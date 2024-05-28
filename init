@@ -6,6 +6,8 @@
  * In order to run in non-interactive mode:
  *
  * init --env=Development --overwrite=n
+ *
+ * @edition Andrey and_y87 Kidin
  */
 
 if (!extension_loaded('openssl')) {
@@ -13,7 +15,7 @@ if (!extension_loaded('openssl')) {
 }
 
 $params = getParams();
-$root = str_replace('\\', '/', __DIR__);
+$root = str_replace('\\', '/', __DIR__ . DIRECTORY_SEPARATOR . 'app' );
 $envs = require "$root/environments/index.php";
 $envNames = array_keys($envs);
 
@@ -111,27 +113,52 @@ foreach ($callbacks as $callback) {
 
 echo "\n  ... initialization completed.\n\n";
 
-function getFileList($root, $basePath = '')
+/**
+ * @param string $root
+ * @param string $basePath
+ *
+ * @return array
+ */
+function getFileList( string $root, string $basePath = ''): array
 {
     $files = [];
+
     $handle = opendir($root);
-    while (($path = readdir($handle)) !== false) {
+
+    while (($path = readdir($handle)) !== false)
+    {
         if ($path === '.git' || $path === '.svn' || $path === '.' || $path === '..') {
             continue;
         }
+
         $fullPath = "$root/$path";
         $relativePath = $basePath === '' ? $path : "$basePath/$path";
+
         if (is_dir($fullPath)) {
+
             $files = array_merge($files, getFileList($fullPath, $relativePath));
+
         } else {
+
             $files[] = $relativePath;
         }
     }
+
     closedir($handle);
+
     return $files;
 }
 
-function copyFile($root, $source, $target, &$all, $params)
+/**
+ * @param string $root
+ * @param string $source
+ * @param string $target
+ * @param bool $all
+ * @param array $params
+ *
+ * @return bool
+ */
+function copyFile( string $root, string $source, string $target, bool &$all, array  $params): bool
 {
     if (!is_file($root . '/' . $source)) {
         echo "       skip $target ($source not exist)\n";
@@ -175,23 +202,42 @@ function copyFile($root, $source, $target, &$all, $params)
     return true;
 }
 
-function removeFile($root, $target, &$all, $params)
+/**
+ * @param string $root
+ * @param string $target
+ * @param bool $all
+ * @param array $params
+ *
+ * @return bool
+ */
+function removeFile(string $root, string $target, bool &$all, array $params = [] ): bool
 {
-	if (is_file($root . '/' . $target)) {
-		if ($all) {
+	if (is_file($root . '/' . $target))
+    {
+		if ($all)
+        {
 			echo "  delete $target\n";
+
 		} else {
+
 			echo "      delete $target\n";
 			echo "            ...confirm? [Yes|No|All|Quit] ";
 
 			$answer = !empty($params['delete']) ? $params['delete'] : trim(fgets(STDIN));
-			if (!strncasecmp($answer, 'q', 1)) {
+
+			if (!strncasecmp($answer, 'q', 1))
+            {
 				return false;
+
 			} else {
-				if (!strncasecmp($answer, 'y', 1)) {
+				if (!strncasecmp($answer, 'y', 1))
+                {
 					echo "  delete $target\n";
+
 				} else {
-					if (!strncasecmp($answer, 'a', 1)) {
+
+					if (!strncasecmp($answer, 'a', 1))
+                    {
 						echo "  delete $target\n";
 						$all = true;
 					} else {
@@ -207,30 +253,48 @@ function removeFile($root, $target, &$all, $params)
 	return true;
 }
 
-function getParams()
+/**
+ * @return array
+ */
+function getParams(): array
 {
     $rawParams = [];
+
     if (isset($_SERVER['argv'])) {
         $rawParams = $_SERVER['argv'];
         array_shift($rawParams);
     }
 
     $params = [];
-    foreach ($rawParams as $param) {
-        if (preg_match('/^--([\w-]*\w)(=(.*))?$/', $param, $matches)) {
+
+    foreach ($rawParams as $param)
+    {
+        if (preg_match('/^--([\w-]*\w)(=(.*))?$/', $param, $matches))
+        {
             $name = $matches[1];
+
             $params[$name] = isset($matches[3]) ? $matches[3] : true;
+
         } else {
             $params[] = $param;
         }
     }
+
     return $params;
 }
 
-function setWritable($root, $paths)
+/**
+ * @param string $root
+ * @param array $paths
+ *
+ * @return void
+ */
+function setWritable( string $root, array $paths ): void
 {
-    foreach ($paths as $writable) {
-        if (is_dir("$root/$writable")) {
+    foreach ($paths as $writable)
+    {
+        if (is_dir("$root/$writable"))
+        {
             if (@chmod("$root/$writable", 0777)) {
                 echo "      chmod 0777 $writable\n";
             } else {
@@ -242,10 +306,18 @@ function setWritable($root, $paths)
     }
 }
 
-function setExecutable($root, $paths)
+/**
+ * @param string $root
+ * @param array $paths
+ *
+ * @return void
+ */
+function setExecutable( string $root, array $paths ): void
 {
-    foreach ($paths as $executable) {
-        if (file_exists("$root/$executable")) {
+    foreach ($paths as $executable)
+    {
+        if (file_exists("$root/$executable"))
+        {
             if (@chmod("$root/$executable", 0755)) {
                 echo "      chmod 0755 $executable\n";
             } else {
@@ -257,9 +329,17 @@ function setExecutable($root, $paths)
     }
 }
 
-function setCookieValidationKey($root, $paths)
+
+/**
+ * @param string $root
+ * @param array $paths
+ *
+ * @return void
+ */
+function setCookieValidationKey( string $root, array $paths ): void
 {
-    foreach ($paths as $file) {
+    foreach ($paths as $file)
+    {
         echo "   generate cookie validation key in $file\n";
         $file = $root . '/' . $file;
         $length = 32;
@@ -270,9 +350,16 @@ function setCookieValidationKey($root, $paths)
     }
 }
 
-function createSymlink($root, $links)
+/**
+ * @param string $root
+ * @param array $links
+ *
+ * @return void
+ */
+function createSymlink( string  $root, array  $links ): void
 {
-    foreach ($links as $link => $target) {
+    foreach ($links as $link => $target)
+    {
         //first removing folders to avoid errors if the folder already exists
         @rmdir($root . "/" . $link);
         //next removing existing symlink in order to update the target
@@ -289,9 +376,12 @@ function createSymlink($root, $links)
 
 /**
  * Prints error message.
+ *
+ * @return void
+ *
  * @param string $message message
  */
-function printError($message)
+function printError( string $message ): void
 {
     echo "\n  " . formatMessage("Error. $message", ['fg-red']) . " \n";
 }
@@ -304,7 +394,7 @@ function printError($message)
  *
  * @return boolean true if the stream supports ANSI colors, otherwise false.
  */
-function ansiColorsSupported()
+function ansiColorsSupported(): bool
 {
     return DIRECTORY_SEPARATOR === '\\'
         ? getenv('ANSICON') !== false || getenv('ConEmuANSI') === 'ON'
@@ -316,7 +406,7 @@ function ansiColorsSupported()
  * @param string $name style name
  * @return integer ANSI code of style.
  */
-function getStyleCode($name)
+function getStyleCode( string $name ): int
 {
     $styles = [
         'bold' => 1,
@@ -346,7 +436,7 @@ function getStyleCode($name)
  * @param string[] $styles styles
  * @return string formatted message.
  */
-function formatMessage($message, $styles)
+function formatMessage( string $message, array $styles ): string
 {
     if (empty($styles) || !ansiColorsSupported()) {
         return $message;
