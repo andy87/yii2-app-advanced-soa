@@ -1,10 +1,11 @@
 <?php
 
-namespace app\frontend\models;
+namespace app\frontend\models\forms;
 
 use app\common\models\User;
 use yii\base\InvalidArgumentException;
 use yii\base\Model;
+use yii\db\Exception;
 
 class VerifyEmailForm extends Model
 {
@@ -42,8 +43,9 @@ class VerifyEmailForm extends Model
      * Verify email
      *
      * @return User|null the saved model or null if saving fails
+     * @throws Exception
      */
-    public function verifyEmail()
+    public function verifyEmail(): ?User
     {
         $user = $this->_user;
         $user->status = User::STATUS_ACTIVE;

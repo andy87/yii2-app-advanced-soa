@@ -3,7 +3,7 @@
 namespace app\frontend\tests\unit\models;
 
 use app\common\fixtures\UserFixture;
-use app\frontend\models\SignupForm;
+use app\frontend\models\forms\SignupForm;
 use function frontend\tests\unit\models\codecept_data_dir;
 use function frontend\tests\unit\models\verify;
 

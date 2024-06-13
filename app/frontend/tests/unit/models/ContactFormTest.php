@@ -2,7 +2,7 @@
 
 namespace app\frontend\tests\unit\models;
 
-use app\frontend\models\ContactForm;
+use app\frontend\models\forms\ContactForm;
 use yii\mail\MessageInterface;
 use function frontend\tests\unit\models\verify;
 

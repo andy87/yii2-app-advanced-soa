@@ -1,8 +1,14 @@
 <?php
 
-/** @var yii\web\View $this */
+use app\frontend\resources\site\SiteIndexResources;
+
+/**
+ * @var yii\web\View $this
+ * @var  SiteIndexResources $R
+ */
 
 $this->title = 'My Yii Application';
+
 ?>
 <div class="site-index">
     <div class="p-5 mb-4 bg-transparent rounded-3">

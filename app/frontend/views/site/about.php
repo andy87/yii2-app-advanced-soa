@@ -1,12 +1,19 @@
 <?php
 
-/** @var yii\web\View $this */
-
+use yii\web\View;
 use yii\helpers\Html;
+use app\frontend\resources\site\SiteAboutResources;
+
+/**
+ * @var View $this
+ * @var SiteAboutResources $R
+ */
 
 $this->title = 'About';
 $this->params['breadcrumbs'][] = $this->title;
+
 ?>
+
 <div class="site-about">
     <h1><?= Html::encode($this->title) ?></h1>
 

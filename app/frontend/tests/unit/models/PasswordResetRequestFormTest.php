@@ -2,10 +2,10 @@
 
 namespace app\frontend\tests\unit\models;
 
-use Yii;
-use app\frontend\models\PasswordResetRequestForm;
 use app\common\fixtures\UserFixture as UserFixture;
 use app\common\models\User;
+use app\frontend\models\forms\PasswordResetRequestForm;
+use Yii;
 use function frontend\tests\unit\models\codecept_data_dir;
 use function frontend\tests\unit\models\verify;
 

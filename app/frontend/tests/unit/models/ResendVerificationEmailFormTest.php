@@ -3,9 +3,9 @@
 namespace app\frontend\tests\unit\models;
 
 
-use Codeception\Test\Unit;
 use app\common\fixtures\UserFixture;
-use app\frontend\models\ResendVerificationEmailForm;
+use app\frontend\models\forms\ResendVerificationEmailForm;
+use Codeception\Test\Unit;
 use function frontend\tests\unit\models\codecept_data_dir;
 use function frontend\tests\unit\models\verify;
 
