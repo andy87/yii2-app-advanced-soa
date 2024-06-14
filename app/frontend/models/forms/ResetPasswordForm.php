@@ -15,8 +15,8 @@ class ResetPasswordForm extends Model
 {
     public const ATTR_PASSWORD = 'password';
 
-    public const MESSAGE_SUCCESS = 'New password was saved.';
-    public const MESSAGE_ERROR = 'Sorry, we are unable to reset password for email provided.';
+    public const MESSAGE_SUCCESS = 'Новый пароль был сохранен';
+    public const MESSAGE_ERROR = 'Извините, мы не можем сбросить пароль для указанного адреса электронной почты.';
 
     public ?string $password = null;
 

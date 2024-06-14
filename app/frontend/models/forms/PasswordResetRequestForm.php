@@ -15,8 +15,8 @@ class PasswordResetRequestForm extends EmailingModel
 {
     public const ATTR_EMAIL = 'email';
 
-    public const MESSAGE_SUCCESS = 'Check your email for further instructions.';
-    public const MESSAGE_ERROR = 'Sorry, we are unable to reset password for the provided email address.';
+    public const MESSAGE_SUCCESS = 'Проверьте свою электронную почту для получения дальнейших инструкций.';
+    public const MESSAGE_ERROR = 'Извините, мы не можем сбросить пароль для указанного адреса электронной почты.';
 
     public string $composeHtml = 'passwordResetToken-html';
     public string $composeView = 'passwordResetToken-text';
