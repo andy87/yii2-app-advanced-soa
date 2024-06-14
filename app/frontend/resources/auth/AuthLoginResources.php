@@ -23,6 +23,7 @@ class AuthLoginResources extends TemplateResources
     public LoginForm $loginForm;
 
 
+
     /**
      * AuthLoginResources constructor.
      */

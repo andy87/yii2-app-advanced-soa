@@ -3,7 +3,7 @@
 namespace app\frontend\models\forms;
 
 use Yii;
-use app\common\models\User;
+use app\common\models\Identity;
 use yii\base\{ Model, InvalidArgumentException };
 
 /**
@@ -21,9 +21,9 @@ class ResetPasswordForm extends Model
     public ?string $password = null;
 
     /**
-     * @var User
+     * @var Identity
      */
-    public User $user;
+    private Identity $_identity;
 
 
 
@@ -39,7 +39,7 @@ class ResetPasswordForm extends Model
     {
         if ( strlen($token) )
         {
-            if ($this->user = User::findByPasswordResetToken($token))
+            if ($this->_identity = Identity::findByPasswordResetToken($token))
             {
                 parent::__construct($config);
 
@@ -63,5 +63,13 @@ class ResetPasswordForm extends Model
             [self::ATTR_PASSWORD, 'required'],
             [self::ATTR_PASSWORD, 'string', 'min' => Yii::$app->params['user.passwordMinLength']],
         ];
+    }
+
+    /**
+     * @return Identity
+     */
+    public function getIdentity(): Identity
+    {
+        return $this->_identity;
     }
 }

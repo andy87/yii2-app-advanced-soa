@@ -11,11 +11,13 @@ use yii\bootstrap5\{Html,ActiveForm};
  * @var AuthLoginResources $R
  */
 
-$loginForm = $R->loginForm;
-
 $this->title = 'Login';
 $this->params['breadcrumbs'][] = $this->title;
+
+$loginForm = $R->loginForm;
+
 ?>
+
 <div class="auth-login">
     <h1><?= Html::encode($this->title) ?></h1>
 

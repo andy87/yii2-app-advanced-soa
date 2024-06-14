@@ -2,60 +2,63 @@
 
 namespace app\frontend\models\forms;
 
-use app\common\models\User;
+use app\common\models\dto\EmailDto;
+use app\common\models\Identity;
+use app\frontend\components\model\EmailingModel;
 use Yii;
-use yii\base\Model;
 
-class ResendVerificationEmailForm extends Model
+/**
+ * Class `ResendVerificationEmailForm`
+ *
+ * @package app\frontend\models\forms
+ */
+class ResendVerificationEmailForm extends EmailingModel
 {
+    public const ATTR_EMAIL = 'email';
+    public const MESSAGE_SUCCESS = 'Проверьте свою почту для получения дальнейших инструкций.';
+    public const MESSAGE_ERROR = 'Извините, мы не можем отправить письмо для подтверждения на указанный адрес электронной почты.';
+
+    public ?string $composeHtml = 'emailVerify-html';
+    public ?string $composeText = 'emailVerify-text';
+
+
     /**
-     * @var string
+     * @var ?string
      */
-    public $email;
+    public ?string $email = null;
+
 
 
     /**
      * {@inheritdoc}
+     *
+     * @return array
      */
-    public function rules()
+    public function rules(): array
     {
         return [
-            ['email', 'trim'],
-            ['email', 'required'],
-            ['email', 'email'],
-            ['email', 'exist',
-                'targetClass' => '\app\common\models\User',
-                'filter' => ['status' => User::STATUS_INACTIVE],
-                'message' => 'There is no user with this email address.'
+            [self::ATTR_EMAIL, 'trim'],
+            [self::ATTR_EMAIL, 'required'],
+            [self::ATTR_EMAIL, 'email'],
+            [self::ATTR_EMAIL, 'exist',
+                'targetClass' => Identity::class,
+                'filter' => ['status' => Identity::STATUS_INACTIVE],
+                'message' => 'Пользователь с таким адресом электронной почты не найден.'
             ],
         ];
     }
 
     /**
-     * Sends confirmation email to user
-     *
-     * @return bool whether the email was sent
+     * @return EmailDto
      */
-    public function sendEmail()
+    public function constructEmailDto(): EmailDto
     {
-        $user = User::findOne([
-            'email' => $this->email,
-            'status' => User::STATUS_INACTIVE
-        ]);
+        $emailDto = new EmailDto();
+        $emailDto->to = $this->email;
+        $emailDto->subject = 'Account registration at ' . Yii::$app->name;
+        $emailDto->fromEmail = Yii::$app->params['supportEmail'];
+        $emailDto->fromName = Yii::$app->name . ' robot';
 
-        if ($user === null) {
-            return false;
-        }
-
-        return Yii::$app
-            ->mailer
-            ->compose(
-                ['html' => 'emailVerify-html', 'text' => 'emailVerify-text'],
-                ['user' => $user]
-            )
-            ->setFrom([Yii::$app->params['supportEmail'] => Yii::$app->name . ' robot'])
-            ->setTo($this->email)
-            ->setSubject('Account registration at ' . Yii::$app->name)
-            ->send();
+        return $emailDto;
     }
 }

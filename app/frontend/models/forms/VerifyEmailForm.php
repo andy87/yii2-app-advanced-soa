@@ -2,22 +2,30 @@
 
 namespace app\frontend\models\forms;
 
-use app\common\models\User;
+use app\common\models\Identity;
+use app\frontend\services\models\IdentityService;
 use yii\base\InvalidArgumentException;
+use yii\base\InvalidConfigException;
 use yii\base\Model;
 use yii\db\Exception;
 
 class VerifyEmailForm extends Model
 {
-    /**
-     * @var string
-     */
-    public $token;
+    public const MESSAGE_SUCCESS = 'Вы успешно подтвердили свой email!';
+    public const MESSAGE_ERROR = 'Извините! Токен неверный, мы не можем подтвердить аккаунт.';
+
+
+
 
     /**
-     * @var User
+     * @var ?string
      */
-    private $_user;
+    public ?string $token = null;
+
+    /**
+     * @var ?Identity
+     */
+    private ?Identity $_identity;
 
 
     /**
@@ -25,30 +33,30 @@ class VerifyEmailForm extends Model
      *
      * @param string $token
      * @param array $config name-value pairs that will be used to initialize the object properties
-     * @throws InvalidArgumentException if token is empty or not valid
+     *
+     * @throws InvalidArgumentException|InvalidConfigException
      */
     public function __construct($token, array $config = [])
     {
-        if (empty($token) || !is_string($token)) {
-            throw new InvalidArgumentException('Verify email token cannot be blank.');
-        }
-        $this->_user = User::findByVerificationToken($token);
-        if (!$this->_user) {
-            throw new InvalidArgumentException('Wrong verify email token.');
-        }
         parent::__construct($config);
+
+        if (strlen($token) )
+        {
+            $this->_identity = IdentityService::getInstance()->findByVerificationToken($token);
+
+            if (!$this->_identity) {
+                throw new InvalidArgumentException('Wrong verify email token.');
+            }
+        }
+
+        throw new InvalidArgumentException('Verify email token cannot be blank.');
     }
 
     /**
-     * Verify email
-     *
-     * @return User|null the saved model or null if saving fails
-     * @throws Exception
+     * @return Identity
      */
-    public function verifyEmail(): ?User
+    public function getIdentity(): Identity
     {
-        $user = $this->_user;
-        $user->status = User::STATUS_ACTIVE;
-        return $user->save(false) ? $user : null;
+        return $this->_identity;
     }
 }

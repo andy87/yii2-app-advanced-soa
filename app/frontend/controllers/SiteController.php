@@ -2,7 +2,7 @@
 
 namespace app\frontend\controllers;
 
-use app\common\components\trair\SessionFlash;
+use app\common\components\traits\SessionFlash;
 use app\frontend\components\{actions\CaptchaAction, BaseFrontendController};
 use app\frontend\models\forms\ContactForm;
 use app\frontend\resources\site\{SiteAboutResources, SiteContactResources, SiteIndexResources};

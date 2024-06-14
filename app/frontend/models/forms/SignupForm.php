@@ -2,13 +2,12 @@
 
 namespace app\frontend\models\forms;
 
+use Yii;
+use app\common\models\Identity;
 use app\common\models\dto\EmailDto;
-use app\common\models\User;
+use yii\base\InvalidConfigException;
 use app\frontend\components\model\EmailingModel;
 use app\frontend\services\controllers\AuthService;
-use Yii;
-use yii\base\InvalidConfigException;
-use yii\base\Model;
 
 /**
  * Signup form
@@ -27,10 +26,10 @@ class SignupForm extends EmailingModel
     public ?string $email = null;
     public ?string $password = null;
 
-    public User $user;
+    public Identity $user;
 
-    public string $composeHtml = 'emailVerify-html';
-    public string $composeView = 'emailVerify-text';
+    public ?string $composeHtml = 'emailVerify-html';
+    public ?string $composeView = 'emailVerify-text';
 
 
     /**
@@ -48,8 +47,8 @@ class SignupForm extends EmailingModel
 
             [self::ATTR_PASSWORD, 'string', 'min' => Yii::$app->params['user.passwordMinLength']],
 
-            [self::ATTR_EMAIL, 'unique', 'targetClass' => '\app\common\models\User', 'message' => 'This email address has already been taken.'],
-            [self::ATTR_USERNAME, 'unique', 'targetClass' => '\app\common\models\User', 'message' => 'This username has already been taken.'],
+            [self::ATTR_EMAIL, 'unique', 'targetClass' => Identity::class, 'message' => 'Этот адрес электронной почты уже занят'],
+            [self::ATTR_USERNAME, 'unique', 'targetClass' => Identity::class, 'message' => 'Это имя пользователя уже занято.'],
         ];
     }
 
@@ -73,7 +72,7 @@ class SignupForm extends EmailingModel
         $emailDto->to = $this->email;
         $emailDto->fromEmail = Yii::$app->params['supportEmail'];
         $emailDto->fromName = Yii::$app->name . ' robot';
-        $emailDto->subject = 'Account registration at ' . Yii::$app->name;
+        $emailDto->subject = 'Регистрация аккаунта на сайте ' . Yii::$app->name;
 
         return $emailDto;
     }

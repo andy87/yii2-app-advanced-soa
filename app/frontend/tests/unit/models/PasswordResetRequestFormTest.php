@@ -3,7 +3,7 @@
 namespace app\frontend\tests\unit\models;
 
 use app\common\fixtures\UserFixture as UserFixture;
-use app\common\models\User;
+use app\common\models\Identity;
 use app\frontend\models\forms\PasswordResetRequestForm;
 use Yii;
 use function frontend\tests\unit\models\codecept_data_dir;
@@ -48,7 +48,7 @@ class PasswordResetRequestFormTest extends \Codeception\Test\Unit
         
         $model = new PasswordResetRequestForm();
         $model->email = $userFixture['email'];
-        $user = User::findOne(['password_reset_token' => $userFixture['password_reset_token']]);
+        $user = Identity::findOne(['password_reset_token' => $userFixture['password_reset_token']]);
 
         verify($model->sendEmail())->notEmpty();
         verify($user->password_reset_token)->notEmpty();

@@ -13,12 +13,16 @@ use app\frontend\components\interfaces\ModelEmailingInterface;
  */
 abstract class EmailingModel extends Model implements ModelEmailingInterface
 {
-    /** @var string $composeHtml */
-    public string $composeHtml;
+    /** @var ?string $composeHtml */
+    public ?string $composeHtml = null;
 
 
-    /** @var string $composeView */
-    public string $composeView;
+    /** @var ?string $composeView */
+    public ?string $composeView = null;
+
+
+    /** @var ?string $composeText */
+    public ?string $composeText = null;
 
 
 
@@ -29,11 +33,15 @@ abstract class EmailingModel extends Model implements ModelEmailingInterface
      */
     public function getEmailComposeConfig(array $params): array
     {
-        return [
-            'html' => $this->composeHtml,
-            'view' => $this->composeView,
-            'params' => $params,
-        ];
+        $composeConfig = [];
+
+        if ($this->composeHtml) $composeConfig['html'] = $this->composeHtml;
+        if ($this->composeView) $composeConfig['view'] = $this->composeView;
+        if ($this->composeText) $composeConfig['text'] = $this->composeText;
+
+        $composeConfig['params'] = $params;
+
+        return $composeConfig;
     }
 
     /**

@@ -1,6 +1,6 @@
 <?php
 
-namespace app\common\components\trair;
+namespace app\common\components\traits;
 
 use Yii;
 use yii\web\Session;

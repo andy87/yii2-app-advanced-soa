@@ -23,6 +23,8 @@ class SiteService extends BaseService
      * @return ?bool
      *
      * @throws InvalidConfigException
+     *
+     * @tag #site #handler #contact #form
      */
     public function handlerContactForm(ContactForm $contactForm, array $data): ?bool
     {
@@ -53,6 +55,8 @@ class SiteService extends BaseService
      * @return bool
      *
      * @throws InvalidConfigException
+     *
+     * @tag #site #send #email #contact #form
      */
     public function sendEmailContactForm(ContactForm $contactForm): bool
     {

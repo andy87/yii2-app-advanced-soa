@@ -7,7 +7,7 @@ namespace app\frontend\models\items;
  *
  * @package app\frontend\models\items
  */
-class User extends \app\common\models\User
+class User extends \app\common\models\sources\User
 {
 
 }

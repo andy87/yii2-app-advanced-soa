@@ -9,7 +9,7 @@ use app\frontend\controllers\AuthController;
 /**
  * Login form
  *
- * @property ?User $user
+ * @property ?Identity $user
  */
 class LoginForm extends Model
 {
@@ -23,7 +23,7 @@ class LoginForm extends Model
     public ?string $password = null;
     public bool $rememberMe = false;
 
-    private ?User $_user = null;
+    private ?Identity $_user = null;
 
 
     /**
@@ -87,12 +87,12 @@ class LoginForm extends Model
     /**
      * Finds user by [[username]]
      *
-     * @return User|null
+     * @return Identity|null
      */
-    protected function getUser(): ?User
+    protected function getUser(): ?Identity
     {
         if ($this->_user === null) {
-            $this->_user = User::findByUsername($this->username);
+            $this->_user = Identity::findByUsername($this->username);
         }
 
         return $this->_user;

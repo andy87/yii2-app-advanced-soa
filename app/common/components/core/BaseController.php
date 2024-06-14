@@ -2,7 +2,7 @@
 
 namespace app\common\components\core;
 
-use app\common\components\trair\RuntimeLogs;
+use app\common\components\traits\RuntimeLogs;
 use yii\web\Controller;
 
 /**

@@ -25,8 +25,12 @@ use yii\web\IdentityInterface;
  * @property integer $updated_at
  * @property string $password write-only password
  */
-class User extends ActiveRecord implements IdentityInterface
+class Identity extends ActiveRecord implements IdentityInterface
 {
+    public const ATTR_USERNAME = 'username';
+    public const ATTR_PASSWORD = 'password';
+    public const ATTR_EMAIL = 'email';
+
     const STATUS_DELETED = 0;
     const STATUS_INACTIVE = 9;
     const STATUS_ACTIVE = 10;
@@ -70,9 +74,9 @@ class User extends ActiveRecord implements IdentityInterface
     /**
      * @param $id
      *
-     * @return User|IdentityInterface|null
+     * @return Identity|IdentityInterface|null
      */
-    public static function findIdentity($id): User|IdentityInterface|null
+    public static function findIdentity($id): Identity|IdentityInterface|null
     {
         return static::findOne(['id' => $id, 'status' => self::STATUS_ACTIVE]);
     }

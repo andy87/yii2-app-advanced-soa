@@ -8,16 +8,17 @@ use app\common\models\LoginForm;
 use yii\base\Exception as YiiBaseException;
 use yii\db\Exception as YiiDbException;
 use yii\filters\{VerbFilter, AccessControl};
-use app\common\components\trair\SessionFlash;
+use app\common\components\traits\SessionFlash;
 use yii\web\{Response, BadRequestHttpException};
 use app\frontend\services\controllers\AuthService;
 use app\frontend\components\BaseFrontendController;
 use yii\base\{InvalidArgumentException, InvalidConfigException};
 use app\frontend\resources\auth\{AuthRequestPasswordResetResources,
+    AuthResendVerificationEmailResources,
     AuthResetPasswordResources,
     AuthSignupResources,
-    AuthLoginResources
-};
+    AuthLoginResources,
+    AuthVerifyEmailResources};
 use app\frontend\models\forms\{SignupForm,
     VerifyEmailForm,
     ResetPasswordForm,
@@ -46,6 +47,11 @@ class AuthController extends BaseFrontendController
     public const ACTION_REQUEST_PASSWORD_RESET_TOKEN = 'request-password-reset-token';
 
 
+    public const ROLE_GUEST = '?';
+    public const ROLE_USER = '@';
+
+
+
     /**
      * @return array[]
      */
@@ -59,12 +65,12 @@ class AuthController extends BaseFrontendController
                     [
                         'actions' => [self::ACTION_SIGNUP],
                         'allow' => true,
-                        'roles' => ['?'],
+                        'roles' => [self::ROLE_GUEST],
                     ],
                     [
                         'actions' => [self::ACTION_LOGOUT],
                         'allow' => true,
-                        'roles' => ['@'],
+                        'roles' => [self::ROLE_USER],
                     ],
                 ],
             ],
@@ -94,26 +100,22 @@ class AuthController extends BaseFrontendController
      */
     public function actionLogin(): Response|string
     {
-        if (Yii::$app->user->isGuest) {
+        if (Yii::$app->user->isGuest)
+        {
             $R = new AuthLoginResources;
 
             $result = AuthService::getInstance()->handlerLoginForm($R->loginForm, Yii::$app->request->post());
 
-            if ($result) {
+            if ($result) return $this->goBack();
 
-                return $this->goBack();
-
-            } else {
-
-                $R->loginForm->password = '';
-
-                return $this->render($R::TEMPLATE, $R->release());
-            }
+            $R->loginForm->password = '';
 
         } else {
 
             return $this->goHome();
         }
+
+        return $this->render($R::TEMPLATE, $R->release());
     }
 
     /**
@@ -141,7 +143,8 @@ class AuthController extends BaseFrontendController
     {
         $R = new AuthSignupResources;
 
-        if (Yii::$app->request->isPost) {
+        if (Yii::$app->request->isPost)
+        {
             $post = Yii::$app->request->post();
 
             $handlerResult = AuthService::getInstance()->handlerSignupForm($R->signupForm, $post);
@@ -150,8 +153,6 @@ class AuthController extends BaseFrontendController
                 $R->signupForm::MESSAGE_SUCCESS,
                 $R->signupForm::MESSAGE_ERROR
             );
-
-            if ($handlerResult) return $this->goHome();
         }
 
         return $this->render($R::TEMPLATE, $R->release());
@@ -168,7 +169,8 @@ class AuthController extends BaseFrontendController
     {
         $R = new AuthRequestPasswordResetResources;
 
-        if (Yii::$app->request->isPost) {
+        if (Yii::$app->request->isPost)
+        {
             $post = Yii::$app->request->post();
 
             $handlerResult = AuthService::getInstance()
@@ -201,19 +203,20 @@ class AuthController extends BaseFrontendController
 
         try
         {
-            $post = Yii::$app->request->post();
+            if (Yii::$app->request->isPost)
+            {
+                $post = Yii::$app->request->post();
 
-            $result = AuthService::getInstance()
-                ->handlerResetPasswordForm($R->resetPasswordForm, $post);
+                $result = AuthService::getInstance()
+                    ->handlerResetPasswordForm($R->resetPasswordForm, $post);
 
-            $this->setSessionFlashMessage($result,
-                $R->resetPasswordForm::MESSAGE_SUCCESS,
-                $R->resetPasswordForm::MESSAGE_ERROR
-            );
+                $this->setSessionFlashMessage($result,
+                    $R->resetPasswordForm::MESSAGE_SUCCESS,
+                    $R->resetPasswordForm::MESSAGE_ERROR
+                );
 
-            if ($result) return $this->goHome();
-
-            return $this->render($R::TEMPLATE, $R->release());
+                if ($result) return $this->goHome();
+            }
 
         } catch (InvalidArgumentException $e) {
 
@@ -224,6 +227,8 @@ class AuthController extends BaseFrontendController
 
             throw new BadRequestHttpException($e->getMessage());
         }
+
+        return $this->render($R::TEMPLATE, $R->release());
     }
 
     /**
@@ -233,29 +238,28 @@ class AuthController extends BaseFrontendController
      *
      * @return Response
      *
-     * @throws BadRequestHttpException|YiiDbException
+     * @throws BadRequestHttpException|InvalidConfigException|YiiDbException
      */
     public function actionVerifyEmail(string $token): Response
     {
+        $R = new AuthVerifyEmailResources;
+        $R->verifyEmailForm = new VerifyEmailForm($token);
+
         try
         {
-            $model = new VerifyEmailForm($token);
+            $handlerResult = AuthService::getInstance()->handlerAuthVerifyEmailResources($R->verifyEmailForm);
 
-            if (($user = $model->verifyEmail()) && Yii::$app->user->login($user))
-            {
-                Yii::$app->session->setFlash('success', 'Вы успешно подтвердили свой email!');
-
-                return $this->goHome();
-            }
-
-            Yii::$app->session->setFlash('error', 'Извините! Токен неверный, мы не можем подтвердить аккаунт.');
-
-            return $this->goHome();
+            $this->setSessionFlashMessage( $handlerResult,
+                $R->verifyEmailForm::MESSAGE_SUCCESS,
+                $R->verifyEmailForm::MESSAGE_ERROR
+            );
 
         } catch (InvalidArgumentException $e) {
 
             throw new BadRequestHttpException($e->getMessage());
         }
+
+        return $this->goHome();
     }
 
     /**
@@ -265,20 +269,22 @@ class AuthController extends BaseFrontendController
      */
     public function actionResendVerificationEmail(): Response|string
     {
-        $model = new ResendVerificationEmailForm();
+        $R = new AuthResendVerificationEmailResources;
 
-        if ($model->load(Yii::$app->request->post()) && $model->validate())
+        if (Yii::$app->request->isPost)
         {
-            if ($model->sendEmail())
-            {
-                Yii::$app->session->setFlash('success', 'Проверьте свою почту для получения дальнейших инструкций.');
+            $post = Yii::$app->request->post();
 
-                return $this->goHome();
-            }
+            $handlerResult = AuthService::getInstance()->handlerResendVerificationEmail($R->resendVerificationEmailForm, $post);
 
-            Yii::$app->session->setFlash('error', 'Извините, мы не можем отправить письмо для подтверждения на указанный адрес электронной почты.');
+            $this->setSessionFlashMessage($handlerResult,
+                $R->resendVerificationEmailForm::MESSAGE_SUCCESS,
+                $R->resendVerificationEmailForm::MESSAGE_ERROR
+            );
+
+            if ($handlerResult) return $this->goHome();
         }
 
-        return $this->render('resendVerificationEmail', [ 'model' => $model ]);
+        return $this->render($R::TEMPLATE, $R->release());
     }
 }

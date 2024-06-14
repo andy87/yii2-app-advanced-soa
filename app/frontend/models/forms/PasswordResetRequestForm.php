@@ -3,7 +3,7 @@
 namespace app\frontend\models\forms;
 
 use Yii;
-use app\common\models\{ User, dto\EmailDto };
+use app\common\models\{ Identity, dto\EmailDto };
 use app\frontend\components\model\EmailingModel;
 
 /**
@@ -18,16 +18,12 @@ class PasswordResetRequestForm extends EmailingModel
     public const MESSAGE_SUCCESS = 'Проверьте свою электронную почту для получения дальнейших инструкций.';
     public const MESSAGE_ERROR = 'Извините, мы не можем сбросить пароль для указанного адреса электронной почты.';
 
-    public string $composeHtml = 'passwordResetToken-html';
-    public string $composeView = 'passwordResetToken-text';
+    public ?string $composeHtml = 'passwordResetToken-html';
+    public ?string $composeView = 'passwordResetToken-text';
 
 
     /** @var ?string   */
     public ?string $email = null;
-
-    /** @var ?User  */
-    public ?User $user = null;
-
 
     /**
      * @return array
@@ -39,8 +35,8 @@ class PasswordResetRequestForm extends EmailingModel
             [self::ATTR_EMAIL, 'required'],
             [self::ATTR_EMAIL, 'email'],
             [self::ATTR_EMAIL, 'exist',
-                'targetClass' => \app\common\models\User::class,
-                'filter' => ['status' => User::STATUS_ACTIVE],
+                'targetClass' => Identity::class,
+                'filter' => ['status' => Identity::STATUS_ACTIVE],
                 'message' => 'Нет пользователя с таким email.'
             ],
         ];

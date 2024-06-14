@@ -1,15 +1,22 @@
 <?php
 
-/** @var yii\web\View $this */
-/** @var yii\bootstrap5\ActiveForm $form */
-/** @var \app\frontend\models\forms\SignupForm $model */
+use yii\web\View;
+use yii\bootstrap5\{ Html, ActiveForm };
+use app\frontend\resources\auth\AuthSignupResources;
 
-use yii\bootstrap5\ActiveForm;
-use yii\bootstrap5\Html;
+/**
+ * @var View $this
+ * @var ActiveForm $form
+ * @var AuthSignupResources $R
+ */
 
 $this->title = 'Signup';
 $this->params['breadcrumbs'][] = $this->title;
+
+$signupForm = $R->signupForm;
+
 ?>
+
 <div class="auth-signup">
     <h1><?= Html::encode($this->title) ?></h1>
 
@@ -19,14 +26,14 @@ $this->params['breadcrumbs'][] = $this->title;
         <div class="col-lg-5">
             <?php $form = ActiveForm::begin(['id' => 'form-signup']); ?>
 
-                <?= $form->field($model, 'username')->textInput(['autofocus' => true]) ?>
+                <?= $form->field($signupForm, $signupForm::ATTR_USERNAME)->textInput(['autofocus' => true]) ?>
 
-                <?= $form->field($model, 'email') ?>
+                <?= $form->field($signupForm, $signupForm::ATTR_EMAIL) ?>
 
-                <?= $form->field($model, 'password')->passwordInput() ?>
+                <?= $form->field($signupForm, $signupForm::ATTR_PASSWORD)->passwordInput() ?>
 
                 <div class="form-group">
-                    <?= Html::submitButton('Signup', ['class' => 'btn btn-primary', 'name' => 'signup-button']) ?>
+                    <?= Html::submitButton('Войти', ['class' => 'btn btn-primary', 'name' => 'signup-button']) ?>
                 </div>
 
             <?php ActiveForm::end(); ?>

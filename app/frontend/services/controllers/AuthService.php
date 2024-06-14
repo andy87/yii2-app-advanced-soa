@@ -5,12 +5,14 @@ namespace app\frontend\services\controllers;
 use app\common\components\core\BaseService;
 use app\common\models\dto\EmailDto;
 use app\common\models\LoginForm;
-use app\common\models\User;
+use app\common\models\Identity;
 use app\common\services\EmailService;
 use app\frontend\models\forms\PasswordResetRequestForm;
+use app\frontend\models\forms\ResendVerificationEmailForm;
 use app\frontend\models\forms\ResetPasswordForm;
 use app\frontend\models\forms\SignupForm;
-use app\frontend\services\models\UserService;
+use app\frontend\models\forms\VerifyEmailForm;
+use app\frontend\services\models\IdentityService;
 use Exception;
 use Yii;
 use yii\base\InvalidConfigException;
@@ -67,7 +69,7 @@ class AuthService extends BaseService
 
                 try
                 {
-                    $signupForm->user = UserService::getInstance()->signup($signupForm);
+                    $signupForm->user = IdentityService::getInstance()->createItem($signupForm);
 
                      if ($signupForm->user->id)
                      {
@@ -124,7 +126,7 @@ class AuthService extends BaseService
         $configCompose = $signupForm->getEmailComposeConfig(['user' => $signupForm->user]);
 
         return EmailService::getInstance()
-            ->sendEmail($registrationEmail, $configCompose );
+            ->sendEmail($registrationEmail, $configCompose);
     }
 
     /**
@@ -145,15 +147,15 @@ class AuthService extends BaseService
         {
             if ($passwordResetRequestForm->validate())
             {
-                $passwordResetRequestForm->user = UserService::getInstance()->getActiveUserByEmail($passwordResetRequestForm->email);
+                $passwordResetRequestForm->_identity = IdentityService::getInstance()->findActiveUserByEmail($passwordResetRequestForm->email);
 
-                if ($passwordResetRequestForm->user)
+                if ($passwordResetRequestForm->_identity)
                 {
-                    if (User::isPasswordResetTokenValid($passwordResetRequestForm->user->password_reset_token))
+                    if (Identity::isPasswordResetTokenValid($passwordResetRequestForm->_identity->password_reset_token))
                     {
-                        $passwordResetRequestForm->user->generatePasswordResetToken();
+                        $passwordResetRequestForm->_identity->generatePasswordResetToken();
 
-                        if ($passwordResetRequestForm->user->save())
+                        if ($passwordResetRequestForm->_identity->save())
                         {
                             return $this->sendEmailRequestPasswordReset($passwordResetRequestForm);
 
@@ -196,11 +198,11 @@ class AuthService extends BaseService
         $requestPasswordResetEmail = $passwordResetRequestForm->constructEmailDto();
 
         $configCompose = $passwordResetRequestForm->getEmailComposeConfig([
-            'user' => $passwordResetRequestForm->user
+            'user' => $passwordResetRequestForm->_identity
         ]);
 
         return EmailService::getInstance()
-            ->sendEmail( $requestPasswordResetEmail, $configCompose );
+            ->sendEmail($requestPasswordResetEmail, $configCompose);
     }
 
     /**
@@ -210,6 +212,8 @@ class AuthService extends BaseService
      * @return bool
      *
      * @throws \yii\base\Exception
+     *
+     * @tag #auth #handler #reset #password #form
      */
     public function handlerResetPasswordForm(ResetPasswordForm $resetPasswordForm, array $data ): bool
     {
@@ -217,7 +221,7 @@ class AuthService extends BaseService
 
             if ($resetPasswordForm->validate())
             {
-                if ($this->resetUserPassword($resetPasswordForm))
+                if ($this->resetPassword($resetPasswordForm))
                 {
                     return true;
 
@@ -236,24 +240,118 @@ class AuthService extends BaseService
         return false;
     }
 
-
     /**
-     * Resets password.
-     *
      * @return bool if password was reset.
      *
      * @throws \yii\base\Exception
+     *
+     * @tag #auth #reset #password
      */
-    public function resetUserPassword(ResetPasswordForm $resetPasswordForm): bool
+    public function resetPassword(ResetPasswordForm $resetPasswordForm): bool
     {
-        $user = $resetPasswordForm->user;
+        $identity = $resetPasswordForm->getIdentity();
 
-        $user->setPassword($resetPasswordForm->password);
+        $identity->setPassword($resetPasswordForm->password);
 
-        $user->removePasswordResetToken();
+        $identity->removePasswordResetToken();
 
-        $user->generateAuthKey();
+        $identity->generateAuthKey();
 
-        return $user->save(false);
+        return $identity->save(false);
+    }
+
+    /**
+     * @param VerifyEmailForm $verifyEmailForm
+     *
+     * @return bool
+     *
+     * @throws \yii\db\Exception
+     *
+     * @tag #auth #handler #verify #email
+     */
+    public function handlerAuthVerifyEmailResources(VerifyEmailForm $verifyEmailForm): bool
+    {
+        $identity = $this->verify($verifyEmailForm);
+
+        if ( $identity )
+        {
+            return Yii::$app->user->login($identity);
+
+        } else {
+
+            $message = 'Verify email form `save error`';
+        }
+
+        $this->runtimeLogError(__METHOD__, $message, $verifyEmailForm);
+
+        return false;
+    }
+
+    /**
+     * @param VerifyEmailForm $verifyEmailForm
+     *
+     * @return ?Identity
+     *
+     * @throws \yii\db\Exception
+     */
+    public function verify( VerifyEmailForm $verifyEmailForm ): ?Identity
+    {
+        $identity = $verifyEmailForm->getIdentity();
+
+        $identity->status = Identity::STATUS_ACTIVE;
+
+        return $identity->save(false) ? $identity : null;
+    }
+
+    /**
+     * @param ResendVerificationEmailForm $resendVerificationEmailForm
+     *
+     * @param mixed $post
+     *
+     * @return bool
+     *
+     * @throws InvalidConfigException
+     *
+     * @tag #auth #handler #resend #verification #email
+     */
+    public function handlerResendVerificationEmail(ResendVerificationEmailForm $resendVerificationEmailForm, array $post): bool
+    {
+        if ( $resendVerificationEmailForm->load($post) )
+        {
+            if ( $resendVerificationEmailForm->validate() )
+            {
+                return $this->sendEmailResendVerification($resendVerificationEmailForm);
+
+            } else {
+                $message = 'Resend verification email form `validation error`';
+            }
+        } else {
+            $message = 'Resend verification email form `load error`';
+        }
+
+        $this->runtimeLogError(__METHOD__, $message, $resendVerificationEmailForm);
+
+        return false;
+    }
+
+    /**
+     * @param ResendVerificationEmailForm $resendVerificationEmailForm
+     *
+     * @return bool
+     *
+     * @throws InvalidConfigException
+     *
+     * @tag #auth #send #email #resend #verification
+     */
+    public function sendEmailResendVerification(ResendVerificationEmailForm $resendVerificationEmailForm): bool
+    {
+        $resendVerificationEmail = $resendVerificationEmailForm->constructEmailDto();
+
+        $user = IdentityService::getInstance()->findResendVerificationUser($resendVerificationEmailForm->email);
+
+        $configCompose = $resendVerificationEmailForm->getEmailComposeConfig([ 'user' => $user ]);
+
+        return EmailService::getInstance()
+            ->sendEmail($resendVerificationEmail, $configCompose);
     }
 }
