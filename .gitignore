@@ -43,3 +43,7 @@ phpunit.phar
 /backend/web/robots.txt
 
 .idea/
+
+vendor/
+
+composer.lock

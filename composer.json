@@ -50,13 +50,13 @@
     "autoload-dev": {
         "psr-4": {
             "app\\common\\tests\\": ["app/common/tests/",
-                "common/tests/_support"
+                "app/common/tests/_support"
             ],
             "app\\backend\\tests\\": ["app/backend/tests/",
-                "backend/tests/_support"
+                "app/backend/tests/_support"
             ],
             "app\\frontend\\tests\\": ["app/frontend/tests/",
-                "frontend/tests/_support"
+                "app/frontend/tests/_support"
             ]
         }
     },
@@ -69,5 +69,12 @@
         "fxp-asset": {
             "enabled": false
         }
-    }
+    },
+
+    "repositories": [
+        {
+            "type": "composer",
+            "url": "https://asset-packagist.org"
+        }
+    ]
 }
