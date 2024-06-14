@@ -9,7 +9,7 @@ use app\common\components\core\BaseResources;
  *
  * @package app\common\components\resources
  */
-class TemplateResources extends BaseResources
+abstract class TemplateResources extends BaseResources
 {
     public const TEMPLATE = 'index';
 }

@@ -17,4 +17,14 @@ class AuthSignupResources extends TemplateResources
 
     /** @var SignupForm $signupForm */
     public SignupForm $signupForm;
+
+
+
+    /**
+     * AuthSignupResources constructor.
+     */
+    public function __construct()
+    {
+        $this->signupForm = new SignupForm;
+    }
 }

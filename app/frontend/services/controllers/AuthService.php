@@ -7,6 +7,7 @@ use app\common\models\dto\EmailDto;
 use app\common\models\LoginForm;
 use app\common\models\User;
 use app\common\services\EmailService;
+use app\frontend\models\forms\PasswordResetRequestForm;
 use app\frontend\models\forms\SignupForm;
 use app\frontend\services\models\UserService;
 use Exception;
@@ -26,6 +27,8 @@ class AuthService extends BaseService
      * @param array $data
      *
      * @return bool
+     * 
+     * @tag #auth #handler #form #login
      */
     public function handlerLoginForm(LoginForm $loginForm, array $data): bool
     {
@@ -51,6 +54,7 @@ class AuthService extends BaseService
      *
      * @return bool
      *
+     * @tag #auth #handler #form #signup
      */
     public function handlerSignupForm(SignupForm $signupForm, array $data): bool
     {
@@ -62,11 +66,11 @@ class AuthService extends BaseService
 
                 try
                 {
-                     $user = UserService::getInstance()->signup($signupForm);
+                    $signupForm->user = UserService::getInstance()->signup($signupForm);
 
-                     if ($user->id)
+                     if ($signupForm->user->id)
                      {
-                         if ( $this->sendRegistrationEmailByUser($user) )
+                         if ( $this->sendEmailVerifyMail($signupForm) )
                          {
                              $transaction->commit();
 
@@ -86,6 +90,7 @@ class AuthService extends BaseService
                         'message' => $e->getMessage(),
                         'file' => $e->getFile(),
                         'line' => $e->getLine(),
+                        'trace' => $e->getTraceAsString(),
                     ];
 
                     $transaction->rollBack();
@@ -98,6 +103,7 @@ class AuthService extends BaseService
         }
 
         Yii::error([
+            'method' => __METHOD__,
             'message' => $message,
             'errors' => $signupForm->errors,
             'attributes' => $signupForm->attributes,
@@ -107,37 +113,102 @@ class AuthService extends BaseService
     }
 
     /**
-     * Sends confirmation email to user
+     * @param SignupForm $signupForm
      *
-     * @param User $user user model to with email should be send
+     * @return bool
      *
-     * @return bool whether the email was sent
      * @throws InvalidConfigException
+     *
+     * @tag #auth #send #email #verify
      */
-    public function sendRegistrationEmailByUser(User $user): bool
+    public function sendEmailVerifyMail(SignupForm $signupForm): bool
     {
-        $registrationEmail = $this->constructRegistrationEmailByUser($user);
+        $registrationEmail = $signupForm->constructEmailDto();
+
+        $configCompose = $signupForm->getEmailComposeConfig(['user' => $signupForm->user]);
 
         return EmailService::getInstance()
-            ->sendEmail($registrationEmail, [
-                ['html' => 'emailVerify-html', 'text' => 'emailVerify-text'],
-                ['user' => $user]
-            ]);
+            ->sendEmail($registrationEmail, $configCompose );
     }
 
     /**
-     * @param User $user
+     * Обработчик запроса сброса пароля пользователя по email
      *
-     * @return EmailDto
+     * @param PasswordResetRequestForm $passwordResetRequestForm
+     * @param array $data
+     *
+     * @return bool
+     *
+     * @throws InvalidConfigException|\yii\db\Exception|\yii\base\Exception
+     *
+     * @tag #auth #handler #form #password #reset #request
      */
-    public function constructRegistrationEmailByUser(User $user): EmailDto
+    public function handlerRequestPasswordResetResources(PasswordResetRequestForm $passwordResetRequestForm, array $data): bool
     {
-        $emailDto = new EmailDto();
-        $emailDto->to = $user->email;
-        $emailDto->fromEmail = Yii::$app->params['supportEmail'];
-        $emailDto->fromName = Yii::$app->name . ' robot';
-        $emailDto->subject = 'Account registration at ' . Yii::$app->name;
+        if ($passwordResetRequestForm->load($data) )
+        {
+            if ($passwordResetRequestForm->validate())
+            {
+                $passwordResetRequestForm->user = UserService::getInstance()->getActiveUserByEmail($passwordResetRequestForm->email);
 
-        return $emailDto;
+                if ($passwordResetRequestForm->user)
+                {
+                    if (User::isPasswordResetTokenValid($passwordResetRequestForm->user->password_reset_token))
+                    {
+                        $passwordResetRequestForm->user->generatePasswordResetToken();
+
+                        if ($passwordResetRequestForm->user->save())
+                        {
+                            return $this->sendEmailRequestPasswordReset($passwordResetRequestForm);
+
+                        } else{
+                            $message = 'User save error';
+                        }
+                    } else {
+                        $message = 'Password reset token is not valid';
+                    }
+                } else {
+                    $message = 'User not found';
+                }
+            } else {
+                $message = 'Password reset request form validation error';
+            }
+
+        } else {
+            $message = 'Password reset request form validation error';
+        }
+
+        Yii::error([
+            'method' => __METHOD__,
+            'message' => $message,
+            'errors' => $passwordResetRequestForm->errors,
+            'attributes' => $passwordResetRequestForm->attributes,
+        ]);
+
+        return false;
+    }
+
+    /**
+     * Отправка письма для сброса пароля пользователя по email
+     *      из формы запроса сброса пароля `PasswordResetRequestForm`
+     *
+     * @param PasswordResetRequestForm $passwordResetRequestForm
+     * 
+     * @return bool
+     * 
+     * @throws InvalidConfigException
+     * 
+     * @tag #auth #send #email #request #password #reset
+     */
+    public function sendEmailRequestPasswordReset(PasswordResetRequestForm $passwordResetRequestForm): bool
+    {
+        $requestPasswordResetEmail = $passwordResetRequestForm->constructEmailDto();
+
+        $configCompose = $passwordResetRequestForm->getEmailComposeConfig([
+            'user' => $passwordResetRequestForm->user
+        ]);
+
+        return EmailService::getInstance()
+            ->sendEmail( $requestPasswordResetEmail, $configCompose );
     }
 }

@@ -2,28 +2,21 @@
 
 namespace app\frontend\controllers;
 
-use app\common\components\trair\SessionFlash;
-use app\common\models\LoginForm;
-use app\frontend\components\BaseFrontendController;
-use app\frontend\models\forms\PasswordResetRequestForm;
-use app\frontend\models\forms\ResendVerificationEmailForm;
-use app\frontend\models\forms\ResetPasswordForm;
-use app\frontend\models\forms\SignupForm;
-use app\frontend\models\forms\VerifyEmailForm;
-use app\frontend\resources\auth\AuthLoginResources;
-use app\frontend\resources\auth\AuthSignupResources;
-use app\frontend\services\controllers\AuthService;
 use Yii;
-use yii\base\InvalidArgumentException;
-use yii\base\InvalidConfigException;
-use yii\filters\AccessControl;
-use yii\filters\VerbFilter;
-use yii\web\BadRequestHttpException;
-use yii\web\Response;
-
+use app\common\models\LoginForm;
+use yii\filters\{VerbFilter, AccessControl };
+use app\common\components\trair\SessionFlash;
+use yii\web\{ Response, BadRequestHttpException };
+use app\frontend\services\controllers\AuthService;
+use app\frontend\components\BaseFrontendController;
+use yii\base\{ InvalidArgumentException, InvalidConfigException };
+use app\frontend\resources\auth\{AuthRequestPasswordResetResources, AuthSignupResources, AuthLoginResources};
+use app\frontend\models\forms\{ SignupForm, VerifyEmailForm, ResetPasswordForm, ResendVerificationEmailForm, PasswordResetRequestForm };
 
 /**
- * Site controller
+ * Class `AuthController`
+ *
+ * @package app\frontend\controllers
  */
 class AuthController extends BaseFrontendController
 {
@@ -39,6 +32,7 @@ class AuthController extends BaseFrontendController
     public const ACTION_VERIFY_EMAIL = 'verify-email';
     public const ACTION_RESEND_VERIFICATION_EMAIL = 'resend-verification-email';
     public const ACTION_REQUEST_PASSWORD_RESET_TOKEN = 'request-password-reset-token';
+
 
 
     /**
@@ -92,8 +86,6 @@ class AuthController extends BaseFrontendController
         if (Yii::$app->user->isGuest) {
             $R = new AuthLoginResources;
 
-            $R->loginForm = new LoginForm;
-
             $result = AuthService::getInstance()->handlerLoginForm($R->loginForm, Yii::$app->request->post());
 
             if ($result) {
@@ -137,8 +129,6 @@ class AuthController extends BaseFrontendController
     {
         $R = new AuthSignupResources;
 
-        $R->signupForm = new SignupForm;
-
         if (Yii::$app->request->isPost) {
             $result = AuthService::getInstance()->handlerSignupForm($R->signupForm, Yii::$app->request->post());
 
@@ -161,10 +151,30 @@ class AuthController extends BaseFrontendController
      * Requests password reset.
      *
      * @return Response|string
+     *
+     * @throws InvalidConfigException
      */
     public function actionRequestPasswordReset(): Response|string
     {
-        $model = new PasswordResetRequestForm();
+        $R = new AuthRequestPasswordResetResources;
+
+        if( Yii::$app->request->isPost)
+        {
+            $result = AuthService::getInstance()
+                ->handlerRequestPasswordResetResources($R->passwordResetRequestForm, Yii::$app->request->post());
+
+            if ($result)
+            {
+                $this->setSessionFlashSuccess($R->passwordResetRequestForm::MESSAGE_SUCCESS);
+
+                return $this->goHome();
+
+            } else {
+
+                $this->setSessionFlashError($R->passwordResetRequestForm::MESSAGE_ERROR);
+            }
+        }
+
         if ($model->load(Yii::$app->request->post()) && $model->validate()) {
             if ($model->sendEmail()) {
                 Yii::$app->session->setFlash('success', 'Check your email for further instructions.');

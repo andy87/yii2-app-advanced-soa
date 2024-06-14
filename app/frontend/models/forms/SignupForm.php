@@ -2,16 +2,18 @@
 
 namespace app\frontend\models\forms;
 
+use app\common\models\dto\EmailDto;
 use app\common\models\User;
+use app\frontend\components\model\EmailingModel;
 use app\frontend\services\controllers\AuthService;
 use Yii;
+use yii\base\InvalidConfigException;
 use yii\base\Model;
-use yii\db\Exception;
 
 /**
  * Signup form
  */
-class SignupForm extends Model
+class SignupForm extends EmailingModel
 {
     public const MESSAGE_SUCCESS = 'Благодарим за регистрацию. Пожалуйста, проверьте свой почтовый ящик.';
     public const MESSAGE_ERROR = 'Ошибка регистрации. Пожалуйста, попробуйте еще раз.';
@@ -24,6 +26,11 @@ class SignupForm extends Model
     public ?string $username = null;
     public ?string $email = null;
     public ?string $password = null;
+
+    public User $user;
+
+    public string $composeHtml = 'emailVerify-html';
+    public string $composeView = 'emailVerify-text';
 
 
     /**
@@ -47,39 +54,27 @@ class SignupForm extends Model
     }
 
     /**
-     * Signs user up.
+     * @return bool whether the creating new account was successful and email was sent
      *
-     * @return ?bool whether the creating new account was successful and email was sent
-     *
-     * @throws Exception
+     * @throws InvalidConfigException
      */
-    public function signup(): ?bool
+    public function signup(): bool
     {
-        if (!$this->validate()) {
-            return null;
-        }
-        
-        AuthService::getInstance()->handlerSignupForm($this, Yii::$app->request->post());
-
-        return $user->save() && $this->sendEmail($user);
+        return AuthService::getInstance()
+            ->handlerSignupForm($this, Yii::$app->request->post());
     }
 
     /**
-     * Sends confirmation email to user
-     * @param User $user user model to with email should be send
-     * @return bool whether the email was sent
+     * @return EmailDto
      */
-    protected function sendEmail(User $user): bool
+    public function constructEmailDto(): EmailDto
     {
-        return Yii::$app
-            ->mailer
-            ->compose(
-                ['html' => 'emailVerify-html', 'text' => 'emailVerify-text'],
-                ['user' => $user]
-            )
-            ->setFrom([Yii::$app->params['supportEmail'] => Yii::$app->name . ' robot'])
-            ->setTo($this->email)
-            ->setSubject('Account registration at ' . Yii::$app->name)
-            ->send();
+        $emailDto = new EmailDto();
+        $emailDto->to = $this->email;
+        $emailDto->fromEmail = Yii::$app->params['supportEmail'];
+        $emailDto->fromName = Yii::$app->name . ' robot';
+        $emailDto->subject = 'Account registration at ' . Yii::$app->name;
+
+        return $emailDto;
     }
 }

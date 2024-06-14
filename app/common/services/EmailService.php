@@ -2,7 +2,7 @@
 
 namespace app\common\services;
 
-use app\common\config\Yii;
+use Yii;
 use app\common\models\dto\EmailDto;
 use app\common\components\core\BaseService;
 use yii\mail\{MailerInterface, MessageInterface};
@@ -35,11 +35,20 @@ class EmailService extends BaseService
      *
      * @return bool
      */
-    public function sendEmail( EmailDto $email, array $compose = []  ): bool
+    public function sendEmail( EmailDto $email, array $compose = [] ): bool
     {
-        return $this
+        $result = $this
             ->constructMessage($email, $compose)
             ->send();
+
+        if ($result) return true;
+
+        Yii::error(['Email was not sent', [
+            'email' => $email,
+            'compose' => $compose,
+        ]]);
+
+        return false;
     }
 
     /**

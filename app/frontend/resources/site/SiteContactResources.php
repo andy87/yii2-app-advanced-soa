@@ -17,4 +17,14 @@ class SiteContactResources extends TemplateResources
 
     /** @var ContactForm */
     public ContactForm $contactForm;
+
+
+
+    /**
+     * SiteContactResources constructor.
+     */
+    public function __construct()
+    {
+        $this->contactForm = new ContactForm;
+    }
 }

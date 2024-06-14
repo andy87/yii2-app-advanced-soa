@@ -2,6 +2,8 @@
 
 namespace app\frontend\models\forms;
 
+use app\common\models\dto\EmailDto;
+use Yii;
 use yii\base\Model;
 
 /**
@@ -58,4 +60,21 @@ class ContactForm extends Model
         ];
     }
 
+    /**
+     * @return EmailDto
+     */
+    public function constructEmail(): EmailDto
+    {
+        $emailDto = new EmailDto();
+
+        $emailDto->to = $this->email;
+        $emailDto->fromEmail = Yii::$app->params['senderEmail'];
+        $emailDto->fromName = Yii::$app->params['senderName'];
+        $emailDto->ReplyToEmail = $this->email;
+        $emailDto->ReplyToName = $this->name;
+        $emailDto->subject = $this->subject;
+        $emailDto->body = $this->body;
+
+        return $emailDto;
+    }
 }

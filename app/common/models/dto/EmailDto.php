@@ -21,6 +21,9 @@ class EmailDto
     public ?string $body = null;
     public ?string $verifyCode = null;
 
+    public array $configCompose = [];
+
+
     /**
      *
      */

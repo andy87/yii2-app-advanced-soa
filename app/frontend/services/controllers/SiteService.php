@@ -16,8 +16,6 @@ use yii\base\InvalidConfigException;
  */
 class SiteService extends BaseService
 {
-
-
     /**
      * @param ContactForm $contactForm
      *
@@ -32,10 +30,8 @@ class SiteService extends BaseService
         if ($contactForm->load($data) && $contactForm->validate()) {
             $adminEmail = Yii::$app->params['adminEmail'] ?? null;
 
-            if ($adminEmail) {
-                $email = $this->constructEmail($contactForm);
-
-                return $this->sendEmail($email);
+            if ($adminEmail){
+                $this->sendEmailContactForm($contactForm);
             }
 
             Yii::error(['Admin email is not set in params', ['params' => Yii::$app->params]]);
@@ -47,41 +43,15 @@ class SiteService extends BaseService
     /**
      * @param ContactForm $contactForm
      *
-     * @return EmailDto
-     */
-    public function constructEmail(ContactForm $contactForm): EmailDto
-    {
-        $emailDto = new EmailDto();
-
-        $emailDto->to = $contactForm->email;
-        $emailDto->fromEmail = Yii::$app->params['senderEmail'];
-        $emailDto->fromName = Yii::$app->params['senderName'];
-        $emailDto->ReplyToEmail = $contactForm->email;
-        $emailDto->ReplyToName = $contactForm->name;
-        $emailDto->subject = $contactForm->subject;
-        $emailDto->body = $contactForm->body;
-
-        return $emailDto;
-    }
-
-    /**
-     * Sends an email to the specified email address using the information collected by this model.
-     *
-     * @param EmailDto $email
-     *
-     * @return bool whether the email was sent
+     * @return bool
      *
      * @throws InvalidConfigException
      */
-    public function sendEmail(EmailDto $email): bool
+    public function sendEmailContactForm(ContactForm $contactForm): bool
     {
-        $result = EmailService::getInstance()
-            ->sendEmail($email);
+        $emailConstructEmail = $contactForm->constructEmail();
 
-        if ($result) return true;
-
-        Yii::error(['Email was not sent', $email]);
-
-        return false;
+        return EmailService::getInstance()
+            ->sendEmail($emailConstructEmail);
     }
 }

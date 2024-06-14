@@ -3,8 +3,11 @@
 namespace app\common\components\core;
 
 /**
- * Class `BaseService`
+ * Class `BaseRepository`
  *
  * @package app\common\components\core
  */
-abstract class BaseService extends BaseSingleton {}
+abstract class BaseRepository extends BaseSingleton
+{
+
+}

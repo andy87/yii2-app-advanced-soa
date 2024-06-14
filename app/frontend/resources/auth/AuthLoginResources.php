@@ -19,4 +19,14 @@ class AuthLoginResources extends TemplateResources
 
     /** @var LoginForm $loginForm */
     public LoginForm $loginForm;
+
+
+
+    /**
+     * AuthLoginResources constructor.
+     */
+    public function __construct()
+    {
+        $this->loginForm = new LoginForm;
+    }
 }

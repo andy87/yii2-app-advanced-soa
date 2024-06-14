@@ -2,68 +2,61 @@
 
 namespace app\frontend\models\forms;
 
-use app\common\models\User;
 use Yii;
-use yii\base\Model;
+use app\common\models\{ User, dto\EmailDto };
+use app\frontend\components\model\EmailingModel;
 
 /**
- * Password reset request form
+ * Class `PasswordResetRequestForm`
+ *
+ * @package app\frontend\models\forms
  */
-class PasswordResetRequestForm extends Model
+class PasswordResetRequestForm extends EmailingModel
 {
-    public $email;
+    public const ATTR_EMAIL = 'email';
+
+    public const MESSAGE_SUCCESS = 'Check your email for further instructions.';
+    public const MESSAGE_ERROR = 'Sorry, we are unable to reset password for the provided email address.';
+
+    public string $composeHtml = 'passwordResetToken-html';
+    public string $composeView = 'passwordResetToken-text';
+
+
+    /** @var ?string   */
+    public ?string $email = null;
+
+    /** @var ?User  */
+    public ?User $user = null;
 
 
     /**
-     * {@inheritdoc}
+     * @return array
      */
-    public function rules()
+    public function rules(): array
     {
         return [
-            ['email', 'trim'],
-            ['email', 'required'],
-            ['email', 'email'],
-            ['email', 'exist',
-                'targetClass' => '\app\common\models\User',
+            [self::ATTR_EMAIL, 'trim'],
+            [self::ATTR_EMAIL, 'required'],
+            [self::ATTR_EMAIL, 'email'],
+            [self::ATTR_EMAIL, 'exist',
+                'targetClass' => \app\common\models\User::class,
                 'filter' => ['status' => User::STATUS_ACTIVE],
-                'message' => 'There is no user with this email address.'
+                'message' => 'Нет пользователя с таким email.'
             ],
         ];
     }
 
     /**
-     * Sends an email with a link, for resetting the password.
-     *
-     * @return bool whether the email was send
+     * @return EmailDto
      */
-    public function sendEmail()
+    public function constructEmailDto(): EmailDto
     {
-        /* @var $user User */
-        $user = User::findOne([
-            'status' => User::STATUS_ACTIVE,
-            'email' => $this->email,
-        ]);
+        $emailDto = new EmailDto();
+        $emailDto->fromEmail = Yii::$app->params['supportEmail'];
+        $emailDto->fromName = Yii::$app->name . ' robot';
+        $emailDto->subject = 'Password reset for ' . Yii::$app->name;
+        $emailDto->to = $this->email;
 
-        if (!$user) {
-            return false;
-        }
-        
-        if (!User::isPasswordResetTokenValid($user->password_reset_token)) {
-            $user->generatePasswordResetToken();
-            if (!$user->save()) {
-                return false;
-            }
-        }
-
-        return Yii::$app
-            ->mailer
-            ->compose(
-                ['html' => 'passwordResetToken-html', 'text' => 'passwordResetToken-text'],
-                ['user' => $user]
-            )
-            ->setFrom([Yii::$app->params['supportEmail'] => Yii::$app->name . ' robot'])
-            ->setTo($this->email)
-            ->setSubject('Password reset for ' . Yii::$app->name)
-            ->send();
+        return $emailDto;
     }
 }
