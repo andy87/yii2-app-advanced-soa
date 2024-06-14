@@ -8,6 +8,7 @@ use app\common\models\LoginForm;
 use app\common\models\User;
 use app\common\services\EmailService;
 use app\frontend\models\forms\PasswordResetRequestForm;
+use app\frontend\models\forms\ResetPasswordForm;
 use app\frontend\models\forms\SignupForm;
 use app\frontend\services\models\UserService;
 use Exception;
@@ -102,12 +103,7 @@ class AuthService extends BaseService
             $message = 'Signup form validation error';
         }
 
-        Yii::error([
-            'method' => __METHOD__,
-            'message' => $message,
-            'errors' => $signupForm->errors,
-            'attributes' => $signupForm->attributes,
-        ]);
+        $this->errorLog(__METHOD__, $message, $signupForm);
 
         return false;
     }
@@ -162,28 +158,23 @@ class AuthService extends BaseService
                             return $this->sendEmailRequestPasswordReset($passwordResetRequestForm);
 
                         } else{
-                            $message = 'User save error';
+                            $message = 'User `save error`';
                         }
                     } else {
-                        $message = 'Password reset token is not valid';
+                        $message = 'Password reset token `is not valid`';
                     }
                 } else {
                     $message = 'User not found';
                 }
             } else {
-                $message = 'Password reset request form validation error';
+                $message = 'Password reset request form `validation error`';
             }
 
         } else {
-            $message = 'Password reset request form validation error';
+            $message = 'Password reset request form `validation error`';
         }
 
-        Yii::error([
-            'method' => __METHOD__,
-            'message' => $message,
-            'errors' => $passwordResetRequestForm->errors,
-            'attributes' => $passwordResetRequestForm->attributes,
-        ]);
+        $this->errorLog(__METHOD__, $message, $passwordResetRequestForm);
 
         return false;
     }
@@ -210,5 +201,59 @@ class AuthService extends BaseService
 
         return EmailService::getInstance()
             ->sendEmail( $requestPasswordResetEmail, $configCompose );
+    }
+
+    /**
+     * @param ResetPasswordForm $resetPasswordForm
+     * @param array $data
+     *
+     * @return bool
+     *
+     * @throws \yii\base\Exception
+     */
+    public function handlerResetPasswordForm(ResetPasswordForm $resetPasswordForm, array $data ): bool
+    {
+        if ($resetPasswordForm->load($data)) {
+
+            if ($resetPasswordForm->validate())
+            {
+                if ($this->resetUserPassword($resetPasswordForm))
+                {
+                    return true;
+
+                } else {
+                    $message = 'Reset password form `save error`';
+                }
+            } else {
+                $message = 'Reset password form `validation error`';
+            }
+        } else {
+            $message = 'Reset password form `load error`';
+        }
+
+        $this->errorLog(__METHOD__, $message, $resetPasswordForm);
+
+        return false;
+    }
+
+
+    /**
+     * Resets password.
+     *
+     * @return bool if password was reset.
+     *
+     * @throws \yii\base\Exception
+     */
+    public function resetUserPassword(ResetPasswordForm $resetPasswordForm): bool
+    {
+        $user = $resetPasswordForm->user;
+
+        $user->setPassword($resetPasswordForm->password);
+
+        $user->removePasswordResetToken();
+
+        $user->generateAuthKey();
+
+        return $user->save(false);
     }
 }

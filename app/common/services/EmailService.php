@@ -37,18 +37,21 @@ class EmailService extends BaseService
      */
     public function sendEmail( EmailDto $email, array $compose = [] ): bool
     {
-        $result = $this
-            ->constructMessage($email, $compose)
-            ->send();
+        $message = $this->constructMessage($email, $compose);
 
-        if ($result) return true;
+        if ($message->send()) {
 
-        Yii::error(['Email was not sent', [
-            'email' => $email,
-            'compose' => $compose,
-        ]]);
+            return true;
 
-        return false;
+        } else {
+
+            Yii::error(['Email was not sent', [
+                'email' => $email,
+                'compose' => $compose,
+            ]]);
+
+            return false;
+        }
     }
 
     /**

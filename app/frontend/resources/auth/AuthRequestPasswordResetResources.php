@@ -9,11 +9,13 @@ use app\frontend\models\forms\PasswordResetRequestForm;
  * Class `AuthRequestPasswordResetResources`
  *
  * @package app\frontend\resources\auth
+ *
+ * @tag #resources #auth #request #password #reset
  */
 class AuthRequestPasswordResetResources extends TemplateResources
 {
     /** @var string  */
-    public const TEMPLATE = '@views/auth/requestPasswordResetToken';
+    public const TEMPLATE = '@views/auth/request-password-reset-token';
 
     /** @var PasswordResetRequestForm  */
     public PasswordResetRequestForm $passwordResetRequestForm;

@@ -2,16 +2,24 @@
 
 namespace app\frontend\controllers;
 
+use Exception;
 use Yii;
 use app\common\models\LoginForm;
-use yii\filters\{VerbFilter, AccessControl };
+use yii\filters\{VerbFilter, AccessControl};
 use app\common\components\trair\SessionFlash;
-use yii\web\{ Response, BadRequestHttpException };
+use yii\web\{Response, BadRequestHttpException};
 use app\frontend\services\controllers\AuthService;
 use app\frontend\components\BaseFrontendController;
-use yii\base\{ InvalidArgumentException, InvalidConfigException };
-use app\frontend\resources\auth\{AuthRequestPasswordResetResources, AuthSignupResources, AuthLoginResources};
-use app\frontend\models\forms\{ SignupForm, VerifyEmailForm, ResetPasswordForm, ResendVerificationEmailForm, PasswordResetRequestForm };
+use yii\base\{InvalidArgumentException, InvalidConfigException};
+use app\frontend\resources\auth\{AuthRequestPasswordResetResources,
+    AuthResetPasswordResources,
+    AuthSignupResources,
+    AuthLoginResources};
+use app\frontend\models\forms\{SignupForm,
+    VerifyEmailForm,
+    ResetPasswordForm,
+    ResendVerificationEmailForm,
+    PasswordResetRequestForm};
 
 /**
  * Class `AuthController`
@@ -32,7 +40,6 @@ class AuthController extends BaseFrontendController
     public const ACTION_VERIFY_EMAIL = 'verify-email';
     public const ACTION_RESEND_VERIFICATION_EMAIL = 'resend-verification-email';
     public const ACTION_REQUEST_PASSWORD_RESET_TOKEN = 'request-password-reset-token';
-
 
 
     /**
@@ -129,11 +136,13 @@ class AuthController extends BaseFrontendController
     {
         $R = new AuthSignupResources;
 
-        if (Yii::$app->request->isPost) {
-            $result = AuthService::getInstance()->handlerSignupForm($R->signupForm, Yii::$app->request->post());
+        if (Yii::$app->request->isPost)
+        {
+            $post = Yii::$app->request->post();
 
-            if ($result)
-            {
+            $result = AuthService::getInstance()->handlerSignupForm($R->signupForm, $post);
+
+            if ($result) {
                 $this->setSessionFlashSuccess($R->signupForm::MESSAGE_SUCCESS);
 
                 return $this->goHome();
@@ -152,19 +161,19 @@ class AuthController extends BaseFrontendController
      *
      * @return Response|string
      *
-     * @throws InvalidConfigException
+     * @throws InvalidConfigException|InvalidConfigException|\yii\db\Exception|Exception
      */
     public function actionRequestPasswordReset(): Response|string
     {
         $R = new AuthRequestPasswordResetResources;
 
-        if( Yii::$app->request->isPost)
+        if (Yii::$app->request->isPost)
         {
-            $result = AuthService::getInstance()
-                ->handlerRequestPasswordResetResources($R->passwordResetRequestForm, Yii::$app->request->post());
+            $post = Yii::$app->request->post();
 
-            if ($result)
-            {
+            $handlerResult = AuthService::getInstance()->handlerRequestPasswordResetResources($R->passwordResetRequestForm, $post);
+
+            if ($handlerResult) {
                 $this->setSessionFlashSuccess($R->passwordResetRequestForm::MESSAGE_SUCCESS);
 
                 return $this->goHome();
@@ -175,45 +184,52 @@ class AuthController extends BaseFrontendController
             }
         }
 
-        if ($model->load(Yii::$app->request->post()) && $model->validate()) {
-            if ($model->sendEmail()) {
-                Yii::$app->session->setFlash('success', 'Check your email for further instructions.');
-
-                return $this->goHome();
-            }
-
-            Yii::$app->session->setFlash('error', 'Sorry, we are unable to reset password for the provided email address.');
-        }
-
-        return $this->render('requestPasswordResetToken', [
-            'model' => $model,
-        ]);
+        return $this->render($R::TEMPLATE, $R->release());
     }
 
     /**
      * Resets password.
      *
      * @param string $token
+     *
      * @return Response|string
-     * @throws BadRequestHttpException
+     *
+     * @throws \yii\base\Exception|BadRequestHttpException
      */
-    public function actionResetPassword($token): Response|string
+    public function actionResetPassword(string $token): Response|string
     {
+        $R = new AuthResetPasswordResources;
+
         try {
-            $model = new ResetPasswordForm($token);
+            $R->resetPasswordForm = new ResetPasswordForm($token);
+
+            $post = Yii::$app->request->post();
+
+            $result = AuthService::getInstance()->handlerResetPasswordForm($R->resetPasswordForm, $post);
+
+            $this->setSessionFlashMessage(
+                $result,
+                $R->resetPasswordForm::MESSAGE_SUCCESS,
+                $R->resetPasswordForm::MESSAGE_ERROR
+            );
+
+            if ($result) {
+                return $this->goHome();
+            }
+
+            return $this->render($R::TEMPLATE, $R->release());
+
         } catch (InvalidArgumentException $e) {
+
+            Yii::error([
+                'message' => $e->getMessage(),
+                'line' => $e->getLine(),
+                'file' => $e->getFile(),
+                'trace' => $e->getTraceAsString()
+            ]);
+
             throw new BadRequestHttpException($e->getMessage());
         }
-
-        if ($model->load(Yii::$app->request->post()) && $model->validate() && $model->resetPassword()) {
-            Yii::$app->session->setFlash('success', 'New password saved.');
-
-            return $this->goHome();
-        }
-
-        return $this->render('resetPassword', [
-            'model' => $model,
-        ]);
     }
 
     /**

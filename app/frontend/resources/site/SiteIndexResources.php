@@ -8,6 +8,8 @@ use app\common\components\resources\TemplateResources;
  * Class `SiteIndexResources`
  *
  * @package app\frontend\resources\site
+ *
+ * @tag #resources #site #index
  */
 class SiteIndexResources extends TemplateResources
 {

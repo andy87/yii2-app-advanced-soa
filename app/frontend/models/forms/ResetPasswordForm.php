@@ -2,22 +2,29 @@
 
 namespace app\frontend\models\forms;
 
-use app\common\models\User;
 use Yii;
-use yii\base\InvalidArgumentException;
-use yii\base\Model;
+use app\common\models\User;
+use yii\base\{ Model, InvalidArgumentException };
 
 /**
- * Password reset form
+ * Class `ResetPasswordForm`
+ *
+ * @package app\frontend\models\forms
  */
 class ResetPasswordForm extends Model
 {
-    public $password;
+    public const ATTR_PASSWORD = 'password';
+
+    public const MESSAGE_SUCCESS = 'New password was saved.';
+    public const MESSAGE_ERROR = 'Sorry, we are unable to reset password for email provided.';
+
+    public ?string $password = null;
 
     /**
-     * @var \app\common\models\User
+     * @var User
      */
-    private $_user;
+    public User $user;
+
 
 
     /**
@@ -25,43 +32,36 @@ class ResetPasswordForm extends Model
      *
      * @param string $token
      * @param array $config name-value pairs that will be used to initialize the object properties
+     *
      * @throws InvalidArgumentException if token is empty or not valid
      */
-    public function __construct($token, $config = [])
+    public function __construct( string $token, array $config = [])
     {
-        if (empty($token) || !is_string($token)) {
-            throw new InvalidArgumentException('Password reset token cannot be blank.');
+        if ( strlen($token) )
+        {
+            if ($this->user = User::findByPasswordResetToken($token))
+            {
+                parent::__construct($config);
+
+            } else {
+
+                throw new InvalidArgumentException('Wrong password reset token.');
+            }
         }
-        $this->_user = User::findByPasswordResetToken($token);
-        if (!$this->_user) {
-            throw new InvalidArgumentException('Wrong password reset token.');
-        }
-        parent::__construct($config);
+
+        throw new InvalidArgumentException('Password reset token cannot be blank.');
     }
 
     /**
      * {@inheritdoc}
+     *
+     * @return array
      */
-    public function rules()
+    public function rules(): array
     {
         return [
-            ['password', 'required'],
-            ['password', 'string', 'min' => Yii::$app->params['user.passwordMinLength']],
+            [self::ATTR_PASSWORD, 'required'],
+            [self::ATTR_PASSWORD, 'string', 'min' => Yii::$app->params['user.passwordMinLength']],
         ];
-    }
-
-    /**
-     * Resets password.
-     *
-     * @return bool if password was reset.
-     */
-    public function resetPassword()
-    {
-        $user = $this->_user;
-        $user->setPassword($this->password);
-        $user->removePasswordResetToken();
-        $user->generateAuthKey();
-
-        return $user->save(false);
     }
 }

@@ -9,6 +9,8 @@ use app\common\models\LoginForm;
  * Class `AuthLoginResources`
  *
  * @package app\frontend\resources\auth
+ *
+ * @tag #resources #auth #login
  */
 class AuthLoginResources extends TemplateResources
 {

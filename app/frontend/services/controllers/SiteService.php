@@ -31,11 +31,18 @@ class SiteService extends BaseService
             $adminEmail = Yii::$app->params['adminEmail'] ?? null;
 
             if ($adminEmail){
-                $this->sendEmailContactForm($contactForm);
+
+                return $this->sendEmailContactForm($contactForm);
+
+            } else {
+                $message = 'Admin email `is not set` in params';
             }
 
-            Yii::error(['Admin email is not set in params', ['params' => Yii::$app->params]]);
+        } else {
+            $message = 'Contact form `is not valid`';
         }
+
+        $this->errorLog(__METHOD__, $message, $contactForm);
 
         return null;
     }

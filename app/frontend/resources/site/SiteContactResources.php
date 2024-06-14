@@ -9,6 +9,8 @@ use app\frontend\models\forms\ContactForm;
  * Class `SiteContactResources`
  *
  * @package app\frontend\resources\site
+ *
+ * @tag #resources #site #contact
  */
 class SiteContactResources extends TemplateResources
 {

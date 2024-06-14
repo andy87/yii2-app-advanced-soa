@@ -9,6 +9,8 @@ use app\frontend\models\forms\SignupForm;
  * Class `AuthSignupResources`
  *
  * @package app\frontend\resources\auth
+ *
+ * @tag #resources #auth #signup
  */
 class AuthSignupResources extends TemplateResources
 {
