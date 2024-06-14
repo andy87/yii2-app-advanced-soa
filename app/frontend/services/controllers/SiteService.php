@@ -2,12 +2,11 @@
 
 namespace app\frontend\services\controllers;
 
-use app\common\components\core\BaseService;
-use app\common\models\dto\EmailDto;
-use app\common\services\EmailService;
-use app\frontend\models\forms\ContactForm;
 use Yii;
 use yii\base\InvalidConfigException;
+use app\common\services\EmailService;
+use app\frontend\models\forms\ContactForm;
+use app\common\components\core\BaseService;
 
 /**
  * Class `SiteService`
@@ -42,7 +41,7 @@ class SiteService extends BaseService
             $message = 'Contact form `is not valid`';
         }
 
-        $this->errorLog(__METHOD__, $message, $contactForm);
+        $this->runtimeLogError(__METHOD__, $message, $contactForm);
 
         return null;
     }

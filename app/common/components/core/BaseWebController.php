@@ -9,7 +9,4 @@ use yii\web\Controller;
  *
  * @package app\common\components\core
  */
-abstract class BaseWebController extends Controller
-{
-
-}
+abstract class BaseWebController extends BaseController {}

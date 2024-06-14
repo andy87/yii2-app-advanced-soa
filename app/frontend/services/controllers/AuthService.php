@@ -103,7 +103,7 @@ class AuthService extends BaseService
             $message = 'Signup form validation error';
         }
 
-        $this->errorLog(__METHOD__, $message, $signupForm);
+        $this->runtimeLogError(__METHOD__, $message, $signupForm);
 
         return false;
     }
@@ -174,7 +174,7 @@ class AuthService extends BaseService
             $message = 'Password reset request form `validation error`';
         }
 
-        $this->errorLog(__METHOD__, $message, $passwordResetRequestForm);
+        $this->runtimeLogError(__METHOD__, $message, $passwordResetRequestForm);
 
         return false;
     }
@@ -231,7 +231,7 @@ class AuthService extends BaseService
             $message = 'Reset password form `load error`';
         }
 
-        $this->errorLog(__METHOD__, $message, $resetPasswordForm);
+        $this->runtimeLogError(__METHOD__, $message, $resetPasswordForm);
 
         return false;
     }
