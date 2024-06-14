@@ -15,7 +15,7 @@ if (!extension_loaded('openssl')) {
 }
 
 $params = getParams();
-$root = str_replace('\\', '/', __DIR__ . DIRECTORY_SEPARATOR . 'app' );
+$root = str_replace('\\', '/', __DIR__ );
 $envs = require "$root/environments/index.php";
 $envNames = array_keys($envs);
 

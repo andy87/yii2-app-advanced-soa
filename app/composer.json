@@ -34,23 +34,30 @@
         "codeception/module-yii2": "^1.1",
         "codeception/module-filesystem": "^3.0 || ^2.0 || ^1.1",
         "codeception/verify": "^3.0 || ^2.2",
-        "symfony/browser-kit": "^6.0 || >=2.7 <=4.2.4"
+        "symfony/browser-kit": "^6.0 || >=2.7 <=4.2.4",
+        "vlucas/phpdotenv": "^5.5"
     },
 
     "autoload": {
         "psr-4": {
             "app\\common\\": "app/common/",
             "app\\frontend\\": "app/frontend/",
-            "backend\\": "app/backend/",
+            "app\\backend\\": "app/backend/",
             "app\\console\\": "app/console/"
         }
     },
 
     "autoload-dev": {
         "psr-4": {
-            "app\\common\\tests\\": ["app/common/tests/", "app/common/tests/_support"],
-            "app\\backend\\tests\\": ["app/backend/tests/", "app/backend/tests/_support"],
-            "app\\frontend\\tests\\": ["app/frontend/tests/", "app/frontend/tests/_support"]
+            "app\\common\\tests\\": ["app/common/tests/",
+                "common/tests/_support"
+            ],
+            "app\\backend\\tests\\": ["app/backend/tests/",
+                "backend/tests/_support"
+            ],
+            "app\\frontend\\tests\\": ["app/frontend/tests/",
+                "frontend/tests/_support"
+            ]
         }
     },
 
@@ -62,12 +69,5 @@
         "fxp-asset": {
             "enabled": false
         }
-    },
-
-    "repositories": [
-        {
-            "type": "composer",
-            "url": "https://asset-packagist.org"
-        }
-    ]
+    }
 }
