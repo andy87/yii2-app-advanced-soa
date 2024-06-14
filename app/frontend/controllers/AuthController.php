@@ -104,7 +104,9 @@ class AuthController extends BaseFrontendController
         {
             $R = new AuthLoginResources;
 
-            $result = AuthService::getInstance()->handlerLoginForm($R->loginForm, Yii::$app->request->post());
+            $post = Yii::$app->request->post();
+
+            $result = AuthService::getInstance()->handlerLoginForm($R->loginForm, $post);
 
             if ($result) return $this->goBack();
 
