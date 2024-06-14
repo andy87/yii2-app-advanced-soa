@@ -2,29 +2,17 @@
 
 namespace app\frontend\controllers;
 
-use Exception;
 use Yii;
-use app\common\models\LoginForm;
-use yii\base\Exception as YiiBaseException;
+use Exception;
 use yii\db\Exception as YiiDbException;
 use yii\filters\{VerbFilter, AccessControl};
 use app\common\components\traits\SessionFlash;
 use yii\web\{Response, BadRequestHttpException};
 use app\frontend\services\controllers\AuthService;
 use app\frontend\components\BaseFrontendController;
-use yii\base\{InvalidArgumentException, InvalidConfigException};
-use app\frontend\resources\auth\{AuthRequestPasswordResetResources,
-    AuthResendVerificationEmailResources,
-    AuthResetPasswordResources,
-    AuthSignupResources,
-    AuthLoginResources,
-    AuthVerifyEmailResources};
-use app\frontend\models\forms\{SignupForm,
-    VerifyEmailForm,
-    ResetPasswordForm,
-    ResendVerificationEmailForm,
-    PasswordResetRequestForm
-};
+use app\frontend\models\forms\{ VerifyEmailForm, ResetPasswordForm };
+use yii\base\{Exception as YiiBaseException, InvalidArgumentException, InvalidConfigException };
+use app\frontend\resources\auth\{AuthRequestPasswordResetResources, AuthResendVerificationEmailResources, AuthResetPasswordResources, AuthSignupResources, AuthLoginResources, AuthVerifyEmailResources};
 
 /**
  * Class `AuthController`
