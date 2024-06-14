@@ -23,8 +23,10 @@ class AuthSignupResources extends TemplateResources
     /**
      * AuthSignupResources constructor.
      */
-    public function __construct()
+    public function __construct($config = [])
     {
+        parent::__construct($config);
+
         $this->signupForm = new SignupForm;
     }
 }

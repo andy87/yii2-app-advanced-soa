@@ -23,8 +23,10 @@ class AuthRequestPasswordResetResources extends TemplateResources
     /**
      * AuthRequestPasswordResetResources constructor.
      */
-    public function __construct()
+    public function __construct($config = [])
     {
+        parent::__construct($config);
+
         $this->passwordResetRequestForm = new PasswordResetRequestForm;
     }
 }

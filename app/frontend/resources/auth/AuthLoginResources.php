@@ -21,12 +21,13 @@ class AuthLoginResources extends TemplateResources
     public LoginForm $loginForm;
 
 
-
     /**
      * AuthLoginResources constructor.
      */
-    public function __construct()
+    public function __construct($config = [])
     {
+        parent::__construct($config);
+
         $this->loginForm = new LoginForm;
     }
 }
