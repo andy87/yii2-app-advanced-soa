@@ -12,11 +12,11 @@ use yii\console\Application as AppConsole;
 defined('YII_DEBUG') or define('YII_DEBUG', true);
 defined('YII_ENV') or define('YII_ENV', 'test');
 
-require __DIR__ . '/vendor/autoload.php';
+require __DIR__ . '/../vendor/autoload.php';
 
 Dotenv::createImmutable( __DIR__, '.env')->load();
 
-require __DIR__ . '/vendor/yiisoft/yii2/Yii.php';
+require __DIR__ . '/../vendor/yiisoft/yii2/Yii.php';
 require __DIR__ . '/common/config/bootstrap.php';
 require __DIR__ . '/console/config/bootstrap.php';
 
@@ -30,5 +30,8 @@ $config = ArrayHelper::merge(
     require __DIR__ . '/console/config/test.php',
     require __DIR__ . '/console/config/test-local.php'
 );
+$app = new AppConsole($config);
 
-exit((new AppConsole($config))->run());
+$exitCode = $app->run();
+
+exit( $exitCode );

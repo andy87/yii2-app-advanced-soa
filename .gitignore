@@ -1,10 +1,8 @@
 # yii console commands
-/yii
-/yii.bat
-/yii_test
-/yii_test.bat
 /app/yii
-/app/yii.bat
+/app/yii_test
+/app/yii_test.bat
+/app/yii
 /app/yii_test
 /app/yii_test.bat
 
