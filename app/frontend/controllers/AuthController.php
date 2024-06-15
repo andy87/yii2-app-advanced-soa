@@ -105,13 +105,15 @@ class AuthController extends BaseFrontendController
         {
             $R = new AuthLoginResources;
 
-            $post = Yii::$app->request->post();
+            if (Yii::$app->request->isPost)
+            {
+                $post = Yii::$app->request->post();
 
-            $result = AuthService::getInstance()->handlerLoginForm($R->loginForm, $post);
+                $handlerResult = AuthService::getInstance()
+                    ->handlerLoginForm($R->loginForm, $post);
 
-            if ($result) return $this->goBack();
-
-            $R->loginForm->password = '';
+                if ($handlerResult) return $this->goBack();
+            }
 
         } else {
 
@@ -132,7 +134,8 @@ class AuthController extends BaseFrontendController
      */
     public function actionLogout(): Response|string
     {
-        AuthService::getInstance()->logout();
+        AuthService::getInstance()
+            ->logout();
 
         return $this->goHome();
     }
@@ -154,7 +157,8 @@ class AuthController extends BaseFrontendController
         {
             $post = Yii::$app->request->post();
 
-            $handlerResult = AuthService::getInstance()->handlerSignupForm($R->signupForm, $post);
+            $handlerResult = AuthService::getInstance()
+                ->handlerSignupForm($R->signupForm, $post);
 
             $this->setSessionFlashMessage($handlerResult,
                 $R->signupForm::MESSAGE_SUCCESS,
@@ -260,7 +264,8 @@ class AuthController extends BaseFrontendController
 
         try
         {
-            $handlerResult = AuthService::getInstance()->handlerAuthVerifyEmailResources($R->verifyEmailForm);
+            $handlerResult = AuthService::getInstance()
+                ->handlerAuthVerifyEmailResources($R->verifyEmailForm);
 
             $this->setSessionFlashMessage( $handlerResult,
                 $R->verifyEmailForm::MESSAGE_SUCCESS,
@@ -292,7 +297,8 @@ class AuthController extends BaseFrontendController
         {
             $post = Yii::$app->request->post();
 
-            $handlerResult = AuthService::getInstance()->handlerResendVerificationEmail($R->resendVerificationEmailForm, $post);
+            $handlerResult = AuthService::getInstance()
+                ->handlerResendVerificationEmail($R->resendVerificationEmailForm, $post);
 
             $this->setSessionFlashMessage($handlerResult,
                 $R->resendVerificationEmailForm::MESSAGE_SUCCESS,

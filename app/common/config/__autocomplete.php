@@ -13,6 +13,7 @@
  */
 
 namespace app\common\config;
+
 class Yii
 {
     /**

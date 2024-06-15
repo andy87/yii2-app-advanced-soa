@@ -2,19 +2,18 @@
 
 namespace app\frontend\services\controllers;
 
-use app\common\components\core\BaseService;
+use Yii;
+use Exception;
 use app\common\models\Identity;
 use app\common\models\LoginForm;
+use yii\base\InvalidConfigException;
 use app\common\services\EmailService;
-use app\frontend\models\forms\PasswordResetRequestForm;
-use app\frontend\models\forms\ResendVerificationEmailForm;
-use app\frontend\models\forms\ResetPasswordForm;
+use app\common\services\IdentityService;
 use app\frontend\models\forms\SignupForm;
 use app\frontend\models\forms\VerifyEmailForm;
-use Exception;
-use IdentityService;
-use Yii;
-use yii\base\InvalidConfigException;
+use app\frontend\models\forms\ResetPasswordForm;
+use app\frontend\models\forms\PasswordResetRequestForm;
+use app\frontend\models\forms\ResendVerificationEmailForm;
 
 /**
  * < Frontend > `AuthService`
@@ -23,26 +22,9 @@ use yii\base\InvalidConfigException;
  *
  * @tag #services #auth
  */
-class AuthService extends BaseService
+class AuthService extends \app\common\services\AuthService
 {
-    /**
-     * @param LoginForm $loginForm
-     *
-     * @param array $data
-     *
-     * @return bool
-     * 
-     * @tag #service #auth #handler #form #login
-     */
-    public function handlerLoginForm(LoginForm $loginForm, array $data): bool
-    {
-        if ( $loginForm->load( $data ) )
-        {
-            return $loginForm->login();
-        }
 
-        return false;
-    }
 
     /**
      * @return bool
@@ -72,7 +54,8 @@ class AuthService extends BaseService
 
                 try
                 {
-                    $Identity = IdentityService::getInstance()->createItem($signupForm);
+                    $Identity = IdentityService::getInstance()
+                        ->createItem($signupForm);
 
                      if ($Identity->id !== null)
                      {
@@ -152,7 +135,8 @@ class AuthService extends BaseService
         {
             if ($passwordResetRequestForm->validate())
             {
-                $passwordResetRequestForm->_identity = IdentityService::getInstance()->findActiveUserByEmail($passwordResetRequestForm->email);
+                $passwordResetRequestForm->_identity = IdentityService::getInstance()
+                    ->findActiveUserByEmail($passwordResetRequestForm->email);
 
                 if ($passwordResetRequestForm->_identity)
                 {
@@ -354,7 +338,8 @@ class AuthService extends BaseService
     {
         $resendVerificationEmail = $resendVerificationEmailForm->constructEmailDto();
 
-        $user = IdentityService::getInstance()->findResendVerificationUser($resendVerificationEmailForm->email);
+        $user = IdentityService::getInstance()
+            ->findResendVerificationUser($resendVerificationEmailForm->email);
 
         $configCompose = $resendVerificationEmailForm->getEmailComposeConfig([ 'user' => $user ]);
 
