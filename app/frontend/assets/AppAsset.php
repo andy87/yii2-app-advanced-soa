@@ -10,6 +10,8 @@ use yii\web\AssetBundle;
  *      Main frontend application asset bundle.
  *
  * @package app\frontend\assets
+ *
+ * @tag #assets #app
  */
 class AppAsset extends AssetBundle
 {

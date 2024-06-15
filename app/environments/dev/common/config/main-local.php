@@ -1,19 +1,22 @@
 <?php
 
+use yii\db\Connection;
+use yii\symfonymailer\Mailer;
+
 return [
     'components' => [
         'db' => [
-            'class' => \yii\db\Connection::class,
-            'dsn' => 'mysql:host=localhost;dbname=yii2advanced',
-            'username' => 'root',
-            'password' => '',
-            'charset' => 'utf8',
+            'class' => Connection::class,
+            'dsn' => $_ENV['DB_DSN_LOCAL'],
+            'username' => $_ENV['DB_USERNAME'],
+            'password' => $_ENV['DB_PASSWORD'],
+            'charset' => $_ENV['DB_CHARSET'],
         ],
         'mailer' => [
-            'class' => \yii\symfonymailer\Mailer::class,
+            'class' => Mailer::class,
             'viewPath' => '@common/mail',
             // send all mails to a file by default.
-            'useFileTransport' => true,
+            'useFileTransport' => $_ENV['MAILER_USE_FILE_TRANSPORT'],
             // You have to set
             //
             // 'useFileTransport' => false,
@@ -22,12 +25,12 @@ return [
             //
             // SMTP server example:
             //    'transport' => [
-            //        'scheme' => 'smtps',
-            //        'host' => '',
-            //        'username' => '',
-            //        'password' => '',
-            //        'port' => 465,
-            //        'dsn' => 'native://default',
+            //        'scheme' => $_ENV['MAILER_SCHEME'],
+            //        'host' => $_ENV['MAILER_HOST'],
+            //        'username' => $_ENV['MAILER_USERNAME'],
+            //        'password' => $_ENV['MAILER_PASSWORD'],
+            //        'port' => $_ENV['MAILER_PORT'],
+            //        'dsn' => $_ENV['MAILER_DSN'],
             //    ],
             //
             // DSN example:

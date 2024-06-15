@@ -39,6 +39,8 @@ class VerifyEmailForm extends Model
      * @param array $config name-value pairs that will be used to initialize the object properties
      *
      * @throws InvalidArgumentException|InvalidConfigException
+     *
+     * @tag #constructor
      */
     public function __construct($token, array $config = [])
     {
@@ -58,6 +60,8 @@ class VerifyEmailForm extends Model
 
     /**
      * @return Identity
+     *
+     * @tag #getter #identity
      */
     public function getIdentity(): Identity
     {

@@ -2,14 +2,14 @@
 
 namespace app\frontend\controllers;
 
-use app\common\components\traits\SessionFlash;
-use app\frontend\components\{actions\CaptchaAction, controllers\BaseFrontendController};
-use app\frontend\models\forms\ContactForm;
-use app\frontend\resources\site\{SiteAboutResources, SiteContactResources, SiteIndexResources};
-use app\frontend\services\controllers\SiteService;
 use Yii;
-use yii\base\InvalidConfigException;
 use yii\web\Response;
+use yii\base\InvalidConfigException;
+use app\frontend\models\forms\ContactForm;
+use app\common\components\traits\SessionFlash;
+use app\frontend\services\controllers\SiteService;
+use app\frontend\components\{actions\CaptchaAction, controllers\BaseFrontendController};
+use app\frontend\resources\site\{SiteAboutResources, SiteContactResources, SiteIndexResources};
 
 /**
  * < Frontend > `SiteController`

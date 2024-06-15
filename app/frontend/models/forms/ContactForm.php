@@ -50,6 +50,8 @@ class ContactForm extends Model
 
     /**
      * @return string[]
+     *
+     * @tag #getter #labels
      */
     public function attributeLabels(): array
     {
@@ -64,8 +66,10 @@ class ContactForm extends Model
 
     /**
      * @return EmailDto
+     *
+     * @tag #constructor #dto #email
      */
-    public function constructEmail(): EmailDto
+    public function constructEmailDto(): EmailDto
     {
         $emailDto = new EmailDto();
 

@@ -34,6 +34,8 @@ class ResendVerificationEmailForm extends EmailingModel
      * {@inheritdoc}
      *
      * @return array
+     *
+     * @tag #rules
      */
     public function rules(): array
     {
@@ -51,6 +53,8 @@ class ResendVerificationEmailForm extends EmailingModel
 
     /**
      * @return EmailDto
+     *
+     * @tag #constructor #dto #email
      */
     public function constructEmailDto(): EmailDto
     {

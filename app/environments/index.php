@@ -37,10 +37,11 @@ return [
             'app/console/runtime',
             'app/frontend/runtime',
             'app/frontend/web/assets',
+            'uploads',
         ],
         'setExecutable' => [
-            '../yii',
-            '../yii_test',
+            '../../yii',
+            '../../yii_test',
         ],
         'setCookieValidationKey' => [
             'app/backend/config/main-local.php',
@@ -56,9 +57,10 @@ return [
             'app/console/runtime',
             'app/frontend/runtime',
             'app/frontend/web/assets',
+            'uploads',
         ],
         'setExecutable' => [
-            '../yii',
+            '../../yii',
         ],
         'setCookieValidationKey' => [
             'app/backend/config/main-local.php',

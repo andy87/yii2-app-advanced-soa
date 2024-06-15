@@ -27,8 +27,11 @@ class PasswordResetRequestForm extends EmailingModel
     /** @var ?string   */
     public ?string $email = null;
 
+
     /**
      * @return array
+     *
+     * @tag #rules
      */
     public function rules(): array
     {
@@ -46,6 +49,8 @@ class PasswordResetRequestForm extends EmailingModel
 
     /**
      * @return EmailDto
+     *
+     * @tag #constructor #dto #email
      */
     public function constructEmailDto(): EmailDto
     {

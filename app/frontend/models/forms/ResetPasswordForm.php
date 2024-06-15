@@ -36,6 +36,8 @@ class ResetPasswordForm extends Model
      * @param array $config name-value pairs that will be used to initialize the object properties
      *
      * @throws InvalidArgumentException if token is empty or not valid
+     *
+     * @tag #constructor
      */
     public function __construct( string $token, array $config = [])
     {
@@ -58,6 +60,8 @@ class ResetPasswordForm extends Model
      * {@inheritdoc}
      *
      * @return array
+     *
+     * @tag #rules
      */
     public function rules(): array
     {
@@ -69,6 +73,8 @@ class ResetPasswordForm extends Model
 
     /**
      * @return Identity
+     *
+     * @tag #getter #identity
      */
     public function getIdentity(): Identity
     {
