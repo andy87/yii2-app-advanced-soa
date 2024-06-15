@@ -2,16 +2,18 @@
 
 namespace app\frontend\models\forms;
 
-use app\common\models\dto\EmailDto;
 use Yii;
 use yii\base\Model;
+use app\common\models\dto\EmailDto;
 
 /**
- * Class `ContactForm`
+ * < Frontend > `ContactForm`
  *
  *      ContactForm is the model behind the contact form.
  *
  * @package app\frontend\models
+ *
+ * @tag #models #forms #contact
  */
 class ContactForm extends Model
 {

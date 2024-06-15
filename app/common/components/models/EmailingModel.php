@@ -1,13 +1,13 @@
 <?php declare(strict_types=1);
 
-namespace app\frontend\components\model;
+namespace app\common\components\models;
 
-use yii\base\Model;
+use app\common\components\interfaces\ModelEmailingInterface;
 use app\common\models\dto\EmailDto;
-use app\frontend\components\interfaces\ModelEmailingInterface;
+use yii\base\Model;
 
 /**
- * Class `EmailingModel`
+ * < Common > `EmailingModel`
  *
  * @package app\frontend\components\model
  */

@@ -7,7 +7,7 @@ use yii\base\BaseObject;
 use yii\base\InvalidConfigException;
 
 /**
- * Class `BaseSingleton`
+ * < Common > `BaseSingleton`
  *
  * @package app\common\components
  */

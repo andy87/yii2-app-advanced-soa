@@ -5,7 +5,7 @@ namespace app\common\models\dto;
 use Yii;
 
 /**
- * Class `Mail`
+< Common > `Mail`
  *
  * @package app\common\components\mail
  */

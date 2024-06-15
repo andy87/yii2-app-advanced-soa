@@ -2,14 +2,14 @@
 
 namespace app\common\components\core;
 
-use app\common\components\traits\RuntimeLogs;
+use app\common\components\traits\Logger;
 
 /**
- * Class `BaseService`
+ * < Common > `BaseService`
  *
  * @package app\common\components\core
  */
 abstract class BaseService extends BaseSingleton
 {
-    use RuntimeLogs;
+    use Logger;
 }

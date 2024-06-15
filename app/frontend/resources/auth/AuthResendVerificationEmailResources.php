@@ -6,7 +6,7 @@ use app\common\components\resources\TemplateResources;
 use app\frontend\models\forms\ResendVerificationEmailForm;
 
 /**
- * Class `AuthResendVerificationEmailResources`
+ * < Frontend > `AuthResendVerificationEmailResources`
  *
  * @package app\frontend\resources\auth
  *
@@ -24,12 +24,12 @@ class AuthResendVerificationEmailResources extends TemplateResources
 
 
     /**
-     * @param array $config
+     * @return void
+     *
+     * @tag #resources #constructor
      */
-    public function __construct(array $config = [])
+    public function __construct()
     {
-        parent::__construct($config);
-
         $this->resendVerificationEmailForm = new ResendVerificationEmailForm;
     }
 }

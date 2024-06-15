@@ -2,14 +2,16 @@
 
 namespace app\frontend\models\forms;
 
+use app\common\components\models\EmailingModel;
+use app\common\models\{dto\EmailDto, Identity};
 use Yii;
-use app\common\models\{ Identity, dto\EmailDto };
-use app\frontend\components\model\EmailingModel;
 
 /**
- * Class `PasswordResetRequestForm`
+ * < Frontend > `PasswordResetRequestForm`
  *
  * @package app\frontend\models\forms
+ *
+ * @tag #models #forms #password #reset #request
  */
 class PasswordResetRequestForm extends EmailingModel
 {

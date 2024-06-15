@@ -3,7 +3,7 @@
 namespace app\common\components\core;
 
 /**
- * Class `BaseRepository`
+ * < Common > `BaseRepository`
  *
  * @package app\common\components\core
  */

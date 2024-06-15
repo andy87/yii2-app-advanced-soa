@@ -1,11 +1,11 @@
 <?php declare(strict_types=1);
 
-namespace app\frontend\components\interfaces;
+namespace app\common\components\interfaces;
 
 use app\common\models\dto\EmailDto;
 
 /**
- * Interface `ModelEmailingInterface`
+ * < Common > `ModelEmailingInterface`
  *
  * @package app\frontend\components\interfaces
  */

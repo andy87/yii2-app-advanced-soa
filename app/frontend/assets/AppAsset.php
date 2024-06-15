@@ -5,7 +5,11 @@ namespace app\frontend\assets;
 use yii\web\AssetBundle;
 
 /**
- * Main frontend application asset bundle.
+ * < Frontend > `AppAsset`
+ *
+ *      Main frontend application asset bundle.
+ *
+ * @package app\frontend\assets
  */
 class AppAsset extends AssetBundle
 {

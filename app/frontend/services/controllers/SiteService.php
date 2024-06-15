@@ -9,9 +9,11 @@ use app\frontend\models\forms\ContactForm;
 use app\common\components\core\BaseService;
 
 /**
- * Class `SiteService`
+ * < Frontend > `SiteService`
  *
  * @package app\frontend\services\controllers
+ *
+ * @tag #services #site
  */
 class SiteService extends BaseService
 {

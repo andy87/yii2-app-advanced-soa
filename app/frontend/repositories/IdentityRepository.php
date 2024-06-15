@@ -6,9 +6,11 @@ use app\common\models\Identity;
 use app\common\components\repositories\MySqlRepository;
 
 /**
- * Class `IdentityRepository`
+ * < Frontend > `IdentityRepository`
  *
  * @package app\frontend\repositories
+ *
+ * @tag #repositories #identity
  */
 class IdentityRepository extends MySqlRepository
 {
@@ -21,6 +23,8 @@ class IdentityRepository extends MySqlRepository
      * @param string $email
      *
      * @return ?Identity
+     *
+     * @tag #find
      */
     public function findActiveByEmail(string $email): ?Identity
     {
@@ -40,6 +44,8 @@ class IdentityRepository extends MySqlRepository
      * @param string $email
      *
      * @return ?Identity
+     *
+     * @tag #find
      */
     public function findInactiveByEmail(string $email): ?Identity
     {
@@ -59,6 +65,8 @@ class IdentityRepository extends MySqlRepository
      * @param string $token
      *
      * @return ?Identity
+     *
+     * @tag #find
      */
     public function findByVerificationToken(string $token): ?Identity
     {

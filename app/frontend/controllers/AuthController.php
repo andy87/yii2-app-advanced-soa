@@ -2,22 +2,29 @@
 
 namespace app\frontend\controllers;
 
-use Yii;
-use Exception;
-use yii\db\Exception as YiiDbException;
-use yii\filters\{VerbFilter, AccessControl};
 use app\common\components\traits\SessionFlash;
-use yii\web\{Response, BadRequestHttpException};
+use app\frontend\components\controllers\BaseFrontendController;
+use app\frontend\models\forms\{ResetPasswordForm, VerifyEmailForm};
+use app\frontend\resources\auth\{AuthLoginResources,
+    AuthRequestPasswordResetResources,
+    AuthResendVerificationEmailResources,
+    AuthResetPasswordResources,
+    AuthSignupResources,
+    AuthVerifyEmailResources};
 use app\frontend\services\controllers\AuthService;
-use app\frontend\components\BaseFrontendController;
-use app\frontend\models\forms\{ VerifyEmailForm, ResetPasswordForm };
-use yii\base\{Exception as YiiBaseException, InvalidArgumentException, InvalidConfigException };
-use app\frontend\resources\auth\{AuthRequestPasswordResetResources, AuthResendVerificationEmailResources, AuthResetPasswordResources, AuthSignupResources, AuthLoginResources, AuthVerifyEmailResources};
+use Exception;
+use Yii;
+use yii\base\{Exception as YiiBaseException, InvalidArgumentException, InvalidConfigException};
+use yii\db\Exception as YiiDbException;
+use yii\filters\{AccessControl, VerbFilter};
+use yii\web\{BadRequestHttpException, Response};
 
 /**
- * Class `AuthController`
+ * < Frontend > `AuthController`
  *
  * @package app\frontend\controllers
+ *
+ * @tag #controllers #auth
  */
 class AuthController extends BaseFrontendController
 {
@@ -42,6 +49,8 @@ class AuthController extends BaseFrontendController
 
     /**
      * @return array[]
+     *
+     * @tag #auth #behaviors
      */
     public function behaviors(): array
     {
@@ -75,6 +84,8 @@ class AuthController extends BaseFrontendController
      * @return string
      *
      * @throws InvalidConfigException
+     *
+     * @tag #auth #action #index
      */
     public function actionIndex(): string
     {
@@ -85,6 +96,8 @@ class AuthController extends BaseFrontendController
      * @return Response|string
      *
      * @throws InvalidConfigException
+     *
+     * @tag #auth #action #login
      */
     public function actionLogin(): Response|string
     {
@@ -114,6 +127,8 @@ class AuthController extends BaseFrontendController
      * @return Response|string
      *
      * @throws InvalidConfigException
+     *
+     * @tag #auth #action #logout
      */
     public function actionLogout(): Response|string
     {
@@ -128,6 +143,8 @@ class AuthController extends BaseFrontendController
      * @return Response|string
      *
      * @throws InvalidConfigException
+     *
+     * @tag #auth #action #signup
      */
     public function actionSignup(): Response|string
     {
@@ -154,6 +171,8 @@ class AuthController extends BaseFrontendController
      * @return Response|string
      *
      * @throws InvalidConfigException|InvalidConfigException|YiiBaseException|Exception
+     *
+     * @tag #auth #action #requestPasswordReset
      */
     public function actionRequestPasswordReset(): Response|string
     {
@@ -184,6 +203,8 @@ class AuthController extends BaseFrontendController
      * @return Response|string
      *
      * @throws BadRequestHttpException|YiiBaseException
+     *
+     * @tag #auth #action #resetPassword
      */
     public function actionResetPassword(string $token): Response|string
     {
@@ -229,6 +250,8 @@ class AuthController extends BaseFrontendController
      * @return Response
      *
      * @throws BadRequestHttpException|InvalidConfigException|YiiDbException
+     *
+     * @tag #auth #action #verifyEmail
      */
     public function actionVerifyEmail(string $token): Response
     {
@@ -256,6 +279,10 @@ class AuthController extends BaseFrontendController
      * Resend verification email
      *
      * @return Response|string
+     *
+     * @throws InvalidConfigException
+     *
+     * @tag #auth #action #resendVerificationEmail
      */
     public function actionResendVerificationEmail(): Response|string
     {

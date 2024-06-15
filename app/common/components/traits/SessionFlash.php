@@ -6,7 +6,7 @@ use Yii;
 use yii\web\Session;
 
 /**
- * Trait `Flash`
+ * < Common > `Flash`
  *
  * @package app\common\components\trair
  */

@@ -7,7 +7,7 @@
  * Example: A property phpdoc can be added in `__Application` class as `@property \vendor\package\Rollbar|__Rollbar $rollbar` and adding a class in this file
  * ```php
  * // @property of \vendor\package\Rollbar goes here
- * class __Rollbar {
+< Common > __Rollbar {
  * }
  * ```
  */

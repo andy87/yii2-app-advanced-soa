@@ -3,7 +3,7 @@
 namespace app\frontend\components\actions;
 
 /**
- * Class `Captcha`
+ * < Frontend > `Captcha`
  *
  * @package app\frontend\components
  */

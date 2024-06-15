@@ -2,14 +2,12 @@
 
 namespace app\common\components\core;
 
-use yii\base\BaseObject;
-
 /**
- * Class `BaseResources`
+ * < Common > `BaseResources`
  *
  * @package app\common\components\core
  */
-abstract class BaseResources extends BaseObject
+abstract class BaseResources
 {
     public const KEY = 'R';
 

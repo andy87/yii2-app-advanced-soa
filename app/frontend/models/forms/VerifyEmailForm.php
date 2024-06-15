@@ -4,16 +4,19 @@ namespace app\frontend\models\forms;
 
 use app\common\models\Identity;
 use app\frontend\services\models\IdentityService;
-use yii\base\InvalidArgumentException;
-use yii\base\InvalidConfigException;
-use yii\base\Model;
-use yii\db\Exception;
+use yii\base\{ Model, InvalidArgumentException, InvalidConfigException };
 
+/**
+ * < Frontend > `VerifyEmailForm`
+ *
+ * @package app\frontend\models\forms
+ *
+ * @tag #models #forms #verify #email
+ */
 class VerifyEmailForm extends Model
 {
     public const MESSAGE_SUCCESS = 'Вы успешно подтвердили свой email!';
     public const MESSAGE_ERROR = 'Извините! Токен неверный, мы не можем подтвердить аккаунт.';
-
 
 
 
@@ -26,6 +29,7 @@ class VerifyEmailForm extends Model
      * @var ?Identity
      */
     private ?Identity $_identity;
+
 
 
     /**

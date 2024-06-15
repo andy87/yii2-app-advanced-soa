@@ -5,7 +5,7 @@ namespace app\common\components\core;
 use yii\db\ActiveRecord;
 
 /**
- * Class `BaseModel`
+ * < Common > `BaseModel`
  *
  * @package app\common\components\core
  */

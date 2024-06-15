@@ -1,12 +1,12 @@
 <?php
 
-namespace app\frontend\components;
+namespace app\frontend\components\controllers;
 
-use yii\web\ErrorAction;
 use app\common\components\core\BaseWebController;
+use yii\web\ErrorAction;
 
 /**
- *  Class `BaseFrontendController`
+ * < Frontend > `BaseFrontendController`
  *
  * @package app\frontend\components
  */

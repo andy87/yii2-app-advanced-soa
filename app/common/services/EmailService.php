@@ -8,7 +8,7 @@ use app\common\components\core\BaseService;
 use yii\mail\{MailerInterface, MessageInterface};
 
 /**
- * Class `EmailService`
+ * < Common > `EmailService`
  *
  * @package app\common\services
  *

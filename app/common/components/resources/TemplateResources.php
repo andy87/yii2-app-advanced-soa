@@ -5,7 +5,7 @@ namespace app\common\components\resources;
 use app\common\components\core\BaseResources;
 
 /**
- * Class `TemplateResources`
+ * < Common > `TemplateResources`
  *
  * @package app\common\components\resources
  */

@@ -9,7 +9,7 @@ use app\common\components\services\ModelService;
 use yii\base\{ Exception, InvalidConfigException };
 
 /**
- * Class `UserService`
+ * < Frontend > `UserService`
  *
  * @package app\frontend\services\models
  *
@@ -49,7 +49,7 @@ class IdentityService extends ModelService
      *
      * @tag #service #identity #create
      */
-    public function createItem(SignupForm $signupForm ): Identity
+    public function createItem(SignupForm $signupForm): Identity
     {
         $identity = $this->createModel();
         $identity->setAttribute($identity::ATTR_USERNAME, $signupForm->username);

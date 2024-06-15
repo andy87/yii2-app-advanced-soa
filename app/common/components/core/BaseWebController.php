@@ -2,10 +2,8 @@
 
 namespace app\common\components\core;
 
-use yii\web\Controller;
-
 /**
- *  Class `BaseWebController`
+ * < Common > `BaseWebController`
  *
  * @package app\common\components\core
  */

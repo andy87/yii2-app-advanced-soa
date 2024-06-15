@@ -6,7 +6,7 @@ use app\common\components\resources\TemplateResources;
 use app\frontend\models\forms\VerifyEmailForm;
 
 /**
- * Class `AuthVerifyEmailResources`
+ * < Frontend > `AuthVerifyEmailResources`
  *
  * @package app\frontend\resources\auth
  *

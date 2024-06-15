@@ -18,9 +18,11 @@ use Yii;
 use yii\base\InvalidConfigException;
 
 /**
- * Class `AuthService`
+ * < Frontend > `AuthService`
  *
  * @package app\frontend\services\controllers
+ *
+ * @tag #services #auth
  */
 class AuthService extends BaseService
 {
@@ -31,7 +33,7 @@ class AuthService extends BaseService
      *
      * @return bool
      * 
-     * @tag #auth #handler #form #login
+     * @tag #service #auth #handler #form #login
      */
     public function handlerLoginForm(LoginForm $loginForm, array $data): bool
     {
@@ -45,6 +47,8 @@ class AuthService extends BaseService
 
     /**
      * @return bool
+     *
+     * @tag #service #auth #logout
      */
     public function logout(): bool
     {
@@ -57,7 +61,7 @@ class AuthService extends BaseService
      *
      * @return bool
      *
-     * @tag #auth #handler #form #signup
+     * @tag #service #auth #handler #form #signup
      */
     public function handlerSignupForm(SignupForm $signupForm, array $data): bool
     {
@@ -69,10 +73,12 @@ class AuthService extends BaseService
 
                 try
                 {
-                    $signupForm->user = IdentityService::getInstance()->createItem($signupForm);
+                    $Identity = IdentityService::getInstance()->createItem($signupForm);
 
-                     if ($signupForm->user->id)
+                     if ($Identity->id !== null)
                      {
+                         $signupForm->identity = $Identity;
+
                          if ( $this->sendEmailVerifyMail($signupForm) )
                          {
                              $transaction->commit();
@@ -117,13 +123,13 @@ class AuthService extends BaseService
      *
      * @throws InvalidConfigException
      *
-     * @tag #auth #send #email #verify
+     * @tag #service #auth #send #email #verifyMail
      */
     public function sendEmailVerifyMail(SignupForm $signupForm): bool
     {
         $registrationEmail = $signupForm->constructEmailDto();
 
-        $configCompose = $signupForm->getEmailComposeConfig(['user' => $signupForm->user]);
+        $configCompose = $signupForm->getEmailComposeConfig(['user' => $signupForm->identity]);
 
         return EmailService::getInstance()
             ->sendEmail($registrationEmail, $configCompose);
@@ -139,7 +145,7 @@ class AuthService extends BaseService
      *
      * @throws InvalidConfigException|\yii\db\Exception|\yii\base\Exception
      *
-     * @tag #auth #handler #form #password #reset #request
+     * @tag #service #auth #handler #form #passwordResetRequest
      */
     public function handlerRequestPasswordResetResources(PasswordResetRequestForm $passwordResetRequestForm, array $data): bool
     {
@@ -191,7 +197,7 @@ class AuthService extends BaseService
      * 
      * @throws InvalidConfigException
      * 
-     * @tag #auth #send #email #request #password #reset
+     * @tag #service #auth #send #email #requestPasswordReset
      */
     public function sendEmailRequestPasswordReset(PasswordResetRequestForm $passwordResetRequestForm): bool
     {
@@ -213,7 +219,7 @@ class AuthService extends BaseService
      *
      * @throws \yii\base\Exception
      *
-     * @tag #auth #handler #reset #password #form
+     * @tag #service #auth #handler #resetPasswordForm
      */
     public function handlerResetPasswordForm(ResetPasswordForm $resetPasswordForm, array $data ): bool
     {
@@ -245,7 +251,7 @@ class AuthService extends BaseService
      *
      * @throws \yii\base\Exception
      *
-     * @tag #auth #reset #password
+     * @tag #service #auth #resetPassword
      */
     public function resetPassword(ResetPasswordForm $resetPasswordForm): bool
     {
@@ -267,7 +273,7 @@ class AuthService extends BaseService
      *
      * @throws \yii\db\Exception
      *
-     * @tag #auth #handler #verify #email
+     * @tag #service #auth #handler #verifyEmailResources
      */
     public function handlerAuthVerifyEmailResources(VerifyEmailForm $verifyEmailForm): bool
     {
@@ -293,6 +299,8 @@ class AuthService extends BaseService
      * @return ?Identity
      *
      * @throws \yii\db\Exception
+     *
+     * @tag #service #auth #verify
      */
     public function verify( VerifyEmailForm $verifyEmailForm ): ?Identity
     {
@@ -312,7 +320,7 @@ class AuthService extends BaseService
      *
      * @throws InvalidConfigException
      *
-     * @tag #auth #handler #resend #verification #email
+     * @tag #service #auth #handler #resend #verificationEmail
      */
     public function handlerResendVerificationEmail(ResendVerificationEmailForm $resendVerificationEmailForm, array $post): bool
     {
@@ -341,7 +349,7 @@ class AuthService extends BaseService
      *
      * @throws InvalidConfigException
      *
-     * @tag #auth #send #email #resend #verification
+     * @tag #service #auth #send #email #resendVerification
      */
     public function sendEmailResendVerification(ResendVerificationEmailForm $resendVerificationEmailForm): bool
     {

@@ -2,15 +2,16 @@
 
 namespace app\frontend\models\forms;
 
+use app\common\components\models\EmailingModel;
+use app\common\models\{dto\EmailDto, Identity};
 use Yii;
-use app\common\models\Identity;
-use app\common\models\dto\EmailDto;
-use yii\base\InvalidConfigException;
-use app\frontend\components\model\EmailingModel;
-use app\frontend\services\controllers\AuthService;
 
 /**
- * Signup form
+ * < Frontend > `SignupForm`
+ *
+ * @package app\frontend\models\forms
+ *
+ * @tag #models #forms #signup
  */
 class SignupForm extends EmailingModel
 {
@@ -26,10 +27,11 @@ class SignupForm extends EmailingModel
     public ?string $email = null;
     public ?string $password = null;
 
-    public Identity $user;
+    public Identity $identity;
 
     public ?string $composeHtml = 'emailVerify-html';
     public ?string $composeView = 'emailVerify-text';
+
 
 
     /**
@@ -53,23 +55,12 @@ class SignupForm extends EmailingModel
     }
 
     /**
-     * @return bool whether the creating new account was successful and email was sent
-     *
-     * @throws InvalidConfigException
-     */
-    public function signup(): bool
-    {
-        return AuthService::getInstance()
-            ->handlerSignupForm($this, Yii::$app->request->post());
-    }
-
-    /**
      * @return EmailDto
      */
     public function constructEmailDto(): EmailDto
     {
         $emailDto = new EmailDto();
-        $emailDto->to = $this->email;
+        $emailDto->to = $this->identity->email;
         $emailDto->fromEmail = Yii::$app->params['supportEmail'];
         $emailDto->fromName = Yii::$app->name . ' robot';
         $emailDto->subject = 'Регистрация аккаунта на сайте ' . Yii::$app->name;

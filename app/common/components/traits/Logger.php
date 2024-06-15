@@ -6,11 +6,11 @@ use Yii;
 use yii\base\Model;
 
 /**
- * Trait `YiiErrorLog`
+ * < Common > `Logger`
  *
  * @package app\common\components\trair
  */
-trait RuntimeLogs
+trait Logger
 {
     /** @var string $runtimeLogError */
     public string $runtimeLogError = 'error';

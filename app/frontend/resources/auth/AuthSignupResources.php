@@ -6,7 +6,7 @@ use app\common\components\resources\TemplateResources;
 use app\frontend\models\forms\SignupForm;
 
 /**
- * Class `AuthSignupResources`
+ * < Frontend > `AuthSignupResources`
  *
  * @package app\frontend\resources\auth
  *
@@ -24,11 +24,13 @@ class AuthSignupResources extends TemplateResources
 
     /**
      * AuthSignupResources constructor.
+     *
+     * @return void
+     *
+     * @tag #resources #constructor
      */
-    public function __construct($config = [])
+    public function __construct()
     {
-        parent::__construct($config);
-
         $this->signupForm = new SignupForm;
     }
 }

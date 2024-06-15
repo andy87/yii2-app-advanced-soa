@@ -6,7 +6,7 @@ use app\common\components\core\{ BaseModel, BaseService };
 use yii\db\Exception;
 
 /**
- * Class `ModelService`
+ * < Common > `ModelService`
  *
  * @package app\common\components\services
  */

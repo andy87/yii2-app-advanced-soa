@@ -3,7 +3,7 @@
 namespace app\common\models\sources;
 
 /**
- * Class `User`
+< Common > `User`
  *
  * @package app\common\models\sources
  */

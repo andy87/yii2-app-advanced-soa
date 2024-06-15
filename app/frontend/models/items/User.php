@@ -3,9 +3,11 @@
 namespace app\frontend\models\items;
 
 /**
- * Class `User`
+ * < Frontend > `User`
  *
  * @package app\frontend\models\items
+ *
+ * @tag #models #items #user
  */
 class User extends \app\common\models\sources\User
 {

@@ -2,28 +2,31 @@
 
 namespace app\frontend\controllers;
 
-use Yii;
-use yii\web\Response;
-use yii\base\InvalidConfigException;
-use app\frontend\models\forms\ContactForm;
 use app\common\components\traits\SessionFlash;
-use app\frontend\services\controllers\SiteService;
-use app\frontend\components\{actions\CaptchaAction, BaseFrontendController};
+use app\frontend\components\{actions\CaptchaAction, controllers\BaseFrontendController};
+use app\frontend\models\forms\ContactForm;
 use app\frontend\resources\site\{SiteAboutResources, SiteContactResources, SiteIndexResources};
+use app\frontend\services\controllers\SiteService;
+use Yii;
+use yii\base\InvalidConfigException;
+use yii\web\Response;
 
 /**
- * Class `SiteController`
+ * < Frontend > `SiteController`
  *
  * @package app\frontend\controllers
+ *
+ * @tag #controllers #site
  */
 class SiteController extends BaseFrontendController
 {
     use SessionFlash;
 
 
-
     /**
-     * {@inheritdoc}
+     * @return array
+     *
+     * @tag #site #actionEditor
      */
     public function actions(): array
     {
@@ -36,6 +39,8 @@ class SiteController extends BaseFrontendController
      * @param array $actions
      *
      * @return array
+     *
+     * @tag #site #actionAdd
      */
     private function addActionCaptcha( array $actions ): array
     {
@@ -51,6 +56,8 @@ class SiteController extends BaseFrontendController
      * Displays homepage.
      *
      * @return string
+     *
+     * @tag #site #action #index
      */
     public function actionIndex(): string
     {
@@ -65,6 +72,8 @@ class SiteController extends BaseFrontendController
      * @return Response|string
      *
      * @throws InvalidConfigException
+     *
+     * @tag #site #action #contact
      */
     public function actionContact(): Response|string
     {
@@ -96,6 +105,8 @@ class SiteController extends BaseFrontendController
      * Displays about page.
      *
      * @return string
+     *
+     * @tag #site #action #about
      */
     public function actionAbout(): string
     {

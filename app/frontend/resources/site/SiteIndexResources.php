@@ -5,7 +5,7 @@ namespace app\frontend\resources\site;
 use app\common\components\resources\TemplateResources;
 
 /**
- * Class `SiteIndexResources`
+ * < Frontend > `SiteIndexResources`
  *
  * @package app\frontend\resources\site
  *

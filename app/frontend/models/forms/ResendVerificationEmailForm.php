@@ -2,15 +2,16 @@
 
 namespace app\frontend\models\forms;
 
-use app\common\models\dto\EmailDto;
-use app\common\models\Identity;
-use app\frontend\components\model\EmailingModel;
+use app\common\components\models\EmailingModel;
+use app\common\models\{dto\EmailDto, Identity};
 use Yii;
 
 /**
- * Class `ResendVerificationEmailForm`
+ * < Frontend > `ResendVerificationEmailForm`
  *
  * @package app\frontend\models\forms
+ *
+ * @tag #models #forms #resend #verification #email
  */
 class ResendVerificationEmailForm extends EmailingModel
 {

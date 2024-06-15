@@ -7,9 +7,11 @@ use app\common\models\Identity;
 use yii\base\{ Model, InvalidArgumentException };
 
 /**
- * Class `ResetPasswordForm`
+ * < Frontend > `ResetPasswordForm`
  *
  * @package app\frontend\models\forms
+ *
+ * @tag #models #forms #reset #password
  */
 class ResetPasswordForm extends Model
 {

@@ -6,7 +6,7 @@ use app\common\components\resources\TemplateResources;
 use app\frontend\models\forms\ContactForm;
 
 /**
- * Class `SiteContactResources`
+ * < Frontend > `SiteContactResources`
  *
  * @package app\frontend\resources\site
  *
@@ -24,11 +24,13 @@ class SiteContactResources extends TemplateResources
 
     /**
      * SiteContactResources constructor.
+     *
+     * @return void
+     *
+     * @tag #resources #constructor
      */
-    public function __construct($config = [])
+    public function __construct()
     {
-        parent::__construct($config);
-
         $this->contactForm = new ContactForm;
     }
 }

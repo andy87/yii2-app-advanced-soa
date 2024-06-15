@@ -6,7 +6,7 @@ use app\common\components\resources\TemplateResources;
 use app\common\models\LoginForm;
 
 /**
- * Class `AuthLoginResources`
+ * < Frontend > `AuthLoginResources`
  *
  * @package app\frontend\resources\auth
  *
@@ -26,11 +26,13 @@ class AuthLoginResources extends TemplateResources
 
     /**
      * AuthLoginResources constructor.
+     *
+     * @return void
+     *
+     * @tag #resources #constructor
      */
-    public function __construct($config = [])
+    public function __construct()
     {
-        parent::__construct($config);
-
         $this->loginForm = new LoginForm;
     }
 }

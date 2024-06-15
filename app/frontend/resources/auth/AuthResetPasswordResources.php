@@ -6,7 +6,7 @@ use app\common\components\resources\TemplateResources;
 use app\frontend\models\forms\ResetPasswordForm;
 
 /**
- * Class `AuthResetPasswordResources`
+ * < Frontend > `AuthResetPasswordResources`
  *
  * @package app\frontend\resources\auth
  *
@@ -17,5 +17,6 @@ class AuthResetPasswordResources extends TemplateResources
     /** @var string Шаблон */
     public const TEMPLATE = '@views/auth/reset-password';
 
+    /** @var ResetPasswordForm $resetPasswordForm */
     public ResetPasswordForm $resetPasswordForm;
 }

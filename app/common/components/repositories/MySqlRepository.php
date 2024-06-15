@@ -6,7 +6,7 @@ use yii\db\{Query, ActiveQuery};
 use app\common\components\core\{BaseModel, BaseRepository};
 
 /**
- * Class `MySqlRepository`
+ * < Common > `MySqlRepository`
  *
  * @package app\common\components\repositories
  */
