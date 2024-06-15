@@ -3,9 +3,9 @@
 namespace app\common\services;
 
 use Yii;
-use app\common\models\LoginForm;
-use app\common\components\core\BaseService;
 use yii\base\InvalidConfigException;
+use app\common\models\forms\LoginForm;
+use app\common\components\core\BaseService;
 
 /**
  * < Common > AuthService

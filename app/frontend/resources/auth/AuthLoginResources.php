@@ -3,7 +3,7 @@
 namespace app\frontend\resources\auth;
 
 use app\common\components\resources\TemplateResources;
-use app\common\models\LoginForm;
+use app\common\models\forms\LoginForm;
 
 /**
  * < Frontend > `AuthLoginResources`

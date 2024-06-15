@@ -5,7 +5,7 @@ namespace app\common\models\dto;
 use Yii;
 
 /**
-< Common > `Mail`
+ * < Common > `Mail`
  *
  * @package app\common\components\mail
  */
@@ -20,9 +20,6 @@ class EmailDto
     public ?string $subject = null;
     public ?string $body = null;
     public ?string $verifyCode = null;
-
-    public array $configCompose = [];
-
 
     /**
      *

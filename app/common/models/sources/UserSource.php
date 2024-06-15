@@ -5,11 +5,11 @@ namespace app\common\models\sources;
 use app\common\components\core\BaseModel;
 
 /**
-< Common > `UserSource`
+ * < Common > `UserSource`
  *
  * @package app\common\models\sources
  */
-class UserSource extends BaseModel
+abstract class UserSource extends BaseModel
 {
 
 }

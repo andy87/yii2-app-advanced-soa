@@ -2,7 +2,7 @@
 
 namespace app\backend\resources\auth;
 
-use app\common\models\LoginForm;
+use app\common\models\forms\LoginForm;
 
 /**
  * < Backend > `AuthLoginResources`

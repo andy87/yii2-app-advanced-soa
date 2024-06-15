@@ -3,8 +3,10 @@
 namespace app\frontend\models\forms;
 
 use app\common\components\models\EmailingModel;
+use app\common\services\IdentityService;
 use app\common\models\{dto\EmailDto, Identity};
 use Yii;
+use yii\base\InvalidConfigException;
 
 /**
  * < Frontend > `PasswordResetRequestForm`
@@ -27,6 +29,9 @@ class PasswordResetRequestForm extends EmailingModel
     /** @var ?string   */
     public ?string $email = null;
 
+    /** @var ?Identity $identity */
+    private ?Identity $identity = null;
+
 
     /**
      * @return array
@@ -45,6 +50,36 @@ class PasswordResetRequestForm extends EmailingModel
                 'message' => 'Нет пользователя с таким email.'
             ],
         ];
+    }
+
+    /**
+     * @return ?Identity
+     *
+     * @throws InvalidConfigException
+     *
+     * @tag #setup #identity
+     */
+    public function setupIdentity(): ?Identity
+    {
+        if ($this->identity === null)
+        {
+            $this->identity = IdentityService::getInstance()
+                ->findActiveByEmail($this->email);
+        }
+
+        return $this->identity;
+    }
+
+    /**
+     * @return ?Identity
+     *
+     * @throws InvalidConfigException
+     *
+     * @tag #getter #identity
+     */
+    public function getIdentity(): ?Identity
+    {
+        return ($this->identity instanceof Identity ) ? $this->identity : $this->setupIdentity();
     }
 
     /**

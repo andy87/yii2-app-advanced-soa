@@ -2,18 +2,18 @@
 
 namespace app\frontend\services\controllers;
 
-use Yii;
-use Exception;
 use app\common\models\Identity;
-use app\common\models\LoginForm;
-use yii\base\InvalidConfigException;
 use app\common\services\EmailService;
 use app\common\services\IdentityService;
-use app\frontend\models\forms\SignupForm;
-use app\frontend\models\forms\VerifyEmailForm;
-use app\frontend\models\forms\ResetPasswordForm;
 use app\frontend\models\forms\PasswordResetRequestForm;
 use app\frontend\models\forms\ResendVerificationEmailForm;
+use app\frontend\models\forms\ResetPasswordForm;
+use app\frontend\models\forms\SignupForm;
+use app\frontend\models\forms\VerifyEmailForm;
+use app\frontend\services\items\UserService;
+use Exception;
+use Yii;
+use yii\base\InvalidConfigException;
 
 /**
  * < Frontend > `AuthService`
@@ -135,16 +135,15 @@ class AuthService extends \app\common\services\AuthService
         {
             if ($passwordResetRequestForm->validate())
             {
-                $passwordResetRequestForm->_identity = IdentityService::getInstance()
-                    ->findActiveUserByEmail($passwordResetRequestForm->email);
+                $identity = $passwordResetRequestForm->getIdentity();
 
-                if ($passwordResetRequestForm->_identity)
+                if ($identity)
                 {
-                    if (Identity::isPasswordResetTokenValid($passwordResetRequestForm->_identity->password_reset_token))
+                    if (Identity::isPasswordResetTokenValid($identity->password_reset_token))
                     {
-                        $passwordResetRequestForm->_identity->generatePasswordResetToken();
+                        $identity->generatePasswordResetToken();
 
-                        if ($passwordResetRequestForm->_identity->save())
+                        if ($identity->save())
                         {
                             return $this->sendEmailRequestPasswordReset($passwordResetRequestForm);
 
@@ -187,7 +186,7 @@ class AuthService extends \app\common\services\AuthService
         $requestPasswordResetEmail = $passwordResetRequestForm->constructEmailDto();
 
         $configCompose = $passwordResetRequestForm->getEmailComposeConfig([
-            'user' => $passwordResetRequestForm->_identity
+            'user' => $passwordResetRequestForm->getIdentity()
         ]);
 
         return EmailService::getInstance()

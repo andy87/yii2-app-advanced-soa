@@ -4,7 +4,9 @@ namespace app\common\services;
 
 use app\common\models\Identity;
 use app\common\components\services\ModelService;
-use app\frontend\repositories\IdentityRepository;
+use app\common\repositories\IdentityRepository;
+use app\frontend\models\forms\SignupForm;
+use Exception;
 use yii\base\InvalidConfigException;
 
 /**
@@ -13,6 +15,10 @@ use yii\base\InvalidConfigException;
  * @package app\common\services
  *
  * @tag #common #service #identity
+ *
+ * @method Identity getClassModel()
+ * @method Identity createModel(array $attributes = [])
+ * @method Identity addModel(array $attributes = [])
  */
 class IdentityService extends ModelService
 {
@@ -65,7 +71,7 @@ class IdentityService extends ModelService
      *
      * @tag #service #identity #find #active #user
      */
-    public function findActiveUserByEmail(string $email): ?Identity
+    public function findActiveByEmail(string $email): ?Identity
     {
         return $this
             ->identityRepository

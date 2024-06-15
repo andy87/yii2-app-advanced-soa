@@ -1,16 +1,20 @@
 <?php declare(strict_types=1);
 
-namespace app\common\models;
+namespace app\common\models\forms;
 
-use Yii;
+use app\common\models\Identity;
 use app\common\services\IdentityService;
 use app\frontend\controllers\AuthController;
-use yii\base\{Model, InvalidConfigException };
+use yii\base\{InvalidConfigException, Model};
 
 /**
- * Login form
+ * < Common > `LoginForm`
  *
- * @property ?Identity $user
+ *      Login form
+ *
+ * @package app\common\models\forms
+ *
+ * @tag #common #forms #login
  */
 class LoginForm extends Model
 {

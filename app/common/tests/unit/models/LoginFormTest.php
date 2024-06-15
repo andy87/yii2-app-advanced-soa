@@ -2,11 +2,11 @@
 
 namespace app\common\tests\unit\models;
 
-use Yii;
-use Codeception\Test\Unit;
-use app\common\models\LoginForm;
 use app\common\fixtures\UserFixture;
+use app\common\models\forms\LoginForm;
 use app\common\tests\_support\UnitTester;
+use Codeception\Test\Unit;
+use Yii;
 use function common\tests\unit\models\codecept_data_dir;
 use function common\tests\unit\models\verify;
 

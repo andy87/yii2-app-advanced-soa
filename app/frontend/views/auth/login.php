@@ -1,9 +1,9 @@
 <?php
 
-use app\common\models\LoginForm;
+use app\common\models\forms\LoginForm;
 use app\frontend\resources\auth\AuthLoginResources;
+use yii\bootstrap5\{ActiveForm, Html};
 use yii\web\View;
-use yii\bootstrap5\{Html,ActiveForm};
 
 /**
  * @var View $this

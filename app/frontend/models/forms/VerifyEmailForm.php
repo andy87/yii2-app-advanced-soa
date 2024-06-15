@@ -3,6 +3,7 @@
 namespace app\frontend\models\forms;
 
 use app\common\models\Identity;
+use app\common\services\IdentityService;
 use IdentityService;
 use yii\base\{InvalidArgumentException, InvalidConfigException, Model};
 
