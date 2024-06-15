@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types=1);
 
 namespace app\frontend\tests\_support;
 
@@ -24,7 +24,12 @@ class FunctionalTester extends \Codeception\Actor
     use _generated\FunctionalTesterActions;
 
 
-    public function seeValidationError($message)
+    /**
+     * @param $message
+     *
+     * @return void
+     */
+    public function seeValidationError($message): void
     {
         $this->see($message, '.invalid-feedback');
     }
