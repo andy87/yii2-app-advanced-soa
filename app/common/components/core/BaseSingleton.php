@@ -13,6 +13,8 @@ use yii\base\InvalidConfigException;
  */
 abstract class BaseSingleton extends BaseObject
 {
+    public const CONFIG = [];
+
     /**
      * @return static
      *
@@ -31,6 +33,6 @@ abstract class BaseSingleton extends BaseObject
      */
     public static function getConfig(): array
     {
-        return ['class' => static::class];
+        return array_merge(static::CONFIG, ['class' => static::class]);
     }
 }
