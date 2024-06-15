@@ -3,26 +3,36 @@
 namespace app\common\tests\unit\models;
 
 use Yii;
+use Codeception\Test\Unit;
 use app\common\models\LoginForm;
 use app\common\fixtures\UserFixture;
+use app\common\tests\_support\UnitTester;
 use function common\tests\unit\models\codecept_data_dir;
 use function common\tests\unit\models\verify;
 
 /**
- * Login form test
+ * < Common > `LoginFormTest`
+ *
+ *      Login form test
+ *
+ * @package app\common\tests\unit\models
+ *
+ * @tag #common #tests #unit #models #LoginForm
  */
-class LoginFormTest extends \Codeception\Test\Unit
+class LoginFormTest extends Unit
 {
     /**
-     * @var \app\common\tests\_support\UnitTester
+     * @var UnitTester
      */
-    protected $tester;
+    protected UnitTester $tester;
 
 
     /**
      * @return array
+     *
+     * @tag #common #tests #unit #LoginForm #fixtures
      */
-    public function _fixtures()
+    public function _fixtures(): array
     {
         return [
             'user' => [
@@ -32,38 +42,53 @@ class LoginFormTest extends \Codeception\Test\Unit
         ];
     }
 
-    public function testLoginNoUser()
+    /**
+     * @return void
+     *
+     * @tag #common #tests #unit #LoginForm #noUser
+     */
+    public function testLoginNoUser(): void
     {
-        $model = new LoginForm([
+        $loginForm = new LoginForm([
             'username' => 'not_existing_username',
             'password' => 'not_existing_password',
         ]);
 
-        verify($model->login())->false();
+        verify($loginForm->login())->false();
         verify(Yii::$app->user->isGuest)->true();
     }
 
-    public function testLoginWrongPassword()
+    /**
+     * @return void
+     *
+     * @tag #common #tests #unit #LoginForm #wrongPassword
+     */
+    public function testLoginWrongPassword(): void
     {
-        $model = new LoginForm([
+        $loginForm = new LoginForm([
             'username' => 'bayer.hudson',
             'password' => 'wrong_password',
         ]);
 
-        verify($model->login())->false();
-        verify( $model->errors)->arrayHasKey('password');
+        verify($loginForm->login())->false();
+        verify( $loginForm->errors)->arrayHasKey('password');
         verify(Yii::$app->user->isGuest)->true();
     }
 
-    public function testLoginCorrect()
+    /**
+     * @return void
+     *
+     * @tag #common #tests #unit #LoginForm #correct
+     */
+    public function testLoginCorrect(): void
     {
-        $model = new LoginForm([
+        $loginForm = new LoginForm([
             'username' => 'bayer.hudson',
             'password' => 'password_0',
         ]);
 
-        verify($model->login())->true();
-        verify($model->errors)->arrayHasNotKey('password');
+        verify($loginForm->login())->true();
+        verify($loginForm->errors)->arrayHasNotKey('password');
         verify(Yii::$app->user->isGuest)->false();
     }
 }
