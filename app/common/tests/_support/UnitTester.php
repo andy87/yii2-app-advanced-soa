@@ -2,10 +2,14 @@
 
 namespace app\common\tests\_support;
 
+use Codeception\Lib\Friend;
 use common\tests\_generated;
 
 /**
- * Inherited Methods
+ * < Common > `UnitTester`
+ *
+ *      Inherited Methods
+ *
  * @method void wantToTest($text)
  * @method void wantTo($text)
  * @method void execute($callable)
@@ -15,9 +19,11 @@ use common\tests\_generated;
  * @method void am($role)
  * @method void lookForwardTo($achieveValue)
  * @method void comment($description)
- * @method \Codeception\Lib\Friend haveFriend($name, $actorClass = NULL)
+ * @method Friend haveFriend($name, $actorClass = NULL)
  *
  * @SuppressWarnings(PHPMD)
+ *
+ * @tag #common #tests #support #unitTester
  */
 class UnitTester extends \Codeception\Actor
 {

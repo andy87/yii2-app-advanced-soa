@@ -3,17 +3,16 @@
 namespace app\frontend\services\controllers;
 
 use app\common\components\core\BaseService;
-use app\common\models\dto\EmailDto;
-use app\common\models\LoginForm;
 use app\common\models\Identity;
+use app\common\models\LoginForm;
 use app\common\services\EmailService;
 use app\frontend\models\forms\PasswordResetRequestForm;
 use app\frontend\models\forms\ResendVerificationEmailForm;
 use app\frontend\models\forms\ResetPasswordForm;
 use app\frontend\models\forms\SignupForm;
 use app\frontend\models\forms\VerifyEmailForm;
-use app\frontend\services\models\IdentityService;
 use Exception;
+use IdentityService;
 use Yii;
 use yii\base\InvalidConfigException;
 

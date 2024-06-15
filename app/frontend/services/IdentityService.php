@@ -1,12 +1,11 @@
 <?php declare(strict_types=1);
 
-namespace app\frontend\services\models;
 
+use app\common\components\services\ModelService;
 use app\common\models\Identity;
 use app\frontend\models\forms\SignupForm;
 use app\frontend\repositories\IdentityRepository;
-use app\common\components\services\ModelService;
-use yii\base\{ Exception, InvalidConfigException };
+use yii\base\{Exception, InvalidConfigException};
 
 /**
  * < Frontend > `UserService`

@@ -3,8 +3,8 @@
 namespace app\frontend\models\forms;
 
 use app\common\models\Identity;
-use app\frontend\services\models\IdentityService;
-use yii\base\{ Model, InvalidArgumentException, InvalidConfigException };
+use IdentityService;
+use yii\base\{InvalidArgumentException, InvalidConfigException, Model};
 
 /**
  * < Frontend > `VerifyEmailForm`
