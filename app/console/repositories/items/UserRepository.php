@@ -1,0 +1,15 @@
+<?php
+
+namespace app\console\repositories\items;
+
+/**
+ * < Console > `UserRepository`
+ *
+ * @package app\console\repositories\items
+ *
+ * @tag #repositories #user
+ */
+class UserRepository extends \app\common\repositories\items\UserRepository
+{
+
+}
