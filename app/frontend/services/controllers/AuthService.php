@@ -132,7 +132,7 @@ class AuthService extends BaseService
         $configCompose = $signupForm->getEmailComposeConfig(['user' => $signupForm->identity]);
 
         return EmailService::getInstance()
-            ->sendEmail($registrationEmail, $configCompose);
+            ->send($registrationEmail, $configCompose);
     }
 
     /**
@@ -208,7 +208,7 @@ class AuthService extends BaseService
         ]);
 
         return EmailService::getInstance()
-            ->sendEmail($requestPasswordResetEmail, $configCompose);
+            ->send($requestPasswordResetEmail, $configCompose);
     }
 
     /**
@@ -360,6 +360,6 @@ class AuthService extends BaseService
         $configCompose = $resendVerificationEmailForm->getEmailComposeConfig([ 'user' => $user ]);
 
         return EmailService::getInstance()
-            ->sendEmail($resendVerificationEmail, $configCompose);
+            ->send($resendVerificationEmail, $configCompose);
     }
 }

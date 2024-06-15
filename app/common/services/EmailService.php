@@ -12,6 +12,7 @@ use yii\mail\{MailerInterface, MessageInterface};
  *
  * @package app\common\services
  *
+ * @tag #common #service #email
  */
 class EmailService extends BaseService
 {
@@ -20,6 +21,8 @@ class EmailService extends BaseService
 
     /**
      * @return array
+     *
+     * @tag #common #service #email #config
      */
     public static function getConfig(): array
     {
@@ -34,8 +37,10 @@ class EmailService extends BaseService
      * @param array $compose
      *
      * @return bool
+     *
+     * @tag #common #service #email #send
      */
-    public function sendEmail( EmailDto $email, array $compose = [] ): bool
+    public function send(EmailDto $email, array $compose = [] ): bool
     {
         $message = $this->constructMessage($email, $compose);
 
@@ -59,6 +64,8 @@ class EmailService extends BaseService
      * @param array $compose
      *
      * @return MessageInterface
+     *
+     * @tag #common #service #email #construct
      */
     public function constructMessage( EmailDto $email, array $compose = [] ): MessageInterface
     {

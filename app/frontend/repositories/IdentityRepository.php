@@ -24,7 +24,7 @@ class IdentityRepository extends MySqlRepository
      *
      * @return ?Identity
      *
-     * @tag #find
+     * @tag #repository #identity #find
      */
     public function findActiveByEmail(string $email): ?Identity
     {
@@ -45,7 +45,7 @@ class IdentityRepository extends MySqlRepository
      *
      * @return ?Identity
      *
-     * @tag #find
+     * @tag #repository #identity #find
      */
     public function findInactiveByEmail(string $email): ?Identity
     {
@@ -66,7 +66,7 @@ class IdentityRepository extends MySqlRepository
      *
      * @return ?Identity
      *
-     * @tag #find
+     * @tag #repository #identity #find
      */
     public function findByVerificationToken(string $token): ?Identity
     {

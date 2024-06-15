@@ -17,6 +17,8 @@ abstract class ModelService extends BaseService
 
     /**
      * @return BaseModel|string
+     *
+     * @tag #core #service #get
      */
     public function getClassModel(): BaseModel|string
     {
@@ -30,6 +32,8 @@ abstract class ModelService extends BaseService
      * @param array $attributes
      *
      * @return BaseModel|string
+     *
+     * @tag #core #service #create
      */
     public function createModel(array $attributes = []): BaseModel|string
     {
@@ -44,6 +48,8 @@ abstract class ModelService extends BaseService
      * @return BaseModel|string
      *
      * @throws Exception
+     *
+     * @tag #core #service #model #add
      */
     public function addModel(array $attributes = []): BaseModel|string
     {

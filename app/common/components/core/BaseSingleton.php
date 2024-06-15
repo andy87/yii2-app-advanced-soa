@@ -13,12 +13,15 @@ use yii\base\InvalidConfigException;
  */
 abstract class BaseSingleton extends BaseObject
 {
+    /** @var array  */
     public const CONFIG = [];
 
     /**
      * @return static
      *
      * @throws InvalidConfigException
+     *
+     * @tag #core #singleton
      */
     public static function getInstance(): static
     {
@@ -30,6 +33,8 @@ abstract class BaseSingleton extends BaseObject
 
     /**
      * @return array
+     *
+     * @tag #core #singleton
      */
     public static function getConfig(): array
     {

@@ -19,6 +19,8 @@ abstract class MySqlRepository extends BaseRepository
 
     /**
      * @return BaseModel|string
+     *
+     * @tag #core #repository #get
      */
     public function getClassModel(): BaseModel|string
     {
@@ -30,6 +32,8 @@ abstract class MySqlRepository extends BaseRepository
 
     /**
      * @return ActiveQuery
+     *
+     * @tag #core #repository #find
      */
     public function find(): ActiveQuery
     {
@@ -42,6 +46,8 @@ abstract class MySqlRepository extends BaseRepository
      * @param array $criteria
      *
      * @return Query
+     *
+     * @tag #core #repository #find
      */
     public function findByCriteria(array $criteria): Query
     {

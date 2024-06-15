@@ -18,6 +18,8 @@ abstract class FormService extends ModelService
 
     /**
      * @return BaseModel|string
+     *
+     * @tag #core #service #get
      */
     public function getClassForm(): BaseModel|string
     {
@@ -31,6 +33,8 @@ abstract class FormService extends ModelService
      * @param array $attributes
      *
      * @return BaseModel|string
+     *
+     * @tag #core #service #create
      */
     public function createForm(array $attributes = []): BaseModel|string
     {

@@ -10,7 +10,11 @@ use yii\web\Controller;
 use yii\web\Response;
 
 /**
- * Site controller
+ * < Backend > `SiteController`
+ *
+ * @package app\backend\controllers
+ *
+ * @tag #backend #controller #site
  */
 class SiteController extends Controller
 {
