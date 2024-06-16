@@ -1,2 +1,4 @@
 suite_namespace: app\backend\tests\unit
 actor: UnitTester
+
+# @cli ./vendor/bin/codecept run app/backend/tests/unit

@@ -64,7 +64,7 @@ class ResendVerificationEmailForm extends EmailingModel
     {
         $emailDto = new EmailDto();
         $emailDto->to = $this->email;
-        $emailDto->subject = $this->generateSubject();
+        $emailDto->subject = $this->generateMailSubject();
         $emailDto->fromEmail = Yii::$app->params['supportEmail'];
         $emailDto->fromName = Yii::$app->name . ' robot';
 
@@ -76,7 +76,7 @@ class ResendVerificationEmailForm extends EmailingModel
      *
      * @tag #generate #subject
      */
-    public function generateSubject(): string
+    public function generateMailSubject(): string
     {
         return 'Account registration at ' . Yii::$app->name;
     }

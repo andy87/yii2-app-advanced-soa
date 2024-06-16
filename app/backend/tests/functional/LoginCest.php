@@ -14,6 +14,8 @@ use app\common\fixtures\UserFixture;
  *
  * @cli ./vendor/bin/codecept run app/backend/tests/functional/LoginCest
  *
+ * @originalFile https://github.com/yiisoft/yii2-app-advanced/blob/master/backend/tests/functional/LoginCest.php
+ *
  * @tag #backend #functional #login
  */
 class LoginCest
@@ -37,6 +39,8 @@ class LoginCest
     
     /**
      * @cli ./vendor/bin/codecept run app/backend/tests/functional/LoginCest:testLoginUser
+     *
+     * @refer https://github.com/yiisoft/yii2-app-advanced/blob/master/backend/tests/functional/LoginCest.php#L33
      *
      * @param FunctionalTester $I
      *

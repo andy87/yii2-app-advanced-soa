@@ -17,6 +17,8 @@ use app\common\{fixtures\UserFixture, models\Identity, models\sources\User, serv
  *
  * @cli ./vendor/bin/codecept run app/frontend/tests/unit/models/SignupFormTest
  *
+ * @originalFile https://github.com/yiisoft/yii2-app-advanced/blob/master/frontend/tests/unit/models/SignupFormTest.php
+ *
  * @tags #frontend #tests #unit #models #SignupForm
  */
 class SignupFormTest extends Unit
@@ -71,6 +73,8 @@ class SignupFormTest extends Unit
      *
      * @cli ./vendor/bin/codecept run app/frontend/tests/unit/models/SignupFormTest:testCorrectSignup
      *
+     * @refer https://github.com/yiisoft/yii2-app-advanced/blob/master/frontend/tests/unit/models/SignupFormTest.php#L26
+     *
      * @return void
      *
      * @throws ModuleException|InvalidConfigException|Exception
@@ -105,7 +109,7 @@ class SignupFormTest extends Unit
         verify($mail)->instanceOf(MessageInterface::class);
         verify($mail->getTo())->arrayHasKey('some_email@example.com');
         verify($mail->getFrom())->arrayHasKey(\Yii::$app->params['supportEmail']);
-        verify($mail->getSubject())->equals($signupForm->getSubject());
+        verify($mail->getSubject())->equals($signupForm->generateMailSubject());
         verify($mail->toString())->stringContainsString($identity->verification_token);
     }
 
@@ -113,6 +117,8 @@ class SignupFormTest extends Unit
      * Not correct signup
      *
      * @cli ./vendor/bin/codecept run app/frontend/tests/unit/models/SignupFormTest:testNotCorrectSignup
+     *
+     * @refer https://github.com/yiisoft/yii2-app-advanced/blob/master/frontend/tests/unit/models/SignupFormTest.php#L55
      *
      * @return void
      *

@@ -74,7 +74,7 @@ class SignupForm extends EmailingModel
         $emailDto->to = $this->identity->email;
         $emailDto->fromEmail = Yii::$app->params['supportEmail'];
         $emailDto->fromName = Yii::$app->name . ' robot';
-        $emailDto->subject = $this->getSubject();
+        $emailDto->subject = $this->generateMailSubject();
 
         return $emailDto;
     }
@@ -84,7 +84,7 @@ class SignupForm extends EmailingModel
      *
      * @tag #models #forms #signup #subject
      */
-    public function getSubject(): string
+    public function generateMailSubject(): string
     {
         return 'Регистрация аккаунта на сайте ' . Yii::$app->name;
     }

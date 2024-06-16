@@ -17,6 +17,8 @@ use app\frontend\{ models\forms\ContactForm, services\SiteService, tests\UnitTes
  *
  * @cli ./vendor/bin/codecept run app/frontend/tests/unit/models/ContactFormTest
  *
+ * @originalFile https://github.com/yiisoft/yii2-app-advanced/blob/master/frontend/tests/unit/models/ContactFormTest.php
+ *
  * @tag #tests #unit #models #ContactFormTest
  */
 class ContactFormTest extends Unit
@@ -25,6 +27,8 @@ class ContactFormTest extends Unit
      * Send email
      *
      * @cli ./vendor/bin/codecept run app/frontend/tests/unit/models/ContactFormTest:testSendEmail
+     *
+     * @refer https://github.com/yiisoft/yii2-app-advanced/blob/master/frontend/tests/unit/models/ContactFormTest.php#L10
      *
      * @return void
      *

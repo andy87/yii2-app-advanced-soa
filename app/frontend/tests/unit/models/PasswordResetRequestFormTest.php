@@ -19,6 +19,8 @@ use app\frontend\{models\forms\PasswordResetRequestForm, services\AuthService, t
  *
  * @cli ./vendor/bin/codecept run app/frontend/tests/unit/models/PasswordResetRequestFormTest
  *
+ * @originalFile https://github.com/yiisoft/yii2-app-advanced/blob/master/frontend/tests/unit/models/PasswordResetRequestFormTest.php
+ *
  * @tags #frontend #tests #unit #models #PasswordResetRequestForm
  */
 class PasswordResetRequestFormTest extends Unit
@@ -49,9 +51,11 @@ class PasswordResetRequestFormTest extends Unit
      *
      * @cli ./vendor/bin/codecept run app/frontend/tests/unit/models/PasswordResetRequestFormTest:testSendMessageWithWrongEmailAddress
      *
+     * @refer https://github.com/yiisoft/yii2-app-advanced/blob/master/frontend/tests/unit/models/VerifyEmailFormTest.php
+     *
      * @return void
      *
-     * @throws InvalidConfigException|YiiDbException|YiiBaseException
+     * @throws InvalidConfigException|YiiBaseException
      *
      * @tag #frontend #tests #reset #wrong #email
      */
@@ -69,6 +73,8 @@ class PasswordResetRequestFormTest extends Unit
      * Not send emails to inactive user
      *
      * @cli ./vendor/bin/codecept run app/frontend/tests/unit/models/PasswordResetRequestFormTest:testNotSendEmailsToInactiveUser
+     *
+     * @refer https://github.com/yiisoft/yii2-app-advanced/blob/master/frontend/tests/unit/models/PasswordResetRequestFormTest.php#L35
      *
      * @return void
      *
@@ -93,6 +99,8 @@ class PasswordResetRequestFormTest extends Unit
      * Send email successfully
      *
      * @cli ./vendor/bin/codecept run app/frontend/tests/unit/models/PasswordResetRequestFormTest:testSendEmailSuccessfully
+     *
+     * @refer https://github.com/yiisoft/yii2-app-advanced/blob/master/frontend/tests/unit/models/PasswordResetRequestFormTest.php#43
      *
      * @return void
      *

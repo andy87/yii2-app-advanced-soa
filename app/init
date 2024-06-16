@@ -7,7 +7,6 @@
  *
  * init --env=Development --overwrite=n
  *
- * @edition Andrey and_y87 Kidin
  */
 
 if (!extension_loaded('openssl')) {
@@ -75,7 +74,7 @@ if (isset($env['skipFiles'])) {
 }
 $all = false;
 foreach ($files as $file) {
-    if (!copyFile($root, "environments/{$env['path']}/$file", $file, $all, $params)) {
+    if (!copyFile($root, "environments/{$env['path']}/$file", "/$file", $all, $params)) {
         break;
     }
 }
@@ -109,6 +108,16 @@ foreach ($callbacks as $callback) {
     if (!empty($env[$callback])) {
         $callback($root, $env[$callback]);
     }
+}
+
+if (!file_exists("$root/../.env")) {
+    if (copy("$root/../.env.example", "$root/../.env")) {
+        echo "\r\n   generate .env\n";
+    } else {
+        printError("Cannot generate .env file.");
+    }
+} else {
+    echo "\r\n   .env exists\n";
 }
 
 echo "\n  ... initialization completed.\n\n";

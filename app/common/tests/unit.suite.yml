@@ -5,3 +5,5 @@ modules:
     enabled:
         - Yii2:
             part: fixtures
+
+# @cli ./vendor/bin/codecept run app/common/tests/unit

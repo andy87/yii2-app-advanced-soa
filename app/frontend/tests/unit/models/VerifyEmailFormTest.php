@@ -16,6 +16,8 @@ use app\frontend\{ models\forms\VerifyEmailForm, services\AuthService };
  *
  * @cli ./vendor/bin/codecept run app/frontend/tests/unit/models/VerifyEmailFormTest
  *
+ * @originalFile https://github.com/yiisoft/yii2-app-advanced/blob/master/frontend/tests/unit/models/VerifyEmailFormTest.php
+ *
  * @tags #frontend #tests #unit #models #VerifyEmailForm
  */
 class VerifyEmailFormTest extends Unit
@@ -44,6 +46,8 @@ class VerifyEmailFormTest extends Unit
      *
      * @cli ./vendor/bin/codecept run app/frontend/tests/unit/models/VerifyEmailFormTest:testWrongToken
      *
+     * @refer https://github.com/yiisoft/yii2-app-advanced/blob/master/frontend/tests/unit/models/VerifyEmailFormTest.php#L26
+     *
      * @return void
      *
      * @tag #frontend #tests #verify #wrong #token
@@ -64,6 +68,8 @@ class VerifyEmailFormTest extends Unit
      *
      * @cli ./vendor/bin/codecept run app/frontend/tests/unit/models/VerifyEmailFormTest:testAlreadyActivatedToken
      *
+     * @refer https://github.com/yiisoft/yii2-app-advanced/blob/master/frontend/tests/unit/models/VerifyEmailFormTest.php#L37
+     *
      * @return void
      *
      * @tag #frontend #tests #verify #already #activated #token
@@ -79,6 +85,8 @@ class VerifyEmailFormTest extends Unit
      * Verify correct token
      *
      * @cli ./vendor/bin/codecept run app/frontend/tests/unit/models/VerifyEmailFormTest:testVerifyCorrectToken
+     *
+     * @refer https://github.com/yiisoft/yii2-app-advanced/blob/master/frontend/tests/unit/models/VerifyEmailFormTest.php#L44
      *
      * @return void
      *

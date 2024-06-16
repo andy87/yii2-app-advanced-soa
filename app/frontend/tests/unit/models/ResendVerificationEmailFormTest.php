@@ -17,6 +17,8 @@ use app\frontend\{ tests\UnitTester, services\AuthService, models\forms\ResendVe
  *
  * @cli ./vendor/bin/codecept run app/frontend/tests/unit/models/ResendVerificationEmailFormTest
  *
+ * @originalFile https://github.com/yiisoft/yii2-app-advanced/blob/master/frontend/tests/unit/models/ResendVerificationEmailFormTest.php
+ *
  * @tags #frontend #tests #unit #models #ResendVerificationEmailFormTest
  */
 class ResendVerificationEmailFormTest extends Unit
@@ -59,6 +61,8 @@ class ResendVerificationEmailFormTest extends Unit
      *
      * @cli ./vendor/bin/codecept run app/frontend/tests/unit/models/ResendVerificationEmailFormTest:testWrongEmailAddress
      *
+     * @refer https://github.com/yiisoft/yii2-app-advanced/blob/master/frontend/tests/unit/models/ResendVerificationEmailFormTest.php#L28
+     *
      * @return void
      *
      * @tag #frontend #tests #resend #wrong #email
@@ -78,6 +82,8 @@ class ResendVerificationEmailFormTest extends Unit
      * Empty email address
      *
      * @cli ./vendor/bin/codecept run app/frontend/tests/unit/models/ResendVerificationEmailFormTest:testEmptyEmailAddress
+     *
+     * @refer https://github.com/yiisoft/yii2-app-advanced/blob/master/frontend/tests/unit/models/ResendVerificationEmailFormTest.php#L40
      *
      * @return void
      *
@@ -99,6 +105,8 @@ class ResendVerificationEmailFormTest extends Unit
      *
      * @cli ./vendor/bin/codecept run app/frontend/tests/unit/models/ResendVerificationEmailFormTest:testResendToActiveUser
      *
+     * @refer https://github.com/yiisoft/yii2-app-advanced/blob/master/frontend/tests/unit/models/ResendVerificationEmailFormTest.php#L52
+     *
      * @return void
      *
      * @tag #frontend #tests #resend #active #user
@@ -118,6 +126,8 @@ class ResendVerificationEmailFormTest extends Unit
      * Successfully resend
      *
      * @cli ./vendor/bin/codecept run app/frontend/tests/unit/models/ResendVerificationEmailFormTest:testSuccessfullyResend
+     *
+     * @refer https://github.com/yiisoft/yii2-app-advanced/blob/master/frontend/tests/unit/models/ResendVerificationEmailFormTest.php#L64
      *
      * @return void
      *
@@ -145,7 +155,7 @@ class ResendVerificationEmailFormTest extends Unit
         verify($mail)->instanceOf(MessageInterface::class);
         verify($mail->getTo())->arrayHasKey('test@mail.com');
         verify($mail->getFrom())->arrayHasKey(Yii::$app->params['supportEmail']);
-        verify($mail->getSubject())->equals($resendVerificationEmailForm->generateSubject());
+        verify($mail->getSubject())->equals($resendVerificationEmailForm->generateMailSubject());
         verify($mail->toString())->stringContainsString('4ch0qbfhvWwkcuWqjN8SWRq72SOw1KYT_1548675330');
     }
 }

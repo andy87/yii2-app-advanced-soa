@@ -16,6 +16,8 @@ use app\common\{tests\UnitTester, services\AuthService, fixtures\UserFixture, mo
  *
  * @cli ./vendor/bin/codecept run app/common/tests/unit/models/LoginFormTest
  *
+ * @originalFile https://github.com/yiisoft/yii2-app-advanced/blob/master/common/tests/unit/models/LoginFormTest.php
+ *
  * @tag #common #tests #unit #models #LoginForm
  */
 class LoginFormTest extends Unit
@@ -47,6 +49,8 @@ class LoginFormTest extends Unit
     /**
      * @cli ./vendor/bin/codecept run app/common/tests/unit/models/LoginFormTest:testLoginNoUser
      *
+     * @refer https://github.com/yiisoft/yii2-app-advanced/blob/master/common/tests/unit/models/LoginFormTest.php#L33
+     *
      * @return void
      *
      * @throws InvalidConfigException
@@ -67,6 +71,8 @@ class LoginFormTest extends Unit
 
     /**
      * @cli ./vendor/bin/codecept run app/common/tests/unit/models/LoginFormTest:testLoginWrongPassword
+     *
+     * @refer https://github.com/yiisoft/yii2-app-advanced/blob/master/common/tests/unit/models/LoginFormTest.php#L44
      *
      * @return void
      *
@@ -90,6 +96,8 @@ class LoginFormTest extends Unit
 
     /**
      * @cli ./vendor/bin/codecept run app/common/tests/unit/models/LoginFormTest:testLoginCorrect
+     *
+     * @refer https://github.com/yiisoft/yii2-app-advanced/blob/master/common/tests/unit/models/LoginFormTest.php#L56
      *
      * @return void
      *

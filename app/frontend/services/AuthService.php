@@ -50,10 +50,10 @@ class AuthService extends \app\common\services\AuthService
                          return $signupForm->identity;
 
                      } else {
-                         $message = 'Signup form email error';
+                         $message = 'send EmailVerify error';
                      }
                  } else {
-                     $message = 'User save error';
+                     $message = 'identity save error';
                  }
 
             } else {
@@ -165,8 +165,7 @@ class AuthService extends \app\common\services\AuthService
             'user' => $passwordResetRequestForm->getIdentity()
         ]);
 
-        return EmailService::getInstance()
-            ->send($requestPasswordResetEmail, $configCompose);
+        return EmailService::getInstance()->send($requestPasswordResetEmail, $configCompose);
     }
 
     /**
