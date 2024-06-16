@@ -1,6 +1,6 @@
 <?php
 
-namespace app\backend\composents\controllers;
+namespace app\backend\components\controllers;
 
 use yii\web\ErrorAction;
 use app\common\components\core\BaseWebController;

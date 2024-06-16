@@ -1,13 +1,10 @@
 <?php
 
-use Dotenv\Dotenv;
 use yii\caching\FileCache;
 
 $dirApp = dirname(__DIR__, 2);
 
 $root = dirname(__DIR__, 3);
-
-Dotenv::createImmutable($root,'.env')->load();
 
 return [
     'vendorPath' => $dirApp . '/vendor',

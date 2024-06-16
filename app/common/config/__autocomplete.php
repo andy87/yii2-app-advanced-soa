@@ -12,28 +12,36 @@
  * ```
  */
 
-namespace app\common\config;
+use yii\web\User;
+use app\common\models\Identity;
+use yii\web\Application as AppWeb;
+use yii\console\Application as AppConsole;
 
+/**
+ * < Common > Yii class is used for IDE autocompletion only.
+ */
 class Yii
 {
     /**
-     * @var \yii\web\Application|\yii\console\Application|__Application
+     * @var AppWeb|AppConsole|__Application
      */
     public static $app;
 }
 
 /**
  * @property \yii $authManager
- * @property \yii\web\User|\__WebUser $user
+ * @property User|\__WebUser $identity
  *
  */
 class __Application
 {
+
 }
 
 /**
- * @property app\models\User $identity
+ * @property Identity $identity
  */
 class __WebUser
 {
+
 }
