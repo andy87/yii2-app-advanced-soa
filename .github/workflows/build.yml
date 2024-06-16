@@ -80,6 +80,7 @@ jobs:
 
       - name: Setup app advanced
         run: |
+          cd app
           ./init --env=Development
           sed -i "s/'dsn' => 'mysql:host=localhost;dbname=yii2advanced_test'/'dsn' => 'mysql:host=127.0.0.1;dbname=yii2advanced_test'/" common/config/test-local.php
           sed -i "/'db'/a 'username' => 'root'," common/config/test-local.php

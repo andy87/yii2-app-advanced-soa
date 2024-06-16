@@ -1,6 +1,6 @@
 <?php
 
-namespace app\console\services;
+namespace app\console\services\items;
 
 use app\common\services\items\UserService;
 
