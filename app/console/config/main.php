@@ -11,7 +11,7 @@ return [
     'id' => 'app-console',
     'basePath' => dirname(__DIR__),
     'bootstrap' => ['log'],
-    'controllerNamespace' => 'console\controllers',
+    'controllerNamespace' => 'app\console\controllers',
     'aliases' => [
         '@bower' => '@vendor/bower-asset',
         '@npm'   => '@vendor/npm-asset',

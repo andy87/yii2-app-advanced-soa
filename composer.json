@@ -40,11 +40,11 @@
 
     "autoload": {
         "psr-4": {
-            "app\\common\\": "app/common/",
-            "app\\frontend\\": "app/frontend/",
-            "app\\backend\\": "app/backend/",
-            "app\\console\\": "app/console/"
-        }
+            "app\\": "app/"
+        },
+        "classmap": [
+            "app/console/migrations"
+        ]
     },
 
     "autoload-dev": {

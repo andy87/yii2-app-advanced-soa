@@ -13,7 +13,7 @@ $params = array_merge(
 return [
     'id' => 'app-backend',
     'basePath' => dirname(__DIR__),
-    'controllerNamespace' => 'backend\controllers',
+    'controllerNamespace' => 'app\backend\controllers',
     'bootstrap' => ['log'],
     'modules' => [],
     'components' => [
