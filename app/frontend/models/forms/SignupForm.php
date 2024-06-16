@@ -2,9 +2,9 @@
 
 namespace app\frontend\models\forms;
 
-use app\common\components\models\EmailingModel;
-use app\common\models\{dto\EmailDto, Identity};
 use Yii;
+use app\common\components\models\EmailingModel;
+use app\common\models\{ Identity, dto\EmailDto };
 
 /**
  * < Frontend > `SignupForm`

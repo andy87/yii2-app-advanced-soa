@@ -2,9 +2,8 @@
 
 namespace app\common\components\models;
 
-use app\common\components\interfaces\ModelEmailingInterface;
-use app\common\models\dto\EmailDto;
 use yii\base\Model;
+use app\common\{ models\dto\EmailDto, components\interfaces\ModelEmailingInterface };
 
 /**
  * < Common > `EmailingModel`

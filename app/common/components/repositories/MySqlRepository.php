@@ -2,8 +2,8 @@
 
 namespace app\common\components\repositories;
 
-use yii\db\{Query, ActiveQuery};
-use app\common\components\core\{BaseModel, BaseRepository};
+use yii\db\{ Query, ActiveQuery };
+use app\common\components\core\{ BaseModel, BaseRepository };
 
 /**
  * < Common > `MySqlRepository`

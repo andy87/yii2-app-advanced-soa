@@ -3,8 +3,7 @@
 namespace app\common\components\core;
 
 use Yii;
-use yii\base\BaseObject;
-use yii\base\InvalidConfigException;
+use yii\base\{ BaseObject, InvalidConfigException };
 
 /**
  * < Common > `BaseSingleton`

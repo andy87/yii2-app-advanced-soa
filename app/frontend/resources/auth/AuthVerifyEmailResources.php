@@ -2,8 +2,8 @@
 
 namespace app\frontend\resources\auth;
 
-use app\common\components\resources\TemplateResources;
 use app\frontend\models\forms\VerifyEmailForm;
+use app\common\components\resources\TemplateResources;
 
 /**
  * < Frontend > `AuthVerifyEmailResources`

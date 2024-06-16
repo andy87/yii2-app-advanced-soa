@@ -2,8 +2,8 @@
 
 namespace app\common\components\core;
 
-use app\common\components\traits\Logger;
 use yii\web\Controller;
+use app\common\components\traits\Logger;
 
 /**
  * < Common > `BaseController`

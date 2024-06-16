@@ -3,12 +3,10 @@
 namespace app\common\models;
 
 use Yii;
-use yii\base\Behavior;
-use yii\base\Exception;
-use yii\base\NotSupportedException;
-use yii\behaviors\TimestampBehavior;
 use yii\db\ActiveRecord;
 use yii\web\IdentityInterface;
+use yii\behaviors\TimestampBehavior;
+use yii\base\{ Behavior, Exception, NotSupportedException };
 
 /**
  * User model

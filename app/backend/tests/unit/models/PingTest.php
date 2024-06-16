@@ -3,7 +3,7 @@
 namespace app\backend\tests\unit\models;
 
 use Codeception\Test\Unit;
-use app\common\components\Ping; 
+use app\common\components\Ping;
 use app\frontend\tests\UnitTester;
 
 /**

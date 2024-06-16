@@ -3,8 +3,7 @@
 namespace app\common\components\services;
 
 
-use yii\base\Model;
-use yii\db\Exception;
+use yii\{ base\Model, db\Exception };
 use app\common\components\core\BaseService;
 
 /**

@@ -2,8 +2,7 @@
 
 namespace app\common\tests;
 
-use Codeception\Actor;
-use Codeception\Lib\Friend;
+use Codeception\{ Actor, Lib\Friend };
 
 /**
  * < Common > `UnitTester`

@@ -3,8 +3,7 @@
 namespace app\common\components\traits;
 
 use Yii;
-use yii\base\InvalidConfigException;
-use yii\base\Model;
+use yii\base\{ Model, InvalidConfigException };
 
 /**
  * < Common > `Logger`
