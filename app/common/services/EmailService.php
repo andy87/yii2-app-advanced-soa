@@ -69,7 +69,7 @@ class EmailService extends BaseService
      */
     public function constructMessage( EmailDto $email, array $compose = [] ): MessageInterface
     {
-        $compose = $this->mailer->compose( ...$compose );
+        $compose = $this->mailer->compose( $compose['view'] ?? null, $compose );
 
         if ($email->to) $compose->setTo($email->to);
 

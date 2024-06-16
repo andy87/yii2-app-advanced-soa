@@ -1,11 +1,14 @@
 <?php declare(strict_types=1);
 
-namespace app\frontend\tests\_support;
+namespace app\frontend\tests;
 
-use frontend\tests\_generated;
+use Codeception\{ Actor, Lib\Friend };
 
 /**
- * Inherited Methods
+ * < Frontend > `FunctionalTester`
+ *
+ *      Inherited Methods
+ *
  * @method void wantToTest($text)
  * @method void wantTo($text)
  * @method void execute($callable)
@@ -15,11 +18,13 @@ use frontend\tests\_generated;
  * @method void am($role)
  * @method void lookForwardTo($achieveValue)
  * @method void comment($description)
- * @method \Codeception\Lib\Friend haveFriend($name, $actorClass = NULL)
+ * @method Friend haveFriend($name, $actorClass = NULL)
  *
  * @SuppressWarnings(PHPMD)
+ *
+ * @tag #frontend #tests #FunctionalTester
  */
-class FunctionalTester extends \Codeception\Actor
+class FunctionalTester extends Actor
 {
     use _generated\FunctionalTesterActions;
 
@@ -28,13 +33,22 @@ class FunctionalTester extends \Codeception\Actor
      * @param $message
      *
      * @return void
+     *
+     * @tag #frontend #tests #functional #seeValidationError
      */
     public function seeValidationError($message): void
     {
         $this->see($message, '.invalid-feedback');
     }
 
-    public function dontSeeValidationError($message)
+    /**
+     * @param $message
+     *
+     * @return void
+     *
+     * @tag #frontend #tests #functional #seeValidationError
+     */
+    public function dontSeeValidationError($message): void
     {
         $this->dontSee($message, '.invalid-feedback');
     }

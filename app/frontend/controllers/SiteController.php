@@ -5,9 +5,9 @@ namespace app\frontend\controllers;
 use Yii;
 use yii\web\Response;
 use yii\base\InvalidConfigException;
+use app\frontend\services\SiteService;
 use app\frontend\models\forms\ContactForm;
 use app\common\components\traits\SessionFlash;
-use app\frontend\services\controllers\SiteService;
 use app\frontend\components\{actions\CaptchaAction, controllers\BaseFrontendController};
 use app\frontend\resources\site\{SiteAboutResources, SiteContactResources, SiteIndexResources};
 
@@ -16,7 +16,7 @@ use app\frontend\resources\site\{SiteAboutResources, SiteContactResources, SiteI
  *
  * @package app\frontend\controllers
  *
- * @tag #controllers #site
+ * @tag #frontend #controllers #site
  */
 class SiteController extends BaseFrontendController
 {

@@ -19,8 +19,12 @@ class ResendVerificationEmailForm extends EmailingModel
     public const MESSAGE_SUCCESS = 'Проверьте свою почту для получения дальнейших инструкций.';
     public const MESSAGE_ERROR = 'Извините, мы не можем отправить письмо для подтверждения на указанный адрес электронной почты.';
 
-    public ?string $composeHtml = 'emailVerify-html';
-    public ?string $composeText = 'emailVerify-text';
+    public const RULE_EXIST_MESSAGE = 'Пользователь с таким адресом электронной почты не найден.';
+
+    protected array $messageConfig = [
+        'html' => 'emailVerify-html',
+        'text' => 'emailVerify-text',
+    ];
 
 
     /**
@@ -46,7 +50,7 @@ class ResendVerificationEmailForm extends EmailingModel
             [self::ATTR_EMAIL, 'exist',
                 'targetClass' => Identity::class,
                 'filter' => ['status' => Identity::STATUS_INACTIVE],
-                'message' => 'Пользователь с таким адресом электронной почты не найден.'
+                'message' => self::RULE_EXIST_MESSAGE
             ],
         ];
     }
@@ -60,10 +64,20 @@ class ResendVerificationEmailForm extends EmailingModel
     {
         $emailDto = new EmailDto();
         $emailDto->to = $this->email;
-        $emailDto->subject = 'Account registration at ' . Yii::$app->name;
+        $emailDto->subject = $this->generateSubject();
         $emailDto->fromEmail = Yii::$app->params['supportEmail'];
         $emailDto->fromName = Yii::$app->name . ' robot';
 
         return $emailDto;
+    }
+
+    /**
+     * @return string
+     *
+     * @tag #generate #subject
+     */
+    public function generateSubject(): string
+    {
+        return 'Account registration at ' . Yii::$app->name;
     }
 }

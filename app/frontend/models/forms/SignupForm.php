@@ -18,6 +18,9 @@ class SignupForm extends EmailingModel
     public const MESSAGE_SUCCESS = 'Благодарим за регистрацию. Пожалуйста, проверьте свой почтовый ящик.';
     public const MESSAGE_ERROR = 'Ошибка регистрации. Пожалуйста, попробуйте еще раз.';
 
+    public const RULE_EXCEPTION_EMAIL_UNIQUE = 'Этот адрес электронной почты уже занят';
+    public const RULE_EXCEPTION_USERNAME_UNIQUE = 'Это имя пользователя уже занято.';
+
     public const ATTR_USERNAME = 'username';
     public const ATTR_EMAIL = 'email';
     public const ATTR_PASSWORD = 'password';
@@ -27,10 +30,12 @@ class SignupForm extends EmailingModel
     public ?string $email = null;
     public ?string $password = null;
 
-    public Identity $identity;
+    public ?Identity $identity = null;
 
-    public ?string $composeHtml = 'emailVerify-html';
-    public ?string $composeView = 'emailVerify-text';
+    protected array $messageConfig = [
+        'html' => 'emailVerify-html',
+        'text' => 'emailVerify-text',
+    ];
 
 
 
@@ -39,7 +44,7 @@ class SignupForm extends EmailingModel
      *
      * @return array
      *
-     * @tag #rules
+     * @tag #models #forms #signup #rules
      */
     public function rules(): array
     {
@@ -53,15 +58,15 @@ class SignupForm extends EmailingModel
 
             [self::ATTR_PASSWORD, 'string', 'min' => Yii::$app->params['user.passwordMinLength']],
 
-            [self::ATTR_EMAIL, 'unique', 'targetClass' => Identity::class, 'message' => 'Этот адрес электронной почты уже занят'],
-            [self::ATTR_USERNAME, 'unique', 'targetClass' => Identity::class, 'message' => 'Это имя пользователя уже занято.'],
+            [self::ATTR_EMAIL, 'unique', 'targetClass' => Identity::class, 'message' => self::RULE_EXCEPTION_EMAIL_UNIQUE],
+            [self::ATTR_USERNAME, 'unique', 'targetClass' => Identity::class, 'message' => self::RULE_EXCEPTION_USERNAME_UNIQUE],
         ];
     }
 
     /**
      * @return EmailDto
      *
-     * @tag #constructor #dto #email
+     * @tag #models #forms #signup #constructor #dto #email
      */
     public function constructEmailDto(): EmailDto
     {
@@ -69,8 +74,18 @@ class SignupForm extends EmailingModel
         $emailDto->to = $this->identity->email;
         $emailDto->fromEmail = Yii::$app->params['supportEmail'];
         $emailDto->fromName = Yii::$app->name . ' robot';
-        $emailDto->subject = 'Регистрация аккаунта на сайте ' . Yii::$app->name;
+        $emailDto->subject = $this->getSubject();
 
         return $emailDto;
+    }
+
+    /**
+     * @return string
+     *
+     * @tag #models #forms #signup #subject
+     */
+    public function getSubject(): string
+    {
+        return 'Регистрация аккаунта на сайте ' . Yii::$app->name;
     }
 }

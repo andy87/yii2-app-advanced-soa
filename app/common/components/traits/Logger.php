@@ -3,6 +3,7 @@
 namespace app\common\components\traits;
 
 use Yii;
+use yii\base\InvalidConfigException;
 use yii\base\Model;
 
 /**
@@ -31,7 +32,10 @@ trait Logger
      * @param Model $model
      * @param array $data
      *
+     * @throws InvalidConfigException
+     *
      * @return void
+     *
      */
     public function runtimeLogError(string $method, string $message, Model $model, array $data = []): void
     {
@@ -43,6 +47,8 @@ trait Logger
      * @param string $message
      * @param Model $model
      * @param array $data
+     *
+     * @throws InvalidConfigException
      *
      * @return void
      */
@@ -57,6 +63,8 @@ trait Logger
      * @param Model $model
      * @param array $data
      *
+     * @throws InvalidConfigException
+     *
      * @return void
      */
     public function runtimeLogWarning(string $method, string $message, Model $model, array $data = []): void
@@ -69,6 +77,8 @@ trait Logger
      * @param string $message
      * @param Model $model
      * @param array $data
+     *
+     * @throws InvalidConfigException
      *
      * @return void
      */
@@ -84,6 +94,8 @@ trait Logger
      * @param Model $model
      * @param array $data
      *
+     * @throws InvalidConfigException
+     *
      * @return void
      */
     public function runtimeLogCore(string $method, string $methodName, string $message, Model $model, array $data = []): void
@@ -97,6 +109,8 @@ trait Logger
 
         $log['data'] = $data;
 
-        call_user_func_array([Yii::getLogger(), $method], [$log]);
+        //print_r([__METHOD__ . '(' . __LINE__ . ')', $log ]);die;
+
+        Yii::{$method}($log);
     }
 }

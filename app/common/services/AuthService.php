@@ -2,6 +2,7 @@
 
 namespace app\common\services;
 
+use app\common\models\Identity;
 use Yii;
 use yii\base\InvalidConfigException;
 use app\common\models\forms\LoginForm;
@@ -50,10 +51,20 @@ class AuthService extends BaseService
      */
     public function login(LoginForm $loginForm): bool
     {
-        return Yii::$app->user->login(
-            $loginForm->getUser(),
-            $this->getRememberMeDuration($loginForm)
-        );
+        $identity = $loginForm->getUser();
+        $duration = $this->getRememberMeDuration($loginForm);
+
+        if ( $loginForm->validate() )
+        {
+            if ( Yii::$app->user->login( $identity, $duration ) )
+            {
+                return true;
+            }
+        }
+
+        $loginForm->addError('password', 'Incorrect username or password.');
+
+        return false;
     }
 
     /**
@@ -71,12 +82,12 @@ class AuthService extends BaseService
     }
 
     /**
-     * @return void
+     * @return bool
      *
      * @tag #common #services #logout
      */
-    public function logout(): void
+    public function logout(): bool
     {
-        Yii::$app->user->logout();
+        return Yii::$app->user->logout();
     }
 }

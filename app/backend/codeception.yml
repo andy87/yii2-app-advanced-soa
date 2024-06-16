@@ -1,4 +1,4 @@
-namespace: backend\tests
+namespace: app\backend\tests
 actor_suffix: Tester
 paths:
     tests: tests
@@ -13,3 +13,5 @@ modules:
     config:
         Yii2:
             configFile: 'config/codeception-local.php'
+
+# @cli ./vendor/bin/codecept run app/backend/tests

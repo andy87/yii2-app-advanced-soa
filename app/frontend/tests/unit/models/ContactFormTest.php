@@ -2,31 +2,56 @@
 
 namespace app\frontend\tests\unit\models;
 
-use app\frontend\models\forms\ContactForm;
-use yii\mail\MessageInterface;
-use function frontend\tests\unit\models\verify;
+use Codeception\Test\Unit;
+use yii\base\InvalidConfigException;
+use Codeception\Exception\ModuleException;
+use yii\mail\{ MailerInterface, MessageInterface };
+use app\frontend\{ models\forms\ContactForm, services\SiteService, tests\UnitTester };
 
-class ContactFormTest extends \Codeception\Test\Unit
+/**
+ * < Frontend > `ContactFormTest`
+ *
+ * @package app\frontend\tests\unit\models
+ *
+ * @property UnitTester $tester
+ *
+ * @cli ./vendor/bin/codecept run app/frontend/tests/unit/models/ContactFormTest
+ *
+ * @tag #tests #unit #models #ContactFormTest
+ */
+class ContactFormTest extends Unit
 {
-    public function testSendEmail()
+    /**
+     * Send email
+     *
+     * @cli ./vendor/bin/codecept run app/frontend/tests/unit/models/ContactFormTest:testSendEmail
+     *
+     * @return void
+     *
+     * @throws InvalidConfigException|MailerInterface|ModuleException
+     *
+     * @tag #frontend #tests #unit #models #ContactFormTest #testSendEmail
+     */
+    public function testSendEmail(): void
     {
-        $model = new ContactForm();
+        $contactForm = new ContactForm();
 
-        $model->attributes = [
+        $contactForm->attributes = [
             'name' => 'Tester',
             'email' => 'tester@example.com',
             'subject' => 'very important letter subject',
             'body' => 'body of current message',
         ];
 
-        verify($model->sendEmail('admin@example.com'))->notEmpty();
+        $sendResult = SiteService::getInstance()->sendEmailContactForm($contactForm);
 
-        // using Yii2 module actions to check email was sent
+        verify( $sendResult )->notEmpty();
+
         $this->tester->seeEmailIsSent();
 
-        /** @var MessageInterface  $emailMessage */
         $emailMessage = $this->tester->grabLastSentEmail();
-        verify($emailMessage)->instanceOf('yii\mail\MessageInterface');
+
+        verify($emailMessage)->instanceOf(MessageInterface::class);
         verify($emailMessage->getTo())->arrayHasKey('admin@example.com');
         verify($emailMessage->getFrom())->arrayHasKey('noreply@example.com');
         verify($emailMessage->getReplyTo())->arrayHasKey('tester@example.com');

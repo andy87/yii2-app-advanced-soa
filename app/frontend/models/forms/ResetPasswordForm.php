@@ -2,9 +2,10 @@
 
 namespace app\frontend\models\forms;
 
+use app\common\services\IdentityService;
 use Yii;
 use app\common\models\Identity;
-use yii\base\{ Model, InvalidArgumentException };
+use yii\base\{InvalidConfigException, Model, InvalidArgumentException};
 
 /**
  * < Frontend > `ResetPasswordForm`
@@ -20,30 +21,35 @@ class ResetPasswordForm extends Model
     public const MESSAGE_SUCCESS = 'Новый пароль был сохранен';
     public const MESSAGE_ERROR = 'Извините, мы не можем сбросить пароль для указанного адреса электронной почты.';
 
+
+    /** @var ?string  */
     public ?string $password = null;
 
     /**
-     * @var Identity
+     * @var ?Identity
      */
-    private Identity $_identity;
-
+    private ?Identity $_identity = null;
 
 
     /**
      * Creates a form model given a token.
      *
-     * @param string $token
+     * @param string $password
      * @param array $config name-value pairs that will be used to initialize the object properties
      *
-     * @throws InvalidArgumentException if token is empty or not valid
+     * @throws InvalidArgumentException|InvalidConfigException if token is empty or not valid
      *
      * @tag #constructor
      */
-    public function __construct( string $token, array $config = [])
+    public function __construct( string $password, array $config = [])
     {
-        if ( strlen($token) )
+        $this->password = $password;
+
+        if ( strlen($this->password) )
         {
-            if ($this->_identity = Identity::findByPasswordResetToken($token))
+            $this->_identity = IdentityService::getInstance()->findByPasswordResetToken($this->password);
+
+            if ($this->_identity)
             {
                 parent::__construct($config);
 
@@ -51,9 +57,10 @@ class ResetPasswordForm extends Model
 
                 throw new InvalidArgumentException('Wrong password reset token.');
             }
-        }
+        } else {
 
-        throw new InvalidArgumentException('Password reset token cannot be blank.');
+            throw new InvalidArgumentException('Password reset token cannot be empty.');
+        }
     }
 
     /**

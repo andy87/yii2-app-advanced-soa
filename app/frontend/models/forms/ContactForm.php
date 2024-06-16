@@ -73,7 +73,7 @@ class ContactForm extends Model
     {
         $emailDto = new EmailDto();
 
-        $emailDto->to = $this->email;
+        $emailDto->to = Yii::$app->params['adminEmail'];
         $emailDto->fromEmail = Yii::$app->params['senderEmail'];
         $emailDto->fromName = Yii::$app->params['senderName'];
         $emailDto->ReplyToEmail = $this->email;

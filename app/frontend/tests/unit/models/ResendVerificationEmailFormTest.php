@@ -2,22 +2,36 @@
 
 namespace app\frontend\tests\unit\models;
 
-
-use app\common\fixtures\UserFixture;
-use app\frontend\models\forms\ResendVerificationEmailForm;
+use Yii;
 use Codeception\Test\Unit;
-use function frontend\tests\unit\models\codecept_data_dir;
-use function frontend\tests\unit\models\verify;
+use yii\mail\MessageInterface;
+use app\common\fixtures\UserFixture;
+use yii\base\InvalidConfigException;
+use Codeception\Exception\ModuleException;
+use app\frontend\{ tests\UnitTester, services\AuthService, models\forms\ResendVerificationEmailForm };
 
+/**
+ * < Frontend > `ResendVerificationEmailFormTest`
+ *
+ * @package app\frontend\tests\unit\models
+ *
+ * @cli ./vendor/bin/codecept run app/frontend/tests/unit/models/ResendVerificationEmailFormTest
+ *
+ * @tags #frontend #tests #unit #models #ResendVerificationEmailFormTest
+ */
 class ResendVerificationEmailFormTest extends Unit
 {
+    /** @var UnitTester */
+    protected UnitTester $tester;
+
+
+
     /**
-     * @var \app\frontend\tests\_support\UnitTester
+     * @return void
+     *
+     * @tag #frontend #tests #fixtures #user
      */
-    protected $tester;
-
-
-    public function _before()
+    public function _before(): void
     {
         $this->tester->haveFixtures([
             'user' => [
@@ -27,61 +41,111 @@ class ResendVerificationEmailFormTest extends Unit
         ]);
     }
 
-    public function testWrongEmailAddress()
+    /**
+     * @param array $attributes
+     *
+     * @return ResendVerificationEmailForm
+     */
+    private function getResendVerificationEmailForm( array $attributes = [] ): ResendVerificationEmailForm
     {
-        $model = new ResendVerificationEmailForm();
-        $model->attributes = [
-            'email' => 'aaa@bbb.cc'
-        ];
+        $resendVerificationEmailForm = new ResendVerificationEmailForm();
+        $resendVerificationEmailForm->attributes = $attributes;
 
-        verify($model->validate())->false();
-        verify($model->hasErrors())->true();
-        verify($model->getFirstError('email'))->equals('There is no user with this email address.');
+        return $resendVerificationEmailForm;
     }
 
-    public function testEmptyEmailAddress()
+    /**
+     * Wrong email address
+     *
+     * @cli ./vendor/bin/codecept run app/frontend/tests/unit/models/ResendVerificationEmailFormTest:testWrongEmailAddress
+     *
+     * @return void
+     *
+     * @tag #frontend #tests #resend #wrong #email
+     */
+    public function testWrongEmailAddress(): void
     {
-        $model = new ResendVerificationEmailForm();
-        $model->attributes = [
-            'email' => ''
-        ];
+        $resendVerificationEmailForm = $this->getResendVerificationEmailForm([
+            ResendVerificationEmailForm::ATTR_EMAIL => 'aaa@bbb.cc'
+        ]);
 
-        verify($model->validate())->false();
-        verify($model->hasErrors())->true();
-        verify($model->getFirstError('email'))->equals('Email cannot be blank.');
+        verify($resendVerificationEmailForm->validate())->false();
+        verify($resendVerificationEmailForm->hasErrors())->true();
+        verify($resendVerificationEmailForm->getFirstError('email'))->equals($resendVerificationEmailForm::RULE_EXIST_MESSAGE);
     }
 
-    public function testResendToActiveUser()
+    /**
+     * Empty email address
+     *
+     * @cli ./vendor/bin/codecept run app/frontend/tests/unit/models/ResendVerificationEmailFormTest:testEmptyEmailAddress
+     *
+     * @return void
+     *
+     * @tag #frontend #tests #resend #empty #email
+     */
+    public function testEmptyEmailAddress(): void
     {
-        $model = new ResendVerificationEmailForm();
-        $model->attributes = [
-            'email' => 'test2@mail.com'
-        ];
+        $resendVerificationEmailForm = $this->getResendVerificationEmailForm([
+            ResendVerificationEmailForm::ATTR_EMAIL => ''
+        ]);
 
-        verify($model->validate())->false();
-        verify($model->hasErrors())->true();
-        verify($model->getFirstError('email'))->equals('There is no user with this email address.');
+        verify($resendVerificationEmailForm->validate())->false();
+        verify($resendVerificationEmailForm->hasErrors())->true();
+        verify($resendVerificationEmailForm->getFirstError('email'))->equals('Email cannot be blank.');
     }
 
-    public function testSuccessfullyResend()
+    /**
+     * Resend to active user
+     *
+     * @cli ./vendor/bin/codecept run app/frontend/tests/unit/models/ResendVerificationEmailFormTest:testResendToActiveUser
+     *
+     * @return void
+     *
+     * @tag #frontend #tests #resend #active #user
+     */
+    public function testResendToActiveUser(): void
     {
-        $model = new ResendVerificationEmailForm();
-        $model->attributes = [
-            'email' => 'test@mail.com'
-        ];
+        $resendVerificationEmailForm = $this->getResendVerificationEmailForm([
+            ResendVerificationEmailForm::ATTR_EMAIL => 'test2@mail.com'
+        ]);
 
-        verify($model->validate())->true();
-        verify($model->hasErrors())->false();
+        verify($resendVerificationEmailForm->validate())->false();
+        verify($resendVerificationEmailForm->hasErrors())->true();
+        verify($resendVerificationEmailForm->getFirstError('email'))->equals($resendVerificationEmailForm::RULE_EXIST_MESSAGE);
+    }
 
-        verify($model->sendEmail())->true();
+    /**
+     * Successfully resend
+     *
+     * @cli ./vendor/bin/codecept run app/frontend/tests/unit/models/ResendVerificationEmailFormTest:testSuccessfullyResend
+     *
+     * @return void
+     *
+     * @throws InvalidConfigException|ModuleException
+     *
+     * @tag #frontend #tests #resend #inactive #user
+     */
+    public function testSuccessfullyResend(): void
+    {
+        $resendVerificationEmailForm = $this->getResendVerificationEmailForm([
+            ResendVerificationEmailForm::ATTR_EMAIL => 'test@mail.com'
+        ]);
+
+        verify($resendVerificationEmailForm->validate())->true();
+        verify($resendVerificationEmailForm->hasErrors())->false();
+
+        $sendResult = AuthService::getInstance()->handlerResendVerificationEmail($resendVerificationEmailForm);
+
+        verify($sendResult)->true();
+
         $this->tester->seeEmailIsSent();
 
         $mail = $this->tester->grabLastSentEmail();
 
-        verify($mail)->instanceOf('yii\mail\MessageInterface');
+        verify($mail)->instanceOf(MessageInterface::class);
         verify($mail->getTo())->arrayHasKey('test@mail.com');
-        verify($mail->getFrom())->arrayHasKey(\Yii::$app->params['supportEmail']);
-        verify($mail->getSubject())->equals('Account registration at ' . \Yii::$app->name);
+        verify($mail->getFrom())->arrayHasKey(Yii::$app->params['supportEmail']);
+        verify($mail->getSubject())->equals($resendVerificationEmailForm->generateSubject());
         verify($mail->toString())->stringContainsString('4ch0qbfhvWwkcuWqjN8SWRq72SOw1KYT_1548675330');
     }
 }

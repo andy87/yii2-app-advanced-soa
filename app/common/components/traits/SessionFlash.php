@@ -21,7 +21,7 @@ trait SessionFlash
      */
     public function setSessionFlashMessage( bool $criteria, string $success, string $error ): void
     {
-        if ($criteria) {
+        if ( $criteria ) {
             $this->setSessionFlashSuccess($success);
         } else {
             $this->setSessionFlashError($error);

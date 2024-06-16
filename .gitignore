@@ -50,3 +50,5 @@ phpunit.phar
 vendor/
 
 composer.lock
+
+.env

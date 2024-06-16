@@ -1,19 +1,14 @@
 <?php declare(strict_types=1);
 
-namespace app\frontend\services\controllers;
+namespace app\frontend\services;
 
-use app\common\models\Identity;
-use app\common\services\EmailService;
-use app\common\services\IdentityService;
-use app\frontend\models\forms\PasswordResetRequestForm;
-use app\frontend\models\forms\ResendVerificationEmailForm;
-use app\frontend\models\forms\ResetPasswordForm;
-use app\frontend\models\forms\SignupForm;
-use app\frontend\models\forms\VerifyEmailForm;
-use app\frontend\services\items\UserService;
-use Exception;
 use Yii;
+use Exception;
+use app\common\models\Identity;
 use yii\base\InvalidConfigException;
+use app\common\services\{ EmailService, IdentityService };
+use app\frontend\models\forms\{ PasswordResetRequestForm, ResendVerificationEmailForm, ResetPasswordForm, SignupForm, VerifyEmailForm };
+use yii\db\Transaction;
 
 /**
  * < Frontend > `AuthService`
@@ -24,78 +19,63 @@ use yii\base\InvalidConfigException;
  */
 class AuthService extends \app\common\services\AuthService
 {
-
-
-    /**
-     * @return bool
-     *
-     * @tag #service #auth #logout
-     */
-    public function logout(): bool
-    {
-        return Yii::$app->user->logout();
-    }
-
     /**
      * @param SignupForm $signupForm
      * @param array $data
      *
-     * @return bool
+     * @throws InvalidConfigException
+     *
+     * @return ?Identity
      *
      * @tag #service #auth #handler #form #signup
      */
-    public function handlerSignupForm(SignupForm $signupForm, array $data): bool
+    public function handlerSignupForm(SignupForm $signupForm, array $data = []): ?Identity
     {
-        if ($signupForm->validate())
+        if (count($data)) $signupForm->load($data);
+
+        $transaction = Yii::$app->db->beginTransaction();
+
+        try
         {
-           if ( $signupForm->load( $data ) )
-           {
-               $transaction = Yii::$app->db->beginTransaction();
+            if ($signupForm->validate())
+            {
+                $signupForm->identity = IdentityService::getInstance()->signUp($signupForm);
 
-                try
-                {
-                    $Identity = IdentityService::getInstance()
-                        ->createItem($signupForm);
-
-                     if ($Identity->id !== null)
+                 if ($signupForm->identity->id !== null)
+                 {
+                     if ( $this->sendEmailVerifyMail($signupForm) )
                      {
-                         $signupForm->identity = $Identity;
+                         $transaction?->commit();
 
-                         if ( $this->sendEmailVerifyMail($signupForm) )
-                         {
-                             $transaction->commit();
+                         return $signupForm->identity;
 
-                             return true;
-
-                         } else {
-                             $message = 'Signup form email error';
-                         }
                      } else {
-                         $message = 'User save error';
+                         $message = 'Signup form email error';
                      }
+                 } else {
+                     $message = 'User save error';
+                 }
 
-                } catch (Exception $e) {
+            } else {
+                $message = 'Signup form validation error';
+            }
+        } catch (Exception $e) {
 
-                    $message = [
-                        'catch' => 'Signup form error',
-                        'message' => $e->getMessage(),
-                        'file' => $e->getFile(),
-                        'line' => $e->getLine(),
-                        'trace' => $e->getTraceAsString(),
-                    ];
-
-                    $transaction->rollBack();
-                }
-           } else {
-               $message = 'Signup form load error';
-           }
-        } else {
-            $message = 'Signup form validation error';
+            $message = 'Catch `handlerSignupForm`';
+            $data = [
+                'catch' => 'Signup form error',
+                'message' => $e->getMessage(),
+                'file' => $e->getFile(),
+                'line' => $e->getLine(),
+                'trace' => $e->getTraceAsString(),
+            ];
         }
 
-        $this->runtimeLogError(__METHOD__, $message, $signupForm);
+        $transaction?->rollBack();
 
-        return false;
+        $this->runtimeLogError(__METHOD__, $message, $signupForm, $data ?? []);
+
+        return null;
     }
 
     /**
@@ -129,37 +109,33 @@ class AuthService extends \app\common\services\AuthService
      *
      * @tag #service #auth #handler #form #passwordResetRequest
      */
-    public function handlerRequestPasswordResetResources(PasswordResetRequestForm $passwordResetRequestForm, array $data): bool
+    public function handlerRequestPasswordResetResources(PasswordResetRequestForm $passwordResetRequestForm, array $data = []): bool
     {
-        if ($passwordResetRequestForm->load($data) )
+        if (count($data)) $passwordResetRequestForm->load($data);
+
+        if ($passwordResetRequestForm->validate())
         {
-            if ($passwordResetRequestForm->validate())
+            $identity = $passwordResetRequestForm->getIdentity();
+
+            if ($identity)
             {
-                $identity = $passwordResetRequestForm->getIdentity();
-
-                if ($identity)
+                if (Identity::isPasswordResetTokenValid($identity->password_reset_token))
                 {
-                    if (Identity::isPasswordResetTokenValid($identity->password_reset_token))
+                    $identity->generatePasswordResetToken();
+
+                    if ($identity->save())
                     {
-                        $identity->generatePasswordResetToken();
+                        return $this->sendEmailRequestPasswordReset($passwordResetRequestForm);
 
-                        if ($identity->save())
-                        {
-                            return $this->sendEmailRequestPasswordReset($passwordResetRequestForm);
-
-                        } else{
-                            $message = 'User `save error`';
-                        }
-                    } else {
-                        $message = 'Password reset token `is not valid`';
+                    } else{
+                        $message = 'User `save error`';
                     }
                 } else {
-                    $message = 'User not found';
+                    $message = 'Password reset token `is not valid`';
                 }
             } else {
-                $message = 'Password reset request form `validation error`';
+                $message = 'User not found';
             }
-
         } else {
             $message = 'Password reset request form `validation error`';
         }
@@ -203,25 +179,23 @@ class AuthService extends \app\common\services\AuthService
      *
      * @tag #service #auth #handler #resetPasswordForm
      */
-    public function handlerResetPasswordForm(ResetPasswordForm $resetPasswordForm, array $data ): bool
+    public function handlerResetPasswordForm(ResetPasswordForm $resetPasswordForm, array $data = [] ): bool
     {
-        if ($resetPasswordForm->load($data)) {
+        if (count($data)) $resetPasswordForm->load($data);
 
-            if ($resetPasswordForm->validate())
+        if ($resetPasswordForm->validate())
+        {
+            if ($this->resetPassword($resetPasswordForm))
             {
-                if ($this->resetPassword($resetPasswordForm))
-                {
-                    return true;
+                return true;
 
-                } else {
-                    $message = 'Reset password form `save error`';
-                }
             } else {
-                $message = 'Reset password form `validation error`';
+                $message = 'Reset password form `save error`';
             }
         } else {
-            $message = 'Reset password form `load error`';
+            $message = 'Reset password form `validation error`';
         }
+
 
         $this->runtimeLogError(__METHOD__, $message, $resetPasswordForm);
 
@@ -257,8 +231,10 @@ class AuthService extends \app\common\services\AuthService
      *
      * @tag #service #auth #handler #verifyEmailResources
      */
-    public function handlerAuthVerifyEmailResources(VerifyEmailForm $verifyEmailForm): bool
+    public function handlerAuthVerifyEmailResources(VerifyEmailForm $verifyEmailForm, array $data = []): bool
     {
+        if (count($data)) $verifyEmailForm->load($data);
+
         $identity = $this->verify($verifyEmailForm);
 
         if ( $identity )
@@ -295,8 +271,7 @@ class AuthService extends \app\common\services\AuthService
 
     /**
      * @param ResendVerificationEmailForm $resendVerificationEmailForm
-     *
-     * @param mixed $post
+     * @param array $data
      *
      * @return bool
      *
@@ -304,19 +279,16 @@ class AuthService extends \app\common\services\AuthService
      *
      * @tag #service #auth #handler #resend #verificationEmail
      */
-    public function handlerResendVerificationEmail(ResendVerificationEmailForm $resendVerificationEmailForm, array $post): bool
+    public function handlerResendVerificationEmail(ResendVerificationEmailForm $resendVerificationEmailForm, array $data = []): bool
     {
-        if ( $resendVerificationEmailForm->load($post) )
-        {
-            if ( $resendVerificationEmailForm->validate() )
-            {
-                return $this->sendEmailResendVerification($resendVerificationEmailForm);
+        if (count($data)) $resendVerificationEmailForm->load($data);
 
-            } else {
-                $message = 'Resend verification email form `validation error`';
-            }
+        if ( $resendVerificationEmailForm->validate() )
+        {
+            return $this->sendEmailResendVerification($resendVerificationEmailForm);
+
         } else {
-            $message = 'Resend verification email form `load error`';
+            $message = 'Resend verification email form `validation error`';
         }
 
         $this->runtimeLogError(__METHOD__, $message, $resendVerificationEmailForm);

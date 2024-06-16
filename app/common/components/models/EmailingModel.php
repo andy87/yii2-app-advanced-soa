@@ -13,16 +13,8 @@ use yii\base\Model;
  */
 abstract class EmailingModel extends Model implements ModelEmailingInterface
 {
-    /** @var ?string $composeHtml */
-    public ?string $composeHtml = null;
-
-
-    /** @var ?string $composeView */
-    public ?string $composeView = null;
-
-
-    /** @var ?string $composeText */
-    public ?string $composeText = null;
+    /** @var array  */
+    protected array $messageConfig = [];
 
 
 
@@ -31,17 +23,11 @@ abstract class EmailingModel extends Model implements ModelEmailingInterface
      *
      * @return array
      */
-    public function getEmailComposeConfig(array $params): array
+    public function getEmailComposeConfig(array $params = []): array
     {
-        $composeConfig = [];
+        if ( count($params) ) $this->messageConfig['params'] = $params;
 
-        if ($this->composeHtml) $composeConfig['html'] = $this->composeHtml;
-        if ($this->composeView) $composeConfig['view'] = $this->composeView;
-        if ($this->composeText) $composeConfig['text'] = $this->composeText;
-
-        $composeConfig['params'] = $params;
-
-        return $composeConfig;
+        return $this->messageConfig;
     }
 
     /**

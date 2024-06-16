@@ -2,22 +2,18 @@
 
 namespace app\frontend\controllers;
 
+use app\common\models\Identity;
 use Yii;
 use Exception;
+use app\frontend\services\AuthService;
 use yii\db\Exception as YiiDbException;
-use yii\filters\{AccessControl, VerbFilter};
+use yii\filters\{ AccessControl, VerbFilter };
 use app\common\components\traits\SessionFlash;
-use yii\web\{BadRequestHttpException, Response};
-use app\frontend\services\controllers\AuthService;
+use yii\web\{ BadRequestHttpException, Response };
 use app\frontend\components\controllers\BaseFrontendController;
-use app\frontend\models\forms\{ResetPasswordForm, VerifyEmailForm};
-use yii\base\{Exception as YiiBaseException, InvalidArgumentException, InvalidConfigException};
-use app\frontend\resources\auth\{AuthLoginResources,
-    AuthRequestPasswordResetResources,
-    AuthResendVerificationEmailResources,
-    AuthResetPasswordResources,
-    AuthSignupResources,
-    AuthVerifyEmailResources};
+use app\frontend\models\forms\{ ResetPasswordForm, VerifyEmailForm };
+use yii\base\{ Exception as YiiBaseException, InvalidArgumentException, InvalidConfigException };
+use app\frontend\resources\auth\{AuthLoginResources, AuthRequestPasswordResetResources, AuthResendVerificationEmailResources, AuthResetPasswordResources, AuthSignupResources, AuthVerifyEmailResources };
 
 /**
  * < Frontend > `AuthController`
@@ -160,7 +156,8 @@ class AuthController extends BaseFrontendController
             $handlerResult = AuthService::getInstance()
                 ->handlerSignupForm($R->signupForm, $post);
 
-            $this->setSessionFlashMessage($handlerResult,
+            $this->setSessionFlashMessage(
+                ($handlerResult instanceof Identity),
                 $R->signupForm::MESSAGE_SUCCESS,
                 $R->signupForm::MESSAGE_ERROR
             );

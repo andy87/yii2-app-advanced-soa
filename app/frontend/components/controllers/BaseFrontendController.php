@@ -2,8 +2,8 @@
 
 namespace app\frontend\components\controllers;
 
-use app\common\components\core\BaseWebController;
 use yii\web\ErrorAction;
+use app\common\components\core\BaseWebController;
 
 /**
  * < Frontend > `BaseFrontendController`

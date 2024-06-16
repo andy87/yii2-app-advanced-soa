@@ -1,8 +1,9 @@
 <?php declare(strict_types=1);
 
-namespace app\backend\tests\_support;
+namespace app\backend\tests;
 
-use backend\tests\_generated;
+use Codeception\Actor;
+use Codeception\Lib\Friend;
 
 /**
  * Inherited Methods
@@ -15,11 +16,11 @@ use backend\tests\_generated;
  * @method void am($role)
  * @method void lookForwardTo($achieveValue)
  * @method void comment($description)
- * @method \Codeception\Lib\Friend haveFriend($name, $actorClass = NULL)
+ * @method Friend haveFriend($name, $actorClass = NULL)
  *
  * @SuppressWarnings(PHPMD)
  */
-class UnitTester extends \Codeception\Actor
+class UnitTester extends Actor
 {
     use _generated\UnitTesterActions;
    /**

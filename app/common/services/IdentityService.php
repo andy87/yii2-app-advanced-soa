@@ -44,22 +44,27 @@ class IdentityService extends ModelService
     /**
      * @param SignupForm $signupForm
      *
-     * @return Identity
+     * @return ?Identity
      *
      * @throws Exception
      *
      * @tag #service #identity #create
      */
-    public function createItem(SignupForm $signupForm): Identity
+    public function signUp(SignupForm $signupForm): ?Identity
     {
-        $identity = $this->createModel();
-        $identity->setAttribute($identity::ATTR_USERNAME, $signupForm->username);
-        $identity->setAttribute($identity::ATTR_EMAIL, $signupForm->email);
-        $identity->setPassword($signupForm->password);
-        $identity->generateAuthKey();
-        $identity->generateEmailVerificationToken();
+        $identity = null;
 
-        $identity->save();
+        if ( $signupForm->validate() )
+        {
+            $identity = $this->createModel();
+            $identity->setAttribute($identity::ATTR_USERNAME, $signupForm->username);
+            $identity->setAttribute($identity::ATTR_EMAIL, $signupForm->email);
+            $identity->setPassword($signupForm->password);
+            $identity->generateAuthKey();
+            $identity->generateEmailVerificationToken();
+
+            $identity->save();
+        }
 
         return $identity;
     }
@@ -118,5 +123,33 @@ class IdentityService extends ModelService
         return $this
             ->identityRepository
             ->findByUsername($username);
+    }
+
+    /**
+     * @param string $password_reset_token
+     *
+     * @return ?Identity
+     *
+     * @tag #service #identity #find #reset #token
+     */
+    public function findIdentityByPasswordResetToken(string $password_reset_token): ?Identity
+    {
+        return $this
+            ->identityRepository
+            ->findIdentityByPasswordResetToken($password_reset_token);
+    }
+
+    /**
+     * @param string $token
+     *
+     * @return ?Identity
+     *
+     * @tag #service #identity #find #reset #token
+     */
+    public function findByPasswordResetToken(string $token): ?Identity
+    {
+        return $this
+            ->identityRepository
+            ->findByPasswordResetToken($token);
     }
 }

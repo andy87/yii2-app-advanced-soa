@@ -30,8 +30,8 @@ class IdentityRepository extends MySqlRepository
     {
         $query = $this
             ->findByCriteria([
-                'email' => $email,
-                'status' => Identity::STATUS_ACTIVE,
+                Identity::ATTR_EMAIL => $email,
+                Identity::ATTR_STATUS => Identity::STATUS_ACTIVE,
             ]);
 
         /** @var ?Identity $identity */
@@ -51,8 +51,8 @@ class IdentityRepository extends MySqlRepository
     {
         $query = $this
             ->findByCriteria([
-                'email' => $email,
-                'status' => Identity::STATUS_INACTIVE,
+                Identity::ATTR_EMAIL => $email,
+                Identity::ATTR_STATUS => Identity::STATUS_INACTIVE,
             ]);
 
         /** @var ?Identity $identity */
@@ -72,8 +72,8 @@ class IdentityRepository extends MySqlRepository
     {
         $query = $this
             ->findByCriteria([
-                'verification_token' => $token,
-                'status' => Identity::STATUS_INACTIVE,
+                Identity::ATTR_VERIFICATION => $token,
+                Identity::ATTR_STATUS => Identity::STATUS_INACTIVE,
             ]);
 
         /** @var ?Identity $identity */
@@ -93,7 +93,47 @@ class IdentityRepository extends MySqlRepository
     {
         $query = $this
             ->findByCriteria([
-                'username' => $username,
+                Identity::ATTR_USERNAME => $username,
+            ]);
+
+        /** @var ?Identity $identity */
+        $identity = $query->one();
+
+        return $identity;
+    }
+
+    /**
+     * @param string $password_reset_token
+     *
+     * @return ?Identity
+     *
+     * @tag #repository #identity #find
+     */
+    public function findIdentityByPasswordResetToken(string $password_reset_token): ?Identity
+    {
+        $query = $this
+            ->findByCriteria([
+                Identity::ATTR_PASSWORD_RESET => $password_reset_token,
+            ]);
+
+        /** @var ?Identity $identity */
+        $identity = $query->one();
+
+        return $identity;
+    }
+
+    /**
+     * @param string $token
+     *
+     * @return ?Identity
+     *
+     * @tag #repository #identity #find
+     */
+    public function findByPasswordResetToken(string $token): ?Identity
+    {
+        $query = $this
+            ->findByCriteria([
+                Identity::ATTR_PASSWORD_RESET => $token,
             ]);
 
         /** @var ?Identity $identity */

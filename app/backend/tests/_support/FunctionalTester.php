@@ -1,11 +1,14 @@
 <?php declare(strict_types=1);
 
-namespace app\backend\tests\_support;
+namespace app\backend\tests;
 
-use backend\tests\_generated;
+use Codeception\{ Actor, Lib\Friend };
 
 /**
- * Inherited Methods
+ * < Backend > `FunctionalTester`
+ *
+ *      Inherited Methods
+ *
  * @method void wantToTest($text)
  * @method void wantTo($text)
  * @method void execute($callable)
@@ -15,11 +18,11 @@ use backend\tests\_generated;
  * @method void am($role)
  * @method void lookForwardTo($achieveValue)
  * @method void comment($description)
- * @method \Codeception\Lib\Friend haveFriend($name, $actorClass = NULL)
+ * @method Friend haveFriend($name, $actorClass = NULL)
  *
  * @SuppressWarnings(PHPMD)
  */
-class FunctionalTester extends \Codeception\Actor
+class FunctionalTester extends Actor
 {
     use _generated\FunctionalTesterActions;
    /**

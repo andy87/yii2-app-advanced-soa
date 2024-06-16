@@ -1,5 +1,6 @@
 <?php
 
+use app\common\models\Identity;
 use yii\web\User;
 
 return [
@@ -8,7 +9,7 @@ return [
     'components' => [
         'user' => [
             'class' => User::class,
-            'identityClass' => 'app\common\models\Identity',
+            'identityClass' => Identity::class,
         ],
     ],
 ];

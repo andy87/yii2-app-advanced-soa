@@ -3,11 +3,31 @@
 namespace app\frontend\tests\functional;
 
 use app\common\fixtures\UserFixture;
-use app\frontend\tests\_support\FunctionalTester;
+use app\frontend\tests\FunctionalTester;
 use function frontend\tests\functional\codecept_data_dir;
 
+/**
+ * < Frontend > `ResendVerificationEmailCest`
+ *
+ * @package app\frontend\tests\functional
+ *
+ * @property FunctionalTester $I
+ *
+ * Fix not used:
+ * - @see ResendVerificationEmailCest::checkPage()
+ * - @see ResendVerificationEmailCest::checkEmptyField()
+ * - @see ResendVerificationEmailCest::checkWrongEmailFormat()
+ * - @see ResendVerificationEmailCest::checkWrongEmail()
+ * - @see ResendVerificationEmailCest::checkAlreadyVerifiedEmail()
+ * - @see ResendVerificationEmailCest::checkSendSuccessfully()
+ *
+ * @cli ./vendor/bin/codecept run app/frontend/tests/functional/ResendVerificationEmailCest
+ *
+ * @tag #frontend #tests #functional #ResendVerificationEmailCest
+ */
 class ResendVerificationEmailCest
 {
+    /** @var string $formId */
     protected $formId = '#resend-verification-email-form';
 
 
@@ -18,7 +38,7 @@ class ResendVerificationEmailCest
      * @see \Codeception\Module\Yii2::loadFixtures()
      * @return array
      */
-    public function _fixtures()
+    public function _fixtures(): array
     {
         return [
             'user' => [
@@ -28,49 +48,106 @@ class ResendVerificationEmailCest
         ];
     }
 
-    public function _before(FunctionalTester $I)
+    /**
+     * @param FunctionalTester $I
+     *
+     * @return void
+     *
+     * @tag #frontend #tests #functional #ResendVerificationEmailCest #_before
+     */
+    public function _before(FunctionalTester $I): void
     {
         $I->amOnRoute('/site/resend-verification-email');
     }
 
-    protected function formParams($email)
+    /**
+     * @param string $email
+     *
+     * @return array
+     */
+    protected function formParams( string $email): array
     {
         return [
             'ResendVerificationEmailForm[email]' => $email
         ];
     }
 
-    public function checkPage(FunctionalTester $I)
+    public function checkPage(FunctionalTester $I): void
     {
         $I->see('Resend verification email', 'h1');
         $I->see('Please fill out your email. A verification email will be sent there.');
     }
 
-    public function checkEmptyField(FunctionalTester $I)
+    /**
+     * @cli ./vendor/bin/codecept run app/frontend/tests/functional/ResendVerificationEmailCest:checkEmptyField
+     *
+     * @param FunctionalTester $I
+     *
+     * @return void
+     *
+     * @tag #frontend #tests #functional #ResendVerificationEmailCest #checkEmptyField
+     */
+    public function checkEmptyField(FunctionalTester $I): void
     {
         $I->submitForm($this->formId, $this->formParams(''));
         $I->seeValidationError('Email cannot be blank.');
     }
 
-    public function checkWrongEmailFormat(FunctionalTester $I)
+    /**
+     * @cli ./vendor/bin/codecept run app/frontend/tests/functional/ResendVerificationEmailCest:checkWrongEmailFormat
+     *
+     * @param FunctionalTester $I
+     *
+     * @return void
+     *
+     * @tag #frontend #tests #functional #ResendVerificationEmailCest #checkWrongEmailFormat
+     */
+    public function checkWrongEmailFormat(FunctionalTester $I): void
     {
         $I->submitForm($this->formId, $this->formParams('abcd.com'));
         $I->seeValidationError('Email is not a valid email address.');
     }
 
-    public function checkWrongEmail(FunctionalTester $I)
+    /**
+     * @cli ./vendor/bin/codecept run app/frontend/tests/functional/ResendVerificationEmailCest:checkWrongEmail
+     *
+     * @param FunctionalTester $I
+     *
+     * @return void
+     *
+     * @tag #frontend #tests #functional #ResendVerificationEmailCest #checkWrongEmail
+     */
+    public function checkWrongEmail(FunctionalTester $I): void
     {
         $I->submitForm($this->formId, $this->formParams('wrong@email.com'));
         $I->seeValidationError('There is no user with this email address.');
     }
 
-    public function checkAlreadyVerifiedEmail(FunctionalTester $I)
+    /**
+     * @cli ./vendor/bin/codecept run app/frontend/tests/functional/ResendVerificationEmailCest:checkAlreadyVerifiedEmail
+     *
+     * @param FunctionalTester $I
+     *
+     * @return void
+     *
+     * @tag #frontend #tests #functional #ResendVerificationEmailCest #checkAlreadyVerifiedEmail
+     */
+    public function checkAlreadyVerifiedEmail(FunctionalTester $I): void
     {
         $I->submitForm($this->formId, $this->formParams('test2@mail.com'));
         $I->seeValidationError('There is no user with this email address.');
     }
 
-    public function checkSendSuccessfully(FunctionalTester $I)
+    /**
+     * @cli ./vendor/bin/codecept run app/frontend/tests/functional/ResendVerificationEmailCest:checkSendSuccessfully
+     *
+     * @param FunctionalTester $I
+     *
+     * @return void
+     *
+     * @tag #frontend #tests #functional #ResendVerificationEmailCest #checkSendSuccessfully
+     */
+    public function checkSendSuccessfully(FunctionalTester $I): void
     {
         $I->submitForm($this->formId, $this->formParams('test@mail.com'));
         $I->canSeeEmailIsSent();

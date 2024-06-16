@@ -3,9 +3,26 @@
 namespace app\frontend\tests\functional;
 
 use app\common\fixtures\UserFixture;
-use app\frontend\tests\_support\FunctionalTester;
-use function frontend\tests\functional\codecept_data_dir;
+use app\frontend\tests\FunctionalTester;
 
+/**
+ * < Frontend > `VerifyEmailCest`
+ *
+ * @package app\frontend\tests\functional
+ *
+ * @property FunctionalTester $I
+ *
+ * Fix not used:
+ * - @see VerifyEmailCest::checkEmptyToken()
+ * - @see VerifyEmailCest::checkInvalidToken()
+ * - @see VerifyEmailCest::checkNoToken()
+ * - @see VerifyEmailCest::checkAlreadyActivatedToken()
+ * - @see VerifyEmailCest::checkSuccessVerification()
+ *
+ * @cli ./vendor/bin/codecept run app/frontend/tests/functional/VerifyEmailCest
+ *
+ * @tag #frontend #tests #functional #VerifyEmailCest
+ */
 class VerifyEmailCest
 {
     /**
@@ -15,7 +32,7 @@ class VerifyEmailCest
      * @see \Codeception\Module\Yii2::loadFixtures()
      * @return array
      */
-    public function _fixtures()
+    public function _fixtures(): array
     {
         return [
             'user' => [
@@ -25,35 +42,80 @@ class VerifyEmailCest
         ];
     }
 
-    public function checkEmptyToken(FunctionalTester $I)
+    /**
+     * @cli ./vendor/bin/codecept run app/frontend/tests/functional/VerifyEmailCest:checkEmptyToken
+     *
+     * @param FunctionalTester $I
+     *
+     * @return void
+     *
+     * @tag #frontend #tests #functional #VerifyEmailCest #_before
+     */
+    public function checkEmptyToken(FunctionalTester $I): void
     {
         $I->amOnRoute('site/verify-email', ['token' => '']);
         $I->canSee('Bad Request', 'h1');
         $I->canSee('Verify email token cannot be blank.');
     }
 
-    public function checkInvalidToken(FunctionalTester $I)
+    /**
+     * @cli ./vendor/bin/codecept run app/frontend/tests/functional/VerifyEmailCest:checkInvalidToken
+     *
+     * @param FunctionalTester $I
+     *
+     * @return void
+     *
+     * @tag #frontend #tests #functional #VerifyEmailCest #checkInvalidToken
+     */
+    public function checkInvalidToken(FunctionalTester $I): void
     {
         $I->amOnRoute('site/verify-email', ['token' => 'wrong_token']);
         $I->canSee('Bad Request', 'h1');
         $I->canSee('Wrong verify email token.');
     }
 
-    public function checkNoToken(FunctionalTester $I)
+    /**
+     * @cli ./vendor/bin/codecept run app/frontend/tests/functional/VerifyEmailCest:checkNoToken
+     *
+     * @param FunctionalTester $I
+     *
+     * @return void
+     *
+     * @tag #frontend #tests #functional #VerifyEmailCest #checkNoToken
+     */
+    public function checkNoToken(FunctionalTester $I): void
     {
         $I->amOnRoute('site/verify-email');
         $I->canSee('Bad Request', 'h1');
         $I->canSee('Missing required parameters: token');
     }
 
-    public function checkAlreadyActivatedToken(FunctionalTester $I)
+    /**
+     * @cli ./vendor/bin/codecept run app/frontend/tests/functional/VerifyEmailCest:checkAlreadyActivatedToken
+     *
+     * @param FunctionalTester $I
+     *
+     * @return void
+     *
+     * @tag #frontend #tests #functional #VerifyEmailCest #checkAlreadyActivatedToken
+     */
+    public function checkAlreadyActivatedToken(FunctionalTester $I): void
     {
         $I->amOnRoute('site/verify-email', ['token' => 'already_used_token_1548675330']);
         $I->canSee('Bad Request', 'h1');
         $I->canSee('Wrong verify email token.');
     }
 
-    public function checkSuccessVerification(FunctionalTester $I)
+    /**
+     * @cli ./vendor/bin/codecept run app/frontend/tests/functional/VerifyEmailCest:checkSuccessVerification
+     *
+     * @param FunctionalTester $I
+     *
+     * @return void
+     *
+     * @tag #frontend #tests #functional #VerifyEmailCest #checkSuccessVerification
+     */
+    public function checkSuccessVerification(FunctionalTester $I): void
     {
         $I->amOnRoute('site/verify-email', ['token' => '4ch0qbfhvWwkcuWqjN8SWRq72SOw1KYT_1548675330']);
         $I->canSee('Your email has been confirmed!');

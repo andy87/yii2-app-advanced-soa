@@ -1,11 +1,16 @@
 <?php declare(strict_types=1);
 
-namespace app\frontend\tests\_support;
+namespace app\frontend\tests;
 
-use frontend\tests\_generated;
+use Codeception\Actor;
+use Codeception\Lib\Friend;
+use yii\mail\MessageInterface;
 
 /**
- * Inherited Methods
+ * < Frontend > `UnitTester`
+ *
+ *      Inherited Methods
+ *
  * @method void wantToTest($text)
  * @method void wantTo($text)
  * @method void execute($callable)
@@ -15,11 +20,13 @@ use frontend\tests\_generated;
  * @method void am($role)
  * @method void lookForwardTo($achieveValue)
  * @method void comment($description)
- * @method \Codeception\Lib\Friend haveFriend($name, $actorClass = NULL)
+ * @method Friend haveFriend($name, $actorClass = NULL)
+ * @method void seeEmailIsSent()
+ * @method MessageInterface grabLastSentEmail()
  *
  * @SuppressWarnings(PHPMD)
  */
-class UnitTester extends \Codeception\Actor
+class UnitTester extends Actor
 {
     use _generated\UnitTesterActions;
    /**

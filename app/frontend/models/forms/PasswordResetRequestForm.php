@@ -22,8 +22,11 @@ class PasswordResetRequestForm extends EmailingModel
     public const MESSAGE_SUCCESS = 'Проверьте свою электронную почту для получения дальнейших инструкций.';
     public const MESSAGE_ERROR = 'Извините, мы не можем сбросить пароль для указанного адреса электронной почты.';
 
-    public ?string $composeHtml = 'passwordResetToken-html';
-    public ?string $composeView = 'passwordResetToken-text';
+
+    public array $messageConfig = [
+        'html' => 'passwordResetToken-html',
+        'text' => 'passwordResetToken-text',
+    ];
 
 
     /** @var ?string   */

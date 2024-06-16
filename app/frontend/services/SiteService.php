@@ -1,12 +1,11 @@
 <?php declare(strict_types=1);
 
-namespace app\frontend\services\controllers;
+namespace app\frontend\services;
 
 use Yii;
 use yii\base\InvalidConfigException;
-use app\common\services\EmailService;
 use app\frontend\models\forms\ContactForm;
-use app\common\components\core\BaseService;
+use app\common\{ services\EmailService, components\core\BaseService };
 
 /**
  * < Frontend > `SiteService`

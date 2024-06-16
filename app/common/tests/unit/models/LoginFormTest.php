@@ -2,13 +2,10 @@
 
 namespace app\common\tests\unit\models;
 
-use app\common\fixtures\UserFixture;
-use app\common\models\forms\LoginForm;
-use app\common\tests\_support\UnitTester;
-use Codeception\Test\Unit;
 use Yii;
-use function common\tests\unit\models\codecept_data_dir;
-use function common\tests\unit\models\verify;
+use Codeception\Test\Unit;
+use yii\base\InvalidConfigException;
+use app\common\{tests\UnitTester, services\AuthService, fixtures\UserFixture, models\forms\LoginForm};
 
 /**
  * < Common > `LoginFormTest`
@@ -16,6 +13,8 @@ use function common\tests\unit\models\verify;
  *      Login form test
  *
  * @package app\common\tests\unit\models
+ *
+ * @cli ./vendor/bin/codecept run app/common/tests/unit/models/LoginFormTest
  *
  * @tag #common #tests #unit #models #LoginForm
  */
@@ -26,6 +25,7 @@ class LoginFormTest extends Unit
      */
     protected UnitTester $tester;
 
+    private LoginForm $loginForm;
 
     /**
      * @return array
@@ -34,6 +34,8 @@ class LoginFormTest extends Unit
      */
     public function _fixtures(): array
     {
+        $this->loginForm = new LoginForm();
+
         return [
             'user' => [
                 'class' => UserFixture::class,
@@ -43,52 +45,67 @@ class LoginFormTest extends Unit
     }
 
     /**
+     * @cli ./vendor/bin/codecept run app/common/tests/unit/models/LoginFormTest:testLoginNoUser
+     *
      * @return void
      *
+     * @throws InvalidConfigException
+     *
      * @tag #common #tests #unit #LoginForm #noUser
+     *
      */
     public function testLoginNoUser(): void
     {
-        $loginForm = new LoginForm([
-            'username' => 'not_existing_username',
-            'password' => 'not_existing_password',
+        $this->loginForm->setAttributes([
+            LoginForm::ATTR_USERNAME => 'not_existing_username',
+            LoginForm::ATTR_PASSWORD => 'not_existing_password',
         ]);
 
-        verify($loginForm->login())->false();
+        verify(AuthService::getInstance()->login($this->loginForm))->false();
         verify(Yii::$app->user->isGuest)->true();
     }
 
     /**
+     * @cli ./vendor/bin/codecept run app/common/tests/unit/models/LoginFormTest:testLoginWrongPassword
+     *
      * @return void
+     *
+     * @throws InvalidConfigException
      *
      * @tag #common #tests #unit #LoginForm #wrongPassword
      */
     public function testLoginWrongPassword(): void
     {
-        $loginForm = new LoginForm([
-            'username' => 'bayer.hudson',
-            'password' => 'wrong_password',
+        $this->loginForm->setAttributes([
+            LoginForm::ATTR_USERNAME => 'bayer.hudson',
+            LoginForm::ATTR_PASSWORD => 'wrong_password',
         ]);
 
-        verify($loginForm->login())->false();
-        verify( $loginForm->errors)->arrayHasKey('password');
+        $login = AuthService::getInstance()->login($this->loginForm);
+
+        verify($login)->false();
+        verify( $this->loginForm->errors)->arrayHasKey('password');
         verify(Yii::$app->user->isGuest)->true();
     }
 
     /**
+     * @cli ./vendor/bin/codecept run app/common/tests/unit/models/LoginFormTest:testLoginCorrect
+     *
      * @return void
+     *
+     * @throws InvalidConfigException
      *
      * @tag #common #tests #unit #LoginForm #correct
      */
     public function testLoginCorrect(): void
     {
-        $loginForm = new LoginForm([
-            'username' => 'bayer.hudson',
-            'password' => 'password_0',
+        $this->loginForm->setAttributes([
+            LoginForm::ATTR_USERNAME => 'bayer.hudson',
+            LoginForm::ATTR_PASSWORD => 'password_0',
         ]);
 
-        verify($loginForm->login())->true();
-        verify($loginForm->errors)->arrayHasNotKey('password');
+        verify(AuthService::getInstance()->login($this->loginForm))->true();
+        verify($this->loginForm->errors)->arrayHasNotKey('password');
         verify(Yii::$app->user->isGuest)->false();
     }
 }

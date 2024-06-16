@@ -2,20 +2,34 @@
 
 namespace app\frontend\tests\unit\models;
 
-use app\common\fixtures\UserFixture;
-use app\frontend\models\forms\VerifyEmailForm;
-use function frontend\tests\unit\models\codecept_data_dir;
-use function frontend\tests\unit\models\verify;
+use yii\db\Exception;
+use Codeception\Test\Unit;
+use app\frontend\tests\UnitTester;
+use app\common\{ fixtures\UserFixture, models\Identity };
+use yii\base\{ InvalidArgumentException, InvalidConfigException };
+use app\frontend\{ models\forms\VerifyEmailForm, services\AuthService };
 
-class VerifyEmailFormTest extends \Codeception\Test\Unit
+/**
+ * < Frontend > `VerifyEmailFormTest`
+ *
+ * @package app\frontend\tests\unit\models
+ *
+ * @cli ./vendor/bin/codecept run app/frontend/tests/unit/models/VerifyEmailFormTest
+ *
+ * @tags #frontend #tests #unit #models #VerifyEmailForm
+ */
+class VerifyEmailFormTest extends Unit
 {
+    /** @var UnitTester */
+    protected UnitTester $tester;
+
+
     /**
-     * @var \app\frontend\tests\_support\UnitTester
+     * @return void
+     *
+     * @tag #frontend #tests #fixtures #user
      */
-    protected $tester;
-
-
-    public function _before()
+    public function _before(): void
     {
         $this->tester->haveFixtures([
             'user' => [
@@ -25,33 +39,66 @@ class VerifyEmailFormTest extends \Codeception\Test\Unit
         ]);
     }
 
-    public function testVerifyWrongToken()
+    /**
+     * Verify wrong token
+     *
+     * @cli ./vendor/bin/codecept run app/frontend/tests/unit/models/VerifyEmailFormTest:testWrongToken
+     *
+     * @return void
+     *
+     * @tag #frontend #tests #verify #wrong #token
+     */
+    public function testVerifyWrongToken(): void
     {
-        $this->tester->expectThrowable('\yii\base\InvalidArgumentException', function() {
+        $this->tester->expectThrowable(InvalidArgumentException::class, function() {
             new VerifyEmailForm('');
         });
 
-        $this->tester->expectThrowable('\yii\base\InvalidArgumentException', function() {
+        $this->tester->expectThrowable(InvalidArgumentException::class, function() {
             new VerifyEmailForm('notexistingtoken_1391882543');
         });
     }
 
-    public function testAlreadyActivatedToken()
+    /**
+     * Already activated token
+     *
+     * @cli ./vendor/bin/codecept run app/frontend/tests/unit/models/VerifyEmailFormTest:testAlreadyActivatedToken
+     *
+     * @return void
+     *
+     * @tag #frontend #tests #verify #already #activated #token
+     */
+    public function testAlreadyActivatedToken(): void
     {
-        $this->tester->expectThrowable('\yii\base\InvalidArgumentException', function() {
+        $this->tester->expectThrowable(InvalidArgumentException::class, function() {
             new VerifyEmailForm('already_used_token_1548675330');
         });
     }
 
-    public function testVerifyCorrectToken()
+    /**
+     * Verify correct token
+     *
+     * @cli ./vendor/bin/codecept run app/frontend/tests/unit/models/VerifyEmailFormTest:testVerifyCorrectToken
+     *
+     * @return void
+     *
+     * @throws InvalidConfigException|Exception
+     *
+     * @tag #frontend #tests #verify #correct #token
+     */
+    public function testVerifyCorrectToken(): void
     {
-        $model = new VerifyEmailForm('4ch0qbfhvWwkcuWqjN8SWRq72SOw1KYT_1548675330');
-        $user = $model->verifyEmail();
-        verify($user)->instanceOf('app\common\models\Identity');
+        $verifyEmailForm = new VerifyEmailForm('4ch0qbfhvWwkcuWqjN8SWRq72SOw1KYT_1548675330');
 
-        verify($user->username)->equals('test.test');
-        verify($user->email)->equals('test@mail.com');
-        verify($user->status)->equals(\app\common\models\Identity::STATUS_ACTIVE);
-        verify($user->validatePassword('Test1234'))->true();
+        AuthService::getInstance()->handlerAuthVerifyEmailResources($verifyEmailForm);
+
+        $identity = $verifyEmailForm->getIdentity();
+
+        verify($identity)->instanceOf(Identity::class);
+
+        verify($identity->username)->equals('test.test');
+        verify($identity->email)->equals('test@mail.com');
+        verify($identity->status)->equals(Identity::STATUS_ACTIVE);
+        verify($identity->validatePassword('Test1234'))->true();
     }
 }

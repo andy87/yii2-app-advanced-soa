@@ -49,13 +49,16 @@
 
     "autoload-dev": {
         "psr-4": {
-            "app\\common\\tests\\": ["app/common/tests/",
+            "app\\common\\tests\\": [
+                "app/common/tests/",
                 "app/common/tests/_support"
             ],
-            "app\\backend\\tests\\": ["app/backend/tests/",
+            "app\\backend\\tests\\": [
+                "app/backend/tests/",
                 "app/backend/tests/_support"
             ],
-            "app\\frontend\\tests\\": ["app/frontend/tests/",
+            "app\\frontend\\tests\\": [
+                "app/frontend/tests/",
                 "app/frontend/tests/_support"
             ]
         }

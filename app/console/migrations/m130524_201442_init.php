@@ -1,7 +1,5 @@
 <?php declare(strict_types=1);
 
-namespace app\console\migrations;
-
 use yii\db\Migration;
 
 class m130524_201442_init extends Migration

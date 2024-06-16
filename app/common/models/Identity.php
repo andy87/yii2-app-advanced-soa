@@ -30,6 +30,13 @@ class Identity extends ActiveRecord implements IdentityInterface
     public const ATTR_USERNAME = 'username';
     public const ATTR_PASSWORD = 'password';
     public const ATTR_EMAIL = 'email';
+    public const ATTR_AUTH_KEY = 'auth_key';
+    public const ATTR_PASSWORD_HASH = 'password_hash';
+    public const ATTR_PASSWORD_RESET = 'password_reset_token';
+    public const ATTR_VERIFICATION = 'verification_token';
+    public const ATTR_STATUS = 'status';
+    public const ATTR_CREATED_AT = 'created_at';
+    public const ATTR_UPDATED_AT = 'updated_at';
 
     const STATUS_DELETED = 0;
     const STATUS_INACTIVE = 9;
@@ -93,38 +100,6 @@ class Identity extends ActiveRecord implements IdentityInterface
     {
         throw new NotSupportedException('"findIdentityByAccessToken" is not implemented.');
     }
-
-    /**
-     * Finds user by username
-     *
-     * @param string $username
-     * @return ?static
-     */
-    public static function findByUsername(string $username): ?static
-    {
-        return static::findOne(['username' => $username, 'status' => self::STATUS_ACTIVE]);
-    }
-
-    /**
-     * Finds user by password reset token
-     *
-     * @param string $token password reset token
-     *
-     * @return ?static
-     */
-    public static function findByPasswordResetToken(string $token): ?static
-    {
-        if (static::isPasswordResetTokenValid($token))
-        {
-            return static::findOne([
-                'password_reset_token' => $token,
-                'status' => self::STATUS_ACTIVE,
-            ]);
-        }
-
-        return null;
-    }
-
 
     /**
      * Finds out if password reset token is valid

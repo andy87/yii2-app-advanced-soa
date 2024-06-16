@@ -2,20 +2,36 @@
 
 namespace app\frontend\tests\unit\models;
 
+use Codeception\Test\Unit;
 use app\common\fixtures\UserFixture;
-use app\frontend\models\forms\ResetPasswordForm;
-use function frontend\tests\unit\models\codecept_data_dir;
-use function frontend\tests\unit\models\verify;
+use Codeception\Exception\ModuleException;
+use app\frontend\{models\forms\ResetPasswordForm, services\AuthService, tests\UnitTester};
+use yii\base\{Exception, InvalidArgumentException, InvalidConfigException};
 
-class ResetPasswordFormTest extends \Codeception\Test\Unit
+/**
+ * < Frontend > `ResetPasswordFormTest`
+ *
+ * @package app\frontend\tests\unit\models
+ *
+ * @cli ./vendor/bin/codecept run app/frontend/tests/unit/models/ResetPasswordFormTest
+ *
+ * @tags #frontend #tests #unit #models #ResetPasswordForm
+ */
+class ResetPasswordFormTest extends Unit
 {
     /**
-     * @var \app\frontend\tests\_support\UnitTester
+     * @var UnitTester
      */
-    protected $tester;
+    protected UnitTester $tester;
 
 
-    public function _before()
+
+    /**
+     * @return void
+     *
+     * @tag #frontend #tests #fixtures #user
+     */
+    public function _before(): void
     {
         $this->tester->haveFixtures([
             'user' => [
@@ -25,22 +41,46 @@ class ResetPasswordFormTest extends \Codeception\Test\Unit
         ]);
     }
 
+    /**
+     * Reset wrong token
+     *
+     * @cli ./vendor/bin/codecept run app/frontend/tests/unit/models/ResetPasswordFormTest:testResetWrongToken
+     *
+     * @return void
+     *
+     * @tag #frontend #tests #reset #wrong #token
+     */
     public function testResetWrongToken()
     {
-        $this->tester->expectThrowable('\yii\base\InvalidArgumentException', function() {
+        $this->tester->expectThrowable(InvalidArgumentException::class, function() {
             new ResetPasswordForm('');
         });
 
-        $this->tester->expectThrowable('\yii\base\InvalidArgumentException', function() {
+        $this->tester->expectThrowable(InvalidArgumentException::class, function() {
             new ResetPasswordForm('notexistingtoken_1391882543');
         });
     }
 
-    public function testResetCorrectToken()
+    /**
+     * Reset correct token
+     *
+     * @cli ./vendor/bin/codecept run app/frontend/tests/unit/models/ResetPasswordFormTest:testResetCorrectToken
+     *
+     * @return void
+     *
+     * @throws ModuleException|InvalidConfigException|Exception
+     *
+     * @tag #frontend #tests #reset #correct #token
+     */
+    public function testResetCorrectToken(): void
     {
         $user = $this->tester->grabFixture('user', 0);
-        $form = new ResetPasswordForm($user['password_reset_token']);
-        verify($form->resetPassword())->notEmpty();
+
+        $resetPasswordForm = new ResetPasswordForm($user['password_reset_token']);
+
+        $resultResetPassword = AuthService::getInstance()->resetPassword($resetPasswordForm);
+
+        verify($resultResetPassword)->notEmpty();
     }
 
 }

@@ -2,12 +2,19 @@
 
 namespace app\backend\tests\functional;
 
-use app\backend\tests\_support\FunctionalTester;
+use app\backend\tests\FunctionalTester;
 use app\common\fixtures\UserFixture;
-use function backend\tests\functional\codecept_data_dir;
 
 /**
- * Class LoginCest
+ * < Backend > `LoginCest`
+ *
+ *      Class LoginCest
+ *
+ * @package app\backend\tests\functional
+ *
+ * @cli ./vendor/bin/codecept run app/backend/tests/functional/LoginCest
+ *
+ * @tag #backend #functional #login
  */
 class LoginCest
 {
@@ -18,7 +25,7 @@ class LoginCest
      * @see \Codeception\Module\Yii2::loadFixtures()
      * @return array
      */
-    public function _fixtures()
+    public function _fixtures(): array
     {
         return [
             'user' => [
@@ -29,9 +36,15 @@ class LoginCest
     }
     
     /**
+     * @cli ./vendor/bin/codecept run app/backend/tests/functional/LoginCest:testLoginUser
+     *
      * @param FunctionalTester $I
+     *
+     * @return void
+     *
+     * @tag #backend #functional #login #user
      */
-    public function loginUser(FunctionalTester $I)
+    public function loginUser(FunctionalTester $I): void
     {
         $I->amOnRoute('/site/login');
         $I->fillField('Username', 'erau');

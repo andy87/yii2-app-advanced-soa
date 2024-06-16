@@ -2,8 +2,10 @@
 
 namespace app\common\components\services;
 
-use app\common\components\core\{ BaseModel, BaseService };
+
+use yii\base\Model;
 use yii\db\Exception;
+use app\common\components\core\BaseService;
 
 /**
  * < Common > `ModelService`
@@ -13,14 +15,14 @@ use yii\db\Exception;
 abstract class ModelService extends BaseService
 {
     /** @var string  */
-    public const CLASS_MODEL = BaseModel::class;
+    public const CLASS_MODEL = Model::class;
 
     /**
-     * @return BaseModel|string
+     * @return Model|string
      *
      * @tag #core #service #get
      */
-    public function getClassModel(): BaseModel|string
+    public function getClassModel(): Model|string
     {
         /** @var static|string $classModel */
         $classModel = static::CLASS_MODEL;
@@ -31,11 +33,11 @@ abstract class ModelService extends BaseService
     /**
      * @param array $attributes
      *
-     * @return BaseModel|string
+     * @return Model|string
      *
      * @tag #core #service #create
      */
-    public function createModel(array $attributes = []): BaseModel|string
+    public function createModel(array $attributes = []): Model|string
     {
         $classModel = $this->getClassModel();
 
@@ -45,13 +47,13 @@ abstract class ModelService extends BaseService
     /**
      * @param array $attributes
      *
-     * @return BaseModel|string
+     * @return Model|string
      *
      * @throws Exception
      *
      * @tag #core #service #model #add
      */
-    public function addModel(array $attributes = []): BaseModel|string
+    public function addModel(array $attributes = []): Model|string
     {
         $model = $this->createModel($attributes);
 

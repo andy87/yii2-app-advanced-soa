@@ -4,7 +4,6 @@ namespace app\frontend\models\forms;
 
 use app\common\models\Identity;
 use app\common\services\IdentityService;
-use IdentityService;
 use yii\base\{InvalidArgumentException, InvalidConfigException, Model};
 
 /**
@@ -47,17 +46,19 @@ class VerifyEmailForm extends Model
     {
         parent::__construct($config);
 
-        if (strlen($token) )
+        $this->token = $token;
+
+        if (strlen($this->token) )
         {
             $this->_identity = IdentityService::getInstance()
-                ->findByVerificationToken($token);
+                ->findByVerificationToken($this->token);
 
             if (!$this->_identity) {
                 throw new InvalidArgumentException('Wrong verify email token.');
             }
+        } else {
+            throw new InvalidArgumentException('Verify email token cannot be blank.');
         }
-
-        throw new InvalidArgumentException('Verify email token cannot be blank.');
     }
 
     /**

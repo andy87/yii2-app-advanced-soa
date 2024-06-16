@@ -1,9 +1,9 @@
 <?php declare(strict_types=1);
 
-namespace app\common\tests\_support;
+namespace app\common\tests;
 
+use Codeception\Actor;
 use Codeception\Lib\Friend;
-use common\tests\_generated;
 
 /**
  * < Common > `UnitTester`
@@ -25,7 +25,7 @@ use common\tests\_generated;
  *
  * @tag #common #tests #support #unitTester
  */
-class UnitTester extends \Codeception\Actor
+class UnitTester extends Actor
 {
     use _generated\UnitTesterActions;
    /**

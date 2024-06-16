@@ -2,23 +2,65 @@
 
 namespace app\frontend\tests\functional;
 
-use app\frontend\tests\_support\FunctionalTester;
+use app\frontend\tests\FunctionalTester;
 
 /* @var $scenario \Codeception\Scenario */
 
+/**
+ * < Frontend > `ContactCest`
+ *
+ * @package app\frontend\tests\functional
+ *
+ * @property FunctionalTester $I
+ *
+ * Fix not used:
+ * - @see ContactCest::checkContact()
+ * - @see ContactCest::checkContactSubmitNoData()
+ * - @see ContactCest::checkContactSubmitNotCorrectEmail()
+ * - @see ContactCest::checkContactSubmitCorrectData()
+ *
+ * @cli ./vendor/bin/codecept run app/frontend/tests/functional/ContactCest
+ *
+ * @tag #frontend #tests #functional #ContactCest
+ */
 class ContactCest
 {
-    public function _before(FunctionalTester $I)
+    /**
+     * @param FunctionalTester $I
+     *
+     * @return void
+     *
+     * @tag #frontend #tests #functional #ContactCest #checkContact
+     */
+    public function _before(FunctionalTester $I): void
     {
         $I->amOnRoute('site/contact');
     }
 
-    public function checkContact(FunctionalTester $I)
+    /**
+     * @cli ./vendor/bin/codecept run app/frontend/tests/functional/ContactCest:checkContact
+     *
+     * @param FunctionalTester $I
+     *
+     * @return void
+     *
+     * @tag #frontend #tests #functional #ContactCest #checkContact
+     */
+    public function checkContact(FunctionalTester $I): void
     {
         $I->see('Contact', 'h1');
     }
 
-    public function checkContactSubmitNoData(FunctionalTester $I)
+    /**
+     * @cli ./vendor/bin/codecept run app/frontend/tests/functional/ContactCest:checkContactSubmitNoData
+     *
+     * @param FunctionalTester $I
+     *
+     * @return void
+     *
+     * @tag #frontend #tests #functional #ContactCest #checkContactSubmitNoData
+     */
+    public function checkContactSubmitNoData(FunctionalTester $I): void
     {
         $I->submitForm('#contact-form', []);
         $I->see('Contact', 'h1');
@@ -29,7 +71,16 @@ class ContactCest
         $I->seeValidationError('The verification code is incorrect');
     }
 
-    public function checkContactSubmitNotCorrectEmail(FunctionalTester $I)
+    /**
+     * @cli ./vendor/bin/codecept run app/frontend/tests/functional/ContactCest:checkContactSubmitNotCorrectEmail
+     *
+     * @param FunctionalTester $I
+     *
+     * @return void
+     *
+     * @tag #frontend #tests #functional #ContactCest #checkContactSubmitNotCorrectEmail
+     */
+    public function checkContactSubmitNotCorrectEmail(FunctionalTester $I): void
     {
         $I->submitForm('#contact-form', [
             'ContactForm[name]' => 'tester',
@@ -45,7 +96,16 @@ class ContactCest
         $I->dontSeeValidationError('The verification code is incorrect');
     }
 
-    public function checkContactSubmitCorrectData(FunctionalTester $I)
+    /**
+     * @cli ./vendor/bin/codecept run app/frontend/tests/functional/ContactCest:checkContactSubmitCorrectData
+     *
+     * @param FunctionalTester $I
+     *
+     * @return void
+     *
+     * @tag #frontend #tests #functional #ContactCest #checkContactSubmitCorrectData
+     */
+    public function checkContactSubmitCorrectData(FunctionalTester $I): void
     {
         $I->submitForm('#contact-form', [
             'ContactForm[name]' => 'tester',

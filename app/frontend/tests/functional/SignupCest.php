@@ -2,19 +2,52 @@
 
 namespace app\frontend\tests\functional;
 
-use app\frontend\tests\_support\FunctionalTester;
+use app\frontend\tests\FunctionalTester;
 
+/**
+ * < Frontend > `SignupCest`
+ *
+ * @package app\frontend\tests\functional
+ *
+ * @property FunctionalTester $I
+ *
+ * Fix not used:
+ * - @see SignupCest::signupWithEmptyFields()
+ * - @see SignupCest::signupWithWrongEmail()
+ * - @see SignupCest::signupSuccessfully()
+ *
+ * @cli ./vendor/bin/codecept run app/frontend/tests/functional/SignupCest
+ *
+ * @tag #frontend #tests #functional #SignupCest
+ */
 class SignupCest
 {
+    /** @var string $formId */
     protected $formId = '#form-signup';
 
 
-    public function _before(FunctionalTester $I)
+    /**
+     * @param FunctionalTester $I
+     *
+     * @return void
+     *
+     * @tag #frontend #tests #functional #SignupCest #_before
+     */
+    public function _before(FunctionalTester $I): void
     {
         $I->amOnRoute('site/signup');
     }
 
-    public function signupWithEmptyFields(FunctionalTester $I)
+    /**
+     * @cli ./vendor/bin/codecept run app/frontend/tests/functional/SignupCest:signupWithEmptyFields
+     *
+     * @param FunctionalTester $I
+     *
+     * @return void
+     *
+     * @tag #frontend #tests #functional #SignupCest #signupWithEmptyFields
+     */
+    public function signupWithEmptyFields(FunctionalTester $I): void
     {
         $I->see('Signup', 'h1');
         $I->see('Please fill out the following fields to signup:');
@@ -25,7 +58,16 @@ class SignupCest
 
     }
 
-    public function signupWithWrongEmail(FunctionalTester $I)
+    /**
+     * @cli ./vendor/bin/codecept run app/frontend/tests/functional/SignupCest:signupWithWrongEmail
+     *
+     * @param FunctionalTester $I
+     *
+     * @return void
+     *
+     * @tag #frontend #tests #functional #SignupCest #signupWithWrongEmail
+     */
+    public function signupWithWrongEmail(FunctionalTester $I): void
     {
         $I->submitForm(
             $this->formId, [
@@ -39,7 +81,16 @@ class SignupCest
         $I->see('Email is not a valid email address.', '.invalid-feedback');
     }
 
-    public function signupSuccessfully(FunctionalTester $I)
+    /**
+     * @cli ./vendor/bin/codecept run app/frontend/tests/functional/SignupCest:signupSuccessfully
+     *
+     * @param FunctionalTester $I
+     *
+     * @return void
+     *
+     * @tag #frontend #tests #functional #SignupCest #signupSuccessfully
+     */
+    public function signupSuccessfully(FunctionalTester $I): void
     {
         $I->submitForm($this->formId, [
             'SignupForm[username]' => 'tester',

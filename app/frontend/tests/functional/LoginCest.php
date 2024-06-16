@@ -2,10 +2,26 @@
 
 namespace app\frontend\tests\functional;
 
-use app\frontend\tests\_support\FunctionalTester;
+use app\frontend\tests\FunctionalTester;
 use app\common\fixtures\UserFixture;
-use function frontend\tests\functional\codecept_data_dir;
 
+/**
+ * < Frontend > `LoginCest`
+ *
+ * @package app\frontend\tests\functional
+ *
+ * @property FunctionalTester $I
+ *
+ * Fix not used:
+ * - @see LoginCest::checkEmpty()
+ * - @see LoginCest::checkWrongPassword()
+ * - @see LoginCest::checkInactiveAccount()
+ * - @see LoginCest::checkValidLogin()
+ *
+ * @cli ./vendor/bin/codecept run app/frontend/tests/functional/LoginCest
+ *
+ * @tag #frontend #tests #functional #LoginCest
+ */
 class LoginCest
 {
     /**
@@ -15,7 +31,7 @@ class LoginCest
      * @see \Codeception\Module\Yii2::loadFixtures()
      * @return array
      */
-    public function _fixtures()
+    public function _fixtures(): array
     {
         return [
             'user' => [
@@ -25,12 +41,25 @@ class LoginCest
         ];
     }
 
-    public function _before(FunctionalTester $I)
+    /**
+     * @param FunctionalTester $I
+     *
+     * @return void
+     *
+     * @tag #frontend #tests #functional #LoginCest #checkEmpty
+     */
+    public function _before(FunctionalTester $I): void
     {
         $I->amOnRoute('site/login');
     }
 
-    protected function formParams($login, $password)
+    /**
+     * @param string $login
+     * @param string $password
+     *
+     * @return array
+     */
+    protected function formParams( string $login, string $password): array
     {
         return [
             'LoginForm[username]' => $login,
@@ -38,26 +67,62 @@ class LoginCest
         ];
     }
 
-    public function checkEmpty(FunctionalTester $I)
+    /**
+     * @cli ./vendor/bin/codecept run app/frontend/tests/functional/LoginCest:checkEmpty
+     *
+     * @param FunctionalTester $I
+     *
+     * @return void
+     *
+     * @tag #frontend #tests #functional #LoginCest #checkEmpty
+     */
+    public function checkEmpty(FunctionalTester $I): void
     {
         $I->submitForm('#login-form', $this->formParams('', ''));
         $I->seeValidationError('Username cannot be blank.');
         $I->seeValidationError('Password cannot be blank.');
     }
 
-    public function checkWrongPassword(FunctionalTester $I)
+    /**
+     * @cli ./vendor/bin/codecept run app/frontend/tests/functional/LoginCest:checkWrongPassword
+     *
+     * @param FunctionalTester $I
+     *
+     * @return void
+     *
+     * @tag #frontend #tests #functional #LoginCest #checkWrongPassword
+     */
+    public function checkWrongPassword(FunctionalTester $I): void
     {
         $I->submitForm('#login-form', $this->formParams('admin', 'wrong'));
         $I->seeValidationError('Incorrect username or password.');
     }
 
-    public function checkInactiveAccount(FunctionalTester $I)
+    /**
+     * @cli ./vendor/bin/codecept run app/frontend/tests/functional/LoginCest:checkInactiveAccount
+     *
+     * @param FunctionalTester $I
+     *
+     * @return void
+     *
+     * @tag #frontend #tests #functional #LoginCest #checkInactiveAccount
+     */
+    public function checkInactiveAccount(FunctionalTester $I): void
     {
         $I->submitForm('#login-form', $this->formParams('test.test', 'Test1234'));
         $I->seeValidationError('Incorrect username or password');
     }
 
-    public function checkValidLogin(FunctionalTester $I)
+    /**
+     * @cli ./vendor/bin/codecept run app/frontend/tests/functional/LoginCest:checkValidLogin
+     *
+     * @param FunctionalTester $I
+     *
+     * @return void
+     *
+     * @tag #frontend #tests #functional #LoginCest #checkValidLogin
+     */
+    public function checkValidLogin(FunctionalTester $I): void
     {
         $I->submitForm('#login-form', $this->formParams('erau', 'password_0'));
         $I->see('Logout (erau)', 'form button[type=submit]');

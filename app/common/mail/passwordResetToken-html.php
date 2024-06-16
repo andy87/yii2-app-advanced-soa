@@ -1,12 +1,18 @@
 <?php
 
+use yii\web\View;
 use yii\helpers\Html;
+use app\common\models\Identity;
 
-/** @var yii\web\View $this */
-/** @var \app\common\models\Identity $user */
+/**
+ * @var View $this
+ * @var Identity $user
+ */
 
 $resetLink = Yii::$app->urlManager->createAbsoluteUrl(['site/reset-password', 'token' => $user->password_reset_token]);
+
 ?>
+
 <div class="password-reset">
     <p>Hello <?= Html::encode($user->username) ?>,</p>
 
