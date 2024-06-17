@@ -91,7 +91,7 @@ jobs:
           sed -i "s/'cookieValidationKey' => ''/'cookieValidationKey' => 'testkey'/" ./app/backend/config/main.php
 
       - name: Apply migration
-        run: php app/yii_test migrate --interactive=0
+        run: php ./app/yii_test migrate --interactive=0
 
       - name: Run tests with codeception 
         run: vendor/bin/codecept run
