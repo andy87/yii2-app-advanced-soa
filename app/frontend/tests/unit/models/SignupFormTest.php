@@ -54,16 +54,16 @@ class SignupFormTest extends Unit
     {
         $user = new User;
 
-        verify($attributes)->arrayHasKey(User::ATTR_USERNAME);
-        verify($attributes)->arrayHasKey(User::ATTR_EMAIL);
-        verify($attributes)->arrayHasKey(User::ATTR_PASSWORD);
+        verify($attributes)->arrayHasKey($user::ATTR_USERNAME);
+        verify($attributes)->arrayHasKey($user::ATTR_EMAIL);
+        verify($attributes)->arrayHasKey($user::ATTR_PASSWORD);
 
         $user->setAttributes($attributes);
-        $user->password = $attributes[User::ATTR_PASSWORD];
+        $user->password = $attributes[$user::ATTR_PASSWORD];
 
-        verify($user->attributes)->arrayHasKey(User::ATTR_USERNAME);
-        verify($user->attributes)->arrayHasKey(User::ATTR_EMAIL);
-        verify((array) $user)->arrayHasKey(User::ATTR_PASSWORD);
+        verify($user->attributes)->arrayHasKey($user::ATTR_USERNAME);
+        verify($user->attributes)->arrayHasKey($user::ATTR_EMAIL);
+        verify((array) $user)->arrayHasKey($user::ATTR_PASSWORD);
 
         return $user;
     }
@@ -97,9 +97,9 @@ class SignupFormTest extends Unit
 
         /** @var Identity $identity */
         $identity = $this->tester->grabRecord(Identity::class, [
-            Identity::ATTR_USERNAME => $user->username,
-            Identity::ATTR_EMAIL => $user->email,
-            Identity::ATTR_STATUS => Identity::STATUS_INACTIVE
+            $signupForm->identity::ATTR_USERNAME => $user->username,
+            $signupForm->identity::ATTR_EMAIL => $user->email,
+            $signupForm->identity::ATTR_STATUS => Identity::STATUS_INACTIVE
         ]);
 
         $this->tester->seeEmailIsSent();

@@ -1,14 +1,18 @@
 <?php
 
-use app\common\models\forms\LoginForm;
-use app\frontend\resources\auth\AuthLoginResources;
-use yii\bootstrap5\{ActiveForm, Html};
 use yii\web\View;
+use app\common\models\forms\LoginForm;
+use yii\bootstrap5\{ Html, ActiveForm };
+use app\frontend\resources\auth\AuthLoginResources;
 
 /**
+ * @url {host}/auth/login
+ *
  * @var View $this
  * @var ActiveForm $form
  * @var AuthLoginResources $R
+ *
+ * @tag #frontend #auth #login
  */
 
 $this->title = 'Авторизация';
@@ -27,11 +31,11 @@ $loginForm = $R->loginForm;
         <div class="col-lg-5">
             <?php $form = ActiveForm::begin(['id' => $loginForm::ID]); ?>
 
-                <?= $form->field($loginForm, LoginForm::ATTR_USERNAME)->textInput(['autofocus' => true]) ?>
+                <?= $form->field($loginForm, $loginForm::ATTR_USERNAME)->textInput(['autofocus' => true]) ?>
 
-                <?= $form->field($loginForm, LoginForm::ATTR_PASSWORD)->passwordInput() ?>
+                <?= $form->field($loginForm, $loginForm::ATTR_PASSWORD)->passwordInput() ?>
 
-                <?= $form->field($loginForm, LoginForm::ATTR_REMEMBER_ME)->checkbox() ?>
+                <?= $form->field($loginForm, $loginForm::ATTR_REMEMBER_ME)->checkbox() ?>
 
                 <div class="my-1 mx-0" style="color:#999;">
                     Если вы забыли пароль, вы можете <?= Html::a('сбросить его', $loginForm->getHrefRequestPasswordReset()) ?>.

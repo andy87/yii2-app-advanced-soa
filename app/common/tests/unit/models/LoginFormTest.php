@@ -61,8 +61,8 @@ class LoginFormTest extends Unit
     public function testLoginNoUser(): void
     {
         $this->loginForm->setAttributes([
-            LoginForm::ATTR_USERNAME => 'not_existing_username',
-            LoginForm::ATTR_PASSWORD => 'not_existing_password',
+            $this->loginForm::ATTR_USERNAME => 'not_existing_username',
+            $this->loginForm::ATTR_PASSWORD => 'not_existing_password',
         ]);
 
         verify(AuthService::getInstance()->login($this->loginForm))->false();
@@ -83,8 +83,8 @@ class LoginFormTest extends Unit
     public function testLoginWrongPassword(): void
     {
         $this->loginForm->setAttributes([
-            LoginForm::ATTR_USERNAME => 'bayer.hudson',
-            LoginForm::ATTR_PASSWORD => 'wrong_password',
+            $this->loginForm::ATTR_USERNAME => 'bayer.hudson',
+            $this->loginForm::ATTR_PASSWORD => 'wrong_password',
         ]);
 
         $login = AuthService::getInstance()->login($this->loginForm);
@@ -108,8 +108,8 @@ class LoginFormTest extends Unit
     public function testLoginCorrect(): void
     {
         $this->loginForm->setAttributes([
-            LoginForm::ATTR_USERNAME => 'bayer.hudson',
-            LoginForm::ATTR_PASSWORD => 'password_0',
+            $this->loginForm::ATTR_USERNAME => 'bayer.hudson',
+            $this->loginForm::ATTR_PASSWORD => 'password_0',
         ]);
 
         verify(AuthService::getInstance()->login($this->loginForm))->true();

@@ -16,6 +16,8 @@ use yii\base\{InvalidConfigException, Model, InvalidArgumentException};
  */
 class ResetPasswordForm extends Model
 {
+    const ID = 'reset-password-form';
+
     public const ATTR_PASSWORD = 'password';
 
     public const MESSAGE_SUCCESS = 'Новый пароль был сохранен';

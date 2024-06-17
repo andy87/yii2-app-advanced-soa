@@ -16,11 +16,12 @@ use app\common\{ services\IdentityService, components\models\EmailingModel };
  */
 class PasswordResetRequestForm extends EmailingModel
 {
-    public const ATTR_EMAIL = 'email';
+    const ID = 'request-password-reset-form';
 
     public const MESSAGE_SUCCESS = 'Проверьте свою электронную почту для получения дальнейших инструкций.';
     public const MESSAGE_ERROR = 'Извините, мы не можем сбросить пароль для указанного адреса электронной почты.';
 
+    public const ATTR_EMAIL = 'email';
 
 
     /** @var ?string   */

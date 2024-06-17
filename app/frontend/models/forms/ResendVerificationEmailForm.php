@@ -17,12 +17,13 @@ use yii\base\InvalidConfigException;
  */
 class ResendVerificationEmailForm extends EmailingModel
 {
+    const ID = 'resend-verification-email-form';
+
     public const ATTR_EMAIL = 'email';
     public const MESSAGE_SUCCESS = 'Проверьте свою почту для получения дальнейших инструкций.';
     public const MESSAGE_ERROR = 'Извините, мы не можем отправить письмо для подтверждения на указанный адрес электронной почты.';
 
     public const RULE_EXIST_MESSAGE = 'Пользователь с таким адресом электронной почты не найден.';
-
 
 
     /**

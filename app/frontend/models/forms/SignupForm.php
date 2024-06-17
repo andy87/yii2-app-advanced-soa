@@ -17,6 +17,8 @@ use yii\base\InvalidConfigException;
  */
 class SignupForm extends EmailingModel
 {
+    const ID = 'form-signup';
+
     public const MESSAGE_SUCCESS = 'Благодарим за регистрацию. Пожалуйста, проверьте свой почтовый ящик.';
     public const MESSAGE_ERROR = 'Ошибка регистрации. Пожалуйста, попробуйте еще раз.';
 

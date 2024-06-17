@@ -22,7 +22,7 @@ $resetPasswordForm = $R->resetPasswordForm;
 
     <div class="row">
         <div class="col-lg-5">
-            <?php $form = ActiveForm::begin(['id' => 'reset-password-form']); ?>
+            <?php $form = ActiveForm::begin(['id' => $resetPasswordForm::ID]); ?>
 
                 <?= $form->field($resetPasswordForm, $resetPasswordForm::ATTR_PASSWORD)->passwordInput(['autofocus' => true]) ?>
 
