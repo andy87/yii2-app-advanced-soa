@@ -13,7 +13,7 @@ use app\common\models\forms\LoginForm;
  */
 class AuthLoginResources extends \app\common\components\resources\TemplateResources
 {
-    public const TEMPLATE = '@views/auth/login';
+    public const TEMPLATE = '@app/views/auth/login';
 
     public LoginForm $loginForm;
 

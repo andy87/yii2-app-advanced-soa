@@ -2,13 +2,11 @@
 
 namespace app\backend\tests\functional;
 
-use app\backend\tests\FunctionalTester;
 use app\common\fixtures\UserFixture;
+use app\backend\tests\FunctionalTester;
 
 /**
  * < Backend > `LoginCest`
- *
- *      Class LoginCest
  *
  * @package app\backend\tests\functional
  *
@@ -16,7 +14,7 @@ use app\common\fixtures\UserFixture;
  *
  * @originalFile https://github.com/yiisoft/yii2-app-advanced/blob/master/backend/tests/functional/LoginCest.php
  *
- * @tag #backend #functional #login
+ * @tag #tests #functional #LoginCest
  */
 class LoginCest
 {
@@ -50,7 +48,7 @@ class LoginCest
      */
     public function loginUser(FunctionalTester $I): void
     {
-        $I->amOnRoute('/site/login');
+        $I->amOnRoute('/auth/login');
         $I->fillField('Username', 'erau');
         $I->fillField('Password', 'password_0');
         $I->click('login-button');

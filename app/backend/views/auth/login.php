@@ -1,30 +1,37 @@
 <?php
 
-/** @var yii\web\View $this */
-/** @var yii\bootstrap5\ActiveForm $form */
-/** @var \app\common\models\forms\LoginForm $model */
+use yii\web\View;
+use yii\bootstrap5\{ Html, ActiveForm };
+use app\backend\resources\auth\AuthLoginResources;
 
-use yii\bootstrap5\ActiveForm;
-use yii\bootstrap5\Html;
+/**
+ * @var View $this
+ * @var ActiveForm $form
+ * @var AuthLoginResources $R
+ */
 
-$this->title = 'Login';
+$this->title = 'Авторизация';
+
+$loginForm = $R->loginForm;
+
 ?>
+
 <div class="site-login">
     <div class="mt-5 offset-lg-3 col-lg-6">
         <h1><?= Html::encode($this->title) ?></h1>
 
-        <p>Please fill out the following fields to login:</p>
+        <p>Пожалуйста, заполните следующие поля для входа:</p>
 
-        <?php $form = ActiveForm::begin(['id' => 'login-form']); ?>
+        <?php $form = ActiveForm::begin(['id' => $loginForm::ID]); ?>
 
-            <?= $form->field($model, 'username')->textInput(['autofocus' => true]) ?>
+            <?= $form->field($loginForm, $loginForm::ATTR_USERNAME)->textInput(['autofocus' => true]) ?>
 
-            <?= $form->field($model, 'password')->passwordInput() ?>
+            <?= $form->field($loginForm, $loginForm::ATTR_PASSWORD)->passwordInput() ?>
 
-            <?= $form->field($model, 'rememberMe')->checkbox() ?>
+            <?= $form->field($loginForm, $loginForm::ATTR_REMEMBER_ME)->checkbox() ?>
 
             <div class="form-group">
-                <?= Html::submitButton('Login', ['class' => 'btn btn-primary btn-block', 'name' => 'login-button']) ?>
+                <?= Html::submitButton('Авторизоваться', ['class' => 'btn btn-primary btn-block', 'name' => 'login-button']) ?>
             </div>
 
         <?php ActiveForm::end(); ?>

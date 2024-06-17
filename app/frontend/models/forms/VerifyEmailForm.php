@@ -50,8 +50,7 @@ class VerifyEmailForm extends Model
 
         if (strlen($this->token) )
         {
-            $this->_identity = IdentityService::getInstance()
-                ->findByVerificationToken($this->token);
+            $this->_identity = IdentityService::getInstance()->findByVerificationToken($this->token);
 
             if (!$this->_identity) {
                 throw new InvalidArgumentException('Wrong verify email token.');

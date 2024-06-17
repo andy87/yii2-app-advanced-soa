@@ -15,7 +15,7 @@ use app\frontend\models\forms\PasswordResetRequestForm;
 class AuthRequestPasswordResetResources extends TemplateResources
 {
     /** @var string  */
-    public const TEMPLATE = '@views/auth/request-password-reset-token';
+    public const TEMPLATE = '@app/views/auth/request-password-reset-token';
 
     /** @var PasswordResetRequestForm  */
     public PasswordResetRequestForm $passwordResetRequestForm;

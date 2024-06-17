@@ -14,5 +14,5 @@ use app\common\components\resources\TemplateResources;
 class SiteIndexResources extends TemplateResources
 {
     /** @var string Шаблон */
-    public const TEMPLATE = '@views/site/index';
+    public const TEMPLATE = '@app/views/site/index';
 }

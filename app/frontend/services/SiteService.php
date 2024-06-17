@@ -63,7 +63,6 @@ class SiteService extends BaseService
     {
         $emailConstructEmail = $contactForm->constructEmailDto();
 
-        return EmailService::getInstance()
-            ->send($emailConstructEmail);
+        return EmailService::getInstance()->send($emailConstructEmail);
     }
 }

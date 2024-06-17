@@ -2,6 +2,7 @@
 
 namespace app\common\components\controllers;
 
+use yii\web\ErrorAction;
 use app\common\components\core\BaseController;
 
 /**
@@ -22,7 +23,7 @@ abstract class BaseWebController extends BaseController
         return [
             'error' => [
                 'class' => ErrorAction::class,
-                'view' => '@views/errors/common'
+                'view' => '@app/views/system/error'
             ]
         ];
     }

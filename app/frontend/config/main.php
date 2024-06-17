@@ -59,6 +59,7 @@ return [
                 '<controller:\w+>/' => '<controller>/index',
             ],
         ],
+
     ],
 
     'params' => $params,

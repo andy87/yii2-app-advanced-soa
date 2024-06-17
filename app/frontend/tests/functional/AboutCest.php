@@ -3,7 +3,7 @@
 namespace app\frontend\tests\functional;
 
 use app\frontend\tests\FunctionalTester;
-use app\frontend\tests\_generated\FunctionalTesterActions;
+use ReflectionClass;
 
 /**
  * < Frontend > `AboutCest`
@@ -21,8 +21,6 @@ use app\frontend\tests\_generated\FunctionalTesterActions;
  */
 class AboutCest
 {
-    use FunctionalTesterActions;
-
     /**
      * @cli ./vendor/bin/codecept run app/frontend/tests/functional/AboutCest:checkAbout
      *
@@ -34,18 +32,18 @@ class AboutCest
      */
     public function checkAbout(FunctionalTester $I): void
     {
+        // check on has method `amOnRoute`
+        $class = new ReflectionClass($I);
+
+        print_r([
+            'get_class' => get_class($I),
+            'hasMethod->amOnRoute()' => $class->hasMethod('amOnRoute'),
+        ]);
+
+        die;
+
         $I->amOnRoute('site/about');
 
         $I->see('About', 'h1');
-    }
-
-    /**
-     * @return string[]
-     */
-    protected function getScenario(): array
-    {
-        return [
-            'scenario' => 'AboutCest',
-        ];
     }
 }

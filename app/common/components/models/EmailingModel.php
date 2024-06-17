@@ -3,7 +3,7 @@
 namespace app\common\components\models;
 
 use yii\base\Model;
-use app\common\{ models\dto\EmailDto, components\interfaces\ModelEmailingInterface };
+use app\common\{ models\dto\EmailMessageDto, components\interfaces\ModelEmailingInterface };
 
 /**
  * < Common > `EmailingModel`
@@ -14,23 +14,12 @@ abstract class EmailingModel extends Model implements ModelEmailingInterface
 {
     /** @var array  */
     protected array $messageConfig = [];
+    protected array $messageParams = [];
 
 
 
     /**
-     * @param array $params
-     *
-     * @return array
+     * @return EmailMessageDto
      */
-    public function getEmailComposeConfig(array $params = []): array
-    {
-        if ( count($params) ) $this->messageConfig['params'] = $params;
-
-        return $this->messageConfig;
-    }
-
-    /**
-     * @return EmailDto
-     */
-    abstract public function constructEmailDto(): EmailDto;
+    abstract public function constructEmailDto(): EmailMessageDto;
 }

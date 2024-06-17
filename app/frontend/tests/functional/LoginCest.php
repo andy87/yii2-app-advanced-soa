@@ -2,6 +2,7 @@
 
 namespace app\frontend\tests\functional;
 
+use app\common\models\forms\LoginForm;
 use app\frontend\tests\FunctionalTester;
 use app\common\fixtures\UserFixture;
 
@@ -10,17 +11,11 @@ use app\common\fixtures\UserFixture;
  *
  * @package app\frontend\tests\functional
  *
- * @property FunctionalTester $I
- *
- * Fix not used:
- * - @see LoginCest::checkEmpty()
- * - @see LoginCest::checkWrongPassword()
- * - @see LoginCest::checkInactiveAccount()
- * - @see LoginCest::checkValidLogin()
- *
  * @cli ./vendor/bin/codecept run app/frontend/tests/functional/LoginCest
  *
- * @tag #frontend #tests #functional #LoginCest
+ * @originalFile https://github.com/yiisoft/yii2-app-advanced/blob/master/frontend/tests/functional/LoginCest.php
+ *
+ * @tag #tests #functional #LoginCest
  */
 class LoginCest
 {
@@ -42,6 +37,7 @@ class LoginCest
     }
 
     /**
+     *
      * @param FunctionalTester $I
      *
      * @return void
@@ -50,7 +46,7 @@ class LoginCest
      */
     public function _before(FunctionalTester $I): void
     {
-        $I->amOnRoute('site/login');
+        $I->amOnRoute('auth/login');
     }
 
     /**
@@ -70,6 +66,8 @@ class LoginCest
     /**
      * @cli ./vendor/bin/codecept run app/frontend/tests/functional/LoginCest:checkEmpty
      *
+     * @refer https://github.com/yiisoft/yii2-app-advanced/blob/master/frontend/tests/functional/LoginCest.php#40
+     *
      * @param FunctionalTester $I
      *
      * @return void
@@ -78,13 +76,15 @@ class LoginCest
      */
     public function checkEmpty(FunctionalTester $I): void
     {
-        $I->submitForm('#login-form', $this->formParams('', ''));
+        $I->submitForm('#' . LoginForm::ID, $this->formParams('', ''));
         $I->seeValidationError('Username cannot be blank.');
         $I->seeValidationError('Password cannot be blank.');
     }
 
     /**
      * @cli ./vendor/bin/codecept run app/frontend/tests/functional/LoginCest:checkWrongPassword
+     *
+     * @refer https://github.com/yiisoft/yii2-app-advanced/blob/master/frontend/tests/functional/LoginCest.php#47
      *
      * @param FunctionalTester $I
      *
@@ -94,12 +94,14 @@ class LoginCest
      */
     public function checkWrongPassword(FunctionalTester $I): void
     {
-        $I->submitForm('#login-form', $this->formParams('admin', 'wrong'));
+        $I->submitForm('#' . LoginForm::ID, $this->formParams('admin', 'wrong'));
         $I->seeValidationError('Incorrect username or password.');
     }
 
     /**
      * @cli ./vendor/bin/codecept run app/frontend/tests/functional/LoginCest:checkInactiveAccount
+     *
+     * @refer https://github.com/yiisoft/yii2-app-advanced/blob/master/frontend/tests/functional/LoginCest.php#53
      *
      * @param FunctionalTester $I
      *
@@ -109,12 +111,14 @@ class LoginCest
      */
     public function checkInactiveAccount(FunctionalTester $I): void
     {
-        $I->submitForm('#login-form', $this->formParams('test.test', 'Test1234'));
+        $I->submitForm('#' . LoginForm::ID, $this->formParams('test.test', 'Test1234'));
         $I->seeValidationError('Incorrect username or password');
     }
 
     /**
      * @cli ./vendor/bin/codecept run app/frontend/tests/functional/LoginCest:checkValidLogin
+     *
+     * @refer https://github.com/yiisoft/yii2-app-advanced/blob/master/frontend/tests/functional/LoginCest.php#59
      *
      * @param FunctionalTester $I
      *
@@ -124,7 +128,7 @@ class LoginCest
      */
     public function checkValidLogin(FunctionalTester $I): void
     {
-        $I->submitForm('#login-form', $this->formParams('erau', 'password_0'));
+        $I->submitForm('#' . LoginForm::ID, $this->formParams('erau', 'password_0'));
         $I->see('Logout (erau)', 'form button[type=submit]');
         $I->dontSeeLink('Login');
         $I->dontSeeLink('Signup');

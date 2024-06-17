@@ -2,12 +2,10 @@
 
 use yii\caching\FileCache;
 
-$dirApp = dirname(__DIR__, 2);
-
 $root = dirname(__DIR__, 3);
 
 return [
-    'vendorPath' => $dirApp . '/vendor',
+    'vendorPath' => $root . '/vendor',
 
     'aliases' => [
         '@bower'    => '@vendor/bower-asset',

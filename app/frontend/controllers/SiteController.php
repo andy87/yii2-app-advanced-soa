@@ -81,8 +81,7 @@ class SiteController extends BaseFrontendController
 
         $R->contactForm = new ContactForm;
 
-        $result = SiteService::getInstance()
-            ->handlerContactForm($R->contactForm, Yii::$app->request->post() );
+        $result = SiteService::getInstance()->handlerContactForm($R->contactForm, Yii::$app->request->post() );
 
         if( $result === null )
         {

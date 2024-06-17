@@ -2,7 +2,7 @@
 
 namespace app\common\components\interfaces;
 
-use app\common\models\dto\EmailDto;
+use app\common\models\dto\EmailMessageDto;
 
 /**
  * < Common > `ModelEmailingInterface`
@@ -11,7 +11,5 @@ use app\common\models\dto\EmailDto;
  */
 interface ModelEmailingInterface
 {
-    public function constructEmailDto(): EmailDto;
-
-    public function getEmailComposeConfig(array $params): array;
+    public function constructEmailDto(): EmailMessageDto;
 }

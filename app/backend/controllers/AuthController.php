@@ -76,8 +76,7 @@ class AuthController extends BaseBackendController
             {
                 $post = Yii::$app->request->post();
 
-                $handlerResult = AuthService::getInstance()
-                    ->handlerLoginForm($R->loginForm, $post);
+                $handlerResult = AuthService::getInstance()->handlerLoginForm($R->loginForm, $post);
 
                 if ($handlerResult) return $this->goBack();
             }
@@ -97,8 +96,7 @@ class AuthController extends BaseBackendController
      */
     public function actionLogout(): Response
     {
-        AuthService::getInstance()
-            ->logout();
+        AuthService::getInstance()->logout();
 
         return $this->goHome();
     }

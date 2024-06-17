@@ -2,9 +2,11 @@
 
 namespace app\frontend\models\forms;
 
+use app\common\services\IdentityService;
 use Yii;
 use app\common\components\models\EmailingModel;
-use app\common\models\{ Identity, dto\EmailDto };
+use app\common\models\{ Identity, dto\EmailMessageDto };
+use yii\base\InvalidConfigException;
 
 /**
  * < Frontend > `SignupForm`
@@ -25,6 +27,11 @@ class SignupForm extends EmailingModel
     public const ATTR_EMAIL = 'email';
     public const ATTR_PASSWORD = 'password';
 
+    public const COMPOSE_MESSAGE_VIEW = [
+        'html' => 'emailVerify-html',
+        'text' => 'emailVerify-text',
+    ];
+
 
     public ?string $username = null;
     public ?string $email = null;
@@ -32,10 +39,6 @@ class SignupForm extends EmailingModel
 
     public ?Identity $identity = null;
 
-    protected array $messageConfig = [
-        'html' => 'emailVerify-html',
-        'text' => 'emailVerify-text',
-    ];
 
 
 
@@ -64,19 +67,26 @@ class SignupForm extends EmailingModel
     }
 
     /**
-     * @return EmailDto
+     * @return EmailMessageDto
      *
      * @tag #models #forms #signup #constructor #dto #email
+     * @throws InvalidConfigException
      */
-    public function constructEmailDto(): EmailDto
+    public function constructEmailDto(): EmailMessageDto
     {
-        $emailDto = new EmailDto();
-        $emailDto->to = $this->identity->email;
-        $emailDto->fromEmail = Yii::$app->params['supportEmail'];
-        $emailDto->fromName = Yii::$app->name . ' robot';
-        $emailDto->subject = $this->generateMailSubject();
+        $emailMessageDto = new EmailMessageDto();
+        $emailMessageDto->to = $this->identity->email;
+        $emailMessageDto->fromEmail = Yii::$app->params['supportEmail'];
+        $emailMessageDto->fromName = Yii::$app->name . ' robot';
+        $emailMessageDto->subject = $this->generateMailSubject();
 
-        return $emailDto;
+        $emailMessageDto->view = self::COMPOSE_MESSAGE_VIEW;
+
+        $emailMessageDto->params = [
+            'user' => IdentityService::getInstance()->findResendVerificationUser($this->email)
+        ];
+
+        return $emailMessageDto;
     }
 
     /**

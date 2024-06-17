@@ -3,7 +3,6 @@
 namespace app\backend\components\controllers;
 
 use app\common\components\controllers\BaseWebController;
-use yii\web\ErrorAction;
 
 /**
  * < Backend > `BaseBackendController`

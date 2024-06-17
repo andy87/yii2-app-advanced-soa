@@ -4,7 +4,7 @@ namespace app\frontend\models\forms;
 
 use Yii;
 use yii\base\InvalidConfigException;
-use app\common\models\{ Identity, dto\EmailDto };
+use app\common\models\{ Identity, dto\EmailMessageDto };
 use app\common\{ services\IdentityService, components\models\EmailingModel };
 
 /**
@@ -21,11 +21,6 @@ class PasswordResetRequestForm extends EmailingModel
     public const MESSAGE_SUCCESS = 'Проверьте свою электронную почту для получения дальнейших инструкций.';
     public const MESSAGE_ERROR = 'Извините, мы не можем сбросить пароль для указанного адреса электронной почты.';
 
-
-    public array $messageConfig = [
-        'html' => 'passwordResetToken-html',
-        'text' => 'passwordResetToken-text',
-    ];
 
 
     /** @var ?string   */
@@ -65,8 +60,7 @@ class PasswordResetRequestForm extends EmailingModel
     {
         if ($this->identity === null)
         {
-            $this->identity = IdentityService::getInstance()
-                ->findActiveByEmail($this->email);
+            $this->identity = IdentityService::getInstance()->findActiveByEmail($this->email);
         }
 
         return $this->identity;
@@ -85,18 +79,29 @@ class PasswordResetRequestForm extends EmailingModel
     }
 
     /**
-     * @return EmailDto
+     * @return EmailMessageDto
+     *
+     * @throws InvalidConfigException
      *
      * @tag #constructor #dto #email
      */
-    public function constructEmailDto(): EmailDto
+    public function constructEmailDto(): EmailMessageDto
     {
-        $emailDto = new EmailDto();
-        $emailDto->fromEmail = Yii::$app->params['supportEmail'];
-        $emailDto->fromName = Yii::$app->name . ' robot';
-        $emailDto->subject = 'Password reset for ' . Yii::$app->name;
-        $emailDto->to = $this->email;
+        $emailMessageDto = new EmailMessageDto();
+        $emailMessageDto->fromEmail = Yii::$app->params['supportEmail'];
+        $emailMessageDto->fromName = Yii::$app->name . ' robot';
+        $emailMessageDto->subject = 'Password reset for ' . Yii::$app->name;
+        $emailMessageDto->to = $this->email;
 
-        return $emailDto;
+        $emailMessageDto->view = [
+            'html' => 'passwordResetToken-html',
+            'text' => 'passwordResetToken-text',
+        ];
+
+        $emailMessageDto->params = [
+            'user' => $this->getIdentity()
+        ];
+
+        return $emailMessageDto;
     }
 }

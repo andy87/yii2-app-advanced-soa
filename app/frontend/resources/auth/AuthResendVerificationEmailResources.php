@@ -15,7 +15,7 @@ use app\frontend\models\forms\ResendVerificationEmailForm;
 class AuthResendVerificationEmailResources extends TemplateResources
 {
     /** @var string  */
-    public const TEMPLATE = '@views/auth/resend-verification-email';
+    public const TEMPLATE = '@app/views/auth/resend-verification-email';
 
 
 

@@ -3,7 +3,7 @@
 namespace app\common\services;
 
 use Yii;
-use app\common\models\dto\EmailDto;
+use app\common\models\dto\EmailMessageDto;
 use app\common\components\core\BaseService;
 use yii\mail\{MailerInterface, MessageInterface};
 
@@ -33,16 +33,15 @@ class EmailService extends BaseService
     }
 
     /**
-     * @param EmailDto $email
-     * @param array $compose
+     * @param EmailMessageDto $emailMessageDto
      *
      * @return bool
      *
      * @tag #common #service #email #send
      */
-    public function send(EmailDto $email, array $compose = [] ): bool
+    public function send(EmailMessageDto $emailMessageDto): bool
     {
-        $message = $this->constructMessage($email, $compose);
+        $message = $this->constructMessage($emailMessageDto);
 
         if ($message->send()) {
 
@@ -51,8 +50,7 @@ class EmailService extends BaseService
         } else {
 
             Yii::error(['Email was not sent', [
-                'email' => $email,
-                'compose' => $compose,
+                'emailMessageDto' => $emailMessageDto,
             ]]);
 
             return false;
@@ -60,30 +58,29 @@ class EmailService extends BaseService
     }
 
     /**
-     * @param EmailDto $email
-     * @param array $compose
+     * @param EmailMessageDto $emailMessageDto
      *
      * @return MessageInterface
      *
      * @tag #common #service #email #construct
      */
-    public function constructMessage( EmailDto $email, array $compose = [] ): MessageInterface
+    public function constructMessage(EmailMessageDto $emailMessageDto): MessageInterface
     {
-        $compose = $this->mailer->compose( $compose['view'] ?? null, $compose );
+        $compose = $this->mailer->compose( $emailMessageDto->view, $emailMessageDto->params );
 
-        if ($email->to) $compose->setTo($email->to);
+        if ($emailMessageDto->to) $compose->setTo($emailMessageDto->to);
 
-        if ($email->fromEmail && $email->fromName){
-            $compose->setFrom([$email->fromEmail => $email->fromName]);
+        if ($emailMessageDto->fromEmail && $emailMessageDto->fromName){
+            $compose->setFrom([$emailMessageDto->fromEmail => $emailMessageDto->fromName]);
         }
 
-        if ( $email->ReplyToEmail && $email->ReplyToName ){
-            $compose->setReplyTo([$email->ReplyToEmail => $email->ReplyToName]);
+        if ( $emailMessageDto->ReplyToEmail && $emailMessageDto->ReplyToName ){
+            $compose->setReplyTo([$emailMessageDto->ReplyToEmail => $emailMessageDto->ReplyToName]);
         }
 
-        if ($email->subject) $compose->setSubject($email->subject);
+        if ($emailMessageDto->subject) $compose->setSubject($emailMessageDto->subject);
 
-        if ($email->body) $compose->setTextBody($email->body);
+        if ($emailMessageDto->body) $compose->setTextBody($emailMessageDto->body);
 
         return $compose;
     }

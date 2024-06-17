@@ -15,7 +15,7 @@ use app\frontend\models\forms\ContactForm;
 class SiteContactResources extends TemplateResources
 {
     /** @var string Шаблон */
-    public const TEMPLATE = '@views/site/contact';
+    public const TEMPLATE = '@app/views/site/contact';
 
     /** @var ContactForm */
     public ContactForm $contactForm;

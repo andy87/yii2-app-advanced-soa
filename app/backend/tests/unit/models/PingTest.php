@@ -22,7 +22,7 @@ use app\frontend\tests\UnitTester;
 class PingTest extends Unit
 {
     /**
-     * Send email
+     * Ping test
      *
      * @cli ./vendor/bin/codecept run app/backend/tests/unit/models/PingTest:testPong
      *

@@ -11,7 +11,7 @@ use yii\web\View;
  * @var AuthLoginResources $R
  */
 
-$this->title = 'Login';
+$this->title = 'Авторизация';
 $this->params['breadcrumbs'][] = $this->title;
 
 $loginForm = $R->loginForm;
@@ -25,7 +25,7 @@ $loginForm = $R->loginForm;
 
     <div class="row">
         <div class="col-lg-5">
-            <?php $form = ActiveForm::begin(['id' => 'login-form']); ?>
+            <?php $form = ActiveForm::begin(['id' => $loginForm::ID]); ?>
 
                 <?= $form->field($loginForm, LoginForm::ATTR_USERNAME)->textInput(['autofocus' => true]) ?>
 

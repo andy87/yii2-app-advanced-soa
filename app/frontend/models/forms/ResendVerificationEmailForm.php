@@ -2,9 +2,11 @@
 
 namespace app\frontend\models\forms;
 
+use app\common\services\IdentityService;
 use Yii;
 use app\common\components\models\EmailingModel;
-use app\common\models\{ Identity, dto\EmailDto };
+use app\common\models\{ Identity, dto\EmailMessageDto };
+use yii\base\InvalidConfigException;
 
 /**
  * < Frontend > `ResendVerificationEmailForm`
@@ -21,10 +23,6 @@ class ResendVerificationEmailForm extends EmailingModel
 
     public const RULE_EXIST_MESSAGE = 'Пользователь с таким адресом электронной почты не найден.';
 
-    protected array $messageConfig = [
-        'html' => 'emailVerify-html',
-        'text' => 'emailVerify-text',
-    ];
 
 
     /**
@@ -56,19 +54,27 @@ class ResendVerificationEmailForm extends EmailingModel
     }
 
     /**
-     * @return EmailDto
+     * @return EmailMessageDto
+     *
+     * @throws InvalidConfigException
      *
      * @tag #constructor #dto #email
      */
-    public function constructEmailDto(): EmailDto
+    public function constructEmailDto(): EmailMessageDto
     {
-        $emailDto = new EmailDto();
-        $emailDto->to = $this->email;
-        $emailDto->subject = $this->generateMailSubject();
-        $emailDto->fromEmail = Yii::$app->params['supportEmail'];
-        $emailDto->fromName = Yii::$app->name . ' robot';
+        $emailMessageDto = new EmailMessageDto();
+        $emailMessageDto->to = $this->email;
+        $emailMessageDto->subject = $this->generateMailSubject();
+        $emailMessageDto->fromEmail = Yii::$app->params['supportEmail'];
+        $emailMessageDto->fromName = Yii::$app->name . ' robot';
 
-        return $emailDto;
+        $emailMessageDto->view = SignupForm::COMPOSE_MESSAGE_VIEW;
+
+        $emailMessageDto->params = [
+            'user' => IdentityService::getInstance()->findResendVerificationUser($this->email)
+        ];
+
+        return $emailMessageDto;
     }
 
     /**

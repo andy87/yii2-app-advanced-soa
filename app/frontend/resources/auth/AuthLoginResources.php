@@ -14,7 +14,7 @@ use app\common\{ models\forms\LoginForm, components\resources\TemplateResources 
 class AuthLoginResources extends TemplateResources
 {
     /** @var string Шаблон */
-    public const TEMPLATE = '@views/auth/login';
+    public const TEMPLATE = '@app/views/auth/login';
 
 
 

@@ -45,6 +45,7 @@ return [
         'errorHandler' => [
             'errorAction' => 'site/error',
         ],
+
         'urlManager' => [
             'hostInfo' => $_ENV['APP_BACKEND_HOST'],
             'enablePrettyUrl' => true,
@@ -56,6 +57,7 @@ return [
                 '<controller:\w+>/' => '<controller>/index',
             ],
         ],
+
     ],
     'params' => $params,
 ];

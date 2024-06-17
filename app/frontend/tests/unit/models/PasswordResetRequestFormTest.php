@@ -8,7 +8,7 @@ use Codeception\Test\Unit;
 use yii\mail\MessageInterface;
 use yii\db\Exception as YiiDbException;
 use Codeception\Exception\ModuleException;
-use app\common\{ fixtures\UserFixture, services\IdentityService };
+use app\common\{fixtures\UserFixture, models\Identity, services\IdentityService};
 use yii\base\{Exception as YiiBaseException, InvalidConfigException};
 use app\frontend\{models\forms\PasswordResetRequestForm, services\AuthService, tests\UnitTester};
 
@@ -116,16 +116,20 @@ class PasswordResetRequestFormTest extends Unit
         $passwordResetRequestForm = new PasswordResetRequestForm();
         $passwordResetRequestForm->email = $userFixture['email'];
 
-        $user = IdentityService::getInstance()
-            ->findIdentityByPasswordResetToken($userFixture['password_reset_token']);
+        $identity = IdentityService::getInstance()->findIdentityByPasswordResetToken($userFixture['password_reset_token']);
 
-        $sendResult = AuthService::getInstance()
-            ->handlerRequestPasswordResetResources($passwordResetRequestForm);
+        verify($identity)->instanceOf(Identity::class);
+
+        $sendResult = AuthService::getInstance()->handlerRequestPasswordResetResources($passwordResetRequestForm);
 
         verify($sendResult)->notEmpty();
-        verify($user->password_reset_token)->notEmpty();
+
+        $identity = $passwordResetRequestForm->getIdentity();
+
+        verify($identity->password_reset_token)->notEmpty();
 
         $emailMessage = $this->tester->grabLastSentEmail();
+
         verify($emailMessage)->instanceOf(MessageInterface::class);
         verify($emailMessage->getTo())->arrayHasKey($passwordResetRequestForm->email);
         verify($emailMessage->getFrom())->arrayHasKey(Yii::$app->params['supportEmail']);

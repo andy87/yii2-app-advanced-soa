@@ -9,7 +9,7 @@ use Yii;
  *
  * @package app\common\components\mail
  */
-class EmailDto
+class EmailMessageDto
 {
     public ?string $to = null;
     public ?string $fromEmail = null;
@@ -20,6 +20,13 @@ class EmailDto
     public ?string $subject = null;
     public ?string $body = null;
     public ?string $verifyCode = null;
+
+
+    /** @var ?array compose view argument */
+    public ?array $view = null;
+
+    /** @var array compose params argument  */
+    public array $params = [];
 
     /**
      *

@@ -78,9 +78,7 @@ class IdentityService extends ModelService
      */
     public function findActiveByEmail(string $email): ?Identity
     {
-        return $this
-            ->identityRepository
-            ->findActiveByEmail($email);
+        return $this->identityRepository->findActiveByEmail($email);
     }
 
     /**
@@ -92,9 +90,7 @@ class IdentityService extends ModelService
      */
     public function findResendVerificationUser(string $email): ?Identity
     {
-        return $this
-            ->identityRepository
-            ->findInactiveByEmail($email);
+        return $this->identityRepository->findInactiveByEmail($email);
     }
 
     /**
@@ -106,9 +102,7 @@ class IdentityService extends ModelService
      */
     public function findByVerificationToken(string $token): ?Identity
     {
-        return $this
-            ->identityRepository
-            ->findByVerificationToken($token);
+        return $this->identityRepository->findByVerificationToken($token);
     }
 
     /**
@@ -120,9 +114,7 @@ class IdentityService extends ModelService
      */
     public function findByUsername(?string $username): ?Identity
     {
-        return $this
-            ->identityRepository
-            ->findByUsername($username);
+        return $this->identityRepository->findByUsername($username);
     }
 
     /**
@@ -134,9 +126,7 @@ class IdentityService extends ModelService
      */
     public function findIdentityByPasswordResetToken(string $password_reset_token): ?Identity
     {
-        return $this
-            ->identityRepository
-            ->findIdentityByPasswordResetToken($password_reset_token);
+        return $this->identityRepository->findIdentityByPasswordResetToken($password_reset_token);
     }
 
     /**
@@ -148,8 +138,6 @@ class IdentityService extends ModelService
      */
     public function findByPasswordResetToken(string $token): ?Identity
     {
-        return $this
-            ->identityRepository
-            ->findByPasswordResetToken($token);
+        return $this->identityRepository->findByPasswordResetToken($token);
     }
 }

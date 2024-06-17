@@ -14,5 +14,5 @@ use app\common\components\resources\TemplateResources;
 class SiteAboutResources extends TemplateResources
 {
     /** @var string Шаблон */
-    public const TEMPLATE = '@views/site/about';
+    public const TEMPLATE = '@app/views/site/about';
 }

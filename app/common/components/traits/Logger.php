@@ -2,6 +2,7 @@
 
 namespace app\common\components\traits;
 
+use Exception;
 use Yii;
 use yii\base\{ Model, InvalidConfigException };
 
@@ -111,5 +112,22 @@ trait Logger
         //print_r([__METHOD__ . '(' . __LINE__ . ')', $log ]);die;
 
         Yii::{$method}($log);
+    }
+
+    /**
+     * @param string $catch
+     * @param Exception $e
+     *
+     * @return array
+     */
+    public function prepareException(string $catch, Exception $e): array
+    {
+        return [
+            'catch' => $catch,
+            'message' => $e->getMessage(),
+            'file' => $e->getFile(),
+            'line' => $e->getLine(),
+            'trace' => $e->getTraceAsString(),
+        ];
     }
 }

@@ -8,7 +8,6 @@ use app\common\models\Identity;
 use yii\base\InvalidConfigException;
 use app\common\services\{ EmailService, IdentityService };
 use app\frontend\models\forms\{ PasswordResetRequestForm, ResendVerificationEmailForm, ResetPasswordForm, SignupForm, VerifyEmailForm };
-use yii\db\Transaction;
 
 /**
  * < Frontend > `AuthService`
@@ -62,13 +61,7 @@ class AuthService extends \app\common\services\AuthService
         } catch (Exception $e) {
 
             $message = 'Catch `handlerSignupForm`';
-            $data = [
-                'catch' => 'Signup form error',
-                'message' => $e->getMessage(),
-                'file' => $e->getFile(),
-                'line' => $e->getLine(),
-                'trace' => $e->getTraceAsString(),
-            ];
+            $data = $this->prepareException('Signup form error', $e);
         }
 
         $transaction?->rollBack();
@@ -91,10 +84,7 @@ class AuthService extends \app\common\services\AuthService
     {
         $registrationEmail = $signupForm->constructEmailDto();
 
-        $configCompose = $signupForm->getEmailComposeConfig(['user' => $signupForm->identity]);
-
-        return EmailService::getInstance()
-            ->send($registrationEmail, $configCompose);
+        return EmailService::getInstance()->send($registrationEmail);
     }
 
     /**
@@ -105,13 +95,15 @@ class AuthService extends \app\common\services\AuthService
      *
      * @return bool
      *
-     * @throws InvalidConfigException|\yii\db\Exception|\yii\base\Exception
+     * @throws InvalidConfigException|\yii\base\Exception
      *
      * @tag #service #auth #handler #form #passwordResetRequest
      */
     public function handlerRequestPasswordResetResources(PasswordResetRequestForm $passwordResetRequestForm, array $data = []): bool
     {
         if (count($data)) $passwordResetRequestForm->load($data);
+
+        //$transaction = Yii::$app->db->beginTransaction();
 
         if ($passwordResetRequestForm->validate())
         {
@@ -121,26 +113,41 @@ class AuthService extends \app\common\services\AuthService
             {
                 if (Identity::isPasswordResetTokenValid($identity->password_reset_token))
                 {
-                    $identity->generatePasswordResetToken();
-
-                    if ($identity->save())
+                    try
                     {
-                        return $this->sendEmailRequestPasswordReset($passwordResetRequestForm);
+                        $identity->generatePasswordResetToken();
 
-                    } else{
-                        $message = 'User `save error`';
+                        if ($identity->save())
+                        {
+                            if ($this->sendEmailRequestPasswordReset($passwordResetRequestForm)) {
+
+                                //$transaction?->commit();
+                                return true;
+
+                            } else {
+                                $message = 'send EmailRequestPasswordReset error';
+                            }
+                        } else{
+                            $message = 'Identity `save error`';
+                        }
+                    } catch (Exception $e) {
+
+                        $message = 'Catch `handlerRequestPasswordResetResources`';
+                        $data = $this->prepareException('Password reset request error', $e);
                     }
                 } else {
                     $message = 'Password reset token `is not valid`';
                 }
             } else {
-                $message = 'User not found';
+                $message = 'Identity not found';
             }
         } else {
             $message = 'Password reset request form `validation error`';
         }
 
-        $this->runtimeLogError(__METHOD__, $message, $passwordResetRequestForm);
+        //$transaction?->rollBack();
+
+        $this->runtimeLogError(__METHOD__, $message, $passwordResetRequestForm, $data ?? []);
 
         return false;
     }
@@ -161,11 +168,7 @@ class AuthService extends \app\common\services\AuthService
     {
         $requestPasswordResetEmail = $passwordResetRequestForm->constructEmailDto();
 
-        $configCompose = $passwordResetRequestForm->getEmailComposeConfig([
-            'user' => $passwordResetRequestForm->getIdentity()
-        ]);
-
-        return EmailService::getInstance()->send($requestPasswordResetEmail, $configCompose);
+        return EmailService::getInstance()->send($requestPasswordResetEmail);
     }
 
     /**
@@ -223,10 +226,10 @@ class AuthService extends \app\common\services\AuthService
 
     /**
      * @param VerifyEmailForm $verifyEmailForm
-     *
+     * @param array $data
      * @return bool
      *
-     * @throws \yii\db\Exception
+     * @throws InvalidConfigException|\yii\db\Exception
      *
      * @tag #service #auth #handler #verifyEmailResources
      */
@@ -308,12 +311,6 @@ class AuthService extends \app\common\services\AuthService
     {
         $resendVerificationEmail = $resendVerificationEmailForm->constructEmailDto();
 
-        $user = IdentityService::getInstance()
-            ->findResendVerificationUser($resendVerificationEmailForm->email);
-
-        $configCompose = $resendVerificationEmailForm->getEmailComposeConfig([ 'user' => $user ]);
-
-        return EmailService::getInstance()
-            ->send($resendVerificationEmail, $configCompose);
+        return EmailService::getInstance()->send($resendVerificationEmail);
     }
 }

@@ -101,8 +101,7 @@ class AuthController extends BaseFrontendController
             {
                 $post = Yii::$app->request->post();
 
-                $handlerResult = AuthService::getInstance()
-                    ->handlerLoginForm($R->loginForm, $post);
+                $handlerResult = AuthService::getInstance()->handlerLoginForm($R->loginForm, $post);
 
                 if ($handlerResult) return $this->goBack();
             }
@@ -126,8 +125,7 @@ class AuthController extends BaseFrontendController
      */
     public function actionLogout(): Response|string
     {
-        AuthService::getInstance()
-            ->logout();
+        AuthService::getInstance()->logout();
 
         return $this->goHome();
     }
@@ -149,8 +147,7 @@ class AuthController extends BaseFrontendController
         {
             $post = Yii::$app->request->post();
 
-            $handlerResult = AuthService::getInstance()
-                ->handlerSignupForm($R->signupForm, $post);
+            $handlerResult = AuthService::getInstance()->handlerSignupForm($R->signupForm, $post);
 
             $this->setSessionFlashMessage(
                 ($handlerResult instanceof Identity),
@@ -179,8 +176,7 @@ class AuthController extends BaseFrontendController
         {
             $post = Yii::$app->request->post();
 
-            $handlerResult = AuthService::getInstance()
-                ->handlerRequestPasswordResetResources($R->passwordResetRequestForm, $post);
+            $handlerResult = AuthService::getInstance()->handlerRequestPasswordResetResources($R->passwordResetRequestForm, $post);
 
             $this->setSessionFlashMessage($handlerResult,
                 $R->passwordResetRequestForm::MESSAGE_SUCCESS,
@@ -215,8 +211,7 @@ class AuthController extends BaseFrontendController
             {
                 $post = Yii::$app->request->post();
 
-                $result = AuthService::getInstance()
-                    ->handlerResetPasswordForm($R->resetPasswordForm, $post);
+                $result = AuthService::getInstance()->handlerResetPasswordForm($R->resetPasswordForm, $post);
 
                 $this->setSessionFlashMessage($result,
                     $R->resetPasswordForm::MESSAGE_SUCCESS,
@@ -257,8 +252,7 @@ class AuthController extends BaseFrontendController
 
         try
         {
-            $handlerResult = AuthService::getInstance()
-                ->handlerAuthVerifyEmailResources($R->verifyEmailForm);
+            $handlerResult = AuthService::getInstance()->handlerAuthVerifyEmailResources($R->verifyEmailForm);
 
             $this->setSessionFlashMessage( $handlerResult,
                 $R->verifyEmailForm::MESSAGE_SUCCESS,
@@ -290,8 +284,7 @@ class AuthController extends BaseFrontendController
         {
             $post = Yii::$app->request->post();
 
-            $handlerResult = AuthService::getInstance()
-                ->handlerResendVerificationEmail($R->resendVerificationEmailForm, $post);
+            $handlerResult = AuthService::getInstance()->handlerResendVerificationEmail($R->resendVerificationEmailForm, $post);
 
             $this->setSessionFlashMessage($handlerResult,
                 $R->resendVerificationEmailForm::MESSAGE_SUCCESS,

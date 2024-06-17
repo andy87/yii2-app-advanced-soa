@@ -15,7 +15,7 @@ use app\frontend\models\forms\SignupForm;
 class AuthSignupResources extends TemplateResources
 {
     /** @var string Шаблон */
-    public const TEMPLATE = '@views/auth/signup';
+    public const TEMPLATE = '@app/views/auth/signup';
 
     /** @var SignupForm $signupForm */
     public SignupForm $signupForm;

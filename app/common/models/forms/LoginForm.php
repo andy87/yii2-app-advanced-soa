@@ -17,6 +17,7 @@ use app\common\{ models\Identity, services\IdentityService };
  */
 class LoginForm extends Model
 {
+    public const ID = 'login-form';
     public const ATTR_USERNAME = 'username';
     public const ATTR_PASSWORD = 'password';
     public const ATTR_REMEMBER_ME = 'rememberMe';
@@ -94,8 +95,7 @@ class LoginForm extends Model
     public function getUser(): ?Identity
     {
         if ($this->_user === null) {
-            $this->_user = IdentityService::getInstance()
-                ->findByUsername($this->username);
+            $this->_user = IdentityService::getInstance()->findByUsername($this->username);
         }
 
         return $this->_user;

@@ -15,7 +15,7 @@ use app\common\components\resources\TemplateResources;
 class AuthVerifyEmailResources extends TemplateResources
 {
     /** @var string  */
-    public const TEMPLATE = '@views/auth/verify-email';
+    public const TEMPLATE = '@app/views/auth/verify-email';
 
 
 
