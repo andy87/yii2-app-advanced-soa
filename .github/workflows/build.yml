@@ -94,4 +94,6 @@ jobs:
         run: php ./app/yii_test migrate --interactive=0
 
       - name: Run tests with codeception 
-        run: vendor/bin/codecept run
+        run: |
+          vendor/bin/codecept build
+          vendor/bin/codecept run
