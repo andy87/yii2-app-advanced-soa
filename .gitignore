@@ -1,9 +1,12 @@
-# phpstorm project files
-.idea/
 
 vendor/
 
+# phpstorm project files
+.idea/
+
 .env
+
+composer.lock
 
 # yii console commands
 /app/yii
@@ -14,12 +17,14 @@ vendor/
 /app/frontend/web/index.php
 /app/frontend/web/index-test.php
 /app/frontend/web/robots.txt
+
+app/frontend/tests/_support/*
+
 /app/backend/web/index.php
 /app/backend/web/index-test.php
 /app/backend/web/robots.txt
 
-composer.lock
-
+app/backend/tests/_support/*
 
 .phpunit.result.cache
 
@@ -47,3 +52,4 @@ phpunit.phar
 
 # vagrant runtime
 /.vagrant
+
