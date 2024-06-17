@@ -5,6 +5,7 @@ namespace app\backend\controllers;
 use Yii;
 use yii\web\Response;
 use yii\base\InvalidConfigException;
+use app\common\components\{ Role, Action };
 use yii\filters\{ VerbFilter, AccessControl };
 use app\backend\services\controllers\AuthService;
 use app\backend\resources\auth\AuthLoginResources;
@@ -22,13 +23,6 @@ class AuthController extends BaseBackendController
     public const ENDPOINT = 'auth';
 
 
-    public const ACTION_LOGIN = 'login';
-    public const ACTION_LOGOUT = 'logout';
-
-
-    public const ROLE_USER = '@';
-
-
 
     /**
      * {@inheritdoc}
@@ -44,20 +38,20 @@ class AuthController extends BaseBackendController
                 'class' => AccessControl::class,
                 'rules' => [
                     [
-                        'actions' => [self::ACTION_LOGIN, self::ACTION_ERROR ],
+                        'actions' => [Action::LOGIN, Action::ERROR ],
                         'allow' => true,
                     ],
                     [
-                        'actions' => [self::ACTION_LOGOUT ],
+                        'actions' => [Action::LOGOUT ],
                         'allow' => true,
-                        'roles' => [ self::ROLE_USER ],
+                        'roles' => [ Role::USER ],
                     ],
                 ],
             ],
             'verbs' => [
                 'class' => VerbFilter::class,
                 'actions' => [
-                    self::ACTION_LOGOUT => ['post'],
+                    Action::LOGOUT => ['post'],
                 ],
             ],
         ];

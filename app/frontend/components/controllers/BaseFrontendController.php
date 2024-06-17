@@ -2,8 +2,8 @@
 
 namespace app\frontend\components\controllers;
 
+use app\common\components\controllers\BaseWebController;
 use yii\web\ErrorAction;
-use app\common\components\core\BaseWebController;
 
 /**
  * < Frontend > `BaseFrontendController`
@@ -14,16 +14,5 @@ use app\common\components\core\BaseWebController;
  */
 class BaseFrontendController extends BaseWebController
 {
-    /**
-     * @return array
-     */
-    public function actions(): array
-    {
-        return [
-            'error' => [
-                'class' => ErrorAction::class,
-                'view' => 'views/errors/common'
-            ]
-        ];
-    }
+
 }

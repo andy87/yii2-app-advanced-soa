@@ -1,7 +1,7 @@
 <?php
 
-use app\common\models\Identity;
 use yii\log\FileTarget;
+use app\common\models\Identity;
 
 $params = array_merge(
     require __DIR__ . '/../../common/config/params.php',
@@ -11,27 +11,27 @@ $params = array_merge(
 );
 
 return [
-    'id' => 'app-backend',
+    'id' => $_ENV['APP_BACKEND_ID'],
     'basePath' => dirname(__DIR__),
     'controllerNamespace' => 'app\backend\controllers',
     'bootstrap' => ['log'],
     'modules' => [],
     'components' => [
         'request' => [
-            'csrfParam' => '_csrf-backend',
-            'baseUrl' => '/admin',
+            'csrfParam' => $_ENV['APP_BACKEND_CSRF_PARAM'],
+            'baseUrl' => $_ENV['APP_BACKEND_BASE_URL'],
         ],
         'user' => [
             'identityClass' => Identity::class,
             'enableAutoLogin' => true,
             'identityCookie' => [
-                'name' => '_identity-backend',
+                'name' => $_ENV['APP_BACKEND_IDENTITY_COOKIE'],
                 'httpOnly' => true
             ],
         ],
         'session' => [
             // this is the name of the session cookie used for login on the backend
-            'name' => 'advanced-backend',
+            'name' => $_ENV['APP_BACKEND_SESSION_NAME'],
         ],
         'log' => [
             'traceLevel' => YII_DEBUG ? 3 : 0,
@@ -46,6 +46,7 @@ return [
             'errorAction' => 'site/error',
         ],
         'urlManager' => [
+            'hostInfo' => $_ENV['APP_BACKEND_HOST'],
             'enablePrettyUrl' => true,
             'showScriptName' => false,
             'rules' => [

@@ -1,0 +1,179 @@
+#!/usr/bin/env php
+<?php declare(strict_types=1);
+
+// delete all config gitIgnore files
+
+$backend = [
+    'backend/config/codeception-local.php',
+    'backend/config/main-local.php',
+    'backend/config/params-local.php',
+    'backend/config/test-local.php',
+    'backend/web/index.php',
+    'backend/web/index-test.php',
+    'backend/web/robots.txt',
+];
+
+$frontend = [
+    'frontend/config/codeception-local.php',
+    'frontend/config/main-local.php',
+    'frontend/config/params-local.php',
+    'frontend/config/test-local.php',
+    'frontend/web/index.php',
+    'frontend/web/index-test.php',
+    'frontend/web/robots.txt',
+];
+
+$common = [
+    'common/config/codeception-local.php',
+    'common/config/main-local.php',
+    'common/config/params-local.php',
+    'common/config/test-local.php',
+];
+
+$console = [
+    'console/config/main-local.php',
+    'console/config/params-local.php',
+    'console/config/test-local.php',
+];
+
+$app = [
+    'yii',
+    'yii_test',
+    '../.env',
+    '../composer.lock',
+    '../vendor',
+    'reset',
+];
+
+
+
+/**
+ * @return array
+ */
+function getParams(): array
+{
+    $rawParams = [];
+
+    if (isset($_SERVER['argv'])) {
+        $rawParams = $_SERVER['argv'];
+        array_shift($rawParams);
+    }
+
+    $params = [];
+
+    foreach ($rawParams as $param)
+    {
+        if (preg_match('/^--([\w-]*\w)(=(.*))?$/', $param, $matches))
+        {
+            $name = $matches[1];
+
+            $params[$name] = isset($matches[3]) ? $matches[3] : true;
+
+        } else {
+            $params[] = $param;
+        }
+    }
+
+    return $params;
+}
+
+$pathList = array_merge($backend, $frontend, $common, $console, $app);
+
+$params = getParams();
+
+
+
+if (in_array('-help', $params) || in_array('-h', $params)) {
+    echo 'Usage: php remove-gitignore-files.php [options]'. PHP_EOL;
+    echo 'Options:'. PHP_EOL;
+    echo '  --help, -h    Show this help'. PHP_EOL;
+    echo '  --list, -l    Show list of files to delete'. PHP_EOL;
+    echo '  --vendor, -v  Clear vendor directory'. PHP_EOL;
+    exit(0);
+}
+
+if (in_array('-list', $params) || in_array('-l', $params)) {
+    echo 'List of files to delete:'. PHP_EOL;
+    foreach ($pathList as $path) {
+        echo '  ' . $path . PHP_EOL;
+    }
+    exit(0);
+}
+
+if (in_array('-vendor', $params) || in_array('-v', $params)) {
+    clearDirectory('../vendor');
+    exit(0);
+}
+
+echo '  Confirm remove'. PHP_EOL;
+echo '    ...git ignore files? [Yes|No] ';
+$answer = trim(fgets(STDIN));
+if (strncasecmp($answer, 'y', 1)) {
+    echo PHP_EOL . '  Quit remove.' . PHP_EOL;
+    exit(0);
+}
+
+echo PHP_EOL . 'Deleting files...' . PHP_EOL . PHP_EOL;
+
+foreach ($pathList as $path)
+{
+    try {
+        if (is_dir($path))
+        {
+            echo '  Confirm remove directory:'. PHP_EOL;
+            echo "    `$path`? [Yes|No] ";
+            $answer = trim(fgets(STDIN));
+            if (strncasecmp($answer, 'y', 1)) {
+                echo PHP_EOL . '  result `Skip`.' . PHP_EOL;
+            } else {
+                clearDirectory($path);
+            }
+
+        } else {
+            if (file_exists($path))
+            {
+                if (unlink($path))
+                {
+                    echo "SUCCESS | file exists`";
+
+                } else {
+                    echo "ERROR | file exists`";
+                }
+            } else {
+                echo "SKIP | not exists";
+            }
+        }
+
+    } catch (Exception $e) {
+
+        echo "CATCH | " . $e->getMessage();
+    }
+
+    echo " | `$path`" . PHP_EOL;
+}
+
+/**
+ * @param string $dir
+ *
+ * @return void
+ */
+function clearDirectory(string $dir): void
+{
+    $fileList = scandir($dir .'/bower-asset');
+
+    print_r($fileList);die;
+
+    foreach ($files as $file)
+    {
+        if (is_dir($file))
+        {
+            clearDirectory($file);
+
+        } else {
+            chmod($file, 0777);
+
+            unlink($file);
+        }
+    }
+    rmdir($dir);
+}

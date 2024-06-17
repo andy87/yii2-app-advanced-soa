@@ -1,16 +1,27 @@
-# yii console commands
-yii
-yii.bat
-yii_test
-yii_test.bat
-
 # phpstorm project files
 .idea/
 
+vendor/
+
 .env
 
-.phpunit.result.cache
+# yii console commands
+/app/yii
+/app/yii_test
+/app/reset
 
+# ignore generated files
+/app/frontend/web/index.php
+/app/frontend/web/index-test.php
+/app/frontend/web/robots.txt
+/app/backend/web/index.php
+/app/backend/web/index-test.php
+/app/backend/web/robots.txt
+
+composer.lock
+
+
+.phpunit.result.cache
 
 # netbeans project files
 nbproject
@@ -22,9 +33,6 @@ nbproject
 
 # windows thumbnail cache
 Thumbs.db
-
-# composer vendor dir
-/app/vendor
 
 # composer itself is not needed
 composer.phar
@@ -39,15 +47,3 @@ phpunit.phar
 
 # vagrant runtime
 /.vagrant
-
-# ignore generated files
-/app/frontend/web/index.php
-/app/frontend/web/index-test.php
-/app/frontend/web/robots.txt
-/app/backend/web/index.php
-/app/backend/web/index-test.php
-/app/backend/web/robots.txt
-
-vendor/
-
-composer.lock

@@ -2,11 +2,12 @@
 
 namespace app\frontend\controllers;
 
-use app\common\models\Identity;
 use Yii;
 use Exception;
+use app\common\models\Identity;
 use app\frontend\services\AuthService;
 use yii\db\Exception as YiiDbException;
+use app\common\components\{ Role , Action };
 use yii\filters\{ AccessControl, VerbFilter };
 use app\common\components\traits\SessionFlash;
 use yii\web\{ BadRequestHttpException, Response };
@@ -28,18 +29,13 @@ class AuthController extends BaseFrontendController
 
     public const ENDPOINT = 'auth';
 
-    public const ACTION_LOGIN = 'login';
-    public const ACTION_LOGOUT = 'logout';
+
     public const ACTION_SIGNUP = 'signup';
     public const ACTION_REQUEST_PASSWORD_RESET = 'request-password-reset';
     public const ACTION_RESET_PASSWORD = 'reset-password';
     public const ACTION_VERIFY_EMAIL = 'verify-email';
     public const ACTION_RESEND_VERIFICATION_EMAIL = 'resend-verification-email';
     public const ACTION_REQUEST_PASSWORD_RESET_TOKEN = 'request-password-reset-token';
-
-
-    public const ROLE_GUEST = '?';
-    public const ROLE_USER = '@';
 
 
 
@@ -53,24 +49,24 @@ class AuthController extends BaseFrontendController
         return [
             'access' => [
                 'class' => AccessControl::class,
-                'only' => [self::ACTION_LOGOUT, self::ACTION_SIGNUP],
+                'only' => [Action::LOGIN, self::ACTION_SIGNUP],
                 'rules' => [
                     [
                         'actions' => [self::ACTION_SIGNUP],
                         'allow' => true,
-                        'roles' => [self::ROLE_GUEST],
+                        'roles' => [Role::GUEST],
                     ],
                     [
-                        'actions' => [self::ACTION_LOGOUT],
+                        'actions' => [Action::LOGOUT],
                         'allow' => true,
-                        'roles' => [self::ROLE_USER],
+                        'roles' => [Role::USER],
                     ],
                 ],
             ],
             'verbs' => [
                 'class' => VerbFilter::class,
                 'actions' => [
-                    self::ACTION_LOGOUT => ['post'],
+                    Action::LOGOUT => ['post'],
                 ],
             ],
         ];

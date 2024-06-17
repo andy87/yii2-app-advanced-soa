@@ -40,6 +40,7 @@ return [
             '../uploads',
         ],
         'setExecutable' => [
+            'remove',
             'yii',
             'yii_test',
         ],

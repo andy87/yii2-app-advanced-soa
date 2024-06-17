@@ -11,27 +11,27 @@ $params = array_merge(
 );
 
 return [
-    'id' => 'app-frontend',
+    'id' => $_ENV['APP_FRONTEND_ID'],
     'basePath' => dirname(__DIR__),
     'bootstrap' => ['log'],
     'controllerNamespace' => 'app\frontend\controllers',
     'components' => [
 
         'request' => [
-            'csrfParam' => '_csrf-frontend',
+            'csrfParam' => $_ENV['APP_FRONTEND_CSRF_PARAM'],
         ],
 
         'user' => [
             'identityClass' => Identity::class,
             'enableAutoLogin' => true,
             'identityCookie' => [
-                'name' => '_identity-frontend',
+                'name' => $_ENV['APP_FRONTEND_IDENTITY_COOKIE'],
                 'httpOnly' => true
             ],
         ],
 
         'session' => [
-            'name' => 'advanced-frontend',
+            'name' => $_ENV['APP_FRONTEND_SESSION_NAME']
         ],
 
         'log' => [
@@ -49,6 +49,7 @@ return [
         ],
 
         'urlManager' => [
+            'hostInfo' => $_ENV['APP_FRONTEND_HOST'],
             'enablePrettyUrl' => true,
             'showScriptName' => false,
             'rules' => [

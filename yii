@@ -1,0 +1,19 @@
+#!/usr/bin/env php
+<?php
+
+$filePath = __DIR__ . '/app/yii';
+
+if (!file_exists($filePath))
+{
+    echo "\n > > > Required files are missing. < < < ";
+    echo "\n > If you have just cloned the repository, please make sure to run 'composer install' first. And then run the following commands:";
+    echo "\n    cd app";
+    echo "\n    php init";
+    echo "\n > If you deleted the files, please restore them with command `php init`.";
+    echo "\n > ==============================================\n\n";
+
+} else {
+
+    require_once $filePath;
+}
+

@@ -18,15 +18,21 @@ return [
     ],
     'controllerMap' => [
         'fixture' => [
-            'class' => \yii\console\controllers\FixtureController::class,
+            'class' => yii\console\controllers\FixtureController::class,
             'namespace' => 'common\fixtures',
           ],
+        'migration' => [
+            'class' => yii\console\controllers\MigrateController::class,
+            'migrationPath' => [
+                '@console/migrations',
+            ]
+        ],
     ],
     'components' => [
         'log' => [
             'targets' => [
                 [
-                    'class' => \yii\log\FileTarget::class,
+                    'class' => yii\log\FileTarget::class,
                     'levels' => ['error', 'warning'],
                 ],
             ],
