@@ -35,11 +35,13 @@ class SignupCest
      */
     public function _before(FunctionalTester $I): void
     {
-        $I->amOnRoute('site/signup');
+        $I->amOnRoute('auth/signup');
     }
 
     /**
      * @cli ./vendor/bin/codecept run app/frontend/tests/functional/SignupCest:signupWithEmptyFields
+     *
+     * @refer https://github.com/yiisoft/yii2-app-advanced/blob/master/frontend/tests/functional/SignupCest.php#L17
      *
      * @param FunctionalTester $I
      *
@@ -60,6 +62,8 @@ class SignupCest
 
     /**
      * @cli ./vendor/bin/codecept run app/frontend/tests/functional/SignupCest:signupWithWrongEmail
+     *
+     * @refer https://github.com/yiisoft/yii2-app-advanced/blob/master/frontend/tests/functional/SignupCest.php#L28
      *
      * @param FunctionalTester $I
      *
@@ -83,6 +87,8 @@ class SignupCest
 
     /**
      * @cli ./vendor/bin/codecept run app/frontend/tests/functional/SignupCest:signupSuccessfully
+     *
+     * @refer https://github.com/yiisoft/yii2-app-advanced/blob/master/frontend/tests/functional/SignupCest.php#L42
      *
      * @param FunctionalTester $I
      *

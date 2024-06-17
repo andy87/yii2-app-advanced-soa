@@ -45,6 +45,8 @@ class VerifyEmailCest
     /**
      * @cli ./vendor/bin/codecept run app/frontend/tests/functional/VerifyEmailCest:checkEmptyToken
      *
+     * @refer https://github.com/yiisoft/yii2-app-advanced/blob/master/frontend/tests/functional/VerifyEmailCest.php#L27
+     *
      * @param FunctionalTester $I
      *
      * @return void
@@ -53,13 +55,15 @@ class VerifyEmailCest
      */
     public function checkEmptyToken(FunctionalTester $I): void
     {
-        $I->amOnRoute('site/verify-email', ['token' => '']);
+        $I->amOnRoute('auth/verify-email', ['token' => '']);
         $I->canSee('Bad Request', 'h1');
         $I->canSee('Verify email token cannot be blank.');
     }
 
     /**
      * @cli ./vendor/bin/codecept run app/frontend/tests/functional/VerifyEmailCest:checkInvalidToken
+     *
+     * @refer https://github.com/yiisoft/yii2-app-advanced/blob/master/frontend/tests/functional/VerifyEmailCest.php#L41
      *
      * @param FunctionalTester $I
      *
@@ -69,13 +73,15 @@ class VerifyEmailCest
      */
     public function checkInvalidToken(FunctionalTester $I): void
     {
-        $I->amOnRoute('site/verify-email', ['token' => 'wrong_token']);
+        $I->amOnRoute('auth/verify-email', ['token' => 'wrong_token']);
         $I->canSee('Bad Request', 'h1');
         $I->canSee('Wrong verify email token.');
     }
 
     /**
      * @cli ./vendor/bin/codecept run app/frontend/tests/functional/VerifyEmailCest:checkNoToken
+     *
+     * @refer https://github.com/yiisoft/yii2-app-advanced/blob/master/frontend/tests/functional/VerifyEmailCest.php#L48
      *
      * @param FunctionalTester $I
      *
@@ -85,13 +91,15 @@ class VerifyEmailCest
      */
     public function checkNoToken(FunctionalTester $I): void
     {
-        $I->amOnRoute('site/verify-email');
+        $I->amOnRoute('auth/verify-email');
         $I->canSee('Bad Request', 'h1');
         $I->canSee('Missing required parameters: token');
     }
 
     /**
      * @cli ./vendor/bin/codecept run app/frontend/tests/functional/VerifyEmailCest:checkAlreadyActivatedToken
+     *
+     * @refer https://github.com/yiisoft/yii2-app-advanced/blob/master/frontend/tests/functional/VerifyEmailCest.php#L55
      *
      * @param FunctionalTester $I
      *
@@ -101,7 +109,7 @@ class VerifyEmailCest
      */
     public function checkAlreadyActivatedToken(FunctionalTester $I): void
     {
-        $I->amOnRoute('site/verify-email', ['token' => 'already_used_token_1548675330']);
+        $I->amOnRoute('auth/verify-email', ['token' => 'already_used_token_1548675330']);
         $I->canSee('Bad Request', 'h1');
         $I->canSee('Wrong verify email token.');
     }
@@ -117,7 +125,7 @@ class VerifyEmailCest
      */
     public function checkSuccessVerification(FunctionalTester $I): void
     {
-        $I->amOnRoute('site/verify-email', ['token' => '4ch0qbfhvWwkcuWqjN8SWRq72SOw1KYT_1548675330']);
+        $I->amOnRoute('auth/verify-email', ['token' => '4ch0qbfhvWwkcuWqjN8SWRq72SOw1KYT_1548675330']);
         $I->canSee('Your email has been confirmed!');
         $I->canSee('Congratulations!', 'h1');
         $I->see('Logout (test.test)', 'form button[type=submit]');

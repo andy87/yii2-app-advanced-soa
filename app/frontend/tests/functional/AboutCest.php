@@ -24,6 +24,8 @@ class AboutCest
     /**
      * @cli ./vendor/bin/codecept run app/frontend/tests/functional/AboutCest:checkAbout
      *
+     * @refer https://github.com/yiisoft/yii2-app-advanced/blob/master/frontend/tests/functional/AboutCest.php#L9
+     *
      * @param FunctionalTester $I
      *
      * @return void
@@ -32,16 +34,6 @@ class AboutCest
      */
     public function checkAbout(FunctionalTester $I): void
     {
-        // check on has method `amOnRoute`
-        $class = new ReflectionClass($I);
-
-        print_r([
-            'get_class' => get_class($I),
-            'hasMethod->amOnRoute()' => $class->hasMethod('amOnRoute'),
-        ]);
-
-        die;
-
         $I->amOnRoute('site/about');
 
         $I->see('About', 'h1');

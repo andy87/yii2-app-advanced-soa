@@ -57,7 +57,7 @@ class ResendVerificationEmailCest
      */
     public function _before(FunctionalTester $I): void
     {
-        $I->amOnRoute('/site/resend-verification-email');
+        $I->amOnRoute('/auth/resend-verification-email');
     }
 
     /**
@@ -72,6 +72,15 @@ class ResendVerificationEmailCest
         ];
     }
 
+    /**
+     * @cli ./vendor/bin/codecept run app/frontend/tests/functional/ResendVerificationEmailCest:checkPage
+     *
+     * @refer https://github.com/yiisoft/yii2-app-advanced/blob/master/frontend/tests/functional/ResendVerificationEmailCest.php#L42
+     *
+     * @param FunctionalTester $I
+     *
+     * @return void
+     */
     public function checkPage(FunctionalTester $I): void
     {
         $I->see('Resend verification email', 'h1');
@@ -80,6 +89,8 @@ class ResendVerificationEmailCest
 
     /**
      * @cli ./vendor/bin/codecept run app/frontend/tests/functional/ResendVerificationEmailCest:checkEmptyField
+     *
+     * @refer https://github.com/yiisoft/yii2-app-advanced/blob/master/frontend/tests/functional/ResendVerificationEmailCest.php#L48
      *
      * @param FunctionalTester $I
      *
@@ -96,6 +107,8 @@ class ResendVerificationEmailCest
     /**
      * @cli ./vendor/bin/codecept run app/frontend/tests/functional/ResendVerificationEmailCest:checkWrongEmailFormat
      *
+     * @refer https://github.com/yiisoft/yii2-app-advanced/blob/master/frontend/tests/functional/ResendVerificationEmailCest.php#L54
+     *
      * @param FunctionalTester $I
      *
      * @return void
@@ -110,6 +123,8 @@ class ResendVerificationEmailCest
 
     /**
      * @cli ./vendor/bin/codecept run app/frontend/tests/functional/ResendVerificationEmailCest:checkWrongEmail
+     *
+     * @refer https://github.com/yiisoft/yii2-app-advanced/blob/master/frontend/tests/functional/ResendVerificationEmailCest.php#L60
      *
      * @param FunctionalTester $I
      *
@@ -126,6 +141,8 @@ class ResendVerificationEmailCest
     /**
      * @cli ./vendor/bin/codecept run app/frontend/tests/functional/ResendVerificationEmailCest:checkAlreadyVerifiedEmail
      *
+     * @refer https://github.com/yiisoft/yii2-app-advanced/blob/master/frontend/tests/functional/ResendVerificationEmailCest.php#L66
+     *
      * @param FunctionalTester $I
      *
      * @return void
@@ -140,6 +157,8 @@ class ResendVerificationEmailCest
 
     /**
      * @cli ./vendor/bin/codecept run app/frontend/tests/functional/ResendVerificationEmailCest:checkSendSuccessfully
+     *
+     * @refer https://github.com/yiisoft/yii2-app-advanced/blob/master/frontend/tests/functional/ResendVerificationEmailCest.php#L72
      *
      * @param FunctionalTester $I
      *

@@ -17,6 +17,8 @@ use app\common\models\dto\EmailMessageDto;
  */
 class ContactForm extends Model
 {
+    public const ID = 'contact-form';
+
     public const ATTR_NAME = 'name';
     public const ATTR_EMAIL = 'email';
     public const ATTR_SUBJECT = 'subject';

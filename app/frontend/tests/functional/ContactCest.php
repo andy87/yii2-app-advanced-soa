@@ -2,6 +2,7 @@
 
 namespace app\frontend\tests\functional;
 
+use app\frontend\models\forms\ContactForm;
 use app\frontend\tests\FunctionalTester;
 
 /* @var $scenario \Codeception\Scenario */
@@ -40,6 +41,8 @@ class ContactCest
     /**
      * @cli ./vendor/bin/codecept run app/frontend/tests/functional/ContactCest:checkContact
      *
+     * @refer https://github.com/yiisoft/yii2-app-advanced/blob/master/frontend/tests/functional/ContactCest.php#L16
+     *
      * @param FunctionalTester $I
      *
      * @return void
@@ -54,6 +57,8 @@ class ContactCest
     /**
      * @cli ./vendor/bin/codecept run app/frontend/tests/functional/ContactCest:checkContactSubmitNoData
      *
+     * @refer https://github.com/yiisoft/yii2-app-advanced/blob/master/frontend/tests/functional/ContactCest.php#L21
+     *
      * @param FunctionalTester $I
      *
      * @return void
@@ -62,7 +67,7 @@ class ContactCest
      */
     public function checkContactSubmitNoData(FunctionalTester $I): void
     {
-        $I->submitForm('#contact-form', []);
+        $I->submitForm('#'  . ContactForm::ID, []);
         $I->see('Contact', 'h1');
         $I->seeValidationError('Name cannot be blank');
         $I->seeValidationError('Email cannot be blank');
@@ -74,6 +79,8 @@ class ContactCest
     /**
      * @cli ./vendor/bin/codecept run app/frontend/tests/functional/ContactCest:checkContactSubmitNotCorrectEmail
      *
+     * @refer https://github.com/yiisoft/yii2-app-advanced/blob/master/frontend/tests/functional/ContactCest.php#L32
+     *
      * @param FunctionalTester $I
      *
      * @return void
@@ -82,7 +89,7 @@ class ContactCest
      */
     public function checkContactSubmitNotCorrectEmail(FunctionalTester $I): void
     {
-        $I->submitForm('#contact-form', [
+        $I->submitForm('#'  . ContactForm::ID, [
             'ContactForm[name]' => 'tester',
             'ContactForm[email]' => 'tester.email',
             'ContactForm[subject]' => 'test subject',
@@ -99,6 +106,8 @@ class ContactCest
     /**
      * @cli ./vendor/bin/codecept run app/frontend/tests/functional/ContactCest:checkContactSubmitCorrectData
      *
+     * @refer https://github.com/yiisoft/yii2-app-advanced/blob/master/frontend/tests/functional/ContactCest.php#L48
+     *
      * @param FunctionalTester $I
      *
      * @return void
@@ -107,7 +116,7 @@ class ContactCest
      */
     public function checkContactSubmitCorrectData(FunctionalTester $I): void
     {
-        $I->submitForm('#contact-form', [
+        $I->submitForm('#'  . ContactForm::ID, [
             'ContactForm[name]' => 'tester',
             'ContactForm[email]' => 'tester@example.com',
             'ContactForm[subject]' => 'test subject',

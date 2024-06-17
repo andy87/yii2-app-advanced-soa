@@ -24,6 +24,8 @@ class HomeCest
     /**
      * @cli ./vendor/bin/codecept run app/frontend/tests/functional/HomeCest:checkOpen
      *
+     * @refer https://github.com/yiisoft/yii2-app-advanced/blob/master/frontend/tests/functional/HomeCest.php#L9
+     *
      * @param FunctionalTester $I
      *
      * @return void
