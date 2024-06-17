@@ -28,6 +28,7 @@ return [
                 'name' => $_ENV['APP_FRONTEND_IDENTITY_COOKIE'],
                 'httpOnly' => true
             ],
+            'loginUrl' => ['auth/login']
         ],
 
         'session' => [
