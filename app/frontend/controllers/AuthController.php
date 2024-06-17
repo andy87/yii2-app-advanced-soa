@@ -49,10 +49,10 @@ class AuthController extends BaseFrontendController
         return [
             'access' => [
                 'class' => AccessControl::class,
-                'only' => [Action::LOGIN, self::ACTION_SIGNUP],
+                'only' => [ Action::LOGIN, Action::LOGOUT, self::ACTION_SIGNUP],
                 'rules' => [
                     [
-                        'actions' => [self::ACTION_SIGNUP],
+                        'actions' => [Action::LOGIN, self::ACTION_SIGNUP ],
                         'allow' => true,
                         'roles' => [Role::GUEST],
                     ],

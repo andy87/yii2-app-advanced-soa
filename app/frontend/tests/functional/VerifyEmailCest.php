@@ -3,7 +3,9 @@
 namespace app\frontend\tests\functional;
 
 use app\common\fixtures\UserFixture;
+use app\common\models\Identity;
 use app\frontend\tests\FunctionalTester;
+use app\frontend\controllers\AuthController;
 
 /**
  * < Frontend > `VerifyEmailCest`
@@ -43,6 +45,8 @@ class VerifyEmailCest
     }
 
     /**
+     * Check empty token
+     *
      * @cli ./vendor/bin/codecept run app/frontend/tests/functional/VerifyEmailCest:checkEmptyToken
      *
      * @refer https://github.com/yiisoft/yii2-app-advanced/blob/master/frontend/tests/functional/VerifyEmailCest.php#L27
@@ -51,16 +55,21 @@ class VerifyEmailCest
      *
      * @return void
      *
+     * @see AuthController::actionVerifyEmail()
+     *
      * @tag #frontend #tests #functional #VerifyEmailCest #_before
      */
     public function checkEmptyToken(FunctionalTester $I): void
     {
-        $I->amOnRoute('auth/verify-email', ['token' => '']);
+        $route = AuthController::ENDPOINT . '/' . AuthController::ACTION_VERIFY_EMAIL;
+        $I->amOnRoute($route, ['token' => '']);
         $I->canSee('Bad Request', 'h1');
         $I->canSee('Verify email token cannot be blank.');
     }
 
     /**
+     * Check invalid token
+     *
      * @cli ./vendor/bin/codecept run app/frontend/tests/functional/VerifyEmailCest:checkInvalidToken
      *
      * @refer https://github.com/yiisoft/yii2-app-advanced/blob/master/frontend/tests/functional/VerifyEmailCest.php#L41
@@ -69,16 +78,22 @@ class VerifyEmailCest
      *
      * @return void
      *
+     * @see AuthController::actionVerifyEmail()
+     *
      * @tag #frontend #tests #functional #VerifyEmailCest #checkInvalidToken
      */
     public function checkInvalidToken(FunctionalTester $I): void
     {
-        $I->amOnRoute('auth/verify-email', ['token' => 'wrong_token']);
+        $route = AuthController::ENDPOINT . '/' . AuthController::ACTION_VERIFY_EMAIL;
+
+        $I->amOnRoute($route, ['token' => 'wrong_token']);
         $I->canSee('Bad Request', 'h1');
         $I->canSee('Wrong verify email token.');
     }
 
     /**
+     * Check no token
+     *
      * @cli ./vendor/bin/codecept run app/frontend/tests/functional/VerifyEmailCest:checkNoToken
      *
      * @refer https://github.com/yiisoft/yii2-app-advanced/blob/master/frontend/tests/functional/VerifyEmailCest.php#L48
@@ -87,16 +102,21 @@ class VerifyEmailCest
      *
      * @return void
      *
+     * @see AuthController::actionVerifyEmail()
+     *
      * @tag #frontend #tests #functional #VerifyEmailCest #checkNoToken
      */
     public function checkNoToken(FunctionalTester $I): void
     {
-        $I->amOnRoute('auth/verify-email');
+        $route = AuthController::ENDPOINT . '/' . AuthController::ACTION_VERIFY_EMAIL;
+        $I->amOnRoute($route);
         $I->canSee('Bad Request', 'h1');
         $I->canSee('Missing required parameters: token');
     }
 
     /**
+     * Check already activated token
+     *
      * @cli ./vendor/bin/codecept run app/frontend/tests/functional/VerifyEmailCest:checkAlreadyActivatedToken
      *
      * @refer https://github.com/yiisoft/yii2-app-advanced/blob/master/frontend/tests/functional/VerifyEmailCest.php#L55
@@ -105,35 +125,43 @@ class VerifyEmailCest
      *
      * @return void
      *
+     * @see AuthController::actionVerifyEmail()
+     *
      * @tag #frontend #tests #functional #VerifyEmailCest #checkAlreadyActivatedToken
      */
     public function checkAlreadyActivatedToken(FunctionalTester $I): void
     {
-        $I->amOnRoute('auth/verify-email', ['token' => 'already_used_token_1548675330']);
+        $route = AuthController::ENDPOINT . '/' . AuthController::ACTION_VERIFY_EMAIL;
+        $I->amOnRoute($route, ['token' => 'already_used_token_1548675330']);
         $I->canSee('Bad Request', 'h1');
         $I->canSee('Wrong verify email token.');
     }
 
     /**
+     * Check success verification
+     *
      * @cli ./vendor/bin/codecept run app/frontend/tests/functional/VerifyEmailCest:checkSuccessVerification
      *
      * @param FunctionalTester $I
      *
      * @return void
      *
+     * @see AuthController::actionVerifyEmail()
+     *
      * @tag #frontend #tests #functional #VerifyEmailCest #checkSuccessVerification
      */
     public function checkSuccessVerification(FunctionalTester $I): void
     {
-        $I->amOnRoute('auth/verify-email', ['token' => '4ch0qbfhvWwkcuWqjN8SWRq72SOw1KYT_1548675330']);
+        $route = AuthController::ENDPOINT . '/' . AuthController::ACTION_VERIFY_EMAIL;
+        $I->amOnRoute($route, ['token' => '4ch0qbfhvWwkcuWqjN8SWRq72SOw1KYT_1548675330']);
         $I->canSee('Your email has been confirmed!');
         $I->canSee('Congratulations!', 'h1');
         $I->see('Logout (test.test)', 'form button[type=submit]');
 
-        $I->seeRecord('app\common\models\Identity', [
+        $I->seeRecord(Identity::class, [
            'username' => 'test.test',
            'email' => 'test@mail.com',
-           'status' => \app\common\models\Identity::STATUS_ACTIVE
+           'status' => Identity::STATUS_ACTIVE
         ]);
     }
 }

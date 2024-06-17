@@ -2,9 +2,10 @@
 
 namespace app\frontend\tests\functional;
 
+use app\common\fixtures\UserFixture;
 use app\common\models\forms\LoginForm;
 use app\frontend\tests\FunctionalTester;
-use app\common\fixtures\UserFixture;
+use app\frontend\controllers\AuthController;
 
 /**
  * < Frontend > `LoginCest`
@@ -37,7 +38,6 @@ class LoginCest
     }
 
     /**
-     *
      * @param FunctionalTester $I
      *
      * @return void
@@ -46,6 +46,7 @@ class LoginCest
      */
     public function _before(FunctionalTester $I): void
     {
+        /** @see AuthController::actionLogin() */
         $I->amOnRoute('auth/login');
     }
 
@@ -64,6 +65,8 @@ class LoginCest
     }
 
     /**
+     * Check empty
+     *
      * @cli ./vendor/bin/codecept run app/frontend/tests/functional/LoginCest:checkEmpty
      *
      * @refer https://github.com/yiisoft/yii2-app-advanced/blob/master/frontend/tests/functional/LoginCest.php#40
@@ -83,6 +86,8 @@ class LoginCest
     }
 
     /**
+     * Check wrong password
+     *
      * @cli ./vendor/bin/codecept run app/frontend/tests/functional/LoginCest:checkWrongPassword
      *
      * @refer https://github.com/yiisoft/yii2-app-advanced/blob/master/frontend/tests/functional/LoginCest.php#47
@@ -96,10 +101,12 @@ class LoginCest
     public function checkWrongPassword(FunctionalTester $I): void
     {
         $I->submitForm('#' . LoginForm::ID, $this->formParams('admin', 'wrong'));
-        $I->seeValidationError('Incorrect username or password.');
+        $I->seeValidationError(LoginForm::RULE_MESSAGE_WRONG_USER_NAME_OR_PASSWORD);
     }
 
     /**
+     * Check inactive account
+     *
      * @cli ./vendor/bin/codecept run app/frontend/tests/functional/LoginCest:checkInactiveAccount
      *
      * @refer https://github.com/yiisoft/yii2-app-advanced/blob/master/frontend/tests/functional/LoginCest.php#53
@@ -117,6 +124,8 @@ class LoginCest
     }
 
     /**
+     * Check valid login
+     *
      * @cli ./vendor/bin/codecept run app/frontend/tests/functional/LoginCest:checkValidLogin
      *
      * @refer https://github.com/yiisoft/yii2-app-advanced/blob/master/frontend/tests/functional/LoginCest.php#59

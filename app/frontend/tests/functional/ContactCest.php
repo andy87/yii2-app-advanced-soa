@@ -2,8 +2,10 @@
 
 namespace app\frontend\tests\functional;
 
-use app\frontend\models\forms\ContactForm;
 use app\frontend\tests\FunctionalTester;
+use app\frontend\models\forms\ContactForm;
+use app\frontend\controllers\SiteController;
+use Codeception\Exception\ModuleException;
 
 /* @var $scenario \Codeception\Scenario */
 
@@ -31,14 +33,20 @@ class ContactCest
      *
      * @return void
      *
+     * @see SiteController::actionContact()
+     *
      * @tag #frontend #tests #functional #ContactCest #checkContact
      */
     public function _before(FunctionalTester $I): void
     {
-        $I->amOnRoute('site/contact');
+        $route = SiteController::ENDPOINT . '/' . SiteController::ACTION_CONTACT;
+
+        $I->amOnRoute($route);
     }
 
     /**
+     * Check contact
+     *
      * @cli ./vendor/bin/codecept run app/frontend/tests/functional/ContactCest:checkContact
      *
      * @refer https://github.com/yiisoft/yii2-app-advanced/blob/master/frontend/tests/functional/ContactCest.php#L16
@@ -55,6 +63,8 @@ class ContactCest
     }
 
     /**
+     * Check contact submit no data
+     *
      * @cli ./vendor/bin/codecept run app/frontend/tests/functional/ContactCest:checkContactSubmitNoData
      *
      * @refer https://github.com/yiisoft/yii2-app-advanced/blob/master/frontend/tests/functional/ContactCest.php#L21
@@ -77,6 +87,8 @@ class ContactCest
     }
 
     /**
+     * Check contact submit not correct email
+     *
      * @cli ./vendor/bin/codecept run app/frontend/tests/functional/ContactCest:checkContactSubmitNotCorrectEmail
      *
      * @refer https://github.com/yiisoft/yii2-app-advanced/blob/master/frontend/tests/functional/ContactCest.php#L32
@@ -104,6 +116,8 @@ class ContactCest
     }
 
     /**
+     * Check contact submit correct data
+     *
      * @cli ./vendor/bin/codecept run app/frontend/tests/functional/ContactCest:checkContactSubmitCorrectData
      *
      * @refer https://github.com/yiisoft/yii2-app-advanced/blob/master/frontend/tests/functional/ContactCest.php#L48
@@ -111,6 +125,8 @@ class ContactCest
      * @param FunctionalTester $I
      *
      * @return void
+     *
+     * @throws ModuleException
      *
      * @tag #frontend #tests #functional #ContactCest #checkContactSubmitCorrectData
      */

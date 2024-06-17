@@ -22,6 +22,9 @@ class LoginForm extends Model
     public const ATTR_PASSWORD = 'password';
     public const ATTR_REMEMBER_ME = 'rememberMe';
 
+    public const RULE_MESSAGE_WRONG_PASSWORD = 'Неверный пароль.';
+    public const RULE_MESSAGE_WRONG_USER_NAME_OR_PASSWORD = 'Неверное имя пользователя';
+
 
 
     public ?string $username = null;
@@ -61,10 +64,10 @@ class LoginForm extends Model
             {
                 if (!$user->validatePassword($this->password))
                 {
-                    $this->addError($attribute, 'Неверный пароль.');
+                    $this->addError($attribute, self::RULE_MESSAGE_WRONG_PASSWORD);
                 }
             } else {
-                $this->addError('username', 'Неверное имя пользователя');
+                $this->addError(self::ATTR_USERNAME, self::RULE_MESSAGE_WRONG_USER_NAME_OR_PASSWORD);
             }
         }
     }

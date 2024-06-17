@@ -3,6 +3,8 @@
 namespace app\frontend\tests\functional;
 
 use app\frontend\tests\FunctionalTester;
+use app\frontend\controllers\AuthController;
+use Codeception\Exception\ModuleException;
 
 /**
  * < Frontend > `SignupCest`
@@ -35,10 +37,13 @@ class SignupCest
      */
     public function _before(FunctionalTester $I): void
     {
+        /** @see AuthController::actionSignup() */
         $I->amOnRoute('auth/signup');
     }
 
     /**
+     * Signup with empty fields
+     *
      * @cli ./vendor/bin/codecept run app/frontend/tests/functional/SignupCest:signupWithEmptyFields
      *
      * @refer https://github.com/yiisoft/yii2-app-advanced/blob/master/frontend/tests/functional/SignupCest.php#L17
@@ -61,6 +66,8 @@ class SignupCest
     }
 
     /**
+     * Signup with wrong email
+     *
      * @cli ./vendor/bin/codecept run app/frontend/tests/functional/SignupCest:signupWithWrongEmail
      *
      * @refer https://github.com/yiisoft/yii2-app-advanced/blob/master/frontend/tests/functional/SignupCest.php#L28
@@ -86,6 +93,8 @@ class SignupCest
     }
 
     /**
+     * Signup successfully
+     *
      * @cli ./vendor/bin/codecept run app/frontend/tests/functional/SignupCest:signupSuccessfully
      *
      * @refer https://github.com/yiisoft/yii2-app-advanced/blob/master/frontend/tests/functional/SignupCest.php#L42
@@ -94,7 +103,10 @@ class SignupCest
      *
      * @return void
      *
+     * @throws ModuleException
+     *
      * @tag #frontend #tests #functional #SignupCest #signupSuccessfully
+     *
      */
     public function signupSuccessfully(FunctionalTester $I): void
     {

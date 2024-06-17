@@ -22,6 +22,9 @@ class SiteController extends BaseFrontendController
 {
     use SessionFlash;
 
+    public const ENDPOINT = 'site';
+    public const ACTION_CONTACT = 'contact';
+    public const ACTION_ABOUT = 'about';
 
     /**
      * @return array
@@ -32,18 +35,6 @@ class SiteController extends BaseFrontendController
     {
         $actions = parent::actions();
 
-        return $this->addActionCaptcha($actions);
-    }
-
-    /**
-     * @param array $actions
-     *
-     * @return array
-     *
-     * @tag #site #actionAdd
-     */
-    private function addActionCaptcha( array $actions ): array
-    {
         $actions['captcha'] = [
             'class' => CaptchaAction::class,
             'fixedVerifyCode' => YII_ENV_TEST ? CaptchaAction::TEST_VALUE : null,

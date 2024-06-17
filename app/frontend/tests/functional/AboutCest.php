@@ -3,7 +3,7 @@
 namespace app\frontend\tests\functional;
 
 use app\frontend\tests\FunctionalTester;
-use ReflectionClass;
+use app\frontend\controllers\SiteController;
 
 /**
  * < Frontend > `AboutCest`
@@ -22,6 +22,8 @@ use ReflectionClass;
 class AboutCest
 {
     /**
+     * Check about
+     *
      * @cli ./vendor/bin/codecept run app/frontend/tests/functional/AboutCest:checkAbout
      *
      * @refer https://github.com/yiisoft/yii2-app-advanced/blob/master/frontend/tests/functional/AboutCest.php#L9
@@ -30,11 +32,13 @@ class AboutCest
      *
      * @return void
      *
+     * @see SiteController::actionAbout()
+     *
      * @tag #frontend #tests #functional #AboutCest #checkAbout
      */
     public function checkAbout(FunctionalTester $I): void
     {
-        $I->amOnRoute('site/about');
+        $I->amOnRoute(SiteController::ENDPOINT . '/' . SiteController::ACTION_ABOUT);
 
         $I->see('About', 'h1');
     }

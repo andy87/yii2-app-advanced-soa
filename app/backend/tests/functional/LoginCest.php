@@ -4,6 +4,7 @@ namespace app\backend\tests\functional;
 
 use app\common\fixtures\UserFixture;
 use app\backend\tests\FunctionalTester;
+use app\backend\controllers\AuthController;
 
 /**
  * < Backend > `LoginCest`
@@ -48,6 +49,7 @@ class LoginCest
      */
     public function loginUser(FunctionalTester $I): void
     {
+        /** @see AuthController::actionLogin() */
         $I->amOnRoute('/auth/login');
         $I->fillField('Username', 'erau');
         $I->fillField('Password', 'password_0');
