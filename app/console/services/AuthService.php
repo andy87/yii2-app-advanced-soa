@@ -6,7 +6,7 @@ use Yii;
 use app\common\components\core\BaseService;
 
 /**
- * < Frontend > `AuthService`
+ * < Console > `AuthService`
  *
  * @package app\console\services
  *

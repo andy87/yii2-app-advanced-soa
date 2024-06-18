@@ -5,9 +5,9 @@ namespace app\common\components\forms;
 use yii\base\Model;
 
 /**
- * < Frontend > `BaseWebForm`
+ * < Common > `BaseWebForm`
  *
- * @package app\frontend\components\models
+ * @package app\common\components\models
  *
  * @tag #frontend #components #models #baseWebForm
  */

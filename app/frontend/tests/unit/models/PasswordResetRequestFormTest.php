@@ -10,7 +10,10 @@ use yii\db\Exception as YiiDbException;
 use Codeception\Exception\ModuleException;
 use app\common\{fixtures\UserFixture, models\Identity, services\IdentityService};
 use yii\base\{Exception as YiiBaseException, InvalidConfigException};
-use app\frontend\{models\forms\PasswordResetRequestForm, services\AuthService, tests\UnitTester};
+use app\frontend\{controllers\AuthController,
+    models\forms\PasswordResetRequestForm,
+    services\AuthService,
+    tests\UnitTester};
 
 /**
  * < Frontend > `PasswordResetRequestFormTest`
@@ -20,6 +23,8 @@ use app\frontend\{models\forms\PasswordResetRequestForm, services\AuthService, t
  * @cli ./vendor/bin/codecept run app/frontend/tests/unit/models/PasswordResetRequestFormTest
  *
  * @originalFile https://github.com/yiisoft/yii2-app-advanced/blob/master/frontend/tests/unit/models/PasswordResetRequestFormTest.php
+ *
+ * @see AuthController::actionRequestPasswordReset()
  *
  * @tags #frontend #tests #unit #models #PasswordResetRequestForm
  */

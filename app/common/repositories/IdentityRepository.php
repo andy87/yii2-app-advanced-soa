@@ -8,7 +8,7 @@ use app\common\components\repositories\MySqlRepository;
 /**
  * < Common > `IdentityRepository`
  *
- * @package app\frontend\repositories
+ * @package app\common\repositories
  *
  * @tag #repositories #identity
  */

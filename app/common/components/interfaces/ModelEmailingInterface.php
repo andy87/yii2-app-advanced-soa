@@ -7,7 +7,7 @@ use app\common\models\dto\EmailMessageDto;
 /**
  * < Common > `ModelEmailingInterface`
  *
- * @package app\frontend\components\interfaces
+ * @package app\common\components\interfaces
  */
 interface ModelEmailingInterface
 {

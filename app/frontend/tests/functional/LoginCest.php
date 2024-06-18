@@ -140,7 +140,6 @@ class LoginCest extends SendForm
      */
     public function checkInactiveAccount(FunctionalTester $I): void
     {
-        // [yii\base\InvalidArgumentException] Hash is invalid.
         $I->submitForm($this->formId, $this->formParams('test.test', 'Test1234'));
         $I->seeValidationError(LoginForm::RULE_MESSAGE_WRONG_USER_NAME_OR_PASSWORD);
     }

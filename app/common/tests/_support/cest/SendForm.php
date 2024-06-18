@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types=1);
 
 namespace app\common\tests\cest;
 
@@ -6,7 +6,7 @@ use app\common\components\forms\BaseWebForm;
 use app\frontend\{controllers\AuthController, tests\FunctionalTester};
 
 /**
- * < Frontend > `SendForm`
+ * < Common > `SendForm`
  *
  * @package app\frontend\tests\cest
  *

@@ -2,10 +2,10 @@
 
 namespace app\common\models\forms;
 
-use app\common\{models\Identity, services\IdentityService};
+use yii\base\InvalidConfigException;
 use app\common\components\forms\BaseWebForm;
 use app\frontend\controllers\AuthController;
-use yii\base\{InvalidConfigException};
+use app\common\{models\Identity, services\IdentityService};
 
 /**
  * < Common > `LoginForm`

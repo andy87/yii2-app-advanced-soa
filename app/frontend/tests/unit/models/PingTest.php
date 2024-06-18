@@ -7,17 +7,15 @@ use app\common\components\Ping;
 use app\frontend\tests\UnitTester;
 
 /**
- * < Backend > `PingTest`
+ * < Frontend > `PingTest`
  *
- * @package app\backend\tests\unit\modules
+ * @package app\frontend\tests\unit\modules
  *
  * @property UnitTester $tester
  *
  * @cli ./vendor/bin/codecept run app/frontend/tests/unit/models/PingTest
  *
- * @originalFile https://github.com/yiisoft/yii2-app-advanced/blob/master/frontend/tests/unit/models/ContactFormTest.php
- *
- * @tag #tests #unit #models #ContactFormTest
+ * @tag #tests #unit #models #PingTest
  */
 class PingTest extends Unit
 {
@@ -27,7 +25,6 @@ class PingTest extends Unit
      * @cli ./vendor/bin/codecept run app/frontend/tests/unit/models/PingTest:testPong
      *
      * @return void
-     *
      *
      * @tag #frontend #tests #unit #models #ContactFormTest #testSendEmail
      */

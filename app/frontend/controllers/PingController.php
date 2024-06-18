@@ -6,7 +6,7 @@ use app\common\components\Ping;
 use app\backend\components\controllers\BaseBackendController;
 
 /**
- * < Backend > `PingController`
+ * < Frontend > `PingController`
  *
  * @package app\frontend\controllers
  *

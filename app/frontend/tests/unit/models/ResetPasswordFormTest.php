@@ -17,6 +17,8 @@ use yii\base\{Exception, InvalidArgumentException, InvalidConfigException};
  *
  * @originalFile https://github.com/yiisoft/yii2-app-advanced/blob/master/frontend/tests/unit/models/ResetPasswordFormTest.php
  *
+ * @see AuthController::actionResetPassword()
+ *
  * @tags #frontend #tests #unit #models #ResetPasswordForm
  */
 class ResetPasswordFormTest extends Unit

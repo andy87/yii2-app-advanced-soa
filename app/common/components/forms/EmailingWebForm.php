@@ -7,7 +7,7 @@ use app\common\{components\interfaces\ModelEmailingInterface, models\dto\EmailMe
 /**
  * < Common > `EmailingModel`
  *
- * @package app\frontend\components\model
+ * @package app\common\components\model
  */
 abstract class EmailingWebForm extends BaseWebForm implements ModelEmailingInterface
 {

@@ -171,6 +171,8 @@ class AuthController extends BaseFrontendController
      *
      * @throws InvalidConfigException|InvalidConfigException|YiiBaseException|Exception
      *
+     * @see PasswordResetRequestFormTest
+     *
      * @tag #auth #action #requestPasswordReset
      */
     public function actionRequestPasswordReset(): Response|string
@@ -202,6 +204,8 @@ class AuthController extends BaseFrontendController
      * @return Response|string
      *
      * @throws BadRequestHttpException|YiiBaseException
+     *
+     * @see ResetPasswordFormTest
      *
      * @tag #auth #action #resetPassword
      */

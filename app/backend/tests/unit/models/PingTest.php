@@ -4,7 +4,7 @@ namespace app\backend\tests\unit\models;
 
 use Codeception\Test\Unit;
 use app\common\components\Ping;
-use app\frontend\tests\UnitTester;
+use app\backend\tests\UnitTester;
 
 /**
  * < Backend > `PingTest`
@@ -15,9 +15,7 @@ use app\frontend\tests\UnitTester;
  *
  * @cli ./vendor/bin/codecept run app/backend/tests/unit/models/PingTest
  *
- * @originalFile https://github.com/yiisoft/yii2-app-advanced/blob/master/frontend/tests/unit/models/ContactFormTest.php
- *
- * @tag  #tests #unit #models #ContactFormTest
+ * @tag #tests #unit #models #PingTest
  */
 class PingTest extends Unit
 {
