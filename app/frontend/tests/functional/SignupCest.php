@@ -3,13 +3,12 @@
 namespace app\frontend\tests\functional;
 
 use app\common\models\Identity;
-use app\frontend\tests\cest\SendForm;
+use app\common\tests\cest\SendForm;
 use app\frontend\tests\FunctionalTester;
-use Codeception\Exception\ModuleException;
 use app\frontend\models\forms\SignupForm;
+use Codeception\Exception\ModuleException;
 use app\frontend\controllers\AuthController;
-use app\frontend\components\models\BaseWebForm;
-use yii\base\Theme;
+use app\common\components\forms\BaseWebForm;
 
 /**
  * < Frontend > `SignupCest`

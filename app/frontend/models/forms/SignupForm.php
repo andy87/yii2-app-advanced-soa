@@ -2,10 +2,10 @@
 
 namespace app\frontend\models\forms;
 
+use app\common\components\forms\EmailingWebForm;
+use app\common\models\{dto\EmailMessageDto, Identity};
 use app\common\services\IdentityService;
 use Yii;
-use app\common\components\models\EmailingWebForm;
-use app\common\models\{ Identity, dto\EmailMessageDto };
 use yii\base\InvalidConfigException;
 
 /**

@@ -3,12 +3,12 @@
 namespace app\frontend\tests\functional;
 
 use app\common\components\Action;
+use app\common\tests\cest\SendForm;
 use app\common\fixtures\UserFixture;
-use app\frontend\tests\cest\SendForm;
 use app\common\models\forms\LoginForm;
 use app\frontend\tests\FunctionalTester;
+use app\common\components\forms\BaseWebForm;
 use app\frontend\controllers\AuthController;
-use app\frontend\components\models\BaseWebForm;
 
 /**
  * < Frontend > `LoginCest`

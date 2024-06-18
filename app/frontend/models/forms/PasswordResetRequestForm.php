@@ -2,10 +2,10 @@
 
 namespace app\frontend\models\forms;
 
+use app\common\{components\forms\EmailingWebForm, services\IdentityService};
+use app\common\models\{dto\EmailMessageDto, Identity};
 use Yii;
 use yii\base\InvalidConfigException;
-use app\common\models\{ Identity, dto\EmailMessageDto };
-use app\common\{ services\IdentityService, components\models\EmailingWebForm };
 
 /**
  * < Frontend > `PasswordResetRequestForm`

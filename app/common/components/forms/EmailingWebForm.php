@@ -1,9 +1,8 @@
 <?php declare(strict_types=1);
 
-namespace app\common\components\models;
+namespace app\common\components\forms;
 
-use app\frontend\components\models\BaseWebForm;
-use app\common\{ models\dto\EmailMessageDto, components\interfaces\ModelEmailingInterface };
+use app\common\{components\interfaces\ModelEmailingInterface, models\dto\EmailMessageDto};
 
 /**
  * < Common > `EmailingModel`

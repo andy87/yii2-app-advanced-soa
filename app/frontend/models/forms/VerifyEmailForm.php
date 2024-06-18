@@ -2,10 +2,10 @@
 
 namespace app\frontend\models\forms;
 
+use app\common\components\forms\BaseWebForm;
 use app\common\models\Identity;
 use app\common\services\IdentityService;
-use app\frontend\components\models\BaseWebForm;
-use yii\base\{ InvalidArgumentException, InvalidConfigException };
+use yii\base\{InvalidArgumentException, InvalidConfigException};
 
 /**
  * < Frontend > `VerifyEmailForm`

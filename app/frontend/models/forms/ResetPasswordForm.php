@@ -2,11 +2,11 @@
 
 namespace app\frontend\models\forms;
 
-use Yii;
+use app\common\components\forms\BaseWebForm;
 use app\common\models\Identity;
 use app\common\services\IdentityService;
-use app\frontend\components\models\BaseWebForm;
-use yii\base\{ InvalidConfigException, InvalidArgumentException };
+use Yii;
+use yii\base\{InvalidArgumentException, InvalidConfigException};
 
 /**
  * < Frontend > `ResetPasswordForm`

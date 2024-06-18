@@ -3,14 +3,13 @@
 namespace app\frontend\tests\functional;
 
 use Codeception\Scenario;
-use app\frontend\tests\cest\SendForm;
+use app\common\tests\cest\SendForm;
 use app\frontend\tests\FunctionalTester;
-use Codeception\Exception\ModuleException;
 use app\frontend\models\forms\ContactForm;
+use Codeception\Exception\ModuleException;
+use app\common\components\forms\BaseWebForm;
 use app\frontend\controllers\SiteController;
-use app\frontend\components\models\BaseWebForm;
 use app\frontend\components\actions\CaptchaAction;
-use yii\base\Theme;
 
 /* @var $scenario Scenario */
 
@@ -150,13 +149,13 @@ class ContactCest extends SendForm
     public function checkContactSubmitCorrectData(FunctionalTester $I): void
     {
         $I->submitForm($this->formId, [
-            "$this->formName[".ContactForm::ATTR_NAME."]" => 'tester',
-            "$this->formName[".ContactForm::ATTR_EMAIL."]" => 'tester@example.com',
-            "$this->formName[".ContactForm::ATTR_SUBJECT."]" => 'test subject',
-            "$this->formName[".ContactForm::ATTR_BODY."]" => 'test content',
-            "$this->formName[".ContactForm::ATTR_VERIFY_CODE."]" => CaptchaAction::TEST_VALUE,
+            "$this->formName[".$this->form::ATTR_NAME."]" => 'tester',
+            "$this->formName[".$this->form::ATTR_EMAIL."]" => 'tester@example.com',
+            "$this->formName[".$this->form::ATTR_SUBJECT."]" => 'test subject',
+            "$this->formName[".$this->form::ATTR_BODY."]" => 'test content',
+            "$this->formName[".$this->form::ATTR_VERIFY_CODE."]" => CaptchaAction::TEST_VALUE,
         ]);
         $I->seeEmailIsSent();
-        $I->see('Thank you for contacting us. We will respond to you as soon as possible.');
+        $I->see($this->form::MESSAGE_SUCCESS);
     }
 }

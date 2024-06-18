@@ -2,9 +2,9 @@
 
 namespace app\frontend\models\forms;
 
-use Yii;
+use app\common\components\forms\BaseWebForm;
 use app\common\models\dto\EmailMessageDto;
-use app\frontend\components\models\BaseWebForm;
+use Yii;
 
 /**
  * < Frontend > `ContactForm`
