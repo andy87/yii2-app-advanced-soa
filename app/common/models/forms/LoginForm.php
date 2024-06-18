@@ -2,7 +2,7 @@
 
 namespace app\common\models\forms;
 
-use app\frontend\components\models\BaseSendForm;
+use app\frontend\components\models\BaseWebForm;
 use app\frontend\controllers\AuthController;
 use yii\base\{ InvalidConfigException, Model };
 use app\common\{ models\Identity, services\IdentityService };
@@ -17,7 +17,7 @@ use Yii;
  *
  * @tag #common #forms #login
  */
-class LoginForm extends BaseSendForm
+class LoginForm extends BaseWebForm
 {
     public const ATTR_USERNAME = 'username';
     public const ATTR_PASSWORD = 'password';

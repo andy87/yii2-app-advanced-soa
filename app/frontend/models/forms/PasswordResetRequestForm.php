@@ -5,7 +5,7 @@ namespace app\frontend\models\forms;
 use Yii;
 use yii\base\InvalidConfigException;
 use app\common\models\{ Identity, dto\EmailMessageDto };
-use app\common\{ services\IdentityService, components\models\EmailingSendForm };
+use app\common\{ services\IdentityService, components\models\EmailingWebForm };
 
 /**
  * < Frontend > `PasswordResetRequestForm`
@@ -14,7 +14,7 @@ use app\common\{ services\IdentityService, components\models\EmailingSendForm };
  *
  * @tag #models #forms #password #reset #request
  */
-class PasswordResetRequestForm extends EmailingSendForm
+class PasswordResetRequestForm extends EmailingWebForm
 {
     public string $id = 'request-password-reset-form';
 

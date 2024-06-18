@@ -180,7 +180,8 @@ class AuthController extends BaseFrontendController
 
             $this->setSessionFlashMessage($handlerResult,
                 $R->passwordResetRequestForm::MESSAGE_SUCCESS,
-                $R->passwordResetRequestForm::MESSAGE_ERROR);
+                $R->passwordResetRequestForm::MESSAGE_ERROR
+            );
 
             if ($handlerResult) return $this->goHome();
         }

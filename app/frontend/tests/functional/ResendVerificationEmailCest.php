@@ -8,7 +8,7 @@ use app\frontend\tests\cest\SendForm;
 use app\frontend\tests\FunctionalTester;
 use Codeception\Exception\ModuleException;
 use app\frontend\controllers\AuthController;
-use app\frontend\components\models\BaseSendForm;
+use app\frontend\components\models\BaseWebForm;
 use app\frontend\models\forms\ResendVerificationEmailForm;
 
 /**
@@ -34,7 +34,7 @@ use app\frontend\models\forms\ResendVerificationEmailForm;
  */
 class ResendVerificationEmailCest extends SendForm
 {
-    /** @var BaseSendForm */
+    /** @var BaseWebForm */
     protected const BASE_FORM_CLASS = ResendVerificationEmailForm::class;
 
 

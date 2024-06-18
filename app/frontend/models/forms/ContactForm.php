@@ -4,7 +4,7 @@ namespace app\frontend\models\forms;
 
 use Yii;
 use app\common\models\dto\EmailMessageDto;
-use app\frontend\components\models\BaseSendForm;
+use app\frontend\components\models\BaseWebForm;
 
 /**
  * < Frontend > `ContactForm`
@@ -15,7 +15,7 @@ use app\frontend\components\models\BaseSendForm;
  *
  * @tag #models #forms #contact
  */
-class ContactForm extends BaseSendForm
+class ContactForm extends BaseWebForm
 {
     public string $id = 'contact-form';
 

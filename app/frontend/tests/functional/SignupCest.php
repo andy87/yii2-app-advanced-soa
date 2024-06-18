@@ -3,7 +3,7 @@
 namespace app\frontend\tests\functional;
 
 use app\common\models\forms\LoginForm;
-use app\frontend\components\models\BaseSendForm;
+use app\frontend\components\models\BaseWebForm;
 use app\frontend\models\forms\SignupForm;
 use app\frontend\tests\cest\SendForm;
 use app\frontend\tests\FunctionalTester;
@@ -30,7 +30,7 @@ use yii\base\Model;
  */
 class SignupCest extends SendForm
 {
-    /** @var BaseSendForm */
+    /** @var BaseWebForm */
     protected const BASE_FORM_CLASS = SignupForm::class;
 
     /**

@@ -4,7 +4,7 @@ namespace app\frontend\models\forms;
 
 use app\common\services\IdentityService;
 use Yii;
-use app\common\components\models\EmailingSendForm;
+use app\common\components\models\EmailingWebForm;
 use app\common\models\{ Identity, dto\EmailMessageDto };
 use yii\base\InvalidConfigException;
 
@@ -15,7 +15,7 @@ use yii\base\InvalidConfigException;
  *
  * @tag #models #forms #signup
  */
-class SignupForm extends EmailingSendForm
+class SignupForm extends EmailingWebForm
 {
     public string $id = 'form-signup';
 

@@ -5,7 +5,7 @@ namespace app\frontend\models\forms;
 use Yii;
 use app\common\models\Identity;
 use app\common\services\IdentityService;
-use app\frontend\components\models\BaseSendForm;
+use app\frontend\components\models\BaseWebForm;
 use yii\base\{ InvalidConfigException, InvalidArgumentException };
 
 /**
@@ -15,7 +15,7 @@ use yii\base\{ InvalidConfigException, InvalidArgumentException };
  *
  * @tag #models #forms #reset #password
  */
-class ResetPasswordForm extends BaseSendForm
+class ResetPasswordForm extends BaseWebForm
 {
     public string $id = 'reset-password-form';
 

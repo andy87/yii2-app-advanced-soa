@@ -8,7 +8,7 @@ use app\frontend\tests\cest\SendForm;
 use app\common\models\forms\LoginForm;
 use app\frontend\tests\FunctionalTester;
 use app\frontend\controllers\AuthController;
-use app\frontend\components\models\BaseSendForm;
+use app\frontend\components\models\BaseWebForm;
 
 /**
  * < Frontend > `LoginCest`
@@ -26,7 +26,7 @@ use app\frontend\components\models\BaseSendForm;
  */
 class LoginCest extends SendForm
 {
-    /** @var BaseSendForm */
+    /** @var BaseWebForm */
     protected const BASE_FORM_CLASS = LoginForm::class;
 
 

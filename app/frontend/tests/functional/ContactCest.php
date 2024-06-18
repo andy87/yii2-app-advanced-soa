@@ -2,7 +2,7 @@
 
 namespace app\frontend\tests\functional;
 
-use app\frontend\components\models\BaseSendForm;
+use app\frontend\components\models\BaseWebForm;
 use app\frontend\models\forms\ContactForm;
 use Codeception\Scenario;
 use app\frontend\tests\cest\SendForm;
@@ -32,7 +32,7 @@ use app\frontend\controllers\SiteController;
  */
 class ContactCest extends SendForm
 {
-    /** @var BaseSendForm */
+    /** @var BaseWebForm */
     protected const BASE_FORM_CLASS = ContactForm::class;
 
     /**
