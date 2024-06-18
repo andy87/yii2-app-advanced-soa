@@ -69,10 +69,11 @@ ___
 имеет более расширенную структуру, предустановленные пакеты(которыми приходится часто пользоваться).
 
 Были добавлены следующие пакеты:
-- `vlucas/phpdotenv` - для работы с переменными окружения.
-- `mihaildev/yii2-ckeditor` - для работы с редактором текста.
-- `kartik-v/yii2-widget-select2` - для работы с select.  
-
+- [vlucas/phpdotenv](https://github.com/vlucas/phpdotenv) - для работы с переменными окружения  
+- [mihaildev/yii2-ckeditor](https://github.com/MihailDev/yii2-ckeditor?tab=readme-ov-file) - для работы с редактором текста  
+- [kartik-v/yii2-widget-select2](https://demos.krajee.com/widget-details/select2) - для работы с выпадающим списком    
+- [kartik-v/yii2-icons](https://demos.krajee.com/icons) - для работы с иконками  
+  
 #### Файлы
  - Вырезаны `bat` файлы.  
  - Для `dev` кружения добавлен файл `app/reset` для удаления локальных файлов сгенерированных через команду `init`

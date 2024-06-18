@@ -7,4 +7,6 @@ return [
     'user.passwordResetTokenExpire' => 3600,
     'user.passwordMinLength' => 8,
     'auth.rememberMeDuration.days' => 30,
+
+    'bsDependencyEnabled' => false, // this will not load Bootstrap CSS and JS for all Krajee extensions
 ];
