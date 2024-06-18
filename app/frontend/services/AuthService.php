@@ -7,7 +7,7 @@ use Exception;
 use app\common\models\Identity;
 use yii\base\InvalidConfigException;
 use app\common\services\{ EmailService, IdentityService };
-use app\frontend\models\forms\{ PasswordResetRequestForm, ResendVerificationEmailForm, ResetPasswordSendForm, SignupForm, VerifyEmailSendForm };
+use app\frontend\models\forms\{ PasswordResetRequestForm, ResendVerificationEmailForm, ResetPasswordForm, SignupForm, VerifyEmailForm };
 
 /**
  * < Frontend > `AuthService`
@@ -172,7 +172,7 @@ class AuthService extends \app\common\services\AuthService
     }
 
     /**
-     * @param ResetPasswordSendForm $resetPasswordForm
+     * @param ResetPasswordForm $resetPasswordForm
      * @param array $data
      *
      * @return bool
@@ -181,7 +181,7 @@ class AuthService extends \app\common\services\AuthService
      *
      * @tag #service #auth #handler #resetPasswordForm
      */
-    public function handlerResetPasswordForm(ResetPasswordSendForm $resetPasswordForm, array $data = [] ): bool
+    public function handlerResetPasswordForm(ResetPasswordForm $resetPasswordForm, array $data = [] ): bool
     {
         if (count($data)) $resetPasswordForm->load($data);
 
@@ -211,7 +211,7 @@ class AuthService extends \app\common\services\AuthService
      *
      * @tag #service #auth #resetPassword
      */
-    public function resetPassword(ResetPasswordSendForm $resetPasswordForm): bool
+    public function resetPassword(ResetPasswordForm $resetPasswordForm): bool
     {
         $identity = $resetPasswordForm->getIdentity();
 
@@ -225,7 +225,7 @@ class AuthService extends \app\common\services\AuthService
     }
 
     /**
-     * @param VerifyEmailSendForm $verifyEmailForm
+     * @param VerifyEmailForm $verifyEmailForm
      * @param array $data
      * @return bool
      *
@@ -233,7 +233,7 @@ class AuthService extends \app\common\services\AuthService
      *
      * @tag #service #auth #handler #verifyEmailResources
      */
-    public function handlerAuthVerifyEmailResources(VerifyEmailSendForm $verifyEmailForm, array $data = []): bool
+    public function handlerAuthVerifyEmailResources(VerifyEmailForm $verifyEmailForm, array $data = []): bool
     {
         if (count($data)) $verifyEmailForm->load($data);
 
@@ -254,7 +254,7 @@ class AuthService extends \app\common\services\AuthService
     }
 
     /**
-     * @param VerifyEmailSendForm $verifyEmailForm
+     * @param VerifyEmailForm $verifyEmailForm
      *
      * @return ?Identity
      *
@@ -262,7 +262,7 @@ class AuthService extends \app\common\services\AuthService
      *
      * @tag #service #auth #verify
      */
-    public function verify(VerifyEmailSendForm $verifyEmailForm ): ?Identity
+    public function verify(VerifyEmailForm $verifyEmailForm ): ?Identity
     {
         $identity = $verifyEmailForm->getIdentity();
 

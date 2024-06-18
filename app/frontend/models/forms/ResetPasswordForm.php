@@ -15,7 +15,7 @@ use yii\base\{ InvalidConfigException, InvalidArgumentException };
  *
  * @tag #models #forms #reset #password
  */
-class ResetPasswordSendForm extends BaseSendForm
+class ResetPasswordForm extends BaseSendForm
 {
     public string $id = 'reset-password-form';
 

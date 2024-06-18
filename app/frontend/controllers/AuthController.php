@@ -12,7 +12,7 @@ use yii\filters\{ AccessControl, VerbFilter };
 use app\common\components\traits\SessionFlash;
 use yii\web\{ BadRequestHttpException, Response };
 use app\frontend\components\controllers\BaseFrontendController;
-use app\frontend\models\forms\{ ResetPasswordSendForm, VerifyEmailSendForm };
+use app\frontend\models\forms\{ ResetPasswordForm, VerifyEmailForm };
 use yii\base\{ Exception as YiiBaseException, InvalidArgumentException, InvalidConfigException };
 use app\frontend\resources\auth\{AuthLoginResources, AuthRequestPasswordResetResources, AuthResendVerificationEmailResources, AuthResetPasswordResources, AuthSignupResources, AuthVerifyEmailResources };
 
@@ -203,7 +203,7 @@ class AuthController extends BaseFrontendController
     {
         $R = new AuthResetPasswordResources;
 
-        $R->resetPasswordForm = new ResetPasswordSendForm($token);
+        $R->resetPasswordForm = new ResetPasswordForm($token);
 
         try
         {
@@ -248,7 +248,7 @@ class AuthController extends BaseFrontendController
     public function actionVerifyEmail(string $token): Response
     {
         $R = new AuthVerifyEmailResources;
-        $R->verifyEmailForm = new VerifyEmailSendForm($token);
+        $R->verifyEmailForm = new VerifyEmailForm($token);
 
         try
         {

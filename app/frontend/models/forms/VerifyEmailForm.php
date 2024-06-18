@@ -14,7 +14,7 @@ use yii\base\{ InvalidArgumentException, InvalidConfigException };
  *
  * @tag #models #forms #verify #email
  */
-class VerifyEmailSendForm extends BaseSendForm
+class VerifyEmailForm extends BaseSendForm
 {
     public string $id = 'verify-email-form';
 
