@@ -61,8 +61,7 @@ class VerifyEmailCest
      */
     public function checkEmptyToken(FunctionalTester $I): void
     {
-        //[yii\base\InvalidArgumentException] Verify email token cannot be blank.
-        $route = AuthController::ENDPOINT . '/' . AuthController::ACTION_VERIFY_EMAIL;
+        $route = AuthController::ENDPOINT . '/' . AuthController::ACTION_VERIFY_EMAIL; // 'auth/verify-email'
         $I->amOnRoute($route, ['token' => '']);
         $I->canSee('Bad Request', 'h1');
         $I->canSee('Verify email token cannot be blank.');
@@ -85,8 +84,7 @@ class VerifyEmailCest
      */
     public function checkInvalidToken(FunctionalTester $I): void
     {
-        // [yii\base\InvalidArgumentException] Wrong verify email token.
-        $route = AuthController::ENDPOINT . '/' . AuthController::ACTION_VERIFY_EMAIL;
+        $route = AuthController::ENDPOINT . '/' . AuthController::ACTION_VERIFY_EMAIL; // 'auth/verify-email'
 
         $I->amOnRoute($route, ['token' => 'wrong_token']);
         $I->canSee('Bad Request', 'h1');
@@ -110,7 +108,7 @@ class VerifyEmailCest
      */
     public function checkNoToken(FunctionalTester $I): void
     {
-        $route = AuthController::ENDPOINT . '/' . AuthController::ACTION_VERIFY_EMAIL;
+        $route = AuthController::ENDPOINT . '/' . AuthController::ACTION_VERIFY_EMAIL; // 'auth/verify-email'
         $I->amOnRoute($route);
         $I->canSee('Bad Request', 'h1');
         $I->canSee('Missing required parameters: token');
@@ -133,8 +131,7 @@ class VerifyEmailCest
      */
     public function checkAlreadyActivatedToken(FunctionalTester $I): void
     {
-        //[yii\base\InvalidArgumentException] Wrong verify email token.
-        $route = AuthController::ENDPOINT . '/' . AuthController::ACTION_VERIFY_EMAIL;
+        $route = AuthController::ENDPOINT . '/' . AuthController::ACTION_VERIFY_EMAIL; // 'auth/verify-email'
         $I->amOnRoute($route, ['token' => 'already_used_token_1548675330']);
         $I->canSee('Bad Request', 'h1');
         $I->canSee('Wrong verify email token.');
@@ -161,7 +158,7 @@ class VerifyEmailCest
         //-->  My Yii Application My Application Home About Contact Logout (test.test) Вы успешно подтвердили свой email! Congratulations! You have successfully created your Yii-powered application. Get started with Yii Heading Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incidi
         //[Content too long to display. See complete response in 'W:\localhost\_self\github.com\yii2-app-advanced-soa\app\frontend\tests/_output\' directory]
         //--> contains "Your email has been confirmed!".
-        $route = AuthController::ENDPOINT . '/' . AuthController::ACTION_VERIFY_EMAIL;
+        $route = AuthController::ENDPOINT . '/' . AuthController::ACTION_VERIFY_EMAIL; // 'auth/verify-email'
         $I->amOnRoute($route, ['token' => '4ch0qbfhvWwkcuWqjN8SWRq72SOw1KYT_1548675330']);
         $I->canSee('Your email has been confirmed!');
         $I->canSee('Congratulations!', 'h1');

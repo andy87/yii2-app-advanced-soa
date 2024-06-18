@@ -2,6 +2,7 @@
 
 namespace app\frontend\tests\functional;
 
+use app\common\components\Action;
 use app\common\fixtures\UserFixture;
 use app\common\models\forms\LoginForm;
 use app\frontend\tests\FunctionalTester;
@@ -20,6 +21,11 @@ use app\frontend\controllers\AuthController;
  */
 class LoginCest
 {
+    private LoginForm $form;
+    private string $formName = 'LoginForm';
+
+    private string $formId = '#' . LoginForm::ID;
+
     /**
      * Load fixtures before db transaction begin
      * Called in _before()
@@ -42,12 +48,17 @@ class LoginCest
      *
      * @return void
      *
+     * @see AuthController::actionLogin()
+     *
      * @tag #frontend #tests #functional #LoginCest #checkEmpty
      */
     public function _before(FunctionalTester $I): void
     {
-        /** @see AuthController::actionLogin() */
-        $I->amOnRoute('auth/login');
+        $this->form = new LoginForm;
+
+        $route = AuthController::ENDPOINT . '/' . Action::LOGIN; // 'auth/login'
+
+        $I->amOnRoute($route);
     }
 
     /**
@@ -59,8 +70,8 @@ class LoginCest
     protected function formParams( string $login, string $password): array
     {
         return [
-            'LoginForm[username]' => $login,
-            'LoginForm[password]' => $password,
+            "$this->formName[". $this->form::ATTR_USERNAME."]" => $login,
+            "$this->formName[". $this->form::ATTR_PASSWORD."]" => $password,
         ];
     }
 
@@ -79,7 +90,7 @@ class LoginCest
      */
     public function checkEmpty(FunctionalTester $I): void
     {
-        $I->submitForm('#' . LoginForm::ID, $this->formParams('', ''));
+        $I->submitForm($this->formId, $this->formParams('', ''));
 
         $I->seeValidationError('Username cannot be blank.');
         $I->seeValidationError('Password cannot be blank.');
@@ -100,7 +111,7 @@ class LoginCest
      */
     public function checkWrongPassword(FunctionalTester $I): void
     {
-        $I->submitForm('#' . LoginForm::ID, $this->formParams('admin', 'wrong'));
+        $I->submitForm($this->formId, $this->formParams('admin', 'wrong'));
         $I->seeValidationError(LoginForm::RULE_MESSAGE_WRONG_USER_NAME_OR_PASSWORD);
     }
 
@@ -120,8 +131,8 @@ class LoginCest
     public function checkInactiveAccount(FunctionalTester $I): void
     {
         // [yii\base\InvalidArgumentException] Hash is invalid.
-        $I->submitForm('#' . LoginForm::ID, $this->formParams('test.test', 'Test1234'));
-        $I->seeValidationError('Incorrect username or password');
+        $I->submitForm($this->formId, $this->formParams('test.test', 'Test1234'));
+        $I->seeValidationError(LoginForm::RULE_MESSAGE_WRONG_USER_NAME_OR_PASSWORD);
     }
 
     /**
@@ -139,7 +150,7 @@ class LoginCest
      */
     public function checkValidLogin(FunctionalTester $I): void
     {
-        $I->submitForm('#' . LoginForm::ID, $this->formParams('erau', 'password_0'));
+        $I->submitForm($this->formId, $this->formParams('erau', 'password_0'));
         $I->see('Logout (erau)', 'form button[type=submit]');
         $I->dontSeeLink('Login');
         $I->dontSeeLink('Signup');

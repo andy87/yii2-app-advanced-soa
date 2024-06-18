@@ -22,15 +22,19 @@ class AuthService extends BaseService
      *
      * @return bool
      *
-     * @throws InvalidConfigException
-     *
      * @tag #common #service #auth #handler #form #login
      */
-    public function handlerLoginForm(LoginForm $loginForm, array $data): bool
+    public function handlerLoginForm(LoginForm $loginForm, array $data = []): bool
     {
-        if ( $loginForm->load( $data ) && $loginForm->validate() )
+        try
         {
+            if ( count($data) ) $loginForm->load( $data );
+
             return $this->login($loginForm);
+
+        } catch (InvalidConfigException $e) {
+
+            $loginForm->addError('username', $e->getMessage());
         }
 
         $loginForm->password = '';
@@ -49,18 +53,14 @@ class AuthService extends BaseService
      */
     public function login(LoginForm $loginForm): bool
     {
-        $identity = $loginForm->getUser();
-        $duration = $this->getRememberMeDuration($loginForm);
+        $identity = $loginForm->getIdentity();
 
-        if ( $loginForm->validate() )
+        if ( $identity && $loginForm->validate() )
         {
-            if ( Yii::$app->user->login( $identity, $duration ) )
-            {
-                return true;
-            }
-        }
+            $duration = $this->getRememberMeDuration($loginForm);
 
-        $loginForm->addError('password', 'Incorrect username or password.');
+            return Yii::$app->user->login( $identity, $duration );
+        }
 
         return false;
     }

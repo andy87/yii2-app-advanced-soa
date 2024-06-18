@@ -65,7 +65,7 @@ class LoginFormTest extends Unit
             $this->loginForm::ATTR_PASSWORD => 'not_existing_password',
         ]);
 
-        verify(AuthService::getInstance()->login($this->loginForm))->false();
+        verify(AuthService::getInstance()->handlerLoginForm($this->loginForm))->false();
         verify(Yii::$app->user->isGuest)->true();
     }
 
@@ -87,7 +87,7 @@ class LoginFormTest extends Unit
             $this->loginForm::ATTR_PASSWORD => 'wrong_password',
         ]);
 
-        $login = AuthService::getInstance()->login($this->loginForm);
+        $login = AuthService::getInstance()->handlerLoginForm($this->loginForm);
 
         verify($login)->false();
         verify( $this->loginForm->errors)->arrayHasKey('password');
@@ -112,7 +112,7 @@ class LoginFormTest extends Unit
             $this->loginForm::ATTR_PASSWORD => 'password_0',
         ]);
 
-        verify(AuthService::getInstance()->login($this->loginForm))->true();
+        verify(AuthService::getInstance()->handlerLoginForm($this->loginForm))->true();
         verify($this->loginForm->errors)->arrayHasNotKey('password');
         verify(Yii::$app->user->isGuest)->false();
     }

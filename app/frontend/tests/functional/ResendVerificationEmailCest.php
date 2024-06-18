@@ -65,7 +65,7 @@ class ResendVerificationEmailCest
     {
         $this->form = new ResendVerificationEmailForm();
 
-        $route = AuthController::ENDPOINT . '/' . AuthController::ACTION_RESEND_VERIFICATION_EMAIL;
+        $route = AuthController::ENDPOINT . '/' . AuthController::ACTION_RESEND_VERIFICATION_EMAIL; // 'auth/resend-verification-email'
 
         $I->amOnRoute($route);
     }

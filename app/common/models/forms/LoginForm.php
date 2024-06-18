@@ -5,6 +5,7 @@ namespace app\common\models\forms;
 use app\frontend\controllers\AuthController;
 use yii\base\{ InvalidConfigException, Model };
 use app\common\{ models\Identity, services\IdentityService };
+use Yii;
 
 /**
  * < Common > `LoginForm`
@@ -23,7 +24,7 @@ class LoginForm extends Model
     public const ATTR_REMEMBER_ME = 'rememberMe';
 
     public const RULE_MESSAGE_WRONG_PASSWORD = 'Неверный пароль.';
-    public const RULE_MESSAGE_WRONG_USER_NAME_OR_PASSWORD = 'Неверное имя пользователя';
+    public const RULE_MESSAGE_WRONG_USER_NAME_OR_PASSWORD = 'Неверное имя пользователя или пароль.';
 
 
 
@@ -31,7 +32,7 @@ class LoginForm extends Model
     public ?string $password = null;
     public bool $rememberMe = false;
 
-    private ?Identity $_user = null;
+    private ?Identity $_identity = null;
 
 
     /**
@@ -58,16 +59,11 @@ class LoginForm extends Model
     {
         if (!$this->hasErrors())
         {
-            $user = $this->getUser();
+            $identity = $this->getIdentity();
 
-            if ( $user )
+            if ( !$identity || !$identity->validatePassword($this->password))
             {
-                if (!$user->validatePassword($this->password))
-                {
-                    $this->addError($attribute, self::RULE_MESSAGE_WRONG_PASSWORD);
-                }
-            } else {
-                $this->addError(self::ATTR_USERNAME, self::RULE_MESSAGE_WRONG_USER_NAME_OR_PASSWORD);
+                $this->addError($attribute, self::RULE_MESSAGE_WRONG_USER_NAME_OR_PASSWORD);
             }
         }
     }
@@ -77,7 +73,7 @@ class LoginForm extends Model
      */
     public function getHrefRequestPasswordReset(): array
     {
-        return [AuthController::ENDPOINT . '/' . AuthController::ACTION_REQUEST_PASSWORD_RESET];
+        return [AuthController::ENDPOINT . '/' . AuthController::ACTION_REQUEST_PASSWORD_RESET]; // 'auth/request-password-reset'
     }
 
     /**
@@ -85,7 +81,7 @@ class LoginForm extends Model
      */
     public function getHrefResendVerificationEmail(): array
     {
-        return [AuthController::ENDPOINT . '/' . AuthController::ACTION_RESEND_VERIFICATION_EMAIL];
+        return [AuthController::ENDPOINT . '/' . AuthController::ACTION_RESEND_VERIFICATION_EMAIL]; // 'auth/resend-verification-email'
     }
 
     /**
@@ -95,12 +91,18 @@ class LoginForm extends Model
      *
      * @throws InvalidConfigException
      */
-    public function getUser(): ?Identity
+    public function getIdentity(): ?Identity
     {
-        if ($this->_user === null) {
-            $this->_user = IdentityService::getInstance()->findByUsername($this->username);
+        if ($this->_identity === null) {
+            $this->_identity = IdentityService::getInstance()->findByUsername($this->username);
         }
 
-        return $this->_user;
+        if ($this->username && $this->password) {
+            if ( !$this->_identity ) {
+                $this->addError(self::ATTR_PASSWORD, self::RULE_MESSAGE_WRONG_USER_NAME_OR_PASSWORD);
+            }
+        }
+
+        return $this->_identity;
     }
 }

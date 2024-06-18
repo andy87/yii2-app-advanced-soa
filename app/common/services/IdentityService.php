@@ -114,7 +114,7 @@ class IdentityService extends ModelService
      */
     public function findByUsername(?string $username): ?Identity
     {
-        return $this->identityRepository->findByUsername($username);
+        return $this->identityRepository->findActiveByUsername($username);
     }
 
     /**

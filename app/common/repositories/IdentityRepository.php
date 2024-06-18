@@ -89,11 +89,12 @@ class IdentityRepository extends MySqlRepository
      *
      * @tag #repository #identity #find
      */
-    public function findByUsername(?string $username): ?Identity
+    public function findActiveByUsername(?string $username): ?Identity
     {
         $query = $this
             ->findByCriteria([
                 Identity::ATTR_USERNAME => $username,
+                Identity::ATTR_STATUS => Identity::STATUS_ACTIVE,
             ]);
 
         /** @var ?Identity $identity */
