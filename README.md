@@ -99,14 +99,13 @@ ___
 - `backend/components` - содержит компоненты, которые используются в `backend` части приложения.
 - `backend/services` - содержит сервисы, которые используются в `backend` части приложения.
 - `backend/repository` - содержит репозитории, которые используются в `backend` сервисах.
-- `backend/resources`(_ViewModel_) - содержит ресурсы, которые используются в `backend` части приложения.
-
+- `backend/resources` _(ViewModel)_ - содержит ресурсы, которые используются `backend/views`.
 
 #### Frontend
 - `frontend/components` - содержит компоненты, которые используются в `frontend` части приложения.
 - `frontend/services` - содержит сервисы, которые используются в `frontend` части приложения.
 - `frontend/repository` - содержит репозитории, которые используются в `frontend` сервисах.
-- `frontend/resources`(_ViewModel_) - содержит ресурсы, которые используются в `frontend` части приложения.
+- `frontend/resources` _(ViewModel)_ - содержит ресурсы, которые используются `frontend/views`.
 
 
 ### Init
