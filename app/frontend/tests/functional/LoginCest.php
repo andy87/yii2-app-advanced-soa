@@ -65,7 +65,7 @@ class LoginCest
     }
 
     /**
-     * Check empty
+     * `Check empty`
      *
      * @cli ./vendor/bin/codecept run app/frontend/tests/functional/LoginCest:checkEmpty
      *
@@ -119,6 +119,7 @@ class LoginCest
      */
     public function checkInactiveAccount(FunctionalTester $I): void
     {
+        // [yii\base\InvalidArgumentException] Hash is invalid.
         $I->submitForm('#' . LoginForm::ID, $this->formParams('test.test', 'Test1234'));
         $I->seeValidationError('Incorrect username or password');
     }

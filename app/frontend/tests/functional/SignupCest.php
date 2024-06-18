@@ -3,8 +3,8 @@
 namespace app\frontend\tests\functional;
 
 use app\frontend\tests\FunctionalTester;
-use app\frontend\controllers\AuthController;
 use Codeception\Exception\ModuleException;
+use app\frontend\controllers\AuthController;
 
 /**
  * < Frontend > `SignupCest`
@@ -110,6 +110,11 @@ class SignupCest
      */
     public function signupSuccessfully(FunctionalTester $I): void
     {
+        //  Test  tests\functional\SignupCest.php:signupSuccessfully
+        // Step  See "Thank you for registration. Please check your inbox for verification email."
+        // Fail  Failed asserting that on page /index-test.php/auth/signup
+        //-->  Signup My Application Home About Contact SignupLogin Home Signup Signup Благодарим за регистрацию. Пожалуйста, проверьте свой почтовый ящик. Signup Please fill out the following fields to signup: Username Email Password Войти © My Application 2024 Powered by Yii Framework
+        //--> contains "Thank you for registration. Please check your inbox for verification email.".
         $I->submitForm($this->formId, [
             'SignupForm[username]' => 'tester',
             'SignupForm[email]' => 'tester.email@example.com',

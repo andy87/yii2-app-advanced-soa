@@ -9,17 +9,18 @@
 use yii\bootstrap5\{ Html, ActiveForm };
 use app\frontend\resources\auth\AuthResendVerificationEmailResources;
 
-$this->title = 'Resend verification email';
-$this->params['breadcrumbs'][] = $this->title;
-
 $resendVerificationEmailForm = $R->resendVerificationEmailForm;
+
+
+$this->title = $resendVerificationEmailForm::TITLE;
+$this->params['breadcrumbs'][] = $this->title;
 
 ?>
 
 <div class="auth-resend-verification-email">
     <h1><?= Html::encode($this->title) ?></h1>
 
-    <p>Пожалуйста, введите ваш email. Письмо с подтверждением будет отправлено на него.</p>
+    <p><?= $resendVerificationEmailForm::HINT ?></p>
 
     <div class="row">
         <div class="col-lg-5">

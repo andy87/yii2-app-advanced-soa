@@ -17,7 +17,10 @@ use yii\base\InvalidConfigException;
  */
 class ResendVerificationEmailForm extends EmailingModel
 {
-    const ID = 'resend-verification-email-form';
+    public const ID = 'resend-verification-email-form';
+
+    public const TITLE = 'Отправить повторное письмо подтверждения email';
+    public const HINT = 'Пожалуйста, введите ваш email, на который будет отправлено письмо с подтверждением.';
 
     public const ATTR_EMAIL = 'email';
     public const MESSAGE_SUCCESS = 'Проверьте свою почту для получения дальнейших инструкций.';
