@@ -64,7 +64,7 @@ class VerifyEmailCest
     {
         $I->amOnRoute($this->getRoute(), ['token' => '']);
         $I->canSee('Bad Request', 'h1');
-        $I->canSee('Verify email token cannot be blank.');
+        $I->canSee(VerifyEmailForm::EXCEPTION_TOKEN_EMPTY);
     }
 
     /**
@@ -86,7 +86,7 @@ class VerifyEmailCest
     {
         $I->amOnRoute($this->getRoute(), ['token' => 'wrong_token']);
         $I->canSee('Bad Request', 'h1');
-        $I->canSee('Wrong verify email token.');
+        $I->canSee(VerifyEmailForm::EXCEPTION_TOKEN_INVALID);
     }
 
     /**
@@ -154,9 +154,9 @@ class VerifyEmailCest
         $I->see('Logout (test.test)', 'form button[type=submit]');
 
         $I->seeRecord(Identity::class, [
-           'username' => 'test.test',
-           'email' => 'test@mail.com',
-           'status' => Identity::STATUS_ACTIVE
+            Identity::ATTR_USERNAME => 'test.test',
+            Identity::ATTR_EMAIL => 'test@mail.com',
+            Identity::ATTR_STATUS => Identity::STATUS_ACTIVE
         ]);
     }
 

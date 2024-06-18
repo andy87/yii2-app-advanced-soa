@@ -237,7 +237,7 @@ class AuthService extends \app\common\services\AuthService
     {
         if (count($data)) $verifyEmailForm->load($data);
 
-        $identity = $this->verify($verifyEmailForm);
+        $identity = $this->verifyEmail($verifyEmailForm);
 
         if ( $identity )
         {
@@ -262,7 +262,7 @@ class AuthService extends \app\common\services\AuthService
      *
      * @tag #service #auth #verify
      */
-    public function verify(VerifyEmailForm $verifyEmailForm ): ?Identity
+    public function verifyEmail(VerifyEmailForm $verifyEmailForm ): ?Identity
     {
         $identity = $verifyEmailForm->getIdentity();
 

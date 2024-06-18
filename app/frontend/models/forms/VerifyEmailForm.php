@@ -48,30 +48,27 @@ class VerifyEmailForm extends BaseWebForm
      *
      * @tag #constructor
      */
-    public function __construct($token, array $config = [])
+    public function __construct(string $token, array $config = [])
     {
-        parent::__construct($config);
-
-        $this->token = $token;
-
-        if (strlen($this->token) )
-        {
-            $this->_identity = IdentityService::getInstance()->findByVerificationToken($this->token);
-
-            if (!$this->_identity) {
-                throw new InvalidArgumentException(self::EXCEPTION_TOKEN_INVALID);
-            }
-        } else {
+        if (empty($token)) {
             throw new InvalidArgumentException(self::EXCEPTION_TOKEN_EMPTY);
         }
+
+        $this->_identity = IdentityService::getInstance()->findInactiveByVerificationToken($token);
+
+        if (!$this->_identity) {
+            throw new InvalidArgumentException(self::EXCEPTION_TOKEN_INVALID);
+        }
+
+        parent::__construct($config);
     }
 
     /**
-     * @return Identity
+     * @return ?Identity
      *
      * @tag #getter #identity
      */
-    public function getIdentity(): Identity
+    public function getIdentity(): ?Identity
     {
         return $this->_identity;
     }

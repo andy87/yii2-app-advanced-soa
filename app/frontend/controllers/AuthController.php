@@ -54,12 +54,7 @@ class AuthController extends BaseFrontendController
                     [
                         'actions' => [
                             Action::LOGIN,
-                            self::ACTION_SIGNUP,
-                            self::ACTION_REQUEST_PASSWORD_RESET,
-                            self::ACTION_RESET_PASSWORD,
-                            self::ACTION_VERIFY_EMAIL,
-                            self::ACTION_RESEND_VERIFICATION_EMAIL,
-                            self::ACTION_REQUEST_PASSWORD_RESET_TOKEN
+                            self::ACTION_SIGNUP
                         ],
                         'allow' => true,
                         'roles' => [Role::GUEST],
@@ -258,7 +253,11 @@ class AuthController extends BaseFrontendController
      */
     public function actionVerifyEmail(string $token): Response
     {
-        $verifyEmailForm = new VerifyEmailForm($token);
+        try {
+            $verifyEmailForm = new VerifyEmailForm($token);
+        } catch (InvalidArgumentException $e) {
+            throw new BadRequestHttpException($e->getMessage());
+        }
 
         try
         {

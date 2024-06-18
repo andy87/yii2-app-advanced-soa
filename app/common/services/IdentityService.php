@@ -100,9 +100,9 @@ class IdentityService extends ModelService
      *
      * @tag #service #identity #find #verification #token
      */
-    public function findByVerificationToken(string $token): ?Identity
+    public function findInactiveByVerificationToken(string $token): ?Identity
     {
-        return $this->identityRepository->findByVerificationToken($token);
+        return $this->identityRepository->findInactiveByVerificationToken($token);
     }
 
     /**

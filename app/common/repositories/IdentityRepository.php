@@ -68,7 +68,7 @@ class IdentityRepository extends MySqlRepository
      *
      * @tag #repository #identity #find
      */
-    public function findByVerificationToken(string $token): ?Identity
+    public function findInactiveByVerificationToken(string $token): ?Identity
     {
         $query = $this
             ->findByCriteria([
