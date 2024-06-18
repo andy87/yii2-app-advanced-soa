@@ -25,7 +25,7 @@ class LoginForm extends BaseWebForm
 
     public const RULE_MESSAGE_WRONG_USER_NAME_OR_PASSWORD = 'Неверное имя пользователя или пароль.';
 
-    public const RULE_REQUIRED_TEMPLATE = 'Поле `{attribute}` не может быть пустым';
+    public const RULE_REQUIRED_MESSAGE = 'Поле `{attribute}` не может быть пустым';
 
     public string $id = 'login-form';
 
@@ -42,7 +42,7 @@ class LoginForm extends BaseWebForm
     public function rules(): array
     {
         return [
-            [[self::ATTR_USERNAME, self::ATTR_PASSWORD], 'required', 'message' => self::RULE_REQUIRED_TEMPLATE ],
+            [[self::ATTR_USERNAME, self::ATTR_PASSWORD], 'required', 'message' => self::RULE_REQUIRED_MESSAGE ],
             [self::ATTR_REMEMBER_ME, 'boolean'],
             [self::ATTR_PASSWORD, 'validatePassword'], /** @see validatePassword */
         ];

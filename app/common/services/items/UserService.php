@@ -9,11 +9,11 @@ use app\common\{ models\sources\User, components\services\ModelService };
  *
  * @package app\common\services\items
  *
- * @tag #common #service #items #user
- *
  * @method User|string getClassModel()
  * @method User createModel(array $attributes = [])
  * @method User addModel(array $attributes = [])
+ *
+ * @tag #common #service #items #user
  */
 class UserService extends ModelService
 {

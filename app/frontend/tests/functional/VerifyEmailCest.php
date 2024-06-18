@@ -6,6 +6,7 @@ use app\common\models\Identity;
 use app\common\fixtures\UserFixture;
 use app\frontend\tests\FunctionalTester;
 use app\frontend\controllers\AuthController;
+use app\frontend\models\forms\VerifyEmailForm;
 
 /**
  * < Frontend > `VerifyEmailCest`
@@ -148,7 +149,7 @@ class VerifyEmailCest
     public function checkSuccessVerification(FunctionalTester $I): void
     {
         $I->amOnRoute( $this->getRoute(), ['token' => '4ch0qbfhvWwkcuWqjN8SWRq72SOw1KYT_1548675330']);
-        $I->canSee('Your email has been confirmed!');
+        $I->canSee(VerifyEmailForm::MESSAGE_SUCCESS);
         $I->canSee('Congratulations!', 'h1');
         $I->see('Logout (test.test)', 'form button[type=submit]');
 
@@ -166,6 +167,6 @@ class VerifyEmailCest
      */
     private function getRoute(): string
     {
-        return AuthController::ENDPOINT . '/' . AuthController::ACTION_VERIFY_EMAIL; // 'auth/verify-email'
+        return AuthController::ENDPOINT . '/' . AuthController::ACTION_VERIFY_EMAIL;
     }
 }

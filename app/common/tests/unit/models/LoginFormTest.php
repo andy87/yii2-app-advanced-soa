@@ -56,7 +56,6 @@ class LoginFormTest extends Unit
      * @throws InvalidConfigException
      *
      * @tag #common #tests #unit #LoginForm #noUser
-     *
      */
     public function testLoginNoUser(): void
     {

@@ -9,11 +9,11 @@ use app\backend\models\items\User;
  *
  * @package app\backend\services
  *
- * @tag #backend #service #user
- *
  * @method User|string getClassModel()
  * @method User createModel(array $attributes = [])
  * @method User addModel(array $attributes = [])
+ *
+ * @tag #backend #service #user
  */
 class UserService extends \app\common\services\items\UserService
 {

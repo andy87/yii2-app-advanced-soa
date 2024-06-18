@@ -10,17 +10,17 @@ use app\frontend\resources\auth\AuthSignupResources;
  * @var AuthSignupResources $R
  */
 
-$this->title = 'Signup';
-$this->params['breadcrumbs'][] = $this->title;
-
 $signupForm = $R->signupForm;
+
+$this->title = $signupForm::TITLE;
+$this->params['breadcrumbs'][] = $this->title;
 
 ?>
 
 <div class="auth-signup">
     <h1><?= Html::encode($this->title) ?></h1>
 
-    <p>Please fill out the following fields to signup:</p>
+    <p><?=$signupForm::HINT;?></p>
 
     <div class="row">
         <div class="col-lg-5">
@@ -33,7 +33,10 @@ $signupForm = $R->signupForm;
                 <?= $form->field($signupForm, $signupForm::ATTR_PASSWORD)->passwordInput() ?>
 
                 <div class="form-group">
-                    <?= Html::submitButton('Войти', ['class' => 'btn btn-primary', 'name' => 'signup-button']) ?>
+                    <?= Html::submitButton($signupForm::BUTTON_SIGNUP, [
+                        'class' => 'btn btn-primary',
+                        'name' => 'signup-button'
+                    ]) ?>
                 </div>
 
             <?php ActiveForm::end(); ?>

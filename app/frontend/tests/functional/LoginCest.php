@@ -97,8 +97,8 @@ class LoginCest extends SendForm
         $I->submitForm($this->formId, $this->formParams('', ''));
 
         $messages = [
-            str_replace('{attribute}', $this->form->getAttributeLabel($this->form::ATTR_USERNAME), $this->form::RULE_REQUIRED_TEMPLATE),
-            str_replace('{attribute}', $this->form->getAttributeLabel($this->form::ATTR_PASSWORD), $this->form::RULE_REQUIRED_TEMPLATE),
+            str_replace('{attribute}', $this->form->getAttributeLabel($this->form::ATTR_USERNAME), $this->form::RULE_REQUIRED_MESSAGE),
+            str_replace('{attribute}', $this->form->getAttributeLabel($this->form::ATTR_PASSWORD), $this->form::RULE_REQUIRED_MESSAGE),
         ];
 
         foreach ($messages as $attribute => $message) {

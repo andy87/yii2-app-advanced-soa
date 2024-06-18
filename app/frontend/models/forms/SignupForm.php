@@ -17,6 +17,8 @@ use yii\base\InvalidConfigException;
  */
 class SignupForm extends EmailingWebForm
 {
+    public const TITLE = 'Регистрация';
+    public const HINT = 'Пожалуйста, заполните следующие поля для регистрации:';
     public string $id = 'form-signup';
 
     public const MESSAGE_SUCCESS = 'Благодарим за регистрацию. Пожалуйста, проверьте свой почтовый ящик.';
@@ -24,6 +26,8 @@ class SignupForm extends EmailingWebForm
 
     public const RULE_EXCEPTION_EMAIL_UNIQUE = 'Этот адрес электронной почты уже занят';
     public const RULE_EXCEPTION_USERNAME_UNIQUE = 'Это имя пользователя уже занято.';
+    public const RULE_REQUIRED_MESSAGE = 'Поле `{attribute}` не может быть пустым';
+    public const RULE_MESSAGE_WRONG_EMAIL = 'Некорректный адрес электронной почты';
 
     public const ATTR_USERNAME = 'username';
     public const ATTR_EMAIL = 'email';
@@ -33,6 +37,8 @@ class SignupForm extends EmailingWebForm
         'html' => 'emailVerify-html',
         'text' => 'emailVerify-text',
     ];
+
+    public const BUTTON_SIGNUP = 'Зарегистрироваться';
 
 
     public ?string $username = null;
@@ -55,16 +61,28 @@ class SignupForm extends EmailingWebForm
     {
         return [
             [[self::ATTR_USERNAME, self::ATTR_EMAIL], 'trim'],
-            [[self::ATTR_USERNAME, self::ATTR_EMAIL, self::ATTR_PASSWORD], 'required'],
+            [[self::ATTR_USERNAME, self::ATTR_EMAIL, self::ATTR_PASSWORD], 'required', 'message' => self::RULE_REQUIRED_MESSAGE],
             [self::ATTR_USERNAME, 'string', 'min' => 2, 'max' => 255],
 
-            [self::ATTR_EMAIL, 'email'],
+            [self::ATTR_EMAIL, 'email', 'message' => self::RULE_MESSAGE_WRONG_EMAIL ],
             [self::ATTR_EMAIL, 'string', 'max' => 255],
 
             [self::ATTR_PASSWORD, 'string', 'min' => Yii::$app->params['user.passwordMinLength']],
 
             [self::ATTR_EMAIL, 'unique', 'targetClass' => Identity::class, 'message' => self::RULE_EXCEPTION_EMAIL_UNIQUE],
             [self::ATTR_USERNAME, 'unique', 'targetClass' => Identity::class, 'message' => self::RULE_EXCEPTION_USERNAME_UNIQUE],
+        ];
+    }
+
+    /**
+     * @return string[]
+     */
+    public function attributeLabels(): array
+    {
+        return [
+            self::ATTR_USERNAME => 'Имя пользователя',
+            self::ATTR_EMAIL => 'Email',
+            self::ATTR_PASSWORD => 'Пароль',
         ];
     }
 

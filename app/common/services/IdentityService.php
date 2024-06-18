@@ -14,11 +14,11 @@ use yii\base\InvalidConfigException;
  *
  * @package app\common\services
  *
- * @tag #common #service #identity
- *
  * @method Identity getClassModel()
  * @method Identity createModel(array $attributes = [])
  * @method Identity addModel(array $attributes = [])
+ *
+ * @tag #common #service #identity
  */
 class IdentityService extends ModelService
 {

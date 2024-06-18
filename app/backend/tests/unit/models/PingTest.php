@@ -28,7 +28,6 @@ class PingTest extends Unit
      *
      * @return void
      *
-     *
      * @tag #backend #tests #unit #models #ContactFormTest #testSendEmail
      */
     public function testPong(): void

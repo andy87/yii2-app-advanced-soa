@@ -2,14 +2,14 @@
 
 namespace app\frontend\tests\functional;
 
-use app\common\models\forms\LoginForm;
-use app\frontend\components\models\BaseWebForm;
-use app\frontend\models\forms\SignupForm;
+use app\common\models\Identity;
 use app\frontend\tests\cest\SendForm;
 use app\frontend\tests\FunctionalTester;
 use Codeception\Exception\ModuleException;
+use app\frontend\models\forms\SignupForm;
 use app\frontend\controllers\AuthController;
-use yii\base\Model;
+use app\frontend\components\models\BaseWebForm;
+use yii\base\Theme;
 
 /**
  * < Frontend > `SignupCest`
@@ -68,13 +68,20 @@ class SignupCest extends SendForm
      */
     public function signupWithEmptyFields(FunctionalTester $I): void
     {
-        $I->see('Signup', 'h1');
-        $I->see('Please fill out the following fields to signup:');
-        $I->submitForm($this->formId, []);
-        $I->seeValidationError('Username cannot be blank.');
-        $I->seeValidationError('Email cannot be blank.');
-        $I->seeValidationError('Password cannot be blank.');
+        $I->see( $this->form::TITLE, 'h1');
+        $I->see($this->form::HINT, 'p');
 
+        $I->submitForm($this->formId, []);
+
+        $messages = [
+            str_replace('{attribute}', $this->form->getAttributeLabel($this->form::ATTR_USERNAME), $this->form::RULE_REQUIRED_MESSAGE),
+            str_replace('{attribute}', $this->form->getAttributeLabel($this->form::ATTR_EMAIL), $this->form::RULE_REQUIRED_MESSAGE),
+            str_replace('{attribute}', $this->form->getAttributeLabel($this->form::ATTR_PASSWORD), $this->form::RULE_REQUIRED_MESSAGE),
+        ];
+
+        foreach ($messages as $attribute => $message) {
+            $I->seeValidationError($message);
+        }
     }
 
     /**
@@ -92,16 +99,22 @@ class SignupCest extends SendForm
      */
     public function signupWithWrongEmail(FunctionalTester $I): void
     {
-        $I->submitForm(
-            $this->formId, [
-            'SignupForm[username]'  => 'tester',
-            'SignupForm[email]'     => 'ttttt',
-            'SignupForm[password]'  => 'tester_password',
-        ]
-        );
-        $I->dontSee('Username cannot be blank.', '.invalid-feedback');
-        $I->dontSee('Password cannot be blank.', '.invalid-feedback');
-        $I->see('Email is not a valid email address.', '.invalid-feedback');
+        $I->submitForm( $this->formId, [
+            $this->formName. '['.$this->form::ATTR_USERNAME.']' => 'tester',
+            $this->formName. '['.$this->form::ATTR_EMAIL.']' => 'ttttt',
+            $this->formName. '['.$this->form::ATTR_PASSWORD.']' => 'tester_password',
+        ]);
+
+        $messages = [
+            str_replace('{attribute}', $this->form->getAttributeLabel($this->form::ATTR_USERNAME), $this->form::RULE_REQUIRED_MESSAGE),
+            str_replace('{attribute}', $this->form->getAttributeLabel($this->form::ATTR_PASSWORD), $this->form::RULE_REQUIRED_MESSAGE),
+        ];
+
+        foreach ($messages as $message) {
+            $I->dontSee($message, '.invalid-feedback');
+        }
+
+        $I->see( $this->form::RULE_MESSAGE_WRONG_EMAIL, '.invalid-feedback');
     }
 
     /**
@@ -118,23 +131,22 @@ class SignupCest extends SendForm
      * @throws ModuleException
      *
      * @tag #frontend #tests #functional #SignupCest #signupSuccessfully
-     *
      */
     public function signupSuccessfully(FunctionalTester $I): void
     {
         $I->submitForm($this->formId, [
-            'SignupForm[username]' => 'tester',
-            'SignupForm[email]' => 'tester.email@example.com',
-            'SignupForm[password]' => 'tester_password',
+            $this->formName. '['.$this->form::ATTR_USERNAME.']' => 'tester',
+            $this->formName. '['.$this->form::ATTR_EMAIL.']' => 'tester.email@example.com',
+            $this->formName. '['.$this->form::ATTR_PASSWORD.']' => 'tester_password',
         ]);
 
-        $I->seeRecord('app\common\models\Identity', [
-            'username' => 'tester',
-            'email' => 'tester.email@example.com',
-            'status' => \app\common\models\Identity::STATUS_INACTIVE
+        $I->seeRecord(Identity::class, [
+            Identity::ATTR_USERNAME => 'tester',
+            Identity::ATTR_EMAIL => 'tester.email@example.com',
+            Identity::ATTR_STATUS => Identity::STATUS_INACTIVE
         ]);
 
         $I->seeEmailIsSent();
-        $I->see('Thank you for registration. Please check your inbox for verification email.');
+        $I->see($this->form::MESSAGE_SUCCESS);
     }
 }

@@ -25,7 +25,6 @@ class AuthService extends BaseService
      * @throws InvalidConfigException
      *
      * @tag #common #service #auth #handler #form #login
-     *
      */
     public function handlerLoginForm(LoginForm $loginForm, array $data = []): bool
     {

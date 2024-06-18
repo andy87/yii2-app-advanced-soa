@@ -14,7 +14,7 @@ use yii\web\{ BadRequestHttpException, Response };
 use app\frontend\components\controllers\BaseFrontendController;
 use app\frontend\models\forms\{ ResetPasswordForm, VerifyEmailForm };
 use yii\base\{ Exception as YiiBaseException, InvalidArgumentException, InvalidConfigException };
-use app\frontend\resources\auth\{AuthLoginResources, AuthRequestPasswordResetResources, AuthResendVerificationEmailResources, AuthResetPasswordResources, AuthSignupResources, AuthVerifyEmailResources };
+use app\frontend\resources\auth\{AuthLoginResources, AuthRequestPasswordResetResources, AuthResendVerificationEmailResources, AuthResetPasswordResources, AuthSignupResources };
 
 /**
  * < Frontend > `AuthController`
@@ -52,7 +52,15 @@ class AuthController extends BaseFrontendController
                 'only' => [ Action::LOGIN, Action::LOGOUT, self::ACTION_SIGNUP],
                 'rules' => [
                     [
-                        'actions' => [Action::LOGIN, self::ACTION_SIGNUP ],
+                        'actions' => [
+                            Action::LOGIN,
+                            self::ACTION_SIGNUP,
+                            self::ACTION_REQUEST_PASSWORD_RESET,
+                            self::ACTION_RESET_PASSWORD,
+                            self::ACTION_VERIFY_EMAIL,
+                            self::ACTION_RESEND_VERIFICATION_EMAIL,
+                            self::ACTION_REQUEST_PASSWORD_RESET_TOKEN
+                        ],
                         'allow' => true,
                         'roles' => [Role::GUEST],
                     ],
@@ -85,6 +93,8 @@ class AuthController extends BaseFrontendController
     }
 
     /**
+     * @endpoint auth/login
+     *
      * @return Response|string
      *
      * @throws InvalidConfigException
@@ -115,7 +125,7 @@ class AuthController extends BaseFrontendController
     }
 
     /**
-     * Logs out the current user.
+     * @endpoint auth/logout
      *
      * @return Response|string
      *
@@ -131,7 +141,7 @@ class AuthController extends BaseFrontendController
     }
 
     /**
-     * Signs user up.
+     * @endpoint auth/signup
      *
      * @return Response|string
      *
@@ -160,7 +170,7 @@ class AuthController extends BaseFrontendController
     }
 
     /**
-     * Requests password reset.
+     * @endpoint auth/request-password-reset
      *
      * @return Response|string
      *
@@ -190,7 +200,7 @@ class AuthController extends BaseFrontendController
     }
 
     /**
-     * Resets password.
+     * @endpoint auth/reset-password
      *
      * @param string $token
      *
@@ -236,7 +246,7 @@ class AuthController extends BaseFrontendController
     }
 
     /**
-     * Verify email address
+     * @endpoint auth/verify-email
      *
      * @param string $token
      *
@@ -248,16 +258,15 @@ class AuthController extends BaseFrontendController
      */
     public function actionVerifyEmail(string $token): Response
     {
-        $R = new AuthVerifyEmailResources;
-        $R->verifyEmailForm = new VerifyEmailForm($token);
+        $verifyEmailForm = new VerifyEmailForm($token);
 
         try
         {
-            $handlerResult = AuthService::getInstance()->handlerAuthVerifyEmailResources($R->verifyEmailForm);
+            $handlerResult = AuthService::getInstance()->handlerAuthVerifyEmailResources($verifyEmailForm);
 
             $this->setSessionFlashMessage( $handlerResult,
-                $R->verifyEmailForm::MESSAGE_SUCCESS,
-                $R->verifyEmailForm::MESSAGE_ERROR
+                $verifyEmailForm::MESSAGE_SUCCESS,
+                $verifyEmailForm::MESSAGE_ERROR
             );
 
         } catch (InvalidArgumentException $e) {
@@ -269,7 +278,7 @@ class AuthController extends BaseFrontendController
     }
 
     /**
-     * Resend verification email
+     * @endpoint auth/resend-verification-email
      *
      * @return Response|string
      *
