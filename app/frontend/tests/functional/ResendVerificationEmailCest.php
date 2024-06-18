@@ -4,9 +4,11 @@ namespace app\frontend\tests\functional;
 
 use app\common\models\Identity;
 use app\common\fixtures\UserFixture;
+use app\frontend\tests\cest\SendForm;
 use app\frontend\tests\FunctionalTester;
 use Codeception\Exception\ModuleException;
 use app\frontend\controllers\AuthController;
+use app\frontend\components\models\BaseSendForm;
 use app\frontend\models\forms\ResendVerificationEmailForm;
 
 /**
@@ -15,6 +17,8 @@ use app\frontend\models\forms\ResendVerificationEmailForm;
  * @package app\frontend\tests\functional
  *
  * @property FunctionalTester $I
+ * @property ResendVerificationEmailForm $form
+ *
  *
  * Fix not used:
  * - @see ResendVerificationEmailCest::checkPage()
@@ -28,12 +32,11 @@ use app\frontend\models\forms\ResendVerificationEmailForm;
  *
  * @tag #frontend #tests #functional #ResendVerificationEmailCest
  */
-class ResendVerificationEmailCest
+class ResendVerificationEmailCest extends SendForm
 {
-    private ResendVerificationEmailForm $form;
-    /** @var string $formId */
-    private string $formId = '#' . ResendVerificationEmailForm::ID;
-    private string $formName = 'ResendVerificationEmailForm';
+    /** @var BaseSendForm */
+    protected const BASE_FORM_CLASS = ResendVerificationEmailForm::class;
+
 
     /**
      * Load fixtures before db transaction begin
@@ -63,7 +66,7 @@ class ResendVerificationEmailCest
      */
     public function _before(FunctionalTester $I): void
     {
-        $this->form = new ResendVerificationEmailForm();
+        parent::_before($I);
 
         $route = AuthController::ENDPOINT . '/' . AuthController::ACTION_RESEND_VERIFICATION_EMAIL; // 'auth/resend-verification-email'
 

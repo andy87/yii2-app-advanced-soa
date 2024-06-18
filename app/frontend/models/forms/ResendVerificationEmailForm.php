@@ -4,7 +4,7 @@ namespace app\frontend\models\forms;
 
 use app\common\services\IdentityService;
 use Yii;
-use app\common\components\models\EmailingModel;
+use app\common\components\models\EmailingSendForm;
 use app\common\models\{ Identity, dto\EmailMessageDto };
 use yii\base\InvalidConfigException;
 
@@ -15,9 +15,9 @@ use yii\base\InvalidConfigException;
  *
  * @tag #models #forms #resend #verification #email
  */
-class ResendVerificationEmailForm extends EmailingModel
+class ResendVerificationEmailForm extends EmailingSendForm
 {
-    public const ID = 'resend-verification-email-form';
+    public string $id = 'resend-verification-email-form';
 
     public const TITLE = 'Отправить повторное письмо подтверждения email';
     public const HINT = 'Пожалуйста, введите ваш email, на который будет отправлено письмо с подтверждением.';

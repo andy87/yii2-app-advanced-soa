@@ -24,7 +24,7 @@ $passwordResetRequestForm = $R->passwordResetRequestForm
 
     <div class="row">
         <div class="col-lg-5">
-            <?php $form = ActiveForm::begin(['id' => $passwordResetRequestForm::ID]); ?>
+            <?php $form = ActiveForm::begin(['id' => $passwordResetRequestForm->id]); ?>
 
                 <?= $form->field($passwordResetRequestForm, $passwordResetRequestForm::ATTR_EMAIL)
                     ->textInput(['autofocus' => true]) ?>

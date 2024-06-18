@@ -2,12 +2,13 @@
 
 namespace app\frontend\tests\functional;
 
-use Codeception\Scenario;
-use app\frontend\tests\FunctionalTester;
+use app\frontend\components\models\BaseSendForm;
 use app\frontend\models\forms\ContactForm;
+use Codeception\Scenario;
+use app\frontend\tests\cest\SendForm;
+use app\frontend\tests\FunctionalTester;
 use Codeception\Exception\ModuleException;
 use app\frontend\controllers\SiteController;
-use app\frontend\components\actions\CaptchaAction;
 
 /* @var $scenario Scenario */
 
@@ -17,6 +18,7 @@ use app\frontend\components\actions\CaptchaAction;
  * @package app\frontend\tests\functional
  *
  * @property FunctionalTester $I
+ * @property ContactForm $form
  *
  * Fix not used:
  * - @see ContactCest::checkContact()
@@ -28,10 +30,10 @@ use app\frontend\components\actions\CaptchaAction;
  *
  * @tag #frontend #tests #functional #ContactCest
  */
-class ContactCest
+class ContactCest extends SendForm
 {
-    private string $formId = '#'  . ContactForm::ID;
-    private string $formName = 'ContactForm';
+    /** @var BaseSendForm */
+    protected const BASE_FORM_CLASS = ContactForm::class;
 
     /**
      * @param FunctionalTester $I
@@ -44,6 +46,8 @@ class ContactCest
      */
     public function _before(FunctionalTester $I): void
     {
+        parent::_before($I);
+
         $route = SiteController::ENDPOINT . '/' . SiteController::ACTION_CONTACT;
 
         //$I->amOnRoute($route);

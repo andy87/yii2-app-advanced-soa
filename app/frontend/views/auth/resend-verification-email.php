@@ -24,7 +24,7 @@ $this->params['breadcrumbs'][] = $this->title;
 
     <div class="row">
         <div class="col-lg-5">
-            <?php $form = ActiveForm::begin(['id' => $resendVerificationEmailForm::ID]); ?>
+            <?php $form = ActiveForm::begin(['id' => $resendVerificationEmailForm->id]); ?>
 
             <?= $form
                 ->field($resendVerificationEmailForm, $resendVerificationEmailForm::ATTR_EMAIL)

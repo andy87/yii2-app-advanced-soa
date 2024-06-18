@@ -2,7 +2,7 @@
 
 namespace app\common\components\models;
 
-use yii\base\Model;
+use app\frontend\components\models\BaseSendForm;
 use app\common\{ models\dto\EmailMessageDto, components\interfaces\ModelEmailingInterface };
 
 /**
@@ -10,7 +10,7 @@ use app\common\{ models\dto\EmailMessageDto, components\interfaces\ModelEmailing
  *
  * @package app\frontend\components\model
  */
-abstract class EmailingModel extends Model implements ModelEmailingInterface
+abstract class EmailingSendForm extends BaseSendForm implements ModelEmailingInterface
 {
     /** @var array  */
     protected array $messageConfig = [];

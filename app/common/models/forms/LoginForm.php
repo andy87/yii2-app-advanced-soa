@@ -2,6 +2,7 @@
 
 namespace app\common\models\forms;
 
+use app\frontend\components\models\BaseSendForm;
 use app\frontend\controllers\AuthController;
 use yii\base\{ InvalidConfigException, Model };
 use app\common\{ models\Identity, services\IdentityService };
@@ -16,9 +17,8 @@ use Yii;
  *
  * @tag #common #forms #login
  */
-class LoginForm extends Model
+class LoginForm extends BaseSendForm
 {
-    public const ID = 'login-form';
     public const ATTR_USERNAME = 'username';
     public const ATTR_PASSWORD = 'password';
     public const ATTR_REMEMBER_ME = 'rememberMe';
@@ -27,6 +27,7 @@ class LoginForm extends Model
 
     public const RULE_REQUIRED_TEMPLATE = 'Поле `{attribute}` не может быть пустым';
 
+    public string $id = 'login-form';
 
     public ?string $username = null;
     public ?string $password = null;

@@ -4,7 +4,8 @@ namespace app\frontend\models\forms;
 
 use app\common\models\Identity;
 use app\common\services\IdentityService;
-use yii\base\{InvalidArgumentException, InvalidConfigException, Model};
+use app\frontend\components\models\BaseSendForm;
+use yii\base\{ InvalidArgumentException, InvalidConfigException };
 
 /**
  * < Frontend > `VerifyEmailForm`
@@ -13,10 +14,15 @@ use yii\base\{InvalidArgumentException, InvalidConfigException, Model};
  *
  * @tag #models #forms #verify #email
  */
-class VerifyEmailForm extends Model
+class VerifyEmailSendForm extends BaseSendForm
 {
+    public string $id = 'verify-email-form';
+
     public const MESSAGE_SUCCESS = 'Вы успешно подтвердили свой email!';
     public const MESSAGE_ERROR = 'Извините! Токен неверный, мы не можем подтвердить аккаунт.';
+
+    public const EXCEPTION_TOKEN_INVALID = 'Wrong verify email token.';
+    public const EXCEPTION_TOKEN_EMPTY = 'Verify email token cannot be blank.';
 
 
 
@@ -53,10 +59,10 @@ class VerifyEmailForm extends Model
             $this->_identity = IdentityService::getInstance()->findByVerificationToken($this->token);
 
             if (!$this->_identity) {
-                throw new InvalidArgumentException('Wrong verify email token.');
+                throw new InvalidArgumentException(self::EXCEPTION_TOKEN_INVALID);
             }
         } else {
-            throw new InvalidArgumentException('Verify email token cannot be blank.');
+            throw new InvalidArgumentException(self::EXCEPTION_TOKEN_EMPTY);
         }
     }
 

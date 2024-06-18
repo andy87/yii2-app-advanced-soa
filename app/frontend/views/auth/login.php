@@ -29,7 +29,7 @@ $loginForm = $R->loginForm;
 
     <div class="row">
         <div class="col-lg-5">
-            <?php $form = ActiveForm::begin(['id' => $loginForm::ID]); ?>
+            <?php $form = ActiveForm::begin(['id' => $loginForm->id]); ?>
 
                 <?= $form->field($loginForm, $loginForm::ATTR_USERNAME)->textInput(['autofocus' => true]) ?>
 

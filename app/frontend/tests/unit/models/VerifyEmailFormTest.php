@@ -7,7 +7,7 @@ use Codeception\Test\Unit;
 use app\frontend\tests\UnitTester;
 use app\common\{ fixtures\UserFixture, models\Identity };
 use yii\base\{ InvalidArgumentException, InvalidConfigException };
-use app\frontend\{ models\forms\VerifyEmailForm, services\AuthService };
+use app\frontend\{ models\forms\VerifyEmailSendForm, services\AuthService };
 
 /**
  * < Frontend > `VerifyEmailFormTest`
@@ -55,11 +55,11 @@ class VerifyEmailFormTest extends Unit
     public function testVerifyWrongToken(): void
     {
         $this->tester->expectThrowable(InvalidArgumentException::class, function() {
-            new VerifyEmailForm('');
+            new VerifyEmailSendForm('');
         });
 
         $this->tester->expectThrowable(InvalidArgumentException::class, function() {
-            new VerifyEmailForm('notexistingtoken_1391882543');
+            new VerifyEmailSendForm('notexistingtoken_1391882543');
         });
     }
 
@@ -77,7 +77,7 @@ class VerifyEmailFormTest extends Unit
     public function testAlreadyActivatedToken(): void
     {
         $this->tester->expectThrowable(InvalidArgumentException::class, function() {
-            new VerifyEmailForm('already_used_token_1548675330');
+            new VerifyEmailSendForm('already_used_token_1548675330');
         });
     }
 
@@ -96,7 +96,7 @@ class VerifyEmailFormTest extends Unit
      */
     public function testVerifyCorrectToken(): void
     {
-        $verifyEmailForm = new VerifyEmailForm('4ch0qbfhvWwkcuWqjN8SWRq72SOw1KYT_1548675330');
+        $verifyEmailForm = new VerifyEmailSendForm('4ch0qbfhvWwkcuWqjN8SWRq72SOw1KYT_1548675330');
 
         AuthService::getInstance()->handl1erAuthVerifyEmailResources($verifyEmailForm);
 

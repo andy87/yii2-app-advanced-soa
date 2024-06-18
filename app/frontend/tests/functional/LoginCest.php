@@ -4,14 +4,19 @@ namespace app\frontend\tests\functional;
 
 use app\common\components\Action;
 use app\common\fixtures\UserFixture;
+use app\frontend\tests\cest\SendForm;
 use app\common\models\forms\LoginForm;
 use app\frontend\tests\FunctionalTester;
 use app\frontend\controllers\AuthController;
+use app\frontend\components\models\BaseSendForm;
 
 /**
  * < Frontend > `LoginCest`
  *
  * @package app\frontend\tests\functional
+ *
+ * @property FunctionalTester $I
+ * @property LoginForm $form
  *
  * @cli ./vendor/bin/codecept run app/frontend/tests/functional/LoginCest
  *
@@ -19,12 +24,11 @@ use app\frontend\controllers\AuthController;
  *
  * @tag #tests #functional #LoginCest
  */
-class LoginCest
+class LoginCest extends SendForm
 {
-    private LoginForm $form;
-    private string $formName = 'LoginForm';
+    /** @var BaseSendForm */
+    protected const BASE_FORM_CLASS = LoginForm::class;
 
-    private string $formId = '#' . LoginForm::ID;
 
     /**
      * Load fixtures before db transaction begin
@@ -54,7 +58,7 @@ class LoginCest
      */
     public function _before(FunctionalTester $I): void
     {
-        $this->form = new LoginForm;
+        parent::_before($I);
 
         $route = AuthController::ENDPOINT . '/' . Action::LOGIN; // 'auth/login'
 

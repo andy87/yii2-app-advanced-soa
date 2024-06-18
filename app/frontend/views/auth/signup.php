@@ -24,7 +24,7 @@ $signupForm = $R->signupForm;
 
     <div class="row">
         <div class="col-lg-5">
-            <?php $form = ActiveForm::begin(['id' => $signupForm::ID]); ?>
+            <?php $form = ActiveForm::begin(['id' => $signupForm->id]); ?>
 
                 <?= $form->field($signupForm, $signupForm::ATTR_USERNAME)->textInput(['autofocus' => true]) ?>
 

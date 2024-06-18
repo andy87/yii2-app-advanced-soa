@@ -3,8 +3,8 @@
 namespace app\frontend\models\forms;
 
 use Yii;
-use yii\base\Model;
 use app\common\models\dto\EmailMessageDto;
+use app\frontend\components\models\BaseSendForm;
 
 /**
  * < Frontend > `ContactForm`
@@ -15,9 +15,9 @@ use app\common\models\dto\EmailMessageDto;
  *
  * @tag #models #forms #contact
  */
-class ContactForm extends Model
+class ContactForm extends BaseSendForm
 {
-    public const ID = 'contact-form';
+    public string $id = 'contact-form';
 
     public const ATTR_NAME = 'name';
     public const ATTR_EMAIL = 'email';

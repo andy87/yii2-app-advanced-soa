@@ -5,7 +5,7 @@ namespace app\frontend\tests\unit\models;
 use Codeception\Test\Unit;
 use app\common\fixtures\UserFixture;
 use Codeception\Exception\ModuleException;
-use app\frontend\{models\forms\ResetPasswordForm, services\AuthService, tests\UnitTester};
+use app\frontend\{models\forms\ResetPasswordSendForm, services\AuthService, tests\UnitTester};
 use yii\base\{Exception, InvalidArgumentException, InvalidConfigException};
 
 /**
@@ -57,11 +57,11 @@ class ResetPasswordFormTest extends Unit
     public function testResetWrongToken()
     {
         $this->tester->expectThrowable(InvalidArgumentException::class, function() {
-            new ResetPasswordForm('');
+            new ResetPasswordSendForm('');
         });
 
         $this->tester->expectThrowable(InvalidArgumentException::class, function() {
-            new ResetPasswordForm('notexistingtoken_1391882543');
+            new ResetPasswordSendForm('notexistingtoken_1391882543');
         });
     }
 
@@ -82,7 +82,7 @@ class ResetPasswordFormTest extends Unit
     {
         $user = $this->tester->grabFixture('user', 0);
 
-        $resetPasswordForm = new ResetPasswordForm($user['password_reset_token']);
+        $resetPasswordForm = new ResetPasswordSendForm($user['password_reset_token']);
 
         $resultResetPassword = AuthService::getInstance()->resetPassword($resetPasswordForm);
 

@@ -22,7 +22,7 @@ $loginForm = $R->loginForm;
 
         <p>Пожалуйста, заполните следующие поля для входа:</p>
 
-        <?php $form = ActiveForm::begin(['id' => $loginForm::ID]); ?>
+        <?php $form = ActiveForm::begin(['id' => $loginForm->id]); ?>
 
             <?= $form->field($loginForm, $loginForm::ATTR_USERNAME)->textInput(['autofocus' => true]) ?>
 

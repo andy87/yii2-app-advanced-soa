@@ -4,7 +4,7 @@ namespace app\frontend\models\forms;
 
 use app\common\services\IdentityService;
 use Yii;
-use app\common\components\models\EmailingModel;
+use app\common\components\models\EmailingSendForm;
 use app\common\models\{ Identity, dto\EmailMessageDto };
 use yii\base\InvalidConfigException;
 
@@ -15,9 +15,9 @@ use yii\base\InvalidConfigException;
  *
  * @tag #models #forms #signup
  */
-class SignupForm extends EmailingModel
+class SignupForm extends EmailingSendForm
 {
-    const ID = 'form-signup';
+    public string $id = 'form-signup';
 
     public const MESSAGE_SUCCESS = 'Благодарим за регистрацию. Пожалуйста, проверьте свой почтовый ящик.';
     public const MESSAGE_ERROR = 'Ошибка регистрации. Пожалуйста, попробуйте еще раз.';

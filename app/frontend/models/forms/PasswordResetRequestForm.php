@@ -5,7 +5,7 @@ namespace app\frontend\models\forms;
 use Yii;
 use yii\base\InvalidConfigException;
 use app\common\models\{ Identity, dto\EmailMessageDto };
-use app\common\{ services\IdentityService, components\models\EmailingModel };
+use app\common\{ services\IdentityService, components\models\EmailingSendForm };
 
 /**
  * < Frontend > `PasswordResetRequestForm`
@@ -14,9 +14,9 @@ use app\common\{ services\IdentityService, components\models\EmailingModel };
  *
  * @tag #models #forms #password #reset #request
  */
-class PasswordResetRequestForm extends EmailingModel
+class PasswordResetRequestForm extends EmailingSendForm
 {
-    const ID = 'request-password-reset-form';
+    public string $id = 'request-password-reset-form';
 
     public const MESSAGE_SUCCESS = 'Проверьте свою электронную почту для получения дальнейших инструкций.';
     public const MESSAGE_ERROR = 'Извините, мы не можем сбросить пароль для указанного адреса электронной почты.';

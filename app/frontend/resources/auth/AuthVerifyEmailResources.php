@@ -2,7 +2,7 @@
 
 namespace app\frontend\resources\auth;
 
-use app\frontend\models\forms\VerifyEmailForm;
+use app\frontend\models\forms\VerifyEmailSendForm;
 use app\common\components\resources\TemplateResources;
 
 /**
@@ -20,7 +20,7 @@ class AuthVerifyEmailResources extends TemplateResources
 
 
     /**
-     * @var VerifyEmailForm
+     * @var VerifyEmailSendForm
      */
-    public VerifyEmailForm $verifyEmailForm;
+    public VerifyEmailSendForm $verifyEmailForm;
 }

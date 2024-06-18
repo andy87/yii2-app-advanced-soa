@@ -2,10 +2,11 @@
 
 namespace app\frontend\models\forms;
 
-use app\common\services\IdentityService;
 use Yii;
 use app\common\models\Identity;
-use yii\base\{InvalidConfigException, Model, InvalidArgumentException};
+use app\common\services\IdentityService;
+use app\frontend\components\models\BaseSendForm;
+use yii\base\{ InvalidConfigException, InvalidArgumentException };
 
 /**
  * < Frontend > `ResetPasswordForm`
@@ -14,14 +15,17 @@ use yii\base\{InvalidConfigException, Model, InvalidArgumentException};
  *
  * @tag #models #forms #reset #password
  */
-class ResetPasswordForm extends Model
+class ResetPasswordSendForm extends BaseSendForm
 {
-    const ID = 'reset-password-form';
+    public string $id = 'reset-password-form';
 
     public const ATTR_PASSWORD = 'password';
 
     public const MESSAGE_SUCCESS = 'Новый пароль был сохранен';
     public const MESSAGE_ERROR = 'Извините, мы не можем сбросить пароль для указанного адреса электронной почты.';
+
+    public const EXCEPTION_TOKEN_INVALID = 'Wrong password reset token.';
+    public const EXCEPTION_TOKEN_EMPTY_PASSWORD = 'Password reset token cannot be empty.';
 
 
     /** @var ?string  */
@@ -57,11 +61,11 @@ class ResetPasswordForm extends Model
 
             } else {
 
-                throw new InvalidArgumentException('Wrong password reset token.');
+                throw new InvalidArgumentException(self::EXCEPTION_TOKEN_INVALID);
             }
         } else {
 
-            throw new InvalidArgumentException('Password reset token cannot be empty.');
+            throw new InvalidArgumentException(self::EXCEPTION_TOKEN_EMPTY_PASSWORD);
         }
     }
 

@@ -2,9 +2,14 @@
 
 namespace app\frontend\tests\functional;
 
+use app\common\models\forms\LoginForm;
+use app\frontend\components\models\BaseSendForm;
+use app\frontend\models\forms\SignupForm;
+use app\frontend\tests\cest\SendForm;
 use app\frontend\tests\FunctionalTester;
 use Codeception\Exception\ModuleException;
 use app\frontend\controllers\AuthController;
+use yii\base\Model;
 
 /**
  * < Frontend > `SignupCest`
@@ -12,6 +17,7 @@ use app\frontend\controllers\AuthController;
  * @package app\frontend\tests\functional
  *
  * @property FunctionalTester $I
+ * @property SignupForm $form
  *
  * Fix not used:
  * - @see SignupCest::signupWithEmptyFields()
@@ -22,23 +28,29 @@ use app\frontend\controllers\AuthController;
  *
  * @tag #frontend #tests #functional #SignupCest
  */
-class SignupCest
+class SignupCest extends SendForm
 {
-    /** @var string $formId */
-    protected $formId = '#form-signup';
-
+    /** @var BaseSendForm */
+    protected const BASE_FORM_CLASS = SignupForm::class;
 
     /**
+     * @endpoint auth/signup
+     *
      * @param FunctionalTester $I
      *
      * @return void
+     *
+     * @see AuthController::actionSignup()
      *
      * @tag #frontend #tests #functional #SignupCest #_before
      */
     public function _before(FunctionalTester $I): void
     {
-        /** @see AuthController::actionSignup() */
-        $I->amOnRoute('auth/signup');
+        parent::_before($I);
+
+        $roure = AuthController::ENDPOINT . '/' . AuthController::ACTION_SIGNUP;
+
+        $I->amOnRoute( $roure );
     }
 
     /**
@@ -110,11 +122,6 @@ class SignupCest
      */
     public function signupSuccessfully(FunctionalTester $I): void
     {
-        //  Test  tests\functional\SignupCest.php:signupSuccessfully
-        // Step  See "Thank you for registration. Please check your inbox for verification email."
-        // Fail  Failed asserting that on page /index-test.php/auth/signup
-        //-->  Signup My Application Home About Contact SignupLogin Home Signup Signup Благодарим за регистрацию. Пожалуйста, проверьте свой почтовый ящик. Signup Please fill out the following fields to signup: Username Email Password Войти © My Application 2024 Powered by Yii Framework
-        //--> contains "Thank you for registration. Please check your inbox for verification email.".
         $I->submitForm($this->formId, [
             'SignupForm[username]' => 'tester',
             'SignupForm[email]' => 'tester.email@example.com',
