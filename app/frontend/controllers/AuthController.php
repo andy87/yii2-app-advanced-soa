@@ -229,8 +229,8 @@ class AuthController extends BaseFrontendController
 
         } catch (InvalidArgumentException $e) {
 
-            $this->runtimeLogError( __METHOD__,
-                $e->getMessage(),
+            $this->runtimeLogError( $e->getMessage(),
+                __METHOD__,
                 $R->resetPasswordForm
             );
 

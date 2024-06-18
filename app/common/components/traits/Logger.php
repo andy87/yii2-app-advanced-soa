@@ -37,7 +37,7 @@ trait Logger
      * @return void
      *
      */
-    public function runtimeLogError(string $method, string $message, Model $model, array $data = []): void
+    public function runtimeLogError(string $message, string $method, Model $model, array $data = []): void
     {
         $this->runtimeLogCore($this->runtimeLogError, $method, $message, $model, $data);
     }

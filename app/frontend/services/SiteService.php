@@ -21,33 +21,39 @@ class SiteService extends BaseService
      *
      * @param array $data
      *
-     * @return ?bool
+     * @return bool
      *
      * @throws InvalidConfigException
      *
      * @tag #site #handler #contact #form
      */
-    public function handlerContactForm(ContactForm $contactForm, array $data): ?bool
+    public function handlerContactForm(ContactForm $contactForm, array $data = []): bool
     {
-        if ($contactForm->load($data) && $contactForm->validate()) {
-            $adminEmail = Yii::$app->params['adminEmail'] ?? null;
+        if ($contactForm->load($data)) {
 
-            if ($adminEmail)
+            if ($contactForm->validate())
             {
-                return $this->sendEmailContactForm($contactForm);
+                $adminEmail = Yii::$app->params['adminEmail'] ?? null;
 
-            } else {
+                if ($adminEmail)
+                {
+                    return $this->sendEmailContactForm($contactForm);
 
-                $message = 'Admin email `is not set` in params';
+                } else {
+
+                    $this->runtimeLogError( 'Admin email `is not set` in params',
+                        __METHOD__,
+                        $contactForm,
+                        [
+                            'data' => $data,
+                            'params' => Yii::$app->params,
+                        ]
+                    );
+                }
             }
-
-        } else {
-            $message = 'Contact form `is not valid`';
         }
 
-        $this->runtimeLogError(__METHOD__, $message, $contactForm);
-
-        return null;
+        return false;
     }
 
     /**

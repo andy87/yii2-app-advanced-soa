@@ -66,7 +66,11 @@ class AuthService extends \app\common\services\AuthService
 
         $transaction?->rollBack();
 
-        $this->runtimeLogError(__METHOD__, $message, $signupForm, $data ?? []);
+        $this->runtimeLogError( $message,
+            __METHOD__,
+            $signupForm,
+                $data ?? []
+        );
 
         return null;
     }
@@ -103,7 +107,7 @@ class AuthService extends \app\common\services\AuthService
     {
         if (count($data)) $passwordResetRequestForm->load($data);
 
-        //$transaction = Yii::$app->db->beginTransaction();
+        $transaction = Yii::$app->db->beginTransaction();
 
         if ($passwordResetRequestForm->validate())
         {
@@ -121,7 +125,7 @@ class AuthService extends \app\common\services\AuthService
                         {
                             if ($this->sendEmailRequestPasswordReset($passwordResetRequestForm)) {
 
-                                //$transaction?->commit();
+                                $transaction?->commit();
                                 return true;
 
                             } else {
@@ -145,9 +149,13 @@ class AuthService extends \app\common\services\AuthService
             $message = 'Password reset request form `validation error`';
         }
 
-        //$transaction?->rollBack();
+        $transaction?->rollBack();
 
-        $this->runtimeLogError(__METHOD__, $message, $passwordResetRequestForm, $data ?? []);
+        $this->runtimeLogError( $message,
+            __METHOD__,
+            $passwordResetRequestForm,
+                $data ?? []
+        );
 
         return false;
     }
@@ -199,7 +207,11 @@ class AuthService extends \app\common\services\AuthService
         }
 
 
-        $this->runtimeLogError(__METHOD__, $message, $resetPasswordForm);
+        $this->runtimeLogError( $message,
+            __METHOD__,
+            $resetPasswordForm,
+            $data ?? []
+        );
 
         return false;
     }
@@ -248,7 +260,11 @@ class AuthService extends \app\common\services\AuthService
             $message = 'Verify email form `save error`';
         }
 
-        $this->runtimeLogError(__METHOD__, $message, $verifyEmailForm);
+        $this->runtimeLogError( $message,
+            __METHOD__,
+            $verifyEmailForm,
+            $data ?? []
+        );
 
         return false;
     }
@@ -293,7 +309,11 @@ class AuthService extends \app\common\services\AuthService
             $message = 'Resend verification email form `validation error`';
         }
 
-        $this->runtimeLogError(__METHOD__, $message, $resendVerificationEmailForm);
+        $this->runtimeLogError( $message,
+            __METHOD__,
+            $resendVerificationEmailForm,
+            $data ?? []
+        );
 
         return false;
     }

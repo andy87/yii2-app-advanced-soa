@@ -17,7 +17,7 @@ use app\frontend\components\models\BaseWebForm;
  */
 class ContactForm extends BaseWebForm
 {
-    public string $id = 'contact-form';
+    public const TITLE = 'Обратная связь';
 
     public const ATTR_NAME = 'name';
     public const ATTR_EMAIL = 'email';
@@ -29,7 +29,11 @@ class ContactForm extends BaseWebForm
     public const MESSAGE_SUCCESS = 'Спасибо за обращение к нам. Мы ответим вам как можно скорее.';
     public const MESSAGE_ERROR = 'При отправке вашего сообщения произошла ошибка.';
 
+    public const RULE_REQUIRED_MESSAGE = 'Поле `{attribute}` не может быть пустым';
+    public const RULE_VERIFY_CODE_MESSAGE = 'Неверный код проверки';
 
+
+    public string $id = 'contact-form';
 
     public ?string $name = null;
     public ?string $email = null;
@@ -44,9 +48,9 @@ class ContactForm extends BaseWebForm
     public function rules(): array
     {
         return [
-            [[self::ATTR_NAME, self::ATTR_EMAIL, self::ATTR_SUBJECT, self::ATTR_BODY], 'required'],
+            [[self::ATTR_NAME, self::ATTR_EMAIL, self::ATTR_SUBJECT, self::ATTR_BODY], 'required', 'message' => self::RULE_REQUIRED_MESSAGE],
             [self::ATTR_EMAIL, 'email'],
-            [self::ATTR_VERIFY_CODE, 'captcha'],
+            [self::ATTR_VERIFY_CODE, 'captcha', 'message' => self::RULE_VERIFY_CODE_MESSAGE],
         ];
     }
 
@@ -65,6 +69,7 @@ class ContactForm extends BaseWebForm
             self::ATTR_VERIFY_CODE => 'Капча',
         ];
     }
+
 
     /**
      * @return EmailMessageDto

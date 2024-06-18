@@ -11,10 +11,11 @@ use app\frontend\resources\site\SiteContactResources;
  * @var SiteContactResources $R
  */
 
-$this->title = 'Contact';
+$contactForm = $R->contactForm;
+
+$this->title = $contactForm::TITLE;
 $this->params['breadcrumbs'][] = $this->title;
 
-$contactForm = $R->contactForm;
 
 ?>
 
@@ -28,7 +29,7 @@ $contactForm = $R->contactForm;
 
     <div class="row">
         <div class="col-lg-5">
-            <?php $form = ActiveForm::begin(['id' => 'contact-form']); ?>
+            <?php $form = ActiveForm::begin(['id' => $contactForm->id]); ?>
 
                 <?= $form->field($contactForm, $contactForm::ATTR_NAME)->textInput(['autofocus' => true]) ?>
 
