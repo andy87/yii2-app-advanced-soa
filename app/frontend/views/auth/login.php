@@ -38,9 +38,9 @@ $loginForm = $R->loginForm;
                 <?= $form->field($loginForm, $loginForm::ATTR_REMEMBER_ME)->checkbox() ?>
 
                 <div class="my-1 mx-0" style="color:#999;">
-                    Если вы забыли пароль, вы можете <?= Html::a('сбросить его', $loginForm->getHrefRequestPasswordReset()) ?>.
+                    Если вы забыли пароль, вы можете <?= Html::a('сбросить его', [$loginForm->getHrefRequestPasswordReset()]) ?>.
                     <br>
-                    Нужно новое письмо с подтверждением? <?= Html::a('Отправить повторно', $loginForm->getHrefResendVerificationEmail()) ?>
+                    Нужно новое письмо с подтверждением? <?= Html::a('Отправить повторно', [$loginForm->getHrefResendVerificationEmail()]) ?>
                 </div>
 
                 <div class="form-group">

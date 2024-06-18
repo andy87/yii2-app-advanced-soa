@@ -92,8 +92,14 @@ class LoginCest
     {
         $I->submitForm($this->formId, $this->formParams('', ''));
 
-        $I->seeValidationError('Username cannot be blank.');
-        $I->seeValidationError('Password cannot be blank.');
+        $messages = [
+            str_replace('{attribute}', $this->form->getAttributeLabel($this->form::ATTR_USERNAME), $this->form::RULE_REQUIRED_TEMPLATE),
+            str_replace('{attribute}', $this->form->getAttributeLabel($this->form::ATTR_PASSWORD), $this->form::RULE_REQUIRED_TEMPLATE),
+        ];
+
+        foreach ($messages as $attribute => $message) {
+            $I->seeValidationError($message);
+        }
     }
 
     /**

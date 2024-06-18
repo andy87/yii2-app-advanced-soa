@@ -112,7 +112,7 @@ class IdentityService extends ModelService
      *
      * @tag #service #identity #find #reset #token
      */
-    public function findByUsername(?string $username): ?Identity
+    public function findActiveByUsername(?string $username): ?Identity
     {
         return $this->identityRepository->findActiveByUsername($username);
     }

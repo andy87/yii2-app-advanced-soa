@@ -23,9 +23,9 @@ class LoginForm extends Model
     public const ATTR_PASSWORD = 'password';
     public const ATTR_REMEMBER_ME = 'rememberMe';
 
-    public const RULE_MESSAGE_WRONG_PASSWORD = 'Неверный пароль.';
     public const RULE_MESSAGE_WRONG_USER_NAME_OR_PASSWORD = 'Неверное имя пользователя или пароль.';
 
+    public const RULE_REQUIRED_TEMPLATE = 'Поле `{attribute}` не может быть пустым';
 
 
     public ?string $username = null;
@@ -41,7 +41,7 @@ class LoginForm extends Model
     public function rules(): array
     {
         return [
-            [[self::ATTR_USERNAME, self::ATTR_PASSWORD], 'required'],
+            [[self::ATTR_USERNAME, self::ATTR_PASSWORD], 'required', 'message' => self::RULE_REQUIRED_TEMPLATE ],
             [self::ATTR_REMEMBER_ME, 'boolean'],
             [self::ATTR_PASSWORD, 'validatePassword'], /** @see validatePassword */
         ];
@@ -69,40 +69,52 @@ class LoginForm extends Model
     }
 
     /**
-     * @return array
-     */
-    public function getHrefRequestPasswordReset(): array
-    {
-        return [AuthController::ENDPOINT . '/' . AuthController::ACTION_REQUEST_PASSWORD_RESET]; // 'auth/request-password-reset'
-    }
-
-    /**
-     * @return array
-     */
-    public function getHrefResendVerificationEmail(): array
-    {
-        return [AuthController::ENDPOINT . '/' . AuthController::ACTION_RESEND_VERIFICATION_EMAIL]; // 'auth/resend-verification-email'
-    }
-
-    /**
-     * Finds user by [[username]]
-     *
      * @return ?Identity
      *
      * @throws InvalidConfigException
      */
     public function getIdentity(): ?Identity
     {
-        if ($this->_identity === null) {
-            $this->_identity = IdentityService::getInstance()->findByUsername($this->username);
-        }
-
-        if ($this->username && $this->password) {
-            if ( !$this->_identity ) {
-                $this->addError(self::ATTR_PASSWORD, self::RULE_MESSAGE_WRONG_USER_NAME_OR_PASSWORD);
-            }
+        if ($this->_identity === null)
+        {
+            $this->_identity = IdentityService::getInstance()->findActiveByUsername($this->username);
         }
 
         return $this->_identity;
     }
+
+    /**
+     * @return array
+     *
+     * @tag #common #forms #login #labels
+     */
+    public function attributeLabels(): array
+    {
+        return [
+            self::ATTR_USERNAME => 'Имя пользователя',
+            self::ATTR_PASSWORD => 'Пароль',
+            self::ATTR_REMEMBER_ME => 'Запомнить меня',
+        ];
+    }
+
+    /**
+     * @return string
+     *
+     * @endpoint auth/request-password-reset
+     */
+    public function getHrefRequestPasswordReset(): string
+    {
+        return AuthController::ENDPOINT . '/' . AuthController::ACTION_REQUEST_PASSWORD_RESET;
+    }
+
+    /**
+     * @return string
+     *
+     * @endpoint auth/resend-verification-email
+     */
+    public function getHrefResendVerificationEmail(): string
+    {
+        return AuthController::ENDPOINT . '/' . AuthController::ACTION_RESEND_VERIFICATION_EMAIL;
+    }
+
 }
