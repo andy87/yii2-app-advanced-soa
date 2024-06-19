@@ -1,10 +1,10 @@
 namespace: app\common\tests
 actor_suffix: Tester
 paths:
-    tests: app/common/tests
-    output: app/common/tests/_output
-    data: app/common/tests/_data
-    support: app/common/tests/_support
+    tests: tests
+    output: tests/_output
+    data: tests/_data
+    support: tests/_support
 bootstrap: _bootstrap.php
 settings:
     colors: true
