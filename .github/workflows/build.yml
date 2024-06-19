@@ -95,5 +95,5 @@ jobs:
 
       - name: Run tests with codeception 
         run: |
-          vendor/bin/codecept build
-          vendor/bin/codecept run
+          ./vendor/bin/codecept build
+          ./vendor/bin/codecept run
