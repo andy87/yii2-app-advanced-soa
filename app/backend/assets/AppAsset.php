@@ -2,26 +2,16 @@
 
 namespace app\backend\assets;
 
-use yii\web\AssetBundle;
+use app\common\components\assets\BaseWebAsset;
 
 /**
  * <Backend > `AppAsset`
  *
  * @package app\backend\assets
  *
- * @tag #backend #asset #app
+ * @tag #assets #app
  */
-class AppAsset extends AssetBundle
+class AppAsset extends BaseWebAsset
 {
-    public $basePath = '@webroot';
-    public $baseUrl = '@web';
-    public $css = [
-        'css/site.css',
-    ];
-    public $js = [
-    ];
-    public $depends = [
-        'yii\web\YiiAsset',
-        'yii\bootstrap5\BootstrapAsset',
-    ];
+    public $css = [ 'css/site.css' ];
 }
