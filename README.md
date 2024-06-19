@@ -43,7 +43,6 @@ php yii_test migrate
 
 # Run fixtures
 php yii fixture/load "*"
-
 ```
 ### Codeception tests
 
@@ -56,12 +55,7 @@ console move to `root/app` directory application and run the following commands:
 
 ### Check the application with codeception tests ([Yii2 guide](https://github.com/yiisoft/yii2-app-advanced/blob/master/docs/guide/start-testing.md))
 ```bash
-./vendor/bin/codecept run app/common/tests
-
-./vendor/bin/codecept run app/backend/tests
-
-./vendor/bin/codecept run app/frontend/tests/unit
-
+./vendor/bin/codecept run
 ```
 ___
 Я люблю Yii2 за его простоту и функциональность, поэтому захотелось создать свою сборку шаблона приложения.
