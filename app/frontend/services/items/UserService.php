@@ -18,9 +18,4 @@ use app\frontend\models\items\User;
 class UserService extends \app\common\services\items\UserService
 {
     public const CLASS_MODEL = User::class;
-
-    public function finduserByEmail(?string $email)
-    {
-
-    }
 }
