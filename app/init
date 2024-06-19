@@ -110,8 +110,8 @@ foreach ($callbacks as $callback) {
     }
 }
 
-if (!file_exists("$root/../.env")) {
-    if (copy("$root/../.env.example", "$root/../.env")) {
+if (!file_exists("$root/.env")) {
+    if (copy("$root/.env.example", "$root/.env")) {
         echo "\r\n   generate .env\n";
     } else {
         printError("Cannot generate .env file.");

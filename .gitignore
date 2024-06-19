@@ -4,7 +4,7 @@ vendor/
 # phpstorm project files
 .idea/
 
-.env
+app/.env
 
 composer.lock
 

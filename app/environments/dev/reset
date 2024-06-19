@@ -39,7 +39,7 @@ $console = [
 $app = [
     'yii',
     'yii_test',
-    '../.env',
+    '.env',
     '../composer.lock',
     '../vendor',
     'reset',
