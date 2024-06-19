@@ -26,7 +26,7 @@ Documentation is at [docs/guide/README.md](https://github.com/yiisoft/yii2-app-a
 
 console move to `root` directory application and run the following commands:
 ```bash
-composer create-project --prefer-dist yiisoft/yii2-app-advanced-soa .
+git clone git@github.com:andy87/yii2-app-advanced-soa.git .
 
 # Install dependencies
 composer install
@@ -35,14 +35,13 @@ composer install
 cd app
 
 # Initialize application
-php init --env=Development --overwrite=All --delete=All
+php init
+
+// Select Dev/Prod
 
 # Run migrations
 php yii migrate
 php yii_test migrate
-
-# Run fixtures
-php yii fixture/load "*"
 ```
 ### Codeception tests
 
