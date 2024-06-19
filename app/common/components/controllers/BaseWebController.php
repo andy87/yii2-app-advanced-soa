@@ -12,6 +12,8 @@ use app\common\components\core\BaseController;
  */
 abstract class BaseWebController extends BaseController
 {
+    public const ENDPOINT = '/';
+
     public const ACTION_INDEX = 'index';
     public const ACTION_ERROR = 'error';
 
@@ -26,5 +28,23 @@ abstract class BaseWebController extends BaseController
                 'view' => '@app/views/system/error'
             ]
         ];
+    }
+
+    /**
+     * @param ?string $action
+     *
+     * @return string
+     *
+     * @tag #get #endpoint
+     */
+    public static function getEndpoint( ?string $action = null): string
+    {
+        $endpoint = static::ENDPOINT;
+
+        if ($action) {
+            $endpoint .= '/' . $action;
+        }
+
+        return $endpoint;
     }
 }

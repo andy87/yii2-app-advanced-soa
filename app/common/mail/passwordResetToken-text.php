@@ -1,5 +1,6 @@
 <?php
 
+use app\frontend\controllers\AuthController;
 use yii\web\View;
 use app\common\models\Identity;
 
@@ -8,12 +9,15 @@ use app\common\models\Identity;
  * @var Identity $user
  */
 
-$resetLink = Yii::$app->urlManager->createAbsoluteUrl(['auth/reset-password', 'token' => $user->password_reset_token]);
+$resetLink = Yii::$app->urlManager->createAbsoluteUrl([
+    AuthController::getEndpoint(AuthController::ACTION_RESET_PASSWORD),
+    'token' => $user->password_reset_token
+]);
 
 ?>
 
-Hello <?= $user->username ?>,
+Привет <?= $user->username ?>,
 
-Follow the link below to reset your password:
+Подтвердите свой адрес электронной почты:
 
 <?= $resetLink ?>

@@ -2,18 +2,22 @@
 
 use yii\web\View;
 use app\common\models\Identity;
+use app\frontend\controllers\AuthController;
 
 /**
  * @var View $this
  * @var Identity $user
  */
 
-$verifyLink = Yii::$app->urlManager->createAbsoluteUrl(['auth/verify-email', 'token' => $user->verification_token]);
+$verifyLink = Yii::$app->urlManager->createAbsoluteUrl([
+    AuthController::getEndpoint(AuthController::ACTION_VERIFY_EMAIL),
+    'token' => $user->verification_token
+]);
 
 ?>
 
-Hello <?= $user->username ?>,
+Привет <?= $user->username ?>,
 
-Follow the link below to verify your email:
+Подтвердите свой адрес электронной почты:
 
 <?= $verifyLink ?>
