@@ -56,6 +56,9 @@ console move to `root/app` directory application and run the following commands:
 ```bash
 ./vendor/bin/codecept run
 ```
+
+
+
 ___
 Я люблю Yii2 за его простоту и функциональность, поэтому захотелось создать свою сборку шаблона приложения.  
 **Особенности**:
