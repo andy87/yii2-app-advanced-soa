@@ -74,19 +74,12 @@ class SiteController extends BaseFrontendController
         {
             $result = SiteService::getInstance()->handlerContactForm($R->contactForm, Yii::$app->request->post() );
 
-            if( $result === null )
-            {
-                $this->setSessionFlashError( $R->contactForm::MESSAGE_ERROR );
-                return $this->refresh();
+            $this->setSessionFlashMessage( $result,
+                $R->contactForm::MESSAGE_SUCCESS,
+                $R->contactForm::MESSAGE_ERROR
+            );
 
-            } else {
-
-                $this->setSessionFlashMessage(
-                    $result,
-                    $R->contactForm::MESSAGE_SUCCESS,
-                    $R->contactForm::MESSAGE_ERROR
-                );
-            }
+            if( $result ) return $this->refresh();
         }
 
         return $this->render($R::TEMPLATE, $R->release());

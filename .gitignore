@@ -17,11 +17,13 @@ composer.lock
 /app/frontend/web/index.php
 /app/frontend/web/index-test.php
 /app/frontend/web/robots.txt
+app/frontend/tests/_support/*
 app/frontend/tests/_support/_generated/*
 
 /app/backend/web/index.php
 /app/backend/web/index-test.php
 /app/backend/web/robots.txt
+app/backend/tests/_support/*
 app/backend/tests/_support/_generated/*
 
 .phpunit.result.cache

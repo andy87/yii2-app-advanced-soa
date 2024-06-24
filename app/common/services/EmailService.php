@@ -46,15 +46,13 @@ class EmailService extends BaseService
         if ($message->send()) {
 
             return true;
-
-        } else {
-
-            Yii::error(['Email was not sent', [
-                'emailMessageDto' => $emailMessageDto,
-            ]]);
-
-            return false;
         }
+
+        Yii::error(['Email was not sent', [
+            'emailMessageDto' => $emailMessageDto,
+        ]]);
+
+        return false;
     }
 
     /**
