@@ -22,6 +22,9 @@ class AuthController extends BaseBackendController
 {
     public const ENDPOINT = 'auth';
 
+    public const LABELS = [
+        Action::LOGIN => 'Авторизация',
+    ];
 
 
     /**

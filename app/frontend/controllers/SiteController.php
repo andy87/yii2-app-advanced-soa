@@ -4,9 +4,9 @@ namespace app\frontend\controllers;
 
 use Yii;
 use yii\web\Response;
+use app\common\components\Action;
 use yii\base\InvalidConfigException;
 use app\frontend\services\SiteService;
-use app\frontend\models\forms\ContactForm;
 use app\common\components\traits\SessionFlash;
 use app\frontend\components\{actions\CaptchaAction, controllers\BaseFrontendController};
 use app\frontend\resources\site\{SiteAboutResources, SiteContactResources, SiteIndexResources};
@@ -25,6 +25,11 @@ class SiteController extends BaseFrontendController
     public const ENDPOINT = 'site';
     public const ACTION_CONTACT = 'contact';
     public const ACTION_ABOUT = 'about';
+    public const LABELS = [
+        Action::INDEX => 'Главная',
+        self::ACTION_ABOUT => 'О нас',
+        self::ACTION_CONTACT => 'Контакты',
+    ];
 
     /**
      * @return array

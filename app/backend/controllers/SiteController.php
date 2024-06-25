@@ -3,6 +3,7 @@
 namespace app\backend\controllers;
 
 use app\backend\components\controllers\BaseBackendController;
+use app\common\components\Action;
 
 /**
  * < Backend > `SiteController`
@@ -14,6 +15,9 @@ use app\backend\components\controllers\BaseBackendController;
 class SiteController extends BaseBackendController
 {
     public const ENDPOINT = 'site';
+    public const LABELS = [
+        Action::INDEX => 'Главная',
+    ];
 
     /**
      * Displays homepage.
