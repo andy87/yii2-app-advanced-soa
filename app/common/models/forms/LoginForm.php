@@ -26,6 +26,9 @@ class LoginForm extends BaseWebForm
 
     public const RULE_REQUIRED_MESSAGE = 'Поле `{attribute}` не может быть пустым';
 
+    public const HINT = 'Пожалуйста, заполните следующие поля для входа:';
+    public const BUTTON_LOGIN_TEXT = 'Авторизоваться';
+
     public string $id = 'login-form';
 
     public ?string $username = null;
@@ -104,7 +107,7 @@ class LoginForm extends BaseWebForm
      */
     public function getHrefRequestPasswordReset(): string
     {
-        return AuthController::ENDPOINT . '/' . AuthController::ACTION_REQUEST_PASSWORD_RESET;
+        return AuthController::getEndpoint(AuthController::ACTION_REQUEST_PASSWORD_RESET);
     }
 
     /**
@@ -114,7 +117,7 @@ class LoginForm extends BaseWebForm
      */
     public function getHrefResendVerificationEmail(): string
     {
-        return AuthController::ENDPOINT . '/' . AuthController::ACTION_RESEND_VERIFICATION_EMAIL;
+        return AuthController::getEndpoint(AuthController::ACTION_RESEND_VERIFICATION_EMAIL);
     }
 
 }

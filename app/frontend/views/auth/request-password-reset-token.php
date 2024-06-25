@@ -17,7 +17,7 @@ $passwordResetRequestForm = $R->passwordResetRequestForm
 
 ?>
 
-<div class="auth-request-password-reset">
+<div class="auth-request-password-reset" <?=$this->attrDataTemplate(__FILE__)?>>
     <h1><?= Html::encode($this->title) ?></h1>
 
     <p>Пожалуйста, введите ваш email. Ссылка для сброса пароля будет отправлена на него.</p>

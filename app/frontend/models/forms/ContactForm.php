@@ -19,6 +19,8 @@ class ContactForm extends BaseWebForm
 {
     public const TITLE = 'Обратная связь';
 
+    public const HINT = 'Если у вас есть деловые запросы или другие вопросы, пожалуйста, заполните следующую форму, чтобы связаться с нами. Спасибо.';
+
     public const ATTR_NAME = 'name';
     public const ATTR_EMAIL = 'email';
     public const ATTR_SUBJECT = 'subject';
@@ -31,6 +33,8 @@ class ContactForm extends BaseWebForm
 
     public const RULE_REQUIRED_MESSAGE = 'Поле `{attribute}` не может быть пустым';
     public const RULE_VERIFY_CODE_MESSAGE = 'Неверный код проверки';
+
+    public const BUTTON_SEND_TEXT = 'Отправить';
 
 
     public string $id = 'contact-form';

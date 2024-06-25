@@ -2,6 +2,7 @@
 
 use yii\web\View;
 use yii\helpers\Html;
+use app\frontend\controllers\SiteController;
 use app\frontend\resources\site\SiteAboutResources;
 
 /**
@@ -9,12 +10,12 @@ use app\frontend\resources\site\SiteAboutResources;
  * @var SiteAboutResources $R
  */
 
-$this->title = 'About';
+$this->title = SiteController::LABELS[SiteController::ACTION_ABOUT];
 $this->params['breadcrumbs'][] = $this->title;
 
 ?>
 
-<div class="site-about">
+<div class="site-about" <?=$this->attrDataTemplate(__FILE__)?>>
     <h1><?= Html::encode($this->title) ?></h1>
 
     <p>This is the About page. You may modify the following file to customize its content:</p>

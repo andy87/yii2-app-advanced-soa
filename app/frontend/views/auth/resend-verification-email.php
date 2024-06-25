@@ -17,7 +17,7 @@ $this->params['breadcrumbs'][] = $this->title;
 
 ?>
 
-<div class="auth-resend-verification-email">
+<div class="auth-resend-verification-email" <?=$this->attrDataTemplate(__FILE__)?>>
     <h1><?= Html::encode($this->title) ?></h1>
 
     <p><?= $resendVerificationEmailForm::HINT ?></p>

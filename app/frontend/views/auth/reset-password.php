@@ -15,7 +15,7 @@ $resetPasswordForm = $R->resetPasswordForm;
 
 ?>
 
-<div class="auth-reset-password">
+<div class="auth-reset-password" <?=$this->attrDataTemplate(__FILE__)?>>
     <h1><?= Html::encode($this->title) ?></h1>
 
     <p>Пожалуйста, выберите новый пароль:</p>

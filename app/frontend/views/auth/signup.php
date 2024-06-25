@@ -17,7 +17,7 @@ $this->params['breadcrumbs'][] = $this->title;
 
 ?>
 
-<div class="auth-signup">
+<div class="auth-signup" <?=$this->attrDataTemplate(__FILE__)?>>
     <h1><?= Html::encode($this->title) ?></h1>
 
     <p><?=$signupForm::HINT;?></p>
