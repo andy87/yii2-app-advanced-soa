@@ -47,7 +47,7 @@ class SignupCest extends SendForm
     {
         parent::_before($I);
 
-        $roure = AuthController::ENDPOINT . '/' . AuthController::ACTION_SIGNUP;
+        $roure = AuthController::getEndpoint(AuthController::ACTION_SIGNUP);
 
         $I->amOnRoute( $roure );
     }

@@ -68,7 +68,7 @@ class ResendVerificationEmailCest extends SendForm
     {
         parent::_before($I);
 
-        $route = AuthController::ENDPOINT . '/' . AuthController::ACTION_RESEND_VERIFICATION_EMAIL; // 'auth/resend-verification-email'
+        $route = AuthController::getEndpoint(AuthController::ACTION_RESEND_VERIFICATION_EMAIL); // 'auth/resend-verification-email'
 
         $I->amOnRoute($route);
     }

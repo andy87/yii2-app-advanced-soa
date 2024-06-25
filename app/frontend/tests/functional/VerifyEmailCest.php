@@ -167,6 +167,6 @@ class VerifyEmailCest
      */
     private function getRoute(): string
     {
-        return AuthController::ENDPOINT . '/' . AuthController::ACTION_VERIFY_EMAIL;
+        return AuthController::getEndpoint(AuthController::ACTION_VERIFY_EMAIL);
     }
 }

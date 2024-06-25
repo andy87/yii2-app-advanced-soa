@@ -60,7 +60,7 @@ class LoginCest extends SendForm
     {
         parent::_before($I);
 
-        $route = AuthController::ENDPOINT . '/' . Action::LOGIN; // 'auth/login'
+        $route = AuthController::getEndpoint(Action::LOGIN);
 
         $I->amOnRoute($route);
     }

@@ -61,7 +61,7 @@ class LoginCest extends SendForm
      */
     public function loginUser(FunctionalTester $I): void
     {
-        $route = AuthController::ENDPOINT . '/' . Action::LOGIN;
+        $route = AuthController::getEndpoint(Action::LOGIN);
 
         $I->amOnRoute($route);
 
