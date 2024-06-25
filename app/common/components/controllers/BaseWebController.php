@@ -17,6 +17,19 @@ abstract class BaseWebController extends BaseController
     public const ACTION_INDEX = 'index';
     public const ACTION_ERROR = 'error';
 
+
+
+    /**
+     * @return void
+     */
+    public function init(): void
+    {
+        parent::init();
+
+        $this->setupLayoutNavBarConfig();
+        $this->setupLayoutNavConfig();
+    }
+
     /**
      * @return array
      */
@@ -46,5 +59,17 @@ abstract class BaseWebController extends BaseController
         }
 
         return $endpoint;
+    }
+
+
+
+    protected function setupLayoutNavBarConfig()
+    {
+
+    }
+
+    protected function setupLayoutNavConfig()
+    {
+
     }
 }

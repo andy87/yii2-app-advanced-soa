@@ -2,7 +2,9 @@
 
 namespace app\common\components;
 
+use Yii;
 use yii\helpers\Html;
+use app\backend\controllers\AuthController;
 
 /**
  * < Common >
@@ -15,6 +17,9 @@ use yii\helpers\Html;
  */
 class Layout
 {
+    public const BUTTON_TEXT_LOGIN = 'Войти';
+    public const BUTTON_TEXT_LOGOUT = 'Выйти';
+
     public const META_VIEWPORT = 'viewport';
 
     /** @var array|array[] */
@@ -25,19 +30,19 @@ class Layout
         ]
     ];
 
-    /** @var array|string[]  */
-    public static array $body = [
-        'class' => 'd-flex flex-column h-100'
+    public static array $class = [
+        'html' => 'h-100',
+        'body' => 'd-flex flex-column h-100',
+        'main' => 'flex-shrink-0',
+        'footer' => 'footer mt-auto py-3 text-muted',
+        'navBar' => 'navbar navbar-expand-md navbar-dark bg-dark fixed-top',
+        'nav' => 'navbar-nav me-auto mb-2 mb-md-0',
     ];
 
-    /** @var array|string[]  */
-    public static array $main = [
-        'class' => 'flex-shrink-0'
-    ];
+    public static array $navBarConfig = [];
+    public static array $navConfig = [];
 
-    public static array $footer = [
-        'class' => 'footer mt-auto py-3 text-muted'
-    ];
+
 
     /**
      * @param $name
@@ -47,5 +52,51 @@ class Layout
     public static function meta($name): string
     {
         return Html::tag('meta', null, self::$meta[$name]);
+    }
+
+    /**
+     * @return string
+     */
+    public static function getHtmlAuthBlock(): string
+    {
+        return (Yii::$app->user->isGuest)
+            ? Layout::getHtmlLoginButton()
+            : Layout::getHtmlLogoutForm();
+    }
+
+    /**
+     * @return string
+     */
+    public static function getHtmlLoginButton(): string
+    {
+        $link = Html::a(self::BUTTON_TEXT_LOGIN,
+            [AuthController::getEndpoint(Action::LOGIN)],
+            ['class' => ['btn btn-link login text-decoration-none']]
+        );
+
+        return Html::tag('div', $link,['class' => ['d-flex']]);
+    }
+
+    /**
+     * @return string
+     */
+    public static function getHtmlLogoutForm(): string
+    {
+        return Html::beginForm([AuthController::getEndpoint(Action::LOGOUT)], 'post', ['class' => 'd-flex'])
+            . Html::submitButton(
+                self::BUTTON_TEXT_LOGOUT . ' (' . Yii::$app->user->identity->username . ')',
+                ['class' => 'btn btn-link logout text-decoration-none']
+            )
+            . Html::endForm();
+    }
+
+    /**
+     * @return string
+     */
+    public static function getHtmlCopyRight(): string
+    {
+        return Yii::t('yii', 'Powered by {yii}, (And_y87 edition)', [
+            'yii' => '<a href="https://www.yiiframework.com/" rel="external">' . Yii::t('yii', 'Yii Framework') . '</a>',
+        ]);
     }
 }
