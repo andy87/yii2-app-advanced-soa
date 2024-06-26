@@ -17,10 +17,12 @@ return [
     'bootstrap' => ['log'],
     'modules' => [],
     'components' => [
+
         'request' => [
             'csrfParam' => $_ENV['APP_BACKEND_CSRF_PARAM'],
             'baseUrl' => $_ENV['APP_BACKEND_BASE_URL'],
         ],
+
         'user' => [
             'identityClass' => Identity::class,
             'enableAutoLogin' => true,
@@ -29,10 +31,12 @@ return [
                 'httpOnly' => true
             ],
         ],
+
         'session' => [
             // this is the name of the session cookie used for login on the backend
             'name' => $_ENV['APP_BACKEND_SESSION_NAME'],
         ],
+
         'log' => [
             'traceLevel' => YII_DEBUG ? 3 : 0,
             'targets' => [
@@ -42,6 +46,7 @@ return [
                 ],
             ],
         ],
+
         'errorHandler' => [
             'errorAction' => 'system/error',
         ],
