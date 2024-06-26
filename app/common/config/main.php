@@ -2,6 +2,7 @@
 
 use yii\caching\FileCache;
 
+$dirApp = dirname(__DIR__, 2);
 $root = dirname(__DIR__, 3);
 
 return [
@@ -11,6 +12,11 @@ return [
         '@bower'    => '@vendor/bower-asset',
         '@npm'      => '@vendor/npm-asset',
         '@uploads'  => "$root/uploads",
+        '@app'      => $dirApp,
+        '@common'   => "$dirApp/common",
+        '@frontend' => "$dirApp/frontend",
+        '@backend'  => "$dirApp/backend",
+        '@console'  => "$dirApp/console",
     ],
 
     'components' => [

@@ -12,10 +12,7 @@ return [
     'basePath' => dirname(__DIR__),
     'bootstrap' => ['log'],
     'controllerNamespace' => 'app\console\controllers',
-    'aliases' => [
-        '@bower' => '@vendor/bower-asset',
-        '@npm'   => '@vendor/npm-asset',
-    ],
+
     'controllerMap' => [
         'fixture' => [
             'class' => yii\console\controllers\FixtureController::class,
@@ -23,11 +20,10 @@ return [
           ],
         'migration' => [
             'class' => yii\console\controllers\MigrateController::class,
-            'migrationPath' => [
-                '@console/migrations',
-            ]
+            'migrationPath' => ['@console/migrations'],
         ],
     ],
+
     'components' => [
         'log' => [
             'targets' => [
@@ -38,5 +34,6 @@ return [
             ],
         ],
     ],
+
     'params' => $params,
 ];
