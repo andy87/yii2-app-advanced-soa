@@ -120,6 +120,39 @@ if (!file_exists("$root/.env")) {
     echo "\r\n   .env exists\n";
 }
 
+echo "\n Create apache config ? [yes|no] ";
+echo "\n     /.htaccess";
+echo "\n     /app/backend/web/.htaccess";
+echo "\n     /app/frontend/web/.htaccess";
+echo "\n";
+
+$answer = trim(fgets(STDIN));
+
+if (!strncasecmp($answer, 'y', 1))
+{
+    $dirHtaccess = "$root/environments/_server/apache";
+    if (copy("$dirHtaccess/.htaccess", "$root/../.htaccess"))
+    {
+        echo "\n   generate /.htaccess\n";
+    } else {
+        printError("Cannot generate /.htaccess file.");
+    }
+
+    $modules = ['backend', 'frontend'];
+
+    foreach ($modules as $module)
+    {
+        $filePath = "$root/$module/web/.htaccess";
+
+        if (copy("$dirHtaccess/module/web/.htaccess", $filePath))
+        {
+            echo "\n   generate $filePath\n";
+        } else {
+            printError("Cannot generate $filePath file.");
+        }
+    }
+}
+
 echo "\n  ... initialization completed.\n\n";
 
 /**

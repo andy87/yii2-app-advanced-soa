@@ -11,6 +11,7 @@ $backend = [
     'backend/web/index.php',
     'backend/web/index-test.php',
     'backend/web/robots.txt',
+    'backend/web/.htaccess',
 ];
 
 $frontend = [
@@ -21,6 +22,7 @@ $frontend = [
     'frontend/web/index.php',
     'frontend/web/index-test.php',
     'frontend/web/robots.txt',
+    'frontend/web/.htaccess',
 ];
 
 $common = [
@@ -42,6 +44,7 @@ $app = [
     '.env',
     '../composer.lock',
     '../vendor',
+    '../.htaccess',
     'reset',
 ];
 

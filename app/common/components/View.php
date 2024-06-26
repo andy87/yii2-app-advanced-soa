@@ -16,6 +16,6 @@ class View extends \yii\web\View
      */
     public function attrDataTemplate(string $filePath): string
     {
-        return (YII_ENV_DEV === 'dev') ? ' data-template="' . $filePath . '" ' : '';
+        return (YII_ENV_DEV) ? ' data-template="' . $filePath . '" ' : '';
     }
 }

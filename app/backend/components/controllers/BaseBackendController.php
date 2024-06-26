@@ -45,20 +45,11 @@ abstract class BaseBackendController extends BaseWebController
      */
     protected function setupLayoutNavItems(): array
     {
-        $menuItems = [
+        return [
             [
                 'label' => SiteController::LABELS[Action::INDEX],
                 'url' => [SiteController::getEndpoint(Action::INDEX)]
             ],
         ];
-
-        if (Yii::$app->user->isGuest) {
-            $menuItems[] = [
-                'label' => AuthController::LABELS[Action::LOGIN],
-                'url' => [AuthController::getEndpoint(Action::LOGIN)]
-            ];
-        }
-
-        return $menuItems;
     }
 }
