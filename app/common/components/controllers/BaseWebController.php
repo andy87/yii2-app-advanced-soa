@@ -54,11 +54,9 @@ abstract class BaseWebController extends BaseController
     {
         $endpoint = static::ENDPOINT;
 
-        if ($action) {
-            $endpoint .= '/' . $action;
-        }
+        if ($action === null ) $action = '';
 
-        return $endpoint;
+        return "/$endpoint/$action";
     }
 
 

@@ -19,6 +19,6 @@ class PingController extends BaseBackendController
      */
     public function actionIndex(): string
     {
-        return (new Ping())->run();
+        return (new Ping)->run();
     }
 }

@@ -61,7 +61,10 @@ abstract class BaseFrontendController extends BaseWebController
         ];
 
         if (Yii::$app->user->isGuest) {
-            $menuItems[] = ['label' => 'Signup', 'url' => [AuthController::getEndpoint(AuthController::ACTION_SIGNUP)]];
+            $menuItems[] = [
+                'label' => AuthController::LABELS[AuthController::ACTION_SIGNUP],
+                'url' => [AuthController::getEndpoint(AuthController::ACTION_SIGNUP)]
+            ];
         }
 
         return $menuItems;
