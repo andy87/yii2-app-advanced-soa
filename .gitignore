@@ -9,20 +9,22 @@ app/.env
 composer.lock
 
 # yii console commands
-/app/yii
-/app/yii_test
-/app/reset
+app/yii
+app/yii_test
+app/reset
 
 # ignore generated files
-/app/frontend/web/index.php
-/app/frontend/web/index-test.php
-/app/frontend/web/robots.txt
+app/frontend/web/index.php
+app/frontend/web/index-test.php
+app/frontend/web/robots.txt
+app/frontend/web/.htaccess
 app/frontend/tests/_support/*
 app/frontend/tests/_support/_generated/*
 
-/app/backend/web/index.php
-/app/backend/web/index-test.php
-/app/backend/web/robots.txt
+app/backend/web/index.php
+app/backend/web/index-test.php
+app/backend/web/robots.txt
+app/backend/web/.htaccess
 app/backend/tests/_support/*
 app/backend/tests/_support/_generated/*
 
@@ -52,6 +54,3 @@ phpunit.phar
 
 # vagrant runtime
 /.vagrant
-
-
-.htaccess
