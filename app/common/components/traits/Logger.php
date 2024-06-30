@@ -2,8 +2,8 @@
 
 namespace app\common\components\traits;
 
-use Exception;
 use Yii;
+use Exception;
 use yii\base\{ Model, InvalidConfigException };
 
 /**
@@ -13,19 +13,6 @@ use yii\base\{ Model, InvalidConfigException };
  */
 trait Logger
 {
-    /** @var string $runtimeLogError */
-    public string $runtimeLogError = 'error';
-
-    /** @var string $runtimeLogInfo */
-    public string $runtimeLogInfo = 'info';
-
-    /** @var string $runtimeLogWarning */
-    public string $runtimeLogWarning = 'warning';
-
-    /** @var string $runtimeLogDebug */
-    public string $runtimeLogDebug = 'debug';
-
-
     /**
      * @param string $method
      * @param string $message
@@ -39,7 +26,7 @@ trait Logger
      */
     public function runtimeLogError(string $message, string $method, Model $model, array $data = []): void
     {
-        $this->runtimeLogCore($this->runtimeLogError, $method, $message, $model, $data);
+        $this->runtimeLogCore('error', $method, $message, $model, $data);
     }
 
     /**
@@ -54,7 +41,7 @@ trait Logger
      */
     public function runtimeLogInfo(string $method, string $message, Model $model, array $data = []): void
     {
-        $this->runtimeLogCore($this->runtimeLogInfo, $method, $message, $model, $data);
+        $this->runtimeLogCore('info', $method, $message, $model, $data);
     }
 
     /**
@@ -69,7 +56,7 @@ trait Logger
      */
     public function runtimeLogWarning(string $method, string $message, Model $model, array $data = []): void
     {
-        $this->runtimeLogCore($this->runtimeLogWarning, $method, $message, $model, $data);
+        $this->runtimeLogCore('warning', $method, $message, $model, $data);
     }
 
     /**
@@ -84,7 +71,7 @@ trait Logger
      */
     public function runtimeLogDebug(string $method, string $message, Model $model, array $data = []): void
     {
-        $this->runtimeLogCore($this->runtimeLogDebug, $method, $message, $model, $data);
+        $this->runtimeLogCore('debug', $method, $message, $model, $data);
     }
 
     /**
@@ -109,8 +96,7 @@ trait Logger
 
         $log['data'] = $data;
 
-        //print_r([__METHOD__ . '(' . __LINE__ . ')', $log ]);die;
-
+        //Yii::error($log);
         Yii::{$method}($log);
     }
 

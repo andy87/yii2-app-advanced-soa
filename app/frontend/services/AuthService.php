@@ -206,11 +206,10 @@ class AuthService extends \app\common\services\AuthService
             $message = 'Reset password form `validation error`';
         }
 
-
         $this->runtimeLogError( $message,
             __METHOD__,
             $resetPasswordForm,
-            $data ?? []
+            $data
         );
 
         return false;
