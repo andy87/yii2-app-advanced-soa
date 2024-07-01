@@ -1,5 +1,8 @@
 <?php
 
+
+use andy87\yii2\architect\components\controllers\ArchitectController;
+
 $params = array_merge(
     require __DIR__ . '/../../common/config/params.php',
     require __DIR__ . '/../../common/config/params-local.php',
@@ -22,6 +25,7 @@ return [
             'class' => yii\console\controllers\MigrateController::class,
             'migrationPath' => ['@console/migrations'],
         ],
+        'architect' => ArchitectController::class,
     ],
 
     'components' => [

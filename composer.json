@@ -24,7 +24,9 @@
         "twbs/bootstrap-icons": "~1.7",
         "mihaildev/yii2-ckeditor": "dev-master",
         "kartik-v/yii2-widget-select2": "^2.2@dev",
-        "kartik-v/yii2-icons": "^1.4@dev"
+        "kartik-v/yii2-icons": "^1.4@dev",
+        "andy87/knockknock": "*",
+        "andy87/yii2-migrate-architect": "*"
     },
 
     "require-dev": {
