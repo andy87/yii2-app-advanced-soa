@@ -1,6 +1,7 @@
 <?php declare(strict_types=1);
 
 use andy87\yii2\architect\UpdateTable;
+use app\common\models\sources\User;
 
 /**
  * < Common > `m130524_201445_update_table__user`
@@ -11,6 +12,9 @@ use andy87\yii2\architect\UpdateTable;
  */
 class m130524_201445_update_table__user extends UpdateTable
 {
+    /** @var int Сценарий */
+    public int $scenario = self::SCENARIO_UPDATE;
+
     /** @var string  */
     public string $tableName = '{{%user}}';
 
@@ -20,7 +24,7 @@ class m130524_201445_update_table__user extends UpdateTable
     public function columnsListAdd(): array
     {
         return [
-            'verification_token' => $this->string()->defaultValue(null)
+            User::ATTR_VERIFICATION => $this->string()->defaultValue(null)
         ];
     }
 }

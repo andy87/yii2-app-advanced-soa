@@ -6,6 +6,8 @@ namespace app\common\models\sources;
  * < Common > `User`
  *
  * @package app\common\models\sources
+ *
+ * @source php yii gii/model --tableName=user --modelClass=UserSource --baseClass=app\common\components\core\BaseModel --ns=app\common\models\sources --generateLabelsFromComments --overwrite=1
  */
 class User extends UserSource
 {

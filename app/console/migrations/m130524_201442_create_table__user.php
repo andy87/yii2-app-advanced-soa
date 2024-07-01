@@ -1,6 +1,7 @@
 <?php declare(strict_types=1);
 
 use andy87\yii2\architect\CreateTable;
+use app\common\models\sources\User;
 
 /**
  * < Console > `m130524_201442_create_table__user`
@@ -11,8 +12,11 @@ use andy87\yii2\architect\CreateTable;
  */
 class m130524_201442_create_table__user extends CreateTable
 {
+    /** @var int Сценарий */
+    public int $scenario = self::SCENARIO_CREATE;
+
     /** @var string  */
-    protected string $tableName = '{{%user}}';
+    public string $tableName = '{{%user}}';
 
     /**
      * @return array
@@ -20,13 +24,12 @@ class m130524_201442_create_table__user extends CreateTable
     public function columns(): array
     {
         return [
-            'username' => $this->string()->notNull()->unique(),
-            'auth_key' => $this->string(32)->notNull(),
-            'password_hash' => $this->string()->notNull(),
-            'password_reset_token' => $this->string()->unique(),
-            'email' => $this->string()->notNull()->unique(),
-            'status' => $this->smallInteger()->notNull()->defaultValue(10),
-            'created_at' => $this->integer()->notNull(),
+            User::ATTR_USERNAME => $this->string()->notNull()->unique(),
+            User::ATTR_AUTH_KEY => $this->string(32)->notNull(),
+            User::ATTR_PASSWORD_HASH => $this->string()->notNull(),
+            User::ATTR_PASSWORD_RESET => $this->string()->unique(),
+            User::ATTR_EMAIL => $this->string()->notNull()->unique(),
+            User::ATTR_STATUS => $this->smallInteger()->notNull()->defaultValue(10),
         ];
     }
 }
