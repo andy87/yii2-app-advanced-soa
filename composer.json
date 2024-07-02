@@ -22,6 +22,7 @@
         "yiisoft/yii2-bootstrap5": "~2.0.2",
         "yiisoft/yii2-symfonymailer": "~2.0.3",
         "twbs/bootstrap-icons": "~1.7",
+        "vlucas/phpdotenv": "^5.5",
         "mihaildev/yii2-ckeditor": "dev-master",
         "kartik-v/yii2-widget-select2": "^2.2@dev",
         "kartik-v/yii2-icons": "^1.4@dev",
@@ -41,7 +42,6 @@
         "codeception/module-filesystem": "^3.0 || ^2.0 || ^1.1",
         "codeception/verify": "^3.0 || ^2.2",
         "symfony/browser-kit": "^6.0 || >=2.7 <=4.2.4",
-        "vlucas/phpdotenv": "^5.5",
         "codeception/module-webdriver": "3.x-dev"
     },
 
