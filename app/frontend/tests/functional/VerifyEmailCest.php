@@ -2,6 +2,7 @@
 
 namespace app\frontend\tests\functional;
 
+use app\common\components\Layout;
 use app\common\models\Identity;
 use app\common\fixtures\UserFixture;
 use app\frontend\tests\FunctionalTester;
@@ -151,7 +152,7 @@ class VerifyEmailCest
         $I->amOnRoute( $this->getRoute(), ['token' => '4ch0qbfhvWwkcuWqjN8SWRq72SOw1KYT_1548675330']);
         $I->canSee(VerifyEmailForm::MESSAGE_SUCCESS);
         $I->canSee('Congratulations!', 'h1');
-        $I->see('Logout (test.test)', 'form button[type=submit]');
+        $I->see(Layout::BUTTON_TEXT_LOGOUT . ' (test.test)', 'form button[type=submit]');
 
         $I->seeRecord(Identity::class, [
             Identity::ATTR_USERNAME => 'test.test',

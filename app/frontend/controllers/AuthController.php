@@ -4,15 +4,14 @@ namespace app\frontend\controllers;
 
 use Yii;
 use Exception;
-use app\common\models\Identity;
 use app\frontend\services\AuthService;
 use yii\db\Exception as YiiDbException;
-use app\common\components\{ Role , Action };
 use yii\filters\{ AccessControl, VerbFilter };
 use app\common\components\traits\SessionFlash;
 use yii\web\{ BadRequestHttpException, Response };
 use app\frontend\components\controllers\BaseFrontendController;
 use app\frontend\models\forms\{ ResetPasswordForm, VerifyEmailForm };
+use app\common\{ models\Identity, models\sources\Role, components\Action } ;
 use yii\base\{ Exception as YiiBaseException, InvalidArgumentException, InvalidConfigException };
 use app\frontend\resources\auth\{AuthLoginResources, AuthRequestPasswordResetResources, AuthResendVerificationEmailResources, AuthResetPasswordResources, AuthSignupResources };
 
