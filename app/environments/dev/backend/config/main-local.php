@@ -1,6 +1,7 @@
 <?php
 
 use yii\base\Event;
+use andy87\yii2\builder\components\Builder;
 
 $config = [
     'components' => [
@@ -21,7 +22,17 @@ if (YII_ENV_DEV) {
     $config['bootstrap'][] = 'gii';
     $config['modules']['gii'] = [
         'class' => yii\gii\Module::class,
+        'allowedIPs' => ['127.0.0.1', '::1'],
+        'generators' => [
+            Builder::ID => [
+                'class' => Builder::class,
+                'templates' => [
+                    'default' => Builder::TEMPLATE,
+                ]
+            ]
+        ]
     ];
+
     $config['bootstrap'][] = function () {
         Event::on(yii\gii\Module::class, yii\gii\Module::EVENT_BEFORE_ACTION, function ($event)
         {
