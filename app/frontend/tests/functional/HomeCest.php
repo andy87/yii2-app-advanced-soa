@@ -38,10 +38,10 @@ class HomeCest
     public function checkOpen(FunctionalTester $I): void
     {
         /** @see SiteController::actionIndex() */
-        $I->amOnRoute(Yii::$app->homeUrl);
-        $I->see('My Application');
-        $I->seeLink('About');
-        $I->click('About');
-        $I->see('This is the About page.');
+        $I->amOnRoute( Yii::$app->homeUrl );
+        $I->see( Yii::$app->name );
+        $I->seeLink(SiteController::LABELS[SiteController::ACTION_ABOUT]);
+        $I->click(SiteController::LABELS[SiteController::ACTION_ABOUT]);
+        $I->see('Это страница О нас');
     }
 }

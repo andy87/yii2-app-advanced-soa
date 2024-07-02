@@ -17,4 +17,7 @@ class Role extends RoleSource
     public const ATTR_HINT = 'hint';
 
     public const ATTR_PRIORITY = 'priority';
+
+    public const USER = '@';
+    public const GUEST = '?';
 }

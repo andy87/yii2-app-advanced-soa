@@ -18,7 +18,7 @@ $this->params['breadcrumbs'][] = $this->title;
 <div class="site-about" <?=$this->attrDataTemplate(__FILE__)?>>
     <h1><?= Html::encode($this->title) ?></h1>
 
-    <p>This is the About page. You may modify the following file to customize its content:</p>
+    <p>Это страница О нас. Вы можете изменить следующий файл, чтобы настроить его содержимое:</p>
 
     <code><?= __FILE__ ?></code>
 </div>

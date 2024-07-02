@@ -3,13 +3,10 @@
 namespace app\backend\controllers;
 
 use Yii;
-use yii\web\Response;
-use yii\base\InvalidConfigException;
-use app\common\components\{ Role, Action };
 use yii\filters\{ VerbFilter, AccessControl };
-use app\backend\services\controllers\AuthService;
-use app\backend\resources\auth\AuthLoginResources;
-use app\backend\components\controllers\BaseBackendController;
+use yii\{ web\Response, base\InvalidConfigException };
+use app\common\{ components\Action, models\sources\Role };
+use app\backend\{ services\controllers\AuthService, resources\auth\AuthLoginResources, components\controllers\BaseBackendController };
 
 /**
  * < Backend > `AuthController`

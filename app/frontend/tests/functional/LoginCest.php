@@ -3,6 +3,7 @@
 namespace app\frontend\tests\functional;
 
 use app\common\components\Action;
+use app\common\components\Layout;
 use app\common\tests\cest\SendForm;
 use app\common\fixtures\UserFixture;
 use app\common\models\forms\LoginForm;
@@ -160,8 +161,8 @@ class LoginCest extends SendForm
     public function checkValidLogin(FunctionalTester $I): void
     {
         $I->submitForm($this->formId, $this->formParams('erau', 'password_0'));
-        $I->see('Logout (erau)', 'form button[type=submit]');
-        $I->dontSeeLink('Login');
-        $I->dontSeeLink('Signup');
+        $I->see(Layout::BUTTON_TEXT_LOGOUT . ' (erau)', 'form button[type=submit]');
+        $I->dontSeeLink(LoginForm::BUTTON_LOGIN_TEXT);
+        $I->dontSeeLink(Layout::BUTTON_TEXT_LOGIN);
     }
 }
