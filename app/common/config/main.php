@@ -12,6 +12,7 @@ return [
         '@bower'    => '@vendor/bower-asset',
         '@npm'      => '@vendor/npm-asset',
         '@uploads'  => "$root/uploads",
+        '@mode'     => $dirApp,
         '@common'   => "$dirApp/common",
         '@frontend' => "$dirApp/frontend",
         '@backend'  => "$dirApp/backend",

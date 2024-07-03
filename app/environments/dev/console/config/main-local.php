@@ -8,11 +8,10 @@ if (YII_ENV_DEV) {
     $config = [
         'bootstrap' => ['gii'],
         'modules' => [
-            'gii' => yii\gii\Module::class,
-            'aliases' => ['@app' => dirname(__DIR__, 2) ]
+            'gii' => yii\gii\Module::class
         ],
     ];
-    $config['bootstrap'][] = function () {
+    /*$config['bootstrap'][] = function () {
         Event::on(yii\gii\Module::class, yii\gii\Module::EVENT_BEFORE_ACTION, function ($event)
         {
             $module = $event->sender;
@@ -21,7 +20,7 @@ if (YII_ENV_DEV) {
                 Yii::setAlias('@app', dirname(__DIR__, 2));
             }
         });
-    };
+    };*/
 }
 
 return $config;
