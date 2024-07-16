@@ -18,51 +18,19 @@ return [
     'modules' => [],
     'components' => [
 
-        'request' => [
-            'csrfParam' => $_ENV['APP_BACKEND_CSRF_PARAM'],
-            'baseUrl' => $_ENV['APP_BACKEND_BASE_URL'],
-        ],
+        'request' => __DIR__ . '/components/request.php',
 
-        'user' => [
-            'identityClass' => Identity::class,
-            'enableAutoLogin' => true,
-            'identityCookie' => [
-                'name' => $_ENV['APP_BACKEND_IDENTITY_COOKIE'],
-                'httpOnly' => true
-            ],
-        ],
+        'user' => __DIR__ . '/components/user.php',
 
-        'session' => [
-            // this is the name of the session cookie used for login on the backend
-            'name' => $_ENV['APP_BACKEND_SESSION_NAME'],
-        ],
+        'session' => __DIR__ . '/components/session.php',
 
-        'log' => [
-            'traceLevel' => YII_DEBUG ? 3 : 0,
-            'targets' => [
-                [
-                    'class' => FileTarget::class,
-                    'levels' => ['error', 'warning'],
-                ],
-            ],
-        ],
+        'log' => __DIR__ . '/components/log.php',
+
+        'urlManager' => __DIR__ . '/components/urlManager.php',
 
         'errorHandler' => [
             'errorAction' => 'system/error',
         ],
-
-        'urlManager' => [
-            'hostInfo' => $_ENV['APP_BACKEND_HOST'],
-            'enablePrettyUrl' => true,
-            'showScriptName' => false,
-            'rules' => [
-                '<controller:\w+>/<action:\w+>/<id:\d+>' => '<controller>/<action>',
-                '<controller:\w+>/<action:\w+>' => '<controller>/<action>',
-                '<controller:\w+>/<id:\d+>' => '<controller>/view',
-                '<controller:\w+>/' => '<controller>/index',
-            ],
-        ],
-
     ],
     'params' => $params,
 ];

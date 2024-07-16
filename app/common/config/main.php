@@ -1,7 +1,5 @@
 <?php
 
-use yii\caching\FileCache;
-
 $dirApp = dirname(__DIR__, 2);
 $root = dirname(__DIR__, 3);
 
@@ -19,15 +17,10 @@ return [
     ],
 
     'components' => [
-        'cache' => [
-            'class' => FileCache::class,
-        ],
+        'cache' => require __DIR__ . '/components/cache.php',
     ],
 
     'container' => [
-        'definitions' => [
-            \yii\web\View::class => \app\common\components\View::class,
-            \yii\widgets\LinkPager::class => \yii\bootstrap5\LinkPager::class,
-        ],
+        'definitions' => require __DIR__ . '/container/definitions.php',
     ],
 ];
