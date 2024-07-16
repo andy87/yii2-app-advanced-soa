@@ -1,11 +1,9 @@
 <?php
 
-use yii\caching\FileCache;
-
 $dirApp = dirname(__DIR__, 2);
 $root = dirname(__DIR__, 3);
 
-return [
+$config = [
     'vendorPath' => "$root/vendor",
 
     'aliases' => [
@@ -19,15 +17,27 @@ return [
     ],
 
     'components' => [
-        'cache' => [
-            'class' => FileCache::class,
-        ],
-    ],
 
-    'container' => [
-        'definitions' => [
-            \yii\web\View::class => \app\common\components\View::class,
-            \yii\widgets\LinkPager::class => \yii\bootstrap5\LinkPager::class,
-        ],
+        'db' => require __DIR__ . '/components/db.php',
+
+        'cache' => require __DIR__ . '/components/cache.php',
+
+        'mailer' => require __DIR__ . '/components/mailer.php',
+
+        //'redis' => require __DIR__ . '/components/redis.php',
+
+        //'rabbitMq' => require __DIR__ . '/components/rabbitMq.php',
+
+        //'elasticsearch' => require __DIR__ . '/components/elasticsearch.php',
     ],
 ];
+
+$config['container'] = [
+    'definitions' => require __DIR__ . '/container/definitions.php',
+];
+
+/*echo '<pre>';
+print_r($config);
+die();*/
+
+return $config;
