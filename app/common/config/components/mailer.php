@@ -1,9 +1,7 @@
 <?php
 
-use yii\symfonymailer\Mailer;
-
 return [
-    'class' => Mailer::class,
+    'class' => yii\symfonymailer\Mailer::class,
     'transport' => [
         'scheme' => $_ENV['MAILER_SCHEME'],
         'host' => $_ENV['MAILER_HOST'],

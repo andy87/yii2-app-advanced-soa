@@ -1,9 +1,7 @@
 <?php
 
-use yii\db\Connection;
-
 return [
-    'class' => Connection::class,
+    'class' => yii\db\Connection::class,
     'dsn' => $_ENV['DB_DSN_LOCAL'],
     'username' => $_ENV['DB_USERNAME'],
     'password' => $_ENV['DB_PASSWORD'],

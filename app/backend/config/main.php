@@ -18,19 +18,17 @@ return [
     'modules' => [],
     'components' => [
 
-        'request' => __DIR__ . '/components/request.php',
+        'request' => require __DIR__ . '/components/request.php',
 
-        'user' => __DIR__ . '/components/user.php',
+        'user' => require __DIR__ . '/components/user.php',
 
-        'session' => __DIR__ . '/components/session.php',
+        'session' => require __DIR__ . '/components/session.php',
 
-        'log' => __DIR__ . '/components/log.php',
+        'log' => require __DIR__ . '/components/log.php',
 
-        'urlManager' => __DIR__ . '/components/urlManager.php',
+        'urlManager' => require __DIR__ . '/components/urlManager.php',
 
-        'errorHandler' => [
-            'errorAction' => 'system/error',
-        ],
+        'errorHandler' => require __DIR__ . '/components/errorHandler.php',
     ],
     'params' => $params,
 ];

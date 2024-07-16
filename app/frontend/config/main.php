@@ -17,19 +17,17 @@ return [
     'controllerNamespace' => 'app\frontend\controllers',
     'components' => [
 
-        'request' => __DIR__ . '/components/request.php',
+        'errorHandler' => require __DIR__ . '/components/errorHandler.php',
 
-        'user' => __DIR__ . '/components/user.php',
+        'log' => require __DIR__ . '/components/log.php',
 
-        'session' => __DIR__ . '/components/session.php',
+        'request' => require __DIR__ . '/components/request.php',
 
-        'log' => __DIR__ . '/components/log.php',
+        'session' => require __DIR__ . '/components/session.php',
 
-        'urlManager' => __DIR__ . '/components/urlManager.php',
+        'urlManager' => require __DIR__ . '/components/urlManager.php',
 
-        'errorHandler' => [
-            'errorAction' => 'system/error',
-        ],
+        'user' => require __DIR__ . '/components/user.php',
     ],
 
     'params' => $params,
