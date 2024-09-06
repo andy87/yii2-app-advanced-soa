@@ -29,14 +29,7 @@ return [
     ],
 
     'components' => [
-        'log' => [
-            'targets' => [
-                [
-                    'class' => yii\log\FileTarget::class,
-                    'levels' => ['error', 'warning'],
-                ],
-            ],
-        ],
+        'log' => require __DIR__ . '/components/log.php',
     ],
 
     'params' => $params,

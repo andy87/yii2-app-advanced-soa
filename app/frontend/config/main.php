@@ -17,51 +17,17 @@ return [
     'controllerNamespace' => 'app\frontend\controllers',
     'components' => [
 
-        'request' => [
-            'csrfParam' => $_ENV['APP_FRONTEND_CSRF_PARAM'],
-            'baseUrl' => '',
-        ],
+        'errorHandler' => require __DIR__ . '/components/errorHandler.php',
 
-        'user' => [
-            'identityClass' => Identity::class,
-            'enableAutoLogin' => true,
-            'identityCookie' => [
-                'name' => $_ENV['APP_FRONTEND_IDENTITY_COOKIE'],
-                'httpOnly' => true
-            ],
-            'loginUrl' => ['auth/login']
-        ],
+        'log' => require __DIR__ . '/components/log.php',
 
-        'session' => [
-            'name' => $_ENV['APP_FRONTEND_SESSION_NAME']
-        ],
+        'request' => require __DIR__ . '/components/request.php',
 
-        'log' => [
-            'traceLevel' => YII_DEBUG ? 3 : 0,
-            'targets' => [
-                [
-                    'class' => FileTarget::class,
-                    'levels' => ['error', 'warning'],
-                ],
-            ],
-        ],
+        'session' => require __DIR__ . '/components/session.php',
 
-        'errorHandler' => [
-            'errorAction' => 'system/error',
-        ],
+        'urlManager' => require __DIR__ . '/components/urlManager.php',
 
-        'urlManager' => [
-            'hostInfo' => $_ENV['APP_FRONTEND_HOST'],
-            'enablePrettyUrl' => true,
-            'showScriptName' => false,
-            'rules' => [
-                '<controller:\w+>/<action:\w+>/<id:\d+>' => '<controller>/<action>',
-                '<controller:\w+>/<action:\w+>' => '<controller>/<action>',
-                '<controller:\w+>/<id:\d+>' => '<controller>/view',
-                '<controller:\w+>/' => '<controller>/index',
-            ],
-        ],
-
+        'user' => require __DIR__ . '/components/user.php',
     ],
 
     'params' => $params,
