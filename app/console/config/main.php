@@ -17,14 +17,17 @@ return [
     'controllerNamespace' => 'app\console\controllers',
 
     'controllerMap' => [
+
         'fixture' => [
             'class' => yii\console\controllers\FixtureController::class,
             'namespace' => 'common\fixtures',
           ],
+
         'migration' => [
             'class' => yii\console\controllers\MigrateController::class,
             'migrationPath' => ['@console/migrations'],
         ],
+
         'architect' => ArchitectController::class,
     ],
 
