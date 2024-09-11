@@ -26,7 +26,7 @@ class RoleSource extends \app\common\components\core\BaseModel
     /**
      * {@inheritdoc}
      */
-    public function rules()
+    public function rules(): array
     {
         return [
             [['key', 'name'], 'required'],
@@ -43,7 +43,7 @@ class RoleSource extends \app\common\components\core\BaseModel
     /**
      * {@inheritdoc}
      */
-    public function attributeLabels()
+    public function attributeLabels(): array
     {
         return [
             'id' => 'ID',
