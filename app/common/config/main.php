@@ -36,8 +36,4 @@ $config['container'] = [
     'definitions' => require __DIR__ . '/container/definitions.php',
 ];
 
-/*echo '<pre>';
-print_r($config);
-die();*/
-
 return $config;
