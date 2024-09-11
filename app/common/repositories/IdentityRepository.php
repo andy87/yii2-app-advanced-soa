@@ -3,6 +3,7 @@
 namespace app\common\repositories;
 
 use app\common\models\Identity;
+use app\common\models\sources\User;
 use app\common\components\repositories\MySqlRepository;
 
 /**
@@ -30,8 +31,8 @@ class IdentityRepository extends MySqlRepository
     {
         $query = $this
             ->findByCriteria([
-                Identity::ATTR_EMAIL => $email,
-                Identity::ATTR_STATUS => Identity::STATUS_ACTIVE,
+                User::ATTR_EMAIL => $email,
+                User::ATTR_STATUS => Identity::STATUS_ACTIVE,
             ]);
 
         /** @var ?Identity $identity */
@@ -51,8 +52,8 @@ class IdentityRepository extends MySqlRepository
     {
         $query = $this
             ->findByCriteria([
-                Identity::ATTR_EMAIL => $email,
-                Identity::ATTR_STATUS => Identity::STATUS_INACTIVE,
+                User::ATTR_EMAIL => $email,
+                User::ATTR_STATUS => Identity::STATUS_INACTIVE,
             ]);
 
         /** @var ?Identity $identity */
@@ -72,8 +73,8 @@ class IdentityRepository extends MySqlRepository
     {
         $query = $this
             ->findByCriteria([
-                Identity::ATTR_VERIFICATION => $token,
-                Identity::ATTR_STATUS => Identity::STATUS_INACTIVE,
+                User::ATTR_VERIFICATION => $token,
+                User::ATTR_STATUS => Identity::STATUS_INACTIVE,
             ]);
 
         /** @var ?Identity $identity */
@@ -93,8 +94,8 @@ class IdentityRepository extends MySqlRepository
     {
         $query = $this
             ->findByCriteria([
-                Identity::ATTR_USERNAME => $username,
-                Identity::ATTR_STATUS => Identity::STATUS_ACTIVE,
+                User::ATTR_USERNAME => $username,
+                User::ATTR_STATUS => Identity::STATUS_ACTIVE,
             ]);
 
         /** @var ?Identity $identity */
@@ -114,7 +115,7 @@ class IdentityRepository extends MySqlRepository
     {
         $query = $this
             ->findByCriteria([
-                Identity::ATTR_PASSWORD_RESET => $password_reset_token,
+                User::ATTR_PASSWORD_RESET => $password_reset_token,
             ]);
 
         /** @var ?Identity $identity */
@@ -134,7 +135,7 @@ class IdentityRepository extends MySqlRepository
     {
         $query = $this
             ->findByCriteria([
-                Identity::ATTR_PASSWORD_RESET => $token,
+                User::ATTR_PASSWORD_RESET => $token,
             ]);
 
         /** @var ?Identity $identity */

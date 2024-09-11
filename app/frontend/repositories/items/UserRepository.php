@@ -2,6 +2,8 @@
 
 namespace app\frontend\repositories\items;
 
+use app\frontend\models\items\User;
+
 /**
  * < Frontend > `UserRepository`
  *
@@ -11,5 +13,5 @@ namespace app\frontend\repositories\items;
  */
 class UserRepository extends \app\common\repositories\items\UserRepository
 {
-
+    public const MODEL = User::class;
 }

@@ -5,6 +5,7 @@ namespace app\frontend\tests\functional;
 use app\common\components\Layout;
 use app\common\models\Identity;
 use app\common\fixtures\UserFixture;
+use app\common\models\sources\User;
 use app\frontend\tests\FunctionalTester;
 use app\frontend\controllers\AuthController;
 use app\frontend\models\forms\VerifyEmailForm;
@@ -155,9 +156,9 @@ class VerifyEmailCest
         $I->see(Layout::BUTTON_TEXT_LOGOUT . ' (test.test)', 'form button[type=submit]');
 
         $I->seeRecord(Identity::class, [
-            Identity::ATTR_USERNAME => 'test.test',
-            Identity::ATTR_EMAIL => 'test@mail.com',
-            Identity::ATTR_STATUS => Identity::STATUS_ACTIVE
+            User::ATTR_USERNAME => 'test.test',
+            User::ATTR_EMAIL => 'test@mail.com',
+            User::ATTR_STATUS => Identity::STATUS_ACTIVE
         ]);
     }
 

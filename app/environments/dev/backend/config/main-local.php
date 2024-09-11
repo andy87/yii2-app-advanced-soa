@@ -23,7 +23,7 @@ if (YII_ENV_DEV) {
         'class' => yii\gii\Module::class,
     ];
     $config['bootstrap'][] = function () {
-        Event::on(yii\gii\Module::class, yii\gii\Module::EVENT_BEFORE_ACTION, function ($event)
+        Event::on(yii\gii\Module::class, yii\base\Module::EVENT_BEFORE_ACTION, function ($event)
         {
             $module = $event->sender;
 
