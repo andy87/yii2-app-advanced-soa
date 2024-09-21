@@ -3,7 +3,7 @@
 use yii\symfonymailer\Message;
 
 return [
-    'id' => 'app-frontend-tests',
+    'id' => $_ENV['APP_FRONTEND_ID_TEST'],
     'components' => [
         'assetManager' => [
             'basePath' => __DIR__ . '/../web/assets',

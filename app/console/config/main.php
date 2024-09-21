@@ -11,7 +11,7 @@ $params = array_merge(
 );
 
 return [
-    'id' => 'app-console',
+    'id' => $_ENV['APP_CONSOLE_ID'],
     'basePath' => dirname(__DIR__),
     'bootstrap' => ['log'],
     'controllerNamespace' => 'app\console\controllers',

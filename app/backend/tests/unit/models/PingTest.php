@@ -9,7 +9,7 @@ use app\backend\tests\UnitTester;
 /**
  * < Backend > `PingTest`
  *
- * @package app\backend\tests\unit\modules
+ * @package app\backend\tests\unit\modeles
  *
  * @property UnitTester $tester
  *
