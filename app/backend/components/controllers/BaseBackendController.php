@@ -3,7 +3,7 @@
 namespace app\backend\components\controllers;
 
 use Yii;
-use app\backend\controllers\{ SiteController, AuthController };
+use app\backend\controllers\SiteController;
 use app\common\components\{ Layout, Action, controllers\BaseWebController };
 
 /**

@@ -12,6 +12,8 @@ use app\common\models\sources\User;
  */
 class m130524_201442_create_table__user extends CreateTable
 {
+    protected const DATETIME = self::DATETIME_TIMESTAMP;
+
     /** @var int Сценарий */
     public int $scenario = self::SCENARIO_CREATE;
 

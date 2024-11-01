@@ -11,7 +11,7 @@ return ArrayHelper::merge(
         'components' => [
             'request' => [
                 // !!! insert a secret key in the following (if it is empty) - this is required by cookie validation
-                'cookieValidationKey' => '',
+                'cookieValidationKey' => 'RnAMln_NRF6VfTUGQ9d23Jdn6HYlphXx',
             ],
         ],
     ]

@@ -3,53 +3,21 @@
 namespace app\common\models;
 
 use Yii;
-use yii\db\ActiveRecord;
 use yii\web\IdentityInterface;
+use app\common\models\sources\User;
 use yii\behaviors\TimestampBehavior;
 use yii\base\{ Behavior, Exception, NotSupportedException };
 
 /**
  * User model
  *
- * @property integer $id
- * @property string $username
- * @property string $password_hash
- * @property string $password_reset_token
- * @property string $verification_token
- * @property string $email
- * @property string $auth_key
- * @property integer $status
- * @property integer $created_at
- * @property integer $updated_at
- * @property string $password write-only password
  */
-class Identity extends ActiveRecord implements IdentityInterface
+class Identity extends User implements IdentityInterface
 {
-    public const ATTR_USERNAME = 'username';
-    public const ATTR_PASSWORD = 'password';
-    public const ATTR_EMAIL = 'email';
-    public const ATTR_AUTH_KEY = 'auth_key';
-    public const ATTR_PASSWORD_HASH = 'password_hash';
-    public const ATTR_PASSWORD_RESET = 'password_reset_token';
-    public const ATTR_VERIFICATION = 'verification_token';
-    public const ATTR_STATUS = 'status';
-    public const ATTR_CREATED_AT = 'created_at';
-    public const ATTR_UPDATED_AT = 'updated_at';
-
     const STATUS_DELETED = 0;
     const STATUS_INACTIVE = 9;
     const STATUS_ACTIVE = 10;
 
-
-    /**
-     * {@inheritdoc}
-     *
-     * @return string
-     */
-    public static function tableName(): string
-    {
-        return '{{%user}}';
-    }
 
     /**
      * {@inheritdoc}
@@ -71,8 +39,8 @@ class Identity extends ActiveRecord implements IdentityInterface
     public function rules(): array
     {
         return [
-            ['status', 'default', 'value' => self::STATUS_INACTIVE],
-            ['status', 'in', 'range' => [self::STATUS_ACTIVE, self::STATUS_INACTIVE, self::STATUS_DELETED]],
+            [self::ATTR_STATUS, 'default', 'value' => self::STATUS_INACTIVE],
+            [self::ATTR_STATUS, 'in', 'range' => [self::STATUS_ACTIVE, self::STATUS_INACTIVE, self::STATUS_DELETED]],
         ];
     }
 
@@ -83,7 +51,7 @@ class Identity extends ActiveRecord implements IdentityInterface
      */
     public static function findIdentity($id): Identity|IdentityInterface|null
     {
-        return static::findOne(['id' => $id, 'status' => self::STATUS_ACTIVE]);
+        return static::findOne([self::ATTR_ID => $id, self::ATTR_STATUS => self::STATUS_ACTIVE]);
     }
 
     /**
@@ -182,7 +150,7 @@ class Identity extends ActiveRecord implements IdentityInterface
      */
     public function generateAuthKey(): void
     {
-        $this->auth_key = Yii::$app->security->generateRandomString();
+        $this->setAttribute(self::ATTR_AUTH_KEY, Yii::$app->security->generateRandomString());
     }
 
     /**

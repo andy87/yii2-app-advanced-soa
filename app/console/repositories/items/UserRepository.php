@@ -2,6 +2,8 @@
 
 namespace app\console\repositories\items;
 
+use app\common\models\sources\User;
+
 /**
  * < Console > `UserRepository`
  *
@@ -11,5 +13,5 @@ namespace app\console\repositories\items;
  */
 class UserRepository extends \app\common\repositories\items\UserRepository
 {
-
+    public const MODEL = User::class;
 }

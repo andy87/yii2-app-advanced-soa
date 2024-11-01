@@ -21,6 +21,8 @@ $envNames = array_keys($envs);
 echo "Yii Application Initialization Tool v1.0\n\n";
 
 $envName = null;
+$answer = null;
+
 if (empty($params['env']) || $params['env'] === true) {
     echo "Which environment do you want the application to be initialized in?\n\n";
     foreach ($envNames as $i => $name) {
@@ -50,7 +52,7 @@ if (!in_array($envName, $envNames, true)) {
 $env = $envs[$envName];
 
 if (empty($params['env'])) {
-    echo "\n  Initialize the application under '{$envNames[$answer]}' environment? [yes|no] ";
+    echo "\n  Initialize the application under '$envNames[$answer]' environment? [yes|no] ";
     $answer = trim(fgets(STDIN));
     if (strncasecmp($answer, 'y', 1)) {
         echo "\n  Quit initialization.\n";
@@ -87,7 +89,7 @@ foreach(array_column($envs, 'path') as $envPath) {
 	$filesToRemove =
         array_merge(
             $filesToRemove,
-            array_diff(getFileList("$root/environments/{$envPath}"), $files, $filesToRemove, $skipFiles)
+            array_diff(getFileList("$root/environments/$envPath"), $files, $filesToRemove, $skipFiles)
         );
 }
 $filesToRemove = array_filter($filesToRemove, 'file_exists');
@@ -328,7 +330,7 @@ function getParams(): array
         {
             $name = $matches[1];
 
-            $params[$name] = isset($matches[3]) ? $matches[3] : true;
+            $params[$name] = $matches[3] ?? true;
 
         } else {
             $params[] = $param;

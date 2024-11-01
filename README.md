@@ -120,6 +120,15 @@ ___
 2. проставляет права на папку `uploads`.
 3. генерирует файлы `.htaccess` для Apache сервера.
 
+
+## Gii Generator
+
+### EXAMPLE `frontend`
+* Model Class `app\common\models\sources\{Item}` 
+* Search Model Class `app\common\models\search\{Item}Search`
+* Controller Class `app\(backend|frontend)\controllers\sources\{Item}Controller`
+* View Path `@(backend|frontend)/views/sources/{item}`
+
 DIRECTORY STRUCTURE
 -------------------
 

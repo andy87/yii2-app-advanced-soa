@@ -3,6 +3,7 @@
 namespace app\frontend\tests\functional;
 
 use app\common\models\Identity;
+use app\common\models\sources\User;
 use app\common\tests\cest\SendForm;
 use app\frontend\tests\FunctionalTester;
 use app\frontend\models\forms\SignupForm;
@@ -78,7 +79,7 @@ class SignupCest extends SendForm
             str_replace('{attribute}', $this->form->getAttributeLabel($this->form::ATTR_PASSWORD), $this->form::RULE_REQUIRED_MESSAGE),
         ];
 
-        foreach ($messages as $attribute => $message) {
+        foreach ($messages as $message) {
             $I->seeValidationError($message);
         }
     }
@@ -140,9 +141,9 @@ class SignupCest extends SendForm
         ]);
 
         $I->seeRecord(Identity::class, [
-            Identity::ATTR_USERNAME => 'tester',
-            Identity::ATTR_EMAIL => 'tester.email@example.com',
-            Identity::ATTR_STATUS => Identity::STATUS_INACTIVE
+            User::ATTR_USERNAME => 'tester',
+            User::ATTR_EMAIL => 'tester.email@example.com',
+            User::ATTR_STATUS => Identity::STATUS_INACTIVE
         ]);
 
         $I->seeEmailIsSent();

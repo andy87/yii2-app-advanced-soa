@@ -2,6 +2,7 @@
 
 namespace app\common\repositories\items;
 
+use app\common\models\sources\User;
 use app\common\components\repositories\MySqlRepository;
 
 /**
@@ -13,5 +14,6 @@ use app\common\components\repositories\MySqlRepository;
  */
 class UserRepository extends MySqlRepository
 {
+    public const MODEL = User::class;
 
 }

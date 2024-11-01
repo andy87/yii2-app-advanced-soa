@@ -9,6 +9,8 @@ $config = [
     'aliases' => [
         '@bower'    => '@vendor/bower-asset',
         '@npm'      => '@vendor/npm-asset',
+        '@root'     => $root,
+        '@app'      => "$root/app",
         '@uploads'  => "$root/uploads",
         '@mode'     => $dirApp,
         '@common'   => "$dirApp/common",
@@ -36,9 +38,5 @@ $config = [
 $config['container'] = [
     'definitions' => require __DIR__ . '/container/definitions.php',
 ];
-
-/*echo '<pre>';
-print_r($config);
-die();*/
 
 return $config;

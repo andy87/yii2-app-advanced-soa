@@ -11,5 +11,7 @@ use yii\db\ActiveRecord;
  */
 abstract class BaseModel extends ActiveRecord
 {
-
+    public const ATTR_ID = 'id';
+    public const ATTR_CREATED_AT = 'created_at';
+    public const ATTR_UPDATED_AT = 'updated_at';
 }

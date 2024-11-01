@@ -2,7 +2,10 @@
 
 namespace app\common\services\items;
 
-use app\common\{ models\sources\User, components\services\ModelService };
+use app\common\{models\sources\User,
+    components\services\ModelService,
+    repositories\items\UserRepository,
+    repositories\items\UserRepositoryClickHouse};
 
 /**
  * < Items > `UserService`
@@ -18,4 +21,43 @@ use app\common\{ models\sources\User, components\services\ModelService };
 class UserService extends ModelService
 {
     public const CLASS_MODEL = User::class;
+
+    private UserRepository $repository;
+
+    public function init()
+    {
+        parent::init();
+
+        $this->repository = new UserRepository();
+    }
+
+    /**
+     * @example
+     * ```php
+     *  (new UserService)->getOnLastMonth();
+     * ```
+     * @return array
+     */
+    public function getOnLastMonth(): array
+    {
+        $from = date('Y-m-d', strtotime('first day of last month'));
+        $to = date('Y-m-d', strtotime('last day of last month'));
+
+        return $this->getByPeriod($from, $to);
+    }
+
+    /**
+     * @param string $from
+     * @param string $to
+     *
+     * @return array
+     */
+    public function getByPeriod( string $from, string $to ): array
+    {
+        $query = $this
+            ->repository
+            ->findByPeriod($from, $to);
+
+        return $query->all();
+    }
 }

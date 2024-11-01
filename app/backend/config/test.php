@@ -1,6 +1,6 @@
 <?php
 return [
-    'id' => 'app-backend-tests',
+    'id' => $_ENV['APP_BACKEND_ID_TEST'],
     'components' => [
         'assetManager' => [
             'basePath' => __DIR__ . '/../web/assets',
