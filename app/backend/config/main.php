@@ -1,8 +1,5 @@
 <?php
 
-use yii\log\FileTarget;
-use app\common\models\Identity;
-
 $params = array_merge(
     require __DIR__ . '/../../common/config/params.php',
     require __DIR__ . '/../../common/config/params-local.php',
@@ -12,10 +9,11 @@ $params = array_merge(
 
 return [
     'id' => $_ENV['APP_BACKEND_ID'],
+
     'basePath' => dirname(__DIR__),
+
     'controllerNamespace' => 'app\backend\controllers',
-    'bootstrap' => ['log'],
-    'modules' => [],
+
     'components' => [
 
         'request' => require __DIR__ . '/components/request.php',
@@ -30,5 +28,10 @@ return [
 
         'errorHandler' => require __DIR__ . '/components/errorHandler.php',
     ],
+
+    'bootstrap' => ['log'],
+
+    'modules' => [],
+
     'params' => $params,
 ];
