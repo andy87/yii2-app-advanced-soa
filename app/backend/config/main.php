@@ -16,7 +16,6 @@ return [
 
     'controllerNamespace' => 'app\backend\controllers',
 
-
     'components' => [
 
         'request' => require __DIR__ . '/components/request.php',
