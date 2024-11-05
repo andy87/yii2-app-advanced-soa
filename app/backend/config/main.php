@@ -12,7 +12,10 @@ return [
 
     'basePath' => dirname(__DIR__),
 
+    'viewPath' => '@backend/views',
+
     'controllerNamespace' => 'app\backend\controllers',
+
 
     'components' => [
 

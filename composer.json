@@ -26,9 +26,7 @@
         "mihaildev/yii2-ckeditor": "dev-master",
         "kartik-v/yii2-widget-select2": "^2.2@dev",
         "kartik-v/yii2-icons": "^1.4@dev",
-        "andy87/knockknock": "*",
-        "andy87/yii2-migrate-architect": "*",
-        "andy87/yii2-builder": "dev-master"
+        "andy87/knockknock": "*"
     },
 
     "require-dev": {
@@ -43,7 +41,9 @@
         "codeception/module-filesystem": "^3.0 || ^2.0 || ^1.1",
         "codeception/verify": "^3.0 || ^2.2",
         "symfony/browser-kit": "^6.0 || >=2.7 <=4.2.4",
-        "codeception/module-webdriver": "3.x-dev"
+        "codeception/module-webdriver": "3.x-dev",
+        "andy87/yii2-migrate-architect": "dev-master",
+        "andy87/yii2-file-crafter": "*"
     },
 
     "autoload": {

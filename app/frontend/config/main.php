@@ -15,7 +15,10 @@ return [
 
     'basePath' => dirname(__DIR__),
 
+    'viewPath' => '@frontend/views',
+
     'controllerNamespace' => 'app\frontend\controllers',
+
 
     'components' => [
 

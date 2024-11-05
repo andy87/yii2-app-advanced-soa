@@ -1,34 +1,25 @@
 <?php
 
+use yii\base\Event;
+
+require_once "__snippets.php";
+
 $config = [];
 
 if (YII_ENV_DEV)
 {
-    $moduleList = [
-        'debug' => yii\debug\Module::class,
-        'gii' => yii\gii\Module::class,
-    ];
+    $config['bootstrap'][] = 'debug';
+    $config['modules']['debug'] = yii\debug\Module::class;
 
-    foreach ($moduleList as $module => $class)
-    {
-        $config['bootstrap'][] = $module;
-        $config['modules'][$module] = ['class' => $class];
-    }
-
-    $moduleList = [
-        'debug' => yii\debug\Module::class,
-        'gii' => yii\gii\Module::class,
-    ];
-
-    foreach ($moduleList as $module => $class)
-    {
-        $config['bootstrap'][] = $module;
-        $config['modules'][$module] = ['class' => $class];
-    }
+    $config['bootstrap'][] = 'gii';
+    $config['modules']['gii'] = yii\gii\Module::class;
 
     $config['bootstrap'][] = function ()
     {
-        Yii::$app->setBasePath('@app');
+        Event::on(yii\gii\Module::class, yii\base\Module::EVENT_BEFORE_ACTION, function ()
+        {
+            Yii::$app->setBasePath('@root/app');
+        });
     };
 }
 

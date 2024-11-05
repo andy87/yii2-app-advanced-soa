@@ -3,20 +3,14 @@
 $dirApp = dirname(__DIR__, 2);
 $root = dirname(__DIR__, 3);
 
+require_once "__snippets.php";
+
 $config = [
     'vendorPath' => "$root/vendor",
 
     'aliases' => [
         '@bower'    => '@vendor/bower-asset',
         '@npm'      => '@vendor/npm-asset',
-        '@root'     => $root,
-        '@app'      => "$root/app",
-        '@uploads'  => "$root/uploads",
-        '@mode'     => $dirApp,
-        '@common'   => "$dirApp/common",
-        '@frontend' => "$dirApp/frontend",
-        '@backend'  => "$dirApp/backend",
-        '@console'  => "$dirApp/console",
     ],
 
     'components' => [
