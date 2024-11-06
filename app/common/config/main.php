@@ -12,6 +12,7 @@ $config = [
         '@root'     => $root,
         '@app'      => "$root/app",
         '@uploads'  => "$root/uploads",
+        '@mode'     => $dirApp,
         '@common'   => "$dirApp/common",
         '@frontend' => "$dirApp/frontend",
         '@backend'  => "$dirApp/backend",

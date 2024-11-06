@@ -6,7 +6,7 @@ if (YII_ENV_DEV) {
     $config = [
         'bootstrap' => ['gii'],
         'modules' => [
-            'gii' => yii\gii\Module::class,
+            'gii' => yii\gii\Module::class
         ],
     ];
 }
