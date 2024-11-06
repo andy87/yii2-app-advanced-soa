@@ -2,8 +2,6 @@
 
 use yii\base\Event;
 
-require_once "__snippets.php";
-
 $config = [];
 
 if (YII_ENV_DEV)

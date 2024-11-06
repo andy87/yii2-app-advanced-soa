@@ -3,8 +3,6 @@
 $dirApp = dirname(__DIR__, 2);
 $root = dirname(__DIR__, 3);
 
-require_once "__snippets.php";
-
 $config = [
     'vendorPath' => "$root/vendor",
 
