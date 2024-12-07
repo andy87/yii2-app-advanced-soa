@@ -2,9 +2,9 @@
 
 namespace app\common\components\traits\handlers;
 
+use Exception;
 use Throwable;
 use yii\db\ActiveRecord;
-use yii\db\Exception;
 use yii\db\StaleObjectException;
 use app\console\models\items\PascalCase;
 use app\console\models\forms\items\PascalCaseForm;
@@ -27,7 +27,7 @@ Trait ConsoleHandler
      *
      * @return PascalCase[]
      *
-     * @throws \Exception
+     * @throws Exception
      */
     public function processList( int $page, int $perPage ): array
     {
@@ -62,13 +62,15 @@ Trait ConsoleHandler
      *
      * @return ?PascalCase
      *
-     * @throws \Exception
+     * @throws Exception
      */
     public function processModelUpdate(int $id, array $params ): ?PascalCase
     {
-        if ( $model = $this->service->getModel($id) )
+        $service = $this->service;
+
+        if ( $model = $service->getModel($id) )
         {
-            return $this->service->updateModel( $model, $params );
+            return $service->updateModel( $model, $params );
         }
 
         return null;
@@ -88,11 +90,11 @@ Trait ConsoleHandler
     /**
      * @param array $params
      *
-     * @return ActiveRecord
+     * @return PascalCaseForm
      *
      * @throws Exception
      */
-    public function processFormAdd(array $params ): ActiveRecord
+    public function processFormAdd(array $params ): PascalCaseForm
     {
         return $this->service->addForm( $params );
     }
@@ -101,15 +103,17 @@ Trait ConsoleHandler
      * @param int $id
      * @param array $params
      *
-     * @return ?ActiveRecord
+     * @return ?PascalCaseForm
      *
-     * @throws \Exception
+     * @throws Exception
      */
-    public function processFormUpdate(int $id, array $params ): ?ActiveRecord
+    public function processFormUpdate(int $id, array $params ): ?PascalCaseForm
     {
-        if ( $model = $this->service->getForm($id) )
+        $service = $this->service;
+
+        if ( $model = $service->getForm($id) )
         {
-            return $this->service->updateForm( $model, $params );
+            return $service->updateForm( $model, $params );
         }
 
         return null;
@@ -117,19 +121,23 @@ Trait ConsoleHandler
 
     /**
      * @param int $id
-     * @param ?ActiveRecord|string $classModel
+     * @param ?PascalCase|string $classModel
      *
      * @return ?int
      *
      * @throws StaleObjectException|Throwable
      */
-    public function processDelete( int $id, ActiveRecord|string|null $classModel = null ): ?int
+    public function processDelete( int $id, PascalCase|string|null $classModel = null ): ?int
     {
-        $classModel = $classModel ?? $this->service->settings->classModel;
+        $service = $this->service;
+        $repository = $service->repository;
 
-        $query = $this->service->repository->findByModel( $classModel, $id );
+        /** @var ActiveRecord $classModel  */
+        $classModel = $classModel ?? $service->settings->classModel; //TODO: refactor this
 
-        if ( $model = $query->one($this->service->repository->connection) )
+        $query = $repository->findByModel( $classModel, $id );
+
+        if ( $model = $query->one($repository->connection) )
         {
             return (int) $model->delete();
         }
@@ -140,13 +148,17 @@ Trait ConsoleHandler
     /**
      * @param int $id
      *
-     * @return ?ActiveRecord
+     * @return ?PascalCase
      */
-    public function processViewModel(int $id): ?ActiveRecord
+    public function processViewModel(int $id): ?PascalCase
     {
-        $query = $this->service->repository->findByModel( $this->service->settings->classModel, $id );
+        $service = $this->service;
+        $repository = $service->repository;
 
-        if ( $model = $query->one($this->service->repository->connection) )
+        $query = $repository->findByModel( $service->settings->classModel, $id );
+
+        /** @var ?PascalCase $model */
+        if ( $model = $query->one($repository->connection) )
         {
             return $model;
         }
@@ -157,13 +169,17 @@ Trait ConsoleHandler
     /**
      * @param int $id
      *
-     * @return ?ActiveRecord
+     * @return ?PascalCaseForm
      */
-    public function processViewForm(int $id): ?ActiveRecord
+    public function processViewForm(int $id): ?PascalCaseForm
     {
-        $query = $this->service->repository->findByModel( $this->service->settings->classForm, $id );
+        $service = $this->service;
+        $repository = $service->repository;
 
-        if ( $model = $query->one($this->service->repository->connection) )
+        $query = $repository->findByModel( $service->settings->classForm, $id );
+
+        /** @var ?PascalCaseForm $model */
+        if ( $model = $query->one($repository->connection) )
         {
             return $model;
         }

@@ -3,6 +3,7 @@
 namespace app\common\components\base\repository\items\source;
 
 use Exception;
+use yii\db\ActiveRecord;
 use yii\db\Connection;
 use yii\db\ActiveQuery;
 use yii\base\BaseObject;
@@ -34,11 +35,11 @@ abstract class SourceRepository extends BaseObject implements RepositoryInterfac
 
 
     /**
-     * @param SourceModel|string $modelClass
-     * @param SourceModel|string $formClass
+     * @param ActiveRecord|string $modelClass
+     * @param ActiveRecord|string $formClass
      * @param array $config
      */
-    public function __construct( SourceModel|string $modelClass, SourceModel|string $formClass, array $config = [] )
+    public function __construct( ActiveRecord|string $modelClass, ActiveRecord|string $formClass, array $config = [] )
     {
         $this->modelClass = $modelClass;
 
@@ -56,7 +57,7 @@ abstract class SourceRepository extends BaseObject implements RepositoryInterfac
      */
     public function findModel(null|array|string|int $criteria = null): ActiveQuery
     {
-        /** @var SourceModel $modelClass */
+        /** @var ActiveRecord $modelClass */
         $modelClass = $this->getModelClass();
 
         return $this->findByModel( $modelClass, $criteria );
@@ -71,19 +72,19 @@ abstract class SourceRepository extends BaseObject implements RepositoryInterfac
      */
     public function findForm( null|array|string|int $criteria = null): ActiveQuery
     {
-        /** @var SourceModel $modelClass */
+        /** @var ActiveRecord $modelClass */
         $modelClass = $this->getFormClass();
 
         return $this->findByModel( $modelClass, $criteria );
     }
 
     /**
-     * @param SourceModel|string|null $classModel
+     * @param ActiveRecord|string|null $classModel
      * @param array|string|int|null $criteria = null
      *
      * @return ActiveQuery
      */
-    public function findByModel(SourceModel|string|null $classModel, array|string|int|null $criteria = null ): ActiveQuery
+    public function findByModel(ActiveRecord|string|null $classModel, array|string|int|null $criteria = null ): ActiveQuery
     {
         $activeQuery = $classModel::find();
 
@@ -103,11 +104,11 @@ abstract class SourceRepository extends BaseObject implements RepositoryInterfac
      * Find active items
      *
      * @param array|string|int|null $criteria = null
-     * @param SourceModel|string|null $classModel
+     * @param ActiveRecord|string|null $classModel
      *
      * @return ActiveQuery
      */
-    public function findActive( null|array|string|int $criteria = null, SourceModel|string|null $classModel = null ): ActiveQuery
+    public function findActive( null|array|string|int $criteria = null, ActiveRecord|string|null $classModel = null ): ActiveQuery
     {
         $activeQuery = $this->findByModel( $classModel, $criteria );
 
@@ -120,21 +121,21 @@ abstract class SourceRepository extends BaseObject implements RepositoryInterfac
     }
 
     /**
-     * @return SourceModel|string
+     * @return ActiveRecord|string
      *
      * @throws Exception
      */
-    public function getModelClass(): SourceModel|string
+    public function getModelClass(): ActiveRecord|string
     {
         return $this->modelClass;
     }
 
     /**
-     * @return SourceModel|string
+     * @return ActiveRecord|string
      *
      * @throws Exception
      */
-    public function getFormClass(): SourceModel|string
+    public function getFormClass(): ActiveRecord|string
     {
         return $this->formClass;
     }

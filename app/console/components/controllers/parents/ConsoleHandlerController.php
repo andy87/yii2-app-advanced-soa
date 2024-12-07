@@ -2,6 +2,7 @@
 
 namespace app\console\components\controllers\parents;
 
+use app\console\models\forms\items\PascalCaseForm;
 use Exception;
 use Throwable;
 use yii\console\ExitCode;
@@ -197,7 +198,7 @@ abstract class ConsoleHandlerController extends BaseConsoleHandlerController
     {
         $this->printConsoleFuncStart(__METHOD__);
 
-        $model = $this->handler->processDelete( $id );
+        $model = $this->handler->processDelete( $id, PascalCaseForm::class );
 
         ( $model === null )
             ? $this->printConsoleError("Model id:`$id` not found")
