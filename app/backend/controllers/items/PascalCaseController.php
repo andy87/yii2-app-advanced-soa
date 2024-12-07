@@ -30,28 +30,6 @@ class PascalCaseController extends BackendController
     /** @var string Эндпоинт для URI */
     public const ENDPOINT = '{{kebab-case}}';
 
-
-
-    /** @var HandlerInterface|string $classHandler */
-    protected HandlerInterface|string $classHandler = PascalCaseHandler::class;
-
-    /** @var SourceModelInterface|string $classModel */
-    protected SourceModelInterface|string $classModel = PascalCaseHandler::MODEL_CLASS;
-
-    /** @var SearchModelInterface|string $classSearchModel */
-    protected SearchModelInterface|string $classSearchModel = PascalCaseHandler::SEARCH_MODEL_CLASS;
-
-    /** @var DataProviderInterface|string $classDataProvider */
-    protected DataProviderInterface|string $classDataProvider = PascalCaseHandler::DATA_PROVIDER_CLASS;
-
-    /** @var ProducerInterface|string $classProducer */
-    protected ProducerInterface|string $classProducer = PascalCaseHandler::PRODUCER_CLASS;
-
-    /** @var RepositoryInterface|string $classRepository */
-    protected RepositoryInterface|string $classRepository = PascalCaseHandler::REPOSITORY_CLASS;
-
-
-
     /**
      * Массив с ресурсами
      *

@@ -19,10 +19,10 @@ use app\common\components\base\services\items\settings\ServiceSettings;
  * @property PascalCaseDataProvider $dataProvider
  * @property ServiceSettings $settings
  *
- * @method PascalCase modelCreate(array $params)
+ * @method PascalCase createModel(array $params)
  * @method PascalCase addModel(array $params)
  * @method bool modelUpdate(PascalCase $model, mixed $params)
- * @method PascalCase|null getOne(int $id)
+ * @method PascalCase|null getModel(int $id)
  * @method PascalCase|null getOneActive(int $id)
  * @method array getAll(string|array $criteria = [])
  * @method array getAllActive(string|array $criteria = [])

@@ -4,6 +4,7 @@ namespace app\common\components\actions\web;
 
 use app\common\components\base\actions\CrudAction;
 use app\common\components\base\handlers\items\BaseWebHandler;
+use app\common\components\base\moels\items\source\SourceModel;
 use app\common\components\base\services\resources\crud\BaseFormResource;
 use app\common\components\system\Notify;
 use Yii;
@@ -36,7 +37,7 @@ class CrudCreateAction extends CrudAction
     {
         $params = (Yii::$app->request->isPost) ? (array) Yii::$app->request->bodyParams : [];
 
-        $R = $this->handler->processCreate( $params );
+        $R = $this->handler->processCreateForm( $params);
 
         if ( count($params) )
         {

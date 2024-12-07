@@ -2,19 +2,19 @@
 
 namespace app\console\controllers\items;
 
-use app\common\components\base\handlers\items\settings\HandlerSettings;
-use app\common\components\models\dto\ModelInfo;
-use app\console\components\controllers\parents\ConsoleHandlerController;
-use app\console\components\dataProviders\items\PascalCaseDataProvider;
-use app\console\components\handlers\items\PascalCaseHandler;
-use app\console\components\producers\items\PascalCaseProducer;
-use app\console\components\repository\items\PascalCaseRepository;
-use app\console\components\services\items\PascalCaseService;
-use app\console\models\items\PascalCase;
-use app\console\models\search\items\PascalCaseSearch;
 use Exception;
 use Throwable;
 use yii\console\ExitCode;
+use app\console\models\items\PascalCase;
+use app\common\components\models\dto\ModelInfo;
+use app\console\models\search\items\PascalCaseSearch;
+use app\console\components\services\items\PascalCaseService;
+use app\console\components\handlers\items\PascalCaseHandler;
+use app\console\components\producers\items\PascalCaseProducer;
+use app\console\components\repository\items\PascalCaseRepository;
+use app\common\components\base\handlers\items\settings\HandlerSettings;
+use app\console\components\dataProviders\items\PascalCaseDataProvider;
+use app\console\components\controllers\parents\ConsoleHandlerController;
 
 /**
  * Boilerplate Контроллер для модели `PascalCase`
@@ -31,7 +31,6 @@ class PascalCaseController extends ConsoleHandlerController
     /**
      * @return HandlerSettings
      */
-
     public function getHandlerSettings(): HandlerSettings
     {
         return new HandlerSettings(

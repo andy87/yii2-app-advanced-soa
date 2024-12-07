@@ -2,6 +2,7 @@
 
 namespace app\common\components\base\handlers\items;
 
+use app\common\components\base\moels\items\source\SourceModel;
 use Yii;
 use Exception;
 use Throwable;
@@ -119,7 +120,7 @@ abstract class BaseWebHandler extends PascalCaseHandler
      *
      * @throws Exception
      */
-    public function processCreate( array $params = [], string $key = '' ): BaseFormResource
+    public function processCreateForm(array $params = [], string $key = '' ): BaseFormResource
     {
         /** @var BaseCrudViewResource|FrontendCreateResource|BackendCreateResource $R */
         $R = $this->getResources(Action::CREATE);
@@ -140,14 +141,14 @@ abstract class BaseWebHandler extends PascalCaseHandler
      *
      * @return BaseFormResource
      *
-     * @throws InvalidConfigException|Exception
+     * @throws Exception
      */
-    public function processUpdate( int $id, array $params = []  ): BaseFormResource
+    public function processUpdateForm( int $id, array $params = [] ): BaseFormResource
     {
         /** @var BaseCrudViewResource|FrontendFormResource|BackendFormResource $R */
         $R = $this->getResources(Action::UPDATE);
 
-        $R->form = $this->service->getItemById( $id );
+        $R->form = $this->service->repository->findForm($id);
 
         if ( count($params) ) {
             $R->form->load( $params );
@@ -163,12 +164,12 @@ abstract class BaseWebHandler extends PascalCaseHandler
      *
      * @throws InvalidConfigException|Exception
      */
-    public function processView( int $id ): BaseCrudViewResource
+    public function processViewForm(int $id): BaseCrudViewResource
     {
         /** @var BaseCrudViewResource|FrontendViewResource|BackendViewResource $R */
         $R = $this->getResources(Action::VIEW);
 
-        $R->model = $this->service->getOne(['id' => $id]);
+        $R->model = $this->service->getModel( $id, $this->service->settings->classForm );
 
         return $R;
     }

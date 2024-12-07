@@ -2,6 +2,14 @@
 
 namespace app\common\components\base\handlers\items\settings;
 
+use app\common\components\base\services\items\BaseService;
+use app\common\components\base\moels\items\source\SourceModel;
+use app\common\components\interfaces\models\SearchModelInterface;
+use app\common\components\base\handlers\items\source\SourceHandler;
+use app\common\components\base\producers\items\source\SourceProducer;
+use app\common\components\base\repository\items\source\SourceRepository;
+use app\common\components\base\dataProviders\items\source\SourceActiveDataProvider;
+
 /**
  * < Common > `HandlerSetups`
  *
@@ -10,13 +18,14 @@ namespace app\common\components\base\handlers\items\settings;
 class HandlerSettings
 {
     public function __construct(
-        public string $classHandler,
-        public string $classModel,
-        public string $classForm,
-        public string $classSearchModel,
-        public string $classDataProvider,
-        public string $classService,
-        public string $classProducer,
-        public string $classRepository
+        public SourceHandler|string|null $classHandler = null,
+        public SourceModel|string|null $classModel = null,
+        public SourceModel|string|null $classForm = null,
+        public SearchModelInterface|string|null $classSearchModel = null,
+        public SourceActiveDataProvider|string|null $classDataProvider = null,
+        public BaseService|string|null $classService = null,
+        public SourceProducer|string|null $classProducer = null,
+        public SourceRepository|string|null $classRepository = null,
+        public array $config = []
     ){}
 }

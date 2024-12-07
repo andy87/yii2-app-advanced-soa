@@ -32,60 +32,9 @@ abstract class BaseWebHandlerController extends BaseWebController implements Con
     /** @var BaseWebHandler `Обработчик` */
     protected BaseWebHandler $handler;
 
-
-    /** @var HandlerInterface|string $classHandler */
-    protected HandlerInterface|string $classHandler;
-
-    /** @var SourceModelInterface|string $classModel */
-    protected SourceModelInterface|string $classModel;
-    /** @var SearchModelInterface|string $classSearchModel */
-    protected SearchModelInterface|string $classSearchModel;
-    /** @var DataProviderInterface|string $classDataProvider */
-    protected DataProviderInterface|string $classDataProvider;
-    /** @var ProducerInterface|string $classProducer */
-    protected ProducerInterface|string $classProducer;
-    /** @var RepositoryInterface|string $classRepository */
-    protected RepositoryInterface|string $classRepository;
     /** @var array $resources */
     protected array $resources = [];
 
-
-
-    /**
-     * @throws InvalidConfigException
-     */
-    public function init(): void
-    {
-        parent::init();
-
-        $this->handler = $this->constructHandler();
-    }
-
-    /**
-     * @return BaseWebHandler
-     *
-     * @throws InvalidConfigException
-     */
-    public function constructHandler(): BaseWebHandler
-    {
-        /** @var BaseWebHandler $handler */
-        $handler = Yii::createObject([
-            'class' => $this->classHandler,
-            'classModel' => $this->classModel,
-            'classSearchModel' => $this->classSearchModel,
-            'classDataProvider' => $this->classDataProvider,
-            'producer' => [
-                'class' => $this->classProducer,
-                'classModel' => $this->classModel
-            ],
-            'repository' => [
-                'class' => $this->classRepository,
-                'classModel' => $this->classModel
-            ],
-        ]);
-
-        return $handler;
-    }
 
     /**
      * @return array
@@ -109,7 +58,6 @@ abstract class BaseWebHandlerController extends BaseWebController implements Con
         $actions[Action::UPDATE] = [
             'class' => CrudUpdateAction::class,
             'handler' => $this->handler,
-            'classType' => 'warrior',
             'resource' => $this->resources[Action::UPDATE],
         ];
 

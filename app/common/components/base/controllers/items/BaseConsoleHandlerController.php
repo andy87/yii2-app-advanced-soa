@@ -2,8 +2,6 @@
 
 namespace app\common\components\base\controllers\items;
 
-use Yii;
-use yii\base\InvalidConfigException;
 use app\common\components\traits\handlers\HasHandler;
 use app\console\components\handlers\parents\ConsoleHandler;
 use app\common\components\base\controllers\BaseConsoleController;
@@ -20,16 +18,4 @@ use app\common\components\base\controllers\BaseConsoleController;
 abstract class BaseConsoleHandlerController extends BaseConsoleController
 {
     use HasHandler;
-
-
-
-    /**
-     * @throws InvalidConfigException
-     */
-    public function init(): void
-    {
-        parent::init();
-
-        $this->setupHandler();
-    }
 }

@@ -2,10 +2,8 @@
 
 namespace app\common\components\base\producers\items\source;
 
-use Throwable;
 use yii\base\BaseObject;
 use yii\db\Exception;
-use yii\db\StaleObjectException;
 use app\common\components\system\Manager;
 use app\common\components\base\moels\items\source\SourceModel;
 use app\common\components\interfaces\producers\ProducerInterface;

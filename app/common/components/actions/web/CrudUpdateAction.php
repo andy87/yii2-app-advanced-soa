@@ -2,14 +2,13 @@
 
 namespace app\common\components\actions\web;
 
+use Yii;
+use yii\db\Exception;
+use yii\web\Response;
+use app\common\components\system\Notify;
 use app\common\components\base\actions\CrudAction;
 use app\common\components\base\handlers\items\BaseWebHandler;
 use app\common\components\base\services\resources\crud\BaseFormResource;
-use app\common\components\system\Notify;
-use Yii;
-use yii\base\InvalidConfigException;
-use yii\db\Exception;
-use yii\web\Response;
 
 /**
  * Class CrudIndexAction
@@ -33,13 +32,13 @@ class CrudUpdateAction extends CrudAction
      *
      * @return Response|string
      *
-     * @throws InvalidConfigException|Exception|\Exception
+     * @throws Exception|\Exception
      */
     public function run( int $id ): Response|string
     {
         $params = (Yii::$app->request->isPost) ? (array) Yii::$app->request->bodyParams : [];
 
-        $R = $this->handler->processUpdate( $id, $params );
+        $R = $this->handler->processUpdateForm( $id, $params );
 
         if ( count($params) )
         {

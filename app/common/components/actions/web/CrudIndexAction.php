@@ -2,6 +2,7 @@
 
 namespace app\common\components\actions\web;
 
+use Yii;
 use yii\base\InvalidConfigException;
 use app\common\components\base\actions\CrudAction;
 use app\common\components\base\handlers\items\BaseWebHandler;
@@ -27,12 +28,9 @@ class CrudIndexAction extends CrudAction
      */
     public function run(): string
     {
-        $this->resource->searchModel = $this->handler->getService()->getSearchModel();
+        $this->resource->searchModel = $this->handler->service->settings->classSearchModel;
 
-        $this->resource->activeDataProvider = $this->handler->getService()->getDataProviderBySearchModel(
-            $this->resource->searchModel,
-            $this->handler->getPostRequestParams()
-        );
+        $this->resource->activeDataProvider = $this->handler->service->getDataProvider(Yii::$app->request->bodyParams);
 
         return $this->renderResource($this->resource);
     }

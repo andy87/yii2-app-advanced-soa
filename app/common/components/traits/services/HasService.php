@@ -4,7 +4,6 @@ namespace app\common\components\traits\services;
 
 use Yii;
 use yii\base\InvalidConfigException;
-use app\common\components\system\Manager;
 use app\common\components\base\services\items\BaseService;
 use app\common\components\base\services\items\settings\ServiceSettings;
 
@@ -19,19 +18,24 @@ use app\common\components\base\services\items\settings\ServiceSettings;
  */
 trait HasService
 {
-    /** @var BaseService $service */
-    protected BaseService $service;
+    /** @var ?BaseService $_service */
+    protected ?BaseService $_service = null;
 
 
 
     /**
-     * @return void
+     * @return BaseService
      *
      * @throws InvalidConfigException
      */
-    public function setupService(): void
+    public function getService(): BaseService
     {
-        $this->service = $this->constructService();
+        if ( !$this->_service )
+        {
+            $this->_service = $this->constructService();
+        }
+
+        return $this->_service;
     }
 
     /**
@@ -43,27 +47,11 @@ trait HasService
     {
         $serviceSettings = $this->getServiceSettings();
 
-        $serviceConfig = [
-            'class' => $serviceSettings->classService,
-            'configProducer' => [
-                ['class' => $serviceSettings->classProducer],
-                [
-                    new Manager($serviceSettings->classModel),
-                    new Manager($serviceSettings->classForm)
-                ]
-            ],
-            'configRepository' => [
-                'class' => $serviceSettings->classRepository,
-                'modelClass' => $serviceSettings->classModel
-            ],
-            'configDataProvider' => [
-                'class' => $serviceSettings->classDataProvider,
-                'modelClass' => $serviceSettings->classModel
-            ],
-        ];
-
         /** @var BaseService $service */
-        $service = Yii::createObject( $serviceConfig );
+        $service = Yii::createObject([
+            'class' => $serviceSettings->classService,
+            'settings' => $serviceSettings
+        ]);
 
         return $service;
     }

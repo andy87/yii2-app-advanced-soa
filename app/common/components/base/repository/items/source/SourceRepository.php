@@ -2,14 +2,12 @@
 
 namespace app\common\components\base\repository\items\source;
 
+use Exception;
+use yii\db\Connection;
+use yii\db\ActiveQuery;
+use yii\base\BaseObject;
 use app\common\components\base\moels\items\source\SourceModel;
 use app\common\components\interfaces\repository\RepositoryInterface;
-use app\common\components\system\Logger;
-use Exception;
-use JsonException;
-use yii\base\BaseObject;
-use yii\db\ActiveQuery;
-use yii\db\Connection;
 
 /**
  * < Common > Родительский абстрактный класс для всех репозиториев
@@ -22,46 +20,78 @@ use yii\db\Connection;
 abstract class SourceRepository extends BaseObject implements RepositoryInterface
 {
     /** @var SourceModel|string $modelClass класс модели */
-    protected SourceModel|string $modelClass;
+    public SourceModel|string $modelClass;
+
+    /** @var SourceModel|string $formClass класс формы */
+    public SourceModel|string $formClass;
 
     /** @var ?Connection */
     public ?Connection $connection = null;
 
     /** @var array Criteria for active items */
-    protected array $criteriaActive = [];
+    public array $criteriaActive = [];
 
 
     /**
-     * @param string $modelClass
-     * @param array $criteriaActive
+     * @param SourceModel|string $modelClass
+     * @param SourceModel|string $formClass
      * @param array $config
      */
-    public function __construct( string $modelClass, array $criteriaActive = [], array $config = [] )
+    public function __construct( SourceModel|string $modelClass, SourceModel|string $formClass, array $config = [] )
     {
         $this->modelClass = $modelClass;
 
-        $this->criteriaActive = $criteriaActive;
+        $this->formClass = $formClass;
 
         parent::__construct($config);
     }
 
     /**
-     * Create new find query
-     *
-     * @param null|array|string|int $criteria = null
+     * @param array|string|int|null $criteria = null
      *
      * @return ActiveQuery
      *
      * @throws Exception
      */
-    public function find( null|array|string|int $criteria = null ): ActiveQuery
+    public function findModel( null|array|string|int $criteria = null): ActiveQuery
     {
+        /** @var SourceModel $modelClass */
         $modelClass = $this->getModelClass();
 
-        $activeQuery = $modelClass::find();
+        return $this->findCustom( $modelClass, $criteria );
+    }
+
+    /**
+     * @param array|string|int|null $criteria = null
+     *
+     * @return ActiveQuery
+     *
+     * @throws Exception
+     */
+    public function findForm( null|array|string|int $criteria = null): ActiveQuery
+    {
+        /** @var SourceModel $modelClass */
+        $modelClass = $this->getFormClass();
+
+        return $this->findCustom( $modelClass, $criteria );
+    }
+
+    /**
+     * @param SourceModel|string|null $classModel
+     * @param array|string|int|null $criteria = null
+     *
+     * @return ActiveQuery
+     */
+    public function findCustom( SourceModel|string|null $classModel, array|string|int|null $criteria = null ): ActiveQuery
+    {
+        $activeQuery = $classModel::find();
 
         if ( $criteria )
         {
+            if (is_int($criteria)) {
+                $criteria = ['id' => $criteria];
+            }
+
             $activeQuery->where($criteria);
         }
 
@@ -71,15 +101,14 @@ abstract class SourceRepository extends BaseObject implements RepositoryInterfac
     /**
      * Find active items
      *
-     * @param null|array|string|int $criteria = null
+     * @param array|string|int|null $criteria = null
+     * @param SourceModel|string|null $classModel
      *
      * @return ActiveQuery
-     *
-     * @throws Exception
      */
-    public function findActive( null|array|string|int $criteria = null ): ActiveQuery
+    public function findActive( null|array|string|int $criteria = null, SourceModel|string|null $classModel = null ): ActiveQuery
     {
-        $activeQuery = $this->find( $criteria );
+        $activeQuery = $this->findCustom( $classModel, $criteria );
 
         if ( count( $this->criteriaActive ) )
         {
@@ -97,6 +126,16 @@ abstract class SourceRepository extends BaseObject implements RepositoryInterfac
     public function getModelClass(): SourceModel|string
     {
         return $this->modelClass;
+    }
+
+    /**
+     * @return SourceModel|string
+     *
+     * @throws Exception
+     */
+    public function getFormClass(): SourceModel|string
+    {
+        return $this->formClass;
     }
 
     /**

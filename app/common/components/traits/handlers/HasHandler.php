@@ -4,15 +4,15 @@ namespace app\common\components\traits\handlers;
 
 use Yii;
 use yii\base\InvalidConfigException;
-use app\common\components\system\Manager;
 use app\common\components\base\services\items\BaseService;
-use app\console\components\handlers\parents\ConsoleHandler;
+use app\common\components\interfaces\handlers\HandlerInterface;
+use app\common\components\base\services\items\settings\ServiceSettings;
 use app\common\components\base\handlers\items\settings\HandlerSettings;
 
 /**
  * Trait HasHandler
  *
- * @property ConsoleHandler $handler
+ * @property HandlerInterface $handler
  *
  * @package app\common\components\traits\handler
  *
@@ -20,53 +20,57 @@ use app\common\components\base\handlers\items\settings\HandlerSettings;
  */
 trait HasHandler
 {
-    /** @var ConsoleHandler `Обработчик` */
-    protected ConsoleHandler $handler;
+    /** @var ?HandlerInterface `Обработчик` */
+    protected ?HandlerInterface $_handler;
+
 
 
     /**
-     * @return void
+     * @return HandlerInterface
      *
      * @throws InvalidConfigException
      */
-    public function setupHandler(): void
+    public function getHandler(): HandlerInterface
     {
-        $this->handler = $this->constructHandler();
+        if ( !$this->_handler )
+        {
+            $this->_handler = $this->constructHandler();
+        }
+
+        return $this->_handler;
     }
 
     /**
-     * @return ConsoleHandler
+     * @return HandlerInterface
      *
      * @throws InvalidConfigException
      */
-    public function constructHandler(): ConsoleHandler
+    public function constructHandler(): HandlerInterface
     {
-        $handlerSetups = $this->getHandlerSettings();
-
-        $serviceConfig = [
-            'class' => $handlerSetups->classService,
-            'configProducer' => [
-                ['class' => $handlerSetups->classProducer],
-                [
-                    new Manager($handlerSetups->classModel),
-                    new Manager($handlerSetups->classForm)
-                ]
-            ],
-            'configRepository' => [
-                'class' => $handlerSetups->classRepository,
-                'modelClass' => $handlerSetups->classModel
-            ],
-            'configDataProvider' => [
-                'class' => $handlerSetups->classDataProvider,
-                'modelClass' => $handlerSetups->classModel
-            ],
-        ];
+        $handlerSettings = $this->getHandlerSettings();
 
         /** @var BaseService $service */
-        $service = Yii::createObject( $serviceConfig );
+        $service = Yii::createObject([
+            'class' => $handlerSettings->classService,
+            'settings' => new ServiceSettings(
+                $handlerSettings->classModel,
+                $handlerSettings->classForm,
+                $handlerSettings->classSearchModel,
+                $handlerSettings->classDataProvider,
+                $handlerSettings->classService,
+                $handlerSettings->classProducer,
+                $handlerSettings->classRepository,
+                [
+                    $handlerSettings->classRepository => [
+                        $handlerSettings->classModel,
+                        $handlerSettings->classForm
+                    ]
+                ]
+            )
+        ]);
 
-        /** @var ConsoleHandler $handler */
-        $handler = Yii::createObject($handlerSetups,[
+        /** @var HandlerInterface $handler */
+        $handler = Yii::createObject($handlerSettings->classHandler,[
             $service
         ]);
 

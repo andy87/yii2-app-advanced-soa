@@ -18,9 +18,9 @@ use app\backend\components\resources\parents\crud\BackendCreateResource;
  *
  * @method BaseTemplateResource|BackendIndexResource|BackendViewResource|BackendCreateResource|BackendUpdateResource|string getResources(string $action)
  * @method BackendIndexResource processIndex(array $params)
- * @method BackendViewResource processView(int $id)
- * @method BackendCreateResource processCreate(array $params = [], string $key = '')
- * @method BackendUpdateResource processUpdate(int $id, array $params)
+ * @method BackendViewResource processViewForm(int $id)
+ * @method BackendCreateResource processCreateForm(array $params = [], string $key = '')
+ * @method BackendUpdateResource processUpdateForm(int $id, array $params)
  * @method int processDelete(int $id)
  *
  * @package app\backend\components\handlers\parents

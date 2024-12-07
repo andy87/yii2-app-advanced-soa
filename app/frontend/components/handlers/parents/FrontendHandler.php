@@ -22,9 +22,9 @@ use app\frontend\components\resources\parents\crud\FrontendUpdateResource;
  *
  * @method BaseTemplateResource|FrontendIndexResource|FrontendViewResource|FrontendCreateResource|FrontendUpdateResource|string getResources(string $action )
  * @method BackendIndexResource processIndex(array $params)
- * @method BackendViewResource processView(int $id)
- * @method BackendCreateResource processCreate(array $params = [], string $key = '')
- * @method BackendUpdateResource processUpdate(int $id, array $params)
+ * @method BackendViewResource processViewForm(int $id)
+ * @method BackendCreateResource processCreateForm(array $params = [], string $key = '')
+ * @method BackendUpdateResource processUpdateForm(int $id, array $params)
  * @method int processDelete(int $id)
  *
  * @package app\frontend\components\handlers\parents

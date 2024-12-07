@@ -2,12 +2,9 @@
 
 namespace app\common\components\system;
 
-use Throwable;
 use yii\db\Exception;
 use yii\db\ActiveRecord;
 use yii\base\BaseObject;
-use yii\db\StaleObjectException;
-use app\common\components\base\moels\items\source\SourceModel;
 
 /**
  * Class Manager

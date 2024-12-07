@@ -2,6 +2,13 @@
 
 namespace app\common\components\base\services\items\settings;
 
+use app\common\components\base\dataProviders\items\source\SourceActiveDataProvider;
+use app\common\components\base\moels\items\source\SourceModel;
+use app\common\components\base\producers\items\source\SourceProducer;
+use app\common\components\base\repository\items\source\SourceRepository;
+use app\common\components\base\services\items\BaseService;
+use app\common\components\interfaces\models\SearchModelInterface;
+
 /**
  * < Common > Настройки для сервисов
  *
@@ -10,13 +17,13 @@ namespace app\common\components\base\services\items\settings;
 class ServiceSettings
 {
     public function __construct(
-        public ?string $classModel,
-        public ?string $classForm,
-        public ?string $classSearchModel,
-        public ?string $classDataProvider,
-        public ?string $classService,
-        public ?string $classProducer,
-        public ?string $classRepository,
+        public SourceModel|string|null $classModel = null,
+        public SourceModel|string|null $classForm = null,
+        public SearchModelInterface|string|null $classSearchModel = null,
+        public SourceActiveDataProvider|string|null $classDataProvider = null,
+        public BaseService|string|null $classService = null,
+        public SourceProducer|string|null $classProducer = null,
+        public SourceRepository|string|null $classRepository = null,
         public array $config = []
     ){}
 }

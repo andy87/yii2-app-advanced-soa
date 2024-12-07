@@ -2,7 +2,6 @@
 
 namespace app\console\components\producers\items;
 
-
 use app\console\models\items\PascalCase;
 use app\common\components\base\moels\items\source\SourceModel;
 

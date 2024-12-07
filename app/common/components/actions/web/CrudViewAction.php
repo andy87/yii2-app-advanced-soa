@@ -4,6 +4,7 @@ namespace app\common\components\actions\web;
 
 use app\common\components\base\actions\CrudAction;
 use app\common\components\base\handlers\items\BaseWebHandler;
+use app\common\components\base\moels\items\source\SourceModel;
 use app\common\components\base\services\resources\crud\BaseCrudViewResource;
 use app\common\components\system\Notify;
 use yii\base\InvalidConfigException;
@@ -30,7 +31,7 @@ class CrudViewAction extends CrudAction
      */
     public function run( int $id ): Response|string
     {
-        $R = $this->handler->processView( $id );
+        $R = $this->handler->processViewForm( $id );
 
         if ( $R->model )
         {

@@ -3,6 +3,9 @@
 namespace app\console\components\controllers\parents;
 
 use app\console\components\handlers\parents\ConsoleHandler;
+use app\console\models\forms\items\PascalCaseForm;
+use app\console\models\items\PascalCase;
+use Exception;
 use yii\console\ExitCode;
 use yii\base\InvalidConfigException;
 use app\common\components\base\controllers\items\BaseConsoleHandlerController;
@@ -19,72 +22,109 @@ use app\common\components\base\controllers\items\BaseConsoleHandlerController;
 abstract class ConsoleHandlerController extends BaseConsoleHandlerController
 {
     /**
-     * @TODO: Доработать
+     * @param array $params
      *
-     * @throws InvalidConfigException
+     * @return ?PascalCase
+     *
+     * @throws \yii\db\Exception
      */
-    public function actionIndex(): int
+    public function processCreateModel( array $params ): ?PascalCase
     {
-        $models = $this->getHandler()->processIndex();
+        /** @var ?PascalCase $model */
+        $model = $this->handler->service->producer->model->create($params);
 
-        print_r($models);
-
-        return ExitCode::OK;
+        return $model;
     }
 
     /**
-     * @TODO: Доработать
+     *
+     * @param int $id
+     * @param array $params
+     *
+     * @return ?PascalCase
      *
      * @throws InvalidConfigException
      */
-    public function processCreate( string $json ): int
+    public function processUpdateModel( int $id, array $params ): ?PascalCase
     {
-        $model = $this->getHandler()->processCreate($json);
+        if ( $model = $this->findByID($id) )
+        {
+            return $this->handler->service->updateModel( $model, $params );
+        }
 
-        print_r($model);
-
-        return ExitCode::OK;
+        return null;
     }
 
     /**
-     * @TODO: Доработать
+     * @param int $id
+     *
+     * @return ?PascalCase
      *
      * @throws InvalidConfigException
      */
-    public function actionView( int $id ): int
+    public function processViewModel( int $id ): ?PascalCase
     {
-        $model = $this->getHandler()->processView( $id );
-
-        print_r($model);
-
-        return ExitCode::OK;
+        return $this->findByID($id);
     }
 
     /**
-     * @TODO: Доработать
+     * @param array $params
      *
-     * @throws InvalidConfigException
+     * @return ?PascalCaseForm
+     *
+     * @throws \yii\db\Exception
      */
-    public function actionUpdate( int $id, string $json): int
+    public function processCreateForm( array $params ): ?PascalCaseForm
     {
-        $model = $this->getHandler()->processUpdate( $id, $json );
+        /** @var ?PascalCaseForm $form */
+        $form = $this->handler->service->producer->form->create( $params );
 
-        print_r($model);
-
-        return ExitCode::OK;
+        return $form;
     }
 
     /**
-     * @TODO: Доработать
+     * @param int $id
+     * @param array $params
+     *
+     * @return ?PascalCase
+     *
+     * @throws \yii\db\Exception
+     */
+    public function processUpdateForm(int $id, array $params ): ?PascalCase
+    {
+        $form = $this->handler->service->repository->find($id);
+
+        if ( $form )
+        {
+            $this->handler->service->updateForm( $form, $params );
+
+            return $form;
+        }
+
+        return null;
+    }
+
+    /**
+     * @param int $id
+     *
+     * @return ?PascalCase
      *
      * @throws InvalidConfigException
      */
-    public function actionDelete( int $id ): int
+    public function processDelete( int $id ): ?PascalCase
     {
-        $deleteResultCount = $this->getHandler()->processDelete( $id );
+        return $this->findByID($id);
+    }
 
-        echo "Deleted $deleteResultCount items";
-
-        return ExitCode::OK;
+    /**
+     * @param int $id
+     *
+     * @return ?PascalCase
+     *
+     * @throws InvalidConfigException|Exception
+     */
+    private function findByID( int $id ): ?PascalCase
+    {
+        return $this->handler->service->getModel($id);
     }
 }

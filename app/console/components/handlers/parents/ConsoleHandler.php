@@ -41,4 +41,11 @@ abstract class ConsoleHandler extends PascalCaseHandler
     }
 
     // {{Boilerplate}}
+    public function processIndex()
+    {
+    }
+
+    public function processCreate(string $json)
+    {
+    }
 }

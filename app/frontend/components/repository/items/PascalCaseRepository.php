@@ -12,8 +12,8 @@ use app\common\components\base\moels\items\source\SourceModel;
  * @property ?Connection $connection
  * @property array $criteriaActive
  *
- * @method ActiveQuery|null find(array|string|int|null $criteria = null)
- * @method ActiveQuery|null findActive(array|string|int|null $criteria = null)
+ * @method ActiveQuery find(array|string|int|null $criteria = null)
+ * @method ActiveQuery findActive(array|string|int|null $criteria = null)
  * @method self setConnection(Connection $connection)
  * @method Connection|null getConnection()
  *
