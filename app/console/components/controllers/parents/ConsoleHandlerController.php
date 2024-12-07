@@ -21,6 +21,16 @@ use app\common\components\base\controllers\items\BaseConsoleHandlerController;
 abstract class ConsoleHandlerController extends BaseConsoleHandlerController
 {
     /**
+     * Список моделей
+     *
+     * @cli php yii items/pascal-case/list {page:int} {perPage:int}
+     * @cli php yii items/pascal-case/list 1 10
+     *
+     * @param int $page
+     * @param int $limit
+     *
+     * @return int
+     *
      * @throws Exception
      */
     public function actionList(int $page = 1, int $limit = 10): int
