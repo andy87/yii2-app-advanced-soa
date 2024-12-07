@@ -2,7 +2,7 @@
 
 namespace app\common\models\items;
 
-use app\common\components\base\moels\items\source\SourceModel;
+use app\common\components\interfaces\models\SourceModelInterface;
 
 /**
  * < Common > Родительский класс для моделей: console/frontend/backend
@@ -11,7 +11,7 @@ use app\common\components\base\moels\items\source\SourceModel;
  *
  * @tag: #boilerplate #common #model #{{snake_case}}
  */
-class PascalCase extends SourceModel
+class PascalCase extends \app\common\models\sources\PascalCase implements SourceModelInterface
 {
     // {{Boilerplate}}
 }

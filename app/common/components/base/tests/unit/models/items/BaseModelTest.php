@@ -4,7 +4,7 @@ namespace app\common\components\base\tests\unit\models\items;
 
 use yii\console\ExitCode;
 use yii\base\InvalidConfigException;
-use app\common\components\base\moels\items\source\SourceModel;
+use app\common\components\base\models\items\sources\SourceModel;
 use app\common\components\base\tests\unit\source\items\BaseUnitTest;
 
 /**
@@ -19,7 +19,7 @@ use app\common\components\base\tests\unit\source\items\BaseUnitTest;
 abstract class BaseModelTest extends BaseUnitTest
 {
     /** @var SourceModel|string $modelClass */
-    protected SourceModel|string $modelClass;
+    public SourceModel|string $modelClass;
 
 
 

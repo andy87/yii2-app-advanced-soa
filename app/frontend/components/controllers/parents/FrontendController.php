@@ -2,9 +2,9 @@
 
 namespace app\frontend\components\controllers\parents;
 
-use yii\filters\AccessControl;
-use app\frontend\components\handlers\parents\FrontendHandler;
 use app\common\components\base\controllers\items\BaseWebHandlerController;
+use app\common\components\traits\handlers\FrontendHandler;
+use yii\filters\AccessControl;
 
 /**
  * < Frontend > Родительский класс для контроллеров в окружении: `frontend`

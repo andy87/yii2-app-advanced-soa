@@ -2,9 +2,9 @@
 
 namespace app\backend\components\controllers\parents;
 
-use yii\filters\AccessControl;
-use app\backend\components\handlers\parents\BackendHandler;
 use app\common\components\base\controllers\items\BaseWebHandlerController;
+use app\common\components\traits\handlers\BackendHandler;
+use yii\filters\AccessControl;
 
 
 /**

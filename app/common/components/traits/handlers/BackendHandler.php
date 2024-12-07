@@ -1,15 +1,15 @@
 <?php declare(strict_types=1);
 
-namespace app\backend\components\handlers\parents;
+namespace app\common\components\traits\handlers;
 
-use app\common\components\enums\Action;
-use app\common\components\base\services\items\BaseService;
-use app\common\components\base\handlers\items\BaseWebHandler;
-use app\common\components\base\resources\items\BaseTemplateResource;
-use app\backend\components\resources\parents\crud\BackendViewResource;
+use app\backend\components\resources\parents\crud\BackendCreateResource;
 use app\backend\components\resources\parents\crud\BackendIndexResource;
 use app\backend\components\resources\parents\crud\BackendUpdateResource;
-use app\backend\components\resources\parents\crud\BackendCreateResource;
+use app\backend\components\resources\parents\crud\BackendViewResource;
+use app\common\components\base\handlers\items\BaseWebHandler;
+use app\common\components\base\resources\items\BaseTemplateResource;
+use app\common\components\base\services\items\BaseService;
+use app\common\components\enums\Action;
 
 /**
  * < Backend > Родительский класс для обработчиков контроллеров в окружения: `backend`

@@ -47,13 +47,10 @@ class Manager extends BaseObject
 
     /**
      * @param array $params
-     * @param bool $runSave
      *
      * @return ActiveRecord
-     *
-     * @throws Exception
      */
-    public function create( array $params, bool $runSave = false ): ActiveRecord
+    public function create( array $params ): ActiveRecord
     {
         $className = $this->getClassName();
 
@@ -62,10 +59,6 @@ class Manager extends BaseObject
         $params = array_merge($this->defaultModelParams, $params);
 
         $activeRecord->load( $params, '' );
-
-        if ($runSave) {
-            $activeRecord->save();
-        }
 
         return $activeRecord;
     }
@@ -79,6 +72,10 @@ class Manager extends BaseObject
      */
     public function add( array $params ): ActiveRecord
     {
-        return $this->create($params, true);
+        $activeRecord = $this->create($params);
+
+        $activeRecord->save();
+
+        return $activeRecord;
     }
 }

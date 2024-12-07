@@ -3,7 +3,7 @@
 namespace app\console\components\producers\items;
 
 use app\console\models\items\PascalCase;
-use app\common\components\base\moels\items\source\SourceModel;
+use app\common\components\base\models\items\sources\SourceModel;
 
 /**
  * < Console > producer for model `PascalCase`
@@ -18,5 +18,5 @@ use app\common\components\base\moels\items\source\SourceModel;
 class PascalCaseProducer extends \app\common\components\producers\items\PascalCaseProducer
 {
     /** @var SourceModel|string $modelClass model class */
-    protected SourceModel|string $modelClass = PascalCase::class;
+    public SourceModel|string $modelClass = PascalCase::class;
 }

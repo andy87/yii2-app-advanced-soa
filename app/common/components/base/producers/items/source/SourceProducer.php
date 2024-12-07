@@ -2,10 +2,11 @@
 
 namespace app\common\components\base\producers\items\source;
 
-use yii\base\BaseObject;
+use yii\base\Model;
 use yii\db\Exception;
+use yii\db\ActiveRecord;
+use yii\base\BaseObject;
 use app\common\components\system\Manager;
-use app\common\components\base\moels\items\source\SourceModel;
 use app\common\components\interfaces\producers\ProducerInterface;
 
 /**
@@ -43,25 +44,33 @@ abstract class SourceProducer extends BaseObject implements ProducerInterface
 
     /**
      * @param array $params
+     */
+    public function modelCreate( mixed $params = [] ): Model
+    {
+        return $this->model->create($params);
+    }
+
+    /**
+     * @param array $params
      *
      * @throws Exception
      */
-    public function modelCreate( mixed $params = [], bool $runSave = false ): ?SourceModel
+    public function modelAdd( mixed $params ): ActiveRecord
     {
-        /** @var ?SourceModel $model */
-        $model = $this->model->create($params);
+        /** @var ActiveRecord $model */
+        $model = $this->modelCreate( $params );
+
+        $model->save();
 
         return $model;
     }
 
     /**
      * @param array $params
-     *
-     * @throws Exception
      */
-    public function modelAdd( mixed $params ): ?SourceModel
+    public function formCreate( mixed $params = [] ): Model
     {
-        return $this->modelCreate( $params, true );
+        return $this->form->create( $params);
     }
 
     /**
@@ -69,21 +78,13 @@ abstract class SourceProducer extends BaseObject implements ProducerInterface
      *
      * @throws Exception
      */
-    public function formCreate( mixed $params = [], bool $runSave = false ): ?SourceModel
+    public function formAdd( mixed $params ): ActiveRecord
     {
-        /** @var ?SourceModel $form */
-        $form = $this->form->create( $params, $runSave );
+        /** @var ActiveRecord $form */
+        $form = $this->formCreate( $params );
+
+        $form->save();
 
         return $form;
-    }
-
-    /**
-     * @param array $params
-     *
-     * @throws Exception
-     */
-    public function formAdd( mixed $params ): ?SourceModel
-    {
-        return $this->formCreate( $params, true );
     }
 }

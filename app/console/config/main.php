@@ -37,6 +37,9 @@ return [
             'migrationPath' => ['@console/migrations'],
         ],
 
-        'architect' => ArchitectController::class,
+        'architect' => [
+            'class' => ArchitectController::class,
+            'migrationPath' => ['@console/migrations'],
+        ],
     ],
 ];

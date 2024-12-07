@@ -2,14 +2,15 @@
 
 namespace app\common\components\base\controllers\items;
 
-use app\common\components\traits\handlers\HasHandler;
-use app\console\components\handlers\parents\ConsoleHandler;
 use app\common\components\base\controllers\BaseConsoleController;
+use app\common\components\base\handlers\items\settings\HandlerSettings;
+use app\common\components\traits\handlers\ConsoleHandler;
+use app\common\components\traits\handlers\HasHandler;
 
 /**
  * < Common > Родительский класс для всех консольных контроллеров
  *
- * @property ConsoleHandler $handler
+ * @property \app\common\components\traits\handlers\ConsoleHandler $handler
  *
  * @package app\common\components\base\controllers
  *
@@ -18,4 +19,19 @@ use app\common\components\base\controllers\BaseConsoleController;
 abstract class BaseConsoleHandlerController extends BaseConsoleController
 {
     use HasHandler;
+
+
+
+    /** @var array */
+    public array $serviceSettings = [];
+
+
+
+    /**
+     * @return HandlerSettings
+     */
+    public function getHandlerSettings(): HandlerSettings
+    {
+        return new HandlerSettings( ...$this->serviceSettings );
+    }
 }

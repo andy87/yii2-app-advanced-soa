@@ -6,7 +6,7 @@ use Exception;
 use yii\db\Connection;
 use yii\db\ActiveQuery;
 use yii\base\BaseObject;
-use app\common\components\base\moels\items\source\SourceModel;
+use app\common\components\base\models\items\sources\SourceModel;
 use app\common\components\interfaces\repository\RepositoryInterface;
 
 /**
@@ -32,6 +32,7 @@ abstract class SourceRepository extends BaseObject implements RepositoryInterfac
     public array $criteriaActive = [];
 
 
+
     /**
      * @param SourceModel|string $modelClass
      * @param SourceModel|string $formClass
@@ -53,12 +54,12 @@ abstract class SourceRepository extends BaseObject implements RepositoryInterfac
      *
      * @throws Exception
      */
-    public function findModel( null|array|string|int $criteria = null): ActiveQuery
+    public function findModel(null|array|string|int $criteria = null): ActiveQuery
     {
         /** @var SourceModel $modelClass */
         $modelClass = $this->getModelClass();
 
-        return $this->findCustom( $modelClass, $criteria );
+        return $this->findByModel( $modelClass, $criteria );
     }
 
     /**
@@ -73,7 +74,7 @@ abstract class SourceRepository extends BaseObject implements RepositoryInterfac
         /** @var SourceModel $modelClass */
         $modelClass = $this->getFormClass();
 
-        return $this->findCustom( $modelClass, $criteria );
+        return $this->findByModel( $modelClass, $criteria );
     }
 
     /**
@@ -82,7 +83,7 @@ abstract class SourceRepository extends BaseObject implements RepositoryInterfac
      *
      * @return ActiveQuery
      */
-    public function findCustom( SourceModel|string|null $classModel, array|string|int|null $criteria = null ): ActiveQuery
+    public function findByModel(SourceModel|string|null $classModel, array|string|int|null $criteria = null ): ActiveQuery
     {
         $activeQuery = $classModel::find();
 
@@ -108,7 +109,7 @@ abstract class SourceRepository extends BaseObject implements RepositoryInterfac
      */
     public function findActive( null|array|string|int $criteria = null, SourceModel|string|null $classModel = null ): ActiveQuery
     {
-        $activeQuery = $this->findCustom( $classModel, $criteria );
+        $activeQuery = $this->findByModel( $classModel, $criteria );
 
         if ( count( $this->criteriaActive ) )
         {

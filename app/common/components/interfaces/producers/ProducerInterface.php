@@ -2,7 +2,7 @@
 
 namespace app\common\components\interfaces\producers;
 
-use app\common\components\base\moels\items\source\SourceModel;
+use yii\base\Model;
 
 /**
  * < Common >
@@ -13,13 +13,13 @@ use app\common\components\base\moels\items\source\SourceModel;
  */
 interface ProducerInterface
 {
-    public function modelCreate( array $params, bool $runSave = false ): ?SourceModel;
+    public function modelCreate( array $params ): ?Model;
 
-    public function modelAdd( array $params ): ?SourceModel;
+    public function modelAdd( array $params ): ?Model;
 
 
 
-    public function formCreate( array $params, bool $runSave = false ): ?SourceModel;
+    public function formCreate( array $params ): ?Model;
 
-    public function formAdd( array $params ): ?SourceModel;
+    public function formAdd( array $params ): ?Model;
 }

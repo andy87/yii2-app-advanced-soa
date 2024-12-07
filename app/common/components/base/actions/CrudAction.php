@@ -3,7 +3,7 @@
 namespace app\common\components\base\actions;
 
 use app\common\components\base\handlers\items\BaseWebHandler;
-use app\common\components\base\moels\items\source\SourceModel;
+use app\common\components\base\models\items\sources\SourceModel;
 use app\common\components\base\resources\items\BaseTemplateResource;
 use app\common\components\base\services\resources\crud\BaseFormResource;
 use app\common\components\enums\Action;

@@ -6,7 +6,7 @@ use Yii;
 use Exception;
 use yii\console\ExitCode;
 use yii\base\InvalidConfigException;
-use app\common\components\base\moels\items\source\SourceModel;
+use app\common\components\base\models\items\sources\SourceModel;
 use app\common\components\base\tests\unit\source\items\BaseUnitTest;
 use app\common\components\base\producers\items\source\SourceProducer;
 

@@ -2,12 +2,11 @@
 
 namespace app\console\components\controllers\parents;
 
-use app\console\components\handlers\parents\ConsoleHandler;
-use app\console\models\forms\items\PascalCaseForm;
-use app\console\models\items\PascalCase;
 use Exception;
+use Throwable;
 use yii\console\ExitCode;
-use yii\base\InvalidConfigException;
+use app\common\components\models\dto\ModelInfo;
+use app\common\components\traits\handlers\ConsoleHandler;
 use app\common\components\base\controllers\items\BaseConsoleHandlerController;
 
 /**
@@ -22,109 +21,180 @@ use app\common\components\base\controllers\items\BaseConsoleHandlerController;
 abstract class ConsoleHandlerController extends BaseConsoleHandlerController
 {
     /**
-     * @param array $params
-     *
-     * @return ?PascalCase
-     *
-     * @throws \yii\db\Exception
+     * @throws Exception
      */
-    public function processCreateModel( array $params ): ?PascalCase
+    public function actionList(int $page = 1, int $limit = 10): int
     {
-        /** @var ?PascalCase $model */
-        $model = $this->handler->service->producer->model->create($params);
+        $this->printConsoleFuncStart(__METHOD__);
 
-        return $model;
-    }
+        $models = $this->handler->processList($page, $limit);
 
-    /**
-     *
-     * @param int $id
-     * @param array $params
-     *
-     * @return ?PascalCase
-     *
-     * @throws InvalidConfigException
-     */
-    public function processUpdateModel( int $id, array $params ): ?PascalCase
-    {
-        if ( $model = $this->findByID($id) )
+        $this->printConsole('Result');
+
+        if (count($models) > 0)
         {
-            return $this->handler->service->updateModel( $model, $params );
+            $this->printConsoleSuccess('Models found: ' . count($models));
+
+            $list = [];
+
+            foreach ($models as $model)
+            {
+                $list[$model->id] = $model->attributes;
+            }
+            print_r($list);
+
+        } else {
+
+            $this->printConsoleError('Models NOT found');
         }
 
-        return null;
+        $this->printConsoleFuncEnd(__METHOD__);
+
+        return ExitCode::OK;
     }
 
     /**
-     * @param int $id
+     * Создание модели
      *
-     * @return ?PascalCase
+     * @cli php yii items/pascal-case/model-add {string:json}
+     * @cli php yii items/pascal-case/model-add "{\"column\": \"string\", \"count\": \"1\", \"content\": \"xxx\"}"
      *
-     * @throws InvalidConfigException
+     * @param string $json JSON-строка с параметрами
+     *
+     * @return int
+     *
+     * @throws Exception
      */
-    public function processViewModel( int $id ): ?PascalCase
+    public function actionModelAdd( string $json ): int
     {
-        return $this->findByID($id);
-    }
+        $this->printConsoleFuncStart(__METHOD__);
 
-    /**
-     * @param array $params
-     *
-     * @return ?PascalCaseForm
-     *
-     * @throws \yii\db\Exception
-     */
-    public function processCreateForm( array $params ): ?PascalCaseForm
-    {
-        /** @var ?PascalCaseForm $form */
-        $form = $this->handler->service->producer->form->create( $params );
+        $params = json_decode($json, true, 512, JSON_THROW_ON_ERROR);
 
-        return $form;
-    }
+        $model = $this->handler->processModelAdd( $params );
 
-    /**
-     * @param int $id
-     * @param array $params
-     *
-     * @return ?PascalCase
-     *
-     * @throws \yii\db\Exception
-     */
-    public function processUpdateForm(int $id, array $params ): ?PascalCase
-    {
-        $form = $this->handler->service->repository->find($id);
+        $this->printConsole('Result');
 
-        if ( $form )
+        if ( $model && isset( $model->id ) && !$model->isNewRecord )
         {
-            $this->handler->service->updateForm( $form, $params );
+            $this->printConsoleSuccess("Model added: $model->id" . PHP_EOL );
 
-            return $form;
+        } else {
+
+            $this->printConsoleError('Model NOT added');
         }
 
-        return null;
+        print_r(new ModelInfo($model));
+
+        $this->printConsoleFuncEnd(__METHOD__);
+
+        return ExitCode::OK;
     }
 
     /**
-     * @param int $id
+     * Просмотр модели
      *
-     * @return ?PascalCase
+     * @cli php yii items/pascal-case/model-view 1
      *
-     * @throws InvalidConfigException
+     * @param int $id ID модели
+     *
+     * @return int
+     *
+     * @throws Exception
      */
-    public function processDelete( int $id ): ?PascalCase
+    public function actionModelView( int $id ): int
     {
-        return $this->findByID($id);
+        $this->printConsoleFuncStart(__METHOD__);
+
+        $model = $this->handler->processViewModel( $id );
+
+        $this->printConsole('Result');
+
+        if ($model)
+        {
+            $this->printConsoleSuccess("Model found: $model->id" . PHP_EOL );
+
+            print_r(new ModelInfo($model));
+
+        } else {
+
+            $this->printConsoleError('Model NOT found');
+        }
+
+        $this->printConsoleFuncEnd(__METHOD__);
+
+        return ExitCode::OK;
     }
 
     /**
-     * @param int $id
+     * Обновление модели
      *
-     * @return ?PascalCase
+     * @cli php yii items/pascal-case/model-update 1 '{"name": "value"}'
      *
-     * @throws InvalidConfigException|Exception
+     * @param int $id ID модели
+     * @param string $json JSON-строка с параметрами
+     *
+     * @return int
+     *
+     * @throws Exception
      */
-    private function findByID( int $id ): ?PascalCase
+    public function actionModelUpdate( int $id, string $json ): int
     {
-        return $this->handler->service->getModel($id);
+        $this->printConsoleFuncStart(__METHOD__);
+
+        $params = json_decode( $json, true, 512, JSON_THROW_ON_ERROR );
+
+        $model = $this->handler->processModelUpdate( $id, $params );
+
+        if ($model)
+        {
+            $this->stdout(date('Y-m-d H:i:s') . ' | ');
+
+            print_r(new ModelInfo($model));
+
+            $this->printConsole('Result');
+
+            if ( $model->save() )
+            {
+                $this->printConsoleSuccess("Model updated: $model->id");
+
+            } else {
+
+                $this->printConsoleError('Model NOT updated' . PHP_EOL);
+
+                print_r($model->errors);
+            }
+        }
+
+        $this->printConsoleFuncEnd(__METHOD__);
+
+        return ExitCode::OK;
+
+    }
+
+    /**
+     * Удаление объекта по ID
+     *
+     * @cli php yii items/pascal-case/delete 1
+     *
+     * @param int $id ID модели
+     *
+     * @return int
+     *
+     * @throws Exception|Throwable
+     */
+    public function actionDelete( int $id ): int
+    {
+        $this->printConsoleFuncStart(__METHOD__);
+
+        $model = $this->handler->processDelete( $id );
+
+        ( $model === null )
+            ? $this->printConsoleError("Model id:`$id` not found")
+            : $this->printConsoleSuccess("Model id:`$id` deleted");
+
+        $this->printConsoleFuncEnd(__METHOD__);
+
+        return ExitCode::OK;
     }
 }

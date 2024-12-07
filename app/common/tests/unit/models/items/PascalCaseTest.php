@@ -19,7 +19,7 @@ use app\common\components\base\{moels\items\base\SourceModel};
 class PascalCaseTest extends \unit\models\items\BaseModelTest
 {
     /** @var SourceModel|string $modelClass */
-    protected SourceModel|string $modelClass = \app\common\models\items\PascalCase::class;
+    public SourceModel|string $modelClass = \app\common\models\items\PascalCase::class;
 
     // {{Boilerplate}}
 }

@@ -2,7 +2,7 @@
 
 namespace app\backend\components\resources\parents\crud;
 
-use app\common\components\base\moels\items\source\SourceModel;
+use app\common\components\base\models\items\sources\SourceModel;
 
 /**
  * < Backend > Родительский класс для ресурса создания модели в окружении `backend`

@@ -3,7 +3,7 @@
 namespace app\common\components\base\handlers\items\settings;
 
 use app\common\components\base\services\items\BaseService;
-use app\common\components\base\moels\items\source\SourceModel;
+use app\common\components\base\models\items\sources\SourceModel;
 use app\common\components\interfaces\models\SearchModelInterface;
 use app\common\components\base\handlers\items\source\SourceHandler;
 use app\common\components\base\producers\items\source\SourceProducer;

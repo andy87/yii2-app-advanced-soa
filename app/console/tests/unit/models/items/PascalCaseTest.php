@@ -21,7 +21,7 @@ use unit\models\items\BaseModelTest;
 class PascalCaseTest extends BaseModelTest
 {
     /** @var SourceModel|string $modelClass */
-    protected SourceModel|string $modelClass = PascalCase::class;
+    public SourceModel|string $modelClass = PascalCase::class;
 
     // {{Boilerplate}}
 }

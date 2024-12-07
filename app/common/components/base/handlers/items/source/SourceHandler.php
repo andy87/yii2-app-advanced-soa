@@ -2,9 +2,7 @@
 
 namespace app\common\components\base\handlers\items\source;
 
-use Yii;
 use yii\base\BaseObject;
-use yii\base\InvalidConfigException;
 use app\common\components\traits\services\HasService;
 use app\common\components\base\services\items\BaseService;
 use app\common\components\interfaces\handlers\HandlerInterface;
@@ -23,19 +21,17 @@ abstract class SourceHandler extends BaseObject implements HandlerInterface
 {
     use HasService;
 
+    /**
+     * @var array Настройки для сервиса
+     */
+    public const SETTINGS_SERVICE = [];
 
 
     /**
-     * @param array $config
-     *
-     * @throws InvalidConfigException
+     * @return ServiceSettings
      */
-    public function __construct( array $config = [] )
+    public function getServiceSettings(): ServiceSettings
     {
-        $this->setupService();
-
-        parent::__construct($config);
+        return new ServiceSettings(...static::SETTINGS_SERVICE);
     }
-
-    abstract public function getServiceSettings(): ServiceSettings;
 }

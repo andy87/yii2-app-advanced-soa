@@ -5,7 +5,7 @@ namespace app\common\components\base\dataProviders\items\source;
 use yii\db\Connection;
 use yii\db\QueryInterface;
 use yii\data\ActiveDataProvider;
-use app\common\components\base\moels\items\source\SourceModel;
+use app\common\components\base\models\items\sources\SourceModel;
 use app\common\components\interfaces\dataProvider\DataProviderInterface;
 
 /**

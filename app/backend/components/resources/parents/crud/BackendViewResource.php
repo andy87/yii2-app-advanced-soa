@@ -3,7 +3,7 @@
 namespace app\backend\components\resources\parents\crud;
 
 
-use app\common\components\base\moels\items\base\SourceModel;
+use app\common\components\base\models\items\base\SourceModel;
 use app\common\components\base\services\resources\crud\BaseCrudViewResource;
 
 /**

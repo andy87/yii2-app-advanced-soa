@@ -47,23 +47,21 @@ abstract class BaseToolKit extends SourceToolKit
     {
         if ( !$this->_producer )
         {
-            $params = [];
-
-            if ( $this->settings->classModel )
+            if (isset($this->settings->config[$this->settings->classProducer]))
             {
-                $params[] = new Manager($this->settings->classModel);
-            }
+                $params = $this->settings->config[$this->settings->classProducer];
 
-            if ( $this->settings->classForm )
-            {
-                $params[] = new Manager($this->settings->classForm);
+            } else {
+
+                $params = [];
+
+                if ( $this->settings->classModel ) $params[] = new Manager($this->settings->classModel);
+
+                if ( $this->settings->classForm ) $params[] = new Manager($this->settings->classForm);
             }
 
             /** @var SourceProducer $_producer */
-            $_producer = Yii::createObject(
-                [$this->settings->classProducer],
-                $this->settings->config[$this->settings->classRepository] ?? $params
-            );
+            $_producer = Yii::createObject([ 'class' => $this->settings->classProducer ], $params );
 
             $this->_producer = $_producer;
         }
@@ -86,12 +84,13 @@ abstract class BaseToolKit extends SourceToolKit
         {
             /** @var SourceRepository $_repository */
             $_repository = Yii::createObject(
-                [$this->settings->classRepository],
+                [ 'class' => $this->settings->classRepository ],
                 $this->settings->config[$this->settings->classRepository] ?? []
             );
 
             $this->_repository = $_repository;
         }
+
         return $this->_repository;
     }
 

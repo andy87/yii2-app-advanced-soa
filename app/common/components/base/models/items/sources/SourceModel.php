@@ -1,6 +1,6 @@
 <?php declare(strict_types=1);
 
-namespace app\common\components\base\moels\items\source;
+namespace app\common\components\base\models\items\sources;
 
 use yii\db\ActiveRecord;
 use app\common\components\interfaces\models\SourceModelInterface;

@@ -6,7 +6,7 @@ use yii\web\ErrorAction;
 use yii\filters\VerbFilter;
 use yii\filters\AccessControl;
 use app\common\components\enums\Action;
-use app\common\components\base\moels\items\source\SourceModel;
+use app\common\components\base\models\items\sources\SourceModel;
 use app\common\components\base\controllers\items\source\SourceWebController;
 
 /**

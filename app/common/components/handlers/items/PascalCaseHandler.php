@@ -2,14 +2,15 @@
 
 namespace app\common\components\handlers\items;
 
-use app\common\models\items\PascalCase;
-use app\common\models\search\items\PascalCaseSearch;
-use app\common\components\services\items\PascalCaseService;
-use app\common\components\producers\items\PascalCaseProducer;
-use app\common\components\repository\items\PascalCaseRepository;
 use app\common\components\base\handlers\items\source\SourceHandler;
 use app\common\components\dataProviders\items\PascalCaseDataProvider;
-use app\common\components\base\services\items\settings\ServiceSettings;
+use app\common\components\producers\items\PascalCaseProducer;
+use app\common\components\repository\items\PascalCaseRepository;
+use app\common\components\services\items\PascalCaseService;
+use app\common\models\forms\items\PascalCaseForm;
+use app\common\models\items\PascalCase;
+use app\common\models\search\items\PascalCaseSearch;
+
 
 /**
  * < Common > Родительский класс для обработчиков: console/frontend/backend
@@ -23,21 +24,18 @@ use app\common\components\base\services\items\settings\ServiceSettings;
 class PascalCaseHandler extends SourceHandler
 {
     /**
-     * @return ServiceSettings
+     * @var array Настройки сервиса
      */
-    public function getServiceSettings(): ServiceSettings
-    {
-        return new ServiceSettings(
-            PascalCase::class,
-            null,
-            PascalCaseSearch::class,
-            PascalCaseDataProvider::class,
-            PascalCaseService::class,
-            PascalCaseProducer::class,
-            PascalCaseRepository::class,
-            []
-        );
-    }
-
-    // {{Boilerplate}}
+    public const SETTINGS_SERVICE = [
+        PascalCase::class,
+        PascalCaseForm::class,
+        PascalCaseSearch::class,
+        PascalCaseDataProvider::class,
+        PascalCaseService::class,
+        PascalCaseProducer::class,
+        PascalCaseRepository::class,
+        [
+            PascalCaseRepository::class => [ PascalCase::class, PascalCaseForm::class ]
+        ]
+    ];
 }

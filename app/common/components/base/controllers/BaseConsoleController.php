@@ -4,6 +4,7 @@ namespace app\common\components\base\controllers;
 
 use yii\helpers\BaseConsole;
 use app\common\components\base\controllers\items\source\SourceConsoleController;
+use yii\helpers\Console;
 
 /**
  * < Common > Родительский класс для всех консольных контроллеров
@@ -28,31 +29,36 @@ abstract class BaseConsoleController extends SourceConsoleController
     /**
      * @param string $__METHOD__
      *
-     * @return string
+     * @return void
      */
-    protected function printConsoleFuncStart(string $__METHOD__ ): string
+    protected function printConsoleFuncStart(string $__METHOD__ ): void
     {
-        return $this->printConsole($__METHOD__ . '|Start');
+        echo PHP_EOL;
+
+        $this->printConsole($__METHOD__ . '|Start');
     }
 
     /**
      * @param string $__METHOD__
      *
-     * @return string
+     * @return void
      */
-    protected function printConsoleFuncEnd(string $__METHOD__ ): string
+    protected function printConsoleFuncEnd(string $__METHOD__ ): void
     {
-        return $this->printConsole($__METHOD__ . '|Finish');
+        $this->printConsole($__METHOD__ . '|Finish' . PHP_EOL);
     }
 
     /**
      * @param string $message
+     * @param int $color
      *
-     * @return string
+     * @return void
      */
-    protected function printConsole(string $message ): string
+    protected function printConsole(string $message, int $color = BaseConsole::FG_GREY ): void
     {
-        return PHP_EOL . date(static::DATETIME_FORMAT) . ' | ' . $message;
+        $message = date(static::DATETIME_FORMAT) . ' | ' . $message . PHP_EOL;
+
+        $this->stdout( $message, $color );
     }
 
     /**
@@ -60,11 +66,13 @@ abstract class BaseConsoleController extends SourceConsoleController
      *
      * @return void
      */
-    protected function consolePrintSuccess(?string $message = null ): void
+    protected function printConsoleSuccess(?string $message = null ): void
     {
-        $this->stdout(static::MESSAGE_SUCCESS, BaseConsole::FG_GREEN);
+        $this->stdout(static::MESSAGE_SUCCESS , BaseConsole::FG_GREEN );
 
-        if( $message ) $this->stdout(PHP_EOL . $message );
+        if( $message ) {
+            $this->stdout(" $message" . PHP_EOL);
+        }
     }
 
     /**
@@ -72,11 +80,13 @@ abstract class BaseConsoleController extends SourceConsoleController
      *
      * @return void
      */
-    protected function consolePrintError(?string $message = null ): void
+    protected function printConsoleError(?string $message = null ): void
     {
-        $this->stdout(static::MESSAGE_ERROR, BaseConsole::FG_RED);
+        $this->stdout(static::MESSAGE_ERROR  , BaseConsole::FG_RED);
 
-        if( $message ) $this->stdout(PHP_EOL . $message );
+        if( $message ) {
+            $this->stdout(" $message" . PHP_EOL);
+        }
     }
 
 }

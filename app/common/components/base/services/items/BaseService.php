@@ -4,10 +4,11 @@ namespace app\common\components\base\services\items;
 
 use Exception;
 use Throwable;
+use yii\base\Model;
+use yii\db\ActiveRecord;
 use yii\db\StaleObjectException;
 use yii\db\Exception as DbException;
 use app\common\components\interfaces\CatcherInterface;
-use app\common\components\base\moels\items\source\SourceModel;
 use app\common\components\interfaces\services\ServiceInterface;
 use app\common\components\base\producers\items\source\SourceProducer;
 use app\common\components\base\services\items\settings\ServiceSettings;
@@ -30,17 +31,36 @@ use app\common\components\base\dataProviders\items\source\SourceActiveDataProvid
 abstract class BaseService extends BaseToolKit implements ServiceInterface
 {
     /**
-     * @param int $id
+     * @param int $page
+     * @param int $perPage
      *
-     * @return ?SourceModel
+     * @return ActiveRecord[]
      *
      * @throws Exception
      */
-    public function getModel(int $id): ?SourceModel
+    public function getList(int $page, int $perPage): array
     {
-        $query = $this->repository->find([ 'id' => $id ]);
+        $query = $this->repository->findModel();
+        $query->limit($perPage)->offset($page--);
 
-        /** @var SourceModel $result */
+        /** @var array $result */
+        $result = $query->all($this->repository->connection);
+
+        return $result;
+    }
+
+    /**
+     * @param int $id
+     *
+     * @return ?ActiveRecord
+     *
+     * @throws Exception
+     */
+    public function getModel(int $id): ?ActiveRecord
+    {
+        $query = $this->repository->findModel([ 'id' => $id ]);
+
+        /** @var ActiveRecord $result */
         $result = $query->one($this->repository->connection);
 
         return $result;
@@ -49,11 +69,9 @@ abstract class BaseService extends BaseToolKit implements ServiceInterface
     /**
      * @param array $params
      *
-     * @return ?SourceModel
-     *
-     * @throws DbException
+     * @return Model
      */
-    public function createModel(array $params ): ?SourceModel
+    public function createModel( array $params ): Model
     {
         return $this->producer->modelCreate( $params );
     }
@@ -61,28 +79,28 @@ abstract class BaseService extends BaseToolKit implements ServiceInterface
     /**
      * @param array $params
      *
-     * @return ?SourceModel
+     * @return ?ActiveRecord
      *
      * @throws DbException
      */
-    public function addModel( array $params ): ?SourceModel
+    public function addModel( array $params ): ?ActiveRecord
     {
         return $this->producer->modelAdd( $params );
     }
 
     /**
-     * @param SourceModel $model
+     * @param ActiveRecord $activeRecord
      * @param mixed $params
      *
-     * @return bool
+     * @return ?ActiveRecord
      *
      * @throws DbException
      */
-    public function updateModel( SourceModel $model, mixed $params ): bool
+    public function updateModel( ActiveRecord $activeRecord, mixed $params ): ?ActiveRecord
     {
-        $model->load( $params, '' );
+        $activeRecord->load( $params, '' );
 
-        return $model->save();
+        return $activeRecord->save() ? $activeRecord : null;
     }
 
 
@@ -90,15 +108,15 @@ abstract class BaseService extends BaseToolKit implements ServiceInterface
     /**
      * @param int $id
      *
-     * @return ?SourceModel
+     * @return ?ActiveRecord
      *
      * @throws Exception
      */
-    public function getForm(int $id): ?SourceModel
+    public function getForm(int $id): ?ActiveRecord
     {
         $query = $this->repository->findForm($id);
 
-        /** @var ?SourceModel $result */
+        /** @var ?ActiveRecord $result */
         $result = $query->one($this->repository->connection);
 
         return $result;
@@ -107,11 +125,9 @@ abstract class BaseService extends BaseToolKit implements ServiceInterface
     /**
      * @param array $params
      *
-     * @return ?SourceModel
-     *
-     * @throws DbException
+     * @return Model
      */
-    public function createForm(array $params ): ?SourceModel
+    public function createForm(array $params ): Model
     {
         return $this->producer->formCreate( $params );
     }
@@ -119,42 +135,42 @@ abstract class BaseService extends BaseToolKit implements ServiceInterface
     /**
      * @param array $params
      *
-     * @return ?SourceModel
+     * @return ActiveRecord
      *
      * @throws DbException
      */
-    public function addForm(array $params ): ?SourceModel
+    public function addForm(array $params ): ActiveRecord
     {
         return $this->producer->formAdd( $params );
     }
 
     /**
-     * @param SourceModel $form
+     * @param ActiveRecord $form
      * @param mixed $params
      *
-     * @return bool
+     * @return ?ActiveRecord
      *
      * @throws DbException
      */
-    public function updateForm(SourceModel $form, mixed $params ): bool
+    public function updateForm(ActiveRecord $form, mixed $params ): ?ActiveRecord
     {
         $form->load( $params, '' );
 
-        return $form->save();
+        return $form->save() ? $form : null;
     }
 
     /**
      * @param int $id
      *
-     * @return ?SourceModel
+     * @return ?ActiveRecord
      *
      * @throws Exception
      */
-    public function getActiveModel( int $id ): ?SourceModel
+    public function getActiveModel( int $id ): ?ActiveRecord
     {
         $query = $this->repository->findActive([ 'id' => $id ], $this->repository->modelClass );
 
-        /** @var ?SourceModel $result */
+        /** @var ?ActiveRecord $result */
         $result = $query->one($this->repository->connection);
 
         return $result;
@@ -163,15 +179,15 @@ abstract class BaseService extends BaseToolKit implements ServiceInterface
     /**
      * @param int $id
      *
-     * @return ?SourceModel
+     * @return ?ActiveRecord
      *
      * @throws Exception
      */
-    public function getActiveForm( int $id ): ?SourceModel
+    public function getActiveForm( int $id ): ?ActiveRecord
     {
         $query = $this->repository->findActive([ 'id' => $id ], $this->repository->formClass );
 
-        /** @var ?SourceModel $result */
+        /** @var ?ActiveRecord $result */
         $result = $query->one($this->repository->connection);
 
         return $result;
@@ -180,15 +196,15 @@ abstract class BaseService extends BaseToolKit implements ServiceInterface
     /**
      * @param string|array $criteria
      *
-     * @return ?SourceModel
+     * @return ?ActiveRecord
      *
      * @throws Exception
      */
-    public function getAllModels( string|array $criteria = [] ): ?SourceModel
+    public function getAllModels( string|array $criteria = [] ): ?ActiveRecord
     {
-        $query = $this->repository->findCustom( $this->repository->modelClass, $criteria );
+        $query = $this->repository->findByModel( $this->repository->modelClass, $criteria );
 
-        /** @var ?SourceModel $result */
+        /** @var ?ActiveRecord $result */
         $result = $query->all($this->repository->connection);
 
         return $result;
@@ -197,15 +213,15 @@ abstract class BaseService extends BaseToolKit implements ServiceInterface
     /**
      * @param string|array $criteria
      *
-     * @return ?SourceModel
+     * @return ?ActiveRecord
      *
      * @throws Exception
      */
-    public function getAllForms( string|array $criteria = [] ): ?SourceModel
+    public function getAllForms( string|array $criteria = [] ): ?ActiveRecord
     {
-        $query = $this->repository->findCustom( $this->repository->formClass, $criteria );
+        $query = $this->repository->findByModel( $this->repository->formClass, $criteria );
 
-        /** @var ?SourceModel $result */
+        /** @var ?ActiveRecord $result */
         $result = $query->all($this->repository->connection);
 
         return $result;
@@ -214,15 +230,15 @@ abstract class BaseService extends BaseToolKit implements ServiceInterface
     /**
      * @param string|array $criteria
      *
-     * @return ?SourceModel
+     * @return ?ActiveRecord
      *
      * @throws Exception
      */
-    public function getAllActiveModels( string|array $criteria = [] ): ?SourceModel
+    public function getAllActiveModels( string|array $criteria = [] ): ?ActiveRecord
     {
         $query = $this->repository->findActive( $criteria, $this->repository->modelClass );
 
-        /** @var ?SourceModel $result */
+        /** @var ?ActiveRecord $result */
         $result = $query->all($this->repository->connection);
 
         return $result;
@@ -231,28 +247,28 @@ abstract class BaseService extends BaseToolKit implements ServiceInterface
     /**
      * @param string|array $criteria
      *
-     * @return ?SourceModel
+     * @return ?ActiveRecord
      *
      * @throws Exception
      */
-    public function getAllActiveForms( string|array $criteria = [] ): ?SourceModel
+    public function getAllActiveForms( string|array $criteria = [] ): ?ActiveRecord
     {
         $query = $this->repository->findActive( $criteria, $this->repository->formClass );
 
-        /** @var ?SourceModel $result */
+        /** @var ?ActiveRecord $result */
         $result = $query->all($this->repository->connection);
 
         return $result;
     }
 
     /**
-     * @param SourceModel $model
+     * @param ActiveRecord $model
      *
      * @return ?int
      *
      * @throws StaleObjectException|Throwable
      */
-    public function delete( SourceModel $model ): ?int
+    public function delete( ActiveRecord $model ): ?int
     {
         return $model->delete();
     }

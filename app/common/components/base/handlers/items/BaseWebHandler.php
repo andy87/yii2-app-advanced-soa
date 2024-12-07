@@ -2,7 +2,7 @@
 
 namespace app\common\components\base\handlers\items;
 
-use app\common\components\base\moels\items\source\SourceModel;
+use app\common\components\base\models\items\sources\SourceModel;
 use Yii;
 use Exception;
 use Throwable;
@@ -76,9 +76,7 @@ abstract class BaseWebHandler extends PascalCaseHandler
      */
     public function getPostRequestParams(): array
     {
-        return (Yii::$app->request->isPost)
-            ? (array) Yii::$app->request->bodyParams
-            : [];
+        return (Yii::$app->request->isPost) ? (array) Yii::$app->request->bodyParams : [];
     }
 
     /**

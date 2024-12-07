@@ -3,8 +3,9 @@
 namespace app\backend\tests\unit\models\items;
 
 use app\backend\models\items\PascalCase;
-use app\common\components\base\{moels\items\base\SourceModel};
-use unit\models\items\BaseModelTest;
+use app\common\components\base\models\items\sources\SourceModel;
+use app\common\components\base\tests\unit\models\items\BaseModelTest;
+
 
 /**
  * < Backend > PascalCaseServiceTest
@@ -21,7 +22,7 @@ use unit\models\items\BaseModelTest;
 class PascalCaseTest extends BaseModelTest
 {
     /** @var SourceModel|string $modelClass */
-    protected SourceModel|string $modelClass = PascalCase::class;
+    public SourceModel|string $modelClass = PascalCase::class;
 
     // {{Boilerplate}}
 }

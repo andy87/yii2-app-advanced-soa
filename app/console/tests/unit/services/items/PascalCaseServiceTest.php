@@ -2,7 +2,6 @@
 
 namespace app\console\tests\unit\services\items;
 
-use app\common\components\base\{services\items\base\SourceService};
 use app\console\components\services\items\PascalCaseService;
 
 /**
