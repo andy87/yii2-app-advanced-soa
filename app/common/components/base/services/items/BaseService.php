@@ -41,7 +41,7 @@ abstract class BaseService extends BaseToolKit implements ServiceInterface
     public function getList(int $page, int $perPage): array
     {
         $query = $this->repository->findModel();
-        $query->limit($perPage)->offset($page--);
+        $query->limit($perPage)->offset($page);
 
         /** @var array $result */
         $result = $query->all($this->repository->connection);

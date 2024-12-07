@@ -2,13 +2,13 @@
 
 namespace app\common\components\traits\handlers;
 
-use app\console\components\services\items\PascalCaseService;
-use app\console\models\forms\items\PascalCaseForm;
-use app\console\models\items\PascalCase;
 use Throwable;
 use yii\db\ActiveRecord;
 use yii\db\Exception;
 use yii\db\StaleObjectException;
+use app\console\models\items\PascalCase;
+use app\console\models\forms\items\PascalCaseForm;
+use app\console\components\services\items\PascalCaseService;
 
 /**
  * < Console > Обработчик контроллеров работающих с сущностью `{{PascalCase}}`
@@ -31,7 +31,7 @@ Trait ConsoleHandler
      */
     public function processList( int $page, int $perPage ): array
     {
-        return $this->service->getList( $page, $perPage );
+        return $this->service->getList( ($page - 1), $perPage );
     }
 
     /**

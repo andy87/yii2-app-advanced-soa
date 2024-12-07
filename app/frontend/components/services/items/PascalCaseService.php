@@ -19,17 +19,21 @@ use app\common\components\base\services\items\settings\ServiceSettings;
  * @property PascalCaseDataProvider $dataProvider
  * @property ServiceSettings $settings
  *
+ * @method PascalCase[] getList(int $page, int $perPage)
+ * @method PascalCase|null getModel(int $id)
  * @method PascalCase createModel(array $params)
  * @method PascalCase|null addModel(array $params)
  * @method PascalCase|null updateModel(PascalCase $model, mixed $params)
+ * @method PascalCaseForm|null getForm(int $id)
  * @method PascalCaseForm createForm(array $params)
  * @method PascalCase|null addForm(array $params)
  * @method PascalCase|null updateForm(PascalCaseForm $form, mixed $params)
- * @method PascalCase|null getModel(int $id)
- * @method PascalCaseForm|null getForm(int $id)
- * @method PascalCase|null getOneActive(int $id)
- * @method array getAll(string|array $criteria = [])
- * @method array getAllActive(string|array $criteria = [])
+ * @method PascalCase|null getActiveModel(int $id)
+ * @method PascalCaseForm|null getActiveForm(int $id)
+ * @method array getAllModels(string|array $criteria = [])
+ * @method PascalCaseForm[] getAllForms(string|array $criteria = [])
+ * @method PascalCase[] getAllActiveModels(string|array $criteria = [])
+ * @method PascalCaseForm[] getAllActiveForms(string|array $criteria = [])
  * @method int delete(PascalCase $model)
  *
  * @package app\frontend\components\services\items
