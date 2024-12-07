@@ -3,9 +3,15 @@
 namespace app\common\components\repository\items;
 
 use yii\db\{ActiveQuery, Connection};
+use app\common\components\base\handlers\items\settings\HandlerSettings;
+use app\common\components\dataProviders\items\PascalCaseDataProvider;
+use app\common\components\handlers\items\PascalCaseHandler;
+use app\common\components\producers\items\PascalCaseProducer;
+use app\common\components\services\items\PascalCaseService;
 use app\common\models\items\PascalCase;
 use app\common\components\base\moels\items\source\SourceModel;
 use app\common\components\base\repository\items\source\SourceRepository;
+use app\common\models\search\items\PascalCaseSearch;
 
 /**
  * < Common > Родительский класс для репозиториев: console/frontend/backend
@@ -26,4 +32,5 @@ class PascalCaseRepository extends SourceRepository
 {
     /** @var SourceModel|string $modelClass класс модели */
     protected SourceModel|string $modelClass = PascalCase::class;
+
 }

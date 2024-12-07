@@ -6,17 +6,17 @@ use Exception;
 use yii\base\InvalidConfigException;
 use app\console\models\items\PascalCase;
 use app\console\models\forms\items\PascalCaseForm;
-use app\console\models\search\items\PascalCaseSearch;
-use app\common\components\traits\services\ApplyServiceTrait;
+use app\frontend\models\search\items\PascalCaseSearch;
 use app\console\components\services\items\PascalCaseService;
-use app\console\components\producers\items\PascalCaseProducer;
-use app\console\components\repository\items\PascalCaseRepository;
-use app\console\components\dataProviders\items\PascalCaseDataProvider;
+use app\frontend\components\producers\items\PascalCaseProducer;
+use app\frontend\components\repository\items\PascalCaseRepository;
+use app\common\components\base\services\items\settings\ServiceSettings;
+use app\frontend\components\dataProviders\items\PascalCaseDataProvider;
 
 /**
  * < Console > Обработчик контроллеров работающих с сущностью `PascalCase`
  *
- * @method PascalCaseService getService()
+ * @property PascalCaseService $service
  *
  * @package app\console\components\handlers\items
  *
@@ -24,16 +24,21 @@ use app\console\components\dataProviders\items\PascalCaseDataProvider;
  */
 class PascalCaseHandler extends \app\common\components\handlers\items\PascalCaseHandler
 {
-    use ApplyServiceTrait;
-
-    public const MODEL_CLASS = PascalCase::class;
-    public const FORM_CLASS = PascalCaseForm::class;
-    public const SEARCH_MODEL_CLASS = PascalCaseSearch::class;
-    public const DATA_PROVIDER_CLASS = PascalCaseDataProvider::class;
-    public const PRODUCER_CLASS = PascalCaseProducer::class;
-    public const REPOSITORY_CLASS = PascalCaseRepository::class;
-
-
+    /**
+     * @return ServiceSettings
+     */
+    public function getServiceSettings(): ServiceSettings
+    {
+        return new ServiceSettings(
+            PascalCase::class,
+            PascalCaseForm::class,
+            PascalCaseSearch::class,
+            PascalCaseDataProvider::class,
+            PascalCaseService::class,
+            PascalCaseProducer::class,
+            PascalCaseRepository::class
+        );
+    }
 
     /**
      * @param int $id
@@ -52,13 +57,12 @@ class PascalCaseHandler extends \app\common\components\handlers\items\PascalCase
      *
      * @return ?PascalCase
      *
-     * @throws InvalidConfigException
      * @throws \yii\db\Exception
      */
     public function processCreateModel( array $params ): ?PascalCase
     {
         /** @var ?PascalCase $model */
-        $model = $this->getService()->producer->model->create($params);
+        $model = $this->service->producer->model->create($params);
 
         return $model;
     }
@@ -68,34 +72,42 @@ class PascalCaseHandler extends \app\common\components\handlers\items\PascalCase
      *
      * @return ?PascalCaseForm
      *
-     * @throws InvalidConfigException
      * @throws \yii\db\Exception
      */
-    public function processCreateForm(array $params ): ?PascalCaseForm
+    public function processCreateForm( array $params ): ?PascalCaseForm
     {
         /** @var ?PascalCaseForm $form */
-        $form = $this->getService()->producer->form->create( $params );
+        $form = $this->service->producer->form->create( $params );
 
         return $form;
     }
 
     /**
-     * @throws InvalidConfigException|Exception
+     *
+     * @param int $id
+     * @param array $params
+     *
+     * @return ?PascalCase
+     *
+     * @throws InvalidConfigException
      */
     public function processUpdateModel( int $id, array $params ): ?PascalCase
     {
-        $model = $this->findByID($id);
-
-        if ( $model )
+        if ( $model = $this->findByID($id) )
         {
-            return $this->getService()->updateModel( $model, $params );
+            return $this->service->updateModel( $model, $params );
         }
 
         return null;
     }
 
     /**
-     * @throws InvalidConfigException|Exception
+     * @param int $id
+     * @param array $params
+     *
+     * @return ?PascalCase
+     *
+     * @throws InvalidConfigException
      */
     public function processUpdateForm(int $id, array $params ): ?PascalCase
     {
@@ -103,13 +115,17 @@ class PascalCaseHandler extends \app\common\components\handlers\items\PascalCase
 
         if ( $form )
         {
-            return $this->getService()->updateModel( $form, $params );
+            return $this->service->updateModel( $form, $params );
         }
 
         return null;
     }
 
     /**
+     * @param int $id
+     *
+     * @return ?PascalCase
+     *
      * @throws InvalidConfigException
      */
     public function processDelete( int $id ): ?PascalCase
@@ -118,10 +134,14 @@ class PascalCaseHandler extends \app\common\components\handlers\items\PascalCase
     }
 
     /**
+     * @param int $id
+     *
+     * @return ?PascalCase
+     *
      * @throws InvalidConfigException|Exception
      */
     private function findByID( int $id ): ?PascalCase
     {
-        return $this->getService()->getItemById($id);
+        return $this->service->getItemById($id);
     }
 }

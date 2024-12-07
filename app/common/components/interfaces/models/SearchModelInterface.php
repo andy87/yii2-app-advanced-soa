@@ -2,7 +2,7 @@
 
 namespace app\common\components\interfaces\models;
 
-use yii\db\ActiveQueryInterface;
+use app\common\components\base\dataProviders\items\source\SourceActiveDataProvider;
 
 /**
  * < Common >
@@ -16,15 +16,7 @@ interface SearchModelInterface
     /**
      * @param array $params
      *
-     * @return ActiveQueryInterface
+     * @return SourceActiveDataProvider
      */
-    public function search( array $params ): ActiveQueryInterface;
-
-    /**
-     * @param $data
-     * @param $formName
-     *
-     * @return mixed
-     */
-    public function load( $data, $formName = null );
+    public function search( array $params ): SourceActiveDataProvider;
 }

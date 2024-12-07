@@ -2,12 +2,14 @@
 
 namespace app\common\components\base\services\items\source;
 
-use app\common\components\interfaces\CatcherInterface;
-use app\common\components\interfaces\services\ServiceInterface;
-use app\common\components\system\Logger;
-use Exception;
 use Yii;
+use Exception;
 use yii\base\BaseObject;
+use app\common\components\system\Logger;
+use app\common\components\interfaces\CatcherInterface;
+use app\common\components\base\producers\items\source\SourceProducer;
+use app\common\components\base\repository\items\source\SourceRepository;
+use app\common\components\base\dataProviders\items\source\SourceActiveDataProvider;
 
 /**
  * < Common > Родительский абстрактный класс для всех сервисов
@@ -17,15 +19,19 @@ use yii\base\BaseObject;
  *
  * @tag: #abstract #common #service #base #source
  */
-abstract class SourceToolKit extends BaseObject implements ServiceInterface
+abstract class SourceToolKit extends BaseObject
 {
-    /** @var array|string */
-    protected array|string $configLogger = [
-        'class' => Logger::class,
-    ];
-
     /** @var CatcherInterface */
     protected CatcherInterface $logger;
+
+    /** @var ?SourceProducer */
+    protected ?SourceProducer $_producer = null;
+
+    /** @var ?SourceRepository */
+    protected ?SourceRepository $_repository = null;
+
+    /** @var ?SourceActiveDataProvider  */
+    protected ?SourceActiveDataProvider $_dataProvider = null;
 
 
 
@@ -45,7 +51,9 @@ abstract class SourceToolKit extends BaseObject implements ServiceInterface
     private function getLogger(): ?CatcherInterface
     {
         /** @var CatcherInterface $logger */
-        $logger = Yii::createObject($this->configLogger);
+        $logger = Yii::createObject([
+            'class' => Logger::class
+        ]);
 
         return $logger;
     }

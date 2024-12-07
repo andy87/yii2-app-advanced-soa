@@ -2,11 +2,13 @@
 
 namespace app\common\components\base\producers\items\source;
 
+use Throwable;
+use yii\base\BaseObject;
+use yii\db\Exception;
+use yii\db\StaleObjectException;
+use app\common\components\system\Manager;
 use app\common\components\base\moels\items\source\SourceModel;
 use app\common\components\interfaces\producers\ProducerInterface;
-use app\common\components\system\Logger;
-use app\common\components\system\Manager;
-use Exception;
 
 /**
  * < Common > Родительский абстрактный класс для всех провайдеров
@@ -16,39 +18,37 @@ use Exception;
  *
  * @tag: #abstract #common #producer #base #source
  */
-abstract class SourceProducer implements ProducerInterface
+abstract class SourceProducer extends BaseObject implements ProducerInterface
 {
-    /** @var \app\common\components\system\Manager  */
+    /** @var Manager */
     public Manager $model;
 
-    /** @var \app\common\components\system\Manager */
-    public Manager $form;
-
-
-    /** @var array  */
-    public array $defaultModelParams = [];
+    /** @var ?Manager */
+    public ?Manager $form = null;
 
 
 
     /**
-     * @param string $modelClass
-     * @param string $formClass
+     * @param Manager $modelManager
+     * @param ?Manager $formManager
      *
-     * @return void
+     * @param array $config
      */
-    public function __construct( string $modelClass, string $formClass )
+    public function __construct( Manager $modelManager, Manager $formManager = null, array $config = [] )
     {
-        $this->model = new Manager( $modelClass );
+        $this->model = $modelManager;
 
-        $this->form = new Manager( $formClass );
+        $this->form = $formManager;
+
+        parent::__construct($config);
     }
 
     /**
      * @param array $params
      *
-     * @throws \yii\db\Exception
+     * @throws Exception
      */
-    public function modelCreate( mixed $params, bool $runSave = false ): ?SourceModel
+    public function modelCreate( mixed $params = [], bool $runSave = false ): ?SourceModel
     {
         /** @var ?SourceModel $model */
         $model = $this->model->create($params);
@@ -59,7 +59,7 @@ abstract class SourceProducer implements ProducerInterface
     /**
      * @param array $params
      *
-     * @throws \yii\db\Exception
+     * @throws Exception
      */
     public function modelAdd( mixed $params ): ?SourceModel
     {
@@ -67,28 +67,14 @@ abstract class SourceProducer implements ProducerInterface
     }
 
     /**
-     * @param SourceModel $sourceModel
-     * @param mixed $params
-     *
-     * @return ?SourceModel
-     */
-    public function modelUpdate( SourceModel $sourceModel, mixed $params ): ?SourceModel
-    {
-        /** @var SourceModel $model */
-        $model = $this->model->update( $sourceModel, $params );
-
-        return $model;
-    }
-
-    /**
      * @param array $params
      *
-     * @throws \yii\db\Exception
+     * @throws Exception
      */
-    public function formCreate( mixed $params, bool $runSave = false ): ?SourceModel
+    public function formCreate( mixed $params = [], bool $runSave = false ): ?SourceModel
     {
         /** @var ?SourceModel $form */
-        $form = $this->model->create($params);
+        $form = $this->form->create( $params, $runSave );
 
         return $form;
     }
@@ -96,24 +82,10 @@ abstract class SourceProducer implements ProducerInterface
     /**
      * @param array $params
      *
-     * @throws \yii\db\Exception
+     * @throws Exception
      */
     public function formAdd( mixed $params ): ?SourceModel
     {
-        return $this->modelCreate( $params, true );
-    }
-
-    /**
-     * @param SourceModel $sourceForm
-     * @param mixed $params
-     *
-     * @return ?SourceModel
-     */
-    public function formUpdate( SourceModel $sourceForm, mixed $params ): ?SourceModel
-    {
-        /** @var SourceModel $form */
-        $form = $this->form->update( $sourceForm, $params );
-
-        return $form;
+        return $this->formCreate( $params, true );
     }
 }

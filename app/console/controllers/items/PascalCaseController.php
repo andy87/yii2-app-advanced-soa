@@ -2,54 +2,49 @@
 
 namespace app\console\controllers\items;
 
+use app\common\components\base\handlers\items\settings\HandlerSettings;
+use app\common\components\models\dto\ModelInfo;
+use app\console\components\controllers\parents\ConsoleHandlerController;
+use app\console\components\dataProviders\items\PascalCaseDataProvider;
+use app\console\components\handlers\items\PascalCaseHandler;
+use app\console\components\producers\items\PascalCaseProducer;
+use app\console\components\repository\items\PascalCaseRepository;
+use app\console\components\services\items\PascalCaseService;
+use app\console\models\items\PascalCase;
+use app\console\models\search\items\PascalCaseSearch;
 use Exception;
 use Throwable;
 use yii\console\ExitCode;
-use yii\data\ActiveDataProvider;
-use app\console\models\items\PascalCase;
-use app\common\components\models\dto\ModelInfo;
-use app\console\models\search\items\PascalCaseSearch;
-use app\console\components\handlers\items\PascalCaseHandler;
-use app\console\components\producers\items\PascalCaseProducer;
-use app\common\components\interfaces\handlers\HandlerInterface;
-use app\common\components\interfaces\models\SearchModelInterface;
-use app\common\components\interfaces\models\SourceModelInterface;
-use app\common\components\interfaces\producers\ProducerInterface;
-use app\console\components\repository\items\PascalCaseRepository;
-use app\common\components\interfaces\repository\RepositoryInterface;
-use app\common\components\interfaces\dataProvider\DataProviderInterface;
-use app\common\components\base\controllers\items\BaseConsoleHandlerController;
 
 /**
  * Boilerplate Контроллер для модели `PascalCase`
  *
  * @property PascalCaseHandler $handler
+ * @property HandlerSettings|string $handlerSetups
  *
  * @package app\console\controllers\items
  *
  * @tag: #boilerplate #console #controller #{{snake_case}}
  */
-class PascalCaseController extends BaseConsoleHandlerController
+class PascalCaseController extends ConsoleHandlerController
 {
-    /** @var HandlerInterface|string $classHandler */
-    protected HandlerInterface|string $classHandler = PascalCaseHandler::class;
+    /**
+     * @return HandlerSettings
+     */
 
-    /** @var SourceModelInterface|string $classModel */
-    protected SourceModelInterface|string $classMode = PascalCase::class;
-
-    /** @var SearchModelInterface|string $classSearchModel */
-    protected SearchModelInterface|string $classSearchModel = PascalCaseSearch::class;
-
-    /** @var DataProviderInterface|string $classDataProvider */
-    protected DataProviderInterface|string $classDataProvider = ActiveDataProvider::class;
-
-    /** @var ProducerInterface|string $classProducer */
-    protected ProducerInterface|string $classProducer = PascalCaseProducer::class;
-
-    /** @var RepositoryInterface|string $classRepository */
-    protected RepositoryInterface|string $classRepository = PascalCaseRepository::class;
-
-
+    public function getHandlerSettings(): HandlerSettings
+    {
+        return new HandlerSettings(
+            classHandler: PascalCaseHandler::class,
+            classModel: PascalCase::class,
+            classForm: PascalCase::class,
+            classSearchModel: PascalCaseSearch::class,
+            classDataProvider: PascalCaseDataProvider::class,
+            classService: PascalCaseService::class,
+            classProducer: PascalCaseProducer::class,
+            classRepository: PascalCaseRepository::class
+        );
+    }
 
     /**
      * @cli php yii pascal-case/add '{"name": "value"}'

@@ -2,33 +2,30 @@
 
 namespace app\backend\components\services\items;
 
-use yii\data\ActiveDataProvider;
 use app\backend\models\items\PascalCase;
-use app\backend\models\search\items\PascalCaseSearch;
 use app\common\components\interfaces\CatcherInterface;
-use app\common\components\base\moels\items\source\SourceModel;
-use app\common\components\interfaces\models\SearchModelInterface;
-use app\common\components\base\producers\items\source\SourceProducer;
+use app\backend\components\producers\items\PascalCaseProducer;
+use app\backend\components\repository\items\PascalCaseRepository;
 use app\backend\components\dataProviders\items\PascalCaseDataProvider;
-use app\common\components\base\repository\items\source\SourceRepository;
+use app\common\components\base\services\items\settings\ServiceSettings;
 
 /**
  * < Backend > Сервис для работы с сущностью `PascalCase`
  *
- * @property array $configProducer
- * @property array $configRepository
- * @property ActiveDataProvider|string $dataProviderClass
- * @property array|string $configLogger;
- * @property CatcherInterface $logger;
- * @property SourceProducer $provider
- * @property SourceRepository $repository
+ * @property CatcherInterface $logger
+ * @property PascalCaseProducer $producer
+ * @property PascalCaseRepository $repository
+ * @property PascalCaseDataProvider $dataProvider
+ * @property ServiceSettings $settings
  *
- * @method PascalCaseSearch getSearchModel(array $params = [], string $formName = '')
- * @method PascalCaseDataProvider getDataProviderBySearchModel(PascalCaseSearch $searchModel, array $params = [])
- * @method PascalCase getItemById(int $id, bool $runValidation = false)
- * @method PascalCase modelCreate(mixed $params)
- * @method PascalCase updateModel(?PascalCase $model, mixed $params)
- * @method int deleteItemByCriteria(array $criteria)
+ * @method PascalCase modelCreate(array $params)
+ * @method PascalCase addModel(array $params)
+ * @method bool modelUpdate(PascalCase $model, mixed $params)
+ * @method PascalCase|null getOne(int $id)
+ * @method PascalCase|null getOneActive(int $id)
+ * @method array getAll(string|array $criteria = [])
+ * @method array getAllActive(string|array $criteria = [])
+ * @method null|int delete(PascalCase $model)
  *
  * @package app\backend\components\services\items
  *
@@ -36,11 +33,5 @@ use app\common\components\base\repository\items\source\SourceRepository;
  */
 class PascalCaseService extends \app\common\components\services\items\PascalCaseService
 {
-    /** @var SourceModel|string $modelClass класс модели */
-    protected SourceModel|string $modelClass = PascalCase::class;
-
-    /** @var SearchModelInterface|string */
-    protected SearchModelInterface|string $searchModelClass = PascalCaseSearch::class;
-
     // {{Boilerplate}}
 }

@@ -2,77 +2,40 @@
 
 namespace app\common\components\base\handlers\items\source;
 
-use AllowDynamicProperties;
-use app\common\components\base\handlers\dto\ConfigSourceHandlerDto;
+use Yii;
+use yii\base\BaseObject;
+use yii\base\InvalidConfigException;
+use app\common\components\traits\services\HasService;
 use app\common\components\base\services\items\BaseService;
 use app\common\components\interfaces\handlers\HandlerInterface;
-use app\common\components\traits\services\ApplyServiceTrait;
-use yii\base\BaseObject;
+use app\common\components\base\services\items\settings\ServiceSettings;
 
 /**
  * < Common > Родительский абстрактный класс для всех обработчиков
  *
- * @property array $configService;
- * @property ConfigSourceHandlerDto $configSourceHandlerDto
- *
- * @method BaseService getService()
+ * @property BaseService $service;
  *
  * @package app\common\components\base\handlers\items\core
  *
  * @tag: #abstract #common #handler #base
  */
-#[AllowDynamicProperties]
 abstract class SourceHandler extends BaseObject implements HandlerInterface
 {
-    use ApplyServiceTrait;
+    use HasService;
 
 
 
     /**
-     * @param ConfigSourceHandlerDto $configSourceHandlerDto Конфигурация `Обработчика запросов`
-     */
-    public function __construct(private readonly ConfigSourceHandlerDto $configSourceHandlerDto, $config = [] )
-    {
-        parent::__construct($config);
-
-        $this->setupServiceConfig($configSourceHandlerDto);
-    }
-
-    /**
-     * @param ConfigSourceHandlerDto $configSourceHandlerDto
+     * @param array $config
      *
-     * @return void
+     * @throws InvalidConfigException
      */
-    private function setupServiceConfig(ConfigSourceHandlerDto $configSourceHandlerDto): void
+    public function __construct( array $config = [] )
     {
-        $configService = [];
+        $this->setupService();
 
-        if (isset($configSourceHandlerDto->classSearchModel))
-        {
-            $configService['searchModelClass'] = $configSourceHandlerDto->classSearchModel;
-        }
-
-        if (isset($configSourceHandlerDto->classDataProvider))
-        {
-            $configService['dataProviderClass'] = $configSourceHandlerDto->classDataProvider;
-        }
-
-        if (isset($configSourceHandlerDto->classProducer))
-        {
-            $configService['configProducer'] =[
-                'class' => $configSourceHandlerDto->classProducer,
-                'modelClass' => $configSourceHandlerDto->classModel,
-            ];
-        }
-
-        if (isset($configSourceHandlerDto->classProducer))
-        {
-            $configService['configRepository'] =[
-                'class' => $configSourceHandlerDto->classRepository,
-                'modelClass' => $configSourceHandlerDto->classModel,
-            ];
-        }
-
-        $this->configService = $configService;
+        parent::__construct($config);
     }
+
+    abstract public function getServiceSettings(): ServiceSettings;
 }

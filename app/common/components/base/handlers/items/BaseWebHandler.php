@@ -2,66 +2,38 @@
 
 namespace app\common\components\base\handlers\items;
 
-use app\backend\components\resources\parents\crud\BackendCreateResource;
-use app\backend\components\resources\parents\crud\BackendFormResource;
-use app\backend\components\resources\parents\crud\BackendIndexResource;
-use app\backend\components\resources\parents\crud\BackendViewResource;
-use app\common\components\base\dataProviders\items\source\SourceActiveDataProvider;
-use app\common\components\base\handlers\dto\ConfigSourceHandlerDto;
-use app\common\components\base\handlers\items\source\SourceHandler;
-use app\common\components\base\moels\items\source\SourceModel;
-use app\common\components\base\producers\items\source\SourceProducer;
-use app\common\components\base\repository\items\source\SourceRepository;
-use app\common\components\base\resources\items\BaseTemplateResource;
-use app\common\components\base\services\items\BaseService;
-use app\common\components\base\services\resources\crud\BaseCrudViewResource;
-use app\common\components\base\services\resources\crud\BaseFormResource;
-use app\common\components\base\services\resources\crud\BaseGridViewResource;
-use app\common\components\base\services\resources\crud\BaseListViewResource;
+use Yii;
+use Exception;
+use Throwable;
+use yii\base\InvalidConfigException;
 use app\common\components\enums\Action;
-use app\common\components\interfaces\dataProvider\DataProviderInterface;
-use app\common\components\interfaces\models\SearchModelInterface;
-use app\common\components\interfaces\models\SourceModelInterface;
-use app\common\components\interfaces\producers\ProducerInterface;
-use app\common\components\interfaces\repository\RepositoryInterface;
-use app\frontend\components\resources\parents\crud\FrontendCreateResource;
+use app\common\components\base\services\items\BaseService;
+use app\common\components\handlers\items\PascalCaseHandler;
+use app\common\components\base\resources\items\BaseTemplateResource;
+use app\backend\components\resources\parents\crud\BackendFormResource;
+use app\backend\components\resources\parents\crud\BackendViewResource;
+use app\backend\components\resources\parents\crud\BackendIndexResource;
+use app\backend\components\resources\parents\crud\BackendCreateResource;
+use app\common\components\base\services\resources\crud\BaseFormResource;
+use app\frontend\components\resources\parents\crud\FrontendViewResource;
 use app\frontend\components\resources\parents\crud\FrontendFormResource;
 use app\frontend\components\resources\parents\crud\FrontendIndexResource;
-use app\frontend\components\resources\parents\crud\FrontendViewResource;
-use Exception;
-use RuntimeException;
-use Throwable;
-use Yii;
-use yii\{base\InvalidConfigException, web\Application};
+use app\frontend\components\resources\parents\crud\FrontendCreateResource;
+use app\common\components\base\services\resources\crud\BaseListViewResource;
+use app\common\components\base\services\resources\crud\BaseGridViewResource;
+use app\common\components\base\services\resources\crud\BaseCrudViewResource;
 
 /**
  * < Common > Родительский абстрактный класс для всех Web обработчиков
  *
- * @property array $configService;
- * @property BaseService|string $classHandler
- * @property SourceModel|string $classModel
- * @property SearchModelInterface|string $classSearchModel
- * @property SourceActiveDataProvider|string $classDataProvider
- * @property SourceProducer|string $classProducer;
- * @property SourceRepository|string $classRepository;
- *
- * @method BaseService getService()
+ * @property BaseService $service;
  *
  * @package app\common\components\base\handlers\itemse
  *
  * @tag: #abstract #common #handler #base
  */
-abstract class BaseWebHandler extends SourceHandler
+abstract class BaseWebHandler extends PascalCaseHandler
 {
-    public const MODEL_CLASS = SourceModelInterface::class;
-    public const FORM_CLASS = SourceModelInterface::class;
-    public const SEARCH_MODEL_CLASS = SourceModelInterface::class;
-    public const DATA_PROVIDER_CLASS = DataProviderInterface::class;
-    public const PRODUCER_CLASS = ProducerInterface::class;
-    public const REPOSITORY_CLASS = RepositoryInterface::class;
-
-
-
     /**
      * Массив с ресурсами для контроллера
      *
@@ -81,21 +53,6 @@ abstract class BaseWebHandler extends SourceHandler
     public array $resources = [];
 
 
-
-    /**
-     * @throws Exception
-     */
-    public function __construct( ConfigSourceHandlerDto $configSourceHandlerDto, $config = [] )
-    {
-        if ( Yii::$app instanceof Application )
-        {
-            parent::__construct( $configSourceHandlerDto, $config );
-
-        } else {
-
-            throw new RuntimeException('This handler can be used only in web application');
-        }
-    }
 
     /**
      * @return array
@@ -147,12 +104,9 @@ abstract class BaseWebHandler extends SourceHandler
         /** @var BaseCrudViewResource|FrontendIndexResource|BackendIndexResource $R */
         $R = $this->getResources(Action::INDEX);
 
-        $R->searchModel = $this->getService()->getSearchModel();
+        $R->searchModel = $this->service->settings->classSearchModel;
 
-        $R->activeDataProvider = $this->getService()->getDataProviderBySearchModel(
-            $R->searchModel,
-            $params
-        );
+        $R->activeDataProvider = $this->service->getDataProvider( $params );
 
         return $R;
     }
@@ -163,14 +117,14 @@ abstract class BaseWebHandler extends SourceHandler
      *
      * @return BaseFormResource
      *
-     * @throws InvalidConfigException|Exception
+     * @throws Exception
      */
     public function processCreate( array $params = [], string $key = '' ): BaseFormResource
     {
         /** @var BaseCrudViewResource|FrontendCreateResource|BackendCreateResource $R */
         $R = $this->getResources(Action::CREATE);
 
-        $R->form = $this->getService()->createForm();
+        $R->form = $this->service->producer->formCreate();
 
         if (count($params) && $R->form->load($params, $key))
         {
@@ -193,7 +147,7 @@ abstract class BaseWebHandler extends SourceHandler
         /** @var BaseCrudViewResource|FrontendFormResource|BackendFormResource $R */
         $R = $this->getResources(Action::UPDATE);
 
-        $R->form = $this->getService()->getItemById( $id );
+        $R->form = $this->service->getItemById( $id );
 
         if ( count($params) ) {
             $R->form->load( $params );
@@ -214,7 +168,7 @@ abstract class BaseWebHandler extends SourceHandler
         /** @var BaseCrudViewResource|FrontendViewResource|BackendViewResource $R */
         $R = $this->getResources(Action::VIEW);
 
-        $R->model = $this->getService()->getOne(['id' => $id]);
+        $R->model = $this->service->getOne(['id' => $id]);
 
         return $R;
     }
@@ -228,6 +182,6 @@ abstract class BaseWebHandler extends SourceHandler
      */
     public function processDelete(int $id ): bool
     {
-        return $this->getService()->getOne(['id' => $id])?->delete();
+        return $this->service->deleteItemByCriteria(['id' => $id])?->delete();
     }
 }

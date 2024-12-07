@@ -2,65 +2,43 @@
 
 namespace app\console\components\handlers\parents;
 
-use app\common\components\base\dataProviders\items\source\SourceActiveDataProvider;
-use app\common\components\base\handlers\dto\ConfigSourceHandlerDto;
-use app\common\components\base\handlers\items\source\SourceHandler;
-use app\common\components\base\moels\items\source\SourceModel;
-use app\common\components\base\producers\items\source\SourceProducer;
-use app\common\components\base\repository\items\source\SourceRepository;
-use app\common\components\interfaces\models\SearchModelInterface;
+use app\console\models\items\PascalCase;
+use app\console\models\forms\items\PascalCaseForm;
+use app\console\models\search\items\PascalCaseSearch;
+use app\console\components\services\items\PascalCaseService;
+use app\console\components\handlers\items\PascalCaseHandler;
+use app\console\components\producers\items\PascalCaseProducer;
+use app\console\components\repository\items\PascalCaseRepository;
+use app\console\components\dataProviders\items\PascalCaseDataProvider;
+use app\common\components\base\services\items\settings\ServiceSettings;
 
 /**
  * < Console > Обработчик контроллеров работающих с сущностью `{{PascalCase}}`
  *
- * @property array $configService;
- * @property ConfigSourceHandlerDto $configSourceHandlerDto
+ * @property PascalCaseService $service
  *
  * @package app\console\components\handlers\parents
  *
  * @tag: #abstract #console #parent #boilerplate #handler
  */
-abstract class ConsoleHandler extends SourceHandler
+abstract class ConsoleHandler extends PascalCaseHandler
 {
-    /** @var SourceModel|string Класс `модели` */
-    public SourceModel|string $classModel;
-
-    /** @var SearchModelInterface|string Класс `Модели поиска` */
-    public SearchModelInterface|string $classSearchModel;
-
-    /** @var SourceActiveDataProvider|string Класс `Провайдера данных` */
-    public SourceActiveDataProvider|string $classDataProvider;
-
-    /** @var SourceProducer|string Класс `Продюсера` */
-    public SourceProducer|string $classProducer;
-
-    /** @var SourceRepository|string Класс `Репозиторий` */
-    public SourceRepository|string $classRepository;
-
-
-
-    public function processIndex(): array
+    /**
+     * @return ServiceSettings
+     */
+    public function getServiceSettings(): ServiceSettings
     {
-        return [];
+        return new ServiceSettings(
+            PascalCase::class,
+            PascalCaseForm::class,
+            PascalCaseSearch::class,
+            PascalCaseDataProvider::class,
+            PascalCaseService::class,
+            PascalCaseProducer::class,
+            PascalCaseRepository::class,
+            []
+        );
     }
 
-    public function processCreate( string $json ): ?SourceModel
-    {
-        return new $this->classModel();
-    }
-
-    public function processView( int $id ): ?SourceModel
-    {
-        return new $this->classModel();
-    }
-
-    public function processUpdate( int $id, $json ): ?SourceModel
-    {
-        return new $this->classModel();
-    }
-
-    public function processDelete( int $id ): int
-    {
-        return 0;
-    }
+    // {{Boilerplate}}
 }

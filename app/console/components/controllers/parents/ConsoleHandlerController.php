@@ -1,6 +1,6 @@
 <?php declare(strict_types=1);
 
-namespace app\console\controllers\parent;
+namespace app\console\components\controllers\parents;
 
 use app\console\components\handlers\parents\ConsoleHandler;
 use yii\console\ExitCode;
@@ -18,7 +18,6 @@ use app\common\components\base\controllers\items\BaseConsoleHandlerController;
  */
 abstract class ConsoleHandlerController extends BaseConsoleHandlerController
 {
-
     /**
      * @TODO: Доработать
      *

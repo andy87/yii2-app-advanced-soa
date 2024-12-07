@@ -2,9 +2,12 @@
 
 namespace app\common\components\system;
 
+use Throwable;
 use yii\db\Exception;
 use yii\db\ActiveRecord;
 use yii\base\BaseObject;
+use yii\db\StaleObjectException;
+use app\common\components\base\moels\items\source\SourceModel;
 
 /**
  * Class Manager
@@ -18,17 +21,23 @@ class Manager extends BaseObject
     /** @var ActiveRecord|string $modelClass класс модели */
     private ActiveRecord|string $modelClass;
 
+    /** @var array  */
+    public array $defaultModelParams = [];
+
 
 
     /**
      * @param string $modelClass
+     * @param array $defaultModelParams
      * @param array $config
      */
-    public function __construct(string $modelClass, array $config = [] )
+    public function __construct( string $modelClass, array $defaultModelParams = [], array $config = [] )
     {
         parent::__construct($config);
 
         $this->modelClass = $modelClass;
+
+        $this->defaultModelParams = $defaultModelParams;
     }
 
     /**
@@ -53,6 +62,8 @@ class Manager extends BaseObject
 
         $activeRecord = new $className();
 
+        $params = array_merge($this->defaultModelParams, $params);
+
         $activeRecord->load( $params, '' );
 
         if ($runSave) {
@@ -73,37 +84,4 @@ class Manager extends BaseObject
     {
         return $this->create($params, true);
     }
-
-    /**
-     * @param ActiveRecord $activeRecord
-     * @param array $params
-     *
-     * @return ActiveRecord
-     */
-    public function update( ActiveRecord $activeRecord, array $params ): ActiveRecord
-    {
-        $activeRecord->load( $params, '' );
-
-        return $activeRecord;
-    }
-
-    /**
-     * @param array|string|int $criteria
-     *
-     * @return ?ActiveRecord
-     */
-    public function find( array|string|int $criteria ): ?ActiveRecord
-    {
-        $className = $this->getClassName();
-
-        if ( is_int($criteria)) {
-            $criteria = ['id' => $criteria];
-        }
-
-        /** @var ?ActiveRecord $activeRecord */
-        $activeRecord = $className::find()->where($criteria)->one();
-
-        return $activeRecord;
-    }
-
 }

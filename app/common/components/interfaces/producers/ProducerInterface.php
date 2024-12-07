@@ -13,7 +13,13 @@ use app\common\components\base\moels\items\source\SourceModel;
  */
 interface ProducerInterface
 {
-    public function create( array $params, bool $runSave = false ): ?SourceModel;
+    public function modelCreate( array $params, bool $runSave = false ): ?SourceModel;
 
-    public function add( array $params ): ?SourceModel;
+    public function modelAdd( array $params ): ?SourceModel;
+
+
+
+    public function formCreate( array $params, bool $runSave = false ): ?SourceModel;
+
+    public function formAdd( array $params ): ?SourceModel;
 }

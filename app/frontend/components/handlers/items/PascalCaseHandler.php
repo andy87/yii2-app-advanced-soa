@@ -2,7 +2,6 @@
 
 namespace app\frontend\components\handlers\items;
 
-use app\common\components\base\resources\items\BaseTemplateResource;
 use app\common\components\enums\Action;
 use app\frontend\models\items\PascalCase;
 use app\frontend\models\forms\items\PascalCaseForm;
@@ -14,13 +13,14 @@ use app\frontend\components\repository\items\PascalCaseRepository;
 use app\frontend\components\resources\items\PascalCaseIndexResource;
 use app\frontend\components\resources\items\PascalCaseCreateResource;
 use app\frontend\components\resources\items\PascalCaseUpdateResource;
+use app\common\components\base\resources\items\BaseTemplateResource;
 use app\frontend\components\dataProviders\items\PascalCaseDataProvider;
+use app\common\components\base\services\items\settings\ServiceSettings;
 
 /**
  * < Frontend > Обработчик контроллеров работающих с сущностью `PascalCase`
  *
- * @property array configService;
- * @method PascalCaseService getService()
+ * @property PascalCaseService $service
  *
  * @package app\frontend\components\handlers\items
  *
@@ -28,16 +28,6 @@ use app\frontend\components\dataProviders\items\PascalCaseDataProvider;
  */
 class PascalCaseHandler extends FrontendHandler
 {
-    public const MODEL_CLASS = PascalCase::class;
-    public const FORM_CLASS = PascalCaseForm::class;
-    public const SEARCH_MODEL_CLASS = PascalCaseSearch::class;
-    public const DATA_PROVIDER_CLASS = PascalCaseDataProvider::class;
-    public const PRODUCER_CLASS = PascalCaseProducer::class;
-    public const REPOSITORY_CLASS = PascalCaseRepository::class;
-
-
-
-
     /** @var array */
     public array $resources = [
         Action::INDEX => PascalCaseIndexResource::class,
@@ -46,4 +36,20 @@ class PascalCaseHandler extends FrontendHandler
         Action::UPDATE => PascalCaseUpdateResource::class,
         null => BaseTemplateResource::class,
     ];
+
+    /**
+     * @return ServiceSettings
+     */
+    public function getServiceSettings(): ServiceSettings
+    {
+        return new ServiceSettings(
+            PascalCase::class,
+            PascalCaseForm::class,
+            PascalCaseSearch::class,
+            PascalCaseDataProvider::class,
+            PascalCaseService::class,
+            PascalCaseProducer::class,
+            PascalCaseRepository::class
+        );
+    }
 }

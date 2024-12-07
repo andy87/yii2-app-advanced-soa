@@ -16,7 +16,7 @@ use app\common\components\base\dataProviders\items\source\SourceActiveDataProvid
  *
  * @tag: #boilerplate #common #dataProvider #{{snake_case}}
  */
-class PascalCaseDataProviderSource extends SourceActiveDataProvider
+class PascalCaseDataProvider extends SourceActiveDataProvider
 {
     // {{Boilerplate}}
 }

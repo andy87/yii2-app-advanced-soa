@@ -18,8 +18,7 @@ use app\frontend\components\resources\parents\crud\FrontendUpdateResource;
 /**
  * < Frontend > Обработчик контроллеров работающих с сущностью `{{PascalCase}}`
  *
- * @property array configService;
- * @method BaseService getService()
+ * @property BaseService $service
  *
  * @method BaseTemplateResource|FrontendIndexResource|FrontendViewResource|FrontendCreateResource|FrontendUpdateResource|string getResources(string $action )
  * @method BackendIndexResource processIndex(array $params)

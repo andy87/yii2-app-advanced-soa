@@ -9,8 +9,8 @@ use app\common\components\base\producers\items\source\SourceProducer;
 /**
  * < Common > Родительский класс для продюсеров: console/frontend/backend
  *
- * @method PascalCase create(array $params = [], bool $runSave = false)
- * @method PascalCase add(array $params)
+ * @method PascalCase createModel(array $params = [], bool $runSave = false)
+ * @method PascalCase addModel(array $params)
  *
  * @package app\app\common\services\components\services\producers\items
  *

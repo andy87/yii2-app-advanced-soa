@@ -2,208 +2,127 @@
 
 namespace app\common\components\base\services\items;
 
-use Exception;
-use yii\db\Connection;
-use yii\db\ActiveQuery;
+use Yii;
+use yii\base\InvalidConfigException;
+use app\common\components\system\Manager;
 use app\common\components\interfaces\CatcherInterface;
-use app\common\components\base\moels\items\source\SourceModel;
+use app\common\components\interfaces\models\SearchModelInterface;
 use app\common\components\base\services\items\source\SourceToolKit;
 use app\common\components\base\producers\items\source\SourceProducer;
+use app\common\components\base\services\items\settings\ServiceSettings;
 use app\common\components\base\repository\items\source\SourceRepository;
+use app\common\components\base\dataProviders\items\source\SourceActiveDataProvider;
 
 /**
  * < Common > Базовый абстрактный класс для всех сервисов
  *      использующих BaseModel
  *      требует установки провайдера и репозитория
  *
- * @property array|string $configLogger;
- * @property CatcherInterface $logger;
+ * @property CatcherInterface $logger
+ * @property SourceProducer $producer - получение объекта происходит через магический метод __get -> getProducer()
+ * @property SourceRepository $repository - получение объекта происходит через магический метод __get -> getRepository()
+ * @property SourceActiveDataProvider $dataProvider - получение объекта происходит через магический метод __get -> getDataProvider()
  *
  * @package app\common\components\base\services
- *
- * @see self::addModel()
- * @see self::getAll()
- * @see self::getActive()
- * @see self::getAllActive()
  *
  * @tag: #abstract #common #service #base #items
  */
 abstract class BaseToolKit extends SourceToolKit
 {
-    /** @var SourceProducer */
-    protected SourceProducer $producer;
-
-    /** @var SourceRepository */
-    protected SourceRepository $repository;
+    /** @var ServiceSettings */
+    public ServiceSettings $settings;
 
 
 
     /**
-     * @param array $params
+     * Magic method for getting properties `producer`
      *
-     * @return ?SourceModel
+     * P.S. Что бы собирать объект именно во время вызова, а не во время объявления
      *
-     * @throws Exception
+     * @return SourceProducer
+     *
+     * @throws InvalidConfigException
      */
-    public function modelCreate(array $params ): ?SourceModel
+    public function getProducer(): SourceProducer
     {
-        return $this->producer->create( $params );
-    }
+        if ( !$this->_producer )
+        {
+            $params = [];
 
-    /**
-     * @param array $params
-     *
-     * @return ?SourceModel
-     *
-     * @throws Exception
-     */
-    public function addModel(array $params ): ?SourceModel
-    {
-        return $this->producer->add( $params );
-    }
+            if ( $this->settings->classModel )
+            {
+                $params[] = new Manager($this->settings->classModel);
+            }
 
-    /**
-     * @param array $criteria
-     *
-     * @return ?ActiveQuery
-     *
-     * @throws Exception
-     */
-    public function find( array $criteria ): ?ActiveQuery
-    {
-        return $this->repository->find( $criteria );
-    }
+            if ( $this->settings->classForm )
+            {
+                $params[] = new Manager($this->settings->classForm);
+            }
 
-    /**
-     * @param array $criteria
-     *
-     * @return ?ActiveQuery
-     *
-     * @throws Exception
-     */
-    public function findActive( array $criteria ): ?ActiveQuery
-    {
-        return $this->repository->findActive( $criteria );
-    }
+            /** @var SourceProducer $_producer */
+            $_producer = Yii::createObject(
+                [$this->settings->classProducer],
+                $this->settings->config[$this->settings->classRepository] ?? $params
+            );
 
-    /**
-     * @param array $where
-     * @param bool $required
-     *
-     * @return ?SourceModel
-     *
-     * @throws Exception
-     */
-    public function getOne( array $where, bool $required = false ): ?SourceModel
-    {
-        $query = $this->find( $where );
-
-        $model = $this->one($query);
-
-        if ( $required && !$model ) {
-            $model = $this->modelCreate( $where );
+            $this->_producer = $_producer;
         }
 
-        return $model;
+        return $this->_producer;
     }
 
     /**
-     * @param array $where
+     * Magic method for getting properties `repository`
      *
-     * @return array
+     * P.S. Что бы собирать объект именно во время вызова, а не во время объявления
      *
-     * @throws Exception
+     * @return SourceRepository
+     *
+     * @throws InvalidConfigException
      */
-    public function getAll( array $where = [] ): array
+    public function getRepository(): SourceRepository
     {
-        $query = $this->find( $where );
+        if ( !$this->_repository )
+        {
+            /** @var SourceRepository $_repository */
+            $_repository = Yii::createObject(
+                [$this->settings->classRepository],
+                $this->settings->config[$this->settings->classRepository] ?? []
+            );
 
-        return $this->all($query);
+            $this->_repository = $_repository;
+        }
+        return $this->_repository;
     }
 
     /**
-     * @param array $where
+     * Magic method for getting properties `dataProvider`
      *
-     * @return ?SourceModel
+     * P.S. Что бы собирать объект именно во время вызова, а не во время объявления
      *
-     * @throws Exception
+     * @param array|null $queryParams
+     *
+     * @return SourceActiveDataProvider
+     *
+     * @throws InvalidConfigException
      */
-    public function getActive( array $where ): ?SourceModel
+    public function getDataProvider( ?array $queryParams = null ): SourceActiveDataProvider
     {
-        $query = $this->findActive( $where );
+        if ($this->settings->classSearchModel)
+        {
+            if ( !$this->_dataProvider )
+            {
+                /** @var SearchModelInterface $searchModel */
+                $searchModel = new $this->settings->classSearchModel();
 
-        return $this->one($query);
-    }
+                $_dataProvider = $searchModel->search( $queryParams ?? Yii::$app->request->queryParams );
 
+                $this->_dataProvider = $_dataProvider;
+            }
 
-    /**
-     * @param array $where
-     *
-     * @return SourceModel[]
-     *
-     * @throws Exception
-     */
-    public function getAllActive( array $where = [] ): array
-    {
-        $query = $this->findActive( $where );
-
-        return $this->all($query);
-    }
-
-    /**
-     * @param ActiveQuery $query
-     *
-     * @return SourceModel[]
-     *
-     * @throws Exception
-     */
-    private function all( ActiveQuery $query ): array
-    {
-        try {
-
-            return $query->all($this->getConnection());
-
-        } catch (Exception $e) {
-
-            $this->handlerCatch( $e, __METHOD__, 'Error! on get `all` models', [
-                'query' => $query
-            ]);
+            return $this->_dataProvider;
         }
 
-        return [];
-    }
-
-    /**
-     * @param ActiveQuery $query
-     *
-     * @return SourceModel|array|null
-     *
-     * @throws Exception
-     */
-    private function one( ActiveQuery $query ): SourceModel|array|null
-    {
-        try {
-
-            /** @var SourceModel|null $model */
-            $model = $query->one($this->getConnection());
-
-            return $model;
-
-        } catch (Exception $e) {
-
-            $this->handlerCatch( $e, __METHOD__, 'Error! on get `one` model', [
-                'query' => $query
-            ]);
-        }
-
-        return null;
-    }
-
-    /**
-     * @return ?Connection
-     */
-    private function getConnection(): ?Connection
-    {
-        return $this->repository->getConnection();
+        throw new InvalidConfigException('Property `classSearchModel` is not set in the settings');
     }
 }

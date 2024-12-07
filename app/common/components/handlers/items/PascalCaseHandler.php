@@ -3,11 +3,18 @@
 namespace app\common\components\handlers\items;
 
 use app\common\models\items\PascalCase;
-use app\common\components\base\moels\items\source\SourceModel;
+use app\common\models\search\items\PascalCaseSearch;
+use app\common\components\services\items\PascalCaseService;
+use app\common\components\producers\items\PascalCaseProducer;
+use app\common\components\repository\items\PascalCaseRepository;
 use app\common\components\base\handlers\items\source\SourceHandler;
+use app\common\components\dataProviders\items\PascalCaseDataProvider;
+use app\common\components\base\services\items\settings\ServiceSettings;
 
 /**
  * < Common > Родительский класс для обработчиков: console/frontend/backend
+ *
+ * @property PascalCaseService $service
  *
  * @package app\app\common\services\components\handlers\items
  *
@@ -15,8 +22,22 @@ use app\common\components\base\handlers\items\source\SourceHandler;
  */
 class PascalCaseHandler extends SourceHandler
 {
-    /** @var SourceModel|string */
-    public const MODEL_CLASS = PascalCase::class;
+    /**
+     * @return ServiceSettings
+     */
+    public function getServiceSettings(): ServiceSettings
+    {
+        return new ServiceSettings(
+            PascalCase::class,
+            null,
+            PascalCaseSearch::class,
+            PascalCaseDataProvider::class,
+            PascalCaseService::class,
+            PascalCaseProducer::class,
+            PascalCaseRepository::class,
+            []
+        );
+    }
 
     // {{Boilerplate}}
 }

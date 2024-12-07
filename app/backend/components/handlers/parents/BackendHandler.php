@@ -3,8 +3,8 @@
 namespace app\backend\components\handlers\parents;
 
 use app\common\components\enums\Action;
-use app\common\components\base\handlers\items\BaseWebHandler;
 use app\common\components\base\services\items\BaseService;
+use app\common\components\base\handlers\items\BaseWebHandler;
 use app\common\components\base\resources\items\BaseTemplateResource;
 use app\backend\components\resources\parents\crud\BackendViewResource;
 use app\backend\components\resources\parents\crud\BackendIndexResource;
@@ -14,8 +14,7 @@ use app\backend\components\resources\parents\crud\BackendCreateResource;
 /**
  * < Backend > Родительский класс для обработчиков контроллеров в окружения: `backend`
  *
- * @property array configService;
- * @method BaseService getService()
+ * @property BaseService $service;
  *
  * @method BaseTemplateResource|BackendIndexResource|BackendViewResource|BackendCreateResource|BackendUpdateResource|string getResources(string $action)
  * @method BackendIndexResource processIndex(array $params)

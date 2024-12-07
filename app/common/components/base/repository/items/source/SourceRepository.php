@@ -25,12 +25,25 @@ abstract class SourceRepository extends BaseObject implements RepositoryInterfac
     protected SourceModel|string $modelClass;
 
     /** @var ?Connection */
-    protected ?Connection $connection = null;
+    public ?Connection $connection = null;
 
     /** @var array Criteria for active items */
     protected array $criteriaActive = [];
 
 
+    /**
+     * @param string $modelClass
+     * @param array $criteriaActive
+     * @param array $config
+     */
+    public function __construct( string $modelClass, array $criteriaActive = [], array $config = [] )
+    {
+        $this->modelClass = $modelClass;
+
+        $this->criteriaActive = $criteriaActive;
+
+        parent::__construct($config);
+    }
 
     /**
      * Create new find query
@@ -53,29 +66,6 @@ abstract class SourceRepository extends BaseObject implements RepositoryInterfac
         }
 
         return $activeQuery;
-    }
-
-    /**
-     * @param int $id
-     * @param bool $isActive Применение фильтра по активным записям
-     *
-     * @return ?SourceModel
-     *
-     * @throws Exception
-     */
-    public function getOne(int $id, bool $isActive = true ): ?SourceModel
-    {
-        $activeQuery = $this->find(['id' => $id]);
-
-        if ( $isActive && count($this->criteriaActive) )
-        {
-            $activeQuery->andFilterWhere( $this->criteriaActive );
-        }
-
-        /** @var ?SourceModel $model */
-        $model = $activeQuery->one();
-
-        return $model;
     }
 
     /**
@@ -107,21 +97,6 @@ abstract class SourceRepository extends BaseObject implements RepositoryInterfac
     public function getModelClass(): SourceModel|string
     {
         return $this->modelClass;
-    }
-
-    /**
-     * @param Exception $e
-     * @param string $method
-     * @param string $message
-     * @param array $params
-     *
-     * @return void
-     *
-     * @throws JsonException
-     */
-    public function handlerCatch(Exception $e, string $method, string $message, array $params): void
-    {
-        Logger::logCatch( $e, $method, $message, $params );
     }
 
     /**
