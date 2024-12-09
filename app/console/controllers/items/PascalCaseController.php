@@ -19,9 +19,10 @@ use app\console\components\controllers\parents\ConsoleHandlerController;
  * @property PascalCaseHandler $handler
  * @property HandlerSettings|string $handlerSetups
  *
- * @method PascalCase|null actionModelAdd(string $json)
- * @method PascalCase|null actionModelView(int $id)
- * @method PascalCase|null actionModelUpdate(int $id, string $json)
+ * @method int actionList(int $page = 1, int $limit = 10)
+ * @method int actionModelAdd(string $json)
+ * @method int actionModelView(int $id)
+ * @method int actionModelUpdate(int $id, string $json)
  * @method int actionDelete(int $id)
  *
  * @package app\console\controllers\items
@@ -40,7 +41,10 @@ class PascalCaseController extends ConsoleHandlerController
         PascalCaseProducer::class,
         PascalCaseRepository::class,
         [
-            PascalCaseRepository::class => [ PascalCase::class, PascalCaseForm::class ]
+            PascalCaseRepository::class => [
+                PascalCase::class,
+                PascalCaseForm::class
+            ]
         ]
     ];
 }

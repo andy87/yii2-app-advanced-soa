@@ -2,7 +2,7 @@
 
 namespace app\common\models\sources;
 
-use yii\db\ActiveRecord;
+use app\common\components\core\BaseModel;
 
 /**
  * < Common > `Role`
@@ -12,7 +12,7 @@ use yii\db\ActiveRecord;
  * @source php yii gii/model --tableName=role --modelClass=RoleSource --baseClass=app\common\components\core\BaseModel --ns=app\common\models\sources --generateLabelsFromComments --overwrite=1
  *
  */
-class PascalCase extends ActiveRecord
+class PascalCase extends BaseModel
 {
 
     public static function tableName(): string

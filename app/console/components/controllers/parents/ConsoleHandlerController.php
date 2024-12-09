@@ -2,11 +2,11 @@
 
 namespace app\console\components\controllers\parents;
 
-use app\console\models\forms\items\PascalCaseForm;
 use Exception;
 use Throwable;
 use yii\console\ExitCode;
 use app\common\components\models\dto\ModelInfo;
+use app\console\models\forms\items\PascalCaseForm;
 use app\common\components\traits\handlers\ConsoleHandler;
 use app\common\components\base\controllers\items\BaseConsoleHandlerController;
 

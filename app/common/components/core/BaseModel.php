@@ -7,6 +7,10 @@ use yii\db\ActiveRecord;
 /**
  * < Common > `BaseModel`
  *
+ * @property int $id
+ * @property int $created_at
+ * @property int $updated_at
+ *
  * @package app\common\components\core
  */
 abstract class BaseModel extends ActiveRecord
