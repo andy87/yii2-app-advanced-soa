@@ -4,29 +4,29 @@ vendor/
 # phpstorm project files
 .idea/
 
-app/.env
+yii2/.env
 
 composer.lock
 
 # yii console commands
-app/yii
-app/yii_test
-app/reset
+yii2/yii
+yii2/yii_test
+yii2/reset
 
 # ignore generated files
-app/frontend/web/index.php
-app/frontend/web/index-test.php
-app/frontend/web/robots.txt
-app/frontend/web/.htaccess
-app/frontend/tests/_support/*
-app/frontend/tests/_support/_generated/*
+yii2/frontend/web/index.php
+yii2/frontend/web/index-test.php
+yii2/frontend/web/robots.txt
+yii2/frontend/web/.htaccess
+yii2/frontend/tests/_support/*
+yii2/frontend/tests/_support/_generated/*
 
-app/backend/web/index.php
-app/backend/web/index-test.php
-app/backend/web/robots.txt
-app/backend/web/.htaccess
-app/backend/tests/_support/*
-app/backend/tests/_support/_generated/*
+yii2/backend/web/index.php
+yii2/backend/web/index-test.php
+yii2/backend/web/robots.txt
+yii2/backend/web/.htaccess
+yii2/backend/tests/_support/*
+yii2/backend/tests/_support/_generated/*
 
 .phpunit.result.cache
 

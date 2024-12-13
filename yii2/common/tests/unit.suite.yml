@@ -1,0 +1,9 @@
+suite_namespace: yii2\common\tests\unit
+actor: UnitTester
+bootstrap: false
+modules:
+    enabled:
+        - Yii2:
+            part: fixtures
+
+# @cli ./vendor/bin/codecept run yii2/common/tests/unit

@@ -1,0 +1,4 @@
+suite_namespace: yii2\backend\tests\unit
+actor: UnitTester
+
+# @cli ./vendor/bin/codecept run app/backend/tests/unit

@@ -1,0 +1,9 @@
+suite_namespace: yii2\frontend\tests\unit
+actor: UnitTester
+modules:
+    enabled:
+        - Yii2:
+            part: [orm, email, fixtures]
+        - Asserts
+
+# @cli ./vendor/bin/codecept run app/frontend/tests/unit
