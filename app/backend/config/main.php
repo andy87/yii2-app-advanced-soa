@@ -7,12 +7,18 @@ $params = array_merge(
     require __DIR__ . '/params-local.php'
 );
 
+$basePath = dirname(__DIR__);
+
 return [
     'id' => $_ENV['APP_BACKEND_ID'],
 
-    'basePath' => dirname(__DIR__),
+    'basePath' => $basePath,
 
     'controllerNamespace' => 'app\backend\controllers',
+
+    'aliases' => [
+        '@app'      => $basePath,
+    ],
 
     'components' => [
 
