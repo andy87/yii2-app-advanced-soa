@@ -54,4 +54,4 @@ phpunit.phar
 /phpunit.xml
 
 
-.htaccess
+/.htaccess
