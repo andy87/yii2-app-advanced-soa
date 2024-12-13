@@ -13,7 +13,7 @@ use yii\base\{Exception, InvalidArgumentException, InvalidConfigException};
  *
  * @package yii2\frontend\tests\unit\models
  *
- * @cli ./vendor/bin/codecept run app/frontend/tests/unit/models/ResetPasswordFormTest
+ * @cli ./vendor/bin/codecept run yii2/frontend/tests/unit/models/ResetPasswordFormTest
  *
  * @originalFile https://github.com/yiisoft/yii2-app-advanced/blob/master/frontend/tests/unit/models/ResetPasswordFormTest.php
  *
@@ -48,7 +48,7 @@ class ResetPasswordFormTest extends Unit
     /**
      * Reset wrong token
      *
-     * @cli ./vendor/bin/codecept run app/frontend/tests/unit/models/ResetPasswordFormTest:testResetWrongToken
+     * @cli ./vendor/bin/codecept run yii2/frontend/tests/unit/models/ResetPasswordFormTest:testResetWrongToken
      *
      * @refer https://github.com/yiisoft/yii2-app-advanced/blob/master/frontend/tests/unit/models/ResetPasswordFormTest.php#L26
      *
@@ -70,7 +70,7 @@ class ResetPasswordFormTest extends Unit
     /**
      * Reset correct token
      *
-     * @cli ./vendor/bin/codecept run app/frontend/tests/unit/models/ResetPasswordFormTest:testResetCorrectToken
+     * @cli ./vendor/bin/codecept run yii2/frontend/tests/unit/models/ResetPasswordFormTest:testResetCorrectToken
      *
      * @refer https://github.com/yiisoft/yii2-app-advanced/blob/master/frontend/tests/unit/models/ResetPasswordFormTest.php#L37
      *

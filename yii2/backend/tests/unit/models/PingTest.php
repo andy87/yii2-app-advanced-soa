@@ -13,7 +13,7 @@ use yii2\backend\tests\UnitTester;
  *
  * @property UnitTester $tester
  *
- * @cli ./vendor/bin/codecept run app/backend/tests/unit/models/PingTest
+ * @cli ./vendor/bin/codecept run yii2/backend/tests/unit/models/PingTest
  *
  * @tag #tests #unit #models #PingTest
  */
@@ -22,7 +22,7 @@ class PingTest extends Unit
     /**
      * Ping test
      *
-     * @cli ./vendor/bin/codecept run app/backend/tests/unit/models/PingTest:testPong
+     * @cli ./vendor/bin/codecept run yii2/backend/tests/unit/models/PingTest:testPong
      *
      * @return void
      *

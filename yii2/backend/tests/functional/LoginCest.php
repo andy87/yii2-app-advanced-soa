@@ -15,7 +15,7 @@ use yii2\backend\controllers\AuthController;
  *
  * @package yii2\backend\tests\functional
  *
- * @cli ./vendor/bin/codecept run app/backend/tests/functional/LoginCest
+ * @cli ./vendor/bin/codecept run yii2/backend/tests/functional/LoginCest
  *
  * @originalFile https://github.com/yiisoft/yii2-app-advanced/blob/master/backend/tests/functional/LoginCest.php
  *
@@ -48,7 +48,7 @@ class LoginCest extends SendForm
     }
     
     /**
-     * @cli ./vendor/bin/codecept run app/backend/tests/functional/LoginCest:testLoginUser
+     * @cli ./vendor/bin/codecept run yii2/backend/tests/functional/LoginCest:testLoginUser
      *
      * @refer https://github.com/yiisoft/yii2-app-advanced/blob/master/backend/tests/functional/LoginCest.php#L33
      *

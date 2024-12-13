@@ -15,7 +15,7 @@ use yii2\frontend\{ tests\UnitTester, services\AuthService, models\forms\ResendV
  *
  * @package yii2\frontend\tests\unit\models
  *
- * @cli ./vendor/bin/codecept run app/frontend/tests/unit/models/ResendVerificationEmailFormTest
+ * @cli ./vendor/bin/codecept run yii2/frontend/tests/unit/models/ResendVerificationEmailFormTest
  *
  * @originalFile https://github.com/yiisoft/yii2-app-advanced/blob/master/frontend/tests/unit/models/ResendVerificationEmailFormTest.php
  *
@@ -59,7 +59,7 @@ class ResendVerificationEmailFormTest extends Unit
     /**
      * Wrong email address
      *
-     * @cli ./vendor/bin/codecept run app/frontend/tests/unit/models/ResendVerificationEmailFormTest:testWrongEmailAddress
+     * @cli ./vendor/bin/codecept run yii2/frontend/tests/unit/models/ResendVerificationEmailFormTest:testWrongEmailAddress
      *
      * @refer https://github.com/yiisoft/yii2-app-advanced/blob/master/frontend/tests/unit/models/ResendVerificationEmailFormTest.php#L28
      *
@@ -81,7 +81,7 @@ class ResendVerificationEmailFormTest extends Unit
     /**
      * Empty email address
      *
-     * @cli ./vendor/bin/codecept run app/frontend/tests/unit/models/ResendVerificationEmailFormTest:testEmptyEmailAddress
+     * @cli ./vendor/bin/codecept run yii2/frontend/tests/unit/models/ResendVerificationEmailFormTest:testEmptyEmailAddress
      *
      * @refer https://github.com/yiisoft/yii2-app-advanced/blob/master/frontend/tests/unit/models/ResendVerificationEmailFormTest.php#L40
      *
@@ -103,7 +103,7 @@ class ResendVerificationEmailFormTest extends Unit
     /**
      * Resend to active user
      *
-     * @cli ./vendor/bin/codecept run app/frontend/tests/unit/models/ResendVerificationEmailFormTest:testResendToActiveUser
+     * @cli ./vendor/bin/codecept run yii2/frontend/tests/unit/models/ResendVerificationEmailFormTest:testResendToActiveUser
      *
      * @refer https://github.com/yiisoft/yii2-app-advanced/blob/master/frontend/tests/unit/models/ResendVerificationEmailFormTest.php#L52
      *
@@ -125,7 +125,7 @@ class ResendVerificationEmailFormTest extends Unit
     /**
      * Successfully resend
      *
-     * @cli ./vendor/bin/codecept run app/frontend/tests/unit/models/ResendVerificationEmailFormTest:testSuccessfullyResend
+     * @cli ./vendor/bin/codecept run yii2/frontend/tests/unit/models/ResendVerificationEmailFormTest:testSuccessfullyResend
      *
      * @refer https://github.com/yiisoft/yii2-app-advanced/blob/master/frontend/tests/unit/models/ResendVerificationEmailFormTest.php#L64
      *

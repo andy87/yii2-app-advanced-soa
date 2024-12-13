@@ -1,9 +1,9 @@
 # global codeception file to run tests from all apps
 include:
-    - app/common
-    - app/frontend
-    - app/backend
+    - yii2/common
+    - yii2/frontend
+    - yii2/backend
 paths:
-    output: app/console/runtime/output
+    output: yii2/console/runtime/output
 settings:
     colors: true

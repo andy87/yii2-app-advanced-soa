@@ -16,7 +16,7 @@ use yii2\frontend\controllers\SiteController;
  * Fix not used:
  * - @see HomeCest::checkOpen()
  *
- * @cli ./vendor/bin/codecept run app/frontend/tests/functional/HomeCest
+ * @cli ./vendor/bin/codecept run yii2/frontend/tests/functional/HomeCest
  *
  * @tag #frontend #tests #functional #HomeCest
  */
@@ -25,7 +25,7 @@ class HomeCest
     /**
      * Check open
      *
-     * @cli ./vendor/bin/codecept run app/frontend/tests/functional/HomeCest:checkOpen
+     * @cli ./vendor/bin/codecept run yii2/frontend/tests/functional/HomeCest:checkOpen
      *
      * @refer https://github.com/yiisoft/yii2-app-advanced/blob/master/frontend/tests/functional/HomeCest.php#L9
      *

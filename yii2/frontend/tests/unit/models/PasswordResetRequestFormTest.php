@@ -20,7 +20,7 @@ use yii2\frontend\{controllers\AuthController,
  *
  * @package yii2\frontend\tests\unit\models
  *
- * @cli ./vendor/bin/codecept run app/frontend/tests/unit/models/PasswordResetRequestFormTest
+ * @cli ./vendor/bin/codecept run yii2/frontend/tests/unit/models/PasswordResetRequestFormTest
  *
  * @originalFile https://github.com/yiisoft/yii2-app-advanced/blob/master/frontend/tests/unit/models/PasswordResetRequestFormTest.php
  *
@@ -54,7 +54,7 @@ class PasswordResetRequestFormTest extends Unit
     /**
      * Send message with wrong email address
      *
-     * @cli ./vendor/bin/codecept run app/frontend/tests/unit/models/PasswordResetRequestFormTest:testSendMessageWithWrongEmailAddress
+     * @cli ./vendor/bin/codecept run yii2/frontend/tests/unit/models/PasswordResetRequestFormTest:testSendMessageWithWrongEmailAddress
      *
      * @refer https://github.com/yiisoft/yii2-app-advanced/blob/master/frontend/tests/unit/models/VerifyEmailFormTest.php
      *
@@ -77,7 +77,7 @@ class PasswordResetRequestFormTest extends Unit
     /**
      * Not send emails to inactive user
      *
-     * @cli ./vendor/bin/codecept run app/frontend/tests/unit/models/PasswordResetRequestFormTest:testNotSendEmailsToInactiveUser
+     * @cli ./vendor/bin/codecept run yii2/frontend/tests/unit/models/PasswordResetRequestFormTest:testNotSendEmailsToInactiveUser
      *
      * @refer https://github.com/yiisoft/yii2-app-advanced/blob/master/frontend/tests/unit/models/PasswordResetRequestFormTest.php#L35
      *
@@ -103,7 +103,7 @@ class PasswordResetRequestFormTest extends Unit
     /**
      * Send email successfully
      *
-     * @cli ./vendor/bin/codecept run app/frontend/tests/unit/models/PasswordResetRequestFormTest:testSendEmailSuccessfully
+     * @cli ./vendor/bin/codecept run yii2/frontend/tests/unit/models/PasswordResetRequestFormTest:testSendEmailSuccessfully
      *
      * @refer https://github.com/yiisoft/yii2-app-advanced/blob/master/frontend/tests/unit/models/PasswordResetRequestFormTest.php#43
      *

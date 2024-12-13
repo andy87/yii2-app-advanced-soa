@@ -14,7 +14,7 @@ use yii2\frontend\{ models\forms\VerifyEmailForm, services\AuthService };
  *
  * @package yii2\frontend\tests\unit\models
  *
- * @cli ./vendor/bin/codecept run app/frontend/tests/unit/models/VerifyEmailFormTest
+ * @cli ./vendor/bin/codecept run yii2/frontend/tests/unit/models/VerifyEmailFormTest
  *
  * @originalFile https://github.com/yiisoft/yii2-app-advanced/blob/master/frontend/tests/unit/models/VerifyEmailFormTest.php
  *
@@ -44,7 +44,7 @@ class VerifyEmailFormTest extends Unit
     /**
      * Verify wrong token
      *
-     * @cli ./vendor/bin/codecept run app/frontend/tests/unit/models/VerifyEmailFormTest:testWrongToken
+     * @cli ./vendor/bin/codecept run yii2/frontend/tests/unit/models/VerifyEmailFormTest:testWrongToken
      *
      * @refer https://github.com/yiisoft/yii2-app-advanced/blob/master/frontend/tests/unit/models/VerifyEmailFormTest.php#L26
      *
@@ -66,7 +66,7 @@ class VerifyEmailFormTest extends Unit
     /**
      * Already activated token
      *
-     * @cli ./vendor/bin/codecept run app/frontend/tests/unit/models/VerifyEmailFormTest:testAlreadyActivatedToken
+     * @cli ./vendor/bin/codecept run yii2/frontend/tests/unit/models/VerifyEmailFormTest:testAlreadyActivatedToken
      *
      * @refer https://github.com/yiisoft/yii2-app-advanced/blob/master/frontend/tests/unit/models/VerifyEmailFormTest.php#L37
      *
@@ -84,7 +84,7 @@ class VerifyEmailFormTest extends Unit
     /**
      * Verify correct token
      *
-     * @cli ./vendor/bin/codecept run app/frontend/tests/unit/models/VerifyEmailFormTest:testVerifyCorrectToken
+     * @cli ./vendor/bin/codecept run yii2/frontend/tests/unit/models/VerifyEmailFormTest:testVerifyCorrectToken
      *
      * @refer https://github.com/yiisoft/yii2-app-advanced/blob/master/frontend/tests/unit/models/VerifyEmailFormTest.php#L44
      *

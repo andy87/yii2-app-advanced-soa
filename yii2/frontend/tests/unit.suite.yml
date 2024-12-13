@@ -6,4 +6,4 @@ modules:
             part: [orm, email, fixtures]
         - Asserts
 
-# @cli ./vendor/bin/codecept run app/frontend/tests/unit
+# @cli ./vendor/bin/codecept run yii2/frontend/tests/unit

@@ -19,7 +19,7 @@ use yii2\frontend\controllers\AuthController;
  * @property FunctionalTester $I
  * @property LoginForm $form
  *
- * @cli ./vendor/bin/codecept run app/frontend/tests/functional/LoginCest
+ * @cli ./vendor/bin/codecept run yii2/frontend/tests/functional/LoginCest
  *
  * @originalFile https://github.com/yiisoft/yii2-app-advanced/blob/master/frontend/tests/functional/LoginCest.php
  *
@@ -83,7 +83,7 @@ class LoginCest extends SendForm
     /**
      * `Check empty`
      *
-     * @cli ./vendor/bin/codecept run app/frontend/tests/functional/LoginCest:checkEmpty
+     * @cli ./vendor/bin/codecept run yii2/frontend/tests/functional/LoginCest:checkEmpty
      *
      * @refer https://github.com/yiisoft/yii2-app-advanced/blob/master/frontend/tests/functional/LoginCest.php#40
      *
@@ -110,7 +110,7 @@ class LoginCest extends SendForm
     /**
      * Check wrong password
      *
-     * @cli ./vendor/bin/codecept run app/frontend/tests/functional/LoginCest:checkWrongPassword
+     * @cli ./vendor/bin/codecept run yii2/frontend/tests/functional/LoginCest:checkWrongPassword
      *
      * @refer https://github.com/yiisoft/yii2-app-advanced/blob/master/frontend/tests/functional/LoginCest.php#47
      *
@@ -129,7 +129,7 @@ class LoginCest extends SendForm
     /**
      * Check inactive account
      *
-     * @cli ./vendor/bin/codecept run app/frontend/tests/functional/LoginCest:checkInactiveAccount
+     * @cli ./vendor/bin/codecept run yii2/frontend/tests/functional/LoginCest:checkInactiveAccount
      *
      * @refer https://github.com/yiisoft/yii2-app-advanced/blob/master/frontend/tests/functional/LoginCest.php#53
      *
@@ -148,7 +148,7 @@ class LoginCest extends SendForm
     /**
      * Check valid login
      *
-     * @cli ./vendor/bin/codecept run app/frontend/tests/functional/LoginCest:checkValidLogin
+     * @cli ./vendor/bin/codecept run yii2/frontend/tests/functional/LoginCest:checkValidLogin
      *
      * @refer https://github.com/yiisoft/yii2-app-advanced/blob/master/frontend/tests/functional/LoginCest.php#59
      *

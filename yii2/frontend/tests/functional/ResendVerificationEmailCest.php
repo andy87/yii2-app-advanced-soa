@@ -28,7 +28,7 @@ use yii2\frontend\models\forms\ResendVerificationEmailForm;
  * - @see ResendVerificationEmailCest::checkAlreadyVerifiedEmail()
  * - @see ResendVerificationEmailCest::checkSendSuccessfully()
  *
- * @cli ./vendor/bin/codecept run app/frontend/tests/functional/ResendVerificationEmailCest
+ * @cli ./vendor/bin/codecept run yii2/frontend/tests/functional/ResendVerificationEmailCest
  *
  * @tag #frontend #tests #functional #ResendVerificationEmailCest
  */
@@ -88,7 +88,7 @@ class ResendVerificationEmailCest extends SendForm
     /**
      * Check page
      *
-     * @cli ./vendor/bin/codecept run app/frontend/tests/functional/ResendVerificationEmailCest:checkPage
+     * @cli ./vendor/bin/codecept run yii2/frontend/tests/functional/ResendVerificationEmailCest:checkPage
      *
      * @refer https://github.com/yiisoft/yii2-app-advanced/blob/master/frontend/tests/functional/ResendVerificationEmailCest.php#L42
      *
@@ -105,7 +105,7 @@ class ResendVerificationEmailCest extends SendForm
     /**
      * Check empty field
      *
-     * @cli ./vendor/bin/codecept run app/frontend/tests/functional/ResendVerificationEmailCest:checkEmptyField
+     * @cli ./vendor/bin/codecept run yii2/frontend/tests/functional/ResendVerificationEmailCest:checkEmptyField
      *
      * @refer https://github.com/yiisoft/yii2-app-advanced/blob/master/frontend/tests/functional/ResendVerificationEmailCest.php#L48
      *
@@ -124,7 +124,7 @@ class ResendVerificationEmailCest extends SendForm
     /**
      * Check wrong email format
      *
-     * @cli ./vendor/bin/codecept run app/frontend/tests/functional/ResendVerificationEmailCest:checkWrongEmailFormat
+     * @cli ./vendor/bin/codecept run yii2/frontend/tests/functional/ResendVerificationEmailCest:checkWrongEmailFormat
      *
      * @refer https://github.com/yiisoft/yii2-app-advanced/blob/master/frontend/tests/functional/ResendVerificationEmailCest.php#L54
      *
@@ -143,7 +143,7 @@ class ResendVerificationEmailCest extends SendForm
     /**
      * Check wrong email
      *
-     * @cli ./vendor/bin/codecept run app/frontend/tests/functional/ResendVerificationEmailCest:checkWrongEmail
+     * @cli ./vendor/bin/codecept run yii2/frontend/tests/functional/ResendVerificationEmailCest:checkWrongEmail
      *
      * @refer https://github.com/yiisoft/yii2-app-advanced/blob/master/frontend/tests/functional/ResendVerificationEmailCest.php#L60
      *
@@ -162,7 +162,7 @@ class ResendVerificationEmailCest extends SendForm
     /**
      * Check already verified email
      *
-     * @cli ./vendor/bin/codecept run app/frontend/tests/functional/ResendVerificationEmailCest:checkAlreadyVerifiedEmail
+     * @cli ./vendor/bin/codecept run yii2/frontend/tests/functional/ResendVerificationEmailCest:checkAlreadyVerifiedEmail
      *
      * @refer https://github.com/yiisoft/yii2-app-advanced/blob/master/frontend/tests/functional/ResendVerificationEmailCest.php#L66
      *
@@ -181,7 +181,7 @@ class ResendVerificationEmailCest extends SendForm
     /**
      * Check send successfully
      *
-     * @cli ./vendor/bin/codecept run app/frontend/tests/functional/ResendVerificationEmailCest:checkSendSuccessfully
+     * @cli ./vendor/bin/codecept run yii2/frontend/tests/functional/ResendVerificationEmailCest:checkSendSuccessfully
      *
      * @refer https://github.com/yiisoft/yii2-app-advanced/blob/master/frontend/tests/functional/ResendVerificationEmailCest.php#L72
      *

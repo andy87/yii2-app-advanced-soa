@@ -4,4 +4,4 @@ modules:
     enabled:
         - Yii2
 
-# @cli ./vendor/bin/codecept run app/backend/tests/functional
+# @cli ./vendor/bin/codecept run yii2/backend/tests/functional

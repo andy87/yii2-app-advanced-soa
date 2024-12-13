@@ -15,7 +15,7 @@ use yii2\common\{fixtures\UserFixture, models\Identity, models\sources\User, ser
  *
  * @package yii2\frontend\tests\unit\models
  *
- * @cli ./vendor/bin/codecept run app/frontend/tests/unit/models/SignupFormTest
+ * @cli ./vendor/bin/codecept run yii2/frontend/tests/unit/models/SignupFormTest
  *
  * @originalFile https://github.com/yiisoft/yii2-app-advanced/blob/master/frontend/tests/unit/models/SignupFormTest.php
  *
@@ -71,7 +71,7 @@ class SignupFormTest extends Unit
     /**
      * Correct signup
      *
-     * @cli ./vendor/bin/codecept run app/frontend/tests/unit/models/SignupFormTest:testCorrectSignup
+     * @cli ./vendor/bin/codecept run yii2/frontend/tests/unit/models/SignupFormTest:testCorrectSignup
      *
      * @refer https://github.com/yiisoft/yii2-app-advanced/blob/master/frontend/tests/unit/models/SignupFormTest.php#L26
      *
@@ -116,7 +116,7 @@ class SignupFormTest extends Unit
     /**
      * Not correct signup
      *
-     * @cli ./vendor/bin/codecept run app/frontend/tests/unit/models/SignupFormTest:testNotCorrectSignup
+     * @cli ./vendor/bin/codecept run yii2/frontend/tests/unit/models/SignupFormTest:testNotCorrectSignup
      *
      * @refer https://github.com/yiisoft/yii2-app-advanced/blob/master/frontend/tests/unit/models/SignupFormTest.php#L55
      *
