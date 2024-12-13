@@ -13,6 +13,15 @@ return ArrayHelper::merge(
                 // !!! insert a secret key in the following (if it is empty) - this is required by cookie validation
                 'cookieValidationKey' => '',
             ],
+
+            'user' => [
+                'identityClass' => yii2\common\models\Identity::class,
+                'identityCookie' => [
+                    'name' => 'codecept_test',
+                    'httpOnly' => true
+                ],
+                'enableSession' => false,
+            ],
         ],
     ]
 );
