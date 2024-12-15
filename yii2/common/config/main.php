@@ -21,13 +21,7 @@ $config = [
 
     'components' => [
 
-        'db' => [
-            'class' => yii\db\Connection::class,
-            'dsn' => $_ENV['DB_DSN_LOCAL'],
-            'username' => $_ENV['DB_USERNAME'],
-            'password' => $_ENV['DB_PASSWORD'],
-            'charset' => $_ENV['DB_CHARSET'],
-        ],
+        'db' => require __DIR__ . '/components/db.php',
 
         'cache' => require __DIR__ . '/components/cache.php',
 
