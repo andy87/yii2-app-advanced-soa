@@ -84,11 +84,11 @@ jobs:
       - name: Setup app advanced
         run: |
           ./yii2/init --env=Development
-          sed -i "s/'dsn' => 'mysql:host=localhost;dbname=yii2advanced_test'/'dsn' => 'mysql:host=127.0.0.1;dbname=yii2advanced_test'/" ./app/common/config/test-local.php
-          sed -i "/'db'/a 'username' => 'root'," ./app/common/config/test-local.php
-          sed -i "/'db'/a 'password' => 'root'," ./app/common/config/test-local.php
-          sed -i "s/'cookieValidationKey' => ''/'cookieValidationKey' => 'testkey'/" ./app/frontend/config/main.php
-          sed -i "s/'cookieValidationKey' => ''/'cookieValidationKey' => 'testkey'/" ./app/backend/config/main.php
+          sed -i "s/'dsn' => 'mysql:host=localhost;dbname=yii2advanced_test'/'dsn' => 'mysql:host=127.0.0.1;dbname=yii2advanced_test'/" ./yii2/common/config/test-local.php
+          sed -i "/'db'/a 'username' => 'root'," ./yii2/common/config/test-local.php
+          sed -i "/'db'/a 'password' => 'root'," ./yii2/common/config/test-local.php
+          sed -i "s/'cookieValidationKey' => ''/'cookieValidationKey' => 'testkey'/" ./yii2/frontend/config/main.php
+          sed -i "s/'cookieValidationKey' => ''/'cookieValidationKey' => 'testkey'/" ./yii2/backend/config/main.php
 
       - name: Apply migration
         run: php yii_test migrate --interactive=0
