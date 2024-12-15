@@ -33,7 +33,7 @@ class LoginForm extends BaseWebForm
 
     public ?string $username = null;
     public ?string $password = null;
-    public bool $rememberMe = false;
+    public bool $rememberMe = true;
 
     private ?Identity $_identity = null;
 

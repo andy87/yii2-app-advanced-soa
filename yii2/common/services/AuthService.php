@@ -50,9 +50,10 @@ class AuthService extends BaseService
     {
         if ( $loginForm->validate() )
         {
+            $identity = $loginForm->getIdentity();
             $duration = $this->getRememberMeDuration($loginForm);
 
-            return Yii::$app->user->login( $loginForm->getIdentity(), $duration );
+            if ($identity) return Yii::$app->user->login( $identity, $duration );
         }
 
         return false;

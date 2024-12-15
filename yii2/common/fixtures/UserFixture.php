@@ -3,6 +3,7 @@
 namespace yii2\common\fixtures;
 
 use yii\test\ActiveFixture;
+use yii2\common\models\Identity;
 
 /**
  * < Common >
@@ -15,5 +16,5 @@ use yii\test\ActiveFixture;
 class UserFixture extends ActiveFixture
 {
     /** @var string  */
-    public $modelClass = 'yii2\common\models\Identity';
+    public $modelClass = Identity::class;
 }

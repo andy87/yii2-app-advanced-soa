@@ -23,5 +23,5 @@ class User extends UserSource
     public const ATTR_UPDATED_AT = 'updated_at';
 
 
-    public ?string $password = null;
+    public string $password;
 }
