@@ -32,7 +32,7 @@ git clone git@github.com:andy87/yii2-app-advanced-soa.git .
 composer install
 
 # Change directory to `app`
-cd app
+cd yii2
 
 # Initialize application
 php init
@@ -80,15 +80,15 @@ ___
   
 ### Файлы
  - Вырезаны `bat` файлы.  
- - В `dev` окружение добавлен файл `app/reset` для удаления локальных файлов сгенерированных через команду `init`
+ - В `dev` окружение добавлен файл `yii2/reset` для удаления локальных файлов сгенерированных через команду `init`
  - Все тесты адаптированы под работу с `Service` и `Repository`
  - Всем основных классам добавлены родительские `abstract class`
  
 ### Директории:
-- `app` - в корне проекта, содержит только части приложения Yii2.
+- `yii2` - в корне проекта, содержит только части приложения Yii2.
 - `uploads` - в корне проекта, содержит загруженные файлы пользователей.
 
-В директории приложения `app` добавлены, дочерние папки:
+В директории приложения `yii2` добавлены, дочерние папки:
 #### Common
 - `common/components` - содержит компоненты, которые могут использоваться во всех частях приложения.
 - `common/services` - содержит сервисы, которые могут использоваться во всех частях приложения, а так же являются родителями для других сервисов.
@@ -124,9 +124,9 @@ ___
 ## Gii Generator
 
 ### EXAMPLE `frontend`
-* Model Class `app\common\models\sources\{Item}` 
-* Search Model Class `app\common\models\search\{Item}Search`
-* Controller Class `app\(backend|frontend)\controllers\sources\{Item}Controller`
+* Model Class `yii2\common\models\sources\{Item}` 
+* Search Model Class `yii2\common\models\search\{Item}Search`
+* Controller Class `yii2\(backend|frontend)\controllers\sources\{Item}Controller`
 * View Path `@(backend|frontend)/views/sources/{item}`
 
 DIRECTORY STRUCTURE
@@ -134,7 +134,7 @@ DIRECTORY STRUCTURE
 
 ```
 uploads/              +   содержит загруженные пользователем файлы
-app/                  +   содержит только части приложения Yii2
+yii2/                  +   содержит только части приложения Yii2
     environments/         содержит переопределения на основе окружения
 
     common/               окружение - общее

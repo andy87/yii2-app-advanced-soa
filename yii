@@ -1,7 +1,7 @@
 #!/usr/bin/env php
 <?php
 
-$filePath = __DIR__ . '/app/yii';
+$filePath = __DIR__ . '/yii2/yii';
 
 if (!file_exists($filePath))
 {

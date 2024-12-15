@@ -1,9 +1,0 @@
-suite_namespace: app\frontend\tests\functional
-actor: FunctionalTester
-modules:
-    enabled:
-        - Filesystem
-        - Yii2
-        - Asserts
-
-# @cli ./vendor/bin/codecept run app/frontend/tests/functional
