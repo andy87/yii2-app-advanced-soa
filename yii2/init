@@ -122,50 +122,53 @@ if (!file_exists("$root/.env")) {
     echo "\r\n   .env exists\n";
 }
 
-echo "\n Select your server:";
-echo "\n    1. Apache";
-echo "\n    2. NGINX";
-echo "\n variant: ";
-$answer = trim(fgets(STDIN));
-
-if ( $answer == 1 )
+if(!isset($params['interactive']) || $params['interactive'] )
 {
-    echo "\n Apache: ";
-    echo "\n     /.htaccess";
-    echo "\n     /yii2/backend/web/.htaccess";
-    echo "\n     /yii2/frontend/web/.htaccess";
-    echo "\n";
-    echo "\n Create config ? [yes|no] ";
-
+    echo "\n Select your server:";
+    echo "\n    1. Apache";
+    echo "\n    2. NGINX";
+    echo "\n variant: ";
     $answer = trim(fgets(STDIN));
 
-    if (!strncasecmp($answer, 'y', 1))
+    if ( $answer == 1 )
     {
-        $dirHtaccess = "$root/environments/_server/apache";
-        if (copy("$dirHtaccess/.htaccess", "$root/../.htaccess"))
+        echo "\n Apache: ";
+        echo "\n     /.htaccess";
+        echo "\n     /yii2/backend/web/.htaccess";
+        echo "\n     /yii2/frontend/web/.htaccess";
+        echo "\n";
+        echo "\n Create config ? [yes|no] ";
+
+        $answer = trim(fgets(STDIN));
+
+        if (!strncasecmp($answer, 'y', 1))
         {
-            echo "\n   generate /.htaccess\n";
-        } else {
-            printError("Cannot generate /.htaccess file.");
-        }
-
-        $modules = ['backend', 'frontend'];
-
-        foreach ($modules as $module)
-        {
-            $filePath = "$root/$module/web/.htaccess";
-
-            if (copy("$dirHtaccess/module/web/.htaccess", $filePath))
+            $dirHtaccess = "$root/environments/_server/apache";
+            if (copy("$dirHtaccess/.htaccess", "$root/../.htaccess"))
             {
-                echo "\n   generate $filePath\n";
+                echo "\n   generate /.htaccess\n";
             } else {
-                printError("Cannot generate $filePath file.");
+                printError("Cannot generate /.htaccess file.");
+            }
+
+            $modules = ['backend', 'frontend'];
+
+            foreach ($modules as $module)
+            {
+                $filePath = "$root/$module/web/.htaccess";
+
+                if (copy("$dirHtaccess/module/web/.htaccess", $filePath))
+                {
+                    echo "\n   generate $filePath\n";
+                } else {
+                    printError("Cannot generate $filePath file.");
+                }
             }
         }
-    }
-} else if ( $answer == 2 ) {
+    } else if ( $answer == 2 ) {
 
-    echo "\n NGINX config not created ";
+        echo "\n NGINX config not created ";
+    }
 }
 
 echo "\n  ... initialization completed.\n\n";
