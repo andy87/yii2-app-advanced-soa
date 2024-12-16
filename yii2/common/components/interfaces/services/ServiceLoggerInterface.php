@@ -1,6 +1,6 @@
 <?php declare(strict_types=1);
 
-namespace app\common\components\interfaces\services\base;
+namespace yii2\common\components\interfaces\services\base;
 
 use yii2\common\components\interfaces\CatcherInterface;
 

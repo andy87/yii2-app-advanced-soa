@@ -2,7 +2,7 @@
 
 namespace yii2\frontend\controllers;
 
-use yii2\frontend\components\controllers\BaseFrontendController;
+use yii2\frontend\components\controllers\parents\FrontendController;
 
 /**
  * < Backend > `SystemController`
@@ -11,7 +11,7 @@ use yii2\frontend\components\controllers\BaseFrontendController;
  *
  * @tag #frontend #controller #system
  */
-class SystemController extends BaseFrontendController
+class SystemController extends FrontendController
 {
 
 }

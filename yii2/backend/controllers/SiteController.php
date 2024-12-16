@@ -2,8 +2,8 @@
 
 namespace yii2\backend\controllers;
 
-use yii2\backend\components\controllers\BaseBackendController;
 use yii2\common\components\Action;
+use yii2\backend\components\controllers\parents\BackendController;
 
 /**
  * < Backend > `SiteController`
@@ -12,7 +12,7 @@ use yii2\common\components\Action;
  *
  * @tag #backend #controller #site
  */
-class SiteController extends BaseBackendController
+class SiteController extends BackendController
 {
     public const ENDPOINT = 'site';
     public const LABELS = [

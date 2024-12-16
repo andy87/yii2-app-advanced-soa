@@ -3,7 +3,7 @@
 namespace yii2\backend\controllers;
 
 use yii2\common\components\Ping;
-use yii2\backend\components\controllers\BaseBackendController;
+use yii2\backend\components\controllers\parents\BackendController;
 
 /**
  * < Backend > `PingController`
@@ -12,7 +12,7 @@ use yii2\backend\components\controllers\BaseBackendController;
  *
  * @tag #backend #controller #ping
  */
-class PingController extends BaseBackendController
+class PingController extends BackendController
 {
     /**
      * @return string

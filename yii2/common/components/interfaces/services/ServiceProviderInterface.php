@@ -1,6 +1,6 @@
 <?php declare(strict_types=1);
 
-namespace app\common\components\interfaces\services;
+namespace yii2\common\components\interfaces\services;
 
 use yii2\common\components\base\providers\items\base\SourceProducer;
 

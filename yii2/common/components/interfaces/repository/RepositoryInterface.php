@@ -1,6 +1,6 @@
 <?php declare(strict_types=1);
 
-namespace app\common\components\interfaces\repository;
+namespace yii2\common\components\interfaces\repository;
 
 use yii2\common\components\base\models\items\sources\SourceModel;
 use yii\db\ActiveQuery;

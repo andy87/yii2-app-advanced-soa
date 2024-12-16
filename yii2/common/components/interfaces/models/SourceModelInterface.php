@@ -1,6 +1,6 @@
 <?php
 
-namespace app\common\components\interfaces\models;
+namespace yii2\common\components\interfaces\models;
 
 /**
  * < Common > Интерфейс модели источника

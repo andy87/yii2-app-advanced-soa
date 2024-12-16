@@ -2,22 +2,22 @@
 
 namespace yii2\frontend\controllers;
 
-use Exception;
 use Yii;
-use yii\base\{Exception as YiiBaseException, InvalidArgumentException, InvalidConfigException};
+use Exception;
 use yii\db\Exception as YiiDbException;
 use yii\filters\{AccessControl, VerbFilter};
-use yii\web\{BadRequestHttpException, Response};
-use yii2\common\{components\Action, models\Identity, models\sources\Role};
 use yii2\common\components\traits\SessionFlash;
-use yii2\frontend\components\controllers\BaseFrontendController;
-use yii2\frontend\components\resources\auth\{AuthResetPasswordResources};
+use yii\web\{BadRequestHttpException, Response};
+use yii2\frontend\components\services\AuthService;
 use yii2\frontend\components\resources\auth\AuthLoginResources;
+use yii2\frontend\components\resources\auth\AuthSignupResources;
+use yii2\frontend\models\forms\{ResetPasswordForm, VerifyEmailForm};
+use yii2\frontend\components\controllers\parents\FrontendController;
+use yii2\frontend\components\resources\auth\{AuthResetPasswordResources};
+use yii2\common\{components\Action, models\Identity, models\sources\Role};
 use yii2\frontend\components\resources\auth\AuthRequestPasswordResetResources;
 use yii2\frontend\components\resources\auth\AuthResendVerificationEmailResources;
-use yii2\frontend\components\resources\auth\AuthSignupResources;
-use yii2\frontend\components\services\AuthService;
-use yii2\frontend\models\forms\{ResetPasswordForm, VerifyEmailForm};
+use yii\base\{Exception as YiiBaseException, InvalidArgumentException, InvalidConfigException};
 
 /**
  * < Frontend > `AuthController`
@@ -26,7 +26,7 @@ use yii2\frontend\models\forms\{ResetPasswordForm, VerifyEmailForm};
  *
  * @tag #controllers #auth
  */
-class AuthController extends BaseFrontendController
+class AuthController extends FrontendController
 {
     use SessionFlash;
 

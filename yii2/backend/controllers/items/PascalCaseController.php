@@ -2,15 +2,7 @@
 
 namespace yii2\backend\controllers\items;
 
-use app\backend\components\controllers\parents\BackendController;
 use yii2\common\components\enums\Action;
-use yii2\common\components\interfaces\handlers\HandlerInterface;
-use yii2\common\components\interfaces\models\SearchModelInterface;
-use yii2\common\components\interfaces\models\SourceModelInterface;
-use yii2\common\components\interfaces\producers\ProducerInterface;
-use yii2\common\components\interfaces\repository\RepositoryInterface;
-use yii2\common\components\interfaces\dataProvider\DataProviderInterface;
-use yii2\backend\components\handlers\items\PascalCaseHandler;
 use yii2\backend\components\controllers\parents\BackendController;
 use yii2\backend\components\resources\items\PascalCaseViewResource;
 use yii2\backend\components\resources\items\PascalCaseIndexResource;

@@ -1,6 +1,6 @@
 <?php declare(strict_types=1);
 
-namespace app\common\components\interfaces\handlers;
+namespace yii2\common\components\interfaces\handlers;
 
 /**
  * < Common >

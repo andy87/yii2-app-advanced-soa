@@ -8,7 +8,7 @@ use yii\web\Response;
 use yii2\common\components\Action;
 use yii2\common\components\traits\SessionFlash;
 use yii2\frontend\components\{actions\CaptchaAction,
-    controllers\BaseFrontendController,
+    controllers\parents\FrontendController,
     resources\site\SiteAboutResources,
     resources\site\SiteIndexResources};
 use yii2\frontend\components\resources\site\{SiteContactResources};
@@ -21,7 +21,7 @@ use yii2\frontend\components\services\SiteService;
  *
  * @tag #frontend #controllers #site
  */
-class SiteController extends BaseFrontendController
+class SiteController extends FrontendController
 {
     use SessionFlash;
 

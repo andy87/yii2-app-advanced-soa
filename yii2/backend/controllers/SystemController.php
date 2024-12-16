@@ -2,7 +2,7 @@
 
 namespace yii2\backend\controllers;
 
-use yii2\backend\components\controllers\BaseBackendController;
+use yii2\backend\components\controllers\parents\BackendController;
 
 /**
  * < Backend > `SystemController`
@@ -11,7 +11,7 @@ use yii2\backend\components\controllers\BaseBackendController;
  *
  * @tag #backend #controller #system
  */
-class SystemController extends BaseBackendController
+class SystemController extends BackendController
 {
 
 }

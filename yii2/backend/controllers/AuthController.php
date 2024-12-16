@@ -3,10 +3,11 @@
 namespace yii2\backend\controllers;
 
 use Yii;
-use yii\{base\InvalidConfigException, web\Response};
 use yii\filters\{AccessControl, VerbFilter};
-use yii2\backend\{components\controllers\BaseBackendController, components\resources\auth\AuthLoginResources};
+use yii\{base\InvalidConfigException, web\Response};
 use yii2\common\{components\Action, models\sources\Role};
+use yii2\backend\components\resources\auth\AuthLoginResources;
+use yii2\backend\components\controllers\parents\BackendController;
 
 /**
  * < Backend > `AuthController`
@@ -15,7 +16,7 @@ use yii2\common\{components\Action, models\sources\Role};
  *
  * @tag #backend #controller #auth
  */
-class AuthController extends BaseBackendController
+class AuthController extends BackendController
 {
     public const ENDPOINT = 'auth';
 

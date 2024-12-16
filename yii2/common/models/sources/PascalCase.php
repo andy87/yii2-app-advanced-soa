@@ -1,6 +1,6 @@
 <?php
 
-namespace app\common\models\sources;
+namespace yii2\common\models\sources;
 
 use yii2\common\components\core\BaseModel;
 

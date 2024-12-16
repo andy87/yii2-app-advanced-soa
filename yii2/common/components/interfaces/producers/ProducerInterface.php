@@ -1,6 +1,6 @@
 <?php declare(strict_types=1);
 
-namespace app\common\components\interfaces\producers;
+namespace yii2\common\components\interfaces\producers;
 
 use yii\base\Model;
 

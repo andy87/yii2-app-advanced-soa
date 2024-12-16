@@ -1,6 +1,6 @@
 <?php declare(strict_types=1);
 
-namespace app\common\components\interfaces\models;
+namespace yii2\common\components\interfaces\models;
 
 use yii2\common\components\base\dataProviders\items\source\SourceActiveDataProvider;
 

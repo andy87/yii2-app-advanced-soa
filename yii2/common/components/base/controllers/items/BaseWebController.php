@@ -60,6 +60,7 @@ abstract class BaseWebController extends SourceWebController
         return [
             'error' => [
                 'class' => ErrorAction::class,
+                'view' => '@common/views/system/error'
             ],
         ];
     }
@@ -89,4 +90,44 @@ abstract class BaseWebController extends SourceWebController
             ],
         ];
     }
+
+
+    /**
+     * @return void
+     */
+    public function init(): void
+    {
+        parent::init();
+
+        $this->setupLayoutNavBarConfig();
+        $this->setupLayoutNavConfig();
+    }
+
+
+    /**
+     * @param ?string $action
+     *
+     * @return string
+     *
+     * @tag #get #endpoint
+     */
+    public static function getEndpoint( ?string $action = null): string
+    {
+        $endpoint = static::ENDPOINT;
+
+        if ($action === null ) $action = '';
+
+        return "/$endpoint/$action";
+    }
+
+
+    /**
+     * @return void
+     */
+    abstract protected function setupLayoutNavBarConfig(): void;
+
+    /**
+     * @return void
+     */
+    abstract protected function setupLayoutNavConfig(): void;
 }
