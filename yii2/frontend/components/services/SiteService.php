@@ -4,8 +4,8 @@ namespace yii2\frontend\components\services;
 
 use Yii;
 use yii\base\InvalidConfigException;
-use yii2\common\{components\core\BaseService, components\services\EmailService};
 use yii2\frontend\models\forms\ContactForm;
+use yii2\common\{components\core\BaseService, components\services\EmailService};
 
 /**
  * < Frontend > `SiteService`
@@ -29,9 +29,9 @@ class SiteService extends BaseService
      */
     public function handlerContactForm(ContactForm $contactForm, array $data = []): bool
     {
-        if ($contactForm->load($data)) {
-
-            if ($contactForm->validate())
+        if ( $contactForm->load($data) )
+        {
+            if ( $contactForm->validate() )
             {
                 $adminEmail = Yii::$app->params['adminEmail'] ?? null;
 

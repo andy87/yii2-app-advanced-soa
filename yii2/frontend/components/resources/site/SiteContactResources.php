@@ -2,8 +2,8 @@
 
 namespace yii2\frontend\components\resources\site;
 
-use yii2\common\components\resources\TemplateResources;
 use yii2\frontend\models\forms\ContactForm;
+use yii2\common\components\resources\TemplateResources;
 
 /**
  * < Frontend > `SiteContactResources`
@@ -15,7 +15,7 @@ use yii2\frontend\models\forms\ContactForm;
 class SiteContactResources extends TemplateResources
 {
     /** @var string Шаблон */
-    public const TEMPLATE = '@app/views/site/contact';
+    public const string TEMPLATE = '@app/views/site/contact';
 
     /** @var ContactForm */
     public ContactForm $contactForm;

@@ -14,27 +14,27 @@ use yii2\common\components\base\services\items\settings\ServiceSettings;
  * < Backend > Сервис для работы с сущностью `PascalCase`
  *
  * @property CatcherInterface $logger
- * @property \yii2\backend\components\producers\items\PascalCaseProducer $producer
- * @property \yii2\backend\components\repository\items\PascalCaseRepository $repository
- * @property \yii2\backend\components\dataProviders\items\PascalCaseDataProvider $dataProvider
+ * @property PascalCaseProducer $producer
+ * @property PascalCaseRepository $repository
+ * @property PascalCaseDataProvider $dataProvider
  * @property ServiceSettings $settings
  *
- * @method \yii2\backend\models\items\PascalCase[] getList(int $page, int $perPage)
- * @method \yii2\backend\models\items\PascalCase|null getModel(int $id)
+ * @method PascalCase[] getList(int $page, int $perPage)
+ * @method PascalCase|null getModel(int $id)
  * @method PascalCase createModel(array $params)
  * @method PascalCase|null addModel(array $params)
- * @method \yii2\backend\models\items\PascalCase|null updateModel(PascalCase $model, mixed $params)
- * @method \yii2\backend\models\forms\items\PascalCaseForm|null getForm(int $id)
- * @method \yii2\backend\models\forms\items\PascalCaseForm createForm(array $params)
- * @method \yii2\backend\models\forms\items\PascalCaseForm|null addForm(array $params)
- * @method \yii2\backend\models\forms\items\PascalCaseForm|null updateForm(\yii2\backend\models\forms\items\PascalCaseForm $form, mixed $params)
+ * @method PascalCase|null updateModel(PascalCase $model, mixed $params)
+ * @method PascalCaseForm|null getForm(int $id)
+ * @method PascalCaseForm createForm(array $params)
+ * @method PascalCaseForm|null addForm(array $params)
+ * @method PascalCaseForm|null updateForm(PascalCaseForm $form, mixed $params)
  * @method PascalCase|null getActiveModel(int $id)
- * @method \yii2\backend\models\forms\items\PascalCaseForm|null getActiveForm(int $id)
+ * @method PascalCaseForm|null getActiveForm(int $id)
  * @method array getAllModels(string|array $criteria = [])
- * @method \yii2\backend\models\forms\items\PascalCaseForm[] getAllForms(string|array $criteria = [])
+ * @method PascalCaseForm[] getAllForms(string|array $criteria = [])
  * @method PascalCase[] getAllActiveModels(string|array $criteria = [])
- * @method \yii2\backend\models\forms\items\PascalCaseForm[] getAllActiveForms(string|array $criteria = [])
- * @method int delete(\yii2\backend\models\items\PascalCase $model)
+ * @method PascalCaseForm[] getAllActiveForms(string|array $criteria = [])
+ * @method int delete(PascalCase $model)
  *
  * @package app\backend\components\services\items
  *

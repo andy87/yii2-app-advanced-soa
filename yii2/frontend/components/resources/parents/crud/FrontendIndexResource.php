@@ -9,14 +9,14 @@ use yii2\common\components\base\dataProviders\items\source\SourceActiveDataProvi
 /**
  * < Frontend> Родительский класс для ресурса индекса в окружении `frontend`
  *
- * @property \yii2\common\components\base\dataProviders\items\source\SourceActiveDataProvider $activeDataProvider
+ * @property SourceActiveDataProvider $activeDataProvider
  * @property SearchModelInterface $searchModel
  *
  * @package app\frontend\components\resources\parents\crud
  *
  * @tag: #abstract #frontend #parent #crud #resource #index
  */
-abstract class FrontendIndexResource extends \yii2\common\components\base\resources\crud\BaseGridViewResource
+abstract class FrontendIndexResource extends BaseGridViewResource
 {
     // {{Boilerplate}}
 }

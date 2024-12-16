@@ -23,6 +23,6 @@ use yii2\common\components\base\models\items\sources\SourceModel;
  */
 class PascalCaseRepository extends \yii2\console\components\repository\items\PascalCaseRepository
 {
-    /** @var \yii2\common\components\base\models\items\sources\SourceModel|string $modelClass класс модели */
-    public SourceModel|string $modelClass = \yii2\backend\models\items\PascalCase::class;
+    /** @var SourceModel|string $modelClass класс модели */
+    public SourceModel|string $modelClass = PascalCase::class;
 }

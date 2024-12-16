@@ -3,6 +3,7 @@
 namespace yii2\backend\controllers\items;
 
 use yii2\common\components\enums\Action;
+use yii2\backend\components\handlers\items\PascalCaseHandler;
 use yii2\backend\components\controllers\parents\BackendController;
 use yii2\backend\components\resources\items\PascalCaseViewResource;
 use yii2\backend\components\resources\items\PascalCaseIndexResource;
@@ -12,7 +13,7 @@ use yii2\backend\components\resources\items\PascalCaseUpdateResource;
 /**
  * Boilerplate Контроллер для модели `PascalCase`
  *
- * @property \yii2\backend\components\handlers\items\PascalCaseHandler $handler
+ * @property PascalCaseHandler $handler
  *
  * @package app\backend\controllers\items
  *

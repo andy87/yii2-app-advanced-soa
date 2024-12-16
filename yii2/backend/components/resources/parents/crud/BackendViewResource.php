@@ -2,8 +2,7 @@
 
 namespace yii2\backend\components\resources\parents\crud;
 
-
-use yii2\common\components\base\models\items\base\SourceModel;
+use yii2\common\components\base\models\items\sources\SourceModel;
 use yii2\common\components\base\resources\crud\BaseCrudViewResource;
 
 /**
@@ -15,7 +14,7 @@ use yii2\common\components\base\resources\crud\BaseCrudViewResource;
  *
  * @tag: #abstract #backend #parent #crud #resource #view
  */
-abstract class BackendViewResource extends \yii2\common\components\base\resources\crud\BaseCrudViewResource
+abstract class BackendViewResource extends BaseCrudViewResource
 {
     // {{Boilerplate}}
 }

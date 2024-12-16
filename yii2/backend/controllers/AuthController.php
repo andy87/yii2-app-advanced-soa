@@ -8,6 +8,7 @@ use yii\{base\InvalidConfigException, web\Response};
 use yii2\common\{components\Action, models\sources\Role};
 use yii2\backend\components\resources\auth\AuthLoginResources;
 use yii2\backend\components\controllers\parents\BackendController;
+use yii2\backend\components\services\controllers\AuthService;
 
 /**
  * < Backend > `AuthController`
@@ -18,9 +19,9 @@ use yii2\backend\components\controllers\parents\BackendController;
  */
 class AuthController extends BackendController
 {
-    public const ENDPOINT = 'auth';
+    public const string ENDPOINT = 'auth';
 
-    public const LABELS = [
+    public const array LABELS = [
         Action::LOGIN => 'Авторизация',
     ];
 
@@ -77,7 +78,7 @@ class AuthController extends BackendController
             {
                 $post = Yii::$app->request->post();
 
-                $handlerResult = \yii2\backend\components\services\controllers\AuthService::getInstance()->handlerLoginForm($R->loginForm, $post);
+                $handlerResult = AuthService::getInstance()->handlerLoginForm($R->loginForm, $post);
 
                 if ($handlerResult) return $this->goBack();
             }
@@ -97,7 +98,7 @@ class AuthController extends BackendController
      */
     public function actionLogout(): Response
     {
-        \yii2\backend\components\services\controllers\AuthService::getInstance()->logout();
+        AuthService::getInstance()->logout();
 
         return $this->goHome();
     }

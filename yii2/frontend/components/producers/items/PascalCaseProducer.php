@@ -17,6 +17,6 @@ use yii2\common\components\base\models\items\sources\SourceModel;
  */
 class PascalCaseProducer extends \yii2\common\components\producers\items\PascalCaseProducer
 {
-    /** @var \yii2\common\components\base\models\items\sources\SourceModel|string $modelClass model class */
+    /** @var SourceModel|string $modelClass model class */
     public SourceModel|string $modelClass = PascalCase::class;
 }

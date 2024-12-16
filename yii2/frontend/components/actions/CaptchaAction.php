@@ -11,5 +11,5 @@ namespace yii2\frontend\components\actions;
  */
 class CaptchaAction extends \yii\captcha\CaptchaAction
 {
-    public const TEST_VALUE = 'testme';
+    public const string TEST_VALUE = 'testme';
 }

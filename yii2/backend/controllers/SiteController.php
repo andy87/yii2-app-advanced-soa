@@ -14,8 +14,8 @@ use yii2\backend\components\controllers\parents\BackendController;
  */
 class SiteController extends BackendController
 {
-    public const ENDPOINT = 'site';
-    public const LABELS = [
+    public const string ENDPOINT = 'site';
+    public const array LABELS = [
         Action::INDEX => 'Главная',
     ];
 

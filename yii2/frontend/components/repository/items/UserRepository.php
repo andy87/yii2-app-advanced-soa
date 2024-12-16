@@ -13,5 +13,5 @@ use yii2\frontend\models\items\User;
  */
 class UserRepository extends \yii2\common\components\repository\items\UserRepository
 {
-    public const MODEL = User::class;
+    public const User|string MODEL = User::class;
 }

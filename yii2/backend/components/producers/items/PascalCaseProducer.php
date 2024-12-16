@@ -9,7 +9,7 @@ use yii2\common\components\base\models\items\sources\SourceModel;
  * < Backend > producer for model `PascalCase`
  *
  * @method PascalCase create(array $params = [], bool $runSave = false)
- * @method \yii2\backend\models\items\PascalCase add(array $params)
+ * @method PascalCase add(array $params)
  *
  * @package app\backend\components\services\producers\items
  *

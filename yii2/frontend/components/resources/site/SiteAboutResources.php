@@ -14,5 +14,5 @@ use yii2\common\components\resources\TemplateResources;
 class SiteAboutResources extends TemplateResources
 {
     /** @var string Шаблон */
-    public const TEMPLATE = '@app/views/site/about';
+    public const string TEMPLATE = '@app/views/site/about';
 }

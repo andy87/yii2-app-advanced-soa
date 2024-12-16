@@ -17,5 +17,5 @@ use yii2\backend\models\items\User;
  */
 class UserService extends \yii2\common\components\services\items\UserService
 {
-    public const CLASS_MODEL = User::class;
+    public const User|string CLASS_MODEL = User::class;
 }

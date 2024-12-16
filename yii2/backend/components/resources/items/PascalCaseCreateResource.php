@@ -8,7 +8,7 @@ use yii2\backend\components\resources\parents\crud\BackendCreateResource;
 /**
  * < Backend > Boilerplate для ресурса создания модели `PascalCase`
  *
- * @property ?\yii2\backend\models\forms\items\PascalCaseForm $form
+ * @property ?PascalCaseForm $form
  *
  * @package app\backend\components\resources\items\{{snake_case}}
  *

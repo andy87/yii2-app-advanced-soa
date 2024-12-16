@@ -14,7 +14,7 @@ use yii2\common\{components\resources\TemplateResources, models\forms\LoginForm}
 class AuthLoginResources extends TemplateResources
 {
     /** @var string Шаблон */
-    public const TEMPLATE = '@app/views/auth/login';
+    public const string TEMPLATE = '@app/views/auth/login';
 
 
 

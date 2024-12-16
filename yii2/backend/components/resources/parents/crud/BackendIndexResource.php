@@ -9,7 +9,7 @@ use yii2\common\components\base\dataProviders\items\source\SourceActiveDataProvi
 /**
  * < Backend > Родительский класс для ресурса индекса в окружении `backend`
  *
- * @property \yii2\common\components\base\dataProviders\items\source\SourceActiveDataProvider $activeDataProvider
+ * @property SourceActiveDataProvider $activeDataProvider
  * @property SearchModelInterface $searchModel
  *
  * @package app\backend\components\resources\parents\crud

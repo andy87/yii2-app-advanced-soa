@@ -2,8 +2,8 @@
 
 namespace yii2\frontend\components\resources\auth;
 
-use yii2\common\components\resources\TemplateResources;
 use yii2\frontend\models\forms\SignupForm;
+use yii2\common\components\resources\TemplateResources;
 
 /**
  * < Frontend > `AuthSignupResources`
@@ -15,7 +15,7 @@ use yii2\frontend\models\forms\SignupForm;
 class AuthSignupResources extends TemplateResources
 {
     /** @var string Шаблон */
-    public const TEMPLATE = '@app/views/auth/signup';
+    public const string TEMPLATE = '@app/views/auth/signup';
 
     /** @var SignupForm $signupForm */
     public SignupForm $signupForm;

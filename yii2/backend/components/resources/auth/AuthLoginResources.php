@@ -3,6 +3,7 @@
 namespace yii2\backend\components\resources\auth;
 
 use yii2\common\models\forms\LoginForm;
+use yii2\common\components\resources\TemplateResources;
 
 /**
  * < Backend > `AuthLoginResources`
@@ -11,11 +12,15 @@ use yii2\common\models\forms\LoginForm;
  *
  * @tag #backend #resources #auth
  */
-class AuthLoginResources extends \yii2\common\components\resources\TemplateResources
+class AuthLoginResources extends TemplateResources
 {
-    public const TEMPLATE = '@app/views/auth/login';
+    public const string TEMPLATE = '@app/views/auth/login';
+
+
 
     public LoginForm $loginForm;
+
+
 
     /**
      * Constructor.

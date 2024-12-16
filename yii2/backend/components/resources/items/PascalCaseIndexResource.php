@@ -9,7 +9,7 @@ use yii2\backend\components\dataProviders\items\PascalCaseDataProvider;
 /**
  * < Backend > Boilerplate для ресурса формы `PascalCase`
  *
- * @property \yii2\backend\models\search\items\PascalCaseSearch $searchModel;
+ * @property PascalCaseSearch $searchModel;
  * @property PascalCaseDataProvider $activeDataProvider;
  *
  * @package app\backend\components\resources\items\{{snake_case}}

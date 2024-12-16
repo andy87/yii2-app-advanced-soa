@@ -29,25 +29,25 @@ class PascalCaseHandler extends \yii2\common\components\handlers\items\PascalCas
     /**
      * @var array Настройки сервиса
      */
-    public const SETTINGS_SERVICE = [
+    public const array SETTINGS_SERVICE = [
         PascalCase::class,
         PascalCaseForm::class,
-        \yii2\backend\models\search\items\PascalCaseSearch::class,
-        \yii2\common\components\dataProviders\items\PascalCaseDataProvider::class,
+        PascalCaseSearch::class,
+        PascalCaseDataProvider::class,
         PascalCaseService::class,
         PascalCaseProducer::class,
         PascalCaseRepository::class,
         [
-            PascalCaseRepository::class => [ \yii2\backend\models\items\PascalCase::class, PascalCaseForm::class ]
+            PascalCaseRepository::class => [ PascalCase::class, PascalCaseForm::class ]
         ]
     ];
 
     /** @var array */
     public array $resources = [
-        Action::INDEX => \yii2\backend\components\resources\items\PascalCaseIndexResource::class,
-        Action::VIEW => \yii2\backend\components\resources\items\PascalCaseIndexResource::class,
+        Action::INDEX => PascalCaseIndexResource::class,
+        Action::VIEW => PascalCaseIndexResource::class,
         Action::CREATE => PascalCaseCreateResource::class,
-        Action::UPDATE => \yii2\backend\components\resources\items\PascalCaseUpdateResource::class,
+        Action::UPDATE => PascalCaseUpdateResource::class,
         null => BaseTemplateResource::class,
     ];
 }

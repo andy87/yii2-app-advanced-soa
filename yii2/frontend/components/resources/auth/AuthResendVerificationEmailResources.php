@@ -15,7 +15,7 @@ use yii2\frontend\models\forms\ResendVerificationEmailForm;
 class AuthResendVerificationEmailResources extends TemplateResources
 {
     /** @var string  */
-    public const TEMPLATE = '@app/views/auth/resend-verification-email';
+    public const string TEMPLATE = '@app/views/auth/resend-verification-email';
 
 
 

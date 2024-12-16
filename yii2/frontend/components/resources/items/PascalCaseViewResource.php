@@ -2,13 +2,11 @@
 
 namespace yii2\frontend\components\resources\items;
 
-use yii2\frontend\components\resources\parents\crud\FrontendViewResource;
 use yii2\frontend\models\items\PascalCase;
+use yii2\frontend\components\resources\parents\crud\FrontendViewResource;
 
 /**
  * < Frontend > Boilerplate для ресурса обновления модели `PascalCase`
- *
- * @property PascalCase $form
  *
  * @property PascalCase $model
  *

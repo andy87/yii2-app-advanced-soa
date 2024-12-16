@@ -2,7 +2,6 @@
 
 namespace yii2\backend\components\resources\parents\crud;
 
-use yii2\backend\components\resources\parents\crud\BackendFormResource;
 use yii2\backend\models\forms\items\PascalCaseForm;
 
 /**

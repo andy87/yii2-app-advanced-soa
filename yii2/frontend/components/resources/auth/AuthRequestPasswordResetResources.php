@@ -15,7 +15,7 @@ use yii2\frontend\models\forms\PasswordResetRequestForm;
 class AuthRequestPasswordResetResources extends TemplateResources
 {
     /** @var string  */
-    public const TEMPLATE = '@app/views/auth/request-password-reset-token';
+    public const string TEMPLATE = '@app/views/auth/request-password-reset-token';
 
     /** @var PasswordResetRequestForm  */
     public PasswordResetRequestForm $passwordResetRequestForm;
