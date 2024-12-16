@@ -2,15 +2,14 @@
 
 namespace app\backend\components\controllers\parents;
 
-use app\common\components\base\controllers\items\BaseWebHandlerController;
-use app\common\components\traits\handlers\BackendHandler;
 use yii\filters\AccessControl;
+use yii2\common\components\base\controllers\items\BaseWebHandlerController;
 
 
 /**
  * < Backend > Родительский класс для контроллеров в окружении: `backend`
  *
- * @property BackendHandler $handler
+ * @property \yii2\common\components\traits\handlers\BackendHandler $handler
  *
  * @package app\backend\components\controllers\parents
  *

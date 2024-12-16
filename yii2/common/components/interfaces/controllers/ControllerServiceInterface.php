@@ -2,7 +2,7 @@
 
 namespace app\common\components\interfaces\controllers;
 
-use app\common\components\base\services\items\BaseService;
+use yii2\common\components\base\services\items\BaseService;
 
 /**
  * < Common >

@@ -2,7 +2,7 @@
 
 namespace app\common\components\interfaces\repository;
 
-use app\common\components\base\models\items\sources\SourceModel;
+use yii2\common\components\base\models\items\sources\SourceModel;
 use yii\db\ActiveQuery;
 
 /**

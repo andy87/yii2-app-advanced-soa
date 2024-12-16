@@ -2,7 +2,7 @@
 
 namespace app\common\components\interfaces\services\base;
 
-use app\common\components\interfaces\CatcherInterface;
+use yii2\common\components\interfaces\CatcherInterface;
 
 /**
  * < Common >

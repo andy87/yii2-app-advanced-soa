@@ -2,7 +2,7 @@
 
 namespace app\common\components\interfaces\models;
 
-use app\common\components\base\dataProviders\items\source\SourceActiveDataProvider;
+use yii2\common\components\base\dataProviders\items\source\SourceActiveDataProvider;
 
 /**
  * < Common >

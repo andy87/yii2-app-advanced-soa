@@ -2,11 +2,10 @@
 
 namespace yii2\common\tests\unit\models;
 
-use Yii;
 use Codeception\Test\Unit;
+use Yii;
 use yii\base\InvalidConfigException;
-use yii2\common\{tests\UnitTester, services\AuthService, fixtures\UserFixture, models\forms\LoginForm};
-use yii\symfonymailer\Message;
+use yii2\common\{components\services\AuthService, fixtures\UserFixture, models\forms\LoginForm, tests\UnitTester};
 
 /**
  * < Common > `LoginFormTest`

@@ -1,10 +1,10 @@
 <?php
 
+use yii\bootstrap5\{ActiveForm, Html};
 use yii\web\View;
-use yii2\common\components\Action;
-use yii\bootstrap5\{ Html, ActiveForm };
+use yii2\backend\components\resources\auth\AuthLoginResources;
 use yii2\backend\controllers\AuthController;
-use yii2\backend\resources\auth\AuthLoginResources;
+use yii2\common\components\Action;
 
 /**
  * @var View $this

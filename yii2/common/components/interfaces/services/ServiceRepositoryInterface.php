@@ -2,7 +2,7 @@
 
 namespace app\common\components\interfaces\services;
 
-use app\common\components\base\repository\items\base\SourceRepository;
+use yii2\common\components\base\repository\items\base\SourceRepository;
 
 /**
  * < Common >

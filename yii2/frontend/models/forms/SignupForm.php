@@ -2,11 +2,11 @@
 
 namespace yii2\frontend\models\forms;
 
-use yii2\common\components\forms\EmailingWebForm;
-use yii2\common\models\{dto\EmailMessageDto, Identity};
-use yii2\common\services\IdentityService;
 use Yii;
 use yii\base\InvalidConfigException;
+use yii2\common\components\forms\EmailingWebForm;
+use yii2\common\components\services\IdentityService;
+use yii2\common\models\{dto\EmailMessageDto, Identity};
 
 /**
  * < Frontend > `SignupForm`

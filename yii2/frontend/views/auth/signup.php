@@ -1,13 +1,13 @@
 <?php
 
+use yii\bootstrap5\{ActiveForm, Html};
 use yii\web\View;
-use yii\bootstrap5\{ Html, ActiveForm };
-use yii2\frontend\resources\auth\AuthSignupResources;
+use yii2\frontend\components\resources\auth\AuthSignupResources;
 
 /**
  * @var View $this
  * @var ActiveForm $form
- * @var AuthSignupResources $R
+ * @var \yii2\frontend\components\resources\auth\AuthSignupResources $R
  */
 
 $signupForm = $R->signupForm;

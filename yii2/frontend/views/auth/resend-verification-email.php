@@ -6,8 +6,8 @@
  * @var AuthResendVerificationEmailResources $R
  */
 
-use yii\bootstrap5\{ Html, ActiveForm };
-use yii2\frontend\resources\auth\AuthResendVerificationEmailResources;
+use yii\bootstrap5\{ActiveForm, Html};
+use yii2\frontend\components\resources\auth\AuthResendVerificationEmailResources;
 
 $resendVerificationEmailForm = $R->resendVerificationEmailForm;
 

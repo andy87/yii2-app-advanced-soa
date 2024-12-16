@@ -2,7 +2,7 @@
 
 namespace app\common\components\interfaces\services;
 
-use app\common\components\base\providers\items\base\SourceProducer;
+use yii2\common\components\base\providers\items\base\SourceProducer;
 
 /**
  * < Common >

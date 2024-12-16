@@ -1,9 +1,9 @@
 <?php
 
-use yii\web\View;
 use yii\helpers\Html;
+use yii\web\View;
+use yii2\frontend\components\resources\site\SiteAboutResources;
 use yii2\frontend\controllers\SiteController;
-use yii2\frontend\resources\site\SiteAboutResources;
 
 /**
  * @var View $this

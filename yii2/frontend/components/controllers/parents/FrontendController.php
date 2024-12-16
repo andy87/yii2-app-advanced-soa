@@ -2,14 +2,14 @@
 
 namespace app\frontend\components\controllers\parents;
 
-use app\common\components\base\controllers\items\BaseWebHandlerController;
-use app\common\components\traits\handlers\FrontendHandler;
+use yii2\common\components\base\controllers\items\BaseWebHandlerController;
+use yii2\common\components\traits\handlers\FrontendHandler;
 use yii\filters\AccessControl;
 
 /**
  * < Frontend > Родительский класс для контроллеров в окружении: `frontend`
  *
- * @property FrontendHandler $handler
+ * @property \yii2\common\components\traits\handlers\FrontendHandler $handler
  *
  * @package app\frontend\components\controllers\parents
  *

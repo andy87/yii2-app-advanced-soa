@@ -2,7 +2,7 @@
 
 namespace yii2\common\components\assets;
 
-use yii2\common\components\core\BaseAsset;
+use yii2\common\components\base\assets\BaseAsset;
 
 /**
  * < Common >

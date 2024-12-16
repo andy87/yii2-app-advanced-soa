@@ -3,10 +3,10 @@
 namespace yii2\backend\controllers;
 
 use Yii;
-use yii\filters\{ VerbFilter, AccessControl };
-use yii\{ web\Response, base\InvalidConfigException };
-use yii2\common\{ components\Action, models\sources\Role };
-use yii2\backend\{ services\controllers\AuthService, resources\auth\AuthLoginResources, components\controllers\BaseBackendController };
+use yii\{base\InvalidConfigException, web\Response};
+use yii\filters\{AccessControl, VerbFilter};
+use yii2\backend\{components\controllers\BaseBackendController, components\resources\auth\AuthLoginResources};
+use yii2\common\{components\Action, models\sources\Role};
 
 /**
  * < Backend > `AuthController`
@@ -76,7 +76,7 @@ class AuthController extends BaseBackendController
             {
                 $post = Yii::$app->request->post();
 
-                $handlerResult = AuthService::getInstance()->handlerLoginForm($R->loginForm, $post);
+                $handlerResult = \yii2\backend\components\services\controllers\AuthService::getInstance()->handlerLoginForm($R->loginForm, $post);
 
                 if ($handlerResult) return $this->goBack();
             }
@@ -96,7 +96,7 @@ class AuthController extends BaseBackendController
      */
     public function actionLogout(): Response
     {
-        AuthService::getInstance()->logout();
+        \yii2\backend\components\services\controllers\AuthService::getInstance()->logout();
 
         return $this->goHome();
     }

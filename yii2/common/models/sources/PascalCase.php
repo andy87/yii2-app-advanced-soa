@@ -2,7 +2,7 @@
 
 namespace app\common\models\sources;
 
-use app\common\components\core\BaseModel;
+use yii2\common\components\core\BaseModel;
 
 /**
  * < Common > `Role`

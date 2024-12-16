@@ -4,7 +4,7 @@ namespace yii2\backend\components\controllers;
 
 use Yii;
 use yii2\backend\controllers\SiteController;
-use yii2\common\components\{ Layout, Action, controllers\BaseWebController };
+use yii2\common\components\{ base\controllers\items\BaseWebController, Layout, Action};
 
 /**
  * < Backend > `BaseBackendController`

@@ -1,13 +1,13 @@
 <?php
 
+use yii\bootstrap5\{ActiveForm, Html};
 use yii\web\View;
-use yii\bootstrap5\{ Html, ActiveForm };
-use yii2\frontend\resources\auth\AuthRequestPasswordResetResources;
+use yii2\frontend\components\resources\auth\AuthRequestPasswordResetResources;
 
 /**
  * @var View $this
  * @var ActiveForm $form
- * @var AuthRequestPasswordResetResources $R
+ * @var \yii2\frontend\components\resources\auth\AuthRequestPasswordResetResources $R
  */
 
 $this->title = 'Request password reset';
