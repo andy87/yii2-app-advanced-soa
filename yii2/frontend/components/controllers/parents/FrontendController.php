@@ -3,18 +3,19 @@
 namespace yii2\frontend\components\controllers\parents;
 
 use Yii;
-use yii2\common\components\Action;
-use yii2\common\components\base\controllers\items\BaseWebHandlerController;
-use yii2\common\components\Layout;
-use yii2\common\components\traits\handlers\FrontendHandler;
 use yii\filters\AccessControl;
+use yii2\common\components\Action;
+use yii2\common\components\Layout;
 use yii2\frontend\controllers\AuthController;
 use yii2\frontend\controllers\SiteController;
+use yii2\common\components\traits\handlers\FrontendHandler;
+use yii2\common\components\base\controllers\items\BaseWebHandlerController;
 
 /**
  * < Frontend > Родительский класс для контроллеров в окружении: `frontend`
  *
  * @property FrontendHandler $handler
+ * @property array $resources
  *
  * @package app\frontend\components\controllers\parents
  *
@@ -74,15 +75,15 @@ abstract class FrontendController extends BaseWebHandlerController
     {
         $menuItems = [
             [
-                'label' => SiteController::LABELS[Action::INDEX],
+                'label' => SiteController::TITLES[Action::INDEX],
                 'url' => [SiteController::getEndpoint(Action::INDEX)]
             ],
             [
-                'label' => SiteController::LABELS[SiteController::ACTION_ABOUT],
+                'label' => SiteController::TITLES[SiteController::ACTION_ABOUT],
                 'url' => [SiteController::getEndpoint(SiteController::ACTION_ABOUT)]
             ],
             [
-                'label' => SiteController::LABELS[SiteController::ACTION_CONTACT],
+                'label' => SiteController::TITLES[SiteController::ACTION_CONTACT],
                 'url' => [SiteController::getEndpoint(SiteController::ACTION_CONTACT)]
             ],
         ];

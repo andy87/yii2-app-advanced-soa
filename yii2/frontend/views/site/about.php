@@ -10,7 +10,7 @@ use yii2\frontend\controllers\SiteController;
  * @var SiteAboutResources $R
  */
 
-$this->title = SiteController::LABELS[SiteController::ACTION_ABOUT];
+$this->title = SiteController::TITLES[SiteController::ACTION_ABOUT];
 $this->params['breadcrumbs'][] = $this->title;
 
 ?>

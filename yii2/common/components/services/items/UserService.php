@@ -2,7 +2,10 @@
 
 namespace yii2\common\components\services\items;
 
-use yii2\common\{components\services\ModelService, models\sources\User, repositories\items\UserRepositoryClickHouse};
+
+use yii2\common\models\sources\User;
+use yii2\common\components\repository\items\UserRepository;
+use yii2\common\components\base\services\items\SingletonService;
 
 /**
  * < Items > `UserService`
@@ -15,46 +18,20 @@ use yii2\common\{components\services\ModelService, models\sources\User, reposito
  *
  * @tag #common #service #items #user
  */
-class UserService extends ModelService
+class UserService extends SingletonService
 {
     public const CLASS_MODEL = User::class;
 
-    private \yii2\common\components\repository\items\UserRepository $repository;
+    private UserRepository $repository;
 
+    /**
+     * @return void
+     */
     public function init()
     {
         parent::init();
 
-        $this->repository = new \yii2\common\components\repository\items\UserRepository();
+        $this->repository = new UserRepository(static::CLASS_MODEL, static::CLASS_MODEL );
     }
 
-    /**
-     * @example
-     * ```php
-     *  (new UserService)->getOnLastMonth();
-     * ```
-     * @return array
-     */
-    public function getOnLastMonth(): array
-    {
-        $from = date('Y-m-d', strtotime('first day of last month'));
-        $to = date('Y-m-d', strtotime('last day of last month'));
-
-        return $this->getByPeriod($from, $to);
-    }
-
-    /**
-     * @param string $from
-     * @param string $to
-     *
-     * @return array
-     */
-    public function getByPeriod( string $from, string $to ): array
-    {
-        $query = $this
-            ->repository
-            ->findByPeriod($from, $to);
-
-        return $query->all();
-    }
 }

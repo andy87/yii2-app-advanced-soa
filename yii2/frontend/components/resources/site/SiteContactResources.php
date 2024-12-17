@@ -29,8 +29,10 @@ class SiteContactResources extends TemplateResources
      *
      * @tag #resources #constructor
      */
-    public function __construct()
+    public function __construct( array $config = [] )
     {
+        parent::__construct( $config );
+
         $this->contactForm = new ContactForm;
     }
 }

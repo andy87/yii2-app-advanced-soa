@@ -23,7 +23,7 @@ abstract class SourceRepository extends BaseObject implements RepositoryInterfac
     /** @var SourceModel|string $modelClass класс модели */
     public SourceModel|string $modelClass;
 
-    /** @var \yii2\common\components\base\models\items\sources\SourceModel|string $formClass класс формы */
+    /** @var SourceModel|string $formClass класс формы */
     public SourceModel|string $formClass;
 
     /** @var ?Connection */

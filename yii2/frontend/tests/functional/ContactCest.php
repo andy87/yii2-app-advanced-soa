@@ -69,7 +69,7 @@ class ContactCest extends SendForm
      */
     public function checkContact(FunctionalTester $I): void
     {
-        $I->see( $this->form::TITLE, 'h1');
+        $I->see( $this->form::HEADER, 'h1');
     }
 
     /**
@@ -88,7 +88,7 @@ class ContactCest extends SendForm
     public function checkContactSubmitNoData(FunctionalTester $I): void
     {
         $I->submitForm($this->formId, []);
-        $I->see($this->form::TITLE, 'h1');
+        $I->see($this->form::HEADER, 'h1');
         $messages = [
             str_replace('{attribute}', $this->form->getAttributeLabel($this->form::ATTR_NAME), $this->form::RULE_REQUIRED_MESSAGE),
             str_replace('{attribute}', $this->form->getAttributeLabel($this->form::ATTR_EMAIL), $this->form::RULE_REQUIRED_MESSAGE),

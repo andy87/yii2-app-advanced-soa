@@ -3,9 +3,9 @@
 namespace yii2\common\components\services;
 
 use Yii;
-use yii\mail\{MailerInterface, MessageInterface};
-use yii2\common\components\core\BaseService;
 use yii2\common\models\dto\EmailMessageDto;
+use yii\mail\{MailerInterface, MessageInterface};
+use yii2\common\components\base\services\items\SingletonService;
 
 /**
  * < Common > `EmailService`
@@ -14,7 +14,7 @@ use yii2\common\models\dto\EmailMessageDto;
  *
  * @tag #common #service #email
  */
-class EmailService extends BaseService
+class EmailService extends SingletonService
 {
     /** @var MailerInterface $mailer */
     public MailerInterface $mailer;

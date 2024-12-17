@@ -2,8 +2,9 @@
 
 namespace yii2\common\components\repository\items;
 
-use yii2\common\components\base\repository\MySqlRepository;
 use yii2\common\models\sources\User;
+use yii2\common\components\base\models\items\sources\SourceModel;
+use yii2\common\components\base\repository\items\source\SourceRepository;
 
 /**
  * < Common > `UserRepository`
@@ -12,8 +13,8 @@ use yii2\common\models\sources\User;
  *
  * @tag #repositories #user
  */
-class UserRepository extends MySqlRepository
+class UserRepository extends SourceRepository
 {
-    public const MODEL = User::class;
-
+    /** @var SourceModel|string $modelClass класс модели */
+    public SourceModel|string $modelClass = User::class;
 }

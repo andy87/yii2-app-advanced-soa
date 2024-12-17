@@ -4,13 +4,13 @@ namespace yii2\common\components\traits\services;
 
 use Yii;
 use yii\base\InvalidConfigException;
-use yii2\common\components\base\services\items\BaseService;
+use yii2\common\components\base\services\items\source\SourceToolKit;
 use yii2\common\components\base\services\items\settings\ServiceSettings;
 
 /**
  * Trait HasService
  *
- * @property \yii2\common\components\base\services\items\BaseService $service
+ * @property SourceToolKit $service
  *
  * @package app\common\components\traits\services
  *
@@ -18,17 +18,17 @@ use yii2\common\components\base\services\items\settings\ServiceSettings;
  */
 trait HasService
 {
-    /** @var ?\yii2\common\components\base\services\items\BaseService $_service */
-    protected ?BaseService $_service = null;
+    /** @var ?SourceToolKit $_service */
+    protected ?SourceToolKit $_service = null;
 
 
 
     /**
-     * @return \yii2\common\components\base\services\items\BaseService
+     * @return SourceToolKit
      *
      * @throws InvalidConfigException
      */
-    public function getService(): BaseService
+    public function getService(): SourceToolKit
     {
         if ( !$this->_service )
         {
@@ -39,15 +39,15 @@ trait HasService
     }
 
     /**
-     * @return \yii2\common\components\base\services\items\BaseService
+     * @return SourceToolKit
      *
      * @throws InvalidConfigException
      */
-    public function constructService(): BaseService
+    public function constructService(): SourceToolKit
     {
         $serviceSettings = $this->getServiceSettings();
 
-        /** @var \yii2\common\components\base\services\items\BaseService $service */
+        /** @var SourceToolKit $service */
         $service = Yii::createObject([
             'class' => $serviceSettings->classService,
             'settings' => $serviceSettings

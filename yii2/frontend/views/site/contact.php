@@ -3,6 +3,7 @@
 use yii\bootstrap5\{ActiveForm, Html};
 use yii\captcha\Captcha;
 use yii2\frontend\components\resources\site\SiteContactResources;
+use yii2\frontend\controllers\SiteController;
 
 /**
  * @var yii\web\View $this
@@ -12,14 +13,14 @@ use yii2\frontend\components\resources\site\SiteContactResources;
 
 $contactForm = $R->contactForm;
 
-$this->title = $contactForm::TITLE;
+$this->title = SiteController::TITLES[SiteController::ACTION_CONTACT];
 $this->params['breadcrumbs'][] = $this->title;
 
 ?>
 
 <div class="site-contact" <?=$this->attrDataTemplate(__FILE__)?>>
 
-    <h1><?= Html::encode($this->title) ?></h1>
+    <h1><?= Html::encode($contactForm::HEADER) ?></h1>
 
     <p><?= $contactForm::HINT ?></p>
 

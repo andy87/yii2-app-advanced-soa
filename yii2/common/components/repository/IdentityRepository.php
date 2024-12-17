@@ -2,9 +2,12 @@
 
 namespace yii2\common\components\repository;
 
-use yii2\common\components\base\repository\MySqlRepository;
+use Exception;
+use yii\db\Query;
 use yii2\common\models\Identity;
 use yii2\common\models\sources\User;
+use yii2\common\components\base\models\items\sources\SourceModel;
+use yii2\common\components\base\repository\items\source\SourceRepository;
 
 /**
  * < Common > `IdentityRepository`
@@ -13,134 +16,115 @@ use yii2\common\models\sources\User;
  *
  * @tag #repositories #identity
  */
-class IdentityRepository extends MySqlRepository
+class IdentityRepository extends SourceRepository
 {
-    /** @var string */
-    public const MODEL = Identity::class;
-
+    /** @var SourceModel|string $modelClass класс модели */
+    public SourceModel|string $modelClass = Identity::class;
 
 
     /**
      * @param string $email
      *
-     * @return ?Identity
+     * @return Query
      *
      * @tag #repository #identity #find
+     *
+     * @throws Exception
      */
-    public function findActiveByEmail(string $email): ?Identity
+    public function findActiveByEmail(string $email): Query
     {
-        $query = $this
-            ->findByCriteria([
+        return $this
+            ->findModel([
                 User::ATTR_EMAIL => $email,
                 User::ATTR_STATUS => Identity::STATUS_ACTIVE,
             ]);
-
-        /** @var ?Identity $identity */
-        $identity = $query->one();
-
-        return $identity;
     }
 
     /**
      * @param string $email
      *
-     * @return ?Identity
+     * @return Query
+     *
+     * @throws Exception
      *
      * @tag #repository #identity #find
      */
-    public function findInactiveByEmail(string $email): ?Identity
+    public function findInactiveByEmail(string $email): Query
     {
-        $query = $this
-            ->findByCriteria([
+        return $this
+            ->findModel([
                 User::ATTR_EMAIL => $email,
                 User::ATTR_STATUS => Identity::STATUS_INACTIVE,
             ]);
-
-        /** @var ?Identity $identity */
-        $identity = $query->one();
-
-        return $identity;
     }
 
     /**
      * @param string $token
      *
-     * @return ?Identity
+     * @return Query
+     *
+     * @throws Exception
      *
      * @tag #repository #identity #find
      */
-    public function findInactiveByVerificationToken(string $token): ?Identity
+    public function findInactiveByVerificationToken(string $token): Query
     {
-        $query = $this
-            ->findByCriteria([
+        return $this
+            ->findModel([
                 User::ATTR_VERIFICATION => $token,
                 User::ATTR_STATUS => Identity::STATUS_INACTIVE,
             ]);
-
-        /** @var ?Identity $identity */
-        $identity = $query->one();
-
-        return $identity;
     }
 
     /**
      * @param ?string $username
      *
-     * @return ?Identity
+     * @return Query
+     *
+     * @throws Exception
      *
      * @tag #repository #identity #find
      */
-    public function findActiveByUsername(?string $username): ?Identity
+    public function findActiveByUsername(?string $username): Query
     {
-        $query = $this
-            ->findByCriteria([
+        return $this
+            ->findModel([
                 User::ATTR_USERNAME => $username,
                 User::ATTR_STATUS => Identity::STATUS_ACTIVE,
             ]);
-
-        /** @var ?Identity $identity */
-        $identity = $query->one();
-
-        return $identity;
     }
 
     /**
      * @param string $password_reset_token
      *
-     * @return ?Identity
+     * @return Query
+     *
+     * @throws Exception
      *
      * @tag #repository #identity #find
      */
-    public function findIdentityByPasswordResetToken(string $password_reset_token): ?Identity
+    public function findIdentityByPasswordResetToken(string $password_reset_token): Query
     {
-        $query = $this
-            ->findByCriteria([
+        return $this
+            ->findModel([
                 User::ATTR_PASSWORD_RESET => $password_reset_token,
             ]);
-
-        /** @var ?Identity $identity */
-        $identity = $query->one();
-
-        return $identity;
     }
 
     /**
      * @param string $token
      *
-     * @return ?Identity
+     * @return Query
+     *
+     * @throws Exception
      *
      * @tag #repository #identity #find
      */
-    public function findByPasswordResetToken(string $token): ?Identity
+    public function findByPasswordResetToken(string $token): Query
     {
-        $query = $this
-            ->findByCriteria([
+        return $this
+            ->findModel([
                 User::ATTR_PASSWORD_RESET => $token,
             ]);
-
-        /** @var ?Identity $identity */
-        $identity = $query->one();
-
-        return $identity;
     }
 }

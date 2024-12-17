@@ -2,20 +2,23 @@
 
 namespace yii2\frontend\controllers;
 
+use JsonException;
 use Yii;
-use yii\base\InvalidConfigException;
 use yii\web\Response;
+use yii\base\InvalidConfigException;
 use yii2\common\components\Action;
 use yii2\common\components\traits\SessionFlash;
 use yii2\frontend\components\{actions\CaptchaAction,
     controllers\parents\FrontendController,
+    handlers\controllers\SiteHandler,
     resources\site\SiteAboutResources,
     resources\site\SiteIndexResources};
 use yii2\frontend\components\resources\site\{SiteContactResources};
-use yii2\frontend\components\services\SiteService;
 
 /**
  * < Frontend > `SiteController`
+ *
+ * @property SiteHandler $handler
  *
  * @package yii2\frontend\controllers
  *
@@ -25,14 +28,29 @@ class SiteController extends FrontendController
 {
     use SessionFlash;
 
-    public const ENDPOINT = 'site';
-    public const ACTION_CONTACT = 'contact';
-    public const ACTION_ABOUT = 'about';
-    public const LABELS = [
+    public const string ENDPOINT = 'site';
+
+    public const array TITLES = [
         Action::INDEX => 'Главная',
         self::ACTION_ABOUT => 'О нас',
         self::ACTION_CONTACT => 'Контакты',
     ];
+
+    public array $resources = [
+        Action::INDEX => SiteIndexResources::class,
+        self::ACTION_ABOUT => SiteAboutResources::class,
+        self::ACTION_CONTACT => SiteContactResources::class,
+    ];
+
+    public const string ACTION_CONTACT = 'contact';
+    public const string ACTION_ABOUT = 'about';
+
+    public function init(): void
+    {
+        parent::init();
+
+        $this->handler = new SiteHandler();
+    }
 
     /**
      * @return array
@@ -60,9 +78,11 @@ class SiteController extends FrontendController
      */
     public function actionIndex(): string
     {
-        $R = new SiteIndexResources;
+        $resourceClassName = $this->resources[Action::INDEX];
 
-        return $this->render($R::TEMPLATE);
+        $R = new $resourceClassName();
+
+        return $this->render($R::TEMPLATE, $R->release() );
     }
 
     /**
@@ -70,27 +90,35 @@ class SiteController extends FrontendController
      *
      * @return Response|string
      *
-     * @throws InvalidConfigException
+     * @throws InvalidConfigException|JsonException
      *
      * @tag #site #action #contact
      */
     public function actionContact(): Response|string
     {
-        $R = new SiteContactResources;
+        $resourceClassName = $this->resources[self::ACTION_CONTACT];
+
+        /** @var SiteContactResources $R */
+        $R = new $resourceClassName();
 
         if ( Yii::$app->request->isPost)
         {
-            $result = SiteService::getInstance()->handlerContactForm($R->contactForm, Yii::$app->request->post() );
+            $params = Yii::$app->request->post();
+
+            $result = $this->handler->processContactForm( $R->contactForm, $params );
 
             $this->setSessionFlashMessage( $result,
                 $R->contactForm::MESSAGE_SUCCESS,
                 $R->contactForm::MESSAGE_ERROR
             );
 
-            if( $result ) return $this->refresh();
+            if( $result )
+            {
+                return $this->refresh();
+            }
         }
 
-        return $this->render($R::TEMPLATE, $R->release());
+        return $this->render( $R::TEMPLATE, $R->release() );
     }
 
     /**

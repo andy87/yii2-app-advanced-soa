@@ -3,55 +3,48 @@
 namespace yii2\frontend\components\services;
 
 use Yii;
+use JsonException;
 use yii\base\InvalidConfigException;
+use yii2\common\components\system\Logger;
 use yii2\frontend\models\forms\ContactForm;
-use yii2\common\{components\core\BaseService, components\services\EmailService};
+use yii2\common\components\services\EmailService;
+use yii2\common\components\base\services\items\SingletonService;
 
 /**
  * < Frontend > `SiteService`
+ *
+ * @property Logger $logger
  *
  * @package yii2\frontend\services\controllers
  *
  * @tag #services #site
  */
-class SiteService extends BaseService
+class SiteService extends SingletonService
 {
     /**
      * @param ContactForm $contactForm
      *
-     * @param array $data
-     *
      * @return bool
      *
-     * @throws InvalidConfigException
+     * @throws InvalidConfigException|JsonException
      *
      * @tag #site #handler #contact #form
      */
-    public function handlerContactForm(ContactForm $contactForm, array $data = []): bool
+    public function sendContactFormToAdminEmail( ContactForm $contactForm ): bool
     {
-        if ( $contactForm->load($data) )
+        $contactForm->email = Yii::$app->params['adminEmail'] ?? null;
+
+        if ($contactForm->email)
         {
-            if ( $contactForm->validate() )
-            {
-                $adminEmail = Yii::$app->params['adminEmail'] ?? null;
-
-                if ($adminEmail)
-                {
-                    return $this->sendEmailContactForm($contactForm);
-
-                } else {
-
-                    $this->runtimeLogError( 'Admin email `is not set` in params',
-                        __METHOD__,
-                        $contactForm,
-                        [
-                            'data' => $data,
-                            'params' => Yii::$app->params,
-                        ]
-                    );
-                }
-            }
+            return $this->sendEmailByContactForm($contactForm);
         }
+
+        $this->logger->logError(__METHOD__,'Admin email `is not set` in params', [
+            '$contactForm' => [
+                'attributes' => $contactForm->attributes,
+                'errors' => $contactForm->errors,
+            ]
+        ]);
 
         return false;
     }
@@ -65,7 +58,7 @@ class SiteService extends BaseService
      *
      * @tag #site #send #email #contact #form
      */
-    public function sendEmailContactForm(ContactForm $contactForm): bool
+    public function sendEmailByContactForm(ContactForm $contactForm): bool
     {
         $emailConstructEmail = $contactForm->constructEmailDto();
 

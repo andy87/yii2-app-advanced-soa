@@ -19,6 +19,6 @@ class PingController extends FrontendController
      */
     public function actionIndex(): string
     {
-        return (new Ping())->run();
+        return new Ping()->run();
     }
 }

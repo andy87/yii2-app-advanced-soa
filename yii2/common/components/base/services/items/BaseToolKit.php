@@ -29,7 +29,7 @@ use yii2\common\components\base\dataProviders\items\source\SourceActiveDataProvi
  */
 abstract class BaseToolKit extends SourceToolKit
 {
-    /** @var \yii2\common\components\base\services\items\settings\ServiceSettings */
+    /** @var ServiceSettings */
     public ServiceSettings $settings;
 
 
@@ -39,7 +39,7 @@ abstract class BaseToolKit extends SourceToolKit
      *
      * P.S. Что бы собирать объект именно во время вызова, а не во время объявления
      *
-     * @return \yii2\common\components\base\producers\items\source\SourceProducer
+     * @return SourceProducer
      *
      * @throws InvalidConfigException
      */
@@ -82,7 +82,7 @@ abstract class BaseToolKit extends SourceToolKit
     {
         if ( !$this->_repository )
         {
-            /** @var \yii2\common\components\base\repository\items\source\SourceRepository $_repository */
+            /** @var SourceRepository $_repository */
             $_repository = Yii::createObject(
                 [ 'class' => $this->settings->classRepository ],
                 $this->settings->config[$this->settings->classRepository] ?? []
@@ -101,7 +101,7 @@ abstract class BaseToolKit extends SourceToolKit
      *
      * @param array|null $queryParams
      *
-     * @return \yii2\common\components\base\dataProviders\items\source\SourceActiveDataProvider
+     * @return SourceActiveDataProvider
      *
      * @throws InvalidConfigException
      */

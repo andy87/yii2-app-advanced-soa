@@ -47,7 +47,7 @@ class ContactFormTest extends Unit
             'body' => 'body of current message',
         ];
 
-        $sendResult = SiteService::getInstance()->sendEmailContactForm($contactForm);
+        $sendResult = SiteService::getInstance()->sendContactFormToAdminEmail($contactForm);
 
         verify( $sendResult )->notEmpty();
 

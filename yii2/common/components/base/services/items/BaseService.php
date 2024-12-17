@@ -42,6 +42,7 @@ abstract class BaseService extends BaseToolKit implements ServiceInterface
     public function getList(int $page, int $perPage): array
     {
         $query = $this->repository->findModel();
+
         $query->limit($perPage)->offset(($page * $perPage));
 
         /** @var array $result */
@@ -103,8 +104,6 @@ abstract class BaseService extends BaseToolKit implements ServiceInterface
 
         return $activeRecord->save() ? $activeRecord : null;
     }
-
-
 
     /**
      * @param int $id

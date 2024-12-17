@@ -30,7 +30,7 @@ class AuthController extends FrontendController
 {
     use SessionFlash;
 
-    public const ENDPOINT = 'auth';
+    public const string ENDPOINT = 'auth';
 
     public const ACTION_SIGNUP = 'signup';
     public const ACTION_REQUEST_PASSWORD_RESET = 'request-password-reset';

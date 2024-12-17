@@ -2,7 +2,7 @@
 
 namespace yii2\common\components\services;
 
-use yii2\common\components\core\BaseModel;
+use yii2\common\components\base\models\items\sources\SourceModel;
 
 /**
  * < Common > `FormService`
@@ -12,16 +12,16 @@ use yii2\common\components\core\BaseModel;
 abstract class FormService extends ModelService
 {
     /** @var string  */
-    public const CLASS_FORM = BaseModel::class;
+    public const CLASS_FORM = SourceModel::class;
 
 
 
     /**
-     * @return BaseModel|string
+     * @return SourceModel|string
      *
      * @tag #core #service #get
      */
-    public function getClassForm(): BaseModel|string
+    public function getClassForm(): SourceModel|string
     {
         /** @var static|string $classForm */
         $classForm = static::CLASS_FORM;
@@ -32,11 +32,11 @@ abstract class FormService extends ModelService
     /**
      * @param array $attributes
      *
-     * @return BaseModel|string
+     * @return SourceModel|string
      *
      * @tag #core #service #create
      */
-    public function createForm(array $attributes = []): BaseModel|string
+    public function createForm(array $attributes = []): SourceModel|string
     {
         $classForm = $this->getClassModel();
 

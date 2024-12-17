@@ -3,6 +3,7 @@
 namespace yii2\common\models\sources;
 
 use Yii;
+use yii2\common\components\base\models\items\sources\SourceModel;
 
 /**
  * This is the model class for table "user".
@@ -18,7 +19,7 @@ use Yii;
  * @property int $updated_at
  * @property string|null $verification_token
  */
-class UserSource extends \yii2\common\components\core\BaseModel
+class UserSource extends SourceModel
 {
     /**
      * {@inheritdoc}

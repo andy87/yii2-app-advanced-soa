@@ -5,6 +5,7 @@ namespace yii2\common\components\system;
 use Yii;
 use Exception;
 use JsonException;
+use yii\web\Controller;
 use yii2\common\components\interfaces\CatcherInterface;
 
 /**
@@ -21,7 +22,7 @@ use yii2\common\components\interfaces\CatcherInterface;
 class Logger implements CatcherInterface
 {
     /** @var string format for logs */
-    protected const FORMAT = 'Y-m-d H:i:s';
+    protected const string FORMAT = 'Y-m-d H:i:s';
 
 
 
@@ -37,7 +38,7 @@ class Logger implements CatcherInterface
      */
     public function catcher(Exception $e, ?string $method, ?string $message, ?array $data = []): bool
     {
-        return self::logCatch($e, $method, $message, $data );
+        return $this->logCatch($e, $method, $message, $data );
     }
 
     /**
@@ -50,15 +51,15 @@ class Logger implements CatcherInterface
      *
      * @throws JsonException
      */
-    public static function logCatch( Exception $e, string $method, string $message, array $params = [] ): bool
+    public function logCatch( Exception $e, string $method, string $message, array $params = [] ): bool
     {
-        $log = self::createLogData( $method, $message, $params, [
+        $log = $this->createLogData( $method, $message, $params, [
             'message' => $e->getMessage(),
             'position' => $e->getFile() . ':' . $e->getLine(),
             'trace' => $e->getTrace()
         ]);
 
-        if ( YII_ENV_DEV && Yii::$app instanceof \yii\web\Controller )
+        if ( YII_ENV_DEV && Yii::$app instanceof Controller )
         {
             $json = json_encode($log, JSON_THROW_ON_ERROR | JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE);
 
@@ -78,17 +79,17 @@ class Logger implements CatcherInterface
      *
      * @throws JsonException
      */
-    public static function logError( string $method, string $message, array $params, ?array $exception = null ): bool
+    public function logError( string $method, string $message, array $params, ?array $exception = null ): bool
     {
         try
         {
-            $log = self::createLogData( $method, $message, $params, $exception );
+            $log = $this->createLogData( $method, $message, $params, $exception );
 
             Yii::error($log);
 
         } catch (Exception $e ) {
 
-            Logger::logCatch($e, __METHOD__, 'Catch! logError()', func_get_args() );
+            $this->logCatch($e, __METHOD__, 'Catch! logError()', func_get_args() );
         }
 
         return true;
@@ -103,17 +104,17 @@ class Logger implements CatcherInterface
      *
      * @throws JsonException
      */
-    public static function logInfo( string $method, string $message, array $params ): bool
+    public function logInfo( string $method, string $message, array $params ): bool
     {
         try
         {
-            $log = self::createLogData( $method, $message, $params );
+            $log = $this->createLogData( $method, $message, $params );
 
             Yii::info($log);
 
         } catch (Exception $e ) {
 
-            self::logCatch($e, __METHOD__, 'Catch! logInfo()', func_get_args() );
+            $this->logCatch($e, __METHOD__, 'Catch! logInfo()', func_get_args() );
         }
 
         return true;
@@ -128,17 +129,17 @@ class Logger implements CatcherInterface
      *
      * @throws JsonException
      */
-    public static function logWarning( string $method, string $message, array $params ): bool
+    public function logWarning( string $method, string $message, array $params ): bool
     {
         try
         {
-            $log = self::createLogData( $method, $message, $params );
+            $log = $this->createLogData( $method, $message, $params );
 
             Yii::warning($log);
 
         } catch (Exception $e ) {
 
-            self::logCatch($e, __METHOD__, 'Catch! logWarning()', func_get_args() );
+            $this->logCatch($e, __METHOD__, 'Catch! logWarning()', func_get_args() );
         }
 
         return true;
@@ -152,7 +153,7 @@ class Logger implements CatcherInterface
      *
      * @return array
      */
-    public static function createLogData( string $method, string $message, array $params, ?array $data = null ): array
+    public function createLogData( string $method, string $message, array $params, ?array $data = null ): array
     {
         $log = [
             date(self::FORMAT) => $method,

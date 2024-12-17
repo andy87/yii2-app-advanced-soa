@@ -40,6 +40,6 @@ class AboutCest
     {
         $I->amOnRoute(SiteController::ENDPOINT . '/' . SiteController::ACTION_ABOUT);
 
-        $I->see(SiteController::LABELS[SiteController::ACTION_ABOUT], 'h1');
+        $I->see(SiteController::TITLES[SiteController::ACTION_ABOUT], 'h1');
     }
 }

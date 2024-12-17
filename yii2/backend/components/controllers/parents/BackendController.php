@@ -14,6 +14,7 @@ use yii2\common\components\base\controllers\items\BaseWebHandlerController;
  * < Backend > Родительский класс для контроллеров в окружении: `backend`
  *
  * @property BackendHandler $handler
+ * @property array $resources
  *
  * @package app\backend\components\controllers\parents
  *

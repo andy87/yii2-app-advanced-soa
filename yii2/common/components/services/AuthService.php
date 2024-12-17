@@ -4,7 +4,7 @@ namespace yii2\common\components\services;
 
 use Yii;
 use yii\base\InvalidConfigException;
-use yii2\common\{components\core\BaseService, models\forms\LoginForm};
+use yii2\common\{components\base\services\items\SingletonService, models\forms\LoginForm};
 
 /**
  * < Common > AuthService
@@ -13,7 +13,7 @@ use yii2\common\{components\core\BaseService, models\forms\LoginForm};
  *
  * @tag #common #services #AuthService
  */
-class AuthService extends BaseService
+class AuthService extends SingletonService
 {
     /**
      * @param LoginForm $loginForm

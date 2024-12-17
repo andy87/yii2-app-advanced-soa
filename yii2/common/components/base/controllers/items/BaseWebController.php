@@ -29,7 +29,7 @@ abstract class BaseWebController extends SourceWebController
      *
      * @var string
      */
-    public const ENDPOINT = '';
+    public const string ENDPOINT = '';
 
 
 

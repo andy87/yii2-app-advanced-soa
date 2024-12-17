@@ -14,7 +14,7 @@ use yii\base\BaseObject;
 abstract class SourceResource extends BaseObject
 {
     /** @var string Key for the release method */
-    public const KEY = 'R';
+    public const string KEY = 'R';
 
 
     /**
@@ -22,6 +22,6 @@ abstract class SourceResource extends BaseObject
      */
     public function release(): array
     {
-        return [self::KEY => (array)$this];
+        return [ static::KEY => $this ];
     }
 }

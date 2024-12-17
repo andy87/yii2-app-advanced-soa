@@ -40,8 +40,8 @@ class HomeCest
         /** @see SiteController::actionIndex() */
         $I->amOnRoute( Yii::$app->homeUrl );
         $I->see( Yii::$app->name );
-        $I->seeLink(SiteController::LABELS[SiteController::ACTION_ABOUT]);
-        $I->click(SiteController::LABELS[SiteController::ACTION_ABOUT]);
+        $I->seeLink(SiteController::TITLES[SiteController::ACTION_ABOUT]);
+        $I->click(SiteController::TITLES[SiteController::ACTION_ABOUT]);
         $I->see('Это страница О нас');
     }
 }
