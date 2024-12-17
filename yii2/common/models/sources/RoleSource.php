@@ -2,6 +2,8 @@
 
 namespace yii2\common\models\sources;
 
+use yii2\common\components\base\models\items\sources\SourceModel;
+
 /**
  * This is the model class for table "role".
  *
@@ -13,7 +15,7 @@ namespace yii2\common\models\sources;
  * @property string|null $created_at Дата создания
  * @property string|null $updated_at Дата обновления
  */
-class RoleSource extends \yii2\common\components\core\BaseModel
+class RoleSource extends SourceModel
 {
     /**
      * {@inheritdoc}
