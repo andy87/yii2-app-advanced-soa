@@ -13,9 +13,14 @@
  */
 
 use yii\web\User;
+use yii2\backend\components\managers\BackendServiceManager;
+use yii2\common\components\managers\CommonHandlerManager;
+use yii2\common\components\managers\CommonServiceManager;
 use yii2\common\models\Identity;
 use yii\web\Application as AppWeb;
 use yii\console\Application as AppConsole;
+use yii2\console\components\managers\ConsoleServiceManager;
+use yii2\frontend\components\managers\BackendServiceManager;
 
 /**
  * < Common > Yii class is used for IDE autocompletion only.
@@ -31,6 +36,9 @@ class Yii
 /**
  * @property \yii $authManager
  * @property User|\__WebUser $identity
+ * @property-read CommonServiceManager|ConsoleServiceManager|BackendServiceManager|BackendServiceManager $serviceManager
+ * @property-read CommonHandlerManager|ConsoleHandlerManager|FrontendHandlerManager|BackendHandlerManager $handlerManager
+ * @property-read CommonRepositoryManager|ConsoleRepositoryManager|FrontendRepositoryManager|BackendRepositoryManager $perositoryManager
  *
  */
 class __Application

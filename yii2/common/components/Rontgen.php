@@ -1,6 +1,6 @@
 <?php declare(strict_types=1);
 
-namespace yii2\common\components\models\dto;
+namespace yii2\common\components;
 
 use yii\base\Model;
 
@@ -11,7 +11,7 @@ use yii\base\Model;
  *
  * @tag: #abstract #common #model #dto
  */
-class ModelInfo
+class Rontgen
 {
     /** @var string $modelName имя модели */
     public string $modelName;
@@ -29,7 +29,7 @@ class ModelInfo
      *
      * @param bool $runValidation
      */
-    public function __construct(Model $model, bool $runValidation = true)
+    public function __construct( Model $model, bool $runValidation = true )
     {
         $this->modelName = get_class($model);
 

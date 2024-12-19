@@ -7,14 +7,12 @@ use Exception;
 use yii\base\BaseObject;
 use yii2\common\components\system\Logger;
 use yii2\common\components\interfaces\CatcherInterface;
-use yii2\common\components\base\producers\items\source\SourceProducer;
-use yii2\common\components\base\repository\items\source\SourceRepository;
-use yii2\common\components\base\dataProviders\items\source\SourceActiveDataProvider;
 
 /**
  * < Common > Родительский абстрактный класс для всех сервисов
  *  использующих BaseModel
  *
+ * @property CatcherInterface|Logger $logger
  * @package app\common\components\base\services\items\base
  *
  * @tag: #abstract #common #service #base #source
@@ -22,7 +20,7 @@ use yii2\common\components\base\dataProviders\items\source\SourceActiveDataProvi
 abstract class SourceService extends BaseObject
 {
     /** @var Logger|string Класс логгера */
-    protected const Logger|string CLASS_LOGGER = Logger::class;
+    protected const CatcherInterface|string CLASS_LOGGER = Logger::class;
 
 
 
@@ -32,9 +30,23 @@ abstract class SourceService extends BaseObject
 
 
     /**
+     * @param array $config
+     *
      * @throws Exception
      */
-    public function init(): void
+    public function __construct( array $config = [])
+    {
+        parent::__construct($config);
+
+        $this->setupLogger();
+    }
+
+    /**
+     * @return void
+     *
+     * @throws Exception
+     */
+    public function setupLogger(): void
     {
         $this->logger = $this->getLogger();
     }
@@ -64,7 +76,7 @@ abstract class SourceService extends BaseObject
      *
      * @throws Exception
      */
-    public function catcher( Exception $e, string $method, string $message, array $data ): bool
+    public function prepareException( Exception $e, string $method, string $message, array $data = [] ): bool
     {
         return $this->logger->logCatch( ...func_get_args() );
     }

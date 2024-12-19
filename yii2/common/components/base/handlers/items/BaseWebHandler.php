@@ -2,7 +2,6 @@
 
 namespace yii2\common\components\base\handlers\items;
 
-use yii2\common\components\base\models\items\sources\SourceModel;
 use Yii;
 use Exception;
 use Throwable;
@@ -10,19 +9,19 @@ use yii\base\InvalidConfigException;
 use yii2\common\components\enums\Action;
 use yii2\common\components\base\services\items\BaseService;
 use yii2\common\components\handlers\items\PascalCaseHandler;
+use yii2\common\components\base\resources\crud\BaseFormResource;
+use yii2\common\components\base\resources\crud\BaseListViewResource;
+use yii2\common\components\base\resources\crud\BaseGridViewResource;
+use yii2\common\components\base\resources\crud\BaseCrudViewResource;
 use yii2\common\components\base\resources\items\BaseTemplateResource;
 use yii2\backend\components\resources\parents\crud\BackendFormResource;
 use yii2\backend\components\resources\parents\crud\BackendViewResource;
 use yii2\backend\components\resources\parents\crud\BackendIndexResource;
 use yii2\backend\components\resources\parents\crud\BackendCreateResource;
-use yii2\common\components\base\resources\crud\BaseFormResource;
 use yii2\frontend\components\resources\parents\crud\FrontendViewResource;
 use yii2\frontend\components\resources\parents\crud\FrontendFormResource;
 use yii2\frontend\components\resources\parents\crud\FrontendIndexResource;
 use yii2\frontend\components\resources\parents\crud\FrontendCreateResource;
-use yii2\common\components\base\resources\crud\BaseListViewResource;
-use yii2\common\components\base\resources\crud\BaseGridViewResource;
-use yii2\common\components\base\resources\crud\BaseCrudViewResource;
 
 /**
  * < Common > Родительский абстрактный класс для всех Web обработчиков
@@ -82,7 +81,7 @@ abstract class BaseWebHandler extends PascalCaseHandler
     /**
      * @param string $action
      *
-     * @return BaseTemplateResource|\yii2\common\components\base\resources\crud\BaseGridViewResource|\yii2\common\components\base\resources\crud\BaseListViewResource|\yii2\common\components\base\resources\crud\BaseFormResource|string
+     * @return BaseTemplateResource|BaseGridViewResource|BaseListViewResource|BaseFormResource|string
      */
     public function getResources( string $action ): BaseTemplateResource|BaseGridViewResource|BaseListViewResource|BaseFormResource|string
     {
@@ -94,13 +93,13 @@ abstract class BaseWebHandler extends PascalCaseHandler
     /**
      * @param array $params
      *
-     * @return BaseGridViewResource|\yii2\common\components\base\resources\crud\BaseListViewResource
+     * @return BaseGridViewResource|BaseListViewResource
      *
      * @throws InvalidConfigException
      */
     public function processIndex(array $params): BaseGridViewResource|BaseListViewResource
     {
-        /** @var BaseCrudViewResource|\yii2\frontend\components\resources\parents\crud\FrontendIndexResource|BackendIndexResource $R */
+        /** @var BaseCrudViewResource|FrontendIndexResource|BackendIndexResource $R */
         $R = $this->getResources(Action::INDEX);
 
         $R->searchModel = $this->service->settings->classSearchModel;
@@ -114,13 +113,13 @@ abstract class BaseWebHandler extends PascalCaseHandler
      * @param array $params
      * @param string $key
      *
-     * @return \yii2\common\components\base\resources\crud\BaseFormResource
+     * @return BaseFormResource
      *
      * @throws Exception
      */
     public function processCreateForm(array $params = [], string $key = '' ): BaseFormResource
     {
-        /** @var BaseCrudViewResource|\yii2\frontend\components\resources\parents\crud\FrontendCreateResource|BackendCreateResource $R */
+        /** @var BaseCrudViewResource|FrontendCreateResource|BackendCreateResource $R */
         $R = $this->getResources(Action::CREATE);
 
         $R->form = $this->service->producer->formCreate();
@@ -137,13 +136,13 @@ abstract class BaseWebHandler extends PascalCaseHandler
      * @param int $id
      * @param array $params
      *
-     * @return \yii2\common\components\base\resources\crud\BaseFormResource
+     * @return BaseFormResource
      *
      * @throws Exception
      */
     public function processUpdateForm( int $id, array $params = [] ): BaseFormResource
     {
-        /** @var BaseCrudViewResource|\yii2\frontend\components\resources\parents\crud\FrontendFormResource|BackendFormResource $R */
+        /** @var BaseCrudViewResource|FrontendFormResource|BackendFormResource $R */
         $R = $this->getResources(Action::UPDATE);
 
         $R->form = $this->service->repository->findForm($id);
@@ -164,10 +163,10 @@ abstract class BaseWebHandler extends PascalCaseHandler
      */
     public function processViewForm(int $id): BaseCrudViewResource
     {
-        /** @var BaseCrudViewResource|\yii2\frontend\components\resources\parents\crud\FrontendViewResource|BackendViewResource $R */
+        /** @var BaseCrudViewResource|FrontendViewResource|BackendViewResource $R */
         $R = $this->getResources(Action::VIEW);
 
-        $R->model = $this->service->getModel( $id, $this->service->settings->classForm );
+        $R->model = $this->service->getModel( $id );
 
         return $R;
     }

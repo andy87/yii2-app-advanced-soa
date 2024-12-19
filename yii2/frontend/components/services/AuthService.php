@@ -2,17 +2,17 @@
 
 namespace yii2\frontend\components\services;
 
-use Exception;
-use Yii;
+use Yii, Exception;
 use yii\base\InvalidConfigException;
+use yii2\common\components\services\IdentityService;
 use yii2\common\models\Identity;
-use yii2\common\services\{yii2\common\components\services\EmailService,
-    yii2\common\components\services\IdentityService};
-use yii2\frontend\models\forms\{PasswordResetRequestForm,
-    ResendVerificationEmailForm,
-    ResetPasswordForm,
+use yii2\frontend\models\forms\{
     SignupForm,
-    VerifyEmailForm};
+    VerifyEmailForm,
+    ResetPasswordForm,
+    PasswordResetRequestForm,
+    ResendVerificationEmailForm
+};
 
 /**
  * < Frontend > `AuthService`
@@ -27,9 +27,9 @@ class AuthService extends \yii2\common\components\services\AuthService
      * @param SignupForm $signupForm
      * @param array $data
      *
-     * @throws InvalidConfigException
-     *
      * @return ?Identity
+     *
+     * @throws Exception
      *
      * @tag #service #auth #handler #form #signup
      */
@@ -43,13 +43,24 @@ class AuthService extends \yii2\common\components\services\AuthService
         {
             if ($signupForm->validate())
             {
-                $signupForm->identity = \yii2\common\components\services\IdentityService::getInstance()->signUp($signupForm);
+                $transaction?->commit();
 
-                 if ($signupForm->identity->id !== null)
+                $signupForm->identity = IdentityService::getInstance()->signUp($signupForm);
+
+                printPre(__METHOD__, [
+                    '$signupForm' => [
+                        'attributes' => $signupForm->attributes,
+                        'errors' => $signupForm->errors,
+                        'identity' => $signupForm->identity
+                    ]
+                ]);
+
+                if (isset($signupForm->identity->id))
                  {
+
+
                      if ( $this->sendEmailVerifyMail($signupForm) )
                      {
-                         $transaction?->commit();
 
                          return $signupForm->identity;
 
@@ -63,19 +74,26 @@ class AuthService extends \yii2\common\components\services\AuthService
             } else {
                 $message = 'Signup form validation error';
             }
+
+
         } catch (Exception $e) {
 
+            printPre(__METHOD__, [
+                'message' => $e->getMessage(),
+                'code' => $e->getCode(),
+                'position' => $e->getFile() . ':' . $e->getLine(),
+                'trace' => $e->getTrace()
+            ]);
+
             $message = 'Catch `handlerSignupForm`';
-            $data = $this->prepareException('Signup form error', $e);
+            $this->prepareException($e, __METHOD__, 'Signup form error',[]);
         }
 
         $transaction?->rollBack();
 
-        $this->runtimeLogError( $message,
-            __METHOD__,
-            $signupForm,
-                $data ?? []
-        );
+        $this->logger->logError( __METHOD__, $message, [
+            '$signupForm' => $signupForm
+        ]);
 
         return null;
     }

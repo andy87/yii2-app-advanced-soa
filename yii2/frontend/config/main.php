@@ -1,7 +1,7 @@
 <?php
 
-use yii\log\FileTarget;
-use yii2\common\models\Identity;
+use yii2\common\components\managers\CommonServiceManager;
+use yii2\frontend\components\managers\BackendServiceManager;
 
 $params = array_merge(
     require __DIR__ . '/../../common/config/params.php',
@@ -36,6 +36,21 @@ return [
         'log' => require __DIR__ . '/../../common/config/components/log.php',
 
         'errorHandler' => require __DIR__ . '/../../common/config/components/errorHandler.php',
+
+        'serviceManager' => [
+            'class' => BackendServiceManager::class,
+            'config' => BackendServiceManager::CONFIG,
+        ],
+
+        'handlerManager' => [
+            'class' => ConsoleHandlerManager::class,
+            'config' => ConsoleHandlerManager::CONFIG,
+        ],
+
+        'repositoryManager' => [
+            'class' => ConsoleRepositoryManager::class,
+            'config' => ConsoleRepositoryManager::CONFIG,
+        ]
     ],
 
     'bootstrap' => ['log'],

@@ -2,12 +2,12 @@
 
 namespace yii2\common\components\actions\web;
 
+use Throwable;
+use yii\web\Response;
+use yii\base\InvalidConfigException;
+use yii2\common\components\system\Notify;
 use yii2\common\components\base\actions\CrudAction;
 use yii2\common\components\base\handlers\items\BaseWebHandler;
-use yii2\common\components\system\Notify;
-use Throwable;
-use yii\base\InvalidConfigException;
-use yii\web\Response;
 
 /**
  * Class CrudIndexAction
@@ -20,8 +20,11 @@ use yii\web\Response;
  */
 class CrudDeleteAction extends CrudAction
 {
-    public const MESSAGE_SUCCESS = 'Удаление прошло успешно.';
-    public const MESSAGE_ERROR = 'Ошибка удаления записи.';
+    /** @var string */
+    public const string MESSAGE_SUCCESS = 'Удаление прошло успешно.';
+
+    /** @var string */
+    public const string MESSAGE_ERROR = 'Ошибка удаления записи.';
 
 
 
@@ -38,11 +41,11 @@ class CrudDeleteAction extends CrudAction
 
         if ( $result )
         {
-            $this->setFlashMessage( self::MESSAGE_SUCCESS, Notify::SUCCESS );
+            $this->setFlashMessage( static::MESSAGE_SUCCESS, Notify::SUCCESS );
 
         } else {
 
-            $this->setFlashMessage( self::MESSAGE_ERROR, Notify::ERROR );
+            $this->setFlashMessage( static::MESSAGE_ERROR, Notify::ERROR );
         }
 
         return $this->goIndex();

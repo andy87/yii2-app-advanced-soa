@@ -14,7 +14,6 @@ use yii2\common\components\base\producers\items\source\SourceProducer;
 use yii2\common\components\base\services\items\settings\ServiceSettings;
 use yii2\common\components\base\repository\items\source\SourceRepository;
 use yii2\common\components\base\dataProviders\items\source\SourceActiveDataProvider;
-use yii2\common\components\base\services\items\BaseToolKit;
 
 /**
  * < Common > Базовый абстрактный класс для всех сервисов
@@ -31,6 +30,8 @@ use yii2\common\components\base\services\items\BaseToolKit;
  */
 abstract class BaseService extends BaseToolKit implements ServiceInterface
 {
+    use ToolsKitMethodsTrait;
+
     /**
      * @param int $page
      * @param int $perPage

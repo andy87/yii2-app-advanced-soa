@@ -8,17 +8,23 @@ use yii2\common\components\actions\web\CrudIndexAction;
 use yii2\common\components\actions\web\CrudCreateAction;
 use yii2\common\components\actions\web\CrudDeleteAction;
 use yii2\common\components\actions\web\CrudUpdateAction;
+use yii2\common\components\base\handlers\items\source\SourceHandler;
 
 /**
  * Trait ActionTrait
  *
- * @property array $handler
- * @property array $resources
- *
  * @package yii2\common\components\traits\controllers
  */
-trait ActionTrait
+trait CrudTrait
 {
+    /** @var SourceHandler $handler */
+    protected SourceHandler $handler;
+
+    /** @var array $resources */
+    protected array $resources;
+
+
+
     /**
      * @return array
      */

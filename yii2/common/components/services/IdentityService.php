@@ -6,24 +6,27 @@ use Yii;
 use Exception;
 use yii2\common\models\Identity;
 use yii\base\InvalidConfigException;
+use yii2\common\models\sources\User;
 use yii2\frontend\models\forms\SignupForm;
 use yii2\common\components\system\Manager;
+use yii2\common\components\traits\SingletonTrait;
 use yii2\common\components\repository\IdentityRepository;
 use yii2\common\components\base\producers\IdentityProducer;
-use yii2\common\components\base\services\items\source\SourceToolKit;
+use yii2\common\components\base\services\items\SingletonService;
 
 /**
  * < Common > `IdentityService`
- *
- * @property IdentityRepository $_repository
- * @property IdentityProducer $_producer
  *
  * @package yii2\common\services
  *
  * @tag #common #service #identity
  */
-class IdentityService extends SourceToolKit
+class IdentityService extends SingletonService
 {
+    use SingletonTrait, ToolsKitTrait;
+
+
+
     /**
      * @return void
      *
@@ -51,8 +54,8 @@ class IdentityService extends SourceToolKit
     private function setupRepository(): void
     {
         /** @var IdentityRepository $repository */
-        $repository = Yii::createObject([
-            'class' => IdentityRepository::class
+        $repository = Yii::createObject(['class' => IdentityRepository::class],[
+            User::class, User::class,
         ]);
 
         $this->_repository = $repository;

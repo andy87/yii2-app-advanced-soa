@@ -22,8 +22,11 @@ use yii2\common\components\base\resources\crud\BaseFormResource;
  */
 class CrudUpdateAction extends CrudAction
 {
-    public const MESSAGE_SUCCESS = 'Запись успешно обновлена.';
-    public const MESSAGE_ERROR = 'Ошибка обновления записи.';
+    /** @var string */
+    public const string MESSAGE_SUCCESS = 'Запись успешно обновлена.';
+
+    /** @var string */
+    public const string MESSAGE_ERROR = 'Ошибка обновления записи.';
 
 
 
@@ -44,16 +47,16 @@ class CrudUpdateAction extends CrudAction
         {
             if ( $R->form->save() )
             {
-                $this->setFlashMessage(self::MESSAGE_SUCCESS, Notify::SUCCESS );
+                $this->setFlashMessage(static::MESSAGE_SUCCESS, Notify::SUCCESS );
 
             } else {
 
-                $this->setFlashMessage(self::MESSAGE_ERROR, Notify::ERROR );
+                $this->setFlashMessage(static::MESSAGE_ERROR, Notify::ERROR );
             }
 
         } elseif ( $R->form === null ) {
 
-            $this->setFlashMessage(self::MESSAGE_NOT_FOUND, Notify::ERROR );
+            $this->setFlashMessage(static::MESSAGE_NOT_FOUND, Notify::ERROR );
 
             return $this->goIndex();
         }

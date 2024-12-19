@@ -34,65 +34,6 @@ abstract class BaseToolKit extends SourceToolKit
 
 
 
-    /**
-     * Magic method for getting properties `producer`
-     *
-     * P.S. Что бы собирать объект именно во время вызова, а не во время объявления
-     *
-     * @return SourceProducer
-     *
-     * @throws InvalidConfigException
-     */
-    public function getProducer(): SourceProducer
-    {
-        if ( !$this->_producer )
-        {
-            if (isset($this->settings->config[$this->settings->classProducer]))
-            {
-                $params = $this->settings->config[$this->settings->classProducer];
-
-            } else {
-
-                $params = [];
-
-                if ( $this->settings->classModel ) $params[] = new Manager($this->settings->classModel);
-
-                if ( $this->settings->classForm ) $params[] = new Manager($this->settings->classForm);
-            }
-
-            /** @var SourceProducer $_producer */
-            $_producer = Yii::createObject([ 'class' => $this->settings->classProducer ], $params );
-
-            $this->_producer = $_producer;
-        }
-
-        return $this->_producer;
-    }
-
-    /**
-     * Magic method for getting properties `repository`
-     *
-     * P.S. Что бы собирать объект именно во время вызова, а не во время объявления
-     *
-     * @return SourceRepository
-     *
-     * @throws InvalidConfigException
-     */
-    public function getRepository(): SourceRepository
-    {
-        if ( !$this->_repository )
-        {
-            /** @var SourceRepository $_repository */
-            $_repository = Yii::createObject(
-                [ 'class' => $this->settings->classRepository ],
-                $this->settings->config[$this->settings->classRepository] ?? []
-            );
-
-            $this->_repository = $_repository;
-        }
-
-        return $this->_repository;
-    }
 
     /**
      * Magic method for getting properties `dataProvider`

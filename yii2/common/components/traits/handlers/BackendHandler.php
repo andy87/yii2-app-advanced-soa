@@ -2,14 +2,13 @@
 
 namespace yii2\common\components\traits\handlers;
 
-use yii2\backend\components\resources\parents\crud\BackendCreateResource;
-use yii2\backend\components\resources\parents\crud\BackendIndexResource;
-use yii2\backend\components\resources\parents\crud\BackendUpdateResource;
-use yii2\backend\components\resources\parents\crud\BackendViewResource;
+use yii2\common\components\enums\Action;
 use yii2\common\components\base\handlers\items\BaseWebHandler;
 use yii2\common\components\base\resources\items\BaseTemplateResource;
-use yii2\common\components\base\services\items\BaseService;
-use yii2\common\components\enums\Action;
+use yii2\backend\components\resources\parents\crud\BackendViewResource;
+use yii2\backend\components\resources\parents\crud\BackendIndexResource;
+use yii2\backend\components\resources\parents\crud\BackendCreateResource;
+use yii2\backend\components\resources\parents\crud\BackendUpdateResource;
 
 /**
  * < Backend > Родительский класс для обработчиков контроллеров в окружения: `backend`

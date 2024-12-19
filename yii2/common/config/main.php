@@ -1,5 +1,9 @@
 <?php
 
+use yii2\common\components\managers\CommonHandlerManager;
+use yii2\common\components\managers\CommonRepositoryManager;
+use yii2\common\components\managers\CommonServiceManager;
+
 $dirApp = dirname(__DIR__, 2);
 $root = dirname(__DIR__, 3);
 
@@ -26,6 +30,21 @@ $config = [
         'cache' => require __DIR__ . '/components/cache.php',
 
         'mailer' => require __DIR__ . '/components/mailer.php',
+
+        'serviceManager' => [
+            'class' => CommonServiceManager::class,
+            'config' => CommonServiceManager::CONFIG,
+        ],
+
+        'handlerManager' => [
+            'class' => CommonHandlerManager::class,
+            'config' => CommonHandlerManager::CONFIG,
+        ],
+
+        'repositoryManager' => [
+            'class' => CommonRepositoryManager::class,
+            'config' => CommonRepositoryManager::CONFIG,
+        ]
 
         //'redis' => require __DIR__ . '/components/redis.php',
 

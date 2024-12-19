@@ -1,5 +1,8 @@
 <?php
 
+use yii2\backend\components\managers\BackendServiceManager;
+use yii2\common\components\managers\CommonServiceManager;
+
 $params = array_merge(
     require __DIR__ . '/../../common/config/params.php',
     require __DIR__ . '/../../common/config/params-local.php',
@@ -33,6 +36,11 @@ return [
         'log' => require __DIR__ . '/../../common/config/components/log.php',
 
         'errorHandler' => require __DIR__ . '/../../common/config/components/errorHandler.php',
+
+        'serviceManager' => [
+            'class' => BackendServiceManager::class,
+            'config' => BackendServiceManager::CONFIG,
+        ]
     ],
 
     'bootstrap' => ['log'],

@@ -1,6 +1,7 @@
 <?php
 
 use andy87\yii2\architect\components\controllers\ArchitectController;
+use yii2\console\components\managers\{ ConsoleHandlerManager, ConsoleRepositoryManager, ConsoleServiceManager };
 
 $params = array_merge(
     require __DIR__ . '/../../common/config/params.php',
@@ -19,6 +20,21 @@ return [
 
     'components' => [
         'log' => require __DIR__ . '/components/log.php',
+
+        'serviceManager' => [
+            'class' => ConsoleServiceManager::class,
+            'config' => ConsoleServiceManager::CONFIG,
+        ],
+
+        'handlerManager' => [
+            'class' => ConsoleHandlerManager::class,
+            'config' => ConsoleHandlerManager::CONFIG,
+        ],
+
+        'repositoryManager' => [
+            'class' => ConsoleRepositoryManager::class,
+            'config' => ConsoleRepositoryManager::CONFIG,
+        ]
     ],
 
     'bootstrap' => ['log'],

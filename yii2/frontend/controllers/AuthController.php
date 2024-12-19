@@ -152,7 +152,7 @@ class AuthController extends FrontendController
      *
      * @return Response|string
      *
-     * @throws InvalidConfigException
+     * @throws InvalidConfigException|Exception
      *
      * @tag #auth #action #signup
      */
@@ -164,7 +164,7 @@ class AuthController extends FrontendController
         {
             $post = Yii::$app->request->post();
 
-            $handlerResult = AuthService::getInstance()->handlerSignupForm($R->signupForm, $post);
+            $handlerResult = AuthService::getInstance()->handlerSignupForm( $R->signupForm, $post );
 
             $this->setSessionFlashMessage(
                 ($handlerResult instanceof Identity),

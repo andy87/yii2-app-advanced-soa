@@ -5,15 +5,21 @@ namespace yii2\common\components\traits\handlers;
 use yii2\common\components\enums\Action;
 use yii2\common\components\base\services\items\BaseService;
 use yii2\common\components\base\resources\items\BaseTemplateResource;
-use yii2\frontend\components\resources\parents\crud\FrontendCreateResource;
-use yii2\frontend\components\resources\parents\crud\FrontendIndexResource;
-use yii2\frontend\components\resources\parents\crud\FrontendUpdateResource;
 use yii2\frontend\components\resources\parents\crud\FrontendViewResource;
+use yii2\frontend\components\resources\parents\crud\FrontendIndexResource;
+use yii2\frontend\components\resources\parents\crud\FrontendCreateResource;
+use yii2\frontend\components\resources\parents\crud\FrontendUpdateResource;
 
 /**
  * < Frontend > Обработчик контроллеров работающих с сущностью `{{PascalCase}}`
  *
- * @property \yii2\common\components\base\services\items\BaseService $service
+ * @property BaseService $service
+ * @method BaseTemplateResource|FrontendIndexResource|FrontendViewResource|FrontendCreateResource|FrontendUpdateResource|string getResources(string $action)
+ * @method FrontendIndexResource processIndex(array $params)
+ * @method FrontendViewResource processViewForm(int $id)
+ * @method FrontendCreateResource processCreateForm(array $params = [], string $key = '')
+ * @method FrontendUpdateResource processUpdateForm(int $id, array $params)
+ * @method int processDelete(int $id)
  *
  * @package app\frontend\components\handlers\parents
  *

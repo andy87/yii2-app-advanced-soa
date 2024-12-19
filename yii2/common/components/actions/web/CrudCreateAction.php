@@ -2,19 +2,18 @@
 
 namespace yii2\common\components\actions\web;
 
+use Yii;
+use yii\db\Exception;
+use yii\base\InvalidConfigException;
+use yii2\common\components\system\Notify;
 use yii2\common\components\base\actions\CrudAction;
 use yii2\common\components\base\handlers\items\BaseWebHandler;
-use yii2\common\components\base\models\items\sources\SourceModel;
 use yii2\common\components\base\resources\crud\BaseFormResource;
-use yii2\common\components\system\Notify;
-use Yii;
-use yii\base\InvalidConfigException;
-use yii\db\Exception;
 
 /**
  * Class CrudIndexAction
  *
- * @property \yii2\common\components\base\handlers\items\BaseWebHandler $handler
+ * @property BaseWebHandler $handler
  * @property BaseFormResource $resource
  *
  * @package app\common\components\actions\crud
@@ -23,8 +22,11 @@ use yii\db\Exception;
  */
 class CrudCreateAction extends CrudAction
 {
-    public const MESSAGE_SUCCESS = 'Запись успешно создана.';
-    public const MESSAGE_ERROR = 'Ошибка создания записи.';
+    /** @var string */
+    public const string MESSAGE_SUCCESS = 'Запись успешно создана.';
+
+    /** @var string */
+    public const string MESSAGE_ERROR = 'Ошибка создания записи.';
 
 
 
@@ -37,18 +39,13 @@ class CrudCreateAction extends CrudAction
     {
         $params = (Yii::$app->request->isPost) ? (array) Yii::$app->request->bodyParams : [];
 
-        $R = $this->handler->processCreateForm( $params);
+        $R = $this->handler->processCreateForm( $params );
 
         if ( count($params) )
         {
-            if ( $R->form->isNewRecord )
-            {
-                $this->setFlashMessage('Ошибка создания записи.', Notify::ERROR );
-
-            } else {
-
-                $this->setFlashMessage('Запись успешно создана.', Notify::SUCCESS );
-            }
+            ( isset($R->form->id) )
+                ? $this->setFlashMessage(static::MESSAGE_SUCCESS, Notify::SUCCESS )
+                : $this->setFlashMessage(static::MESSAGE_ERROR, Notify::ERROR );
         }
 
         return $this->renderResource( $R );

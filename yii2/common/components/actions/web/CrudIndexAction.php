@@ -13,7 +13,7 @@ use yii2\common\components\base\resources\crud\BaseListViewResource;
  * Class CrudIndexAction
  *
  * @property BaseWebHandler $handler
- * @property \yii2\common\components\base\resources\crud\BaseGridViewResource|\yii2\common\components\base\resources\crud\BaseListViewResource $resource
+ * @property BaseGridViewResource|BaseListViewResource $resource
  *
  * @package app\common\components\actions\crud
  *

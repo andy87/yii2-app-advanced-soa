@@ -14,7 +14,7 @@ use yii\web\Response;
  * Class CrudIndexAction
  *
  * @property BaseWebHandler $handler
- * @property \yii2\common\components\base\resources\crud\BaseCrudViewResource $resource
+ * @property BaseCrudViewResource $resource
  *
  * @package app\common\components\actions\crud
  *
@@ -38,7 +38,7 @@ class CrudViewAction extends CrudAction
             return $this->renderResource( $R );
         }
 
-        $this->setFlashMessage(self::MESSAGE_NOT_FOUND, Notify::ERROR );
+        $this->setFlashMessage(static::MESSAGE_NOT_FOUND, Notify::ERROR );
 
         return $this->goIndex();
     }

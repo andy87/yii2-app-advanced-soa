@@ -11,7 +11,7 @@ use yii2\common\components\services\items\UserService;
  *
  * @tag #services #user
  */
-class UserServices extends UserService
+class UserService extends UserService
 {
 
 }

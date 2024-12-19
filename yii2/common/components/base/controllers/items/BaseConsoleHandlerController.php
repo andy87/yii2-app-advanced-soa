@@ -4,8 +4,7 @@ namespace yii2\common\components\base\controllers\items;
 
 use yii2\common\components\base\controllers\BaseConsoleController;
 use yii2\common\components\base\handlers\items\settings\HandlerSettings;
-use yii2\common\components\traits\handlers\ConsoleHandler;
-use yii2\common\components\traits\handlers\HasHandler;
+use yii2\common\components\traits\has\HasHandlerTrait;
 
 /**
  * < Common > Родительский класс для всех консольных контроллеров
@@ -18,7 +17,7 @@ use yii2\common\components\traits\handlers\HasHandler;
  */
 abstract class BaseConsoleHandlerController extends BaseConsoleController
 {
-    use HasHandler;
+    use HasHandlerTrait;
 
 
 

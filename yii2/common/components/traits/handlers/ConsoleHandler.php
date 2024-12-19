@@ -13,7 +13,7 @@ use yii2\console\components\services\items\PascalCaseService;
 /**
  * < Console > Обработчик контроллеров работающих с сущностью `{{PascalCase}}`
  *
- * @property \yii2\console\components\services\items\PascalCaseService $service
+ * @property PascalCaseService $service
  *
  * @package app\console\components\handlers\parents
  *
@@ -25,7 +25,7 @@ Trait ConsoleHandler
      * @param int $page
      * @param int $perPage
      *
-     * @return \yii2\console\models\items\PascalCase[]
+     * @return PascalCase[]
      *
      * @throws Exception
      */
@@ -47,7 +47,7 @@ Trait ConsoleHandler
     /**
      * @param array $params
      *
-     * @return ?\yii2\console\models\items\PascalCase
+     * @return ?PascalCase
      *
      * @throws Exception
      */
@@ -60,7 +60,7 @@ Trait ConsoleHandler
      * @param int $id
      * @param array $params
      *
-     * @return ?\yii2\console\models\items\PascalCase
+     * @return ?PascalCase
      *
      * @throws Exception
      */
@@ -90,7 +90,7 @@ Trait ConsoleHandler
     /**
      * @param array $params
      *
-     * @return \yii2\console\models\forms\items\PascalCaseForm
+     * @return PascalCaseForm
      *
      * @throws Exception
      */
@@ -121,7 +121,7 @@ Trait ConsoleHandler
 
     /**
      * @param int $id
-     * @param ?\yii2\console\models\items\PascalCase|string $classModel
+     * @param ?PascalCase|string $classModel
      *
      * @return ?int
      *
@@ -148,7 +148,7 @@ Trait ConsoleHandler
     /**
      * @param int $id
      *
-     * @return ?\yii2\console\models\items\PascalCase
+     * @return ?PascalCase
      */
     public function processViewModel(int $id): ?PascalCase
     {
@@ -157,7 +157,7 @@ Trait ConsoleHandler
 
         $query = $repository->findByModel( $service->settings->classModel, $id );
 
-        /** @var ?\yii2\console\models\items\PascalCase $model */
+        /** @var ?PascalCase $model */
         if ( $model = $query->one($repository->connection) )
         {
             return $model;
@@ -178,7 +178,7 @@ Trait ConsoleHandler
 
         $query = $repository->findByModel( $service->settings->classForm, $id );
 
-        /** @var ?\yii2\console\models\forms\items\PascalCaseForm $model */
+        /** @var ?PascalCaseForm $model */
         if ( $model = $query->one($repository->connection) )
         {
             return $model;

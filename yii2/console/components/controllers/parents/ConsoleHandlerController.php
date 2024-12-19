@@ -5,10 +5,9 @@ namespace yii2\console\components\controllers\parents;
 use Exception;
 use Throwable;
 use yii\console\ExitCode;
-use yii2\common\components\models\dto\ModelInfo;
-use yii2\console\models\forms\items\PascalCaseForm;
-use yii2\common\components\traits\handlers\ConsoleHandler;
 use yii2\common\components\base\controllers\items\BaseConsoleHandlerController;
+use yii2\common\components\Rontgen;
+use yii2\console\models\forms\items\PascalCaseForm;
 
 /**
  * < Console > Родительский класс для всех консольных контроллеров
@@ -95,7 +94,7 @@ abstract class ConsoleHandlerController extends BaseConsoleHandlerController
             $this->printConsoleError('Model NOT added');
         }
 
-        print_r(new ModelInfo($model));
+        print_r(new Rontgen($model));
 
         $this->printConsoleFuncEnd(__METHOD__);
 
@@ -125,7 +124,7 @@ abstract class ConsoleHandlerController extends BaseConsoleHandlerController
         {
             $this->printConsoleSuccess("Model found: $model->id" . PHP_EOL );
 
-            print_r(new ModelInfo($model));
+            print_r(new Rontgen($model));
 
         } else {
 
@@ -161,7 +160,7 @@ abstract class ConsoleHandlerController extends BaseConsoleHandlerController
         {
             $this->stdout(date('Y-m-d H:i:s') . ' | ');
 
-            print_r(new ModelInfo($model));
+            print_r(new Rontgen($model));
 
             $this->printConsole('Result');
 

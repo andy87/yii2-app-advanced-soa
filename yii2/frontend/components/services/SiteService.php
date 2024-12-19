@@ -8,12 +8,13 @@ use yii\base\InvalidConfigException;
 use yii2\common\components\system\Logger;
 use yii2\frontend\models\forms\ContactForm;
 use yii2\common\components\services\EmailService;
+use yii2\common\components\interfaces\CatcherInterface;
 use yii2\common\components\base\services\items\SingletonService;
 
 /**
  * < Frontend > `SiteService`
  *
- * @property Logger $logger
+ * @property CatcherInterface|Logger $logger
  *
  * @package yii2\frontend\services\controllers
  *

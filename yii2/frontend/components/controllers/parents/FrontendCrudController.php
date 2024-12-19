@@ -2,7 +2,7 @@
 
 namespace yii2\frontend\components\controllers\parents;
 
-use yii2\common\components\traits\controllers\ActionTrait;
+use yii2\common\components\traits\controllers\CrudTrait;
 use yii2\common\components\traits\handlers\FrontendHandler;
 
 /**
@@ -17,5 +17,5 @@ use yii2\common\components\traits\handlers\FrontendHandler;
  */
 abstract class FrontendCrudController extends FrontendController
 {
-    use ActionTrait;
+    use CrudTrait;
 }

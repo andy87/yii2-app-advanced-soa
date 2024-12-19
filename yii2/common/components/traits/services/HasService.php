@@ -10,7 +10,7 @@ use yii2\common\components\base\services\items\settings\ServiceSettings;
 /**
  * Trait HasService
  *
- * @property SourceToolKit $service
+ * @property-read SourceToolKit $service
  *
  * @package app\common\components\traits\services
  *

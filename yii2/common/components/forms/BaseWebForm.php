@@ -13,5 +13,6 @@ use yii\base\Model;
  */
 abstract class BaseWebForm extends Model
 {
+    /** @var string $id */
     public string $id;
 }
