@@ -1,7 +1,8 @@
 <?php
 
+use yii2\backend\components\managers\BackendHandlerManager;
+use yii2\backend\components\managers\BackendRepositoryManager;
 use yii2\backend\components\managers\BackendServiceManager;
-use yii2\common\components\managers\CommonServiceManager;
 
 $params = array_merge(
     require __DIR__ . '/../../common/config/params.php',
@@ -40,6 +41,16 @@ return [
         'serviceManager' => [
             'class' => BackendServiceManager::class,
             'config' => BackendServiceManager::CONFIG,
+        ],
+
+        'handlerManager' => [
+            'class' => BackendHandlerManager::class,
+            'config' => BackendHandlerManager::CONFIG,
+        ],
+
+        'repositoryManager' => [
+            'class' => BackendRepositoryManager::class,
+            'config' => BackendRepositoryManager::CONFIG,
         ]
     ],
 

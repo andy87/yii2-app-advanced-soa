@@ -1,7 +1,8 @@
 <?php
 
-use yii2\common\components\managers\CommonServiceManager;
-use yii2\frontend\components\managers\BackendServiceManager;
+use yii2\frontend\components\managers\FrontendHandlerManager;
+use yii2\frontend\components\managers\FrontendRepositoryManager;
+use yii2\frontend\components\managers\FrontendServiceManager;
 
 $params = array_merge(
     require __DIR__ . '/../../common/config/params.php',
@@ -38,18 +39,18 @@ return [
         'errorHandler' => require __DIR__ . '/../../common/config/components/errorHandler.php',
 
         'serviceManager' => [
-            'class' => BackendServiceManager::class,
-            'config' => BackendServiceManager::CONFIG,
+            'class' => FrontendServiceManager::class,
+            'config' => FrontendServiceManager::CONFIG,
         ],
 
         'handlerManager' => [
-            'class' => ConsoleHandlerManager::class,
-            'config' => ConsoleHandlerManager::CONFIG,
+            'class' => FrontendHandlerManager::class,
+            'config' => FrontendHandlerManager::CONFIG,
         ],
 
         'repositoryManager' => [
-            'class' => ConsoleRepositoryManager::class,
-            'config' => ConsoleRepositoryManager::CONFIG,
+            'class' => FrontendRepositoryManager::class,
+            'config' => FrontendRepositoryManager::CONFIG,
         ]
     ],
 
