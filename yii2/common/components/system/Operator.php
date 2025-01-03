@@ -19,22 +19,22 @@ class Operator extends BaseObject
     private ActiveRecord|string $modelClass;
 
     /** @var array  */
-    public array $defaultModelParams = [];
+    public array $defaultParams = [];
 
 
 
     /**
      * @param string $modelClass
-     * @param array $defaultModelParams
+     * @param array $defaultParams
      * @param array $config
      */
-    public function __construct( string $modelClass, array $defaultModelParams = [], array $config = [] )
+    public function __construct(string $modelClass, array $defaultParams = [], array $config = [] )
     {
         parent::__construct($config);
 
         $this->modelClass = $modelClass;
 
-        $this->defaultModelParams = $defaultModelParams;
+        $this->defaultParams = $defaultParams;
     }
 
     /**
@@ -56,7 +56,7 @@ class Operator extends BaseObject
 
         $activeRecord = new $className();
 
-        $params = array_merge($this->defaultModelParams, $params);
+        $params = array_merge($this->defaultParams, $params);
 
         $activeRecord->load( $params, '' );
 
