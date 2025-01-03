@@ -1,9 +1,9 @@
 <?php declare(strict_types=1);
 
-namespace yii2\console\tests\unit\models\items;
+namespace console\tests\unit\models\items;
 
-use yii2\common\components\base\{moels\items\base\SourceModel};
-use yii2\console\models\items\PascalCase;
+use common\components\base\{moels\items\base\SourceModel};
+use console\models\items\PascalCase;
 use unit\models\items\BaseModelTest;
 
 /**

@@ -1,6 +1,6 @@
 <?php declare(strict_types=1);
 
-namespace yii2\frontend\components\actions;
+namespace frontend\components\actions;
 
 /**
  * < Frontend > `Captcha`

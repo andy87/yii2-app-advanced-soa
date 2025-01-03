@@ -1,9 +1,9 @@
 <?php declare(strict_types=1);
 
-namespace yii2\backend\controllers;
+namespace backend\controllers;
 
-use yii2\common\components\Action;
-use yii2\backend\components\controllers\parents\BackendController;
+use common\components\Action;
+use backend\components\controllers\parents\BackendController;
 
 /**
  * < Backend > `SiteController`

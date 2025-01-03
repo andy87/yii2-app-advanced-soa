@@ -1,6 +1,6 @@
 <?php
 
-namespace yii2\common\components\system;
+namespace common\components\system;
 
 use yii\db\Exception;
 use yii\db\ActiveRecord;

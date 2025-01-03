@@ -1,6 +1,6 @@
 <?php
 
-namespace yii2\common\components\traits;
+namespace common\components\traits;
 
 use Yii;
 use yii\base\InvalidConfigException;

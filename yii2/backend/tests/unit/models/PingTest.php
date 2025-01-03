@@ -1,10 +1,10 @@
 <?php declare(strict_types=1);
 
-namespace yii2\backend\tests\unit\models;
+namespace backend\tests\unit\models;
 
 use Codeception\Test\Unit;
-use yii2\common\components\Ping;
-use yii2\backend\tests\UnitTester;
+use common\components\Ping;
+use backend\tests\UnitTester;
 
 /**
  * < Backend > `PingTest`

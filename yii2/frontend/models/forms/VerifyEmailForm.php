@@ -1,11 +1,11 @@
 <?php declare(strict_types=1);
 
-namespace yii2\frontend\models\forms;
+namespace frontend\models\forms;
 
 use common\services\IdentityService;
 use yii\base\{InvalidArgumentException, InvalidConfigException};
-use yii2\common\components\forms\BaseWebForm;
-use yii2\common\models\Identity;
+use common\components\forms\BaseWebForm;
+use commonmodels\Identity;
 
 /**
  * < Frontend > `VerifyEmailForm`

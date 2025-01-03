@@ -1,13 +1,13 @@
 <?php declare(strict_types=1);
 
-namespace yii2\frontend\tests\unit\models;
+namespace frontend\tests\unit\models;
 
 use Codeception\Exception\ModuleException;
 use Codeception\Test\Unit;
 use frontend\services\SiteService;
 use yii\base\InvalidConfigException;
 use yii\mail\{MailerInterface, MessageInterface};
-use yii2\frontend\{models\forms\ContactForm, tests\UnitTester};
+use frontend\{models\forms\ContactForm, tests\UnitTester};
 
 /**
  * < Frontend > `ContactFormTest`

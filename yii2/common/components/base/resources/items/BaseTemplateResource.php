@@ -1,8 +1,8 @@
 <?php declare(strict_types=1);
 
-namespace yii2\common\components\base\resources\items;
+namespace common\components\base\resources\items;
 
-use yii2\common\components\base\resources\items\sources\SourceResource;
+use common\components\base\resources\items\sources\SourceResource;
 
 /**
  * < Common > Base class for all resources with template

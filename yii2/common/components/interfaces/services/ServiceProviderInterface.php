@@ -1,8 +1,8 @@
 <?php declare(strict_types=1);
 
-namespace yii2\common\components\interfaces\services;
+namespace common\components\interfaces\services;
 
-use yii2\common\components\base\providers\items\base\SourceProducer;
+use common\components\base\providers\items\base\SourceProducer;
 
 /**
  * < Common >

@@ -1,6 +1,6 @@
 <?php declare(strict_types=1);
 
-namespace yii2\frontend\tests\unit\models;
+namespace frontend\tests\unit\models;
 
 use Codeception\Exception\ModuleException;
 use Codeception\Test\Unit;
@@ -9,8 +9,8 @@ use Exception;
 use frontend\services\AuthService;
 use yii\base\InvalidConfigException;
 use yii\mail\MessageInterface;
-use yii2\common\{fixtures\UserFixture, models\Identity, models\sources\User};
-use yii2\frontend\{models\forms\SignupForm, tests\UnitTester};
+use common{fixtures\UserFixture, models\Identity, models\sources\User};
+use frontend\{models\forms\SignupForm, tests\UnitTester};
 
 /**
  * < Frontend > `SignupFormTest`

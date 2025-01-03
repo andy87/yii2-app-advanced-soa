@@ -1,9 +1,9 @@
 <?php
 
-namespace yii2\common\components\base\managers;
+namespace common\components\base\managers;
 
-use yii2\common\components\base\managers\source\SourceManager;
-use yii2\common\components\base\services\items\source\SourceService;
+use common\components\base\managers\source\SourceManager;
+use common\components\base\services\items\source\SourceService;
 
 /**
  * < Common > Менеджер сервисов

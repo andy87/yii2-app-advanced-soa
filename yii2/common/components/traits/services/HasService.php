@@ -1,11 +1,11 @@
 <?php
 
-namespace yii2\common\components\traits\services;
+namespace common\components\traits\services;
 
 use Yii;
 use yii\base\InvalidConfigException;
-use yii2\common\components\base\services\items\source\SourceToolKit;
-use yii2\common\components\base\services\items\settings\ServiceSettings;
+use common\components\base\services\items\source\SourceToolKit;
+use common\components\base\services\items\settings\ServiceSettings;
 
 /**
  * Trait HasService

@@ -1,8 +1,8 @@
 <?php
 
-namespace yii2\frontend\controllers;
+namespace frontend\controllers;
 
-use yii2\frontend\components\controllers\parents\FrontendController;
+use frontend\components\controllers\parents\FrontendController;
 
 /**
  * < Backend > `SystemController`

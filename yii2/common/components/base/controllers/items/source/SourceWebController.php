@@ -1,6 +1,6 @@
 <?php
 
-namespace yii2\common\components\base\controllers\items\source;
+namespace common\components\base\controllers\items\source;
 
 use yii\web\Controller;
 

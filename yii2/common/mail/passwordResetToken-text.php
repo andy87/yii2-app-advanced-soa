@@ -1,8 +1,8 @@
 <?php
 
-use yii2\frontend\controllers\AuthController;
+use frontend\controllers\AuthController;
 use yii\web\View;
-use yii2\common\models\Identity;
+use commonmodels\Identity;
 
 /**
  * @var View $this

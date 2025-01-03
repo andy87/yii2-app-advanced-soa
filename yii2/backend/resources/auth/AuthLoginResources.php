@@ -3,7 +3,7 @@
 namespace backend\resources\auth;
 
 use common\resources\TemplateResources;
-use yii2\common\models\forms\LoginForm;
+use commonmodels\forms\LoginForm;
 
 /**
  * < Backend > `AuthLoginResources`

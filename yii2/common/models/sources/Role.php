@@ -1,6 +1,6 @@
 <?php
 
-namespace yii2\common\models\sources;
+namespace common\models\sources;
 
 /**
  * < Common > `Role`

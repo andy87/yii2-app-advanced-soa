@@ -1,15 +1,15 @@
 <?php declare(strict_types=1);
 
-namespace yii2\frontend\tests\functional;
+namespace frontend\tests\functional;
 
 use Codeception\Scenario;
-use yii2\common\tests\cest\SendForm;
-use yii2\frontend\tests\FunctionalTester;
-use yii2\frontend\models\forms\ContactForm;
+use commontests\cest\SendForm;
+use frontend\tests\FunctionalTester;
+use frontend\models\forms\ContactForm;
 use Codeception\Exception\ModuleException;
-use yii2\common\components\forms\BaseWebForm;
-use yii2\frontend\controllers\SiteController;
-use yii2\frontend\components\actions\CaptchaAction;
+use common\components\forms\BaseWebForm;
+use frontend\controllers\SiteController;
+use frontend\components\actions\CaptchaAction;
 
 /* @var $scenario Scenario */
 

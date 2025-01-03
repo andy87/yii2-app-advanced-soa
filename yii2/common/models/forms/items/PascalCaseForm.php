@@ -1,8 +1,8 @@
 <?php declare(strict_types=1);
 
-namespace yii2\common\models\forms\items;
+namespace common\models\forms\items;
 
-use yii2\common\models\items\PascalCase;
+use commonmodels\items\PascalCase;
 
 /**
  * < Common > Форма для common

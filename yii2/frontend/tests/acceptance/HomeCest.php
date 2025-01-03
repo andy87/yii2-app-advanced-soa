@@ -1,9 +1,9 @@
 <?php declare(strict_types=1);
 
-namespace yii2\frontend\tests\acceptance;
+namespace frontend\tests\acceptance;
 
 use yii\helpers\Url;
-use yii2\frontend\tests\AcceptanceTester;
+use frontend\tests\AcceptanceTester;
 
 /**
  * < Frontend > `HomeCest`

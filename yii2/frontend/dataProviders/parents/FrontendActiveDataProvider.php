@@ -4,7 +4,7 @@ namespace frontend\dataProviders\parents;
 
 use yii\db\Connection;
 use yii\db\QueryInterface;
-use yii2\common\components\base\dataProviders\items\source\SourceActiveDataProvider;
+use common\components\base\dataProviders\items\source\SourceActiveDataProvider;
 
 /**
  * < Frontend > Родительский класс для провайдеров данных в окружении: `frontend`

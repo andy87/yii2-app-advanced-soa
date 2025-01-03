@@ -1,14 +1,14 @@
 <?php declare(strict_types=1);
 
-namespace yii2\common\components\base\tests\unit\producers\items;
+namespace common\components\base\tests\unit\producers\items;
 
 use Yii;
 use Exception;
 use yii\console\ExitCode;
 use yii\base\InvalidConfigException;
-use yii2\common\components\base\models\items\sources\SourceModel;
-use yii2\common\components\base\tests\unit\source\items\BaseUnitTest;
-use yii2\common\components\base\producers\items\source\SourceProducer;
+use common\components\base\models\items\sources\SourceModel;
+use common\components\base\tests\unit\source\items\BaseUnitTest;
+use common\components\base\producers\items\source\SourceProducer;
 
 /**
  * < Common > Base Provider Test

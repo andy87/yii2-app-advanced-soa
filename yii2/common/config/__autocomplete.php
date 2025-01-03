@@ -17,8 +17,8 @@ use console\managers\ConsoleServiceManager;
 use yii\console\Application as AppConsole;
 use yii\web\Application as AppWeb;
 use yii\web\User;
-use yii2\common\models\Identity;
-use yii2\frontend\components\managers\BackendServiceManager;
+use commonmodels\Identity;
+use frontend\components\managers\BackendServiceManager;
 
 /**
  * < Common > Yii class is used for IDE autocompletion only.

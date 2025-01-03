@@ -1,9 +1,9 @@
 <?php declare(strict_types=1);
 
-namespace yii2\backend\components\controllers\parents;
+namespace backend\components\controllers\parents;
 
-use yii2\common\components\traits\controllers\CrudTrait;
-use yii2\common\components\traits\handlers\BackendHandler;
+use common\components\traits\controllers\CrudTrait;
+use common\components\traits\handlers\BackendHandler;
 
 /**
  * < Backend > Родительский класс для контроллеров в окружении: `backend`

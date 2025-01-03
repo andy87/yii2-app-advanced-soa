@@ -1,8 +1,8 @@
 <?php declare(strict_types=1);
 
-namespace yii2\backend\models\search\items;
+namespace backend\models\search\items;
 
-use yii2\backend\models\items\PascalCase;
+use backend\models\items\PascalCase;
 
 /**
  * < Backend > Модель с логикой поиска в `PascalCase` для окружения: backend

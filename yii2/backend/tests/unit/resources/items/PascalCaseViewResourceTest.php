@@ -1,8 +1,8 @@
 <?php declare(strict_types=1);
 
-namespace yii2\backend\tests\unit\resources\items;
+namespace backend\tests\unit\resources\items;
 
-use yii2\common\components\base\tests\unit\resources\items\BaseViewResourceTest;
+use common\components\base\tests\unit\resources\items\BaseViewResourceTest;
 
 /**
  * < Backend > ItemViewResourceTest

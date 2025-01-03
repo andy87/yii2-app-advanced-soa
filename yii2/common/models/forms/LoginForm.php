@@ -1,12 +1,12 @@
 <?php declare(strict_types=1);
 
-namespace yii2\common\models\forms;
+namespace common\models\forms;
 
 use common\services\IdentityService;
 use yii\base\InvalidConfigException;
-use yii2\common\{models\Identity};
-use yii2\common\components\forms\BaseWebForm;
-use yii2\frontend\controllers\AuthController;
+use common{models\Identity};
+use common\components\forms\BaseWebForm;
+use frontend\controllers\AuthController;
 
 /**
  * < Common > `LoginForm`

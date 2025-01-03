@@ -2,7 +2,7 @@
 
 namespace frontend\repository\items;
 
-use yii2\frontend\models\items\User;
+use frontend\models\items\User;
 
 /**
  * < Frontend > `UserRepository`

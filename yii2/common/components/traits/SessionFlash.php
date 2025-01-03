@@ -1,6 +1,6 @@
 <?php declare(strict_types=1);
 
-namespace yii2\common\components\traits;
+namespace common\components\traits;
 
 use Yii;
 use yii\web\Session;

@@ -2,7 +2,7 @@
 
 namespace console\repository\items;
 
-use yii2\common\models\sources\User;
+use commonmodels\sources\User;
 
 /**
  * < Console > `UserRepository`

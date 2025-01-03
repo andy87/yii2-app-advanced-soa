@@ -2,8 +2,8 @@
 
 namespace frontend\resources\parents\crud;
 
-use yii2\common\components\base\models\items\sources\SourceModel;
-use yii2\common\components\base\resources\crud\BaseCrudViewResource;
+use common\components\base\models\items\sources\SourceModel;
+use common\components\base\resources\crud\BaseCrudViewResource;
 
 /**
  * < Frontend> Родительский класс для ресурса просмотра модели в окружении `frontend`

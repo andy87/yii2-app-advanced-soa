@@ -1,14 +1,14 @@
 <?php declare(strict_types=1);
 
-namespace yii2\common\components\base\tests\unit\controllers\items;
+namespace common\components\base\tests\unit\controllers\items;
 
 use Yii;
 use yii\console\ExitCode;
 use yii\base\{Behavior, InvalidConfigException};
-use yii2\backend\controllers\items\PascalCaseController;
-use yii2\common\components\base\handlers\items\source\SourceHandler;
-use yii2\common\components\base\tests\unit\source\items\BaseUnitTest;
-use yii2\common\components\interfaces\controllers\ControllerHandlerInterface;
+use backend\controllers\items\PascalCaseController;
+use common\components\base\handlers\items\source\SourceHandler;
+use common\components\base\tests\unit\source\items\BaseUnitTest;
+use common\components\interfaces\controllers\ControllerHandlerInterface;
 
 /**
  * < Common > Base Model Test

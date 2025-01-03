@@ -1,10 +1,10 @@
 <?php
 
-namespace yii2\common\components;
+namespace common\components;
 
 use Yii;
 use yii\helpers\Html;
-use yii2\backend\controllers\AuthController;
+use backend\controllers\AuthController;
 
 /**
  * < Common >

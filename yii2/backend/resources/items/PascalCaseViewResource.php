@@ -3,7 +3,7 @@
 namespace backend\resources\items;
 
 use backend\resources\parents\crud\BackendViewResource;
-use yii2\backend\models\items\PascalCase;
+use backend\models\items\PascalCase;
 
 /**
  * < Backend > Boilerplate для ресурса обновления модели `PascalCase`

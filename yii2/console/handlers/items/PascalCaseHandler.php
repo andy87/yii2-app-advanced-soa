@@ -4,9 +4,9 @@ namespace console\handlers\items;
 
 use console\services\items\PascalCaseService;
 use frontend\repository\items\PascalCaseRepository;
-use yii2\common\components\traits\handlers\ConsoleHandler;
-use yii2\console\models\forms\items\PascalCaseForm;
-use yii2\console\models\items\PascalCase;
+use common\components\traits\handlers\ConsoleHandler;
+use console\models\forms\items\PascalCaseForm;
+use console\models\items\PascalCase;
 
 /**
  * < Console > Обработчик контроллеров работающих с сущностью `PascalCase`

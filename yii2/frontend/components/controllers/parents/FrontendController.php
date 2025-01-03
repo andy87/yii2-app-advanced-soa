@@ -1,15 +1,15 @@
 <?php declare(strict_types=1);
 
-namespace yii2\frontend\components\controllers\parents;
+namespace frontend\components\controllers\parents;
 
 use Yii;
 use yii\filters\AccessControl;
-use yii2\common\components\Action;
-use yii2\common\components\Layout;
-use yii2\frontend\controllers\AuthController;
-use yii2\frontend\controllers\SiteController;
-use yii2\common\components\traits\handlers\FrontendHandler;
-use yii2\common\components\base\controllers\items\BaseWebHandlerController;
+use common\components\Action;
+use common\components\Layout;
+use frontend\controllers\AuthController;
+use frontend\controllers\SiteController;
+use common\components\traits\handlers\FrontendHandler;
+use common\components\base\controllers\items\BaseWebHandlerController;
 
 /**
  * < Frontend > Родительский класс для контроллеров в окружении: `frontend`

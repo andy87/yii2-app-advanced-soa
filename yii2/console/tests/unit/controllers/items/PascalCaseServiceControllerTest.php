@@ -1,13 +1,13 @@
 <?php declare(strict_types=1);
 
-namespace yii2\console\tests\unit\controllers\items;
+namespace console\tests\unit\controllers\items;
 
-use yii2\common\components\{base\tests\unit\controllers\BaseServiceControllerTest};
+use common\components\{base\tests\unit\controllers\BaseServiceControllerTest};
 use Exception;
 use Throwable;
 use Yii;
 use yii\base\InvalidConfigException;
-use yii2\common\components\enums\Action;
+use common\components\enums\Action;
 
 /**
  * < Console > PascalCaseServiceTest

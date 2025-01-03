@@ -4,7 +4,7 @@ namespace frontend\resources\items;
 
 use frontend\dataProviders\items\PascalCaseDataProvider;
 use frontend\resources\parents\crud\FrontendIndexResource;
-use yii2\frontend\models\search\items\PascalCaseSearch;
+use frontend\models\search\items\PascalCaseSearch;
 
 /**
  * < Frontend > Boilerplate для ресурса формы `PascalCase`

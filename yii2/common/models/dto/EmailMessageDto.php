@@ -1,6 +1,6 @@
 <?php declare(strict_types=1);
 
-namespace yii2\common\models\dto;
+namespace common\models\dto;
 
 use Yii;
 

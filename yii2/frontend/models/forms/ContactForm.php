@@ -1,9 +1,9 @@
 <?php declare(strict_types=1);
 
-namespace yii2\frontend\models\forms;
+namespace frontend\models\forms;
 
-use yii2\common\components\forms\BaseWebForm;
-use yii2\common\models\dto\EmailMessageDto;
+use common\components\forms\BaseWebForm;
+use commonmodels\dto\EmailMessageDto;
 use Yii;
 
 /**

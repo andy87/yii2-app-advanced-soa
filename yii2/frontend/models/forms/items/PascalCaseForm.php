@@ -1,8 +1,8 @@
 <?php declare(strict_types=1);
 
-namespace yii2\frontend\models\forms\items;
+namespace frontend\models\forms\items;
 
-use yii2\frontend\models\items\PascalCase;
+use frontend\models\items\PascalCase;
 
 /**
  * < Frontend > Форма создания модели `PascalCase` в окружении `frontend`

@@ -1,9 +1,9 @@
 <?php declare(strict_types=1);
 
-namespace yii2\common\components\base\tests\functional\items;
+namespace common\components\base\tests\functional\items;
 
 use Codeception\Actor;
-use yii2\common\components\base\tests\functional\source\items\BaseUnitFunctionalTest;
+use common\components\base\tests\functional\source\items\BaseUnitFunctionalTest;
 
 /**
  * < Common > Base Controller Test

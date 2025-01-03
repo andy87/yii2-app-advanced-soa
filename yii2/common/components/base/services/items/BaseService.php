@@ -1,6 +1,6 @@
 <?php declare(strict_types=1);
 
-namespace yii2\common\components\base\services\items;
+namespace common\components\base\services\items;
 
 use Exception;
 use Throwable;
@@ -8,12 +8,12 @@ use yii\base\Model;
 use yii\db\ActiveRecord;
 use yii\db\StaleObjectException;
 use yii\db\Exception as DbException;
-use yii2\common\components\interfaces\CatcherInterface;
-use yii2\common\components\interfaces\services\ServiceInterface;
-use yii2\common\components\base\producers\items\source\SourceProducer;
-use yii2\common\components\base\services\items\settings\ServiceSettings;
-use yii2\common\components\base\repository\items\source\SourceRepository;
-use yii2\common\components\base\dataProviders\items\source\SourceActiveDataProvider;
+use common\components\interfaces\CatcherInterface;
+use common\components\interfaces\services\ServiceInterface;
+use common\components\base\producers\items\source\SourceProducer;
+use common\components\base\services\items\settings\ServiceSettings;
+use common\components\base\repository\items\source\SourceRepository;
+use common\components\base\dataProviders\items\source\SourceActiveDataProvider;
 
 /**
  * < Common > Базовый абстрактный класс для всех сервисов

@@ -2,9 +2,9 @@
 
 namespace backend\resources\parents\crud;
 
-use yii2\common\components\base\dataProviders\items\source\SourceActiveDataProvider;
-use yii2\common\components\base\resources\crud\BaseGridViewResource;
-use yii2\common\components\interfaces\models\SearchModelInterface;
+use common\components\base\dataProviders\items\source\SourceActiveDataProvider;
+use common\components\base\resources\crud\BaseGridViewResource;
+use common\components\interfaces\models\SearchModelInterface;
 
 /**
  * < Backend > Родительский класс для ресурса индекса в окружении `backend`

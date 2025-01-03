@@ -1,14 +1,14 @@
 <?php declare(strict_types=1);
 
-namespace yii2\common\components\traits\handlers;
+namespace common\components\traits\handlers;
 
 use backend\resources\parents\crud\BackendCreateResource;
 use backend\resources\parents\crud\BackendIndexResource;
 use backend\resources\parents\crud\BackendUpdateResource;
 use backend\resources\parents\crud\BackendViewResource;
-use yii2\common\components\base\handlers\items\BaseWebHandler;
-use yii2\common\components\base\resources\items\BaseTemplateResource;
-use yii2\common\components\enums\Action;
+use common\components\base\handlers\items\BaseWebHandler;
+use common\components\base\resources\items\BaseTemplateResource;
+use common\components\enums\Action;
 
 /**
  * < Backend > Родительский класс для обработчиков контроллеров в окружения: `backend`

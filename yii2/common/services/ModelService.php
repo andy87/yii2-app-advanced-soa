@@ -4,7 +4,7 @@ namespace common\services;
 
 
 use yii\{base\Model, db\Exception};
-use yii2\common\components\core\BaseService;
+use common\components\core\BaseService;
 
 /**
  * < Common > `ModelService`

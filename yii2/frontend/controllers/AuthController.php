@@ -1,6 +1,6 @@
 <?php declare(strict_types=1);
 
-namespace yii2\frontend\controllers;
+namespace frontend\controllers;
 
 use Exception;
 use frontend\resources\auth\{AuthResetPasswordResources};
@@ -14,10 +14,10 @@ use yii\base\{Exception as YiiBaseException, InvalidArgumentException, InvalidCo
 use yii\db\Exception as YiiDbException;
 use yii\filters\{AccessControl, VerbFilter};
 use yii\web\{BadRequestHttpException, Response};
-use yii2\common\{components\Action, models\Identity, models\sources\Role};
-use yii2\common\components\traits\SessionFlash;
-use yii2\frontend\components\controllers\parents\FrontendController;
-use yii2\frontend\models\forms\{ResetPasswordForm, VerifyEmailForm};
+use common{components\Action, models\Identity, models\sources\Role};
+use common\components\traits\SessionFlash;
+use frontend\components\controllers\parents\FrontendController;
+use frontend\models\forms\{ResetPasswordForm, VerifyEmailForm};
 
 /**
  * < Frontend > `AuthController`

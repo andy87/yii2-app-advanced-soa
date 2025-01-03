@@ -1,13 +1,13 @@
 <?php declare(strict_types=1);
 
-namespace yii2\console\components\controllers\parents;
+namespace console\components\controllers\parents;
 
 use Exception;
 use Throwable;
 use yii\console\ExitCode;
-use yii2\common\components\base\controllers\items\BaseConsoleHandlerController;
-use yii2\common\components\Rontgen;
-use yii2\console\models\forms\items\PascalCaseForm;
+use common\components\base\controllers\items\BaseConsoleHandlerController;
+use common\components\Rontgen;
+use console\models\forms\items\PascalCaseForm;
 
 /**
  * < Console > Родительский класс для всех консольных контроллеров

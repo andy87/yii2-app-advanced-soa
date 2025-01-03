@@ -2,8 +2,8 @@
 
 use yii\web\View;
 use yii\helpers\Html;
-use yii2\backend\assets\AppAsset;
-use yii2\common\components\Layout;
+use backend\assets\AppAsset;
+use common\components\Layout;
 
 /** @var View $this */
 /** @var string $content */

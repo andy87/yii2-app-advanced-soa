@@ -5,8 +5,8 @@ namespace frontend\handlers\controllers;
 use frontend\services\SiteService;
 use JsonException;
 use yii\base\InvalidConfigException;
-use yii2\common\components\base\handlers\items\source\SourceHandler;
-use yii2\frontend\models\forms\ContactForm;
+use common\components\base\handlers\items\source\SourceHandler;
+use frontend\models\forms\ContactForm;
 
 /**
  * < Frontend > `SiteHandler`

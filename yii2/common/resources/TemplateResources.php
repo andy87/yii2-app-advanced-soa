@@ -2,7 +2,7 @@
 
 namespace common\resources;
 
-use yii2\common\components\base\resources\items\sources\SourceResource;
+use common\components\base\resources\items\sources\SourceResource;
 
 /**
  * < Common > `TemplateResources`

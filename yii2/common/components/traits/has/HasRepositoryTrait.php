@@ -1,11 +1,11 @@
 <?php
 
-namespace yii2\common\components\traits\has;
+namespace common\components\traits\has;
 
 use Yii;
 use yii\base\InvalidConfigException;
-use yii2\common\components\base\handlers\items\settings\HandlerSettings;
-use yii2\common\components\base\handlers\items\source\SourceHandler;
+use common\components\base\handlers\items\settings\HandlerSettings;
+use common\components\base\handlers\items\source\SourceHandler;
 
 /**
  * Trait HasHandler

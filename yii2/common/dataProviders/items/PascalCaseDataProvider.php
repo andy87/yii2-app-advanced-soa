@@ -3,7 +3,7 @@
 namespace common\dataProviders\items;
 
 use yii\db\{Connection, QueryInterface};
-use yii2\common\components\base\dataProviders\items\source\SourceActiveDataProvider;
+use common\components\base\dataProviders\items\source\SourceActiveDataProvider;
 
 /**
  * < Common > Родительский класс проводников данных: frontend/backend

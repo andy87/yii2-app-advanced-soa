@@ -1,12 +1,12 @@
 <?php declare(strict_types=1);
 
-namespace yii2\common\components\base\services\items\source;
+namespace common\components\base\services\items\source;
 
-use yii2\common\components\base\dataProviders\items\source\SourceActiveDataProvider;
-use yii2\common\components\base\producers\items\source\SourceProducer;
-use yii2\common\components\base\repository\items\source\SourceRepository;
-use yii2\common\components\system\Logger;
-use yii2\common\components\traits\has\ToolsKitTrait;
+use common\components\base\dataProviders\items\source\SourceActiveDataProvider;
+use common\components\base\producers\items\source\SourceProducer;
+use common\components\base\repository\items\source\SourceRepository;
+use common\components\system\Logger;
+use common\components\traits\has\ToolsKitTrait;
 
 /**
  * < Common > Родительский абстрактный класс для всех сервисов

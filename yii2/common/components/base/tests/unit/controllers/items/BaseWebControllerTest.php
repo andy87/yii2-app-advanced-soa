@@ -1,11 +1,11 @@
 <?php declare(strict_types=1);
 
-namespace yii2\common\components\base\tests\unit\controllers\items;
+namespace common\components\base\tests\unit\controllers\items;
 
 use yii\console\ExitCode;
-use yii2\common\components\enums\Action;
-use yii2\backend\controllers\items\PascalCaseController;
-use yii2\common\components\base\tests\unit\controllers\items\BaseServiceControllerTest;
+use common\components\enums\Action;
+use backend\controllers\items\PascalCaseController;
+use common\components\base\tests\unit\controllers\items\BaseServiceControllerTest;
 
 /**
  * < Common > Base Model Test

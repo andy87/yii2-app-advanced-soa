@@ -1,14 +1,14 @@
 <?php declare(strict_types=1);
 
-namespace yii2\common\components\traits\handlers;
+namespace common\components\traits\handlers;
 
 use console\services\items\PascalCaseService;
 use Exception;
 use Throwable;
 use yii\db\ActiveRecord;
 use yii\db\StaleObjectException;
-use yii2\console\models\forms\items\PascalCaseForm;
-use yii2\console\models\items\PascalCase;
+use console\models\forms\items\PascalCaseForm;
+use console\models\items\PascalCase;
 
 /**
  * < Console > Обработчик контроллеров работающих с сущностью `{{PascalCase}}`

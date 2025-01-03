@@ -1,6 +1,6 @@
 <?php declare(strict_types=1);
 
-namespace yii2\common\components\base\handlers\items;
+namespace common\components\base\handlers\items;
 
 use backend\resources\parents\crud\BackendCreateResource;
 use backend\resources\parents\crud\BackendFormResource;
@@ -15,13 +15,13 @@ use frontend\resources\parents\crud\FrontendViewResource;
 use Throwable;
 use Yii;
 use yii\base\InvalidConfigException;
-use yii2\common\components\base\resources\crud\BaseCrudViewResource;
-use yii2\common\components\base\resources\crud\BaseFormResource;
-use yii2\common\components\base\resources\crud\BaseGridViewResource;
-use yii2\common\components\base\resources\crud\BaseListViewResource;
-use yii2\common\components\base\resources\items\BaseTemplateResource;
-use yii2\common\components\base\services\items\BaseService;
-use yii2\common\components\enums\Action;
+use common\components\base\resources\crud\BaseCrudViewResource;
+use common\components\base\resources\crud\BaseFormResource;
+use common\components\base\resources\crud\BaseGridViewResource;
+use common\components\base\resources\crud\BaseListViewResource;
+use common\components\base\resources\items\BaseTemplateResource;
+use common\components\base\services\items\BaseService;
+use common\components\enums\Action;
 
 /**
  * < Common > Родительский абстрактный класс для всех Web обработчиков

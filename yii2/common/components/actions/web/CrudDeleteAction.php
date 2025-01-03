@@ -1,13 +1,13 @@
 <?php
 
-namespace yii2\common\components\actions\web;
+namespace common\components\actions\web;
 
 use Throwable;
 use yii\web\Response;
 use yii\base\InvalidConfigException;
-use yii2\common\components\system\Notify;
-use yii2\common\components\base\actions\CrudAction;
-use yii2\common\components\base\handlers\items\BaseWebHandler;
+use common\components\system\Notify;
+use common\components\base\actions\CrudAction;
+use common\components\base\handlers\items\BaseWebHandler;
 
 /**
  * Class CrudIndexAction

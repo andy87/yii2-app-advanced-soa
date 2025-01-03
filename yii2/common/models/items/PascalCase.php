@@ -1,8 +1,8 @@
 <?php declare(strict_types=1);
 
-namespace yii2\common\models\items;
+namespace common\models\items;
 
-use yii2\common\components\interfaces\models\SourceModelInterface;
+use common\components\interfaces\models\SourceModelInterface;
 
 /**
  * < Common > Родительский класс для моделей: console/frontend/backend

@@ -1,6 +1,6 @@
 <?php
 
-namespace yii2\common\components\interfaces\dataProvider;
+namespace common\components\interfaces\dataProvider;
 
 /**
  * < Common > Интерфейс для всех классов-провайдеров данных

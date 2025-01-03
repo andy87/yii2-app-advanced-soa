@@ -1,8 +1,8 @@
 <?php declare(strict_types=1);
 
-namespace yii2\frontend\tests\unit\controllers\items;
+namespace frontend\tests\unit\controllers\items;
 
-use yii2\frontend\controllers\items\PascalCaseController;
+use frontend\controllers\items\PascalCaseController;
 
 /**
  * < Frontend > PascalCaseServiceTest

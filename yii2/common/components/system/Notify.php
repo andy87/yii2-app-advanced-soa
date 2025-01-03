@@ -1,10 +1,10 @@
 <?php declare(strict_types=1);
 
-namespace yii2\common\components\system;
+namespace common\components\system;
 
 use Yii;
 use Exception;
-use yii2\common\components\system\Logger;
+use common\components\system\Logger;
 
 /**
  * < Common > Class Notify

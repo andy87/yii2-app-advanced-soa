@@ -1,8 +1,8 @@
 <?php declare(strict_types=1);
 
-namespace yii2\common\components\interfaces\controllers;
+namespace common\components\interfaces\controllers;
 
-use yii2\common\components\base\services\items\BaseService;
+use common\components\base\services\items\BaseService;
 
 /**
  * < Common >

@@ -1,9 +1,9 @@
 <?php
 
-namespace yii2\common\components\base\managers;
+namespace common\components\base\managers;
 
-use yii2\common\components\base\managers\source\SourceManager;
-use yii2\common\components\base\repository\items\source\SourceRepository;
+use common\components\base\managers\source\SourceManager;
+use common\components\base\repository\items\source\SourceRepository;
 
 /**
  * < Common > Менеджер репозиториев

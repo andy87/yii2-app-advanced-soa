@@ -2,8 +2,8 @@
 
 namespace console\producers\items;
 
-use yii2\common\components\base\models\items\sources\SourceModel;
-use yii2\console\models\items\PascalCase;
+use common\components\base\models\items\sources\SourceModel;
+use console\models\items\PascalCase;
 
 /**
  * < Console > producer for model `PascalCase`

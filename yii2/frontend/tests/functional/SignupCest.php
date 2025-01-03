@@ -1,15 +1,15 @@
 <?php declare(strict_types=1);
 
-namespace yii2\frontend\tests\functional;
+namespace frontend\tests\functional;
 
-use yii2\common\models\Identity;
-use yii2\common\models\sources\User;
-use yii2\common\tests\cest\SendForm;
-use yii2\frontend\tests\FunctionalTester;
-use yii2\frontend\models\forms\SignupForm;
+use commonmodels\Identity;
+use commonmodels\sources\User;
+use commontests\cest\SendForm;
+use frontend\tests\FunctionalTester;
+use frontend\models\forms\SignupForm;
 use Codeception\Exception\ModuleException;
-use yii2\frontend\controllers\AuthController;
-use yii2\common\components\forms\BaseWebForm;
+use frontend\controllers\AuthController;
+use common\components\forms\BaseWebForm;
 
 /**
  * < Frontend > `SignupCest`

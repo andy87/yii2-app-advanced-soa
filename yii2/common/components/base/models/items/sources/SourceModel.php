@@ -1,9 +1,9 @@
 <?php declare(strict_types=1);
 
-namespace yii2\common\components\base\models\items\sources;
+namespace common\components\base\models\items\sources;
 
 use yii\db\ActiveRecord;
-use yii2\common\components\interfaces\models\SourceModelInterface;
+use common\components\interfaces\models\SourceModelInterface;
 
 /**
  * < Common > Родительский класс для всех моделей базы данных

@@ -1,13 +1,13 @@
 <?php
 
-namespace yii2\common\components\actions\web;
+namespace common\components\actions\web;
 
 use Yii;
 use yii\base\InvalidConfigException;
-use yii2\common\components\base\actions\CrudAction;
-use yii2\common\components\base\handlers\items\BaseWebHandler;
-use yii2\common\components\base\resources\crud\BaseGridViewResource;
-use yii2\common\components\base\resources\crud\BaseListViewResource;
+use common\components\base\actions\CrudAction;
+use common\components\base\handlers\items\BaseWebHandler;
+use common\components\base\resources\crud\BaseGridViewResource;
+use common\components\base\resources\crud\BaseListViewResource;
 
 /**
  * Class CrudIndexAction

@@ -1,8 +1,8 @@
 <?php declare(strict_types=1);
 
-namespace yii2\common\tests\unit\models\items;
+namespace common\tests\unit\models\items;
 
-use yii2\common\components\base\moels\items\base\SourceModel;
+use common\components\base\moels\items\base\SourceModel;
 
 /**
  * < Common > PascalCaseServiceTest

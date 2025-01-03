@@ -3,7 +3,7 @@
 namespace common\managers;
 
 use common\services\items\PascalCaseService;
-use yii2\common\components\base\managers\HandlerManager;
+use common\components\base\managers\HandlerManager;
 
 
 /**

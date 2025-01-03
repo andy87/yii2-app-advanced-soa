@@ -2,7 +2,7 @@
 
 namespace common\services;
 
-use yii2\common\components\base\models\items\sources\SourceModel;
+use common\components\base\models\items\sources\SourceModel;
 
 /**
  * < Common > `FormService`

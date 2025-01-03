@@ -6,10 +6,10 @@ use common\services\EmailService;
 use JsonException;
 use Yii;
 use yii\base\InvalidConfigException;
-use yii2\common\components\base\services\items\SingletonService;
-use yii2\common\components\interfaces\CatcherInterface;
-use yii2\common\components\system\Logger;
-use yii2\frontend\models\forms\ContactForm;
+use common\components\base\services\items\SingletonService;
+use common\components\interfaces\CatcherInterface;
+use common\components\system\Logger;
+use frontend\models\forms\ContactForm;
 
 /**
  * < Frontend > `SiteService`

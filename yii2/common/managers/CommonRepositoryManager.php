@@ -5,7 +5,7 @@ namespace common\managers;
 use common\repository\IdentityRepository;
 use common\repository\items\PascalCaseRepository;
 use common\repository\items\UserRepository;
-use yii2\common\components\base\managers\RepositoryManager;
+use common\components\base\managers\RepositoryManager;
 
 
 /**

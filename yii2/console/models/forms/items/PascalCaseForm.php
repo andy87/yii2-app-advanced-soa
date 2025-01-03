@@ -1,8 +1,8 @@
 <?php declare(strict_types=1);
 
-namespace yii2\console\models\forms\items;
+namespace console\models\forms\items;
 
-use yii2\console\models\items\PascalCase;
+use console\models\items\PascalCase;
 
 /**
  * < Console > Форма создания модели `PascalCase` в окружении `console`

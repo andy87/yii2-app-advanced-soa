@@ -1,6 +1,6 @@
 <?php
 
-namespace yii2\common\components\base\managers\source;
+namespace common\components\base\managers\source;
 
 use Yii;
 use RuntimeException;

@@ -1,10 +1,10 @@
 <?php declare(strict_types=1);
 
-namespace yii2\common\components\base\tests\unit\services\items;
+namespace common\components\base\tests\unit\services\items;
 
-use yii2\common\components\base\services\items\BaseService;
-use yii2\common\components\traits\services\ApplyServiceTrait;
-use yii2\common\components\base\tests\unit\source\items\BaseUnitTest;
+use common\components\base\services\items\BaseService;
+use common\components\traits\services\ApplyServiceTrait;
+use common\components\base\tests\unit\source\items\BaseUnitTest;
 
 /**
  * < Common > Base Service Test

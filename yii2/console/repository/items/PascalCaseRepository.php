@@ -3,7 +3,7 @@
 namespace console\repository\items;
 
 use yii\db\{ActiveQuery, Connection};
-use yii2\common\components\base\models\items\sources\SourceModel;
+use common\components\base\models\items\sources\SourceModel;
 
 /**
  * < Console > service for `PascalCaseService`

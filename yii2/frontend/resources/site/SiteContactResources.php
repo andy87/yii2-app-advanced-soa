@@ -3,7 +3,7 @@
 namespace frontend\resources\site;
 
 use common\resources\TemplateResources;
-use yii2\frontend\models\forms\ContactForm;
+use frontend\models\forms\ContactForm;
 
 /**
  * < Frontend > `SiteContactResources`

@@ -1,9 +1,9 @@
 <?php declare(strict_types=1);
 
-namespace yii2\common\components\base\controllers\items;
+namespace common\components\base\controllers\items;
 
-use yii2\common\components\base\handlers\items\source\SourceHandler;
-use yii2\common\components\interfaces\controllers\ControllerHandlerInterface;
+use common\components\base\handlers\items\source\SourceHandler;
+use common\components\interfaces\controllers\ControllerHandlerInterface;
 
 /**
  * < Common > Родительский класс для всех контроллеров с сервисом

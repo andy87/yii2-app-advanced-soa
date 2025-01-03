@@ -1,8 +1,8 @@
 <?php declare(strict_types=1);
 
-namespace yii2\backend\assets;
+namespace backend\assets;
 
-use yii2\common\components\assets\BaseWebAsset;
+use common\components\assets\BaseWebAsset;
 
 /**
  * <Backend > `AppAsset`

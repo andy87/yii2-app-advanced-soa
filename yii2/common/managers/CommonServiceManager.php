@@ -9,7 +9,7 @@ use common\services\IdentityService;
 use common\services\items\PascalCaseService;
 use common\services\items\UserService;
 use common\services\ModelService;
-use yii2\common\components\base\managers\ServiceManager;
+use common\components\base\managers\ServiceManager;
 
 
 /**

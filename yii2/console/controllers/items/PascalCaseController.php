@@ -1,10 +1,10 @@
 <?php declare(strict_types=1);
 
-namespace yii2\console\controllers\items;
+namespace console\controllers\items;
 
 use console\dataProviders\items\PascalCaseDataProvider;
-use yii2\common\components\base\handlers\items\settings\HandlerSettings;
-use yii2\console\components\controllers\parents\ConsoleHandlerController;
+use common\components\base\handlers\items\settings\HandlerSettings;
+use console\components\controllers\parents\ConsoleHandlerController;
 
 /**
  * Boilerplate Контроллер для модели `PascalCase`

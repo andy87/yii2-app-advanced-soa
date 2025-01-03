@@ -1,14 +1,14 @@
 <?php declare(strict_types=1);
 
-namespace yii2\common\components\traits\handlers;
+namespace common\components\traits\handlers;
 
 use frontend\resources\parents\crud\FrontendCreateResource;
 use frontend\resources\parents\crud\FrontendIndexResource;
 use frontend\resources\parents\crud\FrontendUpdateResource;
 use frontend\resources\parents\crud\FrontendViewResource;
-use yii2\common\components\base\resources\items\BaseTemplateResource;
-use yii2\common\components\base\services\items\BaseService;
-use yii2\common\components\enums\Action;
+use common\components\base\resources\items\BaseTemplateResource;
+use common\components\base\services\items\BaseService;
+use common\components\enums\Action;
 
 /**
  * < Frontend > Обработчик контроллеров работающих с сущностью `{{PascalCase}}`

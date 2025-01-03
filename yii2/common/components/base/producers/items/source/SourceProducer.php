@@ -1,13 +1,13 @@
 <?php declare(strict_types=1);
 
-namespace yii2\common\components\base\producers\items\source;
+namespace common\components\base\producers\items\source;
 
 use yii\base\Model;
 use yii\db\Exception;
 use yii\db\ActiveRecord;
 use yii\base\BaseObject;
-use yii2\common\components\system\Manager;
-use yii2\common\components\interfaces\producers\ProducerInterface;
+use common\components\system\Manager;
+use common\components\interfaces\producers\ProducerInterface;
 
 /**
  * < Common > Родительский абстрактный класс для всех провайдеров

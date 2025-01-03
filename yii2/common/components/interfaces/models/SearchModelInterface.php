@@ -1,8 +1,8 @@
 <?php declare(strict_types=1);
 
-namespace yii2\common\components\interfaces\models;
+namespace common\components\interfaces\models;
 
-use yii2\common\components\base\dataProviders\items\source\SourceActiveDataProvider;
+use common\components\base\dataProviders\items\source\SourceActiveDataProvider;
 
 /**
  * < Common >

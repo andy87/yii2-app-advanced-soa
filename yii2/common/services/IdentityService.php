@@ -6,14 +6,14 @@ use common\repository\IdentityRepository;
 use Exception;
 use Yii;
 use yii\base\InvalidConfigException;
-use yii2\common\components\base\producers\IdentityProducer;
-use yii2\common\components\base\services\items\SingletonService;
-use yii2\common\components\services\ToolsKitTrait;
-use yii2\common\components\system\Manager;
-use yii2\common\components\traits\SingletonTrait;
-use yii2\common\models\Identity;
-use yii2\common\models\sources\User;
-use yii2\frontend\models\forms\SignupForm;
+use common\components\base\producers\IdentityProducer;
+use common\components\base\services\items\SingletonService;
+use common\components\services\ToolsKitTrait;
+use common\components\system\Manager;
+use common\components\traits\SingletonTrait;
+use commonmodels\Identity;
+use commonmodels\sources\User;
+use frontend\models\forms\SignupForm;
 
 /**
  * < Common > `IdentityService`

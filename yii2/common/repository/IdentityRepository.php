@@ -4,10 +4,10 @@ namespace common\repository;
 
 use Exception;
 use yii\db\Query;
-use yii2\common\components\base\models\items\sources\SourceModel;
-use yii2\common\components\base\repository\items\source\SourceRepository;
-use yii2\common\models\Identity;
-use yii2\common\models\sources\User;
+use common\components\base\models\items\sources\SourceModel;
+use common\components\base\repository\items\source\SourceRepository;
+use commonmodels\Identity;
+use commonmodels\sources\User;
 
 /**
  * < Common > `IdentityRepository`

@@ -1,9 +1,9 @@
 <?php declare(strict_types=1);
 
-namespace yii2\backend\tests\unit\services\items;
+namespace backend\tests\unit\services\items;
 
 use unit\services\items\BaseServiceTest;
-use yii2\common\components\base\{services\items\base\SourceService};
+use common\components\base\{services\items\base\SourceService};
 
 /**
  * < Backend > PascalCaseServiceTest

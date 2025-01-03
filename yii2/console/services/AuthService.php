@@ -3,7 +3,7 @@
 namespace console\services;
 
 use Yii;
-use yii2\common\components\core\BaseService;
+use common\components\core\BaseService;
 
 /**
  * < Console > `AuthService`

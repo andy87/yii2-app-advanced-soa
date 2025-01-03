@@ -2,7 +2,7 @@
 
 namespace frontend\resources\parents\crud;
 
-use yii2\common\components\base\models\items\sources\SourceModel;
+use common\components\base\models\items\sources\SourceModel;
 
 /**
  * < Frontend> Родительский класс для ресурса обновления модели в окружении `frontend`

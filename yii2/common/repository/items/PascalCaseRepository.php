@@ -3,8 +3,8 @@
 namespace common\repository\items;
 
 use yii\db\{ActiveQuery, Connection};
-use yii2\common\components\base\models\items\sources\SourceModel;
-use yii2\common\components\base\repository\items\source\SourceRepository;
+use common\components\base\models\items\sources\SourceModel;
+use common\components\base\repository\items\source\SourceRepository;
 
 /**
  * < Common > Родительский класс для репозиториев: console/frontend/backend

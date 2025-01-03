@@ -1,14 +1,14 @@
 <?php declare(strict_types=1);
 
-namespace yii2\backend\tests\functional;
+namespace backend\tests\functional;
 
-use yii2\common\components\Action;
-use yii2\common\components\Layout;
-use yii2\common\tests\cest\SendForm;
-use yii2\common\fixtures\UserFixture;
-use yii2\common\models\forms\LoginForm;
-use yii2\backend\tests\FunctionalTester;
-use yii2\backend\controllers\AuthController;
+use common\components\Action;
+use common\components\Layout;
+use commontests\cest\SendForm;
+use commonfixtures\UserFixture;
+use commonmodels\forms\LoginForm;
+use backend\tests\FunctionalTester;
+use backend\controllers\AuthController;
 
 /**
  * < Backend > `LoginCest`

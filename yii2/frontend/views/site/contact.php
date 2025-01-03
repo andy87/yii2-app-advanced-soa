@@ -3,7 +3,7 @@
 use frontend\resources\site\SiteContactResources;
 use yii\bootstrap5\{ActiveForm, Html};
 use yii\captcha\Captcha;
-use yii2\frontend\controllers\SiteController;
+use frontend\controllers\SiteController;
 
 /**
  * @var yii\web\View $this

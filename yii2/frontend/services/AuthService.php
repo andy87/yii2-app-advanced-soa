@@ -5,8 +5,8 @@ namespace frontend\services;
 use Exception;
 use Yii;
 use yii\base\InvalidConfigException;
-use yii2\common\models\Identity;
-use yii2\frontend\models\forms\{PasswordResetRequestForm,
+use commonmodels\Identity;
+use frontend\models\forms\{PasswordResetRequestForm,
     ResendVerificationEmailForm,
     ResetPasswordForm,
     SignupForm,

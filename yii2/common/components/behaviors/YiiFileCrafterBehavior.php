@@ -1,6 +1,6 @@
 <?php declare(strict_types=1);
 
-namespace yii2\common\components\behaviors;
+namespace common\components\behaviors;
 
 use Yii;
 use yii\base\Behavior;

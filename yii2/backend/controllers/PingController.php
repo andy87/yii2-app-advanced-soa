@@ -1,10 +1,10 @@
 <?php
 
-namespace yii2\backend\controllers;
+namespace backend\controllers;
 
 use backend\services\items\PascalCaseService;
 use yii\filters\AccessControl;
-use yii2\backend\components\controllers\parents\BackendController;
+use backend\components\controllers\parents\BackendController;
 
 /**
  * < Backend > `PingController`

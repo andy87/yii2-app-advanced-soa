@@ -1,14 +1,14 @@
 <?php declare(strict_types=1);
 
-namespace yii2\common\components\base\repository\items\source;
+namespace common\components\base\repository\items\source;
 
 use Exception;
 use yii\db\ActiveRecord;
 use yii\db\Connection;
 use yii\db\ActiveQuery;
 use yii\base\BaseObject;
-use yii2\common\components\base\models\items\sources\SourceModel;
-use yii2\common\components\interfaces\repository\RepositoryInterface;
+use common\components\base\models\items\sources\SourceModel;
+use common\components\interfaces\repository\RepositoryInterface;
 
 /**
  * < Common > Родительский абстрактный класс для всех репозиториев

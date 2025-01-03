@@ -1,8 +1,8 @@
 <?php declare(strict_types=1);
 
-namespace yii2\console\tests\unit\producers\items;
+namespace console\tests\unit\producers\items;
 
-use yii2\common\components\base\{providers\items\base\SourceProducer};
+use common\components\base\{providers\items\base\SourceProducer};
 use unit\producers\items\BaseProducerTest;
 
 /**

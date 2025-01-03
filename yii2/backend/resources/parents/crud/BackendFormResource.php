@@ -2,8 +2,8 @@
 
 namespace backend\resources\parents\crud;
 
-use yii2\backend\models\forms\items\PascalCaseForm;
-use yii2\common\components\base\resources\crud\BaseFormResource;
+use backend\models\forms\items\PascalCaseForm;
+use common\components\base\resources\crud\BaseFormResource;
 
 /**
  * < Backend > Родительский класс для ресурса с формой в окружении `backend`

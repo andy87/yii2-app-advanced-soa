@@ -4,8 +4,8 @@ namespace common\services;
 
 use Yii;
 use yii\mail\{MailerInterface, MessageInterface};
-use yii2\common\components\base\services\items\SingletonService;
-use yii2\common\models\dto\EmailMessageDto;
+use common\components\base\services\items\SingletonService;
+use commonmodels\dto\EmailMessageDto;
 
 /**
  * < Common > `EmailService`

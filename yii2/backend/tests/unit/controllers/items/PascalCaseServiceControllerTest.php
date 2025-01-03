@@ -1,6 +1,6 @@
 <?php declare(strict_types=1);
 
-namespace yii2\backend\tests\unit\controllers\items;
+namespace backend\tests\unit\controllers\items;
 
 /**
  * < Backend > PascalCaseServiceTest

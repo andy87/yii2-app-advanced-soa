@@ -1,13 +1,13 @@
 <?php
 
-namespace yii2\common\components\base\actions;
+namespace common\components\base\actions;
 
-use yii2\common\components\base\handlers\items\BaseWebHandler;
-use yii2\common\components\base\models\items\sources\SourceModel;
-use yii2\common\components\base\resources\items\BaseTemplateResource;
-use yii2\common\components\base\resources\crud\BaseFormResource;
-use yii2\common\components\enums\Action;
-use yii2\common\components\system\Notify;
+use common\components\base\handlers\items\BaseWebHandler;
+use common\components\base\models\items\sources\SourceModel;
+use common\components\base\resources\items\BaseTemplateResource;
+use common\components\base\resources\crud\BaseFormResource;
+use common\components\enums\Action;
+use common\components\system\Notify;
 use Yii;
 use yii\web\Response;
 

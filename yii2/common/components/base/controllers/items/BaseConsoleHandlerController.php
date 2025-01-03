@@ -1,10 +1,10 @@
 <?php declare(strict_types=1);
 
-namespace yii2\common\components\base\controllers\items;
+namespace common\components\base\controllers\items;
 
-use yii2\common\components\base\controllers\BaseConsoleController;
-use yii2\common\components\base\handlers\items\settings\HandlerSettings;
-use yii2\common\components\traits\has\HasHandlerTrait;
+use common\components\base\controllers\BaseConsoleController;
+use common\components\base\handlers\items\settings\HandlerSettings;
+use common\components\traits\has\HasHandlerTrait;
 
 /**
  * < Common > Родительский класс для всех консольных контроллеров

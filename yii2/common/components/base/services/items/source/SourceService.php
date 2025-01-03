@@ -1,12 +1,12 @@
 <?php declare(strict_types=1);
 
-namespace yii2\common\components\base\services\items\source;
+namespace common\components\base\services\items\source;
 
 use Yii;
 use Exception;
 use yii\base\BaseObject;
-use yii2\common\components\system\Logger;
-use yii2\common\components\interfaces\CatcherInterface;
+use common\components\system\Logger;
+use common\components\interfaces\CatcherInterface;
 
 /**
  * < Common > Родительский абстрактный класс для всех сервисов

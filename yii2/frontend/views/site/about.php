@@ -3,7 +3,7 @@
 use frontend\resources\site\SiteAboutResources;
 use yii\helpers\Html;
 use yii\web\View;
-use yii2\frontend\controllers\SiteController;
+use frontend\controllers\SiteController;
 
 /**
  * @var View $this

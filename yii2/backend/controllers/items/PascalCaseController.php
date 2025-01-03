@@ -1,12 +1,12 @@
 <?php declare(strict_types=1);
 
-namespace yii2\backend\controllers\items;
+namespace backend\controllers\items;
 
 use backend\handlers\items\PascalCaseHandler;
 use backend\resources\items\PascalCaseCreateResource;
 use backend\resources\items\PascalCaseViewResource;
-use yii2\backend\components\controllers\parents\BackendController;
-use yii2\common\components\enums\Action;
+use backend\components\controllers\parents\BackendController;
+use common\components\enums\Action;
 
 /**
  * Boilerplate Контроллер для модели `PascalCase`

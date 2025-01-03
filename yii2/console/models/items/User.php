@@ -1,6 +1,6 @@
 <?php declare(strict_types=1);
 
-namespace yii2\console\models\items;
+namespace console\models\items;
 
 /**
  * Console `User`

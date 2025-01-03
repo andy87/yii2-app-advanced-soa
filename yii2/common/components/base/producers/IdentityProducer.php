@@ -1,12 +1,12 @@
 <?php
 
-namespace yii2\common\components\base\producers;
+namespace common\components\base\producers;
 
 use yii\base\Exception;
 use yii\db\Exception as DbException;
-use yii2\common\components\base\producers\items\source\SourceProducer;
-use yii2\common\models\Identity;
-use yii2\frontend\models\forms\SignupForm;
+use common\components\base\producers\items\source\SourceProducer;
+use commonmodels\Identity;
+use frontend\models\forms\SignupForm;
 
 /**
  * < Common > Родительский класс для всех продюсеров

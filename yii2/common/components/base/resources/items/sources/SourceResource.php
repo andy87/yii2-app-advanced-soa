@@ -1,6 +1,6 @@
 <?php declare(strict_types=1);
 
-namespace yii2\common\components\base\resources\items\sources;
+namespace common\components\base\resources\items\sources;
 
 use yii\base\BaseObject;
 

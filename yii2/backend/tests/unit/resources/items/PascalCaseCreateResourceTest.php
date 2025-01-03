@@ -1,6 +1,6 @@
 <?php declare(strict_types=1);
 
-namespace yii2\backend\tests\unit\resources\items;
+namespace backend\tests\unit\resources\items;
 
 /**
  * < Backend > ItemCreateResourceTest

@@ -1,12 +1,12 @@
 <?php declare(strict_types=1);
 
-namespace yii2\common\tests\unit\models;
+namespace common\tests\unit\models;
 
 use Codeception\Test\Unit;
 use common\services\AuthService;
 use Yii;
 use yii\base\InvalidConfigException;
-use yii2\common\{fixtures\UserFixture, models\forms\LoginForm, tests\UnitTester};
+use common{fixtures\UserFixture, models\forms\LoginForm, tests\UnitTester};
 
 /**
  * < Common > `LoginFormTest`

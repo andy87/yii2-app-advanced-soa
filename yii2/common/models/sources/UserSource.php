@@ -1,9 +1,9 @@
 <?php
 
-namespace yii2\common\models\sources;
+namespace common\models\sources;
 
 use Yii;
-use yii2\common\components\base\models\items\sources\SourceModel;
+use common\components\base\models\items\sources\SourceModel;
 
 /**
  * This is the model class for table "user".

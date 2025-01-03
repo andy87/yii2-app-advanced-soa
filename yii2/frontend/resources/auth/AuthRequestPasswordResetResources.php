@@ -3,7 +3,7 @@
 namespace frontend\resources\auth;
 
 use common\resources\TemplateResources;
-use yii2\frontend\models\forms\PasswordResetRequestForm;
+use frontend\models\forms\PasswordResetRequestForm;
 
 /**
  * < Frontend > `AuthRequestPasswordResetResources`

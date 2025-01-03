@@ -1,16 +1,16 @@
 <?php declare(strict_types=1);
 
-namespace yii2\frontend\controllers\items;
+namespace frontend\controllers\items;
 
 use frontend\handlers\items\PascalCaseHandler;
-use yii2\common\components\enums\Action;
-use yii2\common\components\interfaces\dataProvider\DataProviderInterface;
-use yii2\common\components\interfaces\handlers\HandlerInterface;
-use yii2\common\components\interfaces\models\SearchModelInterface;
-use yii2\common\components\interfaces\models\SourceModelInterface;
-use yii2\common\components\interfaces\producers\ProducerInterface;
-use yii2\common\components\interfaces\repository\RepositoryInterface;
-use yii2\frontend\components\controllers\parents\FrontendController;
+use common\components\enums\Action;
+use common\components\interfaces\dataProvider\DataProviderInterface;
+use common\components\interfaces\handlers\HandlerInterface;
+use common\components\interfaces\models\SearchModelInterface;
+use common\components\interfaces\models\SourceModelInterface;
+use common\components\interfaces\producers\ProducerInterface;
+use common\components\interfaces\repository\RepositoryInterface;
+use frontend\components\controllers\parents\FrontendController;
 
 /**
  * Boilerplate Контроллер для модели `PascalCase`

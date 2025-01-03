@@ -3,8 +3,8 @@
 use backend\resources\auth\AuthLoginResources;
 use yii\bootstrap5\{ActiveForm, Html};
 use yii\web\View;
-use yii2\backend\controllers\AuthController;
-use yii2\common\components\Action;
+use backend\controllers\AuthController;
+use common\components\Action;
 
 /**
  * @var View $this

@@ -4,10 +4,10 @@ namespace console\services\items;
 
 use console\producers\items\PascalCaseProducer;
 use console\repository\items\PascalCaseRepository;
-use yii2\common\components\base\services\items\settings\ServiceSettings;
-use yii2\common\components\interfaces\CatcherInterface;
-use yii2\console\models\forms\items\PascalCaseForm;
-use yii2\console\models\items\PascalCase;
+use common\components\base\services\items\settings\ServiceSettings;
+use common\components\interfaces\CatcherInterface;
+use console\models\forms\items\PascalCaseForm;
+use console\models\items\PascalCase;
 
 /**
  * < Console > Сервис для работы с сущностью `PascalCase`

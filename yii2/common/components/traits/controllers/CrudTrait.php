@@ -1,14 +1,14 @@
 <?php
 
-namespace yii2\common\components\traits\controllers;
+namespace common\components\traits\controllers;
 
-use yii2\common\components\Action;
-use yii2\common\components\actions\web\CrudViewAction;
-use yii2\common\components\actions\web\CrudIndexAction;
-use yii2\common\components\actions\web\CrudCreateAction;
-use yii2\common\components\actions\web\CrudDeleteAction;
-use yii2\common\components\actions\web\CrudUpdateAction;
-use yii2\common\components\base\handlers\items\source\SourceHandler;
+use common\components\Action;
+use common\components\actions\web\CrudViewAction;
+use common\components\actions\web\CrudIndexAction;
+use common\components\actions\web\CrudCreateAction;
+use common\components\actions\web\CrudDeleteAction;
+use common\components\actions\web\CrudUpdateAction;
+use common\components\base\handlers\items\source\SourceHandler;
 
 /**
  * Trait ActionTrait

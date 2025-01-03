@@ -1,12 +1,12 @@
 <?php
 
-namespace yii2\common\components\actions\web;
+namespace common\components\actions\web;
 
-use yii2\common\components\base\actions\CrudAction;
-use yii2\common\components\base\handlers\items\BaseWebHandler;
-use yii2\common\components\base\models\items\sources\SourceModel;
-use yii2\common\components\base\resources\crud\BaseCrudViewResource;
-use yii2\common\components\system\Notify;
+use common\components\base\actions\CrudAction;
+use common\components\base\handlers\items\BaseWebHandler;
+use common\components\base\models\items\sources\SourceModel;
+use common\components\base\resources\crud\BaseCrudViewResource;
+use common\components\system\Notify;
 use yii\base\InvalidConfigException;
 use yii\web\Response;
 

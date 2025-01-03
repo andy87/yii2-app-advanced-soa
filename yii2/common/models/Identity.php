@@ -1,10 +1,10 @@
 <?php declare(strict_types=1);
 
-namespace yii2\common\models;
+namespace common\models;
 
 use Yii;
 use yii\web\IdentityInterface;
-use yii2\common\models\sources\User;
+use commonmodels\sources\User;
 use yii\behaviors\TimestampBehavior;
 use yii\base\{ Behavior, Exception, NotSupportedException };
 

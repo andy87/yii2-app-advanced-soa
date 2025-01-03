@@ -1,10 +1,10 @@
 <?php declare(strict_types=1);
 
-namespace yii2\frontend\tests\functional\items;
+namespace frontend\tests\functional\items;
 
-use yii2\common\components\enums\Action;
-use yii2\frontend\controllers\items\PascalCaseController;
-use yii2\frontend\tests\FunctionalTester;
+use common\components\enums\Action;
+use frontend\controllers\items\PascalCaseController;
+use frontend\tests\FunctionalTester;
 use Codeception\Actor;
 
 /**

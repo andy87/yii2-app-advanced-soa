@@ -1,8 +1,8 @@
 <?php declare(strict_types=1);
 
-namespace yii2\common\components\interfaces\services;
+namespace common\components\interfaces\services;
 
-use yii2\common\components\base\repository\items\base\SourceRepository;
+use common\components\base\repository\items\base\SourceRepository;
 
 /**
  * < Common >

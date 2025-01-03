@@ -1,9 +1,9 @@
 <?php declare(strict_types=1);
 
-namespace yii2\common\components\base\controllers;
+namespace common\components\base\controllers;
 
 use yii\helpers\BaseConsole;
-use yii2\common\components\base\controllers\items\source\SourceConsoleController;
+use common\components\base\controllers\items\source\SourceConsoleController;
 use yii\helpers\Console;
 
 /**

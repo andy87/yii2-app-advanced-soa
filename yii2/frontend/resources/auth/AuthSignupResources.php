@@ -3,7 +3,7 @@
 namespace frontend\resources\auth;
 
 use common\resources\TemplateResources;
-use yii2\frontend\models\forms\SignupForm;
+use frontend\models\forms\SignupForm;
 
 /**
  * < Frontend > `AuthSignupResources`

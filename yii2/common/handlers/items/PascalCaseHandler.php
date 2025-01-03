@@ -3,10 +3,10 @@
 namespace common\handlers\items;
 
 use common\services\items\PascalCaseService;
-use yii2\common\components\base\handlers\items\source\SourceHandler;
-use yii2\common\models\forms\items\PascalCaseForm;
-use yii2\common\models\items\PascalCase;
-use yii2\common\models\search\items\PascalCaseSearch;
+use common\components\base\handlers\items\source\SourceHandler;
+use commonmodels\forms\items\PascalCaseForm;
+use commonmodels\items\PascalCase;
+use commonmodels\search\items\PascalCaseSearch;
 
 
 /**

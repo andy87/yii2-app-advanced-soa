@@ -2,7 +2,7 @@
 
 namespace backend\resources\parents\crud;
 
-use yii2\common\components\base\models\items\sources\SourceModel;
+use common\components\base\models\items\sources\SourceModel;
 
 /**
  * < Backend > Родительский класс для ресурса создания модели в окружении `backend`

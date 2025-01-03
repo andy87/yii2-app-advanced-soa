@@ -1,14 +1,14 @@
 <?php declare(strict_types=1);
 
-namespace yii2\backend\components\controllers\parents;
+namespace backend\components\controllers\parents;
 
 use Yii;
 use yii\filters\AccessControl;
-use yii2\common\components\Action;
-use yii2\common\components\Layout;
-use yii2\backend\controllers\SiteController;
-use yii2\common\components\traits\handlers\BackendHandler;
-use yii2\common\components\base\controllers\items\BaseWebHandlerController;
+use common\components\Action;
+use common\components\Layout;
+use backend\controllers\SiteController;
+use common\components\traits\handlers\BackendHandler;
+use common\components\base\controllers\items\BaseWebHandlerController;
 
 /**
  * < Backend > Родительский класс для контроллеров в окружении: `backend`

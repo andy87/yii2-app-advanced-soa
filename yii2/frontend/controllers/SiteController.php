@@ -1,6 +1,6 @@
 <?php declare(strict_types=1);
 
-namespace yii2\frontend\controllers;
+namespace frontend\controllers;
 
 use frontend\handlers\controllers\SiteHandler;
 use frontend\resources\site\{SiteContactResources};
@@ -10,9 +10,9 @@ use JsonException;
 use Yii;
 use yii\base\InvalidConfigException;
 use yii\web\Response;
-use yii2\common\components\Action;
-use yii2\common\components\traits\SessionFlash;
-use yii2\frontend\components\{actions\CaptchaAction, controllers\parents\FrontendController};
+use common\components\Action;
+use common\components\traits\SessionFlash;
+use frontend\components\{actions\CaptchaAction, controllers\parents\FrontendController};
 
 /**
  * < Frontend > `SiteController`

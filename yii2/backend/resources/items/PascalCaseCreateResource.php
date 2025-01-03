@@ -3,7 +3,7 @@
 namespace backend\resources\items;
 
 use backend\resources\parents\crud\BackendCreateResource;
-use yii2\backend\models\forms\items\PascalCaseForm;
+use backend\models\forms\items\PascalCaseForm;
 
 /**
  * < Backend > Boilerplate для ресурса создания модели `PascalCase`

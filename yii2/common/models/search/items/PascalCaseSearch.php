@@ -1,10 +1,10 @@
 <?php declare(strict_types=1);
 
-namespace yii2\common\models\search\items;
+namespace common\models\search\items;
 
 use yii\db\ActiveQueryInterface;
-use yii2\common\models\items\PascalCase;
-use yii2\common\components\interfaces\models\SearchModelInterface;
+use commonmodels\items\PascalCase;
+use common\components\interfaces\models\SearchModelInterface;
 
 /**
  * < Common > Модель с логикой поиска в `PascalCase` для окружения: common

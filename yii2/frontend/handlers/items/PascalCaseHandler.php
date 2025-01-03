@@ -6,11 +6,11 @@ use common\dataProviders\items\PascalCaseDataProvider;
 use frontend\resources\items\PascalCaseIndexResource;
 use frontend\resources\items\PascalCaseUpdateResource;
 use frontend\services\items\PascalCaseService;
-use yii2\common\components\base\resources\items\BaseTemplateResource;
-use yii2\common\components\enums\Action;
-use yii2\frontend\models\forms\items\PascalCaseForm;
-use yii2\frontend\models\items\PascalCase;
-use yii2\frontend\models\search\items\PascalCaseSearch;
+use common\components\base\resources\items\BaseTemplateResource;
+use common\components\enums\Action;
+use frontend\models\forms\items\PascalCaseForm;
+use frontend\models\items\PascalCase;
+use frontend\models\search\items\PascalCaseSearch;
 
 /**
  * < Frontend > Обработчик контроллеров работающих с сущностью `PascalCase`

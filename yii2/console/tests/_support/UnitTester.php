@@ -1,8 +1,8 @@
 <?php declare(strict_types=1);
 
-namespace yii2\console\tests\_support;
+namespace console\tests\_support;
 
-use yii2\console\tests\_generated;
+use console\tests\_generated;
 
 /**
  * Inherited Methods

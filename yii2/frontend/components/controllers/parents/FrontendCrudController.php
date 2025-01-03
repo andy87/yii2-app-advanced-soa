@@ -1,9 +1,9 @@
 <?php declare(strict_types=1);
 
-namespace yii2\frontend\components\controllers\parents;
+namespace frontend\components\controllers\parents;
 
-use yii2\common\components\traits\controllers\CrudTrait;
-use yii2\common\components\traits\handlers\FrontendHandler;
+use common\components\traits\controllers\CrudTrait;
+use common\components\traits\handlers\FrontendHandler;
 
 /**
  * < Frontend > Родительский класс для контроллеров в окружении: `frontend`

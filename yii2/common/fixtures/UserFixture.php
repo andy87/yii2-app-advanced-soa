@@ -1,9 +1,9 @@
 <?php declare(strict_types=1);
 
-namespace yii2\common\fixtures;
+namespace common\fixtures;
 
 use yii\test\ActiveFixture;
-use yii2\common\models\Identity;
+use commonmodels\Identity;
 
 /**
  * < Common >

@@ -1,12 +1,12 @@
 <?php declare(strict_types=1);
 
-namespace yii2\common\components\base\handlers\items\source;
+namespace common\components\base\handlers\items\source;
 
 use yii\base\BaseObject;
-use yii2\common\components\traits\services\HasService;
-use yii2\common\components\interfaces\handlers\HandlerInterface;
-use yii2\common\components\base\services\items\source\SourceToolKit;
-use yii2\common\components\base\services\items\settings\ServiceSettings;
+use common\components\traits\services\HasService;
+use common\components\interfaces\handlers\HandlerInterface;
+use common\components\base\services\items\source\SourceToolKit;
+use common\components\base\services\items\settings\ServiceSettings;
 
 /**
  * < Common > Родительский абстрактный класс для всех обработчиков

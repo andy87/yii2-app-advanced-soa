@@ -1,13 +1,13 @@
 <?php declare(strict_types=1);
 
-namespace yii2\backend\controllers;
+namespace backend\controllers;
 
 use backend\resources\auth\AuthLoginResources;
 use yii\{base\InvalidConfigException, web\Response};
 use Yii;
 use yii\filters\{AccessControl, VerbFilter};
-use yii2\backend\components\controllers\parents\BackendController;
-use yii2\common\{components\Action, models\sources\Role};
+use backend\components\controllers\parents\BackendController;
+use common{components\Action, models\sources\Role};
 
 /**
  * < Backend > `AuthController`

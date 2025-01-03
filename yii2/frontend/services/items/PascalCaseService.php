@@ -5,10 +5,10 @@ namespace frontend\services\items;
 use frontend\dataProviders\items\PascalCaseDataProvider;
 use frontend\producers\items\PascalCaseProducer;
 use frontend\repository\items\PascalCaseRepository;
-use yii2\common\components\base\services\items\settings\ServiceSettings;
-use yii2\common\components\interfaces\CatcherInterface;
-use yii2\frontend\models\forms\items\PascalCaseForm;
-use yii2\frontend\models\items\PascalCase;
+use common\components\base\services\items\settings\ServiceSettings;
+use common\components\interfaces\CatcherInterface;
+use frontend\models\forms\items\PascalCaseForm;
+use frontend\models\items\PascalCase;
 
 /**
  * < Frontend > Сервис для работы с сущностью `PascalCase`

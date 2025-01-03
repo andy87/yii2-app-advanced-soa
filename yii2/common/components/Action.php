@@ -1,6 +1,6 @@
 <?php
 
-namespace yii2\common\components;
+namespace common\components;
 
 /**
  * < Common > `Action`

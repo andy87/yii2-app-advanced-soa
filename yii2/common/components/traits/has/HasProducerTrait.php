@@ -1,10 +1,10 @@
 <?php
 
-namespace yii2\common\components\traits\has;
+namespace common\components\traits\has;
 
 use Yii;
 use yii\base\InvalidConfigException;
-use yii2\common\components\base\producers\items\source\SourceProducer;
+use common\components\base\producers\items\source\SourceProducer;
 
 /**
  * Trait HasHandler

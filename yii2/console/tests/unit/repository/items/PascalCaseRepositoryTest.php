@@ -1,6 +1,6 @@
 <?php declare(strict_types=1);
 
-namespace yii2\console\tests\unit\repository\items;
+namespace console\tests\unit\repository\items;
 
 /**
  * < Console > PascalCaseRepositoryTest

@@ -2,7 +2,7 @@
 
 namespace backend\services\items;
 
-use yii2\backend\models\items\User;
+use backend\models\items\User;
 
 /**
  * < Backend > `UserService`

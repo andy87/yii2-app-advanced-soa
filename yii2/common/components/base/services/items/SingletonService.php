@@ -1,9 +1,9 @@
 <?php
 
-namespace yii2\common\components\base\services\items;
+namespace common\components\base\services\items;
 
-use yii2\common\components\traits\SingletonTrait;
-use yii2\common\components\base\services\items\source\SourceService;
+use common\components\traits\SingletonTrait;
+use common\components\base\services\items\source\SourceService;
 
 /**
  * < Common > Родительский абстрактный класс для Singleton сервисов

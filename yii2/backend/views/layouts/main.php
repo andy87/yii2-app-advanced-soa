@@ -1,9 +1,9 @@
 <?php
 
 use yii\web\View;
-use yii2\common\widgets\Alert;
-use yii2\common\components\Layout;
-use yii2\backend\assets\AppAsset;
+use commonwidgets\Alert;
+use common\components\Layout;
+use backend\assets\AppAsset;
 use yii\bootstrap5\{ Nav, Html, NavBar, Breadcrumbs };
 
 /** @var View $this */

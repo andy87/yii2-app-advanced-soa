@@ -5,10 +5,10 @@ namespace common\services\items;
 use common\dataProviders\items\PascalCaseDataProvider;
 use common\producers\items\PascalCaseProducer;
 use common\repository\items\PascalCaseRepository;
-use yii2\common\components\base\services\items\BaseService;
-use yii2\common\components\interfaces\CatcherInterface;
-use yii2\common\models\forms\items\PascalCaseForm;
-use yii2\common\models\items\PascalCase;
+use common\components\base\services\items\BaseService;
+use common\components\interfaces\CatcherInterface;
+use commonmodels\forms\items\PascalCaseForm;
+use commonmodels\items\PascalCase;
 
 /**
  * < Common > Родительский класс для сервисов: console/frontend/backend

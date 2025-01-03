@@ -1,10 +1,10 @@
 <?php declare(strict_types=1);
 
-namespace yii2\frontend\tests\functional;
+namespace frontend\tests\functional;
 
 use Yii;
-use yii2\frontend\tests\FunctionalTester;
-use yii2\frontend\controllers\SiteController;
+use frontend\tests\FunctionalTester;
+use frontend\controllers\SiteController;
 
 /**
  * < Frontend > `HomeCest`

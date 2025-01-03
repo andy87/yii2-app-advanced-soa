@@ -1,6 +1,6 @@
 <?php declare(strict_types=1);
 
-namespace yii2\frontend\models\items;
+namespace frontend\models\items;
 
 /**
  * < Frontend > Boilerplate для модели `PascalCase`

@@ -1,9 +1,9 @@
 <?php
 
-namespace yii2\frontend\controllers;
+namespace frontend\controllers;
 
-use yii2\common\components\Ping;
-use yii2\frontend\components\controllers\parents\FrontendController;
+use common\components\Ping;
+use frontend\components\controllers\parents\FrontendController;
 
 /**
  * < Frontend > `PingController`

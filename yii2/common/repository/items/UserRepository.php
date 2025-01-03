@@ -2,9 +2,9 @@
 
 namespace common\repository\items;
 
-use yii2\common\components\base\models\items\sources\SourceModel;
-use yii2\common\components\base\repository\items\source\SourceRepository;
-use yii2\common\models\sources\User;
+use common\components\base\models\items\sources\SourceModel;
+use common\components\base\repository\items\source\SourceRepository;
+use commonmodels\sources\User;
 
 /**
  * < Common > `UserRepository`

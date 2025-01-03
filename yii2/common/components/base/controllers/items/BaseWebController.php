@@ -1,13 +1,13 @@
 <?php declare(strict_types=1);
 
-namespace yii2\common\components\base\controllers\items;
+namespace common\components\base\controllers\items;
 
 use yii\web\ErrorAction;
 use yii\filters\VerbFilter;
 use yii\filters\AccessControl;
-use yii2\common\components\enums\Action;
-use yii2\common\components\base\models\items\sources\SourceModel;
-use yii2\common\components\base\controllers\items\source\SourceWebController;
+use common\components\enums\Action;
+use common\components\base\models\items\sources\SourceModel;
+use common\components\base\controllers\items\source\SourceWebController;
 
 /**
  * < Common > Родительский класс для всех контроллеров веб-приложения

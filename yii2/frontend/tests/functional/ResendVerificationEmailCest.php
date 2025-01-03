@@ -1,15 +1,15 @@
 <?php declare(strict_types=1);
 
-namespace yii2\frontend\tests\functional;
+namespace frontend\tests\functional;
 
-use yii2\common\models\Identity;
-use yii2\common\tests\cest\SendForm;
-use yii2\common\fixtures\UserFixture;
-use yii2\frontend\tests\FunctionalTester;
+use commonmodels\Identity;
+use commontests\cest\SendForm;
+use commonfixtures\UserFixture;
+use frontend\tests\FunctionalTester;
 use Codeception\Exception\ModuleException;
-use yii2\common\components\forms\BaseWebForm;
-use yii2\frontend\controllers\AuthController;
-use yii2\frontend\models\forms\ResendVerificationEmailForm;
+use common\components\forms\BaseWebForm;
+use frontend\controllers\AuthController;
+use frontend\models\forms\ResendVerificationEmailForm;
 
 /**
  * < Frontend > `ResendVerificationEmailCest`

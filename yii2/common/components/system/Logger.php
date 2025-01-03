@@ -1,12 +1,12 @@
 <?php declare(strict_types=1);
 
-namespace yii2\common\components\system;
+namespace common\components\system;
 
 use Yii;
 use Exception;
 use JsonException;
 use yii\web\Controller;
-use yii2\common\components\interfaces\CatcherInterface;
+use common\components\interfaces\CatcherInterface;
 
 /**
  * < Common > Logger

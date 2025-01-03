@@ -1,6 +1,6 @@
 <?php declare(strict_types=1);
 
-namespace yii2\frontend\tests\unit\models;
+namespace frontend\tests\unit\models;
 
 
 use Codeception\Exception\ModuleException;
@@ -11,8 +11,8 @@ use Yii;
 use yii\base\{Exception as YiiBaseException, InvalidConfigException};
 use yii\db\Exception as YiiDbException;
 use yii\mail\MessageInterface;
-use yii2\common\{fixtures\UserFixture, models\Identity};
-use yii2\frontend\{controllers\AuthController, models\forms\PasswordResetRequestForm, tests\UnitTester};
+use common{fixtures\UserFixture, models\Identity};
+use frontend\{controllers\AuthController, models\forms\PasswordResetRequestForm, tests\UnitTester};
 
 /**
  * < Frontend > `PasswordResetRequestFormTest`

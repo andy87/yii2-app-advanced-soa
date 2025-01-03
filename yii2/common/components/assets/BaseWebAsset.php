@@ -1,9 +1,9 @@
 <?php
 
-namespace yii2\common\components\assets;
+namespace common\components\assets;
 
 use yii\web\YiiAsset;
-use yii2\common\components\base\assets\BaseAsset;
+use common\components\base\assets\BaseAsset;
 use yii\bootstrap5\BootstrapAsset;
 
 /**

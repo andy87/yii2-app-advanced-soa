@@ -1,8 +1,8 @@
 <?php declare(strict_types=1);
 
-namespace yii2\common\components\forms;
+namespace common\components\forms;
 
-use yii2\common\{components\interfaces\ModelEmailingInterface, models\dto\EmailMessageDto};
+use common{components\interfaces\ModelEmailingInterface, models\dto\EmailMessageDto};
 
 /**
  * < Common > `EmailingModel`

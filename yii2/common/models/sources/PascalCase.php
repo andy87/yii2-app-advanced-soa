@@ -1,8 +1,8 @@
 <?php
 
-namespace yii2\common\models\sources;
+namespace common\models\sources;
 
-use yii2\common\components\base\models\items\sources\SourceModel;
+use common\components\base\models\items\sources\SourceModel;
 
 /**
  * < Common > `Role`

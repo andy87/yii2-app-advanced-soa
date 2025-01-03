@@ -1,10 +1,10 @@
 <?php declare(strict_types=1);
 
-namespace yii2\backend\tests\unit\models\items;
+namespace backend\tests\unit\models\items;
 
-use yii2\backend\models\items\PascalCase;
-use yii2\common\components\base\models\items\sources\SourceModel;
-use yii2\common\components\base\tests\unit\models\items\BaseModelTest;
+use backend\models\items\PascalCase;
+use common\components\base\models\items\sources\SourceModel;
+use common\components\base\tests\unit\models\items\BaseModelTest;
 
 
 /**

@@ -1,7 +1,7 @@
 <?php declare(strict_types=1);
 
 use andy87\yii2\architect\UpdateTable;
-use yii2\common\models\sources\User;
+use commonmodels\sources\User;
 
 /**
  * < Common > `m130524_201445_update_table__user`

@@ -1,8 +1,8 @@
 <?php declare(strict_types=1);
 
-namespace yii2\common\components\base\tests\unit\resources\items\source;
+namespace common\components\base\tests\unit\resources\items\source;
 
-use yii2\common\components\base\tests\unit\source\items\BaseUnitTest;
+use common\components\base\tests\unit\source\items\BaseUnitTest;
 
 /**
  * < Common > Base Resource Test

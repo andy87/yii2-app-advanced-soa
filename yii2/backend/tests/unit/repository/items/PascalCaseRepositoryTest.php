@@ -1,6 +1,6 @@
 <?php declare(strict_types=1);
 
-namespace yii2\backend\tests\unit\repository\items;
+namespace backend\tests\unit\repository\items;
 
 use unit\repository\items\BaseRepositoryTest;
 

@@ -1,12 +1,11 @@
 <?php declare(strict_types=1);
 
-namespace yii2\common\components\base\dataProviders\items\source;
+namespace common\components\base\dataProviders\items\source;
 
 use yii\db\Connection;
 use yii\db\QueryInterface;
 use yii\data\ActiveDataProvider;
-use yii2\common\components\base\models\items\sources\SourceModel;
-use yii2\common\components\interfaces\dataProvider\DataProviderInterface;
+use common\components\interfaces\dataProvider\DataProviderInterface;
 
 /**
  * < Common > Родительский класс для всех классов-провайдеров данных

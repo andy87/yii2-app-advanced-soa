@@ -1,6 +1,6 @@
 <?php declare(strict_types=1);
 
-namespace yii2\common\components\base\tests\functional\source\items;
+namespace common\components\base\tests\functional\source\items;
 
 /**
  * < Common > Base Unit Test

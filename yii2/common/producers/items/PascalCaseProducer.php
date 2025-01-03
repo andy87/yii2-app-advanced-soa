@@ -2,9 +2,9 @@
 
 namespace common\producers\items;
 
-use yii2\common\components\base\models\items\sources\SourceModel;
-use yii2\common\components\base\producers\items\source\SourceProducer;
-use yii2\common\models\items\PascalCase;
+use common\components\base\models\items\sources\SourceModel;
+use common\components\base\producers\items\source\SourceProducer;
+use commonmodels\items\PascalCase;
 
 /**
  * < Common > Родительский класс для продюсеров: console/frontend/backend

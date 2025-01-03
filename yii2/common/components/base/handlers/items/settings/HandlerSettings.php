@@ -1,14 +1,14 @@
 <?php
 
-namespace yii2\common\components\base\handlers\items\settings;
+namespace common\components\base\handlers\items\settings;
 
-use yii2\common\components\base\services\items\BaseService;
-use yii2\common\components\base\models\items\sources\SourceModel;
-use yii2\common\components\interfaces\models\SearchModelInterface;
-use yii2\common\components\base\handlers\items\source\SourceHandler;
-use yii2\common\components\base\producers\items\source\SourceProducer;
-use yii2\common\components\base\repository\items\source\SourceRepository;
-use yii2\common\components\base\dataProviders\items\source\SourceActiveDataProvider;
+use common\components\base\services\items\BaseService;
+use common\components\base\models\items\sources\SourceModel;
+use common\components\interfaces\models\SearchModelInterface;
+use common\components\base\handlers\items\source\SourceHandler;
+use common\components\base\producers\items\source\SourceProducer;
+use common\components\base\repository\items\source\SourceRepository;
+use common\components\base\dataProviders\items\source\SourceActiveDataProvider;
 
 /**
  * < Common > `HandlerSetups`
