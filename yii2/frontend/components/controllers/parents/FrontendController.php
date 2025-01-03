@@ -37,7 +37,7 @@ abstract class FrontendController extends BaseWebHandlerController
             'rules' => [
                 [
                     'allow' => true,
-                    'roles' => [AccessControl::GUEST],
+                    'roles' => [AccessControl::ROLE_GUEST],
                 ],
             ],
         ];

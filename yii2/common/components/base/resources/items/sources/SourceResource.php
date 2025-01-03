@@ -2,8 +2,6 @@
 
 namespace common\components\base\resources\items\sources;
 
-use yii\base\BaseObject;
-
 /**
  * < Common > Base class for all resources
  *
@@ -11,7 +9,7 @@ use yii\base\BaseObject;
  *
  * @tag: #abstract #common #resource #base #source
  */
-abstract class SourceResource extends BaseObject
+abstract class SourceResource
 {
     /** @var string Key for the release method */
     public const string KEY = 'R';

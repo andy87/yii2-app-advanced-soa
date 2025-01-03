@@ -31,7 +31,7 @@ class PingController extends BackendController
             'rules' => [
                 [
                     'allow' => true,
-                    'roles' => [AccessControl::USER],
+                    'roles' => [AccessControl::ROLE_USER],
                 ],
             ],
         ];

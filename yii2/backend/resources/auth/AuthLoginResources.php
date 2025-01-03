@@ -29,10 +29,8 @@ class AuthLoginResources extends TemplateResources
      *
      * @tag #backend #resources #auth #constructor
      */
-    public function __construct( array $config )
+    public function __construct()
     {
         $this->loginForm = new LoginForm;
-
-        parent::__construct($config);
     }
 }

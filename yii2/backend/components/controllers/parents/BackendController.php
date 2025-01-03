@@ -34,7 +34,7 @@ abstract class BackendController extends BaseWebHandlerController
             'rules' => [
                 [
                     'allow' => true,
-                    'roles' => [AccessControl::USER],
+                    'roles' => [AccessControl::ROLE_USER],
                 ],
             ],
         ];

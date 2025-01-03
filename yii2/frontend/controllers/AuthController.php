@@ -74,12 +74,12 @@ class AuthController extends FrontendController
                             self::ACTION_SIGNUP
                         ],
                         'allow' => true,
-                        'roles' => [AccessControl::GUEST],
+                        'roles' => [AccessControl::ROLE_GUEST],
                     ],
                     [
                         'actions' => [self::ACTION_LOGOUT],
                         'allow' => true,
-                        'roles' => [AccessControl::USER],
+                        'roles' => [AccessControl::ROLE_USER],
                     ],
                 ],
             ],

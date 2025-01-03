@@ -44,11 +44,12 @@ class AuthController extends BackendController
                     [
                         'actions' => [Endpoints::LOGIN, Endpoints::ERROR ],
                         'allow' => true,
+                        'roles' => [ AccessControl::ROLE_GUEST ],
                     ],
                     [
                         'actions' => [Endpoints::LOGOUT ],
                         'allow' => true,
-                        'roles' => [ AccessControl::USER ],
+                        'roles' => [ AccessControl::ROLE_USER ],
                     ],
                 ],
             ],
