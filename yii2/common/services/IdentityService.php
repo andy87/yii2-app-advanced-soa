@@ -70,11 +70,8 @@ class IdentityService extends SingletonService
     private function setupProducer(): void
     {
         /** @var IdentityProducer $producer */
-        $producer = Yii::createObject([ IdentityProducer::class],[
-            Yii::createObject([
-                'class' => Operator::class,
-                'modelClass' => Identity::class
-            ])
+        $producer = Yii::createObject([ 'class' => IdentityProducer::class ],[
+            Yii::createObject(['class' => Operator::class],[ Identity::class ])
         ]);
 
         $this->_producer = $producer;
