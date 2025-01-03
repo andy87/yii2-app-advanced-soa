@@ -2,21 +2,25 @@
 
 namespace common\services;
 
-use common\repository\IdentityRepository;
-use Exception;
+use common\components\traits\has\ToolsKitTrait;
 use Yii;
-use yii\base\InvalidConfigException;
-use common\components\base\producers\IdentityProducer;
-use common\components\base\services\items\SingletonService;
-use common\components\services\ToolsKitTrait;
-use common\components\system\Manager;
-use common\components\traits\SingletonTrait;
+use Exception;
 use common\models\Identity;
 use common\models\sources\User;
+use yii\base\InvalidConfigException;
 use frontend\models\forms\SignupForm;
+use common\components\system\Operator;
+use common\repository\IdentityRepository;
+use common\components\base\producers\IdentityProducer;
+use common\components\base\services\items\SingletonService;
 
 /**
  * < Common > `IdentityService`
+ *
+ * @property-read IdentityProducer $_producer
+ * @property-read IdentityRepository $_repository
+ *
+ * @method IdentityService getInstance( array $params = [] )
  *
  * @package yii2\common\services
  *
@@ -24,9 +28,7 @@ use frontend\models\forms\SignupForm;
  */
 class IdentityService extends SingletonService
 {
-    use SingletonTrait, ToolsKitTrait;
-
-
+    use ToolsKitTrait;
 
     /**
      * @return void
@@ -54,7 +56,7 @@ class IdentityService extends SingletonService
      */
     private function setupRepository(): void
     {
-        /** @var \common\repository\IdentityRepository $repository */
+        /** @var IdentityRepository $repository */
         $repository = Yii::createObject(['class' => IdentityRepository::class],[
             User::class, User::class,
         ]);
@@ -70,7 +72,7 @@ class IdentityService extends SingletonService
         /** @var IdentityProducer $producer */
         $producer = Yii::createObject([ IdentityProducer::class],[
             Yii::createObject([
-                'class' => Manager::class,
+                'class' => Operator::class,
                 'modelClass' => Identity::class
             ])
         ]);

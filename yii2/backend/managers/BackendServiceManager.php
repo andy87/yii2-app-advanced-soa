@@ -20,8 +20,8 @@ use backend\services\items\PascalCaseService;
  */
 class BackendServiceManager extends CommonServiceManager
 {
-    public const string AUTH = 'authService';
-    public const string USER = 'userService';
+    public const string AUTH = 'auth';
+    public const string USER = 'user';
     public const string PASCALE_CASE = 'PascalCase';
 
 

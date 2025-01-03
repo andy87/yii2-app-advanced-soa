@@ -13,7 +13,7 @@ use yii\base\BaseObject;
  *
  * @tag: #manager #common
  */
-class Manager extends BaseObject
+class Operator extends BaseObject
 {
     /** @var ActiveRecord|string $modelClass класс модели */
     private ActiveRecord|string $modelClass;

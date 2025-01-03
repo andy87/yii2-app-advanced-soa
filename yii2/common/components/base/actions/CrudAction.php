@@ -52,7 +52,7 @@ abstract class CrudAction extends yii\base\Action
 
 
     /**
-     * @param \yii2\common\components\base\resources\items\BaseTemplateResource $R
+     * @param \common\components\base\resources\items\BaseTemplateResource $R
      *
      * @return string
      */

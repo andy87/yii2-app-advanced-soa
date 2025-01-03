@@ -6,7 +6,7 @@ use yii\base\Model;
 use yii\db\Exception;
 use yii\db\ActiveRecord;
 use yii\base\BaseObject;
-use common\components\system\Manager;
+use common\components\system\Operator;
 use common\interfaces\producers\ProducerInterface;
 
 /**
@@ -19,25 +19,25 @@ use common\interfaces\producers\ProducerInterface;
  */
 abstract class SourceProducer extends BaseObject implements ProducerInterface
 {
-    /** @var Manager */
-    public Manager $model;
+    /** @var Operator */
+    public Operator $model;
 
-    /** @var ?Manager */
-    public ?Manager $form = null;
+    /** @var ?Operator */
+    public ?Operator $form;
 
 
 
     /**
-     * @param Manager $modelManager
-     * @param ?Manager $formManager
+     * @param Operator $modelOperator
+     * @param ?Operator $formOperator
      *
      * @param array $config
      */
-    public function __construct( Manager $modelManager, Manager $formManager = null, array $config = [] )
+    public function __construct(Operator $modelOperator, ?Operator $formOperator = null, array $config = [] )
     {
-        $this->model = $modelManager;
+        $this->model = $modelOperator;
 
-        $this->form = $formManager;
+        $this->form = $formOperator;
 
         parent::__construct($config);
     }

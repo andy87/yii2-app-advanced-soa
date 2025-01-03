@@ -13,7 +13,7 @@ use common\components\enums\Action;
 /**
  * < Backend > Родительский класс для обработчиков контроллеров в окружения: `backend`
  *
- * @property \yii2\common\components\base\services\items\BaseService $service;
+ * @property \common\components\base\services\items\BaseService $service;
  *
  * @method BaseTemplateResource|BackendIndexResource|BackendViewResource|BackendCreateResource|BackendUpdateResource|string getResources(string $action)
  * @method BackendIndexResource processIndex(array $params)

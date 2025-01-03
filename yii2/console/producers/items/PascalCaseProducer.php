@@ -8,7 +8,7 @@ use console\models\items\PascalCase;
 /**
  * < Console > producer for model `PascalCase`
  *
- * @method \yii2\console\models\items\PascalCase create(array $params = [], bool $runSave = false)
+ * @method \console\models\items\PascalCase create(array $params = [], bool $runSave = false)
  * @method PascalCase add(array $params)
  *
  * @package yii2\console\components\services\producers\items

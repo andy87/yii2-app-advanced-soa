@@ -2,6 +2,7 @@
 
 namespace frontend\managers;
 
+use common\managers\CommonServiceManager;
 use frontend\services\{items\PascalCaseService};
 use frontend\services\AuthService;
 use frontend\services\items\UserService;
@@ -9,7 +10,7 @@ use frontend\services\items\UserService;
 /**
  * < Common > Менеджер сервисов
  *
- * @property-read \frontend\services\items\UserService $user
+ * @property-read UserService $user
  * @property-read AuthService $auth
  * @property-read PascalCaseService $pascalCase
  *
@@ -17,7 +18,7 @@ use frontend\services\items\UserService;
  *
  * @tag: #common #manager #service
  */
-class FrontendServiceManager extends \common\managers\CommonServiceManager
+class FrontendServiceManager extends CommonServiceManager
 {
     public const string AUTH = 'authService';
     public const string USER = 'userService';
@@ -30,7 +31,7 @@ class FrontendServiceManager extends \common\managers\CommonServiceManager
      * @var array $_listInstance
      */
     public const array CONFIG = [
-        ...\common\managers\CommonServiceManager::CONFIG,
+        ...CommonServiceManager::CONFIG,
         self::USER => ['class' => UserService::class ],
         self::AUTH => ['class' => AuthService::class ],
         self::PASCALE_CASE => ['class' => PascalCaseService::class ],

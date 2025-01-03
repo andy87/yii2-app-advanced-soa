@@ -5,6 +5,7 @@ namespace common\models\forms;
 use Exception;
 use common\models\Identity;
 use common\services\IdentityService;
+use Yii;
 use yii\base\InvalidConfigException;
 use frontend\controllers\AuthController;
 use common\components\base\models\forms\BaseWebForm;
@@ -82,7 +83,7 @@ class LoginForm extends BaseWebForm
     {
         if ($this->_identity === null)
         {
-            $this->_identity = IdentityService::getInstance()->findActiveByUsername($this->username);
+            $this->_identity = Yii::$app->serviceManager->identity->findActiveByUsername($this->username);
         }
 
         return $this->_identity;

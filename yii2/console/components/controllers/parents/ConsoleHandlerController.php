@@ -12,7 +12,7 @@ use console\models\forms\items\PascalCaseForm;
 /**
  * < Console > Родительский класс для всех консольных контроллеров
  *
- * @property \yii2\common\components\traits\handlers\ConsoleHandler $handler
+ * @property \common\components\traits\handlers\ConsoleHandler $handler
  *
  * @package yii2\backend\components\controllers\parent
  *

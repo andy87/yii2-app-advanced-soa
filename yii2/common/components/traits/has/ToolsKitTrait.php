@@ -4,7 +4,7 @@ namespace common\components\traits\has;
 
 use Yii;
 use yii\base\InvalidConfigException;
-use common\components\system\Manager;
+use common\components\system\Operator;
 use common\components\base\producers\items\source\SourceProducer;
 use common\components\base\repository\items\source\SourceRepository;
 use common\components\base\services\items\settings\ServiceSettings;
@@ -56,11 +56,11 @@ trait ToolsKitTrait
                 $params = [];
 
                 if ( $this->settings->classModel ) {
-                    $params[] = new Manager($this->settings->classModel);
+                    $params[] = new Operator($this->settings->classModel);
                 }
 
                 if ( $this->settings->classForm ) {
-                    $params[] = new Manager($this->settings->classForm);
+                    $params[] = new Operator($this->settings->classForm);
                 }
             }
 

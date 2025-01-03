@@ -32,7 +32,7 @@ class PascalCaseHandler extends SourceHandler
         \common\producers\items\PascalCaseProducer::class,
         \common\repository\items\PascalCaseRepository::class,
         [
-            \common\repository\items\PascalCaseRepository::class => [ \yii2\common\models\items\PascalCase::class, PascalCaseForm::class ]
+            \common\repository\items\PascalCaseRepository::class => [ \common\models\items\PascalCase::class, PascalCaseForm::class ]
         ]
     ];
 }

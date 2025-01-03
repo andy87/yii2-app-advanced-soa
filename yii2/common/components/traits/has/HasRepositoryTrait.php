@@ -53,7 +53,7 @@ HasRepositoryTrait
     }
 
     /**
-     * @return \yii2\common\components\base\handlers\items\settings\HandlerSettings
+     * @return \common\components\base\handlers\items\settings\HandlerSettings
      */
     abstract public function getHandlerSettings(): HandlerSettings;
 }

@@ -79,7 +79,7 @@ Trait ConsoleHandler
     /**
      * @param array $params
      *
-     * @return ?\yii2\common\models\forms\items\PascalCaseForm
+     * @return ?\common\models\forms\items\PascalCaseForm
      *
      */
     public function processFormCreate( array $params ): ?PascalCaseForm

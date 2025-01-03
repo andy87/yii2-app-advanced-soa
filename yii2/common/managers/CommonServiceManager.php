@@ -3,25 +3,24 @@
 namespace common\managers;
 
 use common\services\AuthService;
-use common\services\EmailService;
 use common\services\FormService;
-use common\services\IdentityService;
-use common\services\items\PascalCaseService;
-use common\services\items\UserService;
 use common\services\ModelService;
+use common\services\EmailService;
+use common\services\IdentityService;
+use common\services\items\UserService;
+use common\services\items\PascalCaseService;
 use common\components\base\managers\ServiceManager;
-
 
 /**
  * < Common > Менеджер сервисов
  *
- * @property-read \common\services\items\UserService $user
- * @property-read \common\services\AuthService $auth
+ * @property-read UserService $user
+ * @property-read AuthService $auth
  * @property-read EmailService $email
  * @property-read FormService $form
  * @property-read IdentityService $identity
- * @property-read \common\services\ModelService $model
- * @property-read \common\services\items\PascalCaseService $pascalCase
+ * @property-read ModelService $model
+ * @property-read PascalCaseService $pascalCase
  *
  * @package yii2\common\components\managers
  *
@@ -29,14 +28,14 @@ use common\components\base\managers\ServiceManager;
  */
 class CommonServiceManager extends ServiceManager
 {
-    public const string AUTH = 'authService';
-    public const string EMAIL = 'emailService';
+    public const string AUTH = 'auth';
+    public const string EMAIL = 'email';
 
-    public const string FORM = 'formService';
-    public const string IDENTITY = 'identityService';
-    public const string MODEL = 'modelService';
-    public const string USER = 'userService';
-    public const string PASCALE_CASE = 'PascalCaseService';
+    public const string FORM = 'form';
+    public const string IDENTITY = 'identity';
+    public const string MODEL = 'model';
+    public const string USER = 'user';
+    public const string PASCALE_CASE = 'PascalCase';
 
 
     /**

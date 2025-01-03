@@ -30,7 +30,7 @@ use console\repository\items\PascalCaseRepository;
  * @method PascalCaseForm|null getActiveForm(int $id)
  * @method array getAllModels(string|array $criteria = [])
  * @method PascalCaseForm[] getAllForms(string|array $criteria = [])
- * @method \yii2\console\models\items\PascalCase[] getAllActiveModels(string|array $criteria = [])
+ * @method \console\models\items\PascalCase[] getAllActiveModels(string|array $criteria = [])
  * @method PascalCaseForm[] getAllActiveForms(string|array $criteria = [])
  * @method int delete(\yii2\console\models\items\PascalCase $model)
  *

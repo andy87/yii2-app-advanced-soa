@@ -22,13 +22,13 @@ trait SingletonTrait
     /**
      * @param array $params
      *
-     * @return static
+     * @return object
      *
      * @throws InvalidConfigException
      */
-    public static function getInstance( array $params = [] ): static
+    public static function getInstance( array $params = [] ): object
     {
-        if (!isset(self::$instance)) {
+        if (!isset(static::$instance)) {
 
             $classConfig = array_merge($params,[
                 'class' => static::class
@@ -37,9 +37,9 @@ trait SingletonTrait
             /** @var static $instance */
             $instance = Yii::createObject($classConfig);
 
-            self::$instance = $instance;
+            static::$instance = $instance;
         }
 
-        return self::$instance;
+        return static::$instance;
     }
 }

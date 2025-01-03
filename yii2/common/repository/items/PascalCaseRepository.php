@@ -24,5 +24,5 @@ use common\components\base\repository\items\source\SourceRepository;
 class PascalCaseRepository extends SourceRepository
 {
     /** @var SourceModel|string $modelClass класс модели */
-    public SourceModel|string $modelClass = \yii2\common\models\items\PascalCase::class;
+    public SourceModel|string $modelClass = \common\models\items\PascalCase::class;
 }

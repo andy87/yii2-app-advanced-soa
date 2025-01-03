@@ -15,7 +15,7 @@ use common\models\items\PascalCase;
  * @property \common\producers\items\PascalCaseProducer $producer
  * @property \common\repository\items\PascalCaseRepository $repository
  * @property PascalCaseDataProvider $dataProvider
- * @property \yii2\common\components\base\services\items\settings\ServiceSettings $settings
+ * @property \common\components\base\services\items\settings\ServiceSettings $settings
  *
  * @method PascalCase[] getList(int $page, int $perPage)
  * @method PascalCase|null getModel(int $id)
