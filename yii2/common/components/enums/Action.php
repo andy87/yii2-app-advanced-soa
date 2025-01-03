@@ -5,7 +5,7 @@ namespace common\components\enums;
 /**
  * < Common > Class Action
  *
- * @package app\common\components
+ * @package yii2\common\components
  *
  * @tag: #abstract #enum #action
  */
@@ -29,19 +29,19 @@ enum Action: string
 
 
     /** @var string $INDEX */
-    public const INDEX = self::Index->value;
+    public const string INDEX = self::Index->value;
 
     /** @var string $VIEW */
-    public const VIEW = self::View->value;
+    public const string VIEW = self::View->value;
 
     /** @var string $CREATE */
-    public const CREATE = self::Create->value;
+    public const string CREATE = self::Create->value;
 
     /** @var string $UPDATE */
-    public const UPDATE = self::Update->value;
+    public const string UPDATE = self::Update->value;
 
     /** @var string $DELETE */
-    public const DELETE = self::Delete->value;
+    public const string DELETE = self::Delete->value;
 
 
 
@@ -51,7 +51,7 @@ enum Action: string
      *
      * @var array
      */
-    public const VERB = [
+    public const array VERB = [
         self::INDEX,
         self::VIEW,
         self::CREATE,

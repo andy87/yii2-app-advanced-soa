@@ -1,7 +1,7 @@
 <?php
 
 use andy87\yii2\architect\CreateTable;
-use commonmodels\sources\Role;
+use common\models\sources\Role;
 
 /**
  * Class m240629_083647_create_table__role

@@ -3,13 +3,13 @@
 namespace common\components\base\resources\crud;
 
 use yii\data\ActiveDataProvider;
-use common\components\interfaces\models\SearchModelInterface;
+use common\interfaces\models\SearchModelInterface;
 use common\components\base\resources\items\BaseTemplateResource;
 
 /**
  * < Common > Базовый родительский класс для ресурса индекса
  *
- * @package app\common\components\base\resources
+ * @package yii2\common\components\base\resources
  *
  * @tag: #abstract #common #resource #base #crud #index
  */
@@ -18,6 +18,6 @@ abstract class BaseGridViewResource extends BaseTemplateResource
     /** @var ActiveDataProvider */
     public ActiveDataProvider $activeDataProvider;
 
-    /** @var SearchModelInterface */
+    /** @var \common\interfaces\models\SearchModelInterface */
     public SearchModelInterface $searchModel;
 }

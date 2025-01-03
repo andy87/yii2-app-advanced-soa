@@ -2,13 +2,13 @@
 
 namespace backend\tests\functional;
 
-use common\components\Action;
-use common\components\Layout;
-use commontests\cest\SendForm;
-use commonfixtures\UserFixture;
-use commonmodels\forms\LoginForm;
-use backend\tests\FunctionalTester;
 use backend\controllers\AuthController;
+use backend\tests\FunctionalTester;
+use common\components\enums\Endpoints;
+use common\components\Layout;
+use common\models\forms\LoginForm;
+use commonfixtures\UserFixture;
+use commontests\cest\SendForm;
 
 /**
  * < Backend > `LoginCest`
@@ -62,7 +62,7 @@ class LoginCest extends SendForm
      */
     public function loginUser(FunctionalTester $I): void
     {
-        $route = AuthController::getEndpoint(Action::LOGIN);
+        $route = AuthController::getEndpoint(Endpoints::LOGIN);
 
         $I->amOnRoute($route);
 

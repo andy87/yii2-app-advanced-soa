@@ -2,12 +2,15 @@
 
 namespace frontend\tests\unit\models;
 
-use Codeception\Exception\ModuleException;
+use JsonException;
 use Codeception\Test\Unit;
+use yii\mail\MailerInterface;
+use yii\mail\MessageInterface;
+use frontend\tests\UnitTester;
 use frontend\services\SiteService;
 use yii\base\InvalidConfigException;
-use yii\mail\{MailerInterface, MessageInterface};
-use frontend\{models\forms\ContactForm, tests\UnitTester};
+use frontend\models\forms\ContactForm;
+use Codeception\Exception\ModuleException;
 
 /**
  * < Frontend > `ContactFormTest`
@@ -33,7 +36,7 @@ class ContactFormTest extends Unit
      *
      * @return void
      *
-     * @throws InvalidConfigException|MailerInterface|ModuleException
+     * @throws InvalidConfigException|MailerInterface|ModuleException|JsonException
      *
      * @tag #frontend #tests #unit #models #ContactFormTest #testSendEmail
      */

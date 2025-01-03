@@ -7,7 +7,7 @@ use yii\web\Controller;
 /**
  * < Common > Родительский класс для всех веб контроллеров
  *
- * @package app\common\components\base\controllers\base
+ * @package yii2\common\components\base\controllers\base
  *
  * @tag: #abstract #common #base #controller #source #web
  */

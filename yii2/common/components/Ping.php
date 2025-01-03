@@ -9,7 +9,7 @@ namespace common\components;
  */
 class Ping
 {
-    public const ANSWER = 'pong';
+    public const string ANSWER = 'pong';
 
     /**
      * @return string

@@ -14,7 +14,7 @@ use Codeception\Actor;
  *
  * @cli ./vendor/bin/codecept run app/frontend/tests/functional/items/PascalCaseControllerCest
  *
- * @package app\frontend\tests\functional\items
+ * @package yii2\frontend\tests\functional\items
  *
  * @tag: #boilerplate #frontend #tests #functional #ContactCest
  */

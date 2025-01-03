@@ -2,12 +2,15 @@
 
 namespace frontend\tests\unit\models;
 
-use Codeception\Exception\ModuleException;
+use yii\base\Exception;
 use Codeception\Test\Unit;
+use frontend\tests\UnitTester;
+use common\fixtures\UserFixture;
 use frontend\services\AuthService;
-use yii\base\{Exception, InvalidArgumentException, InvalidConfigException};
-use commonfixtures\UserFixture;
-use frontend\{models\forms\ResetPasswordForm, tests\UnitTester};
+use yii\base\InvalidConfigException;
+use yii\base\InvalidArgumentException;
+use Codeception\Exception\ModuleException;
+use frontend\models\forms\ResetPasswordForm;
 
 /**
  * < Frontend > `ResetPasswordFormTest`
@@ -57,7 +60,7 @@ class ResetPasswordFormTest extends Unit
      *
      * @tag #frontend #tests #reset #wrong #token
      */
-    public function testResetWrongToken()
+    public function testResetWrongToken(): void
     {
         $this->tester->expectThrowable(InvalidArgumentException::class, function() {
             new ResetPasswordForm('');

@@ -6,7 +6,7 @@ use common\services\IdentityService;
 use Yii;
 use yii\base\InvalidConfigException;
 use common{components\forms\EmailingWebForm};
-use commonmodels\{dto\EmailMessageDto, Identity};
+use common\models\{dto\EmailMessageDto, Identity};
 
 /**
  * < Frontend > `PasswordResetRequestForm`

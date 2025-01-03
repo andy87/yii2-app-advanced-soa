@@ -5,11 +5,11 @@ namespace frontend\models\items;
 /**
  * < Frontend > Boilerplate для модели `PascalCase`
  *
- * @package app\frontend\models\items
+ * @package yii2\frontend\models\items
  *
  * @tag: #boilerplate #frontend #model #{{snake_case}}
  */
-class PascalCase extends \yii2\common\models\items\PascalCase
+class PascalCase extends \common\models\items\PascalCase
 {
     // {{Boilerplate}}
 }

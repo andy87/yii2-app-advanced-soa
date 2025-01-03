@@ -18,7 +18,7 @@ use console\components\controllers\parents\ConsoleHandlerController;
  * @method int actionModelUpdate(int $id, string $json)
  * @method int actionDelete(int $id)
  *
- * @package app\console\controllers\items
+ * @package yii2\console\controllers\items
  *
  * @tag: #boilerplate #console #controller #{{snake_case}}
  */

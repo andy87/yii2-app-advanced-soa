@@ -2,13 +2,11 @@
 
 namespace frontend\services\items;
 
-use frontend\dataProviders\items\PascalCaseDataProvider;
-use frontend\producers\items\PascalCaseProducer;
-use frontend\repository\items\PascalCaseRepository;
 use common\components\base\services\items\settings\ServiceSettings;
-use common\components\interfaces\CatcherInterface;
+use common\interfaces\CatcherInterface;
 use frontend\models\forms\items\PascalCaseForm;
 use frontend\models\items\PascalCase;
+use frontend\producers\items\PascalCaseProducer;
 
 /**
  * < Frontend > Сервис для работы с сущностью `PascalCase`
@@ -36,7 +34,7 @@ use frontend\models\items\PascalCase;
  * @method PascalCaseForm[] getAllActiveForms(string|array $criteria = [])
  * @method int delete(PascalCase $model)
  *
- * @package app\frontend\components\services\items
+ * @package yii2\frontend\components\services\items
  *
  * @tag: #boilerplate #frontend #service #{{snake_case}}
  */

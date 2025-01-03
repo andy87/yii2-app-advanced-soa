@@ -1,8 +1,8 @@
 <?php declare(strict_types=1);
 
-namespace common\components\interfaces;
+namespace common\interfaces;
 
-use commonmodels\dto\EmailMessageDto;
+use common\models\dto\EmailMessageDto;
 
 /**
  * < Common > `ModelEmailingInterface`

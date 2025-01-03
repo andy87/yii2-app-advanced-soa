@@ -17,7 +17,7 @@ use frontend\models\items\PascalCase;
  * @method self setConnection(Connection $connection)
  * @method Connection|null getConnection()
  *
- * @package app\frontend\components\services\items
+ * @package yii2\frontend\components\services\items
  *
  * @tag: #boilerplate #frontend #service #{{snake_case}}
  */

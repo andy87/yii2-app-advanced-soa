@@ -8,8 +8,8 @@ use yii\base\Model;
 use yii\db\ActiveRecord;
 use yii\db\StaleObjectException;
 use yii\db\Exception as DbException;
-use common\components\interfaces\CatcherInterface;
-use common\components\interfaces\services\ServiceInterface;
+use common\interfaces\CatcherInterface;
+use common\interfaces\services\ServiceInterface;
 use common\components\base\producers\items\source\SourceProducer;
 use common\components\base\services\items\settings\ServiceSettings;
 use common\components\base\repository\items\source\SourceRepository;
@@ -24,7 +24,7 @@ use common\components\base\dataProviders\items\source\SourceActiveDataProvider;
  * @property SourceActiveDataProvider $dataProvider
  * @property ServiceSettings $settings
  *
- * @package app\common\components\base\services\items
+ * @package yii2\common\components\base\services\items
  *
  * @tag: #abstract #common #service #base #items
  */

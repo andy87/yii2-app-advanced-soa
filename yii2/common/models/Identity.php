@@ -4,7 +4,7 @@ namespace common\models;
 
 use Yii;
 use yii\web\IdentityInterface;
-use commonmodels\sources\User;
+use common\models\sources\User;
 use yii\behaviors\TimestampBehavior;
 use yii\base\{ Behavior, Exception, NotSupportedException };
 

@@ -2,19 +2,19 @@
 
 namespace frontend\services;
 
+use common\components\base\services\items\SingletonService;
+use common\components\system\Logger;
+use common\interfaces\CatcherInterface;
 use common\services\EmailService;
+use frontend\models\forms\ContactForm;
 use JsonException;
 use Yii;
 use yii\base\InvalidConfigException;
-use common\components\base\services\items\SingletonService;
-use common\components\interfaces\CatcherInterface;
-use common\components\system\Logger;
-use frontend\models\forms\ContactForm;
 
 /**
  * < Frontend > `SiteService`
  *
- * @property CatcherInterface|Logger $logger
+ * @property \common\interfaces\CatcherInterface|Logger $logger
  *
  * @package yii2\frontend\services\controllers
  *

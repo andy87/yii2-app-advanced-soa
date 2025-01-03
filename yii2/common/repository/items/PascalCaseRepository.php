@@ -17,7 +17,7 @@ use common\components\base\repository\items\source\SourceRepository;
  * @method self setConnection( Connection $connection )
  * @method Connection|null getConnection()
  *
- * @package app\common\components\services\items
+ * @package yii2\common\components\services\items
  *
  * @tag: #boilerplate #common #repository #{{snake_case}}
  */

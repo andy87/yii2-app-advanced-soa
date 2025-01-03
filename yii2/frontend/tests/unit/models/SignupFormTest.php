@@ -2,15 +2,20 @@
 
 namespace frontend\tests\unit\models;
 
-use Codeception\Exception\ModuleException;
-use Codeception\Test\Unit;
-use common\services\IdentityService;
+use Yii;
 use Exception;
-use frontend\services\AuthService;
-use yii\base\InvalidConfigException;
+use Codeception\Test\Unit;
+use common\models\Identity;
 use yii\mail\MessageInterface;
-use common{fixtures\UserFixture, models\Identity, models\sources\User};
-use frontend\{models\forms\SignupForm, tests\UnitTester};
+use frontend\tests\UnitTester;
+use frontend\models\items\User;
+use common\fixtures\UserFixture;
+use frontend\services\AuthService;
+use common\services\IdentityService;
+use yii\base\InvalidConfigException;
+use frontend\models\forms\SignupForm;
+use Codeception\Exception\ModuleException;
+use common\models\sources\User as UserSource;
 
 /**
  * < Frontend > `SignupFormTest`
@@ -86,9 +91,9 @@ class SignupFormTest extends Unit
     public function testCorrectSignup(): void
     {
         $user = $this->getUser([
-            User::ATTR_USERNAME => 'some_username',
-            User::ATTR_EMAIL => 'some_email@example.com',
-            User::ATTR_PASSWORD => 'some_password'
+            UserSource::ATTR_USERNAME => 'some_username',
+            UserSource::ATTR_EMAIL => 'some_email@example.com',
+            UserSource::ATTR_PASSWORD => 'some_password'
         ]);
 
         $signupForm = $this->constructSignupForm($user);
@@ -110,7 +115,7 @@ class SignupFormTest extends Unit
 
         verify($mail)->instanceOf(MessageInterface::class);
         verify($mail->getTo())->arrayHasKey('some_email@example.com');
-        verify($mail->getFrom())->arrayHasKey(\Yii::$app->params['supportEmail']);
+        verify($mail->getFrom())->arrayHasKey(Yii::$app->params['supportEmail']);
         verify($mail->getSubject())->equals($signupForm->generateMailSubject());
         verify($mail->toString())->stringContainsString($identity->verification_token);
     }
@@ -132,9 +137,9 @@ class SignupFormTest extends Unit
     public function testNotCorrectSignup(): void
     {
         $user = $this->getUser([
-            User::ATTR_USERNAME => 'troy.becker',
-            User::ATTR_EMAIL => 'nicolas.dianna@hotmail.com',
-            User::ATTR_PASSWORD => 'some_password'
+            UserSource::ATTR_USERNAME => 'troy.becker',
+            UserSource::ATTR_EMAIL => 'nicolas.dianna@hotmail.com',
+            UserSource::ATTR_PASSWORD => 'some_password'
         ]);
 
         $signupForm = $this->constructSignupForm($user);

@@ -12,7 +12,7 @@ use common\components\base\dataProviders\items\source\SourceActiveDataProvider;
  * @property ?callable|string $key
  * @property ?Connection|array|string| $db
  *
- * @package app\common\components\dataproviders\items
+ * @package yii2\common\components\dataproviders\items
  *
  * @tag: #boilerplate #common #dataProvider #{{snake_case}}
  */

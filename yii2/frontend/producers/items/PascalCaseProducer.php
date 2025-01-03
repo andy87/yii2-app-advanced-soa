@@ -11,7 +11,7 @@ use frontend\models\items\PascalCase;
  * @method PascalCase create(array $params = [], bool $runSave = false)
  * @method PascalCase add(array $params)
  *
- * @package app\frontend\components\services\producers\items
+ * @package yii2\frontend\components\services\producers\items
  *
  * @tag: #boilerplate #frontend #producer #{{snake_case}}
  */

@@ -1,8 +1,10 @@
 <?php declare(strict_types=1);
 
-namespace backend\tests\unit\providers\items;
+namespace backend\tests\unit\producers\items;
 
-use common\components\base\{providers\items\base\SourceProducer};
+
+use common\components\base\producers\items\source\SourceProducer;
+use common\components\base\tests\unit\producers\items\BaseProducerTest;
 
 /**
  * < Backend > PascalCaseProducerTest
@@ -13,11 +15,11 @@ use common\components\base\{providers\items\base\SourceProducer};
  *
  * @method bool testCreateSuccess()
  * @method bool testCreateSuccessWithSave()
- * @package app\backend\tests\unit\producers
+ * @package yii2\backend\tests\unit\producers
  *
  * @tag: #boilerplate #backend #test #service
  */
-class sPascalCaseProducerTest extends \app\common\components\base\tests\base\unit\producers\BaseProviderTest
+class PascalCaseProviderTest extends BaseProducerTest
 {
     // {{Boilerplate}}
 }

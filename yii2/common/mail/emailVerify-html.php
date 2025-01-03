@@ -1,6 +1,6 @@
 <?php
 
-use commonmodels\Identity;
+use common\models\Identity;
 use frontend\controllers\AuthController;
 use yii\{ web\View, helpers\Html };
 

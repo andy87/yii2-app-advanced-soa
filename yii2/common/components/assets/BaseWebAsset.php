@@ -3,8 +3,8 @@
 namespace common\components\assets;
 
 use yii\web\YiiAsset;
-use common\components\base\assets\BaseAsset;
 use yii\bootstrap5\BootstrapAsset;
+use common\components\base\assets\BaseAsset;
 
 /**
  * < Common >

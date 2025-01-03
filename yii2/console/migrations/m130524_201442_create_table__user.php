@@ -1,7 +1,7 @@
 <?php declare(strict_types=1);
 
 use andy87\yii2\architect\CreateTable;
-use commonmodels\sources\User;
+use common\models\sources\User;
 
 /**
  * < Console > `m130524_201442_create_table__user`

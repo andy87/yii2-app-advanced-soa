@@ -2,8 +2,8 @@
 
 namespace frontend\tests\unit\producers\items;
 
-use common\components\base\{providers\items\base\SourceProducer};
-use unit\producers\items\BaseProducerTest;
+use common\components\base\producers\items\source\SourceProducer;
+use common\components\base\tests\unit\producers\items\BaseProducerTest;
 
 /**
  * < Frontend > PascalCaseProducerTest
@@ -15,7 +15,7 @@ use unit\producers\items\BaseProducerTest;
  * @method bool testCreateSuccess()
  * @method bool testCreateSuccessWithSave()
  *
- * @package app\frontend\tests\unit\producers
+ * @package yii2\frontend\tests\unit\producers
  *
  * @tag: #boilerplate #frontend #test #service
  */

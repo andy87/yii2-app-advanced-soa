@@ -7,7 +7,7 @@ use yii\base\Model;
 /**
  * < Common > Информация о модели
  *
- * @package app\common\components\models
+ * @package yii2\common\components\models
  *
  * @tag: #abstract #common #model #dto
  */

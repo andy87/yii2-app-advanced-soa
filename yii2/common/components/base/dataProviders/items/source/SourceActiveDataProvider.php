@@ -5,7 +5,7 @@ namespace common\components\base\dataProviders\items\source;
 use yii\db\Connection;
 use yii\db\QueryInterface;
 use yii\data\ActiveDataProvider;
-use common\components\interfaces\dataProvider\DataProviderInterface;
+use common\interfaces\dataProvider\DataProviderInterface;
 
 /**
  * < Common > Родительский класс для всех классов-провайдеров данных
@@ -14,7 +14,7 @@ use common\components\interfaces\dataProvider\DataProviderInterface;
  * @property ?callable|string $key
  * @property ?Connection|array|string| $db
  *
- * @package app\common\components\base\dataProviders\items\core
+ * @package yii2\common\components\base\dataProviders\items\core
  *
  * @tag: #abstract #common #dataProvider #base
  */

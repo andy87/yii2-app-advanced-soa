@@ -1,13 +1,13 @@
 <?php declare(strict_types=1);
 
-namespace common\components\interfaces\models;
+namespace common\interfaces\models;
 
 use common\components\base\dataProviders\items\source\SourceActiveDataProvider;
 
 /**
  * < Common >
  *
- * @package app\common\components\interfaces\models
+ * @package yii2\common\components\interfaces\models
  *
  * @tag: #abstract #common #interface #searchModel
  */

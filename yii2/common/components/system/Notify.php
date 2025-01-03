@@ -4,22 +4,22 @@ namespace common\components\system;
 
 use Yii;
 use Exception;
-use common\components\system\Logger;
+use JsonException;
+use yii\base\BaseObject;
 
 /**
  * < Common > Class Notify
  *
- * @package app\common\components
+ * @package yii2\common\components
  *
  * @tag: #common #component #notify
  */
-class Notify
+class Notify extends BaseObject
 {
-    public const INFO = 'info';
-    public const ERROR = 'error';
-    public const WARNING = 'warning';
-    public const SUCCESS = 'success';
-
+    public const string INFO = 'info';
+    public const string ERROR = 'error';
+    public const string WARNING = 'warning';
+    public const string SUCCESS = 'success';
 
 
     /**
@@ -27,6 +27,8 @@ class Notify
      * @param string $type
      *
      * @return bool
+     *
+     * @throws JsonException|Exception
      */
     public static function send( string $message, string $type = self::INFO ): bool
     {
@@ -38,9 +40,9 @@ class Notify
 
             return true;
 
-        } catch (Exception $e) {
+        } catch (Exception $exception) {
 
-            Logger::logCatch($e, __METHOD__, 'Catch! Notify::send()',[
+            Logger::catchHandler($exception, __METHOD__, 'Catch! Notify::send()',[
                 'message' => $message,
                 'type' => $type,
             ]);

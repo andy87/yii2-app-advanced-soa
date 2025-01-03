@@ -7,13 +7,13 @@ use yii\db\Exception;
 use yii\db\ActiveRecord;
 use yii\base\BaseObject;
 use common\components\system\Manager;
-use common\components\interfaces\producers\ProducerInterface;
+use common\interfaces\producers\ProducerInterface;
 
 /**
  * < Common > Родительский абстрактный класс для всех провайдеров
  *  использующих BaseModel
  *
- * @package app\common\components\base\producers
+ * @package yii2\common\components\base\producers
  *
  * @tag: #abstract #common #producer #base #source
  */
@@ -22,14 +22,14 @@ abstract class SourceProducer extends BaseObject implements ProducerInterface
     /** @var Manager */
     public Manager $model;
 
-    /** @var ?\yii2\common\components\system\Manager */
+    /** @var ?Manager */
     public ?Manager $form = null;
 
 
 
     /**
-     * @param \yii2\common\components\system\Manager $modelManager
-     * @param ?\yii2\common\components\system\Manager $formManager
+     * @param Manager $modelManager
+     * @param ?Manager $formManager
      *
      * @param array $config
      */

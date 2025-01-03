@@ -7,7 +7,7 @@ use common\components\base\models\items\sources\SourceModel;
 /**
  * < Frontend> Родительский класс для ресурса создания модели в окружении `frontend`
  *
- * @package app\frontend\components\resources\parents\crud
+ * @package yii2\frontend\components\resources\parents\crud
  *
  * @property ?SourceModel $form
  *

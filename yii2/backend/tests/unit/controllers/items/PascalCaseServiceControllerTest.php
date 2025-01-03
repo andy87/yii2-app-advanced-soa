@@ -2,18 +2,21 @@
 
 namespace backend\tests\unit\controllers\items;
 
+use backend\controllers\items\PascalCaseController;
+use common\components\base\tests\unit\controllers\items\BaseWebControllerTest;
+
 /**
  * < Backend > PascalCaseServiceTest
  *
- * @cli ./vendor/bin/codecept run app/backend/tests/unit/controllers/items/ItemServiceControllerTest
+ * @cli ./vendor/bin/codecept run yii2/backend/tests/unit/controllers/items/ItemServiceControllerTest
  *
- * @property \yii2\backend\controllers\items\PascalCaseController $controller
+ * @property PascalCaseController $controller
  *
- * @package app\backend\tests\unit\models\items
+ * @package yii2\backend\tests\unit\models\items
  *
  * @tag: #boilerplate #backend #test #model
  */
-class PascalCaseControllerTest extends \unit\controllers\items\BaseWebControllerTest
+class PascalCaseServiceControllerTest extends BaseWebControllerTest
 {
 
 }

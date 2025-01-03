@@ -7,7 +7,7 @@ use common\components\base\resources\items\sources\SourceResource;
 /**
  * < Common > Base class for all resources with template
  *
- * @package app\common\components\base\resources
+ * @package yii2\common\components\base\resources
  *
  * @tag: #abstract #common #resource #base #items
  */

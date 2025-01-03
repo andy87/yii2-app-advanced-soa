@@ -6,12 +6,12 @@ use Yii;
 use Exception;
 use JsonException;
 use yii\web\Controller;
-use common\components\interfaces\CatcherInterface;
+use common\interfaces\CatcherInterface;
 
 /**
  * < Common > Logger
  *
- * @package app\common\components\core
+ * @package yii2\common\components\core
  *
  * @see self::logError()
  * @see self::logInfo()
@@ -27,7 +27,7 @@ class Logger implements CatcherInterface
 
 
     /**
-     * @param Exception $e
+     * @param Exception $exception
      * @param ?string $method
      * @param ?string $message
      * @param ?array $data
@@ -36,9 +36,14 @@ class Logger implements CatcherInterface
      *
      * @throws Exception
      */
-    public function catcher(Exception $e, ?string $method, ?string $message, ?array $data = []): bool
+    public static function catchHandler(Exception $exception, ?string $method, ?string $message, ?array $data = []): bool
     {
-        return $this->logCatch($e, $method, $message, $data );
+        $className = self::class;
+
+        /** @var  $logger */
+        $logger = new $className;
+
+        return $logger->logCatch($exception, $method, $message, $data );
     }
 
     /**

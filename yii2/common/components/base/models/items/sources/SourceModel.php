@@ -3,7 +3,7 @@
 namespace common\components\base\models\items\sources;
 
 use yii\db\ActiveRecord;
-use common\components\interfaces\models\SourceModelInterface;
+use common\interfaces\models\SourceModelInterface;
 
 /**
  * < Common > Родительский класс для всех моделей базы данных
@@ -15,16 +15,18 @@ use common\components\interfaces\models\SourceModelInterface;
  * @see SourceModel::SINGULAR
  * @see SourceModel::PLURAL
  *
- * @package app\common\components\base\models\items
+ * @package yii2\common\components\base\models\items
  *
  * @tag: #abstract #common #model #base #source
  */
 abstract class SourceModel extends ActiveRecord implements SourceModelInterface
 {
     /** @var string Единственное число */
-    public const SINGULAR = 'Объект';
+    public const string SINGULAR = 'Объект';
 
     /** @var string Множественное число */
-    public const PLURAL = 'Объекты';
+    public const string PLURAL = 'Объекты';
+
+
     // {{Parent}}
 }

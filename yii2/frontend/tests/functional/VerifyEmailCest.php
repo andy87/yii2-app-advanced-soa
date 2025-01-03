@@ -2,10 +2,10 @@
 
 namespace frontend\tests\functional;
 
+use common\models\Identity;
 use common\components\Layout;
-use commonmodels\Identity;
-use commonfixtures\UserFixture;
-use commonmodels\sources\User;
+use common\models\sources\User;
+use common\fixtures\UserFixture;
 use frontend\tests\FunctionalTester;
 use frontend\controllers\AuthController;
 use frontend\models\forms\VerifyEmailForm;

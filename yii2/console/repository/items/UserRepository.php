@@ -2,7 +2,7 @@
 
 namespace console\repository\items;
 
-use commonmodels\sources\User;
+use common\models\sources\User;
 
 /**
  * < Console > `UserRepository`

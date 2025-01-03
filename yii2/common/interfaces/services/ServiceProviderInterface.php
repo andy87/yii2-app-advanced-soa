@@ -1,13 +1,13 @@
 <?php declare(strict_types=1);
 
-namespace common\components\interfaces\services;
+namespace common\interfaces\services;
 
 use common\components\base\providers\items\base\SourceProducer;
 
 /**
  * < Common >
  *
- * @package app\components\interfaces\services
+ * @package yii2\components\interfaces\services
  *
  * @tag: #abstract #common #interface #service #producer
  */

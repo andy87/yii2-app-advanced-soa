@@ -14,7 +14,7 @@ use unit\models\items\BaseModelTest;
  * @cli ./vendor/bin/codecept run app/console/tests/unit/models/items/PascalCaseTest:testInspectAttributes
  * @method PascalCase testInspectAttributes()
  *
- * @package app\console\tests\unit\models\items
+ * @package yii2\console\tests\unit\models\items
  *
  * @tag: #boilerplate #console #test #model
  */

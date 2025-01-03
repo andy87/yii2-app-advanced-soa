@@ -1,6 +1,6 @@
 <?php declare(strict_types=1);
 
-namespace common\components\interfaces\controllers;
+namespace common\interfaces\controllers;
 
 use common\components\base\services\items\BaseService;
 
@@ -9,7 +9,7 @@ use common\components\base\services\items\BaseService;
  *
  * @property BaseService $service
  *
- * @package app\common\components\interfaces\controllers\items
+ * @package yii2\common\components\interfaces\controllers\items
  *
  * @tag: #abstract #common #interface #controller #service
  */

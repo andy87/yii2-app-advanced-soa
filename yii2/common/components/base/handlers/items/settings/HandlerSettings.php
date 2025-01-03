@@ -2,9 +2,9 @@
 
 namespace common\components\base\handlers\items\settings;
 
+use common\interfaces\models\SearchModelInterface;
 use common\components\base\services\items\BaseService;
 use common\components\base\models\items\sources\SourceModel;
-use common\components\interfaces\models\SearchModelInterface;
 use common\components\base\handlers\items\source\SourceHandler;
 use common\components\base\producers\items\source\SourceProducer;
 use common\components\base\repository\items\source\SourceRepository;
@@ -13,7 +13,7 @@ use common\components\base\dataProviders\items\source\SourceActiveDataProvider;
 /**
  * < Common > `HandlerSetups`
  *
- * @package app\common\components\base\handlers\items\setups
+ * @package yii2\common\components\base\handlers\items\setups
  */
 class HandlerSettings
 {

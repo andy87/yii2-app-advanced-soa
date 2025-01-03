@@ -2,9 +2,10 @@
 
 namespace common\components;
 
+use backend\controllers\AuthController;
+use common\components\enums\Endpoints;
 use Yii;
 use yii\helpers\Html;
-use backend\controllers\AuthController;
 
 /**
  * < Common >
@@ -17,10 +18,10 @@ use backend\controllers\AuthController;
  */
 class Layout
 {
-    public const BUTTON_TEXT_LOGIN = 'Войти';
-    public const BUTTON_TEXT_LOGOUT = 'Выйти';
+    public const string BUTTON_TEXT_LOGIN = 'Войти';
+    public const string BUTTON_TEXT_LOGOUT = 'Выйти';
 
-    public const META_VIEWPORT = 'viewport';
+    public const string META_VIEWPORT = 'viewport';
 
     /** @var array|array[] */
     public static array $meta = [
@@ -60,8 +61,8 @@ class Layout
     public static function getHtmlAuthBlock(): string
     {
         return (Yii::$app->user->isGuest)
-            ? Layout::getHtmlLoginButton()
-            : Layout::getHtmlLogoutForm();
+            ? self::getHtmlLoginButton()
+            : self::getHtmlLogoutForm();
     }
 
     /**
@@ -70,7 +71,7 @@ class Layout
     public static function getHtmlLoginButton(): string
     {
         $link = Html::a(self::BUTTON_TEXT_LOGIN,
-            [AuthController::getEndpoint(Action::LOGIN)],
+            [AuthController::getEndpoint(Endpoints::LOGIN)],
             ['class' => ['btn btn-link login text-decoration-none']]
         );
 
@@ -82,7 +83,7 @@ class Layout
      */
     public static function getHtmlLogoutForm(): string
     {
-        return Html::beginForm([AuthController::getEndpoint(Action::LOGOUT)], 'post', ['class' => 'd-flex'])
+        return Html::beginForm([AuthController::getEndpoint(Endpoints::LOGOUT)], 'post', ['class' => 'd-flex'])
             . Html::submitButton(
                 self::BUTTON_TEXT_LOGOUT . ' (' . Yii::$app->user->identity->username . ')',
                 ['class' => 'btn btn-link logout text-decoration-none']

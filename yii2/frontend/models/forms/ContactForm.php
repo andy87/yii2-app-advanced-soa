@@ -2,8 +2,8 @@
 
 namespace frontend\models\forms;
 
-use common\components\forms\BaseWebForm;
-use commonmodels\dto\EmailMessageDto;
+use common\components\base\models\forms\BaseWebForm;
+use common\models\dto\EmailMessageDto;
 use Yii;
 
 /**

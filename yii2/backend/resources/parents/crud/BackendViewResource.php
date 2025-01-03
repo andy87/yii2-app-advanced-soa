@@ -10,7 +10,7 @@ use common\components\base\resources\crud\BaseCrudViewResource;
  *
  * @property ?SourceModel $model
  *
- * @package app\backend\components\resources\parents\crud
+ * @package yii2\backend\components\resources\parents\crud
  *
  * @tag: #abstract #backend #parent #crud #resource #view
  */

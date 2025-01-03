@@ -7,7 +7,7 @@ namespace console\tests\unit\repository\items;
  *
  * @cli ./vendor/bin/codecept run app/console/tests/unit/services/repository/PascalCaseRepositoryTest
  *
- * @package app\console\tests\unit\repository
+ * @package yii2\console\tests\unit\repository
  *
  * @tag: #boilerplate #console #test #repository
  */

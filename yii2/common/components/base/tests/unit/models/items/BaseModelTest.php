@@ -10,13 +10,13 @@ use common\components\base\tests\unit\source\items\BaseUnitTest;
 /**
  * < Common > Base Model Test
  *
- * @package app\common\components\base\tests\unit
+ * @package yii2\common\components\base\tests\unit
  *
  * @cli ./vendor/bin/codecept run app/common/components/base/tests/unit/models/BaseModelTest
  *
  * @tag: #abstract #base #test #model
  */
-abstract class BaseModelTest extends \yii2\common\components\base\tests\unit\source\items\BaseUnitTest
+abstract class BaseModelTest extends BaseUnitTest
 {
     /** @var SourceModel|string $modelClass */
     public SourceModel|string $modelClass;
@@ -45,7 +45,7 @@ abstract class BaseModelTest extends \yii2\common\components\base\tests\unit\sou
 
         $this->assertEquals( $attributes, array_column($columns,'name') );
 
-        $notNullColumns = array_filter($columns, function($column) {
+        $notNullColumns = array_filter($columns, static function($column) {
             return !$column->allowNull;
         });
 

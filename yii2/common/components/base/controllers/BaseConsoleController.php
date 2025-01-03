@@ -4,25 +4,24 @@ namespace common\components\base\controllers;
 
 use yii\helpers\BaseConsole;
 use common\components\base\controllers\items\source\SourceConsoleController;
-use yii\helpers\Console;
 
 /**
  * < Common > Родительский класс для всех консольных контроллеров
  *
- * @package app\common\components\base\controllers
+ * @package yii2\common\components\base\controllers
  *
  * @tag: #abstract #common #base #controller #console
  */
 abstract class BaseConsoleController extends SourceConsoleController
 {
     /** @var string  */
-    protected const MESSAGE_SUCCESS = 'Success!';
+    protected const string MESSAGE_SUCCESS = 'Success!';
 
     /** @var string  */
-    protected const MESSAGE_ERROR = 'Error!';
+    protected const string MESSAGE_ERROR = 'Error!';
 
     /** @var string  */
-    protected const DATETIME_FORMAT = 'Y-m-d H:i:s';
+    protected const string DATETIME_FORMAT = 'Y-m-d H:i:s';
 
 
 

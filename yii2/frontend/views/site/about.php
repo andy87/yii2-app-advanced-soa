@@ -1,6 +1,6 @@
 <?php
 
-use frontend\resources\site\SiteAboutResources;
+use frontend\components\Navigation;
 use yii\helpers\Html;
 use yii\web\View;
 use frontend\controllers\SiteController;
@@ -10,7 +10,7 @@ use frontend\controllers\SiteController;
  * @var \frontend\resources\site\SiteAboutResources $R
  */
 
-$this->title = SiteController::TITLES[SiteController::ACTION_ABOUT];
+$this->title = Navigation::TITLES[SiteController::ACTION_ABOUT];
 $this->params['breadcrumbs'][] = $this->title;
 
 ?>

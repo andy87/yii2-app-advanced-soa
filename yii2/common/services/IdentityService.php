@@ -11,8 +11,8 @@ use common\components\base\services\items\SingletonService;
 use common\components\services\ToolsKitTrait;
 use common\components\system\Manager;
 use common\components\traits\SingletonTrait;
-use commonmodels\Identity;
-use commonmodels\sources\User;
+use common\models\Identity;
+use common\models\sources\User;
 use frontend\models\forms\SignupForm;
 
 /**

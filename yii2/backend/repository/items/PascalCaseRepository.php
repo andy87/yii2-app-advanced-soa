@@ -2,7 +2,8 @@
 
 namespace backend\repository\items;
 
-use yii\db\{ActiveQuery, Connection};
+use yii\db\Connection;
+use yii\db\ActiveQuery;
 use backend\models\items\PascalCase;
 use common\components\base\models\items\sources\SourceModel;
 
@@ -17,7 +18,7 @@ use common\components\base\models\items\sources\SourceModel;
  * @method self setConnection(Connection $connection)
  * @method Connection|null getConnection()
  *
- * @package app\backend\components\services\items
+ * @package yii2\backend\components\services\items
  *
  * @tag: #boilerplate #backend #service #{{snake_case}}
  */

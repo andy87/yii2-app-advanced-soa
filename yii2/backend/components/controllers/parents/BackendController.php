@@ -3,9 +3,9 @@
 namespace backend\components\controllers\parents;
 
 use Yii;
-use yii\filters\AccessControl;
-use common\components\Action;
 use common\components\Layout;
+use common\components\enums\Action;
+use common\components\AccessControl;
 use backend\controllers\SiteController;
 use common\components\traits\handlers\BackendHandler;
 use common\components\base\controllers\items\BaseWebHandlerController;
@@ -16,10 +16,10 @@ use common\components\base\controllers\items\BaseWebHandlerController;
  * @property BackendHandler $handler
  * @property array $resources
  *
- * @package app\backend\components\controllers\parents
+ * @package yii2\backend\components\controllers\parents
  *
  * @tag: #abstract #backend #parent #controller
-* \ */
+ */
 abstract class BackendController extends BaseWebHandlerController
 {
     /**
@@ -34,7 +34,7 @@ abstract class BackendController extends BaseWebHandlerController
             'rules' => [
                 [
                     'allow' => true,
-                    'roles' => ['@'], //user
+                    'roles' => [AccessControl::USER],
                 ],
             ],
         ];

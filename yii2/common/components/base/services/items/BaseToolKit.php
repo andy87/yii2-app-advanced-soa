@@ -4,9 +4,8 @@ namespace common\components\base\services\items;
 
 use Yii;
 use yii\base\InvalidConfigException;
-use common\components\system\Manager;
-use common\components\interfaces\CatcherInterface;
-use common\components\interfaces\models\SearchModelInterface;
+use common\interfaces\CatcherInterface;
+use common\interfaces\models\SearchModelInterface;
 use common\components\base\services\items\source\SourceToolKit;
 use common\components\base\producers\items\source\SourceProducer;
 use common\components\base\services\items\settings\ServiceSettings;
@@ -23,7 +22,7 @@ use common\components\base\dataProviders\items\source\SourceActiveDataProvider;
  * @property SourceRepository $repository - получение объекта происходит через магический метод __get -> getRepository()
  * @property SourceActiveDataProvider $dataProvider - получение объекта происходит через магический метод __get -> getDataProvider()
  *
- * @package app\common\components\base\services
+ * @package yii2\common\components\base\services
  *
  * @tag: #abstract #common #service #base #items
  */

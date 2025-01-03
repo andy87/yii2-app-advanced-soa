@@ -4,7 +4,7 @@ namespace common\repository\items;
 
 use common\components\base\models\items\sources\SourceModel;
 use common\components\base\repository\items\source\SourceRepository;
-use commonmodels\sources\User;
+use common\models\sources\User;
 
 /**
  * < Common > `UserRepository`

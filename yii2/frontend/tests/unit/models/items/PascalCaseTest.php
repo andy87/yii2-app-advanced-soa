@@ -2,9 +2,9 @@
 
 namespace frontend\tests\unit\models\items;
 
-use common\components\base\{moels\items\base\SourceModel};
 use frontend\models\items\PascalCase;
-use unit\models\items\BaseModelTest;
+use common\components\base\models\items\sources\SourceModel;
+use common\components\base\tests\unit\models\items\BaseModelTest;
 
 /**
  * < Frontend > PascalCaseServiceTest
@@ -14,7 +14,7 @@ use unit\models\items\BaseModelTest;
  * @cli ./vendor/bin/codecept run app/frontend/tests/unit/models/items/PascalCaseTest:testInspectAttributes
  * @method PascalCase testInspectAttributes()
  *
- * @package app\frontend\tests\unit\models\items
+ * @package yii2\frontend\tests\unit\models\items
  *
  * @tag: #boilerplate #frontend #test #model
  */

@@ -1,7 +1,7 @@
 <?php
 
 use yii\web\View;
-use commonwidgets\Alert;
+use common\widgets\Alert;
 use common\components\Layout;
 use frontend\assets\AppAsset;
 use yii\bootstrap5\{ Nav, Html, NavBar, Breadcrumbs };

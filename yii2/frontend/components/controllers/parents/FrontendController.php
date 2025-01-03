@@ -2,14 +2,16 @@
 
 namespace frontend\components\controllers\parents;
 
-use Yii;
-use yii\filters\AccessControl;
-use common\components\Action;
+use common\components\AccessControl;
+use common\components\base\controllers\items\BaseWebHandlerController;
+use common\components\enums\Action;
+use common\components\enums\Endpoints;
 use common\components\Layout;
+use common\components\traits\handlers\FrontendHandler;
+use frontend\components\Navigation;
 use frontend\controllers\AuthController;
 use frontend\controllers\SiteController;
-use common\components\traits\handlers\FrontendHandler;
-use common\components\base\controllers\items\BaseWebHandlerController;
+use Yii;
 
 /**
  * < Frontend > Родительский класс для контроллеров в окружении: `frontend`
@@ -17,7 +19,7 @@ use common\components\base\controllers\items\BaseWebHandlerController;
  * @property FrontendHandler $handler
  * @property array $resources
  *
- * @package app\frontend\components\controllers\parents
+ * @package yii2\frontend\components\controllers\parents
  *
  * @tag: #abstract #frontend #parent #controller
  */
@@ -35,7 +37,7 @@ abstract class FrontendController extends BaseWebHandlerController
             'rules' => [
                 [
                     'allow' => true,
-                    'roles' => ['?'], // unAuth
+                    'roles' => [AccessControl::GUEST],
                 ],
             ],
         ];
@@ -75,15 +77,15 @@ abstract class FrontendController extends BaseWebHandlerController
     {
         $menuItems = [
             [
-                'label' => SiteController::TITLES[Action::INDEX],
+                'label' => Navigation::TITLES[Action::INDEX],
                 'url' => [SiteController::getEndpoint(Action::INDEX)]
             ],
             [
-                'label' => SiteController::TITLES[SiteController::ACTION_ABOUT],
+                'label' => Navigation::TITLES[SiteController::ACTION_ABOUT],
                 'url' => [SiteController::getEndpoint(SiteController::ACTION_ABOUT)]
             ],
             [
-                'label' => SiteController::TITLES[SiteController::ACTION_CONTACT],
+                'label' => Navigation::TITLES[SiteController::ACTION_CONTACT],
                 'url' => [SiteController::getEndpoint(SiteController::ACTION_CONTACT)]
             ],
         ];

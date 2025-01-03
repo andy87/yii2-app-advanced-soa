@@ -5,7 +5,6 @@ namespace common\components\base\tests\unit\controllers\items;
 use yii\console\ExitCode;
 use common\components\enums\Action;
 use backend\controllers\items\PascalCaseController;
-use common\components\base\tests\unit\controllers\items\BaseServiceControllerTest;
 
 /**
  * < Common > Base Model Test
@@ -14,14 +13,14 @@ use common\components\base\tests\unit\controllers\items\BaseServiceControllerTes
  *
  * @property PascalCaseController $controller
  *
- * @package app\common\components\base\tests\unit
+ * @package yii2\common\components\base\tests\unit
  *
  * @tag: #abstract #base #test #controllers
  */
 abstract class BaseWebControllerTest extends BaseServiceControllerTest
 {
     /**
-     * @cli ./vendor/bin/codecept run app/backend/tests/unit/controllers/itemsPingTest:testVerb
+     * @cli ./vendor/bin/codecept run yii2/backend/tests/unit/controllers/itemsPingTest:testVerb
      *
      * @return int
      */
@@ -38,8 +37,9 @@ abstract class BaseWebControllerTest extends BaseServiceControllerTest
 
             foreach ( $access as $verb )
             {
-                $this->assertTrue(
-                    in_array( $verb, Action::VERB),
+                $this->assertContains(
+                    $verb,
+                    Action::VERB,
                     "Действие: $action, не имеет доступа по методу: $verb"
                 );
             }

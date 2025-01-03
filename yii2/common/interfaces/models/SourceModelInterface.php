@@ -1,11 +1,11 @@
 <?php
 
-namespace common\components\interfaces\models;
+namespace common\interfaces\models;
 
 /**
  * < Common > Интерфейс модели источника
  *
- * @package app\common\components\interfaces\models
+ * @package yii2\common\components\interfaces\models
  *
  * @tag: #common #interface #model #source
  */

@@ -2,7 +2,7 @@
 
 namespace common\components\traits\controllers;
 
-use common\components\Action;
+use common\components\enums\Action;
 use common\components\actions\web\CrudViewAction;
 use common\components\actions\web\CrudIndexAction;
 use common\components\actions\web\CrudCreateAction;

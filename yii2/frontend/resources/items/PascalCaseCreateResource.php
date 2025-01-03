@@ -10,7 +10,7 @@ use frontend\models\items\PascalCase;
  *
  * @property ?PascalCase $form
  *
- * @package app\frontend\resources\items
+ * @package yii2\frontend\resources\items
  *
  * @tag: #boilerplate #frontend #resource #template #create
  */

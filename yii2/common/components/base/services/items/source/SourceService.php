@@ -6,14 +6,15 @@ use Yii;
 use Exception;
 use yii\base\BaseObject;
 use common\components\system\Logger;
-use common\components\interfaces\CatcherInterface;
+use common\interfaces\CatcherInterface;
 
 /**
  * < Common > Родительский абстрактный класс для всех сервисов
  *  использующих BaseModel
  *
  * @property CatcherInterface|Logger $logger
- * @package app\common\components\base\services\items\base
+ *
+ * @package yii2\common\components\base\services\items\base
  *
  * @tag: #abstract #common #service #base #source
  */
@@ -24,7 +25,7 @@ abstract class SourceService extends BaseObject
 
 
 
-    /** @var CatcherInterface */
+    /** @var \common\interfaces\CatcherInterface */
     protected CatcherInterface $logger;
 
 
@@ -52,13 +53,13 @@ abstract class SourceService extends BaseObject
     }
 
     /**
-     * @return ?CatcherInterface
+     * @return ?\common\interfaces\CatcherInterface
      *
      * @throws Exception
      */
     private function getLogger(): ?CatcherInterface
     {
-        /** @var CatcherInterface $logger */
+        /** @var \common\interfaces\CatcherInterface $logger */
         $logger = Yii::createObject([
             'class' => static::CLASS_LOGGER
         ]);

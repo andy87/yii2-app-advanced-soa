@@ -3,10 +3,9 @@
 namespace frontend\models\forms;
 
 use common\services\IdentityService;
+use common\models\{dto\EmailMessageDto, Identity};
 use Yii;
 use yii\base\InvalidConfigException;
-use common\components\forms\EmailingWebForm;
-use commonmodels\{dto\EmailMessageDto, Identity};
 
 /**
  * < Frontend > `ResendVerificationEmailForm`
@@ -15,7 +14,7 @@ use commonmodels\{dto\EmailMessageDto, Identity};
  *
  * @tag #models #forms #resend #verification #email
  */
-class ResendVerificationEmailForm extends EmailingWebForm
+class ResendVerificationEmailForm extends \common\models\forms\EmailingWebForm
 {
     public string $id = 'resend-verification-email-form';
 

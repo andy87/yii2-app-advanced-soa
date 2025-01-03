@@ -2,8 +2,9 @@
 
 namespace backend\dataProviders\items;
 
+use yii\db\Connection;
+use yii\db\QueryInterface;
 use backend\dataProviders\parents\BackendActiveDataProvide;
-use yii\db\{Connection, QueryInterface};
 
 /**
  * < Backend > Проводник к данным для модели `PascalCase` в окружении `backend`
@@ -12,7 +13,7 @@ use yii\db\{Connection, QueryInterface};
  * @property ?callable|string $key
  * @property ?Connection|array|string| $db
  *
- * @package app\backend\components\dataproviders\items
+ * @package yii2\backend\components\dataproviders\items
  *
  * @tag: #boilerplate #backend #dataProvider #{{snake_case}}
  */

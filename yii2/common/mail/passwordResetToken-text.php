@@ -2,7 +2,7 @@
 
 use frontend\controllers\AuthController;
 use yii\web\View;
-use commonmodels\Identity;
+use common\models\Identity;
 
 /**
  * @var View $this

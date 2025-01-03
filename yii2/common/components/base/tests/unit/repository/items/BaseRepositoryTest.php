@@ -9,11 +9,11 @@ use common\components\base\tests\unit\source\items\BaseUnitTest;
  *
  * @cli ./vendor/bin/codecept run app/common/components/base/tests/unit/repository/BaseRepositoryTest
  *
- * @package app\common\components\base\tests\unit
+ * @package yii2\common\components\base\tests\unit
  *
  * @tag: #abstract #base #test #repository
  */
-abstract class BaseRepositoryTest extends \yii2\common\components\base\tests\unit\source\items\BaseUnitTest
+abstract class BaseRepositoryTest extends BaseUnitTest
 {
     // {{Parent}}
 }

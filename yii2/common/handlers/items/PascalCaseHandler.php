@@ -4,9 +4,9 @@ namespace common\handlers\items;
 
 use common\services\items\PascalCaseService;
 use common\components\base\handlers\items\source\SourceHandler;
-use commonmodels\forms\items\PascalCaseForm;
-use commonmodels\items\PascalCase;
-use commonmodels\search\items\PascalCaseSearch;
+use common\models\forms\items\PascalCaseForm;
+use common\models\items\PascalCase;
+use common\models\search\items\PascalCaseSearch;
 
 
 /**
@@ -14,7 +14,7 @@ use commonmodels\search\items\PascalCaseSearch;
  *
  * @property \common\services\items\PascalCaseService $service
  *
- * @package app\app\common\services\components\handlers\items
+ * @package yii2\app\common\services\components\handlers\items
  *
  * @tag: #boilerplate #common #service #{{snake_case}}
  */

@@ -2,16 +2,20 @@
 
 namespace common\models\items;
 
-use common\components\interfaces\models\SourceModelInterface;
-
 /**
  * < Common > Родительский класс для моделей: console/frontend/backend
  *
- * @package app\common\models\items
+ * @package yii2\common\models\items
  *
  * @tag: #boilerplate #common #model #{{snake_case}}
  */
-class PascalCase extends \app\common\models\sources\PascalCase implements SourceModelInterface
+class PascalCase extends \common\models\sources\PascalCase
 {
+    /** @var string Единственное число */
+    public const string SINGULAR = 'Объект';
+
+    /** @var string Множественное число */
+    public const string PLURAL = 'Объекты';
+
     // {{Boilerplate}}
 }

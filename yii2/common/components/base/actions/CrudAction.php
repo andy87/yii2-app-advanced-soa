@@ -2,25 +2,24 @@
 
 namespace common\components\base\actions;
 
-use common\components\base\handlers\items\BaseWebHandler;
-use common\components\base\models\items\sources\SourceModel;
-use common\components\base\resources\items\BaseTemplateResource;
-use common\components\base\resources\crud\BaseFormResource;
-use common\components\enums\Action;
-use common\components\system\Notify;
 use Yii;
 use yii\web\Response;
+use common\components\enums\Action;
+use common\components\system\Notify;
+use common\components\base\handlers\items\BaseWebHandler;
+use common\components\base\resources\crud\BaseFormResource;
+use common\components\base\resources\items\BaseTemplateResource;
 
 /**
  * Class CrudAction
  *
- * @package app\common\components\base\actions
+ * @package yii2\common\components\base\actions
  */
 abstract class CrudAction extends yii\base\Action
 {
-    public const MESSAGE_SUCCESS = 'ОК';
-    public const MESSAGE_ERROR = 'Ошибка';
-    public const MESSAGE_NOT_FOUND = 'Элемент не найден';
+    public const string MESSAGE_SUCCESS = 'ОК';
+    public const string MESSAGE_ERROR = 'Ошибка';
+    public const string MESSAGE_NOT_FOUND = 'Элемент не найден';
 
 
 

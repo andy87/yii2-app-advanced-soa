@@ -3,8 +3,8 @@
 namespace common\components\base\services\items\settings;
 
 use yii\db\ActiveRecordInterface;
+use common\interfaces\models\SearchModelInterface;
 use common\components\base\services\items\BaseService;
-use common\components\interfaces\models\SearchModelInterface;
 use common\components\base\producers\items\source\SourceProducer;
 use common\components\base\repository\items\source\SourceRepository;
 use common\components\base\dataProviders\items\source\SourceActiveDataProvider;
@@ -12,7 +12,7 @@ use common\components\base\dataProviders\items\source\SourceActiveDataProvider;
 /**
  * < Common > Настройки для сервисов
  *
- * @package app\common\components\base\services\items\setups
+ * @package yii2\common\components\base\services\items\setups
  */
 class ServiceSettings
 {

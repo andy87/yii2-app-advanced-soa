@@ -2,17 +2,21 @@
 
 namespace frontend\tests\unit\models;
 
-
-use Codeception\Exception\ModuleException;
-use Codeception\Test\Unit;
-use common\services\IdentityService;
-use frontend\services\AuthService;
 use Yii;
-use yii\base\{Exception as YiiBaseException, InvalidConfigException};
-use yii\db\Exception as YiiDbException;
+use Exception;
+use Codeception\Test\Unit;
+use common\models\Identity;
 use yii\mail\MessageInterface;
-use common{fixtures\UserFixture, models\Identity};
-use frontend\{controllers\AuthController, models\forms\PasswordResetRequestForm, tests\UnitTester};
+use frontend\tests\UnitTester;
+use common\fixtures\UserFixture;
+use frontend\services\AuthService;
+use yii\base\InvalidConfigException;
+use common\services\IdentityService;
+use yii\db\Exception as YiiDbException;
+use frontend\controllers\AuthController;
+use Codeception\Exception\ModuleException;
+use yii\base\Exception as YiiBaseException;
+use frontend\models\forms\PasswordResetRequestForm;
 
 /**
  * < Frontend > `PasswordResetRequestFormTest`
@@ -85,9 +89,8 @@ class PasswordResetRequestFormTest extends Unit
      * @throws ModuleException|YiiDbException|YiiBaseException
      *
      * @tag #frontend #tests #reset #inactive #user
-     *
      */
-    public function testNotSendEmailsToInactiveUser()
+    public function testNotSendEmailsToInactiveUser(): void
     {
         $user = $this->tester->grabFixture('user', 1);
 
@@ -108,10 +111,9 @@ class PasswordResetRequestFormTest extends Unit
      *
      * @return void
      *
-     * @throws ModuleException|YiiDbException|YiiBaseException
+     * @throws ModuleException|YiiDbException|YiiBaseException|Exception
      *
      * @tag #frontend #tests #reset #correct
-     *
      */
     public function testSendEmailSuccessfully(): void
     {

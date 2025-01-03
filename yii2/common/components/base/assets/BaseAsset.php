@@ -16,5 +16,6 @@ use yii\web\AssetBundle;
 abstract class BaseAsset extends AssetBundle
 {
     public $basePath = '@webroot';
+
     public $baseUrl = '@web';
 }

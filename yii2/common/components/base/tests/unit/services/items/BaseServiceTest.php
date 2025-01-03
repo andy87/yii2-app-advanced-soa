@@ -3,7 +3,6 @@
 namespace common\components\base\tests\unit\services\items;
 
 use common\components\base\services\items\BaseService;
-use common\components\traits\services\ApplyServiceTrait;
 use common\components\base\tests\unit\source\items\BaseUnitTest;
 
 /**
@@ -12,15 +11,13 @@ use common\components\base\tests\unit\source\items\BaseUnitTest;
  * @property BaseService $service
  * @property BaseService|string $classnameService
  *
- * @package app\common\components\base\tests\unit
+ * @package yii2\common\components\base\tests\unit
  *
  * @cli ./vendor/bin/codecept run app/common/components/base/tests/unit/service/BaseServiceTest
  *
  * @tag: #abstract #base #test #service
  */
-abstract class BaseServiceTest extends \yii2\common\components\base\tests\unit\source\items\BaseUnitTest
+abstract class BaseServiceTest extends BaseUnitTest
 {
-    use ApplyServiceTrait;
-
     // {{Parent}}
 }

@@ -1,6 +1,6 @@
 <?php declare(strict_types=1);
 
-namespace common\components\interfaces\repository;
+namespace common\interfaces\repository;
 
 use common\components\base\models\items\sources\SourceModel;
 use yii\db\ActiveQuery;
@@ -8,7 +8,7 @@ use yii\db\ActiveQuery;
 /**
  * < Common >
  *
- * @package app\common\components\interfaces\repository
+ * @package yii2\common\components\interfaces\repository
  *
  * @tag: #abstract #common #interface #repository
  */

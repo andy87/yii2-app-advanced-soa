@@ -7,7 +7,7 @@ use common\components\base\models\items\sources\SourceModel;
 /**
  * < Common > `Role`
  *
- * @package app\common\models\sources
+ * @package yii2\common\models\sources
  *
  * @source php yii gii/model --tableName=role --modelClass=RoleSource --baseClass=app\common\components\core\BaseModel --ns=app\common\models\sources --generateLabelsFromComments --overwrite=1
  *

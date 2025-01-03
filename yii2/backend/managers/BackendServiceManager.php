@@ -2,10 +2,10 @@
 
 namespace backend\managers;
 
-use backend\services\controllers\AuthService;
-use backend\services\items\{PascalCaseService};
 use backend\services\items\UserService;
 use common\managers\CommonServiceManager;
+use backend\services\controllers\AuthService;
+use backend\services\items\PascalCaseService;
 
 /**
  * < Common > Менеджер сервисов
@@ -18,7 +18,7 @@ use common\managers\CommonServiceManager;
  *
  * @tag: #common #manager #service
  */
-class BackendServiceManager extends \common\managers\CommonServiceManager
+class BackendServiceManager extends CommonServiceManager
 {
     public const string AUTH = 'authService';
     public const string USER = 'userService';

@@ -55,7 +55,7 @@ $consumerList = [
     //      * consumer  - массив с настройками для consumer
     //
     //  Простейшая настройка консамера - добавление в массив $consumerList записи вида:
-    //     [ 'consumer-unique-name' => yii2\components\rabbitmq\UniqueNameConsumer::class]
+    //     [ 'consumer-unique-name' => components\rabbitmq\UniqueNameConsumer::class]
 
     ['notify' => [
         'class' => \yii2\components\rabbitmq\consumers\NameConsumer::class,
@@ -159,7 +159,7 @@ return= [
         [
             'name' => 'consumer-name',
             'callbacks' => [
-                'queue-name' => yii2\components\rabbitmq\NameConsumer::class,
+                'queue-name' => components\rabbitmq\NameConsumer::class,
             ],
         ],
     ]

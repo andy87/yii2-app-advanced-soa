@@ -2,13 +2,13 @@
 
 namespace frontend\tests\functional;
 
-use commonmodels\Identity;
-use commontests\cest\SendForm;
-use commonfixtures\UserFixture;
+use common\models\Identity;
+use common\tests\cest\SendForm;
+use common\fixtures\UserFixture;
 use frontend\tests\FunctionalTester;
-use Codeception\Exception\ModuleException;
-use common\components\forms\BaseWebForm;
 use frontend\controllers\AuthController;
+use Codeception\Exception\ModuleException;
+use common\components\base\models\forms\BaseWebForm;
 use frontend\models\forms\ResendVerificationEmailForm;
 
 /**
@@ -34,8 +34,8 @@ use frontend\models\forms\ResendVerificationEmailForm;
  */
 class ResendVerificationEmailCest extends SendForm
 {
-    /** @var BaseWebForm */
-    protected const BASE_FORM_CLASS = ResendVerificationEmailForm::class;
+    /** @var BaseWebForm|string */
+    protected const BaseWebForm|string BASE_FORM_CLASS = ResendVerificationEmailForm::class;
 
 
     /**
@@ -68,7 +68,7 @@ class ResendVerificationEmailCest extends SendForm
     {
         parent::_before($I);
 
-        $route = AuthController::getEndpoint(AuthController::ACTION_RESEND_VERIFICATION_EMAIL); // 'auth/resend-verification-email'
+        $route = AuthController::getEndpoint(AuthController::ACTION_RESEND_VERIFICATION_EMAIL);
 
         $I->amOnRoute($route);
     }

@@ -3,8 +3,8 @@
 namespace common\components\base\handlers\items\source;
 
 use yii\base\BaseObject;
+use common\interfaces\handlers\HandlerInterface;
 use common\components\traits\services\HasService;
-use common\components\interfaces\handlers\HandlerInterface;
 use common\components\base\services\items\source\SourceToolKit;
 use common\components\base\services\items\settings\ServiceSettings;
 
@@ -13,7 +13,7 @@ use common\components\base\services\items\settings\ServiceSettings;
  *
  * @property SourceToolKit $service;
  *
- * @package app\common\components\base\handlers\items\core
+ * @package yii2\common\components\base\handlers\items\core
  *
  * @tag: #abstract #common #handler #base
  */

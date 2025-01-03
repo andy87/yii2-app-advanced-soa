@@ -3,9 +3,8 @@
 namespace frontend\models\forms;
 
 use common\services\IdentityService;
+use common\models\Identity;
 use yii\base\{InvalidArgumentException, InvalidConfigException};
-use common\components\forms\BaseWebForm;
-use commonmodels\Identity;
 
 /**
  * < Frontend > `VerifyEmailForm`
@@ -14,7 +13,7 @@ use commonmodels\Identity;
  *
  * @tag #models #forms #verify #email
  */
-class VerifyEmailForm extends BaseWebForm
+class VerifyEmailForm extends \common\components\base\models\forms\BaseWebForm
 {
     public string $id = 'verify-email-form';
 

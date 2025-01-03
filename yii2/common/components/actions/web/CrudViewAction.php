@@ -2,13 +2,12 @@
 
 namespace common\components\actions\web;
 
-use common\components\base\actions\CrudAction;
-use common\components\base\handlers\items\BaseWebHandler;
-use common\components\base\models\items\sources\SourceModel;
-use common\components\base\resources\crud\BaseCrudViewResource;
+use yii\web\Response;
 use common\components\system\Notify;
 use yii\base\InvalidConfigException;
-use yii\web\Response;
+use common\components\base\actions\CrudAction;
+use common\components\base\handlers\items\BaseWebHandler;
+use common\components\base\resources\crud\BaseCrudViewResource;
 
 /**
  * Class CrudIndexAction
@@ -16,7 +15,7 @@ use yii\web\Response;
  * @property BaseWebHandler $handler
  * @property BaseCrudViewResource $resource
  *
- * @package app\common\components\actions\crud
+ * @package yii2\common\components\actions\crud
  *
  * @tag: #common #default #crud #action #index
  */

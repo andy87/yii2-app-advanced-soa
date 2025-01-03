@@ -3,7 +3,7 @@
 namespace common\fixtures;
 
 use yii\test\ActiveFixture;
-use commonmodels\Identity;
+use common\models\Identity;
 
 /**
  * < Common >

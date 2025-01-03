@@ -3,12 +3,11 @@
 namespace frontend\tests\functional;
 
 use Codeception\Scenario;
-use commontests\cest\SendForm;
+use common\tests\cest\SendForm;
 use frontend\tests\FunctionalTester;
 use frontend\models\forms\ContactForm;
-use Codeception\Exception\ModuleException;
-use common\components\forms\BaseWebForm;
 use frontend\controllers\SiteController;
+use Codeception\Exception\ModuleException;
 use frontend\components\actions\CaptchaAction;
 
 /* @var $scenario Scenario */
@@ -21,20 +20,22 @@ use frontend\components\actions\CaptchaAction;
  * @property FunctionalTester $I
  * @property ContactForm $form
  *
- * Fix not used:
- * - @see ContactCest::checkContact()
- * - @see ContactCest::checkContactSubmitNoData()
- * - @see ContactCest::checkContactSubmitNotCorrectEmail()
- * - @see ContactCest::checkContactSubmitCorrectData()
- *
  * @cli ./vendor/bin/codecept run yii2/frontend/tests/functional/ContactCest
  *
  * @tag #frontend #tests #functional #ContactCest
+ *
+ * @fix `not used`:
+ *  - @see ContactCest::checkContact()
+ *  - @see ContactCest::checkContactSubmitNoData()
+ *  - @see ContactCest::checkContactSubmitNotCorrectEmail()
+ *  - @see ContactCest::checkContactSubmitCorrectData()
  */
 class ContactCest extends SendForm
 {
-    /** @var BaseWebForm */
-    protected const BASE_FORM_CLASS = ContactForm::class;
+    /** @var ContactForm|string */
+    protected const ContactForm|string BASE_FORM_CLASS = ContactForm::class;
+
+
 
     /**
      * @param FunctionalTester $I
@@ -89,12 +90,14 @@ class ContactCest extends SendForm
     {
         $I->submitForm($this->formId, []);
         $I->see($this->form::HEADER, 'h1');
+
         $messages = [
             str_replace('{attribute}', $this->form->getAttributeLabel($this->form::ATTR_NAME), $this->form::RULE_REQUIRED_MESSAGE),
             str_replace('{attribute}', $this->form->getAttributeLabel($this->form::ATTR_EMAIL), $this->form::RULE_REQUIRED_MESSAGE),
             str_replace('{attribute}', $this->form->getAttributeLabel($this->form::ATTR_SUBJECT), $this->form::RULE_REQUIRED_MESSAGE),
             str_replace('{attribute}', $this->form->getAttributeLabel($this->form::ATTR_BODY), $this->form::RULE_REQUIRED_MESSAGE),
         ];
+
         foreach ($messages as $message) {
             $I->seeValidationError($message);
         }
@@ -124,6 +127,7 @@ class ContactCest extends SendForm
             "$this->formName[".ContactForm::ATTR_BODY."]" => 'test content',
             "$this->formName[".ContactForm::ATTR_VERIFY_CODE."]" => CaptchaAction::TEST_VALUE,
         ]);
+
         $I->seeValidationError('Email is not a valid email address.');
         $I->dontSeeValidationError('Name cannot be blank');
         $I->dontSeeValidationError('Subject cannot be blank');

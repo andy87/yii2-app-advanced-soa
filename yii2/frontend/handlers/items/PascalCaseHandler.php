@@ -17,7 +17,7 @@ use frontend\models\search\items\PascalCaseSearch;
  *
  * @property PascalCaseService $service
  *
- * @package app\frontend\components\handlers\items
+ * @package yii2\frontend\components\handlers\items
  *
  * @tag: #boilerplate #frontend #service #{{snake_case}}
  */

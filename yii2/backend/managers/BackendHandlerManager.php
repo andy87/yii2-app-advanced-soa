@@ -8,16 +8,18 @@ use common\managers\CommonServiceManager;
 /**
  * < Common > Менеджер обработчиков
  *
- * @property-read \backend\handlers\items\PascalCaseHandler $pascalCase
+ * @property-read PascalCaseHandler $pascalCase
  *
  * @package yii2\common\components\managers
  *
  * @tag: #common #manager #service
  */
-class BackendHandlerManager extends \common\managers\CommonServiceManager
+class BackendHandlerManager extends CommonServiceManager
 {
     public const string SITE = 'siteHandler';
+
     public const string PASCALE_CASE = 'PascalCaseHandler';
+
 
 
     /**

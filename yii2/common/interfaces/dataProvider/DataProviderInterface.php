@@ -1,11 +1,11 @@
 <?php
 
-namespace common\components\interfaces\dataProvider;
+namespace common\interfaces\dataProvider;
 
 /**
  * < Common > Интерфейс для всех классов-провайдеров данных
  *
- * @package app\common\components\interfaces\dataProvider
+ * @package yii2\common\components\interfaces\dataProvider
  *
  * @tag: #common #dataProvider #interface
  */

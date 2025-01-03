@@ -19,7 +19,7 @@ use console\models\items\PascalCase;
  * @method \yii2\console\models\items\PascalCase processFormUpdate(int $id, array $params )
  * @method \yii2\console\models\items\PascalCase processDelete(int $id )
  *
- * @package app\console\components\handlers\items
+ * @package yii2\console\components\handlers\items
  *
  * @tag: #boilerplate #console #service #{{snake_case}}
  */

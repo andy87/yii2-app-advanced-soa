@@ -12,12 +12,8 @@ namespace common\models\sources;
  */
 class Role extends RoleSource
 {
-    public const ATTR_KEY = 'key';
-    public const ATTR_NAME = 'name';
-    public const ATTR_HINT = 'hint';
-
-    public const ATTR_PRIORITY = 'priority';
-
-    public const USER = '@';
-    public const GUEST = '?';
+    public const string ATTR_KEY = 'key';
+    public const string ATTR_NAME = 'name';
+    public const string ATTR_HINT = 'hint';
+    public const string ATTR_PRIORITY = 'priority';
 }

@@ -7,7 +7,7 @@ namespace console\tests\unit\services\items;
  *
  * @property SourceService $service
  *
- * @package app\console\tests\unit\services\items
+ * @package yii2\console\tests\unit\services\items
  *
  * @tag: #boilerplate #console #test #service
  */

@@ -13,7 +13,7 @@ use common\components\base\producers\items\source\SourceProducer;
 /**
  * < Common > Base Provider Test
  *
- * @package app\common\components\base\tests\unit
+ * @package yii2\common\components\base\tests\unit
  *
  * @see BaseProducerTest::testCreateSuccess()
  * @see BaseProducerTest::testCreateSuccessWithSave()
@@ -22,7 +22,7 @@ use common\components\base\producers\items\source\SourceProducer;
  *
  * @tag: #abstract #base #test #producer
  */
-abstract class BaseProducerTest extends \yii2\common\components\base\tests\unit\source\items\BaseUnitTest
+abstract class BaseProducerTest extends BaseUnitTest
 {
     /** @var array  */
     protected array $configProducer;
@@ -56,7 +56,7 @@ abstract class BaseProducerTest extends \yii2\common\components\base\tests\unit\
      */
     protected function setupProducer(): void
     {
-        /** @var \yii2\common\components\base\producers\items\source\SourceProducer $producer */
+        /** @var SourceProducer $producer */
         $producer = Yii::createObject($this->configProducer);
 
         $this->producer = $producer;
@@ -73,7 +73,7 @@ abstract class BaseProducerTest extends \yii2\common\components\base\tests\unit\
      */
     public function testCreateSuccess(): int
     {
-        /** @var \yii2\common\components\base\models\items\sources\SourceModel $model */
+        /** @var SourceModel $model */
         $model = $this->producer->create($this->testParams['testCreateSuccess']);
 
         $this->assertInstanceOf( SourceModel::class, $model );

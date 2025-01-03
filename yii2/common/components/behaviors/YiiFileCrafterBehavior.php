@@ -4,7 +4,10 @@ namespace common\components\behaviors;
 
 use Yii;
 use yii\base\Behavior;
-use andy87\yii2\file_crafter\components\events\{ CrafterEvent, CrafterEventCommand, CrafterEventRender, CrafterEventGenerate };
+use andy87\yii2\file_crafter\components\events\CrafterEvent;
+use andy87\yii2\file_crafter\components\events\CrafterEventCommand;
+use andy87\yii2\file_crafter\components\events\CrafterEventRender;
+use andy87\yii2\file_crafter\components\events\CrafterEventGenerate;
 
 /**
  * < Common > YiiFileCrafterBehavior
@@ -18,7 +21,7 @@ use andy87\yii2\file_crafter\components\events\{ CrafterEvent, CrafterEventComma
  * @see YiiFileCrafterBehavior::afterRender()
  * @see YiiFileCrafterBehavior::afterGenerate()
  *
- * @package app\common\components\behaviors
+ * @package yii2\common\components\behaviors
  *
  * @tag: #abstract #behavior #yii2 #file_crafter
  */

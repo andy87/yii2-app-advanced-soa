@@ -13,7 +13,7 @@ use common\components\base\dataProviders\items\source\SourceActiveDataProvider;
  * @property ?callable|string $key
  * @property ?Connection|array|string| $db
  *
- * @package app\console\components\dataProviders\parents
+ * @package yii2\console\components\dataProviders\parents
  *
  * @tag: #abstract #console #dataProvider
  */

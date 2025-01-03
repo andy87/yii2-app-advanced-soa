@@ -2,17 +2,16 @@
 
 namespace console\services\items;
 
-use console\producers\items\PascalCaseProducer;
-use console\repository\items\PascalCaseRepository;
 use common\components\base\services\items\settings\ServiceSettings;
-use common\components\interfaces\CatcherInterface;
+use common\interfaces\CatcherInterface;
 use console\models\forms\items\PascalCaseForm;
 use console\models\items\PascalCase;
+use console\repository\items\PascalCaseRepository;
 
 /**
  * < Console > Сервис для работы с сущностью `PascalCase`
  *
- * @property CatcherInterface $logger
+ * @property \common\interfaces\CatcherInterface $logger
  * @property \console\producers\items\PascalCaseProducer $producer
  * @property PascalCaseRepository $repository
  * @property \console\dataProviders\items\PascalCaseDataProvider $dataProvider
@@ -35,7 +34,7 @@ use console\models\items\PascalCase;
  * @method PascalCaseForm[] getAllActiveForms(string|array $criteria = [])
  * @method int delete(\yii2\console\models\items\PascalCase $model)
  *
- * @package app\console\components\services\items
+ * @package yii2\console\components\services\items
  *
  * @tag: #boilerplate #console #service #{{snake_case}}
  */

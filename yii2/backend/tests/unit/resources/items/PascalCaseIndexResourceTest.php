@@ -2,17 +2,16 @@
 
 namespace backend\tests\unit\resources\items;
 
-
-use unit\resources\items\BaseIndexResourceTest;
+use common\components\base\tests\unit\resources\items\BaseIndexResourceTest;
 
 /**
  * < Backend > ItemIndexResourceTest
  *
- * @package app\backend\tests\unit\producers
+ * @package yii2\backend\tests\unit\producers
  *
  * @tag: #boilerplate #backend #test #service
  */
-class BackendIndexResourceTest extends BaseIndexResourceTest
+class PascalCaseIndexResourceTest extends BaseIndexResourceTest
 {
 
 }

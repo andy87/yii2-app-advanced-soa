@@ -2,25 +2,39 @@
 
 namespace backend\controllers\items;
 
-use backend\handlers\items\PascalCaseHandler;
-use backend\resources\items\PascalCaseCreateResource;
-use backend\resources\items\PascalCaseViewResource;
-use backend\components\controllers\parents\BackendController;
 use common\components\enums\Action;
+use common\models\items\PascalCase;
+use backend\handlers\items\PascalCaseHandler;
+use backend\resources\items\PascalCaseViewResource;
+use backend\resources\items\PascalCaseIndexResource;
+use backend\resources\items\PascalCaseCreateResource;
+use backend\resources\items\PascalCaseUpdateResource;
+use backend\components\controllers\parents\BackendController;
 
 /**
  * Boilerplate Контроллер для модели `PascalCase`
  *
  * @property PascalCaseHandler $handler
  *
- * @package app\backend\controllers\items
+ * @package yii2\backend\controllers\items
  *
  * @tag: #boilerplate #backend #controller #{{snake_case}}
  */
 class PascalCaseController extends BackendController
 {
     /** @var string Эндпоинт для URI */
-    public const ENDPOINT = '{{kebab-case}}';
+    public const string ENDPOINT = '{{kebab-case}}';
+
+    /**
+     *
+     */
+    public const array LABELS = [
+        Action::INDEX => PascalCase::PLURAL,
+        Action::CREATE => 'Создание ' . PascalCase::SINGULAR,
+        Action::UPDATE => 'Редактирование ' . PascalCase::SINGULAR,
+        Action::UPDATE => 'Просмотр ' . PascalCase::SINGULAR,
+    ];
+
 
     /**
      * Массив с ресурсами
@@ -28,9 +42,9 @@ class PascalCaseController extends BackendController
      * @var array
      */
     protected array $resources = [
-        Action::INDEX => \backend\resources\items\PascalCaseIndexResource::class,
+        Action::INDEX => PascalCaseIndexResource::class,
         Action::VIEW => PascalCaseViewResource::class,
         Action::CREATE => PascalCaseCreateResource::class,
-        Action::UPDATE => \backend\resources\items\PascalCaseUpdateResource::class,
+        Action::UPDATE => PascalCaseUpdateResource::class,
     ];
 }

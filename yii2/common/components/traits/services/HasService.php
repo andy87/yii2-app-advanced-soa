@@ -12,7 +12,7 @@ use common\components\base\services\items\settings\ServiceSettings;
  *
  * @property-read SourceToolKit $service
  *
- * @package app\common\components\traits\services
+ * @package yii2\common\components\traits\services
  *
  * @tag: #trait #service
  */

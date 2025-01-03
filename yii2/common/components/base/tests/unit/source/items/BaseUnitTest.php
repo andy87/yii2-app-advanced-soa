@@ -7,7 +7,7 @@ use PHPUnit\Framework\TestCase;
 /**
  * < Common > Base Unit Test
  *
- * @package app\common\components\base\tests\core
+ * @package yii2\common\components\base\tests\core
  *
  * @tag: #abstract #base #test #core
  */

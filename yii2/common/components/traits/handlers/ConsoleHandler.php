@@ -15,7 +15,7 @@ use console\models\items\PascalCase;
  *
  * @property PascalCaseService $service
  *
- * @package app\console\components\handlers\parents
+ * @package yii2\console\components\handlers\parents
  *
  * @tag: #abstract #console #parent #boilerplate #handler
  */

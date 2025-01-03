@@ -12,7 +12,7 @@ use yii\db\{Connection, QueryInterface};
  * @property ?callable|string $key
  * @property ?Connection|array|string| $db
  *
- * @package app\frontend\components\dataproviders\items
+ * @package yii2\frontend\components\dataproviders\items
  *
  * @tag: #boilerplate #frontend #dataProvider #{{snake_case}}
  */

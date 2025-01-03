@@ -11,7 +11,7 @@ use common\components\base\producers\items\source\SourceProducer;
  *
  * @property-read SourceProducer $producer
  *
- * @package app\common\components\traits\handler
+ * @package yii2\common\components\traits\handler
  *
  * @tag: #trait #handler
  */

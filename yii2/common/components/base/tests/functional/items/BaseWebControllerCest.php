@@ -8,7 +8,7 @@ use common\components\base\tests\functional\source\items\BaseUnitFunctionalTest;
 /**
  * < Common > Base Controller Test
  *
- * @package app\common\components\base\tests\functional\items
+ * @package yii2\common\components\base\tests\functional\items
  *
  * @cli ./vendor/bin/codecept run app/app\(frontend|backend)\components\base\tests\functional\items/BaseAcceptanceCest
  *

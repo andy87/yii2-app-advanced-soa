@@ -3,23 +3,24 @@
 namespace common\components\base\tests\unit\controllers\items;
 
 use Yii;
+use yii\base\Behavior;
 use yii\console\ExitCode;
-use yii\base\{Behavior, InvalidConfigException};
+use yii\base\InvalidConfigException;
 use backend\controllers\items\PascalCaseController;
+use common\interfaces\controllers\ControllerHandlerInterface;
 use common\components\base\handlers\items\source\SourceHandler;
 use common\components\base\tests\unit\source\items\BaseUnitTest;
-use common\components\interfaces\controllers\ControllerHandlerInterface;
 
 /**
  * < Common > Base Model Test
  *
- * @package app\common\components\base\tests\unit
+ * @package yii2\common\components\base\tests\unit
  *
  * @cli ./vendor/bin/codecept run app/common/components/base/tests/unit/controllers/BaseControllerTest
  *
  * @tag: #abstract #base #test #controllers
  */
-abstract class BaseServiceControllerTest extends \yii2\common\components\base\tests\unit\source\items\BaseUnitTest
+abstract class BaseServiceControllerTest extends BaseUnitTest
 {
     /** @var PascalCaseController $controller */
     public PascalCaseController $controller;
@@ -33,7 +34,7 @@ abstract class BaseServiceControllerTest extends \yii2\common\components\base\te
      */
     public function _before(): void
     {
-        /** @var \yii2\backend\controllers\items\PascalCaseController $controller */
+        /** @var PascalCaseController $controller */
         $controller = Yii::createObject([
             'class' => PascalCaseController::class
         ]);
@@ -42,7 +43,7 @@ abstract class BaseServiceControllerTest extends \yii2\common\components\base\te
     }
 
     /**
-     * @cli ./vendor/bin/codecept run app/backend/tests/unit/controllers/itemsPingTest:testSetupHandler
+     * @cli ./vendor/bin/codecept run yii2/backend/tests/unit/controllers/itemsPingTest:testSetupHandler
      *
      * @return int
      */
@@ -58,13 +59,13 @@ abstract class BaseServiceControllerTest extends \yii2\common\components\base\te
     }
 
     /**
-     * @cli ./vendor/bin/codecept run app/backend/tests/unit/controllers/itemsPingTest:testBehavior
+     * @cli ./vendor/bin/codecept run yii2/backend/tests/unit/controllers/itemsPingTest:testBehavior
      *
      * @return int
      */
     public function testBehavior(): int
     {
-        $this->assertInstanceOf(\app\common\components\interfaces\controllers\ControllerHandlerInterface::class, $this->controller);
+        $this->assertInstanceOf(ControllerHandlerInterface::class, $this->controller);
 
         $behaviors = $this->controller->behaviors();
 

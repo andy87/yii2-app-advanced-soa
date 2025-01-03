@@ -2,22 +2,22 @@
 
 namespace frontend\controllers\items;
 
-use frontend\handlers\items\PascalCaseHandler;
 use common\components\enums\Action;
-use common\components\interfaces\dataProvider\DataProviderInterface;
-use common\components\interfaces\handlers\HandlerInterface;
-use common\components\interfaces\models\SearchModelInterface;
-use common\components\interfaces\models\SourceModelInterface;
-use common\components\interfaces\producers\ProducerInterface;
-use common\components\interfaces\repository\RepositoryInterface;
+use common\interfaces\dataProvider\DataProviderInterface;
+use common\interfaces\handlers\HandlerInterface;
+use common\interfaces\models\SearchModelInterface;
+use common\interfaces\models\SourceModelInterface;
+use common\interfaces\producers\ProducerInterface;
+use common\interfaces\repository\RepositoryInterface;
 use frontend\components\controllers\parents\FrontendController;
+use frontend\handlers\items\PascalCaseHandler;
 
 /**
  * Boilerplate Контроллер для модели `PascalCase`
  *
  * @property \frontend\handlers\items\PascalCaseHandler $handler
  *
- * @package app\frontend\controllers\items
+ * @package yii2\frontend\controllers\items
  *
  * @tag: #boilerplate #frontend #controller #{{snake_case}}
  */

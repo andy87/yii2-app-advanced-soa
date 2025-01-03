@@ -11,7 +11,7 @@ use common\components\traits\handlers\BackendHandler;
  * @property BackendHandler $handler
  * @property array $resources
  *
- * @package app\backend\components\controllers\parents
+ * @package yii2\backend\components\controllers\parents
  *
  * @tag: #abstract #backend #parent #controller
  */

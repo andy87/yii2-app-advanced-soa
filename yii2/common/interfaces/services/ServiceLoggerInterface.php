@@ -1,20 +1,20 @@
 <?php declare(strict_types=1);
 
-namespace common\components\interfaces\services\base;
+namespace common\interfaces\services;
 
-use common\components\interfaces\CatcherInterface;
+use common\interfaces\CatcherInterface;
 
 /**
  * < Common >
  *
- * @package app\common\components\interfaces\services\core
+ * @package yii2\common\components\interfaces\services\core
  *
  * @tag: #abstract #common #interface #service #logger
  */
 interface ServiceLoggerInterface
 {
     /**
-     * @return CatcherInterface|string
+     * @return \common\interfaces\CatcherInterface|string
      */
     public function getLoggerClass(): CatcherInterface|string;
 

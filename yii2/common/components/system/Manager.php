@@ -9,7 +9,7 @@ use yii\base\BaseObject;
 /**
  * Class Manager
  *
- * @package app\common\components
+ * @package yii2\common\components
  *
  * @tag: #manager #common
  */

@@ -2,16 +2,16 @@
 
 namespace common\models\forms\items;
 
-use commonmodels\items\PascalCase;
+use common\models\items\PascalCase;
 
 /**
  * < Common > Форма для common
  *
- * @package app\common\models\items
+ * @package yii2\common\models\items
  *
  * @tag: #boilerplate #common #model #{{snake_case}}
  */
-class PascalCaseForm extends \yii2\common\models\items\PascalCase
+class PascalCaseForm extends \common\models\items\PascalCase
 {
     // {{Boilerplate}}
 }

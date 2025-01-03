@@ -2,16 +2,17 @@
 
 namespace backend\tests\unit\resources\items;
 
-use unit\resources\items\BaseSearchResourceTest;
+
+use common\components\base\tests\unit\resources\items\BaseSearchResourceTest;
 
 /**
  * < Backend > ItemSearchResourceTest
  *
- * @package app\backend\tests\unit\producers
+ * @package yii2\backend\tests\unit\producers
  *
  * @tag: #boilerplate #backend #test #service
  */
-class BackendSearchResourceTest extends BaseSearchResourceTest
+class PascalCaseSearchResourceTest extends BaseSearchResourceTest
 {
 
 }

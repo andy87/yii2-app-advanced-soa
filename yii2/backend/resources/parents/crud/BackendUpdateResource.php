@@ -9,7 +9,7 @@ use backend\models\forms\items\PascalCaseForm;
  *
  * @property ?PascalCaseForm $form
  * 
- * @package app\backend\components\resources\parents\crud
+ * @package yii2\backend\components\resources\parents\crud
  *
  * @tag: #abstract #backend #parent #crud #resource #update
  */

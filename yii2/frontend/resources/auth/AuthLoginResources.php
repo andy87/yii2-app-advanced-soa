@@ -2,8 +2,8 @@
 
 namespace frontend\resources\auth;
 
+use common\models\forms\LoginForm;
 use common\resources\TemplateResources;
-use common{models\forms\LoginForm};
 
 /**
  * < Frontend > `AuthLoginResources`

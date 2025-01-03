@@ -2,9 +2,9 @@
 
 namespace backend\resources\items;
 
+use backend\models\search\items\PascalCaseSearch;
 use backend\dataProviders\items\PascalCaseDataProvider;
 use backend\resources\parents\crud\BackendIndexResource;
-use backend\models\search\items\PascalCaseSearch;
 
 /**
  * < Backend > Boilerplate для ресурса формы `PascalCase`
@@ -12,7 +12,7 @@ use backend\models\search\items\PascalCaseSearch;
  * @property PascalCaseSearch $searchModel;
  * @property PascalCaseDataProvider $activeDataProvider;
  *
- * @package app\backend\components\resources\items\{{snake_case}}
+ * @package yii2\backend\components\resources\items\{{snake_case}}
  *
  * @tag: #boilerplate #backend #resource #template #index
  */

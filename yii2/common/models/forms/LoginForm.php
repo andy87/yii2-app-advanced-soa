@@ -2,11 +2,12 @@
 
 namespace common\models\forms;
 
+use Exception;
+use common\models\Identity;
 use common\services\IdentityService;
 use yii\base\InvalidConfigException;
-use common{models\Identity};
-use common\components\forms\BaseWebForm;
 use frontend\controllers\AuthController;
+use common\components\base\models\forms\BaseWebForm;
 
 /**
  * < Common > `LoginForm`
@@ -19,16 +20,16 @@ use frontend\controllers\AuthController;
  */
 class LoginForm extends BaseWebForm
 {
-    public const ATTR_USERNAME = 'username';
-    public const ATTR_PASSWORD = 'password';
-    public const ATTR_REMEMBER_ME = 'rememberMe';
+    public const string ATTR_USERNAME = 'username';
+    public const string ATTR_PASSWORD = 'password';
+    public const string ATTR_REMEMBER_ME = 'rememberMe';
 
-    public const RULE_MESSAGE_WRONG_USER_NAME_OR_PASSWORD = 'Неверное имя пользователя или пароль.';
+    public const string RULE_MESSAGE_WRONG_USER_NAME_OR_PASSWORD = 'Неверное имя пользователя или пароль.';
 
-    public const RULE_REQUIRED_MESSAGE = 'Поле `{attribute}` не может быть пустым';
+    public const string RULE_REQUIRED_MESSAGE = 'Поле `{attribute}` не может быть пустым';
 
-    public const HINT = 'Пожалуйста, заполните следующие поля для входа:';
-    public const BUTTON_LOGIN_TEXT = 'Авторизоваться';
+    public const string HINT = 'Пожалуйста, заполните следующие поля для входа:';
+    public const string BUTTON_LOGIN_TEXT = 'Авторизоваться';
 
     public string $id = 'login-form';
 
@@ -75,7 +76,7 @@ class LoginForm extends BaseWebForm
     /**
      * @return ?Identity
      *
-     * @throws InvalidConfigException
+     * @throws InvalidConfigException|Exception
      */
     public function getIdentity(): ?Identity
     {
@@ -120,5 +121,4 @@ class LoginForm extends BaseWebForm
     {
         return AuthController::getEndpoint(AuthController::ACTION_RESEND_VERIFICATION_EMAIL);
     }
-
 }

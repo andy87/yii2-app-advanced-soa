@@ -2,7 +2,7 @@
 
 namespace backend\controllers;
 
-use common\components\Action;
+use common\components\enums\Action;
 use backend\components\controllers\parents\BackendController;
 
 /**
@@ -15,6 +15,7 @@ use backend\components\controllers\parents\BackendController;
 class SiteController extends BackendController
 {
     public const string ENDPOINT = 'site';
+
     public const array LABELS = [
         Action::INDEX => 'Главная',
     ];

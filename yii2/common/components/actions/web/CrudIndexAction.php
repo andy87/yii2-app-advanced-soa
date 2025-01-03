@@ -15,7 +15,7 @@ use common\components\base\resources\crud\BaseListViewResource;
  * @property BaseWebHandler $handler
  * @property BaseGridViewResource|BaseListViewResource $resource
  *
- * @package app\common\components\actions\crud
+ * @package yii2\common\components\actions\crud
  *
  * @tag: #common #default #crud #action #index
  */

@@ -2,15 +2,16 @@
 
 namespace frontend\services;
 
-use Exception;
 use Yii;
+use Exception;
+use common\models\Identity;
+use common\services\IdentityService;
 use yii\base\InvalidConfigException;
-use commonmodels\Identity;
-use frontend\models\forms\{PasswordResetRequestForm,
-    ResendVerificationEmailForm,
-    ResetPasswordForm,
-    SignupForm,
-    VerifyEmailForm};
+use frontend\models\forms\SignupForm;
+use frontend\models\forms\VerifyEmailForm;
+use frontend\models\forms\ResetPasswordForm;
+use frontend\models\forms\PasswordResetRequestForm;
+use frontend\models\forms\ResendVerificationEmailForm;
 
 /**
  * < Frontend > `AuthService`
@@ -43,7 +44,7 @@ class AuthService extends \common\services\AuthService
             {
                 $transaction?->commit();
 
-                $signupForm->identity = \common\services\IdentityService::getInstance()->signUp($signupForm);
+                $signupForm->identity = IdentityService::getInstance()->signUp($signupForm);
 
                 printPre(__METHOD__, [
                     '$signupForm' => [

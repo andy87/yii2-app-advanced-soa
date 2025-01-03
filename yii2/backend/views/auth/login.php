@@ -1,10 +1,9 @@
 <?php
 
-use backend\resources\auth\AuthLoginResources;
+use backend\controllers\AuthController;
+use common\components\enums\Endpoints;
 use yii\bootstrap5\{ActiveForm, Html};
 use yii\web\View;
-use backend\controllers\AuthController;
-use common\components\Action;
 
 /**
  * @var View $this
@@ -12,7 +11,7 @@ use common\components\Action;
  * @var \backend\resources\auth\AuthLoginResources $R
  */
 
-$this->title = AuthController::LABELS[Action::LOGIN];
+$this->title = AuthController::LABELS[Endpoints::LOGIN];
 
 $loginForm = $R->loginForm;
 

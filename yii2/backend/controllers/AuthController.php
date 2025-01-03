@@ -2,12 +2,15 @@
 
 namespace backend\controllers;
 
-use backend\resources\auth\AuthLoginResources;
-use yii\{base\InvalidConfigException, web\Response};
 use Yii;
-use yii\filters\{AccessControl, VerbFilter};
+use yii\web\Response;
+use yii\filters\VerbFilter;
+use common\components\AccessControl;
+use yii\base\InvalidConfigException;
+use common\components\enums\Endpoints;
+use backend\services\controllers\AuthService;
+use backend\resources\auth\AuthLoginResources;
 use backend\components\controllers\parents\BackendController;
-use common{components\Action, models\sources\Role};
 
 /**
  * < Backend > `AuthController`
@@ -21,7 +24,7 @@ class AuthController extends BackendController
     public const string ENDPOINT = 'auth';
 
     public const array LABELS = [
-        Action::LOGIN => 'Авторизация',
+        Endpoints::LOGIN => 'Авторизация',
     ];
 
 
@@ -39,20 +42,20 @@ class AuthController extends BackendController
                 'class' => AccessControl::class,
                 'rules' => [
                     [
-                        'actions' => [Action::LOGIN, Action::ERROR ],
+                        'actions' => [Endpoints::LOGIN, Endpoints::ERROR ],
                         'allow' => true,
                     ],
                     [
-                        'actions' => [Action::LOGOUT ],
+                        'actions' => [Endpoints::LOGOUT ],
                         'allow' => true,
-                        'roles' => [ Role::USER ],
+                        'roles' => [ AccessControl::USER ],
                     ],
                 ],
             ],
             'verbs' => [
                 'class' => VerbFilter::class,
                 'actions' => [
-                    Action::LOGOUT => ['post'],
+                    Endpoints::LOGOUT => ['post'],
                 ],
             ],
         ];
@@ -77,7 +80,7 @@ class AuthController extends BackendController
             {
                 $post = Yii::$app->request->post();
 
-                $handlerResult = \backend\services\controllers\AuthService::getInstance()->handlerLoginForm($R->loginForm, $post);
+                $handlerResult = AuthService::getInstance()->handlerLoginForm($R->loginForm, $post);
 
                 if ($handlerResult) return $this->goBack();
             }
@@ -97,7 +100,7 @@ class AuthController extends BackendController
      */
     public function actionLogout(): Response
     {
-        \backend\services\controllers\AuthService::getInstance()->logout();
+        AuthService::getInstance()->logout();
 
         return $this->goHome();
     }

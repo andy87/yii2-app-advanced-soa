@@ -7,7 +7,7 @@ use yii\base\BaseObject;
 /**
  * < Common > Base class for all resources
  *
- * @package app\common\components\resources\source\base
+ * @package yii2\common\components\resources\source\base
  *
  * @tag: #abstract #common #resource #base #source
  */

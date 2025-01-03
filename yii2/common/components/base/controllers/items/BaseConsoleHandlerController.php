@@ -2,16 +2,17 @@
 
 namespace common\components\base\controllers\items;
 
+use common\components\traits\has\HasHandlerTrait;
+use common\components\traits\handlers\ConsoleHandler;
 use common\components\base\controllers\BaseConsoleController;
 use common\components\base\handlers\items\settings\HandlerSettings;
-use common\components\traits\has\HasHandlerTrait;
 
 /**
  * < Common > Родительский класс для всех консольных контроллеров
  *
- * @property \yii2\common\components\traits\handlers\ConsoleHandler $handler
+ * @property ConsoleHandler $handler
  *
- * @package app\common\components\base\controllers
+ * @package yii2\common\components\base\controllers
  *
  * @tag: #abstract #common #base #controller #items #console
  */

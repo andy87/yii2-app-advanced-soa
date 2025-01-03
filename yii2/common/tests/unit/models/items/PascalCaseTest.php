@@ -12,7 +12,7 @@ use common\components\base\moels\items\base\SourceModel;
  * @cli ./vendor/bin/codecept run app/common/tests/unit/models/items/PascalCaseTest:testInspectAttributes
  * @method \yii2\common\models\items\PascalCase testInspectAttributes()
  *
- * @package app\common\tests\unit\models\items
+ * @package yii2\common\tests\unit\models\items
  *
  * @tag: #boilerplate #common #test #model
  */

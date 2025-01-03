@@ -2,14 +2,14 @@
 
 namespace frontend\tests\functional;
 
-use commonmodels\Identity;
-use commonmodels\sources\User;
-use commontests\cest\SendForm;
+use common\models\Identity;
+use common\models\sources\User;
+use common\tests\cest\SendForm;
 use frontend\tests\FunctionalTester;
 use frontend\models\forms\SignupForm;
-use Codeception\Exception\ModuleException;
 use frontend\controllers\AuthController;
-use common\components\forms\BaseWebForm;
+use Codeception\Exception\ModuleException;
+use common\components\base\models\forms\BaseWebForm;
 
 /**
  * < Frontend > `SignupCest`
@@ -19,19 +19,19 @@ use common\components\forms\BaseWebForm;
  * @property FunctionalTester $I
  * @property SignupForm $form
  *
- * Fix not used:
- * - @see SignupCest::signupWithEmptyFields()
- * - @see SignupCest::signupWithWrongEmail()
- * - @see SignupCest::signupSuccessfully()
- *
  * @cli ./vendor/bin/codecept run yii2/frontend/tests/functional/SignupCest
  *
  * @tag #frontend #tests #functional #SignupCest
+ *
+ * @fix `not used`:
+ * - @see SignupCest::signupWithEmptyFields()
+ * - @see SignupCest::signupWithWrongEmail()
+ * - @see SignupCest::signupSuccessfully()
  */
 class SignupCest extends SendForm
 {
-    /** @var BaseWebForm */
-    protected const BASE_FORM_CLASS = SignupForm::class;
+    /** @var BaseWebForm|string */
+    protected const BaseWebForm|string BASE_FORM_CLASS = SignupForm::class;
 
     /**
      * @endpoint auth/signup

@@ -2,14 +2,16 @@
 
 namespace frontend\tests\unit\resources\items;
 
+use common\components\base\tests\unit\resources\items\BaseUpdateResourceTest;
+
 /**
  * < Frontend > ItemUpdateResourceTest
  *
- * @package app\frontend\tests\unit\producers
+ * @package yii2\frontend\tests\unit\producers
  *
  * @tag: #boilerplate #frontend #test #service
  */
-class PascalCaseUpdateResourceTest extends \unit\resources\items\BaseUpdateResourceTest
+class PascalCaseUpdateResourceTest extends BaseUpdateResourceTest
 {
 
 }

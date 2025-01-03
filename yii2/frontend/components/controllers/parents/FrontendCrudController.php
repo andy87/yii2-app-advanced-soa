@@ -11,7 +11,7 @@ use common\components\traits\handlers\FrontendHandler;
  * @property FrontendHandler $handler
  * @property array $resources
  *
- * @package app\frontend\components\controllers\parents
+ * @package yii2\frontend\components\controllers\parents
  *
  * @tag: #abstract #frontend #parent #controller
  */

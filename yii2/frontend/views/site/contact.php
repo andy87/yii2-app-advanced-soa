@@ -1,5 +1,6 @@
 <?php
 
+use frontend\components\Navigation;
 use frontend\resources\site\SiteContactResources;
 use yii\bootstrap5\{ActiveForm, Html};
 use yii\captcha\Captcha;
@@ -13,7 +14,7 @@ use frontend\controllers\SiteController;
 
 $contactForm = $R->contactForm;
 
-$this->title = SiteController::TITLES[SiteController::ACTION_CONTACT];
+$this->title = Navigation::TITLES[SiteController::ACTION_CONTACT];
 $this->params['breadcrumbs'][] = $this->title;
 
 ?>

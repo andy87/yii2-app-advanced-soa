@@ -14,7 +14,7 @@ return [
 
     'basePath' => $basePath,
 
-    'controllerNamespace' => 'yii2\backend\controllers',
+    'controllerNamespace' => 'backend\controllers',
 
     'aliases' => [
         '@app'      => $basePath,

@@ -7,7 +7,7 @@ namespace console\models\items;
  *
  * @package yii2\console\models\items
  */
-class User extends \yii2\common\models\sources\User
+class User extends \common\models\sources\User
 {
 
 }

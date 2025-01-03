@@ -2,18 +2,16 @@
 
 namespace common\services\items;
 
-use common\dataProviders\items\PascalCaseDataProvider;
-use common\producers\items\PascalCaseProducer;
-use common\repository\items\PascalCaseRepository;
 use common\components\base\services\items\BaseService;
-use common\components\interfaces\CatcherInterface;
-use commonmodels\forms\items\PascalCaseForm;
-use commonmodels\items\PascalCase;
+use common\dataProviders\items\PascalCaseDataProvider;
+use common\interfaces\CatcherInterface;
+use common\models\forms\items\PascalCaseForm;
+use common\models\items\PascalCase;
 
 /**
  * < Common > Родительский класс для сервисов: console/frontend/backend
  *
- * @property CatcherInterface $logger
+ * @property \common\interfaces\CatcherInterface $logger
  * @property \common\producers\items\PascalCaseProducer $producer
  * @property \common\repository\items\PascalCaseRepository $repository
  * @property PascalCaseDataProvider $dataProvider
@@ -36,7 +34,7 @@ use commonmodels\items\PascalCase;
  * @method PascalCaseForm[] getAllActiveForms(string|array $criteria = [])
  * @method int delete(PascalCase $model)
  *
- * @package app\common\components\services\items
+ * @package yii2\common\components\services\items
  *
  * @tag: #boilerplate #common #service #{{snake_case}}
  */

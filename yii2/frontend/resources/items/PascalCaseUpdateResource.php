@@ -10,7 +10,7 @@ use frontend\models\items\PascalCase;
  *
  * @property ?PascalCase $form
  *
- * @package app\frontend\resources\items\{{snake_case}}
+ * @package yii2\frontend\resources\items\{{snake_case}}
  *
  * @tag: #boilerplate #frontend #resource #template #update
  */

@@ -8,7 +8,7 @@ use common\components\base\resources\items\BaseTemplateResource;
 /**
  * < Common > Базовый родительский класс для ресурса представления в окружениях: `frontend`, `backend`
  *
- * @package app\common\components\base\resources
+ * @package yii2\common\components\base\resources
  *
  * @tag: #abstract #common #resource #base #crud #view
  */

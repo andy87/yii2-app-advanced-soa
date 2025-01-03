@@ -1,7 +1,7 @@
 <?php
 
 use yii\web\View;
-use commonmodels\Identity;
+use common\models\Identity;
 use frontend\controllers\AuthController;
 
 /**

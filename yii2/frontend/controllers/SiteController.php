@@ -2,22 +2,24 @@
 
 namespace frontend\controllers;
 
+use Yii;
+use JsonException;
+use yii\web\Response;
+use frontend\components\Navigation;
+use common\components\enums\Action;
+use yii\base\InvalidConfigException;
+use common\components\traits\SessionFlash;
 use frontend\handlers\controllers\SiteHandler;
-use frontend\resources\site\{SiteContactResources};
+use frontend\components\actions\CaptchaAction;
 use frontend\resources\site\SiteAboutResources;
 use frontend\resources\site\SiteIndexResources;
-use JsonException;
-use Yii;
-use yii\base\InvalidConfigException;
-use yii\web\Response;
-use common\components\Action;
-use common\components\traits\SessionFlash;
-use frontend\components\{actions\CaptchaAction, controllers\parents\FrontendController};
+use frontend\resources\site\SiteContactResources;
+use frontend\components\controllers\parents\FrontendController;
 
 /**
  * < Frontend > `SiteController`
  *
- * @property \frontend\handlers\controllers\SiteHandler $handler
+ * @property SiteHandler $handler
  *
  * @package yii2\frontend\controllers
  *
@@ -29,26 +31,30 @@ class SiteController extends FrontendController
 
     public const string ENDPOINT = 'site';
 
-    public const array TITLES = [
-        Action::INDEX => 'Главная',
-        self::ACTION_ABOUT => 'О нас',
-        self::ACTION_CONTACT => 'Контакты',
-    ];
-
-    public array $resources = [
-        Action::INDEX => SiteIndexResources::class,
-        self::ACTION_ABOUT => SiteAboutResources::class,
-        self::ACTION_CONTACT => SiteContactResources::class,
-    ];
 
     public const string ACTION_CONTACT = 'contact';
     public const string ACTION_ABOUT = 'about';
 
+
+
+    /**
+     * @var string[]
+     */
+    public array $resources = [
+        Navigation::INDEX => SiteIndexResources::class,
+        Navigation::ABOUT => SiteAboutResources::class,
+        Navigation::CONTACT => SiteContactResources::class,
+    ];
+
+
+    /**
+     * @return void
+     */
     public function init(): void
     {
         parent::init();
 
-        $this->handler = new \frontend\handlers\controllers\SiteHandler();
+        $this->handler = new SiteHandler();
     }
 
     /**
@@ -62,7 +68,7 @@ class SiteController extends FrontendController
 
         $actions['captcha'] = [
             'class' => CaptchaAction::class,
-            'fixedVerifyCode' => YII_ENV_TEST ? CaptchaAction::TEST_VALUE : null,
+            'fixedVerifyCode' => CaptchaAction::getFixedVerifyCode()
         ];
 
         return $actions;
@@ -97,7 +103,7 @@ class SiteController extends FrontendController
     {
         $resourceClassName = $this->resources[self::ACTION_CONTACT];
 
-        /** @var \frontend\resources\site\SiteContactResources $R */
+        /** @var SiteContactResources $R */
         $R = new $resourceClassName();
 
         if ( Yii::$app->request->isPost)

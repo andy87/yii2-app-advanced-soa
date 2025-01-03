@@ -2,18 +2,18 @@
 
 namespace common\models\search\items;
 
+use common\interfaces\models\SearchModelInterface;
+use common\models\items\PascalCase;
 use yii\db\ActiveQueryInterface;
-use commonmodels\items\PascalCase;
-use common\components\interfaces\models\SearchModelInterface;
 
 /**
  * < Common > Модель с логикой поиска в `PascalCase` для окружения: common
  *
- * @package app\common\models\search\items
+ * @package yii2\common\models\search\items
  *
  * @tag: #boilerplate #common #search #{{snake_case}}
  */
-class PascalCaseSearch extends \yii2\common\models\items\PascalCase implements SearchModelInterface
+class PascalCaseSearch extends \common\models\items\PascalCase implements SearchModelInterface
 {
     // {{Boilerplate}}
     public function search(array $params): ActiveQueryInterface

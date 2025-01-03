@@ -2,11 +2,11 @@
 
 namespace common\components\base\services\items\source;
 
-use common\components\base\dataProviders\items\source\SourceActiveDataProvider;
-use common\components\base\producers\items\source\SourceProducer;
-use common\components\base\repository\items\source\SourceRepository;
 use common\components\system\Logger;
 use common\components\traits\has\ToolsKitTrait;
+use common\components\base\producers\items\source\SourceProducer;
+use common\components\base\repository\items\source\SourceRepository;
+use common\components\base\dataProviders\items\source\SourceActiveDataProvider;
 
 /**
  * < Common > Родительский абстрактный класс для всех сервисов
@@ -16,7 +16,7 @@ use common\components\traits\has\ToolsKitTrait;
  * @property ?SourceProducer $_producer
  * @property ?SourceRepository $_repository
  *
- * @package app\common\components\base\services\items\base
+ * @package yii2\common\components\base\services\items\base
  *
  * @tag: #abstract #common #service #base #source
  */

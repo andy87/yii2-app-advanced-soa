@@ -21,7 +21,7 @@ use common\components\enums\Action;
  * @method FrontendUpdateResource processUpdateForm(int $id, array $params)
  * @method int processDelete(int $id)
  *
- * @package app\frontend\components\handlers\parents
+ * @package yii2\frontend\components\handlers\parents
  *
  * @tag: #abstract #frontend #parent #handler
  */

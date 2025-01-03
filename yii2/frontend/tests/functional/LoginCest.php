@@ -2,14 +2,14 @@
 
 namespace frontend\tests\functional;
 
-use common\components\Action;
 use common\components\Layout;
-use commontests\cest\SendForm;
-use commonfixtures\UserFixture;
-use commonmodels\forms\LoginForm;
+use common\tests\cest\SendForm;
+use common\fixtures\UserFixture;
+use common\models\forms\LoginForm;
 use frontend\tests\FunctionalTester;
-use common\components\forms\BaseWebForm;
+use common\components\enums\Endpoints;
 use frontend\controllers\AuthController;
+use common\components\base\models\forms\BaseWebForm;
 
 /**
  * < Frontend > `LoginCest`
@@ -24,11 +24,17 @@ use frontend\controllers\AuthController;
  * @originalFile https://github.com/yiisoft/yii2-app-advanced/blob/master/frontend/tests/functional/LoginCest.php
  *
  * @tag #tests #functional #LoginCest
+ *
+ * @fix `not used`:
+ * - @see LoginCest::checkEmpty()
+ * - @see LoginCest::checkWrongPassword
+ * - @see LoginCest::checkInactiveAccount
+ * - @see LoginCest::checkValidLogin
  */
 class LoginCest extends SendForm
 {
-    /** @var BaseWebForm */
-    protected const BASE_FORM_CLASS = LoginForm::class;
+    /** @var BaseWebForm|string */
+    protected const BaseWebForm|string BASE_FORM_CLASS = LoginForm::class;
 
 
     /**
@@ -61,7 +67,7 @@ class LoginCest extends SendForm
     {
         parent::_before($I);
 
-        $route = AuthController::getEndpoint(Action::LOGIN);
+        $route = AuthController::getEndpoint(Endpoints::LOGIN);
 
         $I->amOnRoute($route);
     }
@@ -102,7 +108,7 @@ class LoginCest extends SendForm
             str_replace('{attribute}', $this->form->getAttributeLabel($this->form::ATTR_PASSWORD), $this->form::RULE_REQUIRED_MESSAGE),
         ];
 
-        foreach ($messages as $attribute => $message) {
+        foreach ($messages as $message) {
             $I->seeValidationError($message);
         }
     }

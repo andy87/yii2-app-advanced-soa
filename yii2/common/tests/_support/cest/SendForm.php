@@ -2,7 +2,7 @@
 
 namespace common\tests\cest;
 
-use common\components\forms\BaseWebForm;
+use common\components\base\models\forms\BaseWebForm;
 use frontend\{controllers\AuthController, tests\FunctionalTester};
 
 /**

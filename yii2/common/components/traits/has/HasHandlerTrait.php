@@ -10,7 +10,7 @@ use common\components\base\handlers\items\source\SourceHandler;
 /**
  * Trait HasHandler
  *
- * @package app\common\components\traits\handler
+ * @package yii2\common\components\traits\handler
  *
  * @tag: #trait #handler
  */

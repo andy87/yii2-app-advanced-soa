@@ -6,7 +6,7 @@ return [
     'components' => [
         'user' => [
             'class' => yii\web\User::class,
-            'identityClass' => yii2\common\models\Identity::class,
+            'identityClass' => common\models\Identity::class,
         ],
     ],
     'params' => require __DIR__ . '/params.php',

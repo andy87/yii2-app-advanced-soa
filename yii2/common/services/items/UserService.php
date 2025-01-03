@@ -7,7 +7,7 @@ use common\repository\items\UserRepository;
 use Yii;
 use yii\base\InvalidConfigException;
 use common\components\base\services\items\SingletonService;
-use commonmodels\sources\User;
+use common\models\sources\User;
 
 /**
  * < Items > `UserService`

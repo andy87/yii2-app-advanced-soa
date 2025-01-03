@@ -3,19 +3,20 @@
 namespace frontend\tests\unit\controllers\items;
 
 use frontend\controllers\items\PascalCaseController;
+use common\components\base\tests\unit\controllers\items\BaseWebControllerTest;
 
 /**
  * < Frontend > PascalCaseServiceTest
  *
  * @cli ./vendor/bin/codecept run app/frontend/tests/unit/controllers/items/ItemServiceControllerTest
  *
- * @property \yii2\frontend\controllers\items\PascalCaseController $controller
+ * @property PascalCaseController $controller
  *
- * @package app\frontend\tests\unit\models\items
+ * @package yii2\frontend\tests\unit\models\items
  *
  * @tag: #boilerplate #frontend #test #model
  */
-class PascalCaseServiceControllerTest extends \unit\controllers\items\BaseWebControllerTest
+class PascalCaseServiceControllerTest extends BaseWebControllerTest
 {
-
+    //{{Boilerplate}}
 }

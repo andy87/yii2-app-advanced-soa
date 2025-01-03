@@ -7,7 +7,7 @@ use yii\console\Controller;
 /**
  * < Common > Родительский класс для всех консольных контроллеров
  *
- * @package app\common\components\base\controllers\base
+ * @package yii2\common\components\base\controllers\base
  *
  * @tag: #abstract #common #base #controller #source #console
  */

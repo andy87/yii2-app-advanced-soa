@@ -6,8 +6,8 @@ use Exception;
 use yii\db\Query;
 use common\components\base\models\items\sources\SourceModel;
 use common\components\base\repository\items\source\SourceRepository;
-use commonmodels\Identity;
-use commonmodels\sources\User;
+use common\models\Identity;
+use common\models\sources\User;
 
 /**
  * < Common > `IdentityRepository`

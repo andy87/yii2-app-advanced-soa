@@ -9,7 +9,7 @@ use common\components\base\models\items\sources\SourceModel;
  *
  * @property ?SourceModel $form
  * 
- * @package app\backend\components\resources\parents\crud
+ * @package yii2\backend\components\resources\parents\crud
  *
  * @tag: #abstract #backend #parent #crud #resource #create
  */

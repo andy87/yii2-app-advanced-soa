@@ -2,17 +2,18 @@
 
 namespace frontend\tests\unit\resources\items;
 
+use common\components\base\tests\unit\resources\items\BaseCreateResourceTest;
 
 /**
  * < Frontend > ItemCreateResourceTest
  *
- * @package app\frontend\tests\unit\resources\items
+ * @package yii2\frontend\tests\unit\resources\items
  *
  * @cli ./vendor/bin/codecept run app/frontend/resources/items/ItemCreateResourceTest
  *
  * @tag: #boilerplate #frontend #resource #{{snake_case}} #create
  */
-class PascalCaseCreateResourceTest extends \unit\resources\items\BaseCreateResourceTest
+class PascalCaseCreateResourceTest extends BaseCreateResourceTest
 {
 
 }

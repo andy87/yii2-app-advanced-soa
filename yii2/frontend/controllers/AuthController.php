@@ -2,22 +2,22 @@
 
 namespace frontend\controllers;
 
-use Exception;
-use frontend\resources\auth\{AuthResetPasswordResources};
-use frontend\resources\auth\AuthLoginResources;
-use frontend\resources\auth\AuthRequestPasswordResetResources;
-use frontend\resources\auth\AuthResendVerificationEmailResources;
-use frontend\resources\auth\AuthSignupResources;
-use frontend\services\AuthService;
+use common\components\AccessControl;
 use Yii;
-use yii\base\{Exception as YiiBaseException, InvalidArgumentException, InvalidConfigException};
+use Exception;
+use yii\filters\VerbFilter;
+use common\models\sources\Role;
+use frontend\services\AuthService;
 use yii\db\Exception as YiiDbException;
-use yii\filters\{AccessControl, VerbFilter};
-use yii\web\{BadRequestHttpException, Response};
-use common{components\Action, models\Identity, models\sources\Role};
 use common\components\traits\SessionFlash;
+use frontend\resources\auth\AuthLoginResources;
+use frontend\resources\auth\AuthSignupResources;
+use frontend\resources\auth\AuthResetPasswordResources;
+use frontend\resources\auth\AuthRequestPasswordResetResources;
 use frontend\components\controllers\parents\FrontendController;
-use frontend\models\forms\{ResetPasswordForm, VerifyEmailForm};
+use frontend\resources\auth\AuthResendVerificationEmailResources;
+use yii\base\{Exception as YiiBaseException, InvalidArgumentException, InvalidConfigException};
+use yii\web\Response;
 
 /**
  * < Frontend > `AuthController`
@@ -32,15 +32,20 @@ class AuthController extends FrontendController
 
     public const string ENDPOINT = 'auth';
 
-    public const ACTION_SIGNUP = 'signup';
-    public const ACTION_REQUEST_PASSWORD_RESET = 'request-password-reset';
-    public const ACTION_RESET_PASSWORD = 'reset-password';
-    public const ACTION_VERIFY_EMAIL = 'verify-email';
-    public const ACTION_RESEND_VERIFICATION_EMAIL = 'resend-verification-email';
-    public const ACTION_REQUEST_PASSWORD_RESET_TOKEN = 'request-password-reset-token';
+    public const string ACTION_LOGIN = 'login';
+    public const string ACTION_LOGOUT = 'logout';
+    public const string ACTION_SIGNUP = 'signup';
+    public const string ACTION_REQUEST_PASSWORD_RESET = 'request-password-reset';
+    public const string ACTION_RESET_PASSWORD = 'reset-password';
+    public const string ACTION_VERIFY_EMAIL = 'verify-email';
+    public const string ACTION_RESEND_VERIFICATION_EMAIL = 'resend-verification-email';
+    public const string ACTION_REQUEST_PASSWORD_RESET_TOKEN = 'request-password-reset-token';
 
-    public const LABELS = [
-        Action::LOGIN => 'Вход',
+    /**
+     * @
+     */
+    public const array LABELS = [
+        self::ACTION_LOGIN => 'Вход',
         self::ACTION_SIGNUP => 'Регистрация',
         self::ACTION_REQUEST_PASSWORD_RESET => 'Запрос сброса пароля',
         self::ACTION_RESET_PASSWORD => 'Сброс пароля',
@@ -61,27 +66,27 @@ class AuthController extends FrontendController
         return [
             'access' => [
                 'class' => AccessControl::class,
-                'only' => [ Action::LOGIN, Action::LOGOUT, self::ACTION_SIGNUP],
+                'only' => [ self::ACTION_LOGIN, self::ACTION_LOGOUT, self::ACTION_SIGNUP],
                 'rules' => [
                     [
                         'actions' => [
-                            Action::LOGIN,
+                            self::ACTION_LOGIN,
                             self::ACTION_SIGNUP
                         ],
                         'allow' => true,
-                        'roles' => [Role::GUEST],
+                        'roles' => [AccessControl::GUEST],
                     ],
                     [
-                        'actions' => [Action::LOGOUT],
+                        'actions' => [self::ACTION_LOGOUT],
                         'allow' => true,
-                        'roles' => [Role::USER],
+                        'roles' => [AccessControl::USER],
                     ],
                 ],
             ],
             'verbs' => [
                 'class' => VerbFilter::class,
                 'actions' => [
-                    Action::LOGOUT => ['post'],
+                    self::ACTION_LOGOUT => ['post'],
                 ],
             ],
         ];

@@ -7,7 +7,7 @@ use common\components\base\tests\unit\resources\items\BaseViewResourceTest;
 /**
  * < Backend > ItemViewResourceTest
  *
- * @package app\backend\tests\unit\producers
+ * @package yii2\backend\tests\unit\producers
  *
  * @tag: #boilerplate #backend #test #service
  */

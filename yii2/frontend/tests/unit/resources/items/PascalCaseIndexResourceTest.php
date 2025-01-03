@@ -2,12 +2,12 @@
 
 namespace frontend\tests\unit\resources\items;
 
-use unit\resources\items\BaseIndexResourceTest;
+use common\components\base\tests\unit\resources\items\BaseIndexResourceTest;
 
 /**
  * < Frontend > ItemIndexResourceTest
  *
- * @package app\frontend\tests\unit\producers
+ * @package yii2\frontend\tests\unit\producers
  *
  * @tag: #boilerplate #frontend #test #service
  */

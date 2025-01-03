@@ -6,7 +6,6 @@ use yii\web\ErrorAction;
 use yii\filters\VerbFilter;
 use yii\filters\AccessControl;
 use common\components\enums\Action;
-use common\components\base\models\items\sources\SourceModel;
 use common\components\base\controllers\items\source\SourceWebController;
 
 /**
@@ -14,7 +13,7 @@ use common\components\base\controllers\items\source\SourceWebController;
  * - BaseFrontendController
  * - BaseBackendController
  *
- * @package app\common\components\base\controllers
+ * @package yii2\common\components\base\controllers
  *
  * @tag: #abstract #common #base #controller #items #web
  */
@@ -40,7 +39,7 @@ abstract class BaseWebController extends SourceWebController
      *
      * @var array
      */
-    public const VERBS = [
+    public const array VERBS = [
         Action::INDEX => ['GET'],
         Action::VIEW => ['GET'],
         Action::CREATE => ['GET', 'POST'],

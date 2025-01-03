@@ -7,7 +7,7 @@ use common\components\base\tests\unit\source\items\BaseUnitTest;
 /**
  * < Common > Base Resource Test
  *
- * @package app\common\components\base\tests\unit\resources\items\source
+ * @package yii2\common\components\base\tests\unit\resources\items\source
  *
  * @cli ./vendor/bin/codecept run app\common\components\base\tests\unit\resources\items\source/BaseResourceTest
  *

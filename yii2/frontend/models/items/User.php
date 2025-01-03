@@ -9,6 +9,6 @@ namespace frontend\models\items;
  *
  * @tag #models #items #user
  */
-class User extends \yii2\common\models\sources\User
+class User extends \common\models\sources\User
 {
 }

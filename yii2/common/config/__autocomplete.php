@@ -17,7 +17,7 @@ use console\managers\ConsoleServiceManager;
 use yii\console\Application as AppConsole;
 use yii\web\Application as AppWeb;
 use yii\web\User;
-use commonmodels\Identity;
+use common\models\Identity;
 use frontend\components\managers\BackendServiceManager;
 
 /**

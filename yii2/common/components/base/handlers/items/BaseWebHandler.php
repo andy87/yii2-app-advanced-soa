@@ -2,33 +2,33 @@
 
 namespace common\components\base\handlers\items;
 
-use backend\resources\parents\crud\BackendCreateResource;
-use backend\resources\parents\crud\BackendFormResource;
-use backend\resources\parents\crud\BackendIndexResource;
-use backend\resources\parents\crud\BackendViewResource;
-use common\handlers\items\PascalCaseHandler;
-use Exception;
-use frontend\resources\parents\crud\FrontendCreateResource;
-use frontend\resources\parents\crud\FrontendFormResource;
-use frontend\resources\parents\crud\FrontendIndexResource;
-use frontend\resources\parents\crud\FrontendViewResource;
-use Throwable;
 use Yii;
+use Throwable;
+use Exception;
+use common\components\enums\Action;
 use yii\base\InvalidConfigException;
-use common\components\base\resources\crud\BaseCrudViewResource;
+use common\handlers\items\PascalCaseHandler;
+use common\components\base\services\items\BaseService;
+use backend\resources\parents\crud\BackendFormResource;
+use backend\resources\parents\crud\BackendViewResource;
+use backend\resources\parents\crud\BackendIndexResource;
+use frontend\resources\parents\crud\FrontendFormResource;
+use frontend\resources\parents\crud\FrontendViewResource;
+use backend\resources\parents\crud\BackendCreateResource;
+use frontend\resources\parents\crud\FrontendIndexResource;
+use frontend\resources\parents\crud\FrontendCreateResource;
 use common\components\base\resources\crud\BaseFormResource;
+use common\components\base\resources\crud\BaseCrudViewResource;
 use common\components\base\resources\crud\BaseGridViewResource;
 use common\components\base\resources\crud\BaseListViewResource;
 use common\components\base\resources\items\BaseTemplateResource;
-use common\components\base\services\items\BaseService;
-use common\components\enums\Action;
 
 /**
  * < Common > Родительский абстрактный класс для всех Web обработчиков
  *
  * @property BaseService $service;
  *
- * @package app\common\components\base\handlers\itemse
+ * @package yii2\common\components\base\handlers\itemse
  *
  * @tag: #abstract #common #handler #base
  */
@@ -99,7 +99,7 @@ abstract class BaseWebHandler extends PascalCaseHandler
      */
     public function processIndex(array $params): BaseGridViewResource|BaseListViewResource
     {
-        /** @var BaseCrudViewResource|FrontendIndexResource|\backend\resources\parents\crud\BackendIndexResource $R */
+        /** @var BaseCrudViewResource|FrontendIndexResource|BackendIndexResource $R */
         $R = $this->getResources(Action::INDEX);
 
         $R->searchModel = $this->service->settings->classSearchModel;
@@ -119,7 +119,7 @@ abstract class BaseWebHandler extends PascalCaseHandler
      */
     public function processCreateForm(array $params = [], string $key = '' ): BaseFormResource
     {
-        /** @var BaseCrudViewResource|\frontend\resources\parents\crud\FrontendCreateResource|BackendCreateResource $R */
+        /** @var BaseCrudViewResource|FrontendCreateResource|BackendCreateResource $R */
         $R = $this->getResources(Action::CREATE);
 
         $R->form = $this->service->producer->formCreate();
@@ -142,7 +142,7 @@ abstract class BaseWebHandler extends PascalCaseHandler
      */
     public function processUpdateForm( int $id, array $params = [] ): BaseFormResource
     {
-        /** @var BaseCrudViewResource|\frontend\resources\parents\crud\FrontendFormResource|\backend\resources\parents\crud\BackendFormResource $R */
+        /** @var BaseCrudViewResource|FrontendFormResource|BackendFormResource $R */
         $R = $this->getResources(Action::UPDATE);
 
         $R->form = $this->service->repository->findForm($id);
@@ -163,7 +163,7 @@ abstract class BaseWebHandler extends PascalCaseHandler
      */
     public function processViewForm(int $id): BaseCrudViewResource
     {
-        /** @var BaseCrudViewResource|\frontend\resources\parents\crud\FrontendViewResource|\backend\resources\parents\crud\BackendViewResource $R */
+        /** @var BaseCrudViewResource|FrontendViewResource|BackendViewResource $R */
         $R = $this->getResources(Action::VIEW);
 
         $R->model = $this->service->getModel( $id );

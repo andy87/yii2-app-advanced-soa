@@ -15,7 +15,7 @@ use unit\producers\items\BaseProducerTest;
  * @method bool testCreateSuccess()
  * @method bool testCreateSuccessWithSave()
  *
- * @package app\common\tests\unit\producers
+ * @package yii2\common\tests\unit\producers
  *
  * @tag: #boilerplate #common #test #service
  */

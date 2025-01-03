@@ -16,12 +16,12 @@ use common\components\base\models\items\sources\SourceModel;
  * @method self setConnection(Connection $connection)
  * @method Connection|null getConnection()
  *
- * @package app\console\components\services\items
+ * @package yii2\console\components\services\items
  *
  * @tag: #boilerplate #console #service #{{snake_case}}
  */
 class PascalCaseRepository extends \common\repository\items\PascalCaseRepository
 {
-    /** @var \yii2\common\components\base\models\items\sources\SourceModel|string $modelClass класс модели */
+    /** @var \common\components\base\models\items\sources\SourceModel|string $modelClass класс модели */
     public SourceModel|string $modelClass = \yii2\console\models\items\PascalCase::class;
 }

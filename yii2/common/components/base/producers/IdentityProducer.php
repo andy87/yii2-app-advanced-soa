@@ -5,7 +5,7 @@ namespace common\components\base\producers;
 use yii\base\Exception;
 use yii\db\Exception as DbException;
 use common\components\base\producers\items\source\SourceProducer;
-use commonmodels\Identity;
+use common\models\Identity;
 use frontend\models\forms\SignupForm;
 
 /**

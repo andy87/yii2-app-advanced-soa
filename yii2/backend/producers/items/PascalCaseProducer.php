@@ -11,7 +11,7 @@ use common\components\base\models\items\sources\SourceModel;
  * @method PascalCase create(array $params = [], bool $runSave = false)
  * @method PascalCase add(array $params)
  *
- * @package app\backend\components\services\producers\items
+ * @package yii2\backend\components\services\producers\items
  *
  * @tag: #boilerplate #backend #producer #{{snake_case}}
  */

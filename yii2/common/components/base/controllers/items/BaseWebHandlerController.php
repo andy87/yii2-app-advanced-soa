@@ -2,13 +2,13 @@
 
 namespace common\components\base\controllers\items;
 
+use common\interfaces\controllers\ControllerHandlerInterface;
 use common\components\base\handlers\items\source\SourceHandler;
-use common\components\interfaces\controllers\ControllerHandlerInterface;
 
 /**
  * < Common > Родительский класс для всех контроллеров с сервисом
  *
- * @package app\common\components\base\controllers
+ * @package yii2\common\components\base\controllers
  *
  * @tag: #abstract #common #base #controller #items #web #handler
  */

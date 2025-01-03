@@ -2,15 +2,15 @@
 
 namespace backend\resources\items;
 
-use backend\resources\parents\crud\BackendViewResource;
 use backend\models\items\PascalCase;
+use backend\resources\parents\crud\BackendViewResource;
 
 /**
  * < Backend > Boilerplate для ресурса обновления модели `PascalCase`
  *
  * @property ?PascalCase $model
  *
- * @package app\backend\components\resources\items\{{snake_case}}
+ * @package yii2\backend\components\resources\items\{{snake_case}}
  *
  * @tag: #boilerplate #backend #resource #template #view
  */

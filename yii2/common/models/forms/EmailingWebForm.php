@@ -1,8 +1,11 @@
 <?php declare(strict_types=1);
 
-namespace common\components\forms;
+namespace common\models\forms;
 
-use common{components\interfaces\ModelEmailingInterface, models\dto\EmailMessageDto};
+use common;
+use common\models\dto\EmailMessageDto;
+use common\interfaces\ModelEmailingInterface;
+use common\components\base\models\forms\BaseWebForm;
 
 /**
  * < Common > `EmailingModel`

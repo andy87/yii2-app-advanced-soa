@@ -2,15 +2,15 @@
 
 namespace backend\resources\items;
 
-use backend\resources\parents\crud\BackendFormResource;
 use backend\models\items\PascalCase;
+use backend\resources\parents\crud\BackendFormResource;
 
 /**
  * < Backend > Boilerplate для ресурса формы `PascalCase`
  *
  * @property ?PascalCase $form
  *
- * @package app\backend\components\resources\items\{{snake_case}}
+ * @package yii2\backend\components\resources\items\{{snake_case}}
  *
  * @tag: #boilerplate #backend #resource #template #form
  */

@@ -16,7 +16,7 @@ use common\components\enums\Action;
  *
  * @property \yii2\console\controllers\items\PascalCaseController $controller
  *
- * @package app\console\tests\unit\models\items
+ * @package yii2\console\tests\unit\models\items
  *
  * @tag: #boilerplate #console #test #model
  */

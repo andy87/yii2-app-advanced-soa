@@ -1,11 +1,11 @@
 <?php declare(strict_types=1);
 
-namespace common\components\interfaces\handlers;
+namespace common\interfaces\handlers;
 
 /**
  * < Common >
  *
- * @package app\common\components\interfaces\handlers
+ * @package yii2\common\components\interfaces\handlers
  *
  * @tag: #abstract #common #interface #handler
  */

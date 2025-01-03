@@ -11,5 +11,16 @@ namespace frontend\components\actions;
  */
 class CaptchaAction extends \yii\captcha\CaptchaAction
 {
-    public const string TEST_VALUE = 'testme';
+    /** @var string  */
+    public const string TEST_VALUE = 'test_me';
+
+
+
+    /**
+     * @return ?string
+     */
+    public static function getFixedVerifyCode(): ?string
+    {
+        return YII_ENV_TEST ? self::TEST_VALUE : null;
+    }
 }

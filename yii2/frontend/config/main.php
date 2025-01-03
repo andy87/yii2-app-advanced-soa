@@ -18,7 +18,7 @@ return [
 
     'basePath' => $basePath,
 
-    'controllerNamespace' => 'yii2\frontend\controllers',
+    'controllerNamespace' => 'frontend\controllers',
 
     'aliases' => [
         '@app'      => $basePath,
@@ -58,5 +58,5 @@ return [
 
     'modules' => [],
 
-    'params' => $params,
+    'params' => $params
 ];

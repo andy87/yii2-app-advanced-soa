@@ -12,7 +12,7 @@ use frontend\models\search\items\PascalCaseSearch;
  * @property PascalCaseSearch $searchModel;
  * @property \frontend\dataProviders\items\PascalCaseDataProvider $activeDataProvider;
  *
- * @package app\frontend\resources\items\{{snake_case}}
+ * @package yii2\frontend\resources\items\{{snake_case}}
  *
  * @tag: #boilerplate #frontend #resource #template #index
  */

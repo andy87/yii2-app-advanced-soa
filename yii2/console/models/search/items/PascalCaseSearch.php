@@ -7,7 +7,7 @@ use console\models\items\PascalCase;
 /**
  * < Console > Модель с логикой поиска в `PascalCase` для окружения: console
  *
- * @package app\console\models\search\items
+ * @package yii2\console\models\search\items
  *
  * @tag: #boilerplate #console #search #{{snake_case}}
  */

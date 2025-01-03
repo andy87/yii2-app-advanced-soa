@@ -9,7 +9,7 @@ use unit\repository\items\BaseRepositoryTest;
  *
  * @cli ./vendor/bin/codecept run app/common/tests/unit/services/repository/PascalCaseRepositoryTest
  *
- * @package app\common\tests\unit\repository
+ * @package yii2\common\tests\unit\repository
  *
  * @tag: #boilerplate #common #test #repository
  */

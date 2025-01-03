@@ -2,6 +2,7 @@
 
 namespace frontend\tests\functional;
 
+use frontend\components\Navigation;
 use frontend\tests\FunctionalTester;
 use frontend\controllers\SiteController;
 
@@ -38,8 +39,8 @@ class AboutCest
      */
     public function checkAbout(FunctionalTester $I): void
     {
-        $I->amOnRoute(SiteController::ENDPOINT . '/' . SiteController::ACTION_ABOUT);
+        $I->amOnRoute(SiteController::ENDPOINT . '/' . Navigation::ABOUT);
 
-        $I->see(SiteController::TITLES[SiteController::ACTION_ABOUT], 'h1');
+        $I->see(Navigation::TITLES[Navigation::ABOUT], 'h1');
     }
 }

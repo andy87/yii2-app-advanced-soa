@@ -18,7 +18,7 @@ return [
 
     'basePath' => dirname(__DIR__),
 
-    'controllerNamespace' => 'yii2\console\controllers',
+    'controllerNamespace' => 'console\controllers',
 
     'components' => [
         'log' => require __DIR__ . '/components/log.php',

@@ -3,6 +3,7 @@
 namespace frontend\tests\functional;
 
 use Yii;
+use frontend\components\Navigation;
 use frontend\tests\FunctionalTester;
 use frontend\controllers\SiteController;
 
@@ -39,9 +40,13 @@ class HomeCest
     {
         /** @see SiteController::actionIndex() */
         $I->amOnRoute( Yii::$app->homeUrl );
+
         $I->see( Yii::$app->name );
-        $I->seeLink(SiteController::TITLES[SiteController::ACTION_ABOUT]);
-        $I->click(SiteController::TITLES[SiteController::ACTION_ABOUT]);
+
+        $I->seeLink(Navigation::TITLES[Navigation::ABOUT]);
+
+        $I->click(Navigation::TITLES[Navigation::ABOUT]);
+
         $I->see('Это страница О нас');
     }
 }

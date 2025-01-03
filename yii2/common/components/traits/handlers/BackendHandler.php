@@ -22,7 +22,7 @@ use common\components\enums\Action;
  * @method BackendUpdateResource processUpdateForm(int $id, array $params)
  * @method int processDelete(int $id)
  *
- * @package app\backend\components\handlers\parents
+ * @package yii2\backend\components\handlers\parents
  *
  * @tag: #abstract #backend #parent #handler
  */

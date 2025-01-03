@@ -2,7 +2,7 @@
 
 use yii\web\View;
 use yii\helpers\Html;
-use commonmodels\Identity;
+use common\models\Identity;
 use frontend\controllers\AuthController;
 
 /**

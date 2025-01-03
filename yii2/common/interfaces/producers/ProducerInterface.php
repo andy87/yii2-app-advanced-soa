@@ -1,13 +1,13 @@
 <?php declare(strict_types=1);
 
-namespace common\components\interfaces\producers;
+namespace common\interfaces\producers;
 
 use yii\base\Model;
 
 /**
  * < Common >
  *
- * @package app\common\components\interfaces\provider
+ * @package yii2\common\components\interfaces\provider
  *
  * @tag: #abstract #common #interface #producer
  */

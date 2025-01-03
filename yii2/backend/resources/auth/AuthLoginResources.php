@@ -2,8 +2,8 @@
 
 namespace backend\resources\auth;
 
+use common\models\forms\LoginForm;
 use common\resources\TemplateResources;
-use commonmodels\forms\LoginForm;
 
 /**
  * < Backend > `AuthLoginResources`
@@ -29,8 +29,10 @@ class AuthLoginResources extends TemplateResources
      *
      * @tag #backend #resources #auth #constructor
      */
-    public function __construct()
+    public function __construct( array $config )
     {
         $this->loginForm = new LoginForm;
+
+        parent::__construct($config);
     }
 }
