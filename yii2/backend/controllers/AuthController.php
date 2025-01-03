@@ -28,6 +28,7 @@ class AuthController extends BackendController
     ];
 
 
+
     /**
      * {@inheritdoc}
      *
