@@ -1,8 +1,8 @@
 <?php
 
-use yii2\common\components\managers\CommonHandlerManager;
-use yii2\common\components\managers\CommonRepositoryManager;
-use yii2\common\components\managers\CommonServiceManager;
+use common\managers\CommonHandlerManager;
+use common\managers\CommonRepositoryManager;
+use common\managers\CommonServiceManager;
 
 $dirApp = dirname(__DIR__, 2);
 $root = dirname(__DIR__, 3);

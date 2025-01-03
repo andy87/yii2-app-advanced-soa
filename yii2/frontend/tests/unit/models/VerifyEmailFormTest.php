@@ -3,10 +3,11 @@
 namespace yii2\frontend\tests\unit\models;
 
 use Codeception\Test\Unit;
+use frontend\services\AuthService;
 use yii\base\{InvalidArgumentException, InvalidConfigException};
 use yii\db\Exception;
 use yii2\common\{fixtures\UserFixture, models\Identity};
-use yii2\frontend\{components\services\AuthService, models\forms\VerifyEmailForm};
+use yii2\frontend\{models\forms\VerifyEmailForm};
 use yii2\frontend\tests\UnitTester;
 
 /**

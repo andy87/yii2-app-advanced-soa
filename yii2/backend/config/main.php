@@ -1,9 +1,5 @@
 <?php
 
-use yii2\backend\components\managers\BackendHandlerManager;
-use yii2\backend\components\managers\BackendRepositoryManager;
-use yii2\backend\components\managers\BackendServiceManager;
-
 $params = array_merge(
     require __DIR__ . '/../../common/config/params.php',
     require __DIR__ . '/../../common/config/params-local.php',
@@ -37,21 +33,6 @@ return [
         'log' => require __DIR__ . '/../../common/config/components/log.php',
 
         'errorHandler' => require __DIR__ . '/../../common/config/components/errorHandler.php',
-
-        'serviceManager' => [
-            'class' => BackendServiceManager::class,
-            'config' => BackendServiceManager::CONFIG,
-        ],
-
-        'handlerManager' => [
-            'class' => BackendHandlerManager::class,
-            'config' => BackendHandlerManager::CONFIG,
-        ],
-
-        'repositoryManager' => [
-            'class' => BackendRepositoryManager::class,
-            'config' => BackendRepositoryManager::CONFIG,
-        ]
     ],
 
     'bootstrap' => ['log'],
@@ -59,4 +40,8 @@ return [
     'modules' => [],
 
     'params' => $params,
+
+    'container' => [
+        'definitions' => require __DIR__ . '/container/definitions.php',
+    ],
 ];

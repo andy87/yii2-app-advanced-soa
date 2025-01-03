@@ -2,23 +2,22 @@
 
 namespace yii2\frontend\controllers;
 
+use frontend\handlers\controllers\SiteHandler;
+use frontend\resources\site\{SiteContactResources};
+use frontend\resources\site\SiteAboutResources;
+use frontend\resources\site\SiteIndexResources;
 use JsonException;
 use Yii;
-use yii\web\Response;
 use yii\base\InvalidConfigException;
+use yii\web\Response;
 use yii2\common\components\Action;
 use yii2\common\components\traits\SessionFlash;
-use yii2\frontend\components\{actions\CaptchaAction,
-    controllers\parents\FrontendController,
-    handlers\controllers\SiteHandler,
-    resources\site\SiteAboutResources,
-    resources\site\SiteIndexResources};
-use yii2\frontend\components\resources\site\{SiteContactResources};
+use yii2\frontend\components\{actions\CaptchaAction, controllers\parents\FrontendController};
 
 /**
  * < Frontend > `SiteController`
  *
- * @property SiteHandler $handler
+ * @property \frontend\handlers\controllers\SiteHandler $handler
  *
  * @package yii2\frontend\controllers
  *
@@ -49,7 +48,7 @@ class SiteController extends FrontendController
     {
         parent::init();
 
-        $this->handler = new SiteHandler();
+        $this->handler = new \frontend\handlers\controllers\SiteHandler();
     }
 
     /**
@@ -98,7 +97,7 @@ class SiteController extends FrontendController
     {
         $resourceClassName = $this->resources[self::ACTION_CONTACT];
 
-        /** @var SiteContactResources $R */
+        /** @var \frontend\resources\site\SiteContactResources $R */
         $R = new $resourceClassName();
 
         if ( Yii::$app->request->isPost)

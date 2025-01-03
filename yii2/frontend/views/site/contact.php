@@ -1,8 +1,8 @@
 <?php
 
+use frontend\resources\site\SiteContactResources;
 use yii\bootstrap5\{ActiveForm, Html};
 use yii\captcha\Captcha;
-use yii2\frontend\components\resources\site\SiteContactResources;
 use yii2\frontend\controllers\SiteController;
 
 /**

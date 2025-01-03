@@ -12,14 +12,12 @@
  * ```
  */
 
-use yii\web\User;
-use yii2\backend\components\managers\BackendServiceManager;
-use yii2\common\components\managers\CommonHandlerManager;
-use yii2\common\components\managers\CommonServiceManager;
-use yii2\common\models\Identity;
-use yii\web\Application as AppWeb;
+use backend\managers\BackendServiceManager;
+use console\managers\ConsoleServiceManager;
 use yii\console\Application as AppConsole;
-use yii2\console\components\managers\ConsoleServiceManager;
+use yii\web\Application as AppWeb;
+use yii\web\User;
+use yii2\common\models\Identity;
 use yii2\frontend\components\managers\BackendServiceManager;
 
 /**
@@ -36,8 +34,8 @@ class Yii
 /**
  * @property \yii $authManager
  * @property User|\__WebUser $identity
- * @property-read CommonServiceManager|ConsoleServiceManager|BackendServiceManager|BackendServiceManager $serviceManager
- * @property-read CommonHandlerManager|ConsoleHandlerManager|FrontendHandlerManager|BackendHandlerManager $handlerManager
+ * @property-read \common\managers\CommonServiceManager|\console\managers\ConsoleServiceManager|BackendServiceManager|BackendServiceManager $serviceManager
+ * @property-read \common\managers\CommonHandlerManager|ConsoleHandlerManager|FrontendHandlerManager|BackendHandlerManager $handlerManager
  * @property-read CommonRepositoryManager|ConsoleRepositoryManager|FrontendRepositoryManager|BackendRepositoryManager $perositoryManager
  *
  */

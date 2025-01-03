@@ -1,6 +1,6 @@
 <?php
 
-use yii2\frontend\components\resources\site\SiteIndexResources;
+use frontend\resources\site\SiteIndexResources;
 
 /**
  * @var yii\web\View $this

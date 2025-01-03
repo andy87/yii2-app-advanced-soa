@@ -3,9 +3,10 @@
 namespace yii2\common\tests\unit\models;
 
 use Codeception\Test\Unit;
+use common\services\AuthService;
 use Yii;
 use yii\base\InvalidConfigException;
-use yii2\common\{components\services\AuthService, fixtures\UserFixture, models\forms\LoginForm, tests\UnitTester};
+use yii2\common\{fixtures\UserFixture, models\forms\LoginForm, tests\UnitTester};
 
 /**
  * < Common > `LoginFormTest`

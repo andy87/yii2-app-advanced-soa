@@ -1,7 +1,9 @@
 <?php
 
 use andy87\yii2\architect\components\controllers\ArchitectController;
-use yii2\console\components\managers\{ ConsoleHandlerManager, ConsoleRepositoryManager, ConsoleServiceManager };
+use console\managers\{ConsoleRepositoryManager};
+use console\managers\ConsoleHandlerManager;
+use console\managers\ConsoleServiceManager;
 
 $params = array_merge(
     require __DIR__ . '/../../common/config/params.php',

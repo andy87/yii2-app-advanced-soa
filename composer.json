@@ -54,6 +54,10 @@
 
     "autoload-dev": {
         "psr-4": {
+            "backend\\": "yii2/backend/",
+            "frontend\\": "yii2/frontend/",
+            "common\\": "yii2/common/",
+            "console\\": "yii2/console/",
             "app\\common\\tests\\": [
               "yii2/common/tests/",
               "yii2/common/tests/_support"

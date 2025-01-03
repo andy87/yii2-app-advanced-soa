@@ -2,7 +2,8 @@
 
 namespace yii2\backend\controllers;
 
-use yii2\common\components\Ping;
+use backend\services\items\PascalCaseService;
+use yii\filters\AccessControl;
 use yii2\backend\components\controllers\parents\BackendController;
 
 /**
@@ -14,11 +15,44 @@ use yii2\backend\components\controllers\parents\BackendController;
  */
 class PingController extends BackendController
 {
+    private readonly PascalCaseService $service;
+
     /**
-     * @return string
+     * @return array
      */
-    public function actionIndex(): string
+    public function behaviors(): array
     {
-        return (new Ping)->run();
+        $behaviors = parent::behaviors();
+
+        $behaviors['access'] = [
+            'class' => AccessControl::class,
+            'rules' => [
+                [
+                    'allow' => true,
+                    'roles' => ['?'], //user
+                ],
+            ],
+        ];
+
+        return $behaviors;
+    }
+
+    public function __construct(PascalCaseService $service, $id, $module, $config = [])
+    {
+        $this->service = $service;
+
+        parent::__construct($id, $module, $config);
+    }
+
+    /**
+     * @return array
+     */
+    public function actionTest(): array
+    {
+        $object = $this->service->test();
+
+        \Yii::$app->response->format = \yii\web\Response::FORMAT_JSON;
+
+        return $object;
     }
 }

@@ -2,26 +2,26 @@
 
 namespace yii2\common\components\base\handlers\items;
 
-use Yii;
+use backend\resources\parents\crud\BackendCreateResource;
+use backend\resources\parents\crud\BackendFormResource;
+use backend\resources\parents\crud\BackendIndexResource;
+use backend\resources\parents\crud\BackendViewResource;
+use common\handlers\items\PascalCaseHandler;
 use Exception;
+use frontend\resources\parents\crud\FrontendCreateResource;
+use frontend\resources\parents\crud\FrontendFormResource;
+use frontend\resources\parents\crud\FrontendIndexResource;
+use frontend\resources\parents\crud\FrontendViewResource;
 use Throwable;
+use Yii;
 use yii\base\InvalidConfigException;
-use yii2\common\components\enums\Action;
-use yii2\common\components\base\services\items\BaseService;
-use yii2\common\components\handlers\items\PascalCaseHandler;
-use yii2\common\components\base\resources\crud\BaseFormResource;
-use yii2\common\components\base\resources\crud\BaseListViewResource;
-use yii2\common\components\base\resources\crud\BaseGridViewResource;
 use yii2\common\components\base\resources\crud\BaseCrudViewResource;
+use yii2\common\components\base\resources\crud\BaseFormResource;
+use yii2\common\components\base\resources\crud\BaseGridViewResource;
+use yii2\common\components\base\resources\crud\BaseListViewResource;
 use yii2\common\components\base\resources\items\BaseTemplateResource;
-use yii2\backend\components\resources\parents\crud\BackendFormResource;
-use yii2\backend\components\resources\parents\crud\BackendViewResource;
-use yii2\backend\components\resources\parents\crud\BackendIndexResource;
-use yii2\backend\components\resources\parents\crud\BackendCreateResource;
-use yii2\frontend\components\resources\parents\crud\FrontendViewResource;
-use yii2\frontend\components\resources\parents\crud\FrontendFormResource;
-use yii2\frontend\components\resources\parents\crud\FrontendIndexResource;
-use yii2\frontend\components\resources\parents\crud\FrontendCreateResource;
+use yii2\common\components\base\services\items\BaseService;
+use yii2\common\components\enums\Action;
 
 /**
  * < Common > Родительский абстрактный класс для всех Web обработчиков
@@ -99,7 +99,7 @@ abstract class BaseWebHandler extends PascalCaseHandler
      */
     public function processIndex(array $params): BaseGridViewResource|BaseListViewResource
     {
-        /** @var BaseCrudViewResource|FrontendIndexResource|BackendIndexResource $R */
+        /** @var BaseCrudViewResource|FrontendIndexResource|\backend\resources\parents\crud\BackendIndexResource $R */
         $R = $this->getResources(Action::INDEX);
 
         $R->searchModel = $this->service->settings->classSearchModel;
@@ -119,7 +119,7 @@ abstract class BaseWebHandler extends PascalCaseHandler
      */
     public function processCreateForm(array $params = [], string $key = '' ): BaseFormResource
     {
-        /** @var BaseCrudViewResource|FrontendCreateResource|BackendCreateResource $R */
+        /** @var BaseCrudViewResource|\frontend\resources\parents\crud\FrontendCreateResource|BackendCreateResource $R */
         $R = $this->getResources(Action::CREATE);
 
         $R->form = $this->service->producer->formCreate();
@@ -142,7 +142,7 @@ abstract class BaseWebHandler extends PascalCaseHandler
      */
     public function processUpdateForm( int $id, array $params = [] ): BaseFormResource
     {
-        /** @var BaseCrudViewResource|FrontendFormResource|BackendFormResource $R */
+        /** @var BaseCrudViewResource|\frontend\resources\parents\crud\FrontendFormResource|\backend\resources\parents\crud\BackendFormResource $R */
         $R = $this->getResources(Action::UPDATE);
 
         $R->form = $this->service->repository->findForm($id);
@@ -163,7 +163,7 @@ abstract class BaseWebHandler extends PascalCaseHandler
      */
     public function processViewForm(int $id): BaseCrudViewResource
     {
-        /** @var BaseCrudViewResource|FrontendViewResource|BackendViewResource $R */
+        /** @var BaseCrudViewResource|\frontend\resources\parents\crud\FrontendViewResource|\backend\resources\parents\crud\BackendViewResource $R */
         $R = $this->getResources(Action::VIEW);
 
         $R->model = $this->service->getModel( $id );

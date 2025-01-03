@@ -2,8 +2,9 @@
 
 namespace yii2\common\models\forms;
 
+use common\services\IdentityService;
 use yii\base\InvalidConfigException;
-use yii2\common\{components\services\IdentityService, models\Identity};
+use yii2\common\{models\Identity};
 use yii2\common\components\forms\BaseWebForm;
 use yii2\frontend\controllers\AuthController;
 

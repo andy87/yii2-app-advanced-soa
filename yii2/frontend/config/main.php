@@ -1,8 +1,8 @@
 <?php
 
-use yii2\frontend\components\managers\FrontendHandlerManager;
-use yii2\frontend\components\managers\FrontendRepositoryManager;
-use yii2\frontend\components\managers\FrontendServiceManager;
+use frontend\managers\FrontendHandlerManager;
+use frontend\managers\FrontendRepositoryManager;
+use frontend\managers\FrontendServiceManager;
 
 $params = array_merge(
     require __DIR__ . '/../../common/config/params.php',

@@ -5,15 +5,14 @@ namespace yii2\frontend\tests\unit\models;
 
 use Codeception\Exception\ModuleException;
 use Codeception\Test\Unit;
+use common\services\IdentityService;
+use frontend\services\AuthService;
 use Yii;
 use yii\base\{Exception as YiiBaseException, InvalidConfigException};
 use yii\db\Exception as YiiDbException;
 use yii\mail\MessageInterface;
-use yii2\common\{components\services\IdentityService, fixtures\UserFixture, models\Identity};
-use yii2\frontend\{components\services\AuthService,
-    controllers\AuthController,
-    models\forms\PasswordResetRequestForm,
-    tests\UnitTester};
+use yii2\common\{fixtures\UserFixture, models\Identity};
+use yii2\frontend\{controllers\AuthController, models\forms\PasswordResetRequestForm, tests\UnitTester};
 
 /**
  * < Frontend > `PasswordResetRequestFormTest`

@@ -1,15 +1,15 @@
 <?php
 
+use backend\resources\auth\AuthLoginResources;
 use yii\bootstrap5\{ActiveForm, Html};
 use yii\web\View;
-use yii2\backend\components\resources\auth\AuthLoginResources;
 use yii2\backend\controllers\AuthController;
 use yii2\common\components\Action;
 
 /**
  * @var View $this
  * @var ActiveForm $form
- * @var AuthLoginResources $R
+ * @var \backend\resources\auth\AuthLoginResources $R
  */
 
 $this->title = AuthController::LABELS[Action::LOGIN];

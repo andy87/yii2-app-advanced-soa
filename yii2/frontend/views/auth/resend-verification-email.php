@@ -3,11 +3,11 @@
 /**
  * @var yii\web\View$this
  * @var yii\bootstrap5\ActiveForm $form
- * @var AuthResendVerificationEmailResources $R
+ * @var \frontend\resources\auth\AuthResendVerificationEmailResources $R
  */
 
+use frontend\resources\auth\AuthResendVerificationEmailResources;
 use yii\bootstrap5\{ActiveForm, Html};
-use yii2\frontend\components\resources\auth\AuthResendVerificationEmailResources;
 
 $resendVerificationEmailForm = $R->resendVerificationEmailForm;
 

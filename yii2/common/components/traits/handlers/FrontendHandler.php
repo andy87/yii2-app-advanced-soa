@@ -2,13 +2,13 @@
 
 namespace yii2\common\components\traits\handlers;
 
-use yii2\common\components\enums\Action;
-use yii2\common\components\base\services\items\BaseService;
+use frontend\resources\parents\crud\FrontendCreateResource;
+use frontend\resources\parents\crud\FrontendIndexResource;
+use frontend\resources\parents\crud\FrontendUpdateResource;
+use frontend\resources\parents\crud\FrontendViewResource;
 use yii2\common\components\base\resources\items\BaseTemplateResource;
-use yii2\frontend\components\resources\parents\crud\FrontendViewResource;
-use yii2\frontend\components\resources\parents\crud\FrontendIndexResource;
-use yii2\frontend\components\resources\parents\crud\FrontendCreateResource;
-use yii2\frontend\components\resources\parents\crud\FrontendUpdateResource;
+use yii2\common\components\base\services\items\BaseService;
+use yii2\common\components\enums\Action;
 
 /**
  * < Frontend > Обработчик контроллеров работающих с сущностью `{{PascalCase}}`

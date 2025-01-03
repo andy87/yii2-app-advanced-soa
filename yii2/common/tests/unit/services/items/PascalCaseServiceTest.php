@@ -3,7 +3,6 @@
 namespace yii2\common\tests\unit\services\items;
 
 use yii2\common\components\base\services\items\BaseService;
-use yii2\common\components\services\items\PascalCaseService;
 use yii2\common\components\base\tests\unit\services\items\BaseServiceTest;
 
 /**
@@ -16,7 +15,7 @@ use yii2\common\components\base\tests\unit\services\items\BaseServiceTest;
 class PascalCaseServiceTest extends BaseServiceTest
 {
     /** @var \yii2\common\components\base\services\items\BaseService|string класс сервиса */
-    public BaseService|string $classNameService = \yii2\common\components\services\items\PascalCaseService::class;
+    public BaseService|string $classNameService = \common\services\items\PascalCaseService::class;
 
     // {{Boilerplate}}
 }

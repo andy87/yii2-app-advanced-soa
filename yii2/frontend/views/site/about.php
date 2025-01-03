@@ -1,13 +1,13 @@
 <?php
 
+use frontend\resources\site\SiteAboutResources;
 use yii\helpers\Html;
 use yii\web\View;
-use yii2\frontend\components\resources\site\SiteAboutResources;
 use yii2\frontend\controllers\SiteController;
 
 /**
  * @var View $this
- * @var SiteAboutResources $R
+ * @var \frontend\resources\site\SiteAboutResources $R
  */
 
 $this->title = SiteController::TITLES[SiteController::ACTION_ABOUT];

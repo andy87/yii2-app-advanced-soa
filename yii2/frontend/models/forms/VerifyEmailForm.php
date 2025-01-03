@@ -2,9 +2,9 @@
 
 namespace yii2\frontend\models\forms;
 
+use common\services\IdentityService;
 use yii\base\{InvalidArgumentException, InvalidConfigException};
 use yii2\common\components\forms\BaseWebForm;
-use yii2\common\components\services\IdentityService;
 use yii2\common\models\Identity;
 
 /**

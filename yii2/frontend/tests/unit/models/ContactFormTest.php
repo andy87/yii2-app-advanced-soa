@@ -4,9 +4,10 @@ namespace yii2\frontend\tests\unit\models;
 
 use Codeception\Exception\ModuleException;
 use Codeception\Test\Unit;
+use frontend\services\SiteService;
 use yii\base\InvalidConfigException;
 use yii\mail\{MailerInterface, MessageInterface};
-use yii2\frontend\{components\services\SiteService, models\forms\ContactForm, tests\UnitTester};
+use yii2\frontend\{models\forms\ContactForm, tests\UnitTester};
 
 /**
  * < Frontend > `ContactFormTest`

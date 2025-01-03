@@ -30,8 +30,6 @@ use yii2\common\components\base\dataProviders\items\source\SourceActiveDataProvi
  */
 abstract class BaseService extends BaseToolKit implements ServiceInterface
 {
-    use ToolsKitMethodsTrait;
-
     /**
      * @param int $page
      * @param int $perPage

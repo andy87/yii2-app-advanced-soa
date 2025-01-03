@@ -2,21 +2,14 @@
 
 namespace yii2\console\controllers\items;
 
-use yii2\console\models\items\PascalCase;
-use yii2\console\models\forms\items\PascalCaseForm;
-use yii2\console\models\search\items\PascalCaseSearch;
-use yii2\console\components\services\items\PascalCaseService;
-use yii2\console\components\handlers\items\PascalCaseHandler;
-use yii2\console\components\producers\items\PascalCaseProducer;
-use yii2\console\components\repository\items\PascalCaseRepository;
+use console\dataProviders\items\PascalCaseDataProvider;
 use yii2\common\components\base\handlers\items\settings\HandlerSettings;
-use yii2\console\components\dataProviders\items\PascalCaseDataProvider;
 use yii2\console\components\controllers\parents\ConsoleHandlerController;
 
 /**
  * Boilerplate Контроллер для модели `PascalCase`
  *
- * @property \yii2\console\components\handlers\items\PascalCaseHandler $handler
+ * @property \console\handlers\items\PascalCaseHandler $handler
  * @property HandlerSettings|string $handlerSetups
  *
  * @method int actionList(int $page = 1, int $limit = 10)
@@ -32,16 +25,16 @@ use yii2\console\components\controllers\parents\ConsoleHandlerController;
 class PascalCaseController extends ConsoleHandlerController
 {
     public array $serviceSettings = [
-        \yii2\console\components\handlers\items\PascalCaseHandler::class,
+        \console\handlers\items\PascalCaseHandler::class,
         \yii2\console\models\items\PascalCase::class,
         \yii2\console\models\forms\items\PascalCaseForm::class,
         \yii2\console\models\search\items\PascalCaseSearch::class,
         PascalCaseDataProvider::class,
-        \yii2\console\components\services\items\PascalCaseService::class,
-        \yii2\console\components\producers\items\PascalCaseProducer::class,
-        \yii2\console\components\repository\items\PascalCaseRepository::class,
+        \console\services\items\PascalCaseService::class,
+        \console\producers\items\PascalCaseProducer::class,
+        \console\repository\items\PascalCaseRepository::class,
         [
-            \yii2\console\components\repository\items\PascalCaseRepository::class => [
+            \console\repository\items\PascalCaseRepository::class => [
                 \yii2\console\models\items\PascalCase::class,
                 \yii2\console\models\forms\items\PascalCaseForm::class
             ]
