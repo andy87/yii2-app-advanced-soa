@@ -1,7 +1,7 @@
 <?php
 
-use yii\web\View;
 use yii\helpers\Html;
+use common\components\View;
 use backend\assets\AppAsset;
 use common\components\Layout;
 
