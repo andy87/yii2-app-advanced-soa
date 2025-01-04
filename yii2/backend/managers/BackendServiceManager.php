@@ -33,9 +33,9 @@ class BackendServiceManager extends CommonServiceManager
      */
     public const array CONFIG = [
         ...CommonServiceManager::CONFIG,
-        self::USER => ['class' => UserService::class ],
-        self::AUTH => ['class' => AuthService::class ],
-        self::PASCALE_CASE => ['class' => PascalCaseService::class ],
+        self::USER => UserService::class,
+        self::AUTH => AuthService::class,
+        self::PASCALE_CASE => PascalCaseService::class,
     ];
 
 

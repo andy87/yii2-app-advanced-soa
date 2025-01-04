@@ -3,10 +3,9 @@
 namespace common\managers;
 
 use common\repository\IdentityRepository;
-use common\repository\items\PascalCaseRepository;
 use common\repository\items\UserRepository;
+use common\repository\items\PascalCaseRepository;
 use common\components\base\managers\RepositoryManager;
-
 
 /**
  * < Common > Менеджер сервисов
@@ -21,9 +20,10 @@ use common\components\base\managers\RepositoryManager;
  */
 class CommonRepositoryManager extends RepositoryManager
 {
-    public const string USER = 'userService';
-    public const string IDENTITY = 'identityService';
-    public const string PASCALE_CASE = 'PascalCaseService';
+    public const string USER = 'user';
+    public const string IDENTITY = 'identity';
+    public const string PASCALE_CASE = 'PascalCase';
+
 
 
     /**
@@ -32,9 +32,9 @@ class CommonRepositoryManager extends RepositoryManager
      * @var array $_listInstance
      */
     public const array CONFIG = [
-        self::USER => ['class' => UserRepository::class ],
-        self::IDENTITY => ['class' => IdentityRepository::class ],
-        self::PASCALE_CASE => ['class' => PascalCaseRepository::class ],
+        self::USER => UserRepository::class,
+        self::IDENTITY => IdentityRepository::class,
+        self::PASCALE_CASE => PascalCaseRepository::class,
     ];
 
 

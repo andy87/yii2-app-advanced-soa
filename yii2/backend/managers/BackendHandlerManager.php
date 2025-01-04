@@ -2,8 +2,8 @@
 
 namespace backend\managers;
 
-use backend\handlers\items\PascalCaseHandler;
 use common\managers\CommonServiceManager;
+use backend\handlers\items\PascalCaseHandler;
 
 /**
  * < Common > Менеджер обработчиков
@@ -29,15 +29,6 @@ class BackendHandlerManager extends CommonServiceManager
      */
     public const array CONFIG = [
         ...CommonServiceManager::CONFIG,
-        self::PASCALE_CASE => ['class' => PascalCaseHandler::class ],
+        self::PASCALE_CASE => PascalCaseHandler::class,
     ];
-
-
-
-    /**
-     * Массив задаваемый в конфигурационном файле
-     *
-     * @var array $config
-     */
-    public array $config;
 }

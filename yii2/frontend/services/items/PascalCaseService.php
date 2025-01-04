@@ -2,19 +2,21 @@
 
 namespace frontend\services\items;
 
-use common\components\base\services\items\settings\ServiceSettings;
+use frontend\models\items\PascalCase;
 use common\interfaces\CatcherInterface;
 use frontend\models\forms\items\PascalCaseForm;
-use frontend\models\items\PascalCase;
 use frontend\producers\items\PascalCaseProducer;
+use frontend\repository\items\PascalCaseRepository;
+use frontend\dataProviders\items\PascalCaseDataProvider;
+use common\components\base\services\items\settings\ServiceSettings;
 
 /**
  * < Frontend > Сервис для работы с сущностью `PascalCase`
  *
  * @property CatcherInterface $logger
  * @property PascalCaseProducer $producer
- * @property \frontend\repository\items\PascalCaseRepository $repository
- * @property \frontend\dataProviders\items\PascalCaseDataProvider $dataProvider
+ * @property PascalCaseRepository $repository
+ * @property PascalCaseDataProvider $dataProvider
  * @property ServiceSettings $settings
  *
  * @method PascalCase[] getList(int $page, int $perPage)

@@ -2,10 +2,10 @@
 
 namespace console\managers;
 
-use common\managers\CommonServiceManager;
-use console\services\{items\PascalCaseService};
 use console\services\AuthService;
 use console\services\items\UserService;
+use common\managers\CommonServiceManager;
+use console\services\items\PascalCaseService;
 
 /**
  * < Common > Менеджер сервисов
@@ -18,7 +18,7 @@ use console\services\items\UserService;
  *
  * @tag: #common #manager #service
  */
-class ConsoleServiceManager extends \common\managers\CommonServiceManager
+class ConsoleServiceManager extends CommonServiceManager
 {
     public const string AUTH = 'authService';
     public const string USER = 'userService';
@@ -32,9 +32,9 @@ class ConsoleServiceManager extends \common\managers\CommonServiceManager
      */
     public const array CONFIG = [
         ...CommonServiceManager::CONFIG,
-        self::USER => ['class' => UserService::class ],
-        self::AUTH => ['class' => AuthService::class ],
-        self::PASCALE_CASE => ['class' => PascalCaseService::class ],
+        self::USER => UserService::class,
+        self::AUTH => AuthService::class,
+        self::PASCALE_CASE => PascalCaseService::class,
     ];
 
 

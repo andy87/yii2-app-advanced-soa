@@ -2,8 +2,8 @@
 
 namespace frontend\producers\items;
 
-use common\components\base\models\items\sources\SourceModel;
 use frontend\models\items\PascalCase;
+use common\components\base\models\items\sources\SourceModel;
 
 /**
  * < Frontend > producer for model `PascalCase`

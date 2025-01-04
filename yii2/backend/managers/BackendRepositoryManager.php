@@ -29,16 +29,7 @@ class BackendRepositoryManager extends CommonServiceManager
      */
     public const array CONFIG = [
         ...CommonServiceManager::CONFIG,
-        self::USER => ['class' => UserRepository::class ],
-        self::PASCALE_CASE => ['class' => PascalCaseRepository::class ],
+        self::USER => UserRepository::class,
+        self::PASCALE_CASE => PascalCaseRepository::class,
     ];
-
-
-
-    /**
-     * Массив задаваемый в конфигурационном файле
-     *
-     * @var array $config
-     */
-    public array $config;
 }

@@ -2,16 +2,15 @@
 
 namespace frontend\components\controllers\parents;
 
-use common\components\AccessControl;
-use common\components\base\controllers\items\BaseWebHandlerController;
-use common\components\enums\Action;
-use common\components\enums\Endpoints;
+use Yii;
 use common\components\Layout;
-use common\components\traits\handlers\FrontendHandler;
+use common\components\enums\Action;
 use frontend\components\Navigation;
+use common\components\AccessControl;
 use frontend\controllers\AuthController;
 use frontend\controllers\SiteController;
-use Yii;
+use common\components\traits\handlers\FrontendHandler;
+use common\components\base\controllers\items\BaseWebHandlerController;
 
 /**
  * < Frontend > Родительский класс для контроллеров в окружении: `frontend`

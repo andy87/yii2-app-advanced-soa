@@ -38,19 +38,20 @@ class CommonServiceManager extends ServiceManager
     public const string PASCALE_CASE = 'PascalCase';
 
 
+
     /**
      * Массив экземпляров сервисов
      *
      * @var array $_listInstance
      */
     public const array CONFIG = [
-        self::USER => ['class' => UserService::class ],
-        self::AUTH => ['class' => AuthService::class ],
-        self::EMAIL => ['class' => EmailService::class ],
-        self::FORM => ['class' => FormService::class ],
-        self::IDENTITY => ['class' => IdentityService::class ],
-        self::MODEL => ['class' => ModelService::class ],
-        self::PASCALE_CASE => ['class' => PascalCaseService::class ],
+        self::USER => UserService::class,
+        self::AUTH => AuthService::class,
+        self::EMAIL => EmailService::class,
+        self::FORM => FormService::class,
+        self::IDENTITY => IdentityService::class,
+        self::MODEL => ModelService::class,
+        self::PASCALE_CASE => PascalCaseService::class,
     ];
 
 

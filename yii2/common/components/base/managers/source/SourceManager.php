@@ -28,14 +28,12 @@ abstract class SourceManager extends BaseObject
 
 
 
-
-
     /**
-     * Массив экземпляров сервисов
+     * Мэппинг классов
      *
-     * @var BaseObject[] $_listInstance
+     * @var array
      */
-    private array $_listInstance = [];
+    public const array CONFIG = [];
 
     /**
      * Массив задаваемый в конфигурационном файле
@@ -48,10 +46,15 @@ abstract class SourceManager extends BaseObject
     protected string $type;
 
 
+
     /**
-     * @throws UnknownPropertyException|InvalidConfigException|RuntimeException
+     * @param $name
+     *
+     * @return BaseObject
+     *
+     * @throws UnknownPropertyException|InvalidConfigException
      */
-    public function __get($name)
+    public function __get( $name )
     {
         if ( isset($this->config[$name]) )
         {
@@ -72,42 +75,22 @@ abstract class SourceManager extends BaseObject
      */
     public function getItem( string $name ): BaseObject
     {
-        if ( !isset($this->_listInstance[$name]) )
+        if( isset($this->config[$name]) )
         {
-            if ( !isset($this->config[$name]) )
-            {
-                throw new RuntimeException(__CLASS__ . " config $this->type `$name` - not found");
-            }
+            $params = $this->getClassParams($name);
 
-            $this->setItem($name);
+            /** @var BaseObject $object */
+            $object = Yii::createObject(...$params);
+
+        } elseif (isset(static::CONFIG[$name])) {
+
+            /** @var BaseObject $object */
+            $object = Yii::createObject(['class' => static::CONFIG[$name] ]);
         }
 
-        return $this->_listInstance[$name];
-    }
+        if (isset($object)) return $object;
 
-    /**
-     * Установка экземпляра сервиса
-     *
-     * @param string $name
-     *
-     * @return void
-     *
-     * @throws InvalidConfigException
-     */
-    private function setItem( string $name ): void
-    {
-        $params = $this->getClassParams($name);
-
-        if (array_key_exists('class', $params)) {
-
-            $this->_listInstance[$name] = Yii::createObject($params);
-
-        } else {
-
-            $params = array_values($params);
-
-            $this->_listInstance[$name] = Yii::createObject(...$params);
-        }
+        $this->exception("В классе `" . static::class. "` не найдена конфигурация для {$name}" );
     }
 
     /**
@@ -120,5 +103,17 @@ abstract class SourceManager extends BaseObject
     private function getClassParams( string $name ): callable|array
     {
         return (is_callable($this->config[$name])) ? $this->config[$name]() : $this->config[$name];
+    }
+
+    /**
+     * @param string $message
+     *
+     * @return void
+     */
+    protected function exception(string $message): void
+    {
+        Yii::error([date('Y-m-d H-i-s'), $message]);
+
+        throw new RuntimeException($message);
     }
 }

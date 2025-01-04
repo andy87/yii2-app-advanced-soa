@@ -3,19 +3,19 @@
 namespace frontend\controllers\items;
 
 use common\components\enums\Action;
-use common\interfaces\dataProvider\DataProviderInterface;
-use common\interfaces\handlers\HandlerInterface;
-use common\interfaces\models\SearchModelInterface;
-use common\interfaces\models\SourceModelInterface;
-use common\interfaces\producers\ProducerInterface;
-use common\interfaces\repository\RepositoryInterface;
-use frontend\components\controllers\parents\FrontendController;
 use frontend\handlers\items\PascalCaseHandler;
+use common\interfaces\handlers\HandlerInterface;
+use frontend\resources\items\PascalCaseExampleResource;
+use frontend\resources\items\PascalCaseViewResource;
+use frontend\resources\items\PascalCaseIndexResource;
+use frontend\resources\items\PascalCaseCreateResource;
+use frontend\resources\items\PascalCaseUpdateResource;
+use frontend\components\controllers\parents\FrontendController;
 
 /**
  * Boilerplate Контроллер для модели `PascalCase`
  *
- * @property \frontend\handlers\items\PascalCaseHandler $handler
+ * @property PascalCaseHandler $handler
  *
  * @package yii2\frontend\controllers\items
  *
@@ -24,21 +24,29 @@ use frontend\handlers\items\PascalCaseHandler;
 class PascalCaseController extends FrontendController
 {
     /** @var string Эндпоинт для URI */
-    public const ENDPOINT = '{{kebab-case}}';
+    public const string ENDPOINT = '{{kebab-case}}';
 
+    public const string ACTION_EXAMPLE = 'example-action';
 
-    protected HandlerInterface|string $classHandler = \frontend\handlers\items\PascalCaseHandler::class;
-    protected SourceModelInterface|string $classModel = PascalCaseHandler::MODEL_CLASS;
-    protected SearchModelInterface|string $classSearchModel = PascalCaseHandler::SEARCH_MODEL_CLASS;
-    protected DataProviderInterface|string $classDataProvider = \frontend\handlers\items\PascalCaseHandler::DATA_PROVIDER_CLASS;
-    protected ProducerInterface|string $classProducer = \frontend\handlers\items\PascalCaseHandler::PRODUCER_CLASS;
-    protected RepositoryInterface|string $classRepository = PascalCaseHandler::REPOSITORY_CLASS;
+    protected HandlerInterface|string $handlerClass = PascalCaseHandler::class;
+
 
 
     protected array $resources = [
-        Action::INDEX => \frontend\resources\items\PascalCaseIndexResource::class,
-        Action::VIEW => \frontend\resources\items\PascalCaseViewResource::class,
-        Action::CREATE => \frontend\resources\items\PascalCaseCreateResource::class,
-        Action::UPDATE => \frontend\resources\items\PascalCaseUpdateResource::class,
+        Action::INDEX => PascalCaseIndexResource::class,
+        Action::VIEW => PascalCaseViewResource::class,
+        Action::CREATE => PascalCaseCreateResource::class,
+        Action::UPDATE => PascalCaseUpdateResource::class,
+        self::ACTION_EXAMPLE => PascalCaseExampleResource::class,
     ];
+
+
+
+    /**
+     * @return void
+     */
+    public function actionExampleAction()
+    {
+        $R = $this->getResource(self::ACTION_EXAMPLE);
+    }
 }

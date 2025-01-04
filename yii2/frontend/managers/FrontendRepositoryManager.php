@@ -2,20 +2,21 @@
 
 namespace frontend\managers;
 
+use common\managers\CommonServiceManager;
 use frontend\repository\items\PascalCaseRepository;
 use frontend\repository\items\UserRepository;
 
 /**
  * < Common > Менеджер репозиториев
  *
- * @property-read \frontend\repository\items\UserRepository $user
- * @property-read \frontend\repository\items\PascalCaseRepository $pascalCase
+ * @property-read UserRepository $user
+ * @property-read PascalCaseRepository $pascalCase
  *
  * @package yii2\common\components\managers
  *
  * @tag: #common #manager #repository
  */
-class FrontendRepositoryManager extends \common\managers\CommonServiceManager
+class FrontendRepositoryManager extends CommonServiceManager
 {
     public const string USER = 'userRepository';
     public const string PASCALE_CASE = 'PascalCaseRepository';
@@ -27,9 +28,9 @@ class FrontendRepositoryManager extends \common\managers\CommonServiceManager
      * @var array $_listInstance
      */
     public const array CONFIG = [
-        ...\common\managers\CommonServiceManager::CONFIG,
-        self::USER => ['class' => UserRepository::class ],
-        self::PASCALE_CASE => ['class' => PascalCaseRepository::class ],
+        ...CommonServiceManager::CONFIG,
+        self::USER => UserRepository::class,
+        self::PASCALE_CASE => PascalCaseRepository::class,
     ];
 
 

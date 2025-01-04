@@ -3,14 +3,14 @@
 namespace console\managers;
 
 use common\managers\CommonRepositoryManager;
-use console\repository\items\{UserRepository};
+use console\repository\items\UserRepository;
 use console\repository\items\PascalCaseRepository;
 
 /**
  * < Common > Менеджер сервисов
  *
- * @property-read \console\repository\items\UserRepository $user
- * @property-read \console\repository\items\PascalCaseRepository $pascalCase
+ * @property-read UserRepository $user
+ * @property-read PascalCaseRepository $pascalCase
  *
  * @package yii2\common\components\managers
  *
@@ -30,8 +30,8 @@ class ConsoleRepositoryManager extends CommonRepositoryManager
      */
     public const array CONFIG = [
         ...CommonRepositoryManager::CONFIG,
-        self::USER => ['class' => UserRepository::class ],
-        self::PASCALE_CASE => ['class' => PascalCaseRepository::class ],
+        self::USER => UserRepository::class,
+        self::PASCALE_CASE => PascalCaseRepository::class,
     ];
 
 

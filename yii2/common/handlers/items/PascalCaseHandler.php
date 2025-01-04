@@ -2,17 +2,19 @@
 
 namespace common\handlers\items;
 
-use common\services\items\PascalCaseService;
-use common\components\base\handlers\items\source\SourceHandler;
-use common\models\forms\items\PascalCaseForm;
 use common\models\items\PascalCase;
+use common\services\items\PascalCaseService;
+use common\models\forms\items\PascalCaseForm;
+use common\producers\items\PascalCaseProducer;
 use common\models\search\items\PascalCaseSearch;
-
+use common\repository\items\PascalCaseRepository;
+use common\dataProviders\items\PascalCaseDataProvider;
+use common\components\base\handlers\items\source\SourceHandler;
 
 /**
  * < Common > Родительский класс для обработчиков: console/frontend/backend
  *
- * @property \common\services\items\PascalCaseService $service
+ * @property PascalCaseService $service
  *
  * @package yii2\app\common\services\components\handlers\items
  *
@@ -27,12 +29,12 @@ class PascalCaseHandler extends SourceHandler
         PascalCase::class,
         PascalCaseForm::class,
         PascalCaseSearch::class,
-        \common\dataProviders\items\PascalCaseDataProvider::class,
-        \common\services\items\PascalCaseService::class,
-        \common\producers\items\PascalCaseProducer::class,
-        \common\repository\items\PascalCaseRepository::class,
+        PascalCaseDataProvider::class,
+        PascalCaseService::class,
+        PascalCaseProducer::class,
+        PascalCaseRepository::class,
         [
-            \common\repository\items\PascalCaseRepository::class => [ \common\models\items\PascalCase::class, PascalCaseForm::class ]
+            PascalCaseRepository::class => [ PascalCase::class, PascalCaseForm::class ]
         ]
     ];
 }

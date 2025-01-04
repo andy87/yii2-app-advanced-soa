@@ -2,20 +2,21 @@
 
 namespace frontend\managers;
 
+use common\managers\CommonServiceManager;
 use frontend\handlers\controllers\SiteHandler;
 use frontend\handlers\items\PascalCaseHandler;
 
 /**
  * < Common > Менеджер сервисов
  *
- * @property-read \frontend\handlers\controllers\SiteHandler $site
- * @property-read \frontend\handlers\items\PascalCaseHandler $pascalCase
+ * @property-read SiteHandler $site
+ * @property-read PascalCaseHandler $pascalCase
  *
  * @package yii2\common\components\managers
  *
  * @tag: #common #manager #service
  */
-class FrontendHandlerManager extends \common\managers\CommonServiceManager
+class FrontendHandlerManager extends CommonServiceManager
 {
     public const string SITE = 'siteHandler';
     public const string PASCALE_CASE = 'PascalCaseHandler';
@@ -27,9 +28,9 @@ class FrontendHandlerManager extends \common\managers\CommonServiceManager
      * @var array $_listInstance
      */
     public const array CONFIG = [
-        ...\common\managers\CommonServiceManager::CONFIG,
-        self::SITE => ['class' => SiteHandler::class ],
-        self::PASCALE_CASE => ['class' => PascalCaseHandler::class ],
+        ...CommonServiceManager::CONFIG,
+        self::SITE => SiteHandler::class,
+        self::PASCALE_CASE => PascalCaseHandler::class,
     ];
 
 

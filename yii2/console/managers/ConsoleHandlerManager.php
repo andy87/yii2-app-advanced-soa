@@ -8,7 +8,7 @@ use console\handlers\items\PascalCaseHandler;
 /**
  * < Common > Менеджер сервисов
  *
- * @property-read \console\handlers\items\PascalCaseHandler $pascalCase
+ * @property-read PascalCaseHandler $pascalCase
  *
  * @package yii2\common\components\managers
  *
@@ -27,7 +27,7 @@ class ConsoleHandlerManager extends CommonHandlerManager
      */
     public const array CONFIG = [
         ...CommonHandlerManager::CONFIG,
-        self::PASCALE_CASE => ['class' => PascalCaseHandler::class ],
+        self::PASCALE_CASE => PascalCaseHandler::class,
     ];
 
 

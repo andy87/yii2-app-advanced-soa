@@ -5,12 +5,11 @@ namespace common\managers;
 use common\services\items\PascalCaseService;
 use common\components\base\managers\HandlerManager;
 
-
 /**
  * < Common > Менеджер сервисов
  *
 
- * @property-read \common\services\items\PascalCaseService $pascalCase
+ * @property-read PascalCaseService $pascalCase
  *
  * @package yii2\common\components\managers
  *
@@ -18,7 +17,7 @@ use common\components\base\managers\HandlerManager;
  */
 class CommonHandlerManager extends HandlerManager
 {
-    public const string PASCALE_CASE = 'PascalCaseHandler';
+    public const string PASCALE_CASE = 'PascalCase';
 
 
     /**
@@ -27,7 +26,7 @@ class CommonHandlerManager extends HandlerManager
      * @var array $_listInstance
      */
     public const array CONFIG = [
-        self::PASCALE_CASE => ['class' => PascalCaseService::class ],
+        self::PASCALE_CASE => PascalCaseService::class,
     ];
 
 
