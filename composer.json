@@ -27,7 +27,8 @@
         "kartik-v/yii2-widget-select2": "^2.2@dev",
         "kartik-v/yii2-icons": "^1.4@dev",
         "andy87/knockknock": "*",
-        "andy87/yii2-migrate-architect": "*"
+        "andy87/yii2-migrate-architect": "*",
+        "andy87/lazy-load-trait": "dev-main"
     },
 
     "require-dev": {

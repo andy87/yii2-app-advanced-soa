@@ -37,7 +37,7 @@ cd yii2
 # Initialize application
 php init
 
-// Select Dev/Prod
+# Select Dev/Prod
 
 # Run migrations
 php yii migrate
@@ -76,7 +76,8 @@ ___
 - [kartik-v/yii2-icons](https://demos.krajee.com/icons) - для работы с иконками  
 - [andy87/knockknock](https://github.com/andy87/knockknock) - для запросов
 - [andy87/yii2-migrate-architect](https://github.com/andy87/yii2-migrate-architect) - для работы с миграциями
-- [andy87/yii2-builder](https://github.com/andy87/yii2-builder) - для массовой генерации файлов
+- [andy87/yii2-file-crafter](https://github.com/andy87/yii2-file-crafter) - для массовой генерации файлов
+- [andy87/lazy-load-trait](https://github.com/andy87/lazy-load-trait) - для отложено загрузки свойств(lazyLoad)
   
 ### Файлы
  - Вырезаны `bat` файлы.  
