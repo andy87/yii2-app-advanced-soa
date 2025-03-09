@@ -2,13 +2,13 @@
 
 namespace yii2\frontend\tests\unit\models;
 
-use Yii;
+use Codeception\Exception\ModuleException;
 use Codeception\Test\Unit;
+use Yii;
+use yii\base\InvalidConfigException;
 use yii\mail\MessageInterface;
 use yii2\common\fixtures\UserFixture;
-use yii\base\InvalidConfigException;
-use Codeception\Exception\ModuleException;
-use yii2\frontend\{ tests\UnitTester, services\AuthService, models\forms\ResendVerificationEmailForm };
+use yii2\frontend\{models\forms\ResendVerificationEmailForm, services\controllers\AuthService, tests\UnitTester};
 
 /**
  * < Frontend > `ResendVerificationEmailFormTest`

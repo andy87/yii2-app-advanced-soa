@@ -2,12 +2,12 @@
 
 namespace yii2\frontend\tests\unit\models;
 
-use yii\db\Exception;
 use Codeception\Test\Unit;
+use yii\base\{InvalidArgumentException, InvalidConfigException};
+use yii\db\Exception;
+use yii2\common\{fixtures\UserFixture, models\Identity};
+use yii2\frontend\{models\forms\VerifyEmailForm, services\controllers\AuthService};
 use yii2\frontend\tests\UnitTester;
-use yii2\common\{ fixtures\UserFixture, models\Identity };
-use yii\base\{ InvalidArgumentException, InvalidConfigException };
-use yii2\frontend\{ models\forms\VerifyEmailForm, services\AuthService };
 
 /**
  * < Frontend > `VerifyEmailFormTest`

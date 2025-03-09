@@ -2,13 +2,13 @@
 
 namespace yii2\frontend\tests\unit\models;
 
-use Exception;
-use Codeception\Test\Unit;
-use yii\mail\MessageInterface;
-use yii\base\InvalidConfigException;
 use Codeception\Exception\ModuleException;
-use yii2\frontend\{ models\forms\SignupForm, services\AuthService, tests\UnitTester };
+use Codeception\Test\Unit;
+use Exception;
+use yii\base\InvalidConfigException;
+use yii\mail\MessageInterface;
 use yii2\common\{fixtures\UserFixture, models\Identity, models\sources\User, services\IdentityService};
+use yii2\frontend\{models\forms\SignupForm, services\controllers\AuthService, tests\UnitTester};
 
 /**
  * < Frontend > `SignupFormTest`

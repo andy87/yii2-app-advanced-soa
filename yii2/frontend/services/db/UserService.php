@@ -1,6 +1,6 @@
 <?php
 
-namespace yii2\frontend\services\items;
+namespace yii2\frontend\services\db;
 
 use yii2\frontend\models\items\User;
 
@@ -15,7 +15,7 @@ use yii2\frontend\models\items\User;
  * @method User createModel(array $attributes = [])
  * @method User addModel(array $attributes = [])
  */
-class UserService extends \yii2\common\services\items\UserService
+class UserService extends \yii2\common\services\db\UserService
 {
     public const CLASS_MODEL = User::class;
 }

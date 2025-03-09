@@ -1,6 +1,6 @@
 <?php
 
-namespace yii2\backend\services\items;
+namespace yii2\backend\services\db;
 
 use yii2\backend\models\items\User;
 
@@ -15,7 +15,7 @@ use yii2\backend\models\items\User;
  *
  * @tag #backend #service #user
  */
-class UserService extends \yii2\common\services\items\UserService
+class UserService extends \yii2\common\services\db\UserService
 {
     public const CLASS_MODEL = User::class;
 }

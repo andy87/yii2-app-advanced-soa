@@ -3,13 +3,13 @@
 namespace yii2\frontend\controllers;
 
 use Yii;
+use yii\base\InvalidConfigException;
 use yii\web\Response;
 use yii2\common\components\Action;
-use yii\base\InvalidConfigException;
-use yii2\frontend\services\SiteService;
 use yii2\common\components\traits\SessionFlash;
 use yii2\frontend\components\{actions\CaptchaAction, controllers\BaseFrontendController};
 use yii2\frontend\resources\site\{SiteAboutResources, SiteContactResources, SiteIndexResources};
+use yii2\frontend\services\controllers\SiteService;
 
 /**
  * < Frontend > `SiteController`

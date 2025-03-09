@@ -2,11 +2,11 @@
 
 namespace yii2\frontend\tests\unit\models;
 
-use Codeception\Test\Unit;
-use yii2\common\fixtures\UserFixture;
 use Codeception\Exception\ModuleException;
-use yii2\frontend\{models\forms\ResetPasswordForm, services\AuthService, tests\UnitTester};
+use Codeception\Test\Unit;
 use yii\base\{Exception, InvalidArgumentException, InvalidConfigException};
+use yii2\common\fixtures\UserFixture;
+use yii2\frontend\{models\forms\ResetPasswordForm, services\controllers\AuthService, tests\UnitTester};
 
 /**
  * < Frontend > `ResetPasswordFormTest`

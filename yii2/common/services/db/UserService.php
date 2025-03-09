@@ -1,6 +1,6 @@
 <?php declare(strict_types=1);
 
-namespace yii2\common\services\items;
+namespace yii2\common\services\db;
 
 use yii2\common\{models\sources\User,
     components\services\ModelService,

@@ -1,8 +1,8 @@
 <?php
 
-namespace yii2\console\services\items;
+namespace yii2\console\services\db;
 
-use yii2\common\services\items\UserService;
+use yii2\common\services\db\UserService;
 
 /**
  * < Console > `UserServices`

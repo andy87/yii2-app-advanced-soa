@@ -1,13 +1,17 @@
 <?php declare(strict_types=1);
 
-namespace yii2\frontend\services;
+namespace yii2\frontend\services\controllers;
 
-use Yii;
 use Exception;
-use yii2\common\models\Identity;
+use Yii;
 use yii\base\InvalidConfigException;
-use yii2\common\services\{ EmailService, IdentityService };
-use yii2\frontend\models\forms\{ PasswordResetRequestForm, ResendVerificationEmailForm, ResetPasswordForm, SignupForm, VerifyEmailForm };
+use yii2\common\models\Identity;
+use yii2\common\services\{EmailService, IdentityService};
+use yii2\frontend\models\forms\{PasswordResetRequestForm,
+    ResendVerificationEmailForm,
+    ResetPasswordForm,
+    SignupForm,
+    VerifyEmailForm};
 
 /**
  * < Frontend > `AuthService`
