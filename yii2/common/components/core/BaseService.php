@@ -2,6 +2,7 @@
 
 namespace yii2\common\components\core;
 
+use yii\base\BaseObject;
 use yii2\common\components\traits\Logger;
 
 /**
@@ -9,7 +10,7 @@ use yii2\common\components\traits\Logger;
  *
  * @package yii2\common\components\core
  */
-abstract class BaseService extends BaseSingleton
+abstract class BaseService extends BaseObject
 {
     use Logger;
 }

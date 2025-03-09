@@ -4,7 +4,7 @@ namespace yii2\frontend\components\controllers;
 
 use Yii;
 use yii2\frontend\controllers\{ SiteController, AuthController };
-use yii2\common\components\{ Layout, Action, controllers\BaseWebController };
+use yii2\common\components\{ Layout, Action, controllers\BaseWebWebController };
 
 /**
  * < Frontend > `BaseFrontendController`
@@ -13,7 +13,7 @@ use yii2\common\components\{ Layout, Action, controllers\BaseWebController };
  *
  * @tag #components #controllers #frontend
  */
-abstract class BaseFrontendController extends BaseWebController
+abstract class BaseFrontendController extends BaseWebWebController
 {
     /**
      * @return void

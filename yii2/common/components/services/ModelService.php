@@ -2,62 +2,119 @@
 
 namespace yii2\common\components\services;
 
-
-use yii\{ base\Model, db\Exception };
+use andy87\lazy_load\yii2\LazyLoadTrait;
+use yii2\common\components\core\BaseProduces;
+use yii2\common\components\core\BaseRepository;
 use yii2\common\components\core\BaseService;
+use yii\{ base\Model, db\ActiveRecord, db\ActiveRecordInterface };
 
 /**
  * < Common > `ModelService`
+ *
+ * @property-read BaseRepository $repository
+ * @property-read BaseProduces $produces
  *
  * @package yii2\common\components\services
  */
 abstract class ModelService extends BaseService
 {
-    /** @var string  */
-    public const CLASS_MODEL = Model::class;
+    use LazyLoadTrait;
 
-    /**
-     * @return Model|string
-     *
-     * @tag #core #service #get
-     */
-    public function getClassModel(): Model|string
-    {
-        /** @var static|string $classModel */
-        $classModel = static::CLASS_MODEL;
+    /** @var string */
+    private const CLASS_MODEL = ActiveRecord::class;
 
-        return $classModel;
-    }
+    /** @var string */
+    private const CLASS_REPOSITORY = BaseRepository::class;
+
+    /** @var string */
+    private const CLASS_PRODUCES = BaseProduces::class;
+
+
+
+    /** @var ActiveRecord|string $modelClass */
+    public ActiveRecord|string $modelClass = self::CLASS_MODEL;
+
+    public array $lazyLoadConfig = [
+        'repository' => [
+            'class' => self::CLASS_REPOSITORY,
+            'model' => self::CLASS_MODEL,
+        ],
+        'produces' => [
+            'class' => self::CLASS_PRODUCES,
+            'model' => self::CLASS_MODEL,
+        ],
+    ];
+
 
     /**
      * @param array $attributes
+     * @param string $scenario
      *
-     * @return Model|string
+     * @return ActiveRecordInterface
      *
      * @tag #core #service #create
      */
-    public function createModel(array $attributes = []): Model|string
+    public function createModel(array $attributes, string $scenario = Model::SCENARIO_DEFAULT ): ActiveRecordInterface
     {
-        $classModel = $this->getClassModel();
-
-        return new $classModel($attributes);
+        return $this->produces->create( $attributes, $scenario );
     }
 
     /**
      * @param array $attributes
+     * @param string $scenario
      *
-     * @return Model|string
+     * @return ActiveRecordInterface
      *
-     * @throws Exception
-     *
-     * @tag #core #service #model #add
+     * @tag #core #service #add
      */
-    public function addModel(array $attributes = []): Model|string
+    public function addModel(array $attributes, string $scenario = Model::SCENARIO_DEFAULT ): ActiveRecordInterface
     {
-        $model = $this->createModel($attributes);
+        return $this->produces->create( $attributes, $scenario );
+    }
 
-        $model->save();
+    /**
+     * @param int $id
+     *
+     * @return ?ActiveRecordInterface
+     *
+     * @tag #core #service #find
+     */
+    public function findByID( int $id ): ?ActiveRecordInterface
+    {
+        return $this->repository->finOne( $id );
+    }
 
-        return $model;
+    /**
+     * @param array|string $criteria
+     *
+     * @return ActiveRecordInterface[]|array
+     *
+     * @tag #core #service #find
+     */
+    public function getAllByCriteria(array|string $criteria ): array
+    {
+        $query = $this->repository->findByCriteria( $criteria );
+
+        /** @var ActiveRecordInterface[]|array $result */
+        $result = $query->all();
+
+        return $result;
+    }
+
+    /**
+     * @param array|string $criteria
+     *
+     * @return ?ActiveRecordInterface
+     *
+     * @tag #core #service #find
+     */
+    public function getByCriteria( array|string $criteria ): ?ActiveRecordInterface
+    {
+        $query = $this->repository->findByCriteria( $criteria );
+
+        /** @var ?ActiveRecordInterface $result */
+        $result = $query->one();
+
+        return $result;
     }
 }

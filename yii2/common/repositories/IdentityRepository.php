@@ -4,7 +4,7 @@ namespace yii2\common\repositories;
 
 use yii2\common\models\Identity;
 use yii2\common\models\sources\User;
-use yii2\common\components\repositories\MySqlRepository;
+use yii2\common\components\core\BaseRepository;
 
 /**
  * < Common > `IdentityRepository`
@@ -13,7 +13,7 @@ use yii2\common\components\repositories\MySqlRepository;
  *
  * @tag #repositories #identity
  */
-class IdentityRepository extends MySqlRepository
+class IdentityRepository extends BaseRepository
 {
     /** @var string */
     public const MODEL = Identity::class;

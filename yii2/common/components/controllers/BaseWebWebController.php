@@ -3,14 +3,14 @@
 namespace yii2\common\components\controllers;
 
 use yii\web\ErrorAction;
-use yii2\common\components\core\BaseController;
+use yii2\common\components\core\BaseWebController;
 
 /**
  * < Common > `BaseWebController`
  *
  * @package yii2\common\components\core
  */
-abstract class BaseWebController extends BaseController
+abstract class BaseWebWebController extends BaseWebController
 {
     public const ENDPOINT = '/';
 

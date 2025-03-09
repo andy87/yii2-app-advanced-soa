@@ -10,7 +10,7 @@ use yii2\common\components\traits\Logger;
  *
  * @package yii2\common\components\core
  */
-abstract class BaseController extends Controller
+abstract class BaseWebController extends Controller
 {
     use Logger;
 }
