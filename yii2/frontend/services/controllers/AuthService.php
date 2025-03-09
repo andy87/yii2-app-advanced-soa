@@ -50,6 +50,8 @@ class AuthService extends \yii2\common\services\AuthService
                      {
                          $transaction?->commit();
 
+                         $signupForm->result = true;
+
                          return $signupForm->identity;
 
                      } else {

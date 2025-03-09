@@ -2,6 +2,8 @@
 
 namespace yii2\console\services\db;
 
+use yii\db\ActiveRecord;
+use yii2\console\models\items\User;
 use yii2\common\services\db\UserService;
 
 /**
@@ -13,5 +15,6 @@ use yii2\common\services\db\UserService;
  */
 class UserServices extends UserService
 {
-
+    /** @var ActiveRecord|string  */
+    protected ActiveRecord|string $modelClass = User::class;
 }

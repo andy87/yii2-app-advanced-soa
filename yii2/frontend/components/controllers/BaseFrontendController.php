@@ -4,7 +4,7 @@ namespace yii2\frontend\components\controllers;
 
 use Yii;
 use yii2\frontend\controllers\{ SiteController, AuthController };
-use yii2\common\components\{ Layout, Action, controllers\BaseWebWebController };
+use yii2\common\components\{Auth, Layout, Action, controllers\BaseWebWebController};
 
 /**
  * < Frontend > `BaseFrontendController`
@@ -62,8 +62,8 @@ abstract class BaseFrontendController extends BaseWebWebController
 
         if (Yii::$app->user->isGuest) {
             $menuItems[] = [
-                'label' => AuthController::LABELS[AuthController::ACTION_SIGNUP],
-                'url' => [AuthController::getEndpoint(AuthController::ACTION_SIGNUP)]
+                'label' => AuthController::LABELS[Auth::ACTION_SIGNUP],
+                'url' => [AuthController::getEndpoint(Auth::ACTION_SIGNUP)]
             ];
         }
 

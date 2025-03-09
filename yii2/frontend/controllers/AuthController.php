@@ -2,13 +2,13 @@
 
 namespace yii2\frontend\controllers;
 
-use Exception;
 use Yii;
+use Exception;
+use andy87\lazy_load\LazyLoadTrait;
 use yii\base\{Exception as YiiBaseException, InvalidArgumentException, InvalidConfigException};
 use yii\db\Exception as YiiDbException;
-use yii\filters\{AccessControl, VerbFilter};
 use yii\web\{BadRequestHttpException, Response};
-use yii2\common\{components\Action, models\Identity, models\sources\Role};
+use yii2\common\{components\Action, components\Auth, models\Identity};
 use yii2\common\components\traits\SessionFlash;
 use yii2\frontend\components\controllers\BaseFrontendController;
 use yii2\frontend\models\forms\{ResetPasswordForm, VerifyEmailForm};
@@ -17,10 +17,13 @@ use yii2\frontend\resources\auth\{AuthLoginResources,
     AuthResendVerificationEmailResources,
     AuthResetPasswordResources,
     AuthSignupResources};
+use yii2\frontend\handlers\AuthHandler;
 use yii2\frontend\services\controllers\AuthService;
 
 /**
  * < Frontend > `AuthController`
+ *
+ * @property-read AuthHandler $handler;
  *
  * @package yii2\frontend\controllers
  *
@@ -28,27 +31,21 @@ use yii2\frontend\services\controllers\AuthService;
  */
 class AuthController extends BaseFrontendController
 {
-    use SessionFlash;
+    use SessionFlash, LazyLoadTrait;
 
-    public const ENDPOINT = 'auth';
+    public const ENDPOINT = Auth::ENDPOINT;
 
-    public const ACTION_SIGNUP = 'signup';
-    public const ACTION_REQUEST_PASSWORD_RESET = 'request-password-reset';
-    public const ACTION_RESET_PASSWORD = 'reset-password';
-    public const ACTION_VERIFY_EMAIL = 'verify-email';
-    public const ACTION_RESEND_VERIFICATION_EMAIL = 'resend-verification-email';
-    public const ACTION_REQUEST_PASSWORD_RESET_TOKEN = 'request-password-reset-token';
+    public const LABELS = Auth::LABELS;
 
-    public const LABELS = [
-        Action::LOGIN => 'Вход',
-        self::ACTION_SIGNUP => 'Регистрация',
-        self::ACTION_REQUEST_PASSWORD_RESET => 'Запрос сброса пароля',
-        self::ACTION_RESET_PASSWORD => 'Сброс пароля',
-        self::ACTION_VERIFY_EMAIL => 'Подтверждение email',
-        self::ACTION_RESEND_VERIFICATION_EMAIL => 'Повторное подтверждение email',
-        self::ACTION_REQUEST_PASSWORD_RESET_TOKEN => 'Запрос токена сброса пароля',
+    public array $lazyLoadConfig = [
+        'handler' => [
+            'class' => AuthHandler::class,
+            'resources' => [
+                Action::LOGIN => AuthLoginResources::class,
+                Auth::ACTION_SIGNUP => AuthSignupResources::class,
+            ]
+        ]
     ];
-
 
 
     /**
@@ -58,33 +55,7 @@ class AuthController extends BaseFrontendController
      */
     public function behaviors(): array
     {
-        return [
-            'access' => [
-                'class' => AccessControl::class,
-                'only' => [ Action::LOGIN, Action::LOGOUT, self::ACTION_SIGNUP],
-                'rules' => [
-                    [
-                        'actions' => [
-                            Action::LOGIN,
-                            self::ACTION_SIGNUP
-                        ],
-                        'allow' => true,
-                        'roles' => [Role::GUEST],
-                    ],
-                    [
-                        'actions' => [Action::LOGOUT],
-                        'allow' => true,
-                        'roles' => [Role::USER],
-                    ],
-                ],
-            ],
-            'verbs' => [
-                'class' => VerbFilter::class,
-                'actions' => [
-                    Action::LOGOUT => ['post'],
-                ],
-            ],
-        ];
+        return Auth::BEHAVIORS;
     }
 
     /**
@@ -110,25 +81,14 @@ class AuthController extends BaseFrontendController
      */
     public function actionLogin(): Response|string
     {
-        if (Yii::$app->user->isGuest)
+        $R = $this->handler->processLogin();
+
+        if ( Yii::$app->user->isGuest )
         {
-            $R = new AuthLoginResources;
-
-            if (Yii::$app->request->isPost)
-            {
-                $post = Yii::$app->request->post();
-
-                $handlerResult = AuthService::getInstance()->handlerLoginForm($R->loginForm, $post);
-
-                if ($handlerResult) return $this->goBack();
-            }
-
-        } else {
-
-            return $this->goHome();
+            return $this->render($R::TEMPLATE, $R->release());
         }
 
-        return $this->render($R::TEMPLATE, $R->release());
+        return $this->goHome();
     }
 
     /**
@@ -136,13 +96,11 @@ class AuthController extends BaseFrontendController
      *
      * @return Response|string
      *
-     * @throws InvalidConfigException
-     *
      * @tag #auth #action #logout
      */
     public function actionLogout(): Response|string
     {
-        AuthService::getInstance()->logout();
+        $this->handler->processLogout();
 
         return $this->goHome();
     }
@@ -158,16 +116,12 @@ class AuthController extends BaseFrontendController
      */
     public function actionSignup(): Response|string
     {
-        $R = new AuthSignupResources;
+        $R = $this->handler->processSignup();
 
         if (Yii::$app->request->isPost)
         {
-            $post = Yii::$app->request->post();
-
-            $handlerResult = AuthService::getInstance()->handlerSignupForm($R->signupForm, $post);
-
             $this->setSessionFlashMessage(
-                ($handlerResult instanceof Identity),
+                ($R->signupForm->result),
                 $R->signupForm::MESSAGE_SUCCESS,
                 $R->signupForm::MESSAGE_ERROR
             );

@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types=1);
 
 namespace yii2\common\services;
 
@@ -26,7 +26,7 @@ class AuthService extends BaseService
      *
      * @tag #common #service #auth #handler #form #login
      */
-    public function handlerLoginForm(LoginForm $loginForm, array $data = []): bool
+    public function authLoginForm(LoginForm $loginForm, array $data = []): bool
     {
         if ( count($data) ) $loginForm->load( $data );
 
@@ -46,11 +46,12 @@ class AuthService extends BaseService
      *
      * @tag #common #services #login
      */
-    public function login(LoginForm $loginForm): bool
+    protected function login( LoginForm $loginForm ): bool
     {
         if ( $loginForm->validate() )
         {
             $identity = $loginForm->getIdentity();
+
             $duration = $this->getRememberMeDuration($loginForm);
 
             if ($identity) return Yii::$app->user->login( $identity, $duration );
@@ -66,10 +67,10 @@ class AuthService extends BaseService
      *
      * @tag #common #services #rememberMe #duration
      */
-    public function getRememberMeDuration(LoginForm $loginForm): int
+    protected function getRememberMeDuration( LoginForm $loginForm ): int
     {
         return ($loginForm->rememberMe)
-            ? ( 3600 * 24 * Yii::$app->params['auth.rememberMeDuration.days'] )
+            ? ( 3600 * 24 * Yii::$app->params[ LoginForm::PARAM_REMEMBER_ME ] )
             : 0;
     }
 

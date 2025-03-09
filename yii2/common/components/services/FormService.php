@@ -9,7 +9,7 @@ use yii2\common\components\core\BaseModel;
  *
  * @package yii2\common\components\services
  */
-abstract class FormService extends ModelService
+abstract class FormService extends ActiveRecordService
 {
     /** @var string  */
     public const CLASS_FORM = BaseModel::class;
@@ -38,7 +38,7 @@ abstract class FormService extends ModelService
      */
     public function createForm(array $attributes = []): BaseModel|string
     {
-        $classForm = $this->getClassModel();
+        $classForm = $this->getClassForm();
 
         return new $classForm($attributes);
     }

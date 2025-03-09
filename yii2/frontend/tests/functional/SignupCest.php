@@ -2,6 +2,7 @@
 
 namespace yii2\frontend\tests\functional;
 
+use yii2\common\components\Auth;
 use yii2\common\models\Identity;
 use yii2\common\models\sources\User;
 use yii2\common\tests\cest\SendForm;
@@ -48,7 +49,7 @@ class SignupCest extends SendForm
     {
         parent::_before($I);
 
-        $roure = AuthController::getEndpoint(AuthController::ACTION_SIGNUP);
+        $roure = AuthController::getEndpoint(Auth::ACTION_SIGNUP);
 
         $I->amOnRoute( $roure );
     }

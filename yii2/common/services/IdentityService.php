@@ -2,17 +2,20 @@
 
 namespace yii2\common\services;
 
-use yii2\common\models\Identity;
-use yii2\common\components\services\ModelService;
-use yii2\common\repositories\IdentityRepository;
-use yii2\frontend\models\forms\SignupForm;
 use Exception;
-use yii\base\InvalidConfigException;
+use yii\db\ActiveRecord;
+use yii2\common\models\Identity;
+use yii2\frontend\models\forms\SignupForm;
+use yii2\common\components\core\BaseRepository;
+use yii2\common\repositories\IdentityRepository;
+use yii2\common\components\services\ActiveRecordService;
 
 /**
  * < Common > `IdentityService`
  *
  * @package yii2\common\services
+ *
+ * @property-read IdentityRepository $repository;
  *
  * @method Identity getClassModel()
  * @method Identity createModel(array $attributes = [])
@@ -20,26 +23,14 @@ use yii\base\InvalidConfigException;
  *
  * @tag #common #service #identity
  */
-class IdentityService extends ModelService
+class IdentityService extends ActiveRecordService
 {
-    public const CLASS_MODEL = Identity::class;
+
+    protected ActiveRecord|string $modelClass = Identity::class;
+
+    protected BaseRepository|string|null $repositoryClass = IdentityRepository::class;
 
 
-    /** @var IdentityRepository $identityRepository */
-    public IdentityRepository $identityRepository;
-
-
-    /**
-     * @return void
-     *
-     * @throws InvalidConfigException
-     *
-     * @tag #service #identity #init
-     */
-    public function init(): void
-    {
-        $this->identityRepository = IdentityRepository::getInstance();
-    }
 
     /**
      * @param SignupForm $signupForm
@@ -78,7 +69,7 @@ class IdentityService extends ModelService
      */
     public function findActiveByEmail(string $email): ?Identity
     {
-        return $this->identityRepository->findActiveByEmail($email);
+        return $this->repository->findActiveByEmail($email);
     }
 
     /**
@@ -90,7 +81,7 @@ class IdentityService extends ModelService
      */
     public function findResendVerificationUser(string $email): ?Identity
     {
-        return $this->identityRepository->findInactiveByEmail($email);
+        return $this->repository->findInactiveByEmail($email);
     }
 
     /**
@@ -102,7 +93,7 @@ class IdentityService extends ModelService
      */
     public function findInactiveByVerificationToken(string $token): ?Identity
     {
-        return $this->identityRepository->findInactiveByVerificationToken($token);
+        return $this->repository->findInactiveByVerificationToken($token);
     }
 
     /**
@@ -114,7 +105,7 @@ class IdentityService extends ModelService
      */
     public function findActiveByUsername(?string $username): ?Identity
     {
-        return $this->identityRepository->findActiveByUsername($username);
+        return $this->repository->findActiveByUsername($username);
     }
 
     /**
@@ -126,7 +117,7 @@ class IdentityService extends ModelService
      */
     public function findIdentityByPasswordResetToken(string $password_reset_token): ?Identity
     {
-        return $this->identityRepository->findIdentityByPasswordResetToken($password_reset_token);
+        return $this->repository->findIdentityByPasswordResetToken($password_reset_token);
     }
 
     /**
@@ -138,6 +129,6 @@ class IdentityService extends ModelService
      */
     public function findByPasswordResetToken(string $token): ?Identity
     {
-        return $this->identityRepository->findByPasswordResetToken($token);
+        return $this->repository->findByPasswordResetToken($token);
     }
 }

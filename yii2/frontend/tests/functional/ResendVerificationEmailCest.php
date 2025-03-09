@@ -2,6 +2,7 @@
 
 namespace yii2\frontend\tests\functional;
 
+use yii2\common\components\Auth;
 use yii2\common\models\Identity;
 use yii2\common\tests\cest\SendForm;
 use yii2\common\fixtures\UserFixture;
@@ -68,7 +69,7 @@ class ResendVerificationEmailCest extends SendForm
     {
         parent::_before($I);
 
-        $route = AuthController::getEndpoint(AuthController::ACTION_RESEND_VERIFICATION_EMAIL); // 'auth/resend-verification-email'
+        $route = AuthController::getEndpoint(Auth::ACTION_RESEND_VERIFICATION_EMAIL); // 'auth/resend-verification-email'
 
         $I->amOnRoute($route);
     }

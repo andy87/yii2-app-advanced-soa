@@ -5,7 +5,7 @@ namespace yii2\common\models\forms;
 use yii\base\InvalidConfigException;
 use yii2\common\components\forms\BaseWebForm;
 use yii2\frontend\controllers\AuthController;
-use yii2\common\{models\Identity, services\IdentityService};
+use yii2\common\{components\Auth, models\Identity, services\IdentityService};
 
 /**
  * < Common > `LoginForm`
@@ -21,18 +21,21 @@ class LoginForm extends BaseWebForm
     public const ATTR_USERNAME = 'username';
     public const ATTR_PASSWORD = 'password';
     public const ATTR_REMEMBER_ME = 'rememberMe';
-
     public const RULE_MESSAGE_WRONG_USER_NAME_OR_PASSWORD = 'Неверное имя пользователя или пароль.';
-
     public const RULE_REQUIRED_MESSAGE = 'Поле `{attribute}` не может быть пустым';
 
     public const HINT = 'Пожалуйста, заполните следующие поля для входа:';
     public const BUTTON_LOGIN_TEXT = 'Авторизоваться';
+    public const PARAM_REMEMBER_ME = 'auth.rememberMeDuration.days';
+
+
 
     public string $id = 'login-form';
 
     public ?string $username = null;
+
     public ?string $password = null;
+
     public bool $rememberMe = true;
 
     private ?Identity $_identity = null;
@@ -107,7 +110,7 @@ class LoginForm extends BaseWebForm
      */
     public function getHrefRequestPasswordReset(): string
     {
-        return AuthController::getEndpoint(AuthController::ACTION_REQUEST_PASSWORD_RESET);
+        return AuthController::getEndpoint(Auth::ACTION_REQUEST_PASSWORD_RESET);
     }
 
     /**
@@ -117,7 +120,7 @@ class LoginForm extends BaseWebForm
      */
     public function getHrefResendVerificationEmail(): string
     {
-        return AuthController::getEndpoint(AuthController::ACTION_RESEND_VERIFICATION_EMAIL);
+        return AuthController::getEndpoint(Auth::ACTION_RESEND_VERIFICATION_EMAIL);
     }
 
 }

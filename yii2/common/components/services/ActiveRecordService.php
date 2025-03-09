@@ -16,34 +16,49 @@ use yii\{ base\Model, db\ActiveRecord, db\ActiveRecordInterface };
  *
  * @package yii2\common\components\services
  */
-abstract class ModelService extends BaseService
+abstract class ActiveRecordService extends BaseService
 {
     use LazyLoadTrait;
 
-    /** @var string */
-    private const CLASS_MODEL = ActiveRecord::class;
 
-    /** @var string */
-    private const CLASS_REPOSITORY = BaseRepository::class;
+    /** @var ActiveRecord|string  */
+    protected ActiveRecord|string $modelClass;
 
-    /** @var string */
-    private const CLASS_PRODUCES = BaseProduces::class;
+    /** @var BaseRepository|string|null  */
+    protected BaseRepository|string|null $repositoryClass = null;
+
+    /** @var BaseProduces|string|null  */
+    protected BaseProduces|string|null $producerClass = null;
 
 
 
-    /** @var ActiveRecord|string $modelClass */
-    public ActiveRecord|string $modelClass = self::CLASS_MODEL;
+    /**
+     * @param string $name
+     *
+     * @return array|string|null
+     */
+    protected function findLazyLoadConfig(string $name): array|string|null
+    {
+        $config = [];
 
-    public array $lazyLoadConfig = [
-        'repository' => [
-            'class' => self::CLASS_REPOSITORY,
-            'model' => self::CLASS_MODEL,
-        ],
-        'produces' => [
-            'class' => self::CLASS_PRODUCES,
-            'model' => self::CLASS_MODEL,
-        ],
-    ];
+        if ( $this->repositoryClass ) {
+            $config['repository'] = [
+                'class' => $this->repositoryClass,
+                'model' => $this->modelClass,
+            ];
+        }
+
+        if ( $this->producerClass ) {
+            $config['produces'] = [
+                'class' => $this->producerClass,
+                'model' => $this->modelClass,
+            ];
+        }
+
+        $config = array_merge( $this->lazyLoadConfig, $config );
+
+        return $config[$name] ?? null;
+    }
 
 
     /**

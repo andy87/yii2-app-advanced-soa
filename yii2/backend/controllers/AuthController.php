@@ -38,13 +38,18 @@ class AuthController extends BaseBackendController
                 'class' => AccessControl::class,
                 'rules' => [
                     [
-                        'actions' => [Action::LOGIN, Action::ERROR ],
+                        'actions' => [ Action::LOGIN ],
                         'allow' => true,
+                        'roles' => [ Role::GUEST ],
                     ],
                     [
-                        'actions' => [Action::LOGOUT ],
+                        'actions' => [ Action::LOGOUT ],
                         'allow' => true,
                         'roles' => [ Role::USER ],
+                    ],
+                    [
+                        'actions' => [ Action::ERROR ],
+                        'allow' => true,
                     ],
                 ],
             ],
@@ -66,25 +71,20 @@ class AuthController extends BaseBackendController
      */
     public function actionLogin(): Response|string
     {
-        if (Yii::$app->user->isGuest)
+        $this->layout = 'blank';
+
+        $R = new AuthLoginResources;
+
+        if (Yii::$app->request->isPost)
         {
-            $this->layout = 'blank';
+            $post = Yii::$app->request->post();
 
-            $R = new AuthLoginResources;
+            $handlerResult = AuthService::getInstance()->handlerLoginForm($R->loginForm, $post);
 
-            if (Yii::$app->request->isPost)
-            {
-                $post = Yii::$app->request->post();
-
-                $handlerResult = AuthService::getInstance()->handlerLoginForm($R->loginForm, $post);
-
-                if ($handlerResult) return $this->goBack();
-            }
-
-            return $this->render($R::TEMPLATE, $R->release());
+            if ($handlerResult) return $this->goBack();
         }
 
-        return $this->goHome();
+        return $this->render($R::TEMPLATE, $R->release());
     }
 
     /**

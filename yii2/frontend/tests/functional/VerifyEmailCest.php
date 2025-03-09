@@ -2,6 +2,7 @@
 
 namespace yii2\frontend\tests\functional;
 
+use yii2\common\components\Auth;
 use yii2\common\components\Layout;
 use yii2\common\models\Identity;
 use yii2\common\fixtures\UserFixture;
@@ -169,6 +170,6 @@ class VerifyEmailCest
      */
     private function getRoute(): string
     {
-        return AuthController::getEndpoint(AuthController::ACTION_VERIFY_EMAIL);
+        return AuthController::getEndpoint(Auth::ACTION_VERIFY_EMAIL);
     }
 }
