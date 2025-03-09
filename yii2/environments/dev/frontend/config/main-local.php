@@ -19,7 +19,20 @@ if (YII_ENV_DEV) {
     $config['bootstrap'][] = 'gii';
     $config['modules']['gii'] = [
         'class' => yii\gii\Module::class,
-        'allowedIPs' => ['127.0.0.1', '::1']
+        'allowedIPs' => ['127.0.0.1', '::1'],
+        'generators' => [
+            'fileCrafter' => [
+                'class' => andy87\yii2\file_crafter\Crafter::class,
+                'options' => [
+                    'templates' => [
+                        'group_name' => [
+                            // 'template' => 'path/to/file.php',
+                            // ...
+                        ]
+                    ]
+                ]
+            ]
+        ],
     ];
 }
 
