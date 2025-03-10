@@ -10,9 +10,12 @@ use yii\web\BadRequestHttpException;
 use yii2\common\components\Action;
 use andy87\lazy_load\yii2\LazyLoadTrait;
 use yii2\common\components\Auth;
+use yii2\common\components\traits\Logger;
 use yii2\frontend\models\forms\ResetPasswordForm;
+use yii2\frontend\models\forms\VerifyEmailForm;
 use yii2\frontend\resources\auth\AuthLoginResources;
 use yii2\frontend\resources\auth\AuthRequestPasswordResetResources;
+use yii2\frontend\resources\auth\AuthResendVerificationEmailResources;
 use yii2\frontend\resources\auth\AuthResetPasswordResources;
 use yii2\frontend\resources\auth\AuthSignupResources;
 use yii2\frontend\services\controllers\AuthService;
@@ -22,7 +25,7 @@ use yii2\frontend\services\controllers\AuthService;
  */
 class AuthHandler extends \yii2\common\handlers\AuthHandler
 {
-    use LazyLoadTrait;
+    use LazyLoadTrait, Logger;
 
     public array $lazyLoadConfig = [
         'service' => AuthService::class,
@@ -30,21 +33,32 @@ class AuthHandler extends \yii2\common\handlers\AuthHandler
 
 
     /**
-     * @throws InvalidConfigException
+     * @return AuthLoginResources
+     *
+     * @throws Exception
      */
     public function processLogin(): AuthLoginResources
     {
-        /** @var AuthLoginResources $R */
-        $R = $this->getResource(Action::LOGIN );
-
-        if (Yii::$app->request->isPost)
+        try
         {
-            $post = Yii::$app->request->post();
+            /** @var AuthLoginResources $R */
+            $R = $this->getResource(Action::LOGIN );
 
-            $this->service->authLoginForm( $R->loginForm, $post );
+            if (Yii::$app->request->isPost)
+            {
+                $post = Yii::$app->request->post();
+
+                $this->service->authLoginForm( $R->loginForm, $post );
+            }
+
+            return $R;
+
+        } catch ( Exception $e ) {
+
+            Yii::error( $this->prepareException(__METHOD__, $e) );
+
+            throw new Exception($e->getMessage());
         }
-
-        return $R;
     }
 
     /**
@@ -58,21 +72,30 @@ class AuthHandler extends \yii2\common\handlers\AuthHandler
     /**
      * @return AuthSignupResources
      *
-     * @throws InvalidConfigException
+     * @throws Exception
      */
     public function processSignup(): AuthSignupResources
     {
-        /** @var AuthSignupResources $R */
-        $R = $this->getResource(Auth::ACTION_SIGNUP );
-
-        if (Yii::$app->request->isPost)
+        try
         {
-            $post = Yii::$app->request->post();
+            /** @var AuthSignupResources $R */
+            $R = $this->getResource(Auth::ACTION_SIGNUP );
 
-            $this->service->handlerSignupForm( $R->signupForm, $post );
+            if (Yii::$app->request->isPost)
+            {
+                $post = Yii::$app->request->post();
+
+                $this->service->handlerSignupForm( $R->signupForm, $post );
+            }
+
+            return $R;
+
+        } catch ( Exception $e ) {
+
+            Yii::error( $this->prepareException(__METHOD__, $e) );
+
+            throw new Exception($e->getMessage());
         }
-
-        return $R;
     }
 
     /**
@@ -83,17 +106,26 @@ class AuthHandler extends \yii2\common\handlers\AuthHandler
      */
     public function processRequestPasswordReset(): AuthRequestPasswordResetResources
     {
-        /** @var AuthRequestPasswordResetResources $R */
-        $R = $this->getResource(Auth::ACTION_REQUEST_PASSWORD_RESET);
-
-        if (Yii::$app->request->isPost)
+        try
         {
-            $post = Yii::$app->request->post();
+            /** @var AuthRequestPasswordResetResources $R */
+            $R = $this->getResource(Auth::ACTION_REQUEST_PASSWORD_RESET);
 
-            $this->service->handlerRequestPasswordResetResources($R->passwordResetRequestForm, $post);
+            if (Yii::$app->request->isPost)
+            {
+                $post = Yii::$app->request->post();
+
+                $this->service->handlerRequestPasswordResetResources($R->passwordResetRequestForm, $post);
+            }
+
+            return $R;
+
+        } catch ( Exception $e ) {
+
+            Yii::error( $this->prepareException(__METHOD__, $e) );
+
+            throw new Exception($e->getMessage());
         }
-
-        return $R;
     }
 
     /**
@@ -101,41 +133,89 @@ class AuthHandler extends \yii2\common\handlers\AuthHandler
      *
      * @return AuthResetPasswordResources
      *
-     * @throws BadRequestHttpException|InvalidConfigException|Exception
+     * @throws Exception
      */
     public function processResetPassword( string $token ): AuthResetPasswordResources
     {
-        /** @var AuthResetPasswordResources $R */
-        $R = $this->getResource(Auth::ACTION_RESET_PASSWORD );
-
-        $R->resetPasswordForm = new ResetPasswordForm($token);
-
         try
         {
+            /** @var AuthResetPasswordResources $R */
+            $R = $this->getResource(Auth::ACTION_RESET_PASSWORD );
+
+            $R->resetPasswordForm = new ResetPasswordForm($token);
+
             if (Yii::$app->request->isPost)
             {
                 $post = Yii::$app->request->post();
 
                 $this->service->handlerResetPasswordForm($R->resetPasswordForm, $post);
-
-                $this->setSessionFlashMessage($result,
-                    $R->resetPasswordForm::MESSAGE_SUCCESS,
-                    $R->resetPasswordForm::MESSAGE_ERROR
-                );
-
-                if ($result) return $this->goHome();
             }
+
+            return $R;
+
+        } catch ( Exception $e) {
+
+            $log = $this->prepareException(__METHOD__, $e);
+            $log['token'] = $token;
+
+            Yii::error( $log );
+
+            throw new Exception($e->getMessage());
+        }
+    }
+
+    /**
+     * @param string $token
+     *
+     * @return bool
+     *
+     * @throws Exception
+     */
+    public function processVerifyEmail( string $token ): bool
+    {
+        try
+        {
+            $verifyEmailForm = new VerifyEmailForm($token);
+
+            return $this->service->handlerAuthVerifyEmailResources($verifyEmailForm);
 
         } catch (InvalidArgumentException $e) {
 
-            $this->runtimeLogError( $e->getMessage(),
-                __METHOD__,
-                $R->resetPasswordForm
-            );
+            $log = $this->prepareException(__METHOD__, $e);
+            $log['token'] = $token;
 
-            throw new BadRequestHttpException($e->getMessage());
+            Yii::error( $log );
+
+            throw new Exception($e->getMessage());
         }
+    }
 
-        return $R;
+    /**
+     * @return AuthResendVerificationEmailResources
+     *
+     * @throws Exception
+     */
+    public function processResendVerificationEmail(): AuthResendVerificationEmailResources
+    {
+        try
+        {
+            /** @var AuthResendVerificationEmailResources $R */
+            $R = $this->getResource(Auth::ACTION_RESEND_VERIFICATION_EMAIL );
+
+            if (Yii::$app->request->isPost)
+            {
+                $post = Yii::$app->request->post();
+
+                $this->service->handlerResendVerificationEmail($R->resendVerificationEmailForm, $post);
+            }
+
+            return $R;
+
+        } catch (InvalidArgumentException $e) {
+
+            Yii::error( $this->prepareException(__METHOD__, $e) );
+
+            throw new Exception($e->getMessage());
+        }
     }
 }

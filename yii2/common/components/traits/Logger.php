@@ -89,6 +89,7 @@ trait Logger
     {
         $log = [
             'method' => $methodName,
+            'date' => date('Y-m-d H:i:s'),
             'message' => $message,
             'errors' => $model->errors,
             'attributes' => $model->attributes,
@@ -110,6 +111,7 @@ trait Logger
     {
         return [
             'catch' => $catch,
+            'date' => date('Y-m-d H:i:s'),
             'message' => $e->getMessage(),
             'file' => $e->getFile(),
             'line' => $e->getLine(),

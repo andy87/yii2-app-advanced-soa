@@ -2,18 +2,20 @@
 
 namespace yii2\frontend\services\controllers;
 
-use andy87\lazy_load\yii2\LazyLoadTrait;
-use Exception;
 use Yii;
+use Exception;
+use andy87\lazy_load\yii2\LazyLoadTrait;
 use yii\base\InvalidConfigException;
 use yii2\common\components\Result;
 use yii2\common\models\Identity;
 use yii2\common\services\{EmailService, IdentityService};
-use yii2\frontend\models\forms\{PasswordResetRequestForm,
-    ResendVerificationEmailForm,
-    ResetPasswordForm,
+use yii2\frontend\models\forms\{
     SignupForm,
-    VerifyEmailForm};
+    VerifyEmailForm,
+    ResetPasswordForm,
+    PasswordResetRequestForm,
+    ResendVerificationEmailForm,
+};
 
 /**
  * < Frontend > `AuthService`
@@ -29,10 +31,13 @@ class AuthService extends \yii2\common\services\AuthService
 {
     use LazyLoadTrait;
 
+
     public array $lazyLoadConfig = [
         'identityService' => IdentityService::class,
         'emailService' => EmailService::class,
     ];
+
+
 
     /**
      * @param SignupForm $signupForm
@@ -351,6 +356,10 @@ class AuthService extends \yii2\common\services\AuthService
     {
         $resendVerificationEmail = $resendVerificationEmailForm->constructEmailDto();
 
-        return $this->emailService->send($resendVerificationEmail);
+        $result = $this->emailService->send($resendVerificationEmail);
+
+        $resendVerificationEmailForm->result = ($result) ? Result::OK ? Result::ERROR;
+
+        return $result;
     }
 }

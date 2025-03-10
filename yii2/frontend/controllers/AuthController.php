@@ -64,7 +64,7 @@ class AuthController extends BaseFrontendController
     /**
      * @return string
      *
-     * @throws InvalidConfigException
+     * @throws Exception
      *
      * @tag #auth #action #index
      */
@@ -78,7 +78,7 @@ class AuthController extends BaseFrontendController
      *
      * @return Response|string
      *
-     * @throws InvalidConfigException
+     * @throws Exception
      *
      * @tag #auth #action #login
      */
@@ -113,7 +113,7 @@ class AuthController extends BaseFrontendController
      *
      * @return Response|string
      *
-     * @throws InvalidConfigException
+     * @throws Exception
      *
      * @tag #auth #action #signup
      */
@@ -121,10 +121,10 @@ class AuthController extends BaseFrontendController
     {
         $R = $this->handler->processSignup();
 
-        if (Yii::$app->request->isPost)
+        if ($R->signupForm->result)
         {
             $this->setSessionFlashMessage(
-                ($R->signupForm->result),
+                ($R->signupForm->result === Result::OK),
                 $R->signupForm::MESSAGE_SUCCESS,
                 $R->signupForm::MESSAGE_ERROR
             );
@@ -138,9 +138,7 @@ class AuthController extends BaseFrontendController
      *
      * @return Response|string
      *
-     * @throws InvalidConfigException|InvalidConfigException|YiiBaseException|Exception
-     *
-     * @see PasswordResetRequestFormTest
+     * @throws Exception
      *
      * @tag #auth #action #requestPasswordReset
      */
@@ -170,9 +168,7 @@ class AuthController extends BaseFrontendController
      *
      * @return Response|string
      *
-     * @throws BadRequestHttpException|YiiBaseException
-     *
-     * @see ResetPasswordFormTest
+     * @throws Exception
      *
      * @tag #auth #action #resetPassword
      */
@@ -202,31 +198,18 @@ class AuthController extends BaseFrontendController
      *
      * @return Response
      *
-     * @throws BadRequestHttpException|InvalidConfigException|YiiDbException
+     * @throws Exception
      *
      * @tag #auth #action #verifyEmail
      */
-    public function actionVerifyEmail(string $token): Response
+    public function actionVerifyEmail( string $token ): Response
     {
-        try {
-            $verifyEmailForm = new VerifyEmailForm($token);
-        } catch (InvalidArgumentException $e) {
-            throw new BadRequestHttpException($e->getMessage());
-        }
+        $result = $this->handler->processVerifyEmail( $token );
 
-        try
-        {
-            $handlerResult = AuthService::getInstance()->handlerAuthVerifyEmailResources($verifyEmailForm);
-
-            $this->setSessionFlashMessage( $handlerResult,
-                $verifyEmailForm::MESSAGE_SUCCESS,
-                $verifyEmailForm::MESSAGE_ERROR
-            );
-
-        } catch (InvalidArgumentException $e) {
-
-            throw new BadRequestHttpException($e->getMessage());
-        }
+        $this->setSessionFlashMessage( $result,
+            VerifyEmailForm::MESSAGE_SUCCESS,
+            VerifyEmailForm::MESSAGE_ERROR
+        );
 
         return $this->goHome();
     }
@@ -236,26 +219,24 @@ class AuthController extends BaseFrontendController
      *
      * @return Response|string
      *
-     * @throws InvalidConfigException
+     * @throws Exception
      *
      * @tag #auth #action #resendVerificationEmail
      */
     public function actionResendVerificationEmail(): Response|string
     {
-        $R = new AuthResendVerificationEmailResources;
+        $R = $this->handler->processResendVerificationEmail();
 
-        if (Yii::$app->request->isPost)
+        if ($R->resendVerificationEmailForm->result)
         {
-            $post = Yii::$app->request->post();
+            $isOK = ($R->resendVerificationEmailForm->result === Result::OK);
 
-            $handlerResult = AuthService::getInstance()->handlerResendVerificationEmail($R->resendVerificationEmailForm, $post);
-
-            $this->setSessionFlashMessage($handlerResult,
+            $this->setSessionFlashMessage($isOK,
                 $R->resendVerificationEmailForm::MESSAGE_SUCCESS,
                 $R->resendVerificationEmailForm::MESSAGE_ERROR
             );
 
-            if ($handlerResult) return $this->goHome();
+            if ($isOK) return $this->goHome();
         }
 
         return $this->render($R::TEMPLATE, $R->release());

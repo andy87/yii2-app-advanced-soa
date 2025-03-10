@@ -34,6 +34,8 @@ class ResendVerificationEmailForm extends EmailingWebForm
      */
     public ?string $email = null;
 
+    public ?string $result = null;
+
 
 
     /**
