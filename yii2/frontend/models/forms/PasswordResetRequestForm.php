@@ -27,6 +27,8 @@ class PasswordResetRequestForm extends EmailingWebForm
     /** @var ?string   */
     public ?string $email = null;
 
+    public ?string $result = null;
+
     /** @var ?Identity $identity */
     private ?Identity $identity = null;
 

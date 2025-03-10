@@ -45,7 +45,7 @@ class SignupForm extends EmailingWebForm
     public ?string $email = null;
     public ?string $password = null;
 
-    public bool $result = false;
+    public ?string $result = null;
 
     public ?Identity $identity = null;
 

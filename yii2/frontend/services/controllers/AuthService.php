@@ -2,9 +2,11 @@
 
 namespace yii2\frontend\services\controllers;
 
+use andy87\lazy_load\yii2\LazyLoadTrait;
 use Exception;
 use Yii;
 use yii\base\InvalidConfigException;
+use yii2\common\components\Result;
 use yii2\common\models\Identity;
 use yii2\common\services\{EmailService, IdentityService};
 use yii2\frontend\models\forms\{PasswordResetRequestForm,
@@ -16,12 +18,22 @@ use yii2\frontend\models\forms\{PasswordResetRequestForm,
 /**
  * < Frontend > `AuthService`
  *
+ * @property-read IdentityService $identityService
+ * @property-read EmailService $emailService
+ *
  * @package yii2\frontend\services\controllers
  *
  * @tag #services #auth
  */
 class AuthService extends \yii2\common\services\AuthService
 {
+    use LazyLoadTrait;
+
+    public array $lazyLoadConfig = [
+        'identityService' => IdentityService::class,
+        'emailService' => EmailService::class,
+    ];
+
     /**
      * @param SignupForm $signupForm
      * @param array $data
@@ -42,7 +54,7 @@ class AuthService extends \yii2\common\services\AuthService
         {
             if ($signupForm->validate())
             {
-                $signupForm->identity = IdentityService::getInstance()->signUp($signupForm);
+                $signupForm->identity = $this->identityService->signUp($signupForm);
 
                  if ($signupForm->identity->id !== null)
                  {
@@ -50,7 +62,7 @@ class AuthService extends \yii2\common\services\AuthService
                      {
                          $transaction?->commit();
 
-                         $signupForm->result = true;
+                         $signupForm->result = Result::OK;
 
                          return $signupForm->identity;
 
@@ -94,7 +106,7 @@ class AuthService extends \yii2\common\services\AuthService
     {
         $registrationEmail = $signupForm->constructEmailDto();
 
-        return EmailService::getInstance()->send($registrationEmail);
+        return $this->emailService->send($registrationEmail);
     }
 
     /**
@@ -132,6 +144,9 @@ class AuthService extends \yii2\common\services\AuthService
                             if ($this->sendEmailRequestPasswordReset($passwordResetRequestForm)) {
 
                                 $transaction?->commit();
+
+                                $passwordResetRequestForm->result = Result::OK;
+
                                 return true;
 
                             } else {
@@ -182,7 +197,7 @@ class AuthService extends \yii2\common\services\AuthService
     {
         $requestPasswordResetEmail = $passwordResetRequestForm->constructEmailDto();
 
-        return EmailService::getInstance()->send($requestPasswordResetEmail);
+        return $this->emailService->send($requestPasswordResetEmail);
     }
 
     /**
@@ -336,6 +351,6 @@ class AuthService extends \yii2\common\services\AuthService
     {
         $resendVerificationEmail = $resendVerificationEmailForm->constructEmailDto();
 
-        return EmailService::getInstance()->send($resendVerificationEmail);
+        return $this->emailService->send($resendVerificationEmail);
     }
 }

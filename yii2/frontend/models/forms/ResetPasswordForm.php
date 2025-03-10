@@ -2,6 +2,7 @@
 
 namespace yii2\frontend\models\forms;
 
+use andy87\lazy_load\yii2\LazyLoadTrait;
 use yii2\common\components\forms\BaseWebForm;
 use yii2\common\models\Identity;
 use yii2\common\services\IdentityService;
@@ -11,12 +12,20 @@ use yii\base\{InvalidArgumentException, InvalidConfigException};
 /**
  * < Frontend > `ResetPasswordForm`
  *
+ * @property-read IdentityService $identityService
+ *
  * @package yii2\frontend\models\forms
  *
  * @tag #models #forms #reset #password
  */
 class ResetPasswordForm extends BaseWebForm
 {
+    use LazyLoadTrait;
+
+    public array $lazyLoadConfig = [
+        'identityService' => IdentityService::class
+    ];
+
     public string $id = 'reset-password-form';
 
     public const ATTR_PASSWORD = 'password';
@@ -30,6 +39,8 @@ class ResetPasswordForm extends BaseWebForm
 
     /** @var ?string  */
     public ?string $password = null;
+
+    public ?bool $result = null;
 
     /**
      * @var ?Identity
@@ -53,7 +64,7 @@ class ResetPasswordForm extends BaseWebForm
 
         if ( strlen($this->password) )
         {
-            $this->_identity = IdentityService::getInstance()->findByPasswordResetToken($this->password);
+            $this->_identity = $this->identityService->findByPasswordResetToken($this->password);
 
             if ($this->_identity)
             {
