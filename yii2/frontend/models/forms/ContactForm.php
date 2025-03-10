@@ -44,6 +44,7 @@ class ContactForm extends BaseWebForm
     public ?string $subject = null;
     public ?string $body = null;
     public ?string $verifyCode = null;
+    public ?string $result = null;
 
 
     /**

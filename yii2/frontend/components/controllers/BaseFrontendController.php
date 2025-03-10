@@ -5,6 +5,7 @@ namespace yii2\frontend\components\controllers;
 use Yii;
 use yii2\frontend\controllers\{ SiteController, AuthController };
 use yii2\common\components\{Auth, Layout, Action, controllers\BaseWebWebController};
+use yii2\frontend\components\Site;
 
 /**
  * < Frontend > `BaseFrontendController`
@@ -51,12 +52,12 @@ abstract class BaseFrontendController extends BaseWebWebController
                 'url' => [SiteController::getEndpoint(Action::INDEX)]
             ],
             [
-                'label' => SiteController::LABELS[SiteController::ACTION_ABOUT],
-                'url' => [SiteController::getEndpoint(SiteController::ACTION_ABOUT)]
+                'label' => SiteController::LABELS[Site::ACTION_ABOUT],
+                'url' => [SiteController::getEndpoint(Site::ACTION_ABOUT)]
             ],
             [
-                'label' => SiteController::LABELS[SiteController::ACTION_CONTACT],
-                'url' => [SiteController::getEndpoint(SiteController::ACTION_CONTACT)]
+                'label' => SiteController::LABELS[Site::ACTION_CONTACT],
+                'url' => [SiteController::getEndpoint(Site::ACTION_CONTACT)]
             ],
         ];
 

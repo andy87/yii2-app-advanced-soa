@@ -2,6 +2,7 @@
 
 namespace yii2\frontend\tests\unit\models;
 
+use andy87\lazy_load\yii2\LazyLoadTrait;
 use Codeception\Exception\ModuleException;
 use Codeception\Test\Unit;
 use Exception;
@@ -13,6 +14,9 @@ use yii2\frontend\{models\forms\SignupForm, services\controllers\AuthService, te
 /**
  * < Frontend > `SignupFormTest`
  *
+ * @property-read AuthService $authService
+ * @property-read IdentityService $identityService
+ *
  * @package yii2\frontend\tests\unit\models
  *
  * @cli ./vendor/bin/codecept run yii2/frontend/tests/unit/models/SignupFormTest
@@ -23,10 +27,18 @@ use yii2\frontend\{models\forms\SignupForm, services\controllers\AuthService, te
  */
 class SignupFormTest extends Unit
 {
+    use LazyLoadTrait;
+
+
     /**
      * @var UnitTester
      */
     protected UnitTester $tester;
+
+    public array $lazyLoadConfig = [
+        'authService'=> AuthService::class,
+        'identityService'=> IdentityService::class
+    ];
 
     /**
      * @return void
@@ -91,7 +103,7 @@ class SignupFormTest extends Unit
 
         $signupForm = $this->constructSignupForm($user);
 
-        AuthService::getInstance()->handlerSignupForm($signupForm);
+        $this->authService->handlerSignupForm($signupForm);
 
         verify($signupForm->identity)->notEmpty();
 
@@ -137,7 +149,7 @@ class SignupFormTest extends Unit
 
         $signupForm = $this->constructSignupForm($user);
 
-        $identity = IdentityService::getInstance()->signUp($signupForm);
+        $identity = $this->identityService->signUp($signupForm);
 
         verify($identity)->empty();
         verify($signupForm->getErrors('username'))->notEmpty();

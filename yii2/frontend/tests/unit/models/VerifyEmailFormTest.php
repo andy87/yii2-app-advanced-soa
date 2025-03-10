@@ -2,6 +2,7 @@
 
 namespace yii2\frontend\tests\unit\models;
 
+use andy87\lazy_load\yii2\LazyLoadTrait;
 use Codeception\Test\Unit;
 use yii\base\{InvalidArgumentException, InvalidConfigException};
 use yii\db\Exception;
@@ -11,6 +12,8 @@ use yii2\frontend\tests\UnitTester;
 
 /**
  * < Frontend > `VerifyEmailFormTest`
+ *
+ * @property-read AuthService $authService
  *
  * @package yii2\frontend\tests\unit\models
  *
@@ -22,9 +25,14 @@ use yii2\frontend\tests\UnitTester;
  */
 class VerifyEmailFormTest extends Unit
 {
+    use LazyLoadTrait;
+
     /** @var UnitTester */
     protected UnitTester $tester;
 
+    public array $lazyLoadConfig = [
+        'authService'=> AuthService::class,
+    ];
 
     /**
      * @return void
@@ -98,7 +106,7 @@ class VerifyEmailFormTest extends Unit
     {
         $verifyEmailForm = new VerifyEmailForm('4ch0qbfhvWwkcuWqjN8SWRq72SOw1KYT_1548675330');
 
-        AuthService::getInstance()->handlerAuthVerifyEmailResources($verifyEmailForm);
+        $this->authService->handlerAuthVerifyEmailResources($verifyEmailForm);
 
         $identity = $verifyEmailForm->getIdentity();
 

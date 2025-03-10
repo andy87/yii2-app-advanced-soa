@@ -4,7 +4,7 @@ namespace yii2\common\services;
 
 use Yii;
 use yii\base\InvalidConfigException;
-use yii2\common\{ models\forms\LoginForm, components\core\BaseService };
+use yii2\common\{components\Result, models\forms\LoginForm, components\core\BaseService};
 
 /**
  * < Common > AuthService
@@ -30,7 +30,16 @@ class AuthService extends BaseService
     {
         if ( count($data) ) $loginForm->load( $data );
 
-        if ( $this->login($loginForm) ) return true;
+        if ( $this->login($loginForm) ) {
+
+            $loginForm->result = Result::OK;
+
+            return true;
+
+        } else {
+
+            $loginForm->result = Result::ERROR;
+        }
 
         $loginForm->password = '';
 

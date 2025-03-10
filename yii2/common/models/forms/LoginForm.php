@@ -2,6 +2,7 @@
 
 namespace yii2\common\models\forms;
 
+use andy87\lazy_load\yii2\LazyLoadTrait;
 use yii\base\InvalidConfigException;
 use yii2\common\components\forms\BaseWebForm;
 use yii2\frontend\controllers\AuthController;
@@ -12,12 +13,16 @@ use yii2\common\{components\Auth, models\Identity, services\IdentityService};
  *
  *      Login form
  *
+ * @property-read IdentityService $identityService
+ *
  * @package yii2\common\models\forms
  *
  * @tag #common #forms #login
  */
 class LoginForm extends BaseWebForm
 {
+    use LazyLoadTrait;
+
     public const ATTR_USERNAME = 'username';
     public const ATTR_PASSWORD = 'password';
     public const ATTR_REMEMBER_ME = 'rememberMe';
@@ -29,6 +34,9 @@ class LoginForm extends BaseWebForm
     public const PARAM_REMEMBER_ME = 'auth.rememberMeDuration.days';
 
 
+    public array $lazyLoadConfig = [
+        'identityService' => IdentityService::class
+    ];
 
     public string $id = 'login-form';
 
@@ -37,6 +45,8 @@ class LoginForm extends BaseWebForm
     public ?string $password = null;
 
     public bool $rememberMe = true;
+
+    public ?string $result = null;
 
     private ?Identity $_identity = null;
 
@@ -83,7 +93,7 @@ class LoginForm extends BaseWebForm
     {
         if ($this->_identity === null)
         {
-            $this->_identity = IdentityService::getInstance()->findActiveByUsername($this->username);
+            $this->_identity = $this->identityService->findActiveByUsername($this->username);
         }
 
         return $this->_identity;

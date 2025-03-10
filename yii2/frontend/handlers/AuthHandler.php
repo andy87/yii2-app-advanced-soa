@@ -4,21 +4,20 @@ namespace yii2\frontend\handlers;
 
 use Yii;
 use yii\base\Exception;
-use yii\base\InvalidArgumentException;
-use yii\base\InvalidConfigException;
-use yii\web\BadRequestHttpException;
-use yii2\common\components\Action;
-use andy87\lazy_load\yii2\LazyLoadTrait;
 use yii2\common\components\Auth;
+use yii2\common\components\Action;
+use yii\base\InvalidConfigException;
+use yii\base\InvalidArgumentException;
+use andy87\lazy_load\yii2\LazyLoadTrait;
 use yii2\common\components\traits\Logger;
-use yii2\frontend\models\forms\ResetPasswordForm;
 use yii2\frontend\models\forms\VerifyEmailForm;
+use yii2\frontend\models\forms\ResetPasswordForm;
+use yii2\frontend\services\controllers\AuthService;
 use yii2\frontend\resources\auth\AuthLoginResources;
+use yii2\frontend\resources\auth\AuthSignupResources;
+use yii2\frontend\resources\auth\AuthResetPasswordResources;
 use yii2\frontend\resources\auth\AuthRequestPasswordResetResources;
 use yii2\frontend\resources\auth\AuthResendVerificationEmailResources;
-use yii2\frontend\resources\auth\AuthResetPasswordResources;
-use yii2\frontend\resources\auth\AuthSignupResources;
-use yii2\frontend\services\controllers\AuthService;
 
 /**
  * @property-read AuthService $service;

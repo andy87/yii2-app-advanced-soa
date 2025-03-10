@@ -2,14 +2,18 @@
 
 namespace yii2\frontend\models\forms;
 
-use yii2\common\components\forms\EmailingWebForm;
-use yii2\common\models\{dto\EmailMessageDto, Identity};
-use yii2\common\services\IdentityService;
 use Yii;
+use yii2\common\models\Identity;
 use yii\base\InvalidConfigException;
+use andy87\lazy_load\yii2\LazyLoadTrait;
+use yii2\common\services\IdentityService;
+use yii2\common\models\dto\EmailMessageDto;
+use yii2\common\components\forms\EmailingWebForm;
 
 /**
  * < Frontend > `ResendVerificationEmailForm`
+ *
+ * @property-read IdentityService $identityService
  *
  * @package yii2\frontend\models\forms
  *
@@ -17,6 +21,8 @@ use yii\base\InvalidConfigException;
  */
 class ResendVerificationEmailForm extends EmailingWebForm
 {
+    use LazyLoadTrait;
+
     public string $id = 'resend-verification-email-form';
 
     public const TITLE = 'Отправить повторное письмо подтверждения email';
@@ -35,6 +41,10 @@ class ResendVerificationEmailForm extends EmailingWebForm
     public ?string $email = null;
 
     public ?string $result = null;
+
+    public array $lazyLoadConfig = [
+        'identityService' => IdentityService::class
+    ];
 
 
 
@@ -62,8 +72,6 @@ class ResendVerificationEmailForm extends EmailingWebForm
     /**
      * @return EmailMessageDto
      *
-     * @throws InvalidConfigException
-     *
      * @tag #constructor #dto #email
      */
     public function constructEmailDto(): EmailMessageDto
@@ -77,7 +85,7 @@ class ResendVerificationEmailForm extends EmailingWebForm
         $emailMessageDto->view = SignupForm::COMPOSE_MESSAGE_VIEW;
 
         $emailMessageDto->params = [
-            'user' => IdentityService::getInstance()->findResendVerificationUser($this->email)
+            'user' => $this->identityService->findResendVerificationUser($this->email)
         ];
 
         return $emailMessageDto;

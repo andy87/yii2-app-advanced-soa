@@ -2,6 +2,7 @@
 
 namespace yii2\frontend\models\forms;
 
+use andy87\lazy_load\yii2\LazyLoadTrait;
 use yii2\common\components\forms\EmailingWebForm;
 use yii2\common\models\{dto\EmailMessageDto, Identity};
 use yii2\common\services\IdentityService;
@@ -17,6 +18,8 @@ use yii\base\InvalidConfigException;
  */
 class SignupForm extends EmailingWebForm
 {
+    use LazyLoadTrait;
+
     public const TITLE = 'Регистрация';
     public const HINT = 'Пожалуйста, заполните следующие поля для регистрации:';
     public string $id = 'form-signup';
@@ -48,6 +51,10 @@ class SignupForm extends EmailingWebForm
     public ?string $result = null;
 
     public ?Identity $identity = null;
+
+    public array $lazyLoadConfig = [
+        'identityService' => IdentityService::class
+    ];
 
 
 
@@ -105,7 +112,7 @@ class SignupForm extends EmailingWebForm
         $emailMessageDto->view = self::COMPOSE_MESSAGE_VIEW;
 
         $emailMessageDto->params = [
-            'user' => IdentityService::getInstance()->findResendVerificationUser($this->email)
+            'user' => $this->ide->findResendVerificationUser($this->email)
         ];
 
         return $emailMessageDto;

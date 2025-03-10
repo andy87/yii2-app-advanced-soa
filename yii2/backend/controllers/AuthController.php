@@ -2,14 +2,21 @@
 
 namespace yii2\backend\controllers;
 
-use Yii;
-use yii\filters\{ VerbFilter, AccessControl };
-use yii\{ web\Response, base\InvalidConfigException };
-use yii2\common\{ components\Action, models\sources\Role };
-use yii2\backend\{ services\controllers\AuthService, resources\auth\AuthLoginResources, components\controllers\BaseBackendController };
+use yii\web\Response;
+use yii\filters\VerbFilter;
+use yii\filters\AccessControl;
+use yii2\common\components\Action;
+use yii\base\InvalidConfigException;
+use yii2\common\models\sources\Role;
+use yii2\backend\handlers\AuthHandler;
+use andy87\lazy_load\yii2\LazyLoadTrait;
+use yii2\backend\resources\auth\AuthLoginResources;
+use yii2\backend\components\controllers\BaseBackendController;
 
 /**
  * < Backend > `AuthController`
+ *
+ * @property-read AuthHandler $handler
  *
  * @package yii2\backend\controllers
  *
@@ -17,11 +24,24 @@ use yii2\backend\{ services\controllers\AuthService, resources\auth\AuthLoginRes
  */
 class AuthController extends BaseBackendController
 {
+    use LazyLoadTrait;
+
     public const ENDPOINT = 'auth';
 
     public const LABELS = [
         Action::LOGIN => 'Авторизация',
     ];
+
+
+    public array $lazyLoadConfig = [
+        'handler' => [
+            'class' => AuthHandler::class,
+            'resources' => [
+                Action::LOGIN => AuthLoginResources::class,
+            ]
+        ]
+    ];
+
 
 
     /**
@@ -73,16 +93,8 @@ class AuthController extends BaseBackendController
     {
         $this->layout = 'blank';
 
-        $R = new AuthLoginResources;
-
-        if (Yii::$app->request->isPost)
-        {
-            $post = Yii::$app->request->post();
-
-            $handlerResult = AuthService::getInstance()->handlerLoginForm($R->loginForm, $post);
-
-            if ($handlerResult) return $this->goBack();
-        }
+        $R = $this->handler->processLogin();
+        if ($R->loginForm->result) return $this->goBack();
 
         return $this->render($R::TEMPLATE, $R->release());
     }
@@ -96,7 +108,7 @@ class AuthController extends BaseBackendController
      */
     public function actionLogout(): Response
     {
-        AuthService::getInstance()->logout();
+        $this->handler->processLogout();
 
         return $this->goHome();
     }

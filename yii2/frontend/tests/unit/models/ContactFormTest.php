@@ -2,6 +2,7 @@
 
 namespace yii2\frontend\tests\unit\models;
 
+use andy87\lazy_load\yii2\LazyLoadTrait;
 use Codeception\Exception\ModuleException;
 use Codeception\Test\Unit;
 use yii\base\InvalidConfigException;
@@ -11,9 +12,11 @@ use yii2\frontend\{models\forms\ContactForm, services\controllers\SiteService, t
 /**
  * < Frontend > `ContactFormTest`
  *
- * @package yii2\frontend\tests\unit\models
+ * @property-read SiteService $siteService
  *
  * @property UnitTester $tester
+ *
+ * @package yii2\frontend\tests\unit\models
  *
  * @cli ./vendor/bin/codecept run yii2/frontend/tests/unit/models/ContactFormTest
  *
@@ -23,6 +26,12 @@ use yii2\frontend\{models\forms\ContactForm, services\controllers\SiteService, t
  */
 class ContactFormTest extends Unit
 {
+    use LazyLoadTrait;
+
+    public array $lazyLoadConfig = [
+        'siteService' => SiteService::class
+    ];
+
     /**
      * Send email
      *
@@ -47,7 +56,7 @@ class ContactFormTest extends Unit
             'body' => 'body of current message',
         ];
 
-        $sendResult = SiteService::getInstance()->sendEmailContactForm($contactForm);
+        $sendResult = $this->siteService->sendEmailContactForm($contactForm);
 
         verify( $sendResult )->notEmpty();
 

@@ -2,6 +2,7 @@
 
 use yii\web\View;
 use yii\helpers\Html;
+use yii2\frontend\components\Site;
 use yii2\frontend\controllers\SiteController;
 use yii2\frontend\resources\site\SiteAboutResources;
 
@@ -10,7 +11,7 @@ use yii2\frontend\resources\site\SiteAboutResources;
  * @var SiteAboutResources $R
  */
 
-$this->title = SiteController::LABELS[SiteController::ACTION_ABOUT];
+$this->title = SiteController::LABELS[Site::ACTION_ABOUT];
 $this->params['breadcrumbs'][] = $this->title;
 
 ?>

@@ -2,6 +2,7 @@
 
 namespace yii2\frontend\tests\unit\models;
 
+use andy87\lazy_load\yii2\LazyLoadTrait;
 use Codeception\Exception\ModuleException;
 use Codeception\Test\Unit;
 use Yii;
@@ -13,6 +14,8 @@ use yii2\frontend\{models\forms\ResendVerificationEmailForm, services\controller
 /**
  * < Frontend > `ResendVerificationEmailFormTest`
  *
+ * @property-read AuthService $authService
+ *
  * @package yii2\frontend\tests\unit\models
  *
  * @cli ./vendor/bin/codecept run yii2/frontend/tests/unit/models/ResendVerificationEmailFormTest
@@ -23,8 +26,15 @@ use yii2\frontend\{models\forms\ResendVerificationEmailForm, services\controller
  */
 class ResendVerificationEmailFormTest extends Unit
 {
+    use LazyLoadTrait;
+
     /** @var UnitTester */
     protected UnitTester $tester;
+
+
+    public array $lazyLoadConfig = [
+        'authService' => AuthService::class
+    ];
 
 
 
@@ -144,7 +154,7 @@ class ResendVerificationEmailFormTest extends Unit
         verify($resendVerificationEmailForm->validate())->true();
         verify($resendVerificationEmailForm->hasErrors())->false();
 
-        $sendResult = AuthService::getInstance()->handlerResendVerificationEmail($resendVerificationEmailForm);
+        $sendResult = $this->authService->handlerResendVerificationEmail($resendVerificationEmailForm);
 
         verify($sendResult)->true();
 

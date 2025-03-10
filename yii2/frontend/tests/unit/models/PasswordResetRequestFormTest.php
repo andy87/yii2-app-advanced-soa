@@ -3,6 +3,7 @@
 namespace yii2\frontend\tests\unit\models;
 
 
+use andy87\lazy_load\yii2\LazyLoadTrait;
 use Codeception\Exception\ModuleException;
 use Codeception\Test\Unit;
 use Yii;
@@ -18,6 +19,9 @@ use yii2\frontend\{controllers\AuthController,
 /**
  * < Frontend > `PasswordResetRequestFormTest`
  *
+ * @property-read IdentityService $identityService
+ * @property-read  AuthService $authService
+ *
  * @package yii2\frontend\tests\unit\models
  *
  * @cli ./vendor/bin/codecept run yii2/frontend/tests/unit/models/PasswordResetRequestFormTest
@@ -30,6 +34,8 @@ use yii2\frontend\{controllers\AuthController,
  */
 class PasswordResetRequestFormTest extends Unit
 {
+    use LazyLoadTrait;
+
     /**
      * @var UnitTester
      */
@@ -69,7 +75,7 @@ class PasswordResetRequestFormTest extends Unit
         $passwordResetRequestForm= new PasswordResetRequestForm();
         $passwordResetRequestForm->email = 'not-existing-email@example.com';
 
-        $sendResult = AuthService::getInstance()->handlerRequestPasswordResetResources($passwordResetRequestForm);
+        $sendResult = $this->authService->handlerRequestPasswordResetResources($passwordResetRequestForm);
 
         verify($sendResult)->false();
     }
@@ -95,7 +101,7 @@ class PasswordResetRequestFormTest extends Unit
         $passwordResetRequestForm = new PasswordResetRequestForm();
         $passwordResetRequestForm->email = $user['email'];
 
-        $sendResult = AuthService::getInstance()->handlerRequestPasswordResetResources($passwordResetRequestForm);
+        $sendResult = $this->authService->handlerRequestPasswordResetResources($passwordResetRequestForm);
 
         verify($sendResult)->false();
     }
@@ -121,11 +127,11 @@ class PasswordResetRequestFormTest extends Unit
         $passwordResetRequestForm = new PasswordResetRequestForm();
         $passwordResetRequestForm->email = $userFixture['email'];
 
-        $identity = IdentityService::getInstance()->findIdentityByPasswordResetToken($userFixture['password_reset_token']);
+        $identity = $this->identityService->findIdentityByPasswordResetToken($userFixture['password_reset_token']);
 
         verify($identity)->instanceOf(Identity::class);
 
-        $sendResult = AuthService::getInstance()->handlerRequestPasswordResetResources($passwordResetRequestForm);
+        $sendResult = $this->authService->handlerRequestPasswordResetResources($passwordResetRequestForm);
 
         verify($sendResult)->notEmpty();
 

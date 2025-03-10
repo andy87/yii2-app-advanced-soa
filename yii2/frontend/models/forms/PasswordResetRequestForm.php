@@ -2,6 +2,7 @@
 
 namespace yii2\frontend\models\forms;
 
+use andy87\lazy_load\yii2\LazyLoadTrait;
 use yii2\common\{components\forms\EmailingWebForm, services\IdentityService};
 use yii2\common\models\{dto\EmailMessageDto, Identity};
 use Yii;
@@ -10,12 +11,16 @@ use yii\base\InvalidConfigException;
 /**
  * < Frontend > `PasswordResetRequestForm`
  *
+ * @property-read IdentityService $identityService
+ *
  * @package yii2\frontend\models\forms
  *
  * @tag #models #forms #password #reset #request
  */
 class PasswordResetRequestForm extends EmailingWebForm
 {
+    use LazyLoadTrait;
+
     public string $id = 'request-password-reset-form';
 
     public const MESSAGE_SUCCESS = 'Проверьте свою электронную почту для получения дальнейших инструкций.';
@@ -31,6 +36,11 @@ class PasswordResetRequestForm extends EmailingWebForm
 
     /** @var ?Identity $identity */
     private ?Identity $identity = null;
+
+
+    public array $lazyLoadConfig = [
+        'identityService' => IdentityService::class
+    ];
 
 
     /**
@@ -55,15 +65,13 @@ class PasswordResetRequestForm extends EmailingWebForm
     /**
      * @return ?Identity
      *
-     * @throws InvalidConfigException
-     *
      * @tag #setup #identity
      */
     public function setupIdentity(): ?Identity
     {
         if ($this->identity === null)
         {
-            $this->identity = IdentityService::getInstance()->findActiveByEmail($this->email);
+            $this->identity = $this->identityService->findActiveByEmail($this->email);
         }
 
         return $this->identity;

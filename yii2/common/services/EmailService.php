@@ -2,6 +2,7 @@
 
 namespace yii2\common\services;
 
+use andy87\lazy_load\yii2\LazyLoadTrait;
 use Yii;
 use yii2\common\models\dto\EmailMessageDto;
 use yii2\common\components\core\BaseService;
@@ -16,6 +17,8 @@ use yii\mail\{MailerInterface, MessageInterface};
  */
 class EmailService extends BaseService
 {
+    use LazyLoadTrait;
+
     /** @var MailerInterface $mailer */
     public MailerInterface $mailer;
 

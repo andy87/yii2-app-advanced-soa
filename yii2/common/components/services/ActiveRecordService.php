@@ -44,18 +44,18 @@ abstract class ActiveRecordService extends BaseService
         if ( $this->repositoryClass ) {
             $config['repository'] = [
                 'class' => $this->repositoryClass,
-                'model' => $this->modelClass,
+                'modelClass' => $this->modelClass,
             ];
         }
 
         if ( $this->producerClass ) {
             $config['produces'] = [
                 'class' => $this->producerClass,
-                'model' => $this->modelClass,
+                'modelClass' => $this->modelClass,
             ];
         }
 
-        $config = array_merge( $this->lazyLoadConfig, $config );
+        $config = array_merge( ($this->lazyLoadConfig ?? []), $config );
 
         return $config[$name] ?? null;
     }
@@ -69,7 +69,7 @@ abstract class ActiveRecordService extends BaseService
      *
      * @tag #core #service #create
      */
-    public function createModel(array $attributes, string $scenario = Model::SCENARIO_DEFAULT ): ActiveRecordInterface
+    public function createModel(array $attributes = [], string $scenario = Model::SCENARIO_DEFAULT ): ActiveRecordInterface
     {
         return $this->produces->create( $attributes, $scenario );
     }

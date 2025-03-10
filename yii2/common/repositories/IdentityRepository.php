@@ -2,6 +2,7 @@
 
 namespace yii2\common\repositories;
 
+use yii\db\ActiveRecordInterface;
 use yii2\common\models\Identity;
 use yii2\common\models\sources\User;
 use yii2\common\components\core\BaseRepository;
@@ -15,8 +16,8 @@ use yii2\common\components\core\BaseRepository;
  */
 class IdentityRepository extends BaseRepository
 {
-    /** @var string */
-    public const MODEL = Identity::class;
+    /** @var ActiveRecordInterface|string */
+    public ActiveRecordInterface|string $modelClass = User::class;
 
 
 

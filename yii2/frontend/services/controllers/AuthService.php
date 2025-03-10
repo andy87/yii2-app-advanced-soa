@@ -34,9 +34,22 @@ class AuthService extends \yii2\common\services\AuthService
 
     public array $lazyLoadConfig = [
         'identityService' => IdentityService::class,
-        'emailService' => EmailService::class,
     ];
 
+
+    /**
+     * @param string $name
+     *
+     * @return array|string|null
+     */
+    protected function findLazyLoadConfig(string $name): array|string|null
+    {
+        $config = array_merge($this->lazyLoadConfig,[
+            'emailService' => EmailService::getConfig()
+        ]);
+
+        return $config[$name] ?? null;
+    }
 
 
     /**
@@ -89,7 +102,7 @@ class AuthService extends \yii2\common\services\AuthService
 
         $transaction?->rollBack();
 
-        $this->runtimeLogError( $message,
+        $this->addLogError( $message,
             __METHOD__,
             $signupForm,
                 $data ?? []
@@ -177,7 +190,7 @@ class AuthService extends \yii2\common\services\AuthService
 
         $transaction?->rollBack();
 
-        $this->runtimeLogError( $message,
+        $this->addLogError( $message,
             __METHOD__,
             $passwordResetRequestForm,
                 $data ?? []
@@ -232,7 +245,7 @@ class AuthService extends \yii2\common\services\AuthService
             $message = 'Reset password form `validation error`';
         }
 
-        $this->runtimeLogError( $message,
+        $this->addLogError( $message,
             __METHOD__,
             $resetPasswordForm,
             $data
@@ -285,7 +298,7 @@ class AuthService extends \yii2\common\services\AuthService
             $message = 'Verify email form `save error`';
         }
 
-        $this->runtimeLogError( $message,
+        $this->addLogError( $message,
             __METHOD__,
             $verifyEmailForm,
             $data ?? []
@@ -334,7 +347,7 @@ class AuthService extends \yii2\common\services\AuthService
             $message = 'Resend verification email form `validation error`';
         }
 
-        $this->runtimeLogError( $message,
+        $this->addLogError( $message,
             __METHOD__,
             $resendVerificationEmailForm,
             $data ?? []
@@ -358,7 +371,7 @@ class AuthService extends \yii2\common\services\AuthService
 
         $result = $this->emailService->send($resendVerificationEmail);
 
-        $resendVerificationEmailForm->result = ($result) ? Result::OK ? Result::ERROR;
+        $resendVerificationEmailForm->result = ($result) ? Result::OK : Result::ERROR;
 
         return $result;
     }

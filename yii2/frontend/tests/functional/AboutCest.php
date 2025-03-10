@@ -2,6 +2,7 @@
 
 namespace yii2\frontend\tests\functional;
 
+use yii2\frontend\components\Site;
 use yii2\frontend\tests\FunctionalTester;
 use yii2\frontend\controllers\SiteController;
 
@@ -38,8 +39,8 @@ class AboutCest
      */
     public function checkAbout(FunctionalTester $I): void
     {
-        $I->amOnRoute(SiteController::ENDPOINT . '/' . SiteController::ACTION_ABOUT);
+        $I->amOnRoute(SiteController::ENDPOINT . '/' . Site::ACTION_ABOUT);
 
-        $I->see(SiteController::LABELS[SiteController::ACTION_ABOUT], 'h1');
+        $I->see(SiteController::LABELS[Site::ACTION_ABOUT], 'h1');
     }
 }

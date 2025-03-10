@@ -2,6 +2,7 @@
 
 namespace yii2\frontend\tests\unit\models;
 
+use andy87\lazy_load\yii2\LazyLoadTrait;
 use Codeception\Exception\ModuleException;
 use Codeception\Test\Unit;
 use yii\base\{Exception, InvalidArgumentException, InvalidConfigException};
@@ -10,6 +11,8 @@ use yii2\frontend\{models\forms\ResetPasswordForm, services\controllers\AuthServ
 
 /**
  * < Frontend > `ResetPasswordFormTest`
+ *
+ * @property-read AuthService $authService
  *
  * @package yii2\frontend\tests\unit\models
  *
@@ -23,10 +26,17 @@ use yii2\frontend\{models\forms\ResetPasswordForm, services\controllers\AuthServ
  */
 class ResetPasswordFormTest extends Unit
 {
+    use LazyLoadTrait;
+
     /**
      * @var UnitTester
      */
     protected UnitTester $tester;
+
+
+    public array $lazyLoadConfig = [
+        'authService'=> AuthService::class
+    ];
 
 
 
@@ -86,7 +96,7 @@ class ResetPasswordFormTest extends Unit
 
         $resetPasswordForm = new ResetPasswordForm($user['password_reset_token']);
 
-        $resultResetPassword = AuthService::getInstance()->resetPassword($resetPasswordForm);
+        $resultResetPassword = $this->authService->resetPassword($resetPasswordForm);
 
         verify($resultResetPassword)->notEmpty();
     }

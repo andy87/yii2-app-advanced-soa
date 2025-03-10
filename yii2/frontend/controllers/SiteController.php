@@ -2,17 +2,25 @@
 
 namespace yii2\frontend\controllers;
 
-use Yii;
-use yii\base\InvalidConfigException;
 use yii\web\Response;
 use yii2\common\components\Action;
+use yii2\common\components\Result;
+use yii2\frontend\components\Site;
+use yii\base\InvalidConfigException;
+use yii2\frontend\handlers\SiteHandler;
+use andy87\lazy_load\yii2\LazyLoadTrait;
+use yii2\frontend\models\forms\ContactForm;
 use yii2\common\components\traits\SessionFlash;
-use yii2\frontend\components\{actions\CaptchaAction, controllers\BaseFrontendController};
-use yii2\frontend\resources\site\{SiteAboutResources, SiteContactResources, SiteIndexResources};
-use yii2\frontend\services\controllers\SiteService;
+use yii2\frontend\components\actions\CaptchaAction;
+use yii2\frontend\resources\site\SiteAboutResources;
+use yii2\frontend\resources\site\SiteIndexResources;
+use yii2\frontend\resources\site\SiteContactResources;
+use yii2\frontend\components\controllers\BaseFrontendController;
 
 /**
  * < Frontend > `SiteController`
+ *
+ * @property-read SiteHandler $handler
  *
  * @package yii2\frontend\controllers
  *
@@ -20,16 +28,25 @@ use yii2\frontend\services\controllers\SiteService;
  */
 class SiteController extends BaseFrontendController
 {
-    use SessionFlash;
+    use SessionFlash, LazyLoadTrait;
+
 
     public const ENDPOINT = 'site';
-    public const ACTION_CONTACT = 'contact';
-    public const ACTION_ABOUT = 'about';
-    public const LABELS = [
-        Action::INDEX => 'Главная',
-        self::ACTION_ABOUT => 'О нас',
-        self::ACTION_CONTACT => 'Контакты',
+
+    public const LABELS = Site::LABELS;
+
+    public array $lazyLoadConfig = [
+        'handler' => [
+            'class' => SiteHandler::class,
+            'resources' => [
+                Action::INDEX => SiteIndexResources::class,
+                Site::ACTION_CONTACT => SiteContactResources::class,
+                Site::ACTION_ABOUT => SiteAboutResources::class,
+            ]
+        ]
     ];
+
+
 
     /**
      * @return array
@@ -57,7 +74,7 @@ class SiteController extends BaseFrontendController
      */
     public function actionIndex(): string
     {
-        $R = new SiteIndexResources;
+        $R = $this->handler->processIndex();
 
         return $this->render($R::TEMPLATE);
     }
@@ -73,18 +90,15 @@ class SiteController extends BaseFrontendController
      */
     public function actionContact(): Response|string
     {
-        $R = new SiteContactResources;
+        $R = $this->handler->processContact();
 
-        if ( Yii::$app->request->isPost)
+        if ( $R->contactForm->result )
         {
-            $result = SiteService::getInstance()->handlerContactForm($R->contactForm, Yii::$app->request->post() );
+            $isOK = $R->contactForm->result === Result::OK;
 
-            $this->setSessionFlashMessage( $result,
-                $R->contactForm::MESSAGE_SUCCESS,
-                $R->contactForm::MESSAGE_ERROR
-            );
+            $this->setSessionFlashMessage( $isOK, ContactForm::MESSAGE_SUCCESS, ContactForm::MESSAGE_ERROR );
 
-            if( $result ) return $this->refresh();
+            if( $isOK ) return $this->refresh();
         }
 
         return $this->render($R::TEMPLATE, $R->release());
@@ -99,7 +113,7 @@ class SiteController extends BaseFrontendController
      */
     public function actionAbout(): string
     {
-        $R = new SiteAboutResources();
+        $R = $this->handler->processAbout();
 
         return $this->render($R::TEMPLATE);
     }

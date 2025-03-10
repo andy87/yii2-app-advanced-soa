@@ -18,10 +18,12 @@ class TemplateHandler extends BaseHandler
     /**
      * @param string $action
      *
-     * @return TemplateResources|string
+     * @return TemplateResources|string|null
      */
-    public function getResource( string $action ): TemplateResources|string
+    public function getResource( string $action ): TemplateResources|string|null
     {
-        return $this->resources[$action] ?? null;
+        $className = $this->resources[$action];
+
+        return new $className();
     }
 }

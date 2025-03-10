@@ -6,6 +6,7 @@ return [
         [
             'class' => yii\log\FileTarget::class,
             'levels' => ['error', 'warning'],
+            'logVars' => []
         ],
     ],
 ];

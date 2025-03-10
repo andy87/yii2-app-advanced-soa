@@ -2,16 +2,23 @@
 
 namespace yii2\common\tests\unit\models;
 
+use andy87\lazy_load\yii2\LazyLoadTrait;
 use Yii;
 use Codeception\Test\Unit;
 use yii\base\InvalidConfigException;
-use yii2\common\{tests\UnitTester, services\AuthService, fixtures\UserFixture, models\forms\LoginForm};
+use yii2\common\{components\Result,
+    tests\UnitTester,
+    services\AuthService,
+    fixtures\UserFixture,
+    models\forms\LoginForm};
 use yii\symfonymailer\Message;
 
 /**
  * < Common > `LoginFormTest`
  *
  *      Login form test
+ *
+ * @property-read AuthService $authService
  *
  * @package yii2\common\tests\unit\models
  *
@@ -23,12 +30,18 @@ use yii\symfonymailer\Message;
  */
 class LoginFormTest extends Unit
 {
+    use LazyLoadTrait;
+
     /**
      * @var UnitTester
      */
     protected UnitTester $tester;
 
     private LoginForm $loginForm;
+
+    public array $lazyLoadConfig = [
+        'authService' => AuthService::class
+    ];
 
 
 
@@ -71,7 +84,7 @@ class LoginFormTest extends Unit
         $this->loginForm->username = 'not_existing_username';
         $this->loginForm->password = 'not_existing_password';
 
-        verify(AuthService::getInstance()->handlerLoginForm($this->loginForm))->false();
+        verify($this->authService->authLoginForm($this->loginForm))->false();
         verify(Yii::$app->user->isGuest)->true();
     }
 
@@ -91,7 +104,9 @@ class LoginFormTest extends Unit
         $this->loginForm->username = 'bayer.hudson';
         $this->loginForm->password = 'wrong_password';
 
-        $login = AuthService::getInstance()->handlerLoginForm($this->loginForm);
+        $this->authService->authLoginForm($this->loginForm);
+
+        $login = ( $this->loginForm->result === Result::OK );
 
         verify($login)->false();
         verify( $this->loginForm->errors)->arrayHasKey('password');
@@ -114,7 +129,7 @@ class LoginFormTest extends Unit
         $this->loginForm->username = 'bayer.hudson';
         $this->loginForm->password = 'password_0';
 
-        verify(AuthService::getInstance()->handlerLoginForm($this->loginForm))->true();
+        verify($this->authService->authLoginForm($this->loginForm))->true();
         verify($this->loginForm->errors)->arrayHasNotKey('password');
         verify(Yii::$app->user->isGuest)->false();
     }

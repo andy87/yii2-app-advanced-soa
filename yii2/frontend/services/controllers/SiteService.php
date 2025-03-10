@@ -2,6 +2,7 @@
 
 namespace yii2\frontend\services\controllers;
 
+use andy87\lazy_load\yii2\LazyLoadTrait;
 use Yii;
 use yii\base\InvalidConfigException;
 use yii2\common\{components\core\BaseService, services\EmailService};
@@ -10,12 +11,30 @@ use yii2\frontend\models\forms\ContactForm;
 /**
  * < Frontend > `SiteService`
  *
+ * @property-read EmailService $emailService
+ *
  * @package yii2\frontend\services\controllers
  *
  * @tag #services #site
  */
 class SiteService extends BaseService
 {
+    use LazyLoadTrait;
+
+    /**
+     * @param string $name
+     *
+     * @return array|string|null
+     */
+    protected function findLazyLoadConfig(string $name): array|string|null
+    {
+        $config = [
+            'emailService' => EmailService::getConfig()
+        ];
+
+        return $config[$name] ?? null;
+    }
+
     /**
      * @param ContactForm $contactForm
      *
@@ -41,7 +60,7 @@ class SiteService extends BaseService
 
                 } else {
 
-                    $this->runtimeLogError( 'Admin email `is not set` in params',
+                    $this->addLogError( 'Admin email `is not set` in params',
                         __METHOD__,
                         $contactForm,
                         [
@@ -69,6 +88,6 @@ class SiteService extends BaseService
     {
         $emailConstructEmail = $contactForm->constructEmailDto();
 
-        return EmailService::getInstance()->send($emailConstructEmail);
+        return $this->emailService->send($emailConstructEmail);
     }
 }

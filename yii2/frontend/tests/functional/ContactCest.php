@@ -4,6 +4,7 @@ namespace yii2\frontend\tests\functional;
 
 use Codeception\Scenario;
 use yii2\common\tests\cest\SendForm;
+use yii2\frontend\components\Site;
 use yii2\frontend\tests\FunctionalTester;
 use yii2\frontend\models\forms\ContactForm;
 use Codeception\Exception\ModuleException;
@@ -49,7 +50,7 @@ class ContactCest extends SendForm
     {
         parent::_before($I);
 
-        $route = SiteController::ENDPOINT . '/' . SiteController::ACTION_CONTACT;
+        $route = SiteController::ENDPOINT . '/' . Site::ACTION_CONTACT;
 
         $I->amOnRoute($route);
     }

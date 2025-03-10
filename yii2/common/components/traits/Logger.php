@@ -24,82 +24,116 @@ trait Logger
      * @return void
      *
      */
-    public function runtimeLogError(string $message, string $method, Model $model, array $data = []): void
+    public function addLogError(string $message, string $method, Model $model, array $data = []): void
     {
-        $this->runtimeLogCore('error', $method, $message, $model, $data);
+        $this->writeLogOnModel('error', $method, $message, $model, $data);
     }
 
     /**
-     * @param string $method
+     * @param string $type
+     * @param string $method_name
      * @param string $message
      * @param Model $model
      * @param array $data
      *
-     * @throws InvalidConfigException
-     *
      * @return void
+     *@throws InvalidConfigException
+     *
      */
-    public function runtimeLogInfo(string $method, string $message, Model $model, array $data = []): void
-    {
-        $this->runtimeLogCore('info', $method, $message, $model, $data);
-    }
-
-    /**
-     * @param string $method
-     * @param string $message
-     * @param Model $model
-     * @param array $data
-     *
-     * @throws InvalidConfigException
-     *
-     * @return void
-     */
-    public function runtimeLogWarning(string $method, string $message, Model $model, array $data = []): void
-    {
-        $this->runtimeLogCore('warning', $method, $message, $model, $data);
-    }
-
-    /**
-     * @param string $method
-     * @param string $message
-     * @param Model $model
-     * @param array $data
-     *
-     * @throws InvalidConfigException
-     *
-     * @return void
-     */
-    public function runtimeLogDebug(string $method, string $message, Model $model, array $data = []): void
-    {
-        $this->runtimeLogCore('debug', $method, $message, $model, $data);
-    }
-
-    /**
-     * @param string $method
-     * @param string $methodName
-     * @param string $message
-     * @param Model $model
-     * @param array $data
-     *
-     * @throws InvalidConfigException
-     *
-     * @return void
-     */
-    public function runtimeLogCore(string $method, string $methodName, string $message, Model $model, array $data = []): void
+    public function writeLogOnModel(string $type, string $method_name, string $message, Model $model, array $data = []): void
     {
         $log = [
-            'method' => $methodName,
-            'date' => date('Y-m-d H:i:s'),
+            'method' => $method_name,
             'message' => $message,
             'errors' => $model->errors,
             'attributes' => $model->attributes,
         ];
 
-        $log['data'] = $data;
+        if ( count($data) ) $log['data'] = $data;
 
-        //Yii::error($log);
-        Yii::{$method}($log);
+        $this->writeLogCore($type, $log );
     }
+
+    /**
+     * @param string $type
+     * @param array $log
+     *
+     * @throws InvalidConfigException
+     *
+     * @return void
+     */
+    public function writeLogCore( string $type,  array $log = []): void
+    {
+        $log = array_merge([
+            'date'  => date('Y-m-d H:i:s'),
+        ], $log);
+
+        Yii::{$type}($log);
+    }
+
+    /**
+     * @param string $method
+     * @param string $message
+     * @param Model $model
+     * @param array $data
+     *
+     * @throws InvalidConfigException
+     *
+     * @return void
+     */
+    public function addLogInfo(string $method, string $message, Model $model, array $data = []): void
+    {
+        $this->writeLogOnModel('info', $method, $message, $model, $data);
+    }
+
+    /**
+     * @param string $method
+     * @param string $message
+     * @param Model $model
+     * @param array $data
+     *
+     * @throws InvalidConfigException
+     *
+     * @return void
+     */
+    public function addLogWarning(string $method, string $message, Model $model, array $data = []): void
+    {
+        $this->writeLogOnModel('warning', $method, $message, $model, $data);
+    }
+
+    /**
+     * @param string $method
+     * @param string $message
+     * @param Model $model
+     * @param array $data
+     *
+     * @throws InvalidConfigException
+     *
+     * @return void
+     */
+    public function addLogDebug(string $method, string $message, Model $model, array $data = []): void
+    {
+        $this->writeLogOnModel('debug', $method, $message, $model, $data);
+    }
+
+    /**
+     * @param string $method
+     * @param Exception $e
+     * @param array $data
+     *
+     * @return void
+     *
+     * @throws InvalidConfigException
+     */
+    public function addLogCatch(string $method, Exception $e, array $data = []): void
+    {
+        $log = $this->prepareException($method, $e);
+
+        if ( count($data) ) $log['data'] = $data;
+
+        $this->writeLogCore( $method, $log );
+    }
+
 
     /**
      * @param string $catch
@@ -111,7 +145,6 @@ trait Logger
     {
         return [
             'catch' => $catch,
-            'date' => date('Y-m-d H:i:s'),
             'message' => $e->getMessage(),
             'file' => $e->getFile(),
             'line' => $e->getLine(),

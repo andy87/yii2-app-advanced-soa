@@ -5,7 +5,10 @@ namespace yii2\common\services;
 use Exception;
 use yii\db\ActiveRecord;
 use yii2\common\models\Identity;
+use yii2\common\models\sources\User;
 use yii2\frontend\models\forms\SignupForm;
+use yii2\common\components\core\BaseProduces;
+use yii2\frontend\producers\IdentityProducer;
 use yii2\common\components\core\BaseRepository;
 use yii2\common\repositories\IdentityRepository;
 use yii2\common\components\services\ActiveRecordService;
@@ -25,10 +28,9 @@ use yii2\common\components\services\ActiveRecordService;
  */
 class IdentityService extends ActiveRecordService
 {
-
-    protected ActiveRecord|string $modelClass = Identity::class;
-
+    public ActiveRecord|string $modelClass = Identity::class;
     protected BaseRepository|string|null $repositoryClass = IdentityRepository::class;
+    protected BaseProduces|string|null $producerClass = IdentityProducer::class;
 
 
 
@@ -41,15 +43,16 @@ class IdentityService extends ActiveRecordService
      *
      * @tag #service #identity #create
      */
-    public function signUp(SignupForm $signupForm): ?Identity
+    public function signUp( SignupForm $signupForm ): ?Identity
     {
         $identity = null;
 
         if ( $signupForm->validate() )
         {
-            $identity = $this->createModel();
-            $identity->setAttribute($identity::ATTR_USERNAME, $signupForm->username);
-            $identity->setAttribute($identity::ATTR_EMAIL, $signupForm->email);
+            $identity = $this->createModel([
+                User::ATTR_USERNAME => $signupForm->username,
+                User::ATTR_EMAIL => $signupForm->email,
+            ]);
             $identity->setPassword($signupForm->password);
             $identity->generateAuthKey();
             $identity->generateEmailVerificationToken();
