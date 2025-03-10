@@ -49,7 +49,7 @@ abstract class BaseFrontendController extends BaseWebWebController
         $menuItems = [
             [
                 'label' => SiteController::LABELS[Action::INDEX],
-                'url' => [SiteController::getEndpoint(Action::INDEX)]
+                'url' => '/'
             ],
             [
                 'label' => SiteController::LABELS[Site::ACTION_ABOUT],

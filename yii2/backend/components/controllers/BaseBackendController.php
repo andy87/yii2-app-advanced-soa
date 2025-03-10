@@ -48,7 +48,7 @@ abstract class BaseBackendController extends BaseWebWebController
         return [
             [
                 'label' => SiteController::LABELS[Action::INDEX],
-                'url' => [SiteController::getEndpoint(Action::INDEX)]
+                'url' => '/'
             ],
         ];
     }
