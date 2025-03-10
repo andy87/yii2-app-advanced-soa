@@ -5,12 +5,15 @@ namespace yii2\frontend\models\forms;
 use andy87\lazy_load\yii2\LazyLoadTrait;
 use yii2\common\components\forms\EmailingWebForm;
 use yii2\common\models\{dto\EmailMessageDto, Identity};
+use yii2\common\components\Result;
 use yii2\common\services\IdentityService;
 use Yii;
 use yii\base\InvalidConfigException;
 
 /**
  * < Frontend > `SignupForm`
+ *
+ * @property-read IdentityService $identityService
  *
  * @package yii2\frontend\models\forms
  *
@@ -112,7 +115,7 @@ class SignupForm extends EmailingWebForm
         $emailMessageDto->view = self::COMPOSE_MESSAGE_VIEW;
 
         $emailMessageDto->params = [
-            'user' => $this->ide->findResendVerificationUser($this->email)
+            'user' => $this->identityService->findResendVerificationUser($this->email)
         ];
 
         return $emailMessageDto;

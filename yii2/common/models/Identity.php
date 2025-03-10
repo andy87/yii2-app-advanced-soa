@@ -38,10 +38,10 @@ class Identity extends User implements IdentityInterface
      */
     public function rules(): array
     {
-        return [
+        return array_merge(parent::rules(), [
             [self::ATTR_STATUS, 'default', 'value' => self::STATUS_INACTIVE],
             [self::ATTR_STATUS, 'in', 'range' => [self::STATUS_ACTIVE, self::STATUS_INACTIVE, self::STATUS_DELETED]],
-        ];
+        ]);
     }
 
     /**

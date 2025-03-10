@@ -82,6 +82,10 @@ class AuthService extends \yii2\common\services\AuthService
 
                          $signupForm->result = Result::OK;
 
+                         $signupForm->username = '';
+                         $signupForm->email = '';
+                         $signupForm->password = '';
+
                          return $signupForm->identity;
 
                      } else {

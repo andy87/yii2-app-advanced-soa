@@ -10,10 +10,14 @@ use yii2\common\components\Action;
 use yii2\common\components\Result;
 use yii2\frontend\handlers\AuthHandler;
 use andy87\lazy_load\yii2\LazyLoadTrait;
+use yii2\frontend\models\forms\SignupForm;
 use yii2\frontend\models\forms\VerifyEmailForm;
 use yii2\common\components\traits\SessionFlash;
+use yii2\frontend\models\forms\ResetPasswordForm;
 use yii2\frontend\resources\auth\AuthLoginResources;
 use yii2\frontend\resources\auth\AuthSignupResources;
+use yii2\frontend\models\forms\PasswordResetRequestForm;
+use yii2\frontend\models\forms\ResendVerificationEmailForm;
 use yii2\frontend\resources\auth\AuthResetPasswordResources;
 use yii2\frontend\components\controllers\BaseFrontendController;
 use yii2\frontend\resources\auth\AuthRequestPasswordResetResources;
@@ -124,8 +128,8 @@ class AuthController extends BaseFrontendController
         {
             $this->setSessionFlashMessage(
                 ($R->signupForm->result === Result::OK),
-                $R->signupForm::MESSAGE_SUCCESS,
-                $R->signupForm::MESSAGE_ERROR
+                SignupForm::MESSAGE_SUCCESS,
+                SignupForm::MESSAGE_ERROR
             );
         }
 
@@ -150,8 +154,8 @@ class AuthController extends BaseFrontendController
             $isOK = ($R->passwordResetRequestForm->result === Result::OK);
 
             $this->setSessionFlashMessage($isOK,
-                $R->passwordResetRequestForm::MESSAGE_SUCCESS,
-                $R->passwordResetRequestForm::MESSAGE_ERROR
+                PasswordResetRequestForm::MESSAGE_SUCCESS,
+                PasswordResetRequestForm::MESSAGE_ERROR
             );
 
             if ($isOK) return $this->goHome();
@@ -180,8 +184,8 @@ class AuthController extends BaseFrontendController
             $isOK = ($R->resetPasswordForm->result == Result::OK);
 
             $this->setSessionFlashMessage($isOK,
-                $R->resetPasswordForm::MESSAGE_SUCCESS,
-                $R->resetPasswordForm::MESSAGE_ERROR
+                ResetPasswordForm::MESSAGE_SUCCESS,
+                ResetPasswordForm::MESSAGE_ERROR
             );
 
             if ($isOK) return $this->goHome();
@@ -231,8 +235,8 @@ class AuthController extends BaseFrontendController
             $isOK = ($R->resendVerificationEmailForm->result === Result::OK);
 
             $this->setSessionFlashMessage($isOK,
-                $R->resendVerificationEmailForm::MESSAGE_SUCCESS,
-                $R->resendVerificationEmailForm::MESSAGE_ERROR
+                ResendVerificationEmailForm::MESSAGE_SUCCESS,
+                ResendVerificationEmailForm::MESSAGE_ERROR
             );
 
             if ($isOK) return $this->goHome();
