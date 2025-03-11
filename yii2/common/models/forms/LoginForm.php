@@ -120,7 +120,7 @@ class LoginForm extends BaseWebForm
      */
     public function getHrefRequestPasswordReset(): string
     {
-        return AuthController::getEndpoint(Auth::ACTION_REQUEST_PASSWORD_RESET);
+        return AuthController::constructUrl(Auth::ACTION_REQUEST_PASSWORD_RESET);
     }
 
     /**
@@ -130,7 +130,7 @@ class LoginForm extends BaseWebForm
      */
     public function getHrefResendVerificationEmail(): string
     {
-        return AuthController::getEndpoint(Auth::ACTION_RESEND_VERIFICATION_EMAIL);
+        return AuthController::constructUrl(Auth::ACTION_RESEND_VERIFICATION_EMAIL);
     }
 
 }

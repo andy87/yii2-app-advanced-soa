@@ -2,7 +2,12 @@
 
 namespace yii2\frontend\tests\acceptance;
 
+use Yii;
 use yii\helpers\Url;
+use yii2\common\components\Action;
+use yii2\frontend\components\Header;
+use yii2\frontend\components\Site;
+use yii2\frontend\controllers\SiteController;
 use yii2\frontend\tests\AcceptanceTester;
 
 /**
@@ -27,11 +32,15 @@ class HomeCest
      */
     public function checkHome(AcceptanceTester $I): void
     {
-        $I->amOnRoute(Url::toRoute('/site/index'));
-        $I->see('My Application');
+        $url = Url::toRoute('/' . SiteController::ENDPOINT . '/' . Action::INDEX );
 
-        $I->seeLink('About');
-        $I->click('About');
+        $I->amOnRoute($url);
+        $I->see(Yii::$app->name);
+
+        $link = Site::LABELS[Site::ACTION_ABOUT];
+
+        $I->seeLink($link);
+        $I->click($link);
         $I->wait(2); // wait for page to be opened
 
         $I->see('This is the About page.');

@@ -11,7 +11,7 @@ use yii2\common\models\Identity;
  */
 
 $resetLink = Yii::$app->urlManager->createAbsoluteUrl([
-    AuthController::getEndpoint(Auth::ACTION_RESET_PASSWORD),
+    AuthController::constructUrl(Auth::ACTION_RESET_PASSWORD),
     'token' => $user->password_reset_token
 ]);
 

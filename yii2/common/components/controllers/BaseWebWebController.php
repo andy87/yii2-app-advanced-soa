@@ -14,10 +14,6 @@ abstract class BaseWebWebController extends BaseWebController
 {
     public const ENDPOINT = '/';
 
-    public const ACTION_INDEX = 'index';
-    public const ACTION_ERROR = 'error';
-
-
 
     /**
      * @return void
@@ -50,7 +46,7 @@ abstract class BaseWebWebController extends BaseWebController
      *
      * @tag #get #endpoint
      */
-    public static function getEndpoint( ?string $action = null): string
+    public static function constructUrl(?string $action = null): string
     {
         $endpoint = static::ENDPOINT;
 

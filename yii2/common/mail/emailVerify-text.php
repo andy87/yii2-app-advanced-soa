@@ -11,7 +11,7 @@ use yii2\frontend\controllers\AuthController;
  */
 
 $verifyLink = Yii::$app->urlManager->createAbsoluteUrl([
-    AuthController::getEndpoint(Auth::ACTION_VERIFY_EMAIL),
+    AuthController::constructUrl(Auth::ACTION_VERIFY_EMAIL),
     'token' => $user->verification_token
 ]);
 

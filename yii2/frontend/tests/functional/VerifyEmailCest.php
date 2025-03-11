@@ -3,6 +3,7 @@
 namespace yii2\frontend\tests\functional;
 
 use yii2\common\components\Auth;
+use yii2\common\components\Header;
 use yii2\common\components\Layout;
 use yii2\common\models\Identity;
 use yii2\common\fixtures\UserFixture;
@@ -65,9 +66,9 @@ class VerifyEmailCest
      */
     public function checkEmptyToken(FunctionalTester $I): void
     {
-        $I->amOnRoute($this->getRoute(), ['token' => '']);
+        $I->amOnRoute($this->getRoute());
         $I->canSee('Bad Request', 'h1');
-        $I->canSee(VerifyEmailForm::EXCEPTION_TOKEN_EMPTY);
+        $I->canSee(VerifyEmailForm::EXCEPTION_TOKEN_MISSING );
     }
 
     /**
@@ -88,8 +89,8 @@ class VerifyEmailCest
     public function checkInvalidToken(FunctionalTester $I): void
     {
         $I->amOnRoute($this->getRoute(), ['token' => 'wrong_token']);
-        $I->canSee('Bad Request', 'h1');
-        $I->canSee(VerifyEmailForm::EXCEPTION_TOKEN_INVALID);
+        $I->canSee( 'Bad Request', 'h1');
+        $I->canSee( VerifyEmailForm::EXCEPTION_TOKEN_INVALID );
     }
 
     /**
@@ -110,8 +111,8 @@ class VerifyEmailCest
     public function checkNoToken(FunctionalTester $I): void
     {
         $I->amOnRoute($this->getRoute());
-        $I->canSee('Bad Request', 'h1');
-        $I->canSee('Missing required parameters: token');
+        $I->canSee( 'Bad Request', 'h1');
+        $I->canSee( VerifyEmailForm::EXCEPTION_TOKEN_MISSING );
     }
 
     /**
@@ -132,8 +133,8 @@ class VerifyEmailCest
     public function checkAlreadyActivatedToken(FunctionalTester $I): void
     {
         $I->amOnRoute($this->getRoute(), ['token' => 'already_used_token_1548675330']);
-        $I->canSee('Bad Request', 'h1');
-        $I->canSee('Wrong verify email token.');
+        $I->canSee( 'Bad Request', 'h1');
+        $I->canSee( VerifyEmailForm::EXCEPTION_TOKEN_INVALID );
     }
 
     /**
@@ -152,9 +153,9 @@ class VerifyEmailCest
     public function checkSuccessVerification(FunctionalTester $I): void
     {
         $I->amOnRoute( $this->getRoute(), ['token' => '4ch0qbfhvWwkcuWqjN8SWRq72SOw1KYT_1548675330']);
-        $I->canSee(VerifyEmailForm::MESSAGE_SUCCESS);
-        $I->canSee('Congratulations!', 'h1');
-        $I->see(Layout::BUTTON_TEXT_LOGOUT . ' (test.test)', 'form button[type=submit]');
+        $I->canSee( VerifyEmailForm::MESSAGE_SUCCESS);
+        $I->canSee( 'Congratulations!', 'h1');
+        $I->see( Header::BUTTON_TEXT_LOGOUT . ' (test.test)', 'form button[type=submit]');
 
         $I->seeRecord(Identity::class, [
             User::ATTR_USERNAME => 'test.test',
@@ -170,6 +171,6 @@ class VerifyEmailCest
      */
     private function getRoute(): string
     {
-        return AuthController::getEndpoint(Auth::ACTION_VERIFY_EMAIL);
+        return AuthController::constructUrl( Auth::ACTION_VERIFY_EMAIL );
     }
 }

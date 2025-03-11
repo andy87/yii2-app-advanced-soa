@@ -1,4 +1,6 @@
+
 # global codeception file to run tests from all apps
+
 include:
     - yii2/common
     - yii2/frontend

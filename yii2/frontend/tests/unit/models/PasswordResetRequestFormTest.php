@@ -41,6 +41,13 @@ class PasswordResetRequestFormTest extends Unit
      */
     protected UnitTester $tester;
 
+    /** @var array */
+    public array $lazyLoadConfig = [
+        'authService' => AuthService::class,
+        'identityService' => IdentityService::class,
+    ];
+
+
 
     /**
      * @return void

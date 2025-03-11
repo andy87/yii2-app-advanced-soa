@@ -1,3 +1,6 @@
+
+# @cli ./vendor/bin/codecept run yii2/frontend/tests/functional
+
 suite_namespace: yii2\frontend\tests\functional
 actor: FunctionalTester
 modules:
@@ -5,5 +8,3 @@ modules:
         - Filesystem
         - Yii2
         - Asserts
-
-# @cli ./vendor/bin/codecept run yii2/frontend/tests/functional

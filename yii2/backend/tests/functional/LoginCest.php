@@ -3,6 +3,7 @@
 namespace yii2\backend\tests\functional;
 
 use yii2\common\components\Action;
+use yii2\common\components\Header;
 use yii2\common\components\Layout;
 use yii2\common\tests\cest\SendForm;
 use yii2\common\fixtures\UserFixture;
@@ -62,7 +63,7 @@ class LoginCest extends SendForm
      */
     public function loginUser(FunctionalTester $I): void
     {
-        $route = AuthController::getEndpoint(Action::LOGIN);
+        $route = AuthController::constructUrl(Action::LOGIN);
 
         $I->amOnRoute($route);
 
@@ -77,8 +78,8 @@ class LoginCest extends SendForm
 
         $I->click('login-button');
 
-        $I->see(Layout::BUTTON_TEXT_LOGOUT . ' (erau)', 'form button[type=submit]');
+        $I->see(Header::BUTTON_TEXT_LOGOUT . ' (erau)', 'form button[type=submit]');
         $I->dontSeeLink(LoginForm::BUTTON_LOGIN_TEXT);
-        $I->dontSeeLink(Layout::BUTTON_TEXT_LOGIN);
+        $I->dontSeeLink(Header::BUTTON_TEXT_LOGIN);
     }
 }

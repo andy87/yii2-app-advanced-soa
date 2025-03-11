@@ -4,6 +4,7 @@ namespace yii2\frontend\handlers;
 
 use Yii;
 use yii\base\Exception;
+use yii\web\BadRequestHttpException;
 use yii2\common\components\Auth;
 use yii2\common\components\Action;
 use yii\base\InvalidConfigException;
@@ -172,9 +173,9 @@ class AuthHandler extends \yii2\common\handlers\AuthHandler
      */
     public function processVerifyEmail( string $token ): bool
     {
-        try
-        {
-            $verifyEmailForm = new VerifyEmailForm($token);
+        try {
+
+            $verifyEmailForm = new VerifyEmailForm( $token );
 
             return $this->service->handlerAuthVerifyEmailResources($verifyEmailForm);
 
@@ -185,7 +186,7 @@ class AuthHandler extends \yii2\common\handlers\AuthHandler
 
             Yii::error( $log );
 
-            throw new Exception($e->getMessage());
+            throw new BadRequestHttpException($e->getMessage());
         }
     }
 
