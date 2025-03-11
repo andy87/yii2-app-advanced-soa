@@ -5,6 +5,7 @@ namespace yii2\frontend\components\controllers;
 use Yii;
 use yii2\frontend\controllers\{ SiteController, AuthController };
 use yii2\common\components\{Auth, Layout, Action, controllers\BaseWebWebController};
+use yii2\frontend\components\Header;
 use yii2\frontend\components\Site;
 
 /**
@@ -37,37 +38,7 @@ abstract class BaseFrontendController extends BaseWebWebController
     {
         Layout::$navConfig = [
             'options' => ['class' => Layout::$class['nav']],
-            'items' => $this->setupLayoutNavItems(),
+            'items' => Header::getNavigationItems(),
         ];
-    }
-
-    /**
-     * @return array
-     */
-    protected function setupLayoutNavItems(): array
-    {
-        $menuItems = [
-            [
-                'label' => SiteController::LABELS[Action::INDEX],
-                'url' => '/'
-            ],
-            [
-                'label' => SiteController::LABELS[Site::ACTION_ABOUT],
-                'url' => [SiteController::getEndpoint(Site::ACTION_ABOUT)]
-            ],
-            [
-                'label' => SiteController::LABELS[Site::ACTION_CONTACT],
-                'url' => [SiteController::getEndpoint(Site::ACTION_CONTACT)]
-            ],
-        ];
-
-        if (Yii::$app->user->isGuest) {
-            $menuItems[] = [
-                'label' => AuthController::LABELS[Auth::ACTION_SIGNUP],
-                'url' => [AuthController::getEndpoint(Auth::ACTION_SIGNUP)]
-            ];
-        }
-
-        return $menuItems;
     }
 }

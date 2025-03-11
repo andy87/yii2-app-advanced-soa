@@ -3,8 +3,9 @@
 namespace yii2\backend\components\controllers;
 
 use Yii;
-use yii2\backend\controllers\SiteController;
-use yii2\common\components\{ Layout, Action, controllers\BaseWebWebController };
+use yii2\backend\components\Header;
+use yii2\common\components\Layout;
+use yii2\common\components\controllers\BaseWebWebController;
 
 /**
  * < Backend > `BaseBackendController`
@@ -36,20 +37,7 @@ abstract class BaseBackendController extends BaseWebWebController
     {
         Layout::$navConfig = [
             'options' => ['class' => Layout::$class['nav']],
-            'items' => $this->setupLayoutNavItems(),
-        ];
-    }
-
-    /**
-     * @return array
-     */
-    protected function setupLayoutNavItems(): array
-    {
-        return [
-            [
-                'label' => SiteController::LABELS[Action::INDEX],
-                'url' => '/'
-            ],
+            'items' => Header::getNavigationItems(),
         ];
     }
 }

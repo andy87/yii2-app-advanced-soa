@@ -1,10 +1,13 @@
 <?php
 
 use yii\web\View;
+use yii\bootstrap5\Nav;
+use yii\bootstrap5\Html;
+use yii\bootstrap5\NavBar;
 use yii2\common\widgets\Alert;
-use yii2\common\components\Layout;
+use yii\bootstrap5\Breadcrumbs;
 use yii2\backend\assets\AppAsset;
-use yii\bootstrap5\{ Nav, Html, NavBar, Breadcrumbs };
+use yii2\common\components\Layout;
 
 /** @var View $this */
 /** @var string $content */
