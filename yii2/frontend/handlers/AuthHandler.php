@@ -62,14 +62,6 @@ class AuthHandler extends \yii2\common\handlers\AuthHandler
     }
 
     /**
-     * @return void
-     */
-    public function processLogout(): void
-    {
-        $this->service->logout();
-    }
-
-    /**
      * @return AuthSignupResources
      *
      * @throws Exception
