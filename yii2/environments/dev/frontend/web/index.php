@@ -2,7 +2,6 @@
 
 use Dotenv\Dotenv;
 use yii\helpers\ArrayHelper;
-use yii\web\Application as AppWeb;
 
 defined('YII_DEBUG') or define('YII_DEBUG', true);
 defined('YII_ENV') or define('YII_ENV', 'dev');
@@ -23,4 +22,4 @@ $config = ArrayHelper::merge(
     require __DIR__ . '/../config/main-local.php'
 );
 
-(new AppWeb($config))->run();
+(new yii\web\Application($config))->run();

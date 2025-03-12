@@ -2,7 +2,6 @@
 
 use Dotenv\Dotenv;
 use yii\helpers\ArrayHelper;
-use yii\web\Application as AppWeb;
 
 // NOTE: Make sure this file is not accessible when deployed to production
 if (!in_array(@$_SERVER['REMOTE_ADDR'], ['127.0.0.1', '::1'])) {
@@ -32,4 +31,4 @@ $config = ArrayHelper::merge(
     require __DIR__ . '/../config/test-local.php'
 );
 
-(new AppWeb($config))->run();
+(new yii\web\Application($config))->run();
