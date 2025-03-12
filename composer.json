@@ -55,15 +55,9 @@
 
     "autoload-dev": {
         "psr-4": {
-            "yii2\\common\\tests\\": [
-              "yii2/common/tests/_support"
-            ],
-            "yii2\\backend\\tests\\": [
-              "yii2/backend/tests/_support"
-            ],
-            "yii2\\frontend\\tests\\": [
-              "yii2/frontend/tests/_support"
-            ]
+            "yii2\\common\\tests\\": [ "yii2/common/tests/", "yii2/common/tests/_support" ],
+            "yii2\\backend\\tests\\": [ "yii2/backend/tests/", "yii2/backend/tests/_support" ],
+            "yii2\\frontend\\tests\\": [ "yii2/frontend/tests/", "yii2/frontend/tests/_support" ]
         }
     },
 
