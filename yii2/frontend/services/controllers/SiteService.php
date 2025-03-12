@@ -52,9 +52,7 @@ class SiteService extends BaseService
 
             if ($contactForm->validate())
             {
-                $adminEmail = Yii::$app->params['adminEmail'] ?? null;
-
-                if ($adminEmail)
+                if (Yii::$app->params['adminEmail'] ?? false)
                 {
                     return $this->sendEmailContactForm($contactForm);
 

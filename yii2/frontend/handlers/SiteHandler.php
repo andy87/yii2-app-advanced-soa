@@ -48,7 +48,9 @@ class SiteHandler extends TemplateHandler
 
         if ( Yii::$app->request->isPost)
         {
-            $result = $this->service->handlerContactForm($R->contactForm, Yii::$app->request->post() );
+            $post = Yii::$app->request->post();
+
+            $result = $this->service->handlerContactForm($R->contactForm, $post );
 
             $R->contactForm->result = $result ? Result::OK : Result::ERROR;
         }
