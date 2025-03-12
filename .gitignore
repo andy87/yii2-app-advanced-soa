@@ -18,14 +18,12 @@ yii2/frontend/web/index.php
 yii2/frontend/web/index-test.php
 yii2/frontend/web/robots.txt
 yii2/frontend/web/.htaccess
-yii2/frontend/tests/_support/*
 yii2/frontend/tests/_support/_generated/*
 
 yii2/backend/web/index.php
 yii2/backend/web/index-test.php
 yii2/backend/web/robots.txt
 yii2/backend/web/.htaccess
-yii2/backend/tests/_support/*
 yii2/backend/tests/_support/_generated/*
 
 .phpunit.result.cache
