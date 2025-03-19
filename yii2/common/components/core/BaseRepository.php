@@ -6,16 +6,16 @@ use yii\base\BaseObject;
 use yii\db\ActiveQueryInterface;
 use yii\db\ActiveRecordInterface;
 use yii2\common\components\traits\ActiveRecordManagerTrait;
+use yii2\common\components\interfaces\core\RepositoryInterface;
 
 /**
  * < Common > `BaseRepository`
  *
  * @package yii2\common\components\core
  */
-abstract class BaseRepository extends BaseObject
+abstract class BaseRepository extends BaseObject implements RepositoryInterface
 {
     use ActiveRecordManagerTrait;
-
 
     /** @var ActiveRecordInterface|string  Класс модели */
     public ActiveRecordInterface|string $modelClass;

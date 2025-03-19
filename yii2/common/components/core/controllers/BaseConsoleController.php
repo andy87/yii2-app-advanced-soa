@@ -3,7 +3,6 @@
 namespace yii2\common\components\core\controllers;
 
 use yii\console\Controller;
-use yii2\common\components\traits\Logger;
 
 /**
  * < Common > `BaseController`
@@ -12,5 +11,5 @@ use yii2\common\components\traits\Logger;
  */
 abstract class BaseConsoleController extends Controller
 {
-    use Logger;
+
 }

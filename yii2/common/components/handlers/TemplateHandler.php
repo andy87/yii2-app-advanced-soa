@@ -3,12 +3,13 @@
 namespace yii2\common\components\handlers;
 
 use yii2\common\components\core\BaseHandler;
+use yii2\common\components\interfaces\handlers\TemplateHandlerInterface;
 use yii2\common\components\resources\TemplateResources;
 
 /**
  *
  */
-class TemplateHandler extends BaseHandler
+class TemplateHandler extends BaseHandler implements TemplateHandlerInterface
 {
     /** @var array  */
     public array $resources;
@@ -20,7 +21,7 @@ class TemplateHandler extends BaseHandler
      *
      * @return TemplateResources|string|null
      */
-    public function getResource( string $action ): TemplateResources|string|null
+    public function getResource( string $action ): TemplateResources|null
     {
         $className = $this->resources[$action];
 

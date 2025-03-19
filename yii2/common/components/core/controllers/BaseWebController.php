@@ -15,6 +15,7 @@ abstract class BaseWebController extends Controller
     public const ENDPOINT = '/';
 
 
+
     /**
      * @return void
      */

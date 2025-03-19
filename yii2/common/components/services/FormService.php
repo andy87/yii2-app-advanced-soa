@@ -3,16 +3,17 @@
 namespace yii2\common\components\services;
 
 use yii2\common\components\core\BaseModel;
+use yii2\common\components\interfaces\services\FormServiceInterface;
 
 /**
  * < Common > `FormService`
  *
  * @package yii2\common\components\services
  */
-abstract class FormService extends ActiveRecordService
+abstract class FormService extends ActiveRecordService implements FormServiceInterface
 {
-    /** @var string  */
-    public const CLASS_FORM = BaseModel::class;
+    /** @var BaseModel|string Класс формы */
+    protected BaseModel|string $formClass;
 
 
 
@@ -24,7 +25,7 @@ abstract class FormService extends ActiveRecordService
     public function getClassForm(): BaseModel|string
     {
         /** @var static|string $classForm */
-        $classForm = static::CLASS_FORM;
+        $classForm = $this->formClass;
 
         return $classForm;
     }

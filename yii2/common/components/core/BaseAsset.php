@@ -3,6 +3,7 @@
 namespace yii2\common\components\core;
 
 use yii\web\AssetBundle;
+use yii2\common\components\interfaces\core\AssetInterface;
 
 /**
  * < Common >
@@ -13,7 +14,7 @@ use yii\web\AssetBundle;
  *
  * @tag #assets #base
  */
-abstract class BaseAsset extends AssetBundle
+abstract class BaseAsset extends AssetBundle implements AssetInterface
 {
     /** @var string Путь к корневой директории веб-приложения */
     public $basePath = '@webroot';

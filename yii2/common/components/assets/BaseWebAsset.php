@@ -3,6 +3,7 @@
 namespace yii2\common\components\assets;
 
 use yii2\common\components\core\BaseAsset;
+use yii2\common\components\interfaces\core\AssetInterface;
 
 /**
  * < Common >
@@ -12,7 +13,7 @@ use yii2\common\components\core\BaseAsset;
  *
  * @tag #assets #base
  */
-abstract class BaseWebAsset extends BaseAsset
+abstract class BaseWebAsset extends BaseAsset implements AssetInterface
 {
     public $css = [];
     public $js = [];
