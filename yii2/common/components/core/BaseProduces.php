@@ -5,7 +5,7 @@ namespace yii2\common\components\core;
 use yii\base\Model;
 use yii\base\BaseObject;
 use yii\db\ActiveRecordInterface;
-use yii2\common\components\traits\ModelManagerTrait;
+use yii2\common\components\traits\ActiveRecordManagerTrait;
 
 /**
  * < Common > `BaseProduces`
@@ -23,9 +23,9 @@ use yii2\common\components\traits\ModelManagerTrait;
  *
  * @package yii2\common\components\core
  */
-class BaseProduces extends BaseObject
+abstract class BaseProduces extends BaseObject
 {
-    use ModelManagerTrait;
+    use ActiveRecordManagerTrait;
 
 
     /**

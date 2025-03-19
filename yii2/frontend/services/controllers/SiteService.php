@@ -58,7 +58,7 @@ class SiteService extends BaseService
 
                 } else {
 
-                    $this->addLogError( 'Admin email `is not set` in params',
+                    $this->addLogModelError( 'Admin email `is not set` in params',
                         __METHOD__,
                         $contactForm,
                         [

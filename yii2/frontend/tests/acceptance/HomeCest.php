@@ -5,7 +5,6 @@ namespace yii2\frontend\tests\acceptance;
 use Yii;
 use yii\helpers\Url;
 use yii2\common\components\Action;
-use yii2\frontend\components\Header;
 use yii2\frontend\components\Site;
 use yii2\frontend\controllers\SiteController;
 use yii2\frontend\tests\AcceptanceTester;

@@ -6,7 +6,6 @@ use Yii;
 use Exception;
 use yii\web\Response;
 use yii2\common\components\Auth;
-use yii2\common\components\Action;
 use yii2\common\components\Result;
 use yii2\frontend\handlers\AuthHandler;
 use andy87\lazy_load\yii2\LazyLoadTrait;
@@ -44,7 +43,7 @@ class AuthController extends BaseFrontendController
         'handler' => [
             'class' => AuthHandler::class,
             'resources' => [
-                Action::LOGIN => AuthLoginResources::class,
+                Auth::ACTION_LOGIN => AuthLoginResources::class,
                 Auth::ACTION_SIGNUP => AuthSignupResources::class,
                 Auth::ACTION_REQUEST_PASSWORD_RESET => AuthRequestPasswordResetResources::class,
                 Auth::ACTION_RESET_PASSWORD => AuthResetPasswordResources::class,

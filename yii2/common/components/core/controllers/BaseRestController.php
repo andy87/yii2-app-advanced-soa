@@ -1,8 +1,8 @@
 <?php declare(strict_types=1);
 
-namespace yii2\common\components\core;
+namespace yii2\common\components\core\controllers;
 
-use yii\web\Controller;
+use yii\rest\Controller;
 use yii2\common\components\traits\Logger;
 
 /**
@@ -10,7 +10,7 @@ use yii2\common\components\traits\Logger;
  *
  * @package yii2\common\components\core
  */
-abstract class BaseWebController extends Controller
+abstract class BaseRestController extends Controller
 {
     use Logger;
 }

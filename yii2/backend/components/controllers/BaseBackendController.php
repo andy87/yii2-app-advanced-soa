@@ -5,7 +5,6 @@ namespace yii2\backend\components\controllers;
 use Yii;
 use yii2\backend\components\Header;
 use yii2\common\components\Layout;
-use yii2\common\components\controllers\BaseWebWebController;
 
 /**
  * < Backend > `BaseBackendController`
@@ -14,7 +13,7 @@ use yii2\common\components\controllers\BaseWebWebController;
  *
  * @tag #backend #components #controller #base
  */
-abstract class BaseBackendController extends BaseWebWebController
+abstract class BaseBackendController extends \yii2\common\components\core\controllers\BaseWebController
 {
     /**
      * @return void

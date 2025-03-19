@@ -5,7 +5,7 @@ namespace yii2\common\components\core;
 use yii\base\BaseObject;
 use yii\db\ActiveQueryInterface;
 use yii\db\ActiveRecordInterface;
-use yii2\common\components\traits\ModelManagerTrait;
+use yii2\common\components\traits\ActiveRecordManagerTrait;
 
 /**
  * < Common > `BaseRepository`
@@ -14,7 +14,12 @@ use yii2\common\components\traits\ModelManagerTrait;
  */
 abstract class BaseRepository extends BaseObject
 {
-    use ModelManagerTrait;
+    use ActiveRecordManagerTrait;
+
+
+    /** @var ActiveRecordInterface|string  Класс модели */
+    public ActiveRecordInterface|string $modelClass;
+
 
 
     /**

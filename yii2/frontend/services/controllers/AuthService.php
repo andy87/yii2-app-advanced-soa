@@ -101,12 +101,12 @@ class AuthService extends \yii2\common\services\AuthService
         } catch (Exception $e) {
 
             $message = 'Catch `handlerSignupForm`';
-            $data = $this->prepareException('Signup form error', $e);
+            $data = $this->getPrepareException('Signup form error', $e);
         }
 
         $transaction?->rollBack();
 
-        $this->addLogError( $message,
+        $this->addLogModelError( $message,
             __METHOD__,
             $signupForm,
                 $data ?? []
@@ -180,7 +180,7 @@ class AuthService extends \yii2\common\services\AuthService
                     } catch (Exception $e) {
 
                         $message = 'Catch `handlerRequestPasswordResetResources`';
-                        $data = $this->prepareException('Password reset request error', $e);
+                        $data = $this->getPrepareException('Password reset request error', $e);
                     }
                 } else {
                     $message = 'Password reset token `is not valid`';
@@ -194,7 +194,7 @@ class AuthService extends \yii2\common\services\AuthService
 
         $transaction?->rollBack();
 
-        $this->addLogError( $message,
+        $this->addLogModelError( $message,
             __METHOD__,
             $passwordResetRequestForm,
                 $data ?? []
@@ -249,7 +249,7 @@ class AuthService extends \yii2\common\services\AuthService
             $message = 'Reset password form `validation error`';
         }
 
-        $this->addLogError( $message,
+        $this->addLogModelError( $message,
             __METHOD__,
             $resetPasswordForm,
             $data
@@ -302,7 +302,7 @@ class AuthService extends \yii2\common\services\AuthService
             $message = 'Verify email form `save error`';
         }
 
-        $this->addLogError( $message,
+        $this->addLogModelError( $message,
             __METHOD__,
             $verifyEmailForm,
             $data ?? []
@@ -351,7 +351,7 @@ class AuthService extends \yii2\common\services\AuthService
             $message = 'Resend verification email form `validation error`';
         }
 
-        $this->addLogError( $message,
+        $this->addLogModelError( $message,
             __METHOD__,
             $resendVerificationEmailForm,
             $data ?? []

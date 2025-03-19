@@ -67,7 +67,7 @@ class Layout
     public static function getHtmlLoginButton(): string
     {
         $link = Html::a(Header::BUTTON_TEXT_LOGIN,
-            [AuthController::constructUrl(Action::LOGIN)],
+            [AuthController::constructUrl(Auth::ACTION_LOGIN)],
             ['class' => ['btn btn-link login text-decoration-none']]
         );
 
@@ -79,7 +79,7 @@ class Layout
      */
     public static function getHtmlLogoutForm(): string
     {
-        return Html::beginForm([AuthController::constructUrl(Action::LOGOUT)], 'post', ['class' => 'd-flex'])
+        return Html::beginForm([AuthController::constructUrl(Auth::ACTION_LOGOUT)], 'post', ['class' => 'd-flex'])
             . Html::submitButton(
                 Header::BUTTON_TEXT_LOGOUT . ' (' . Yii::$app->user->identity->username . ')',
                 ['class' => 'btn btn-link logout text-decoration-none']

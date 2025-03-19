@@ -24,9 +24,9 @@ trait Logger
      * @return void
      *
      */
-    public function addLogError(string $message, string $method, Model $model, array $data = []): void
+    public function addLogModelError(string $message, string $method, Model $model, array $data = []): void
     {
-        $this->writeLogOnModel('error', $method, $message, $model, $data);
+        $this->recordModelsLog('error', $method, $message, $model, $data);
     }
 
     /**
@@ -40,7 +40,7 @@ trait Logger
      *@throws InvalidConfigException
      *
      */
-    public function writeLogOnModel(string $type, string $method_name, string $message, Model $model, array $data = []): void
+    public function recordModelsLog(string $type, string $method_name, string $message, Model $model, array $data = []): void
     {
         $log = [
             'method' => $method_name,
@@ -51,7 +51,7 @@ trait Logger
 
         if ( count($data) ) $log['data'] = $data;
 
-        $this->writeLogCore($type, $log );
+        $this->recordLog($type, $log );
     }
 
     /**
@@ -62,7 +62,7 @@ trait Logger
      *
      * @return void
      */
-    public function writeLogCore( string $type,  array $log = []): void
+    public function recordLog(string $type, array $log = []): void
     {
         $log = array_merge([
             'date'  => date('Y-m-d H:i:s'),
@@ -81,9 +81,28 @@ trait Logger
      *
      * @return void
      */
+    public function addLogError( string $method, string $message, array $data = []): void
+    {
+        $this->recordLog('error', [
+            'method' => $method,
+            'message' => $message,
+            'data' => $data,
+        ]);
+    }
+
+    /**
+     * @param string $method
+     * @param string $message
+     * @param Model $model
+     * @param array $data
+     *
+     * @throws InvalidConfigException
+     *
+     * @return void
+     */
     public function addLogInfo(string $method, string $message, Model $model, array $data = []): void
     {
-        $this->writeLogOnModel('info', $method, $message, $model, $data);
+        $this->recordModelsLog('info', $method, $message, $model, $data);
     }
 
     /**
@@ -98,7 +117,7 @@ trait Logger
      */
     public function addLogWarning(string $method, string $message, Model $model, array $data = []): void
     {
-        $this->writeLogOnModel('warning', $method, $message, $model, $data);
+        $this->recordModelsLog('warning', $method, $message, $model, $data);
     }
 
     /**
@@ -113,7 +132,7 @@ trait Logger
      */
     public function addLogDebug(string $method, string $message, Model $model, array $data = []): void
     {
-        $this->writeLogOnModel('debug', $method, $message, $model, $data);
+        $this->recordModelsLog('debug', $method, $message, $model, $data);
     }
 
     /**
@@ -127,11 +146,11 @@ trait Logger
      */
     public function addLogCatch(string $method, Exception $e, array $data = []): void
     {
-        $log = $this->prepareException($method, $e);
+        $log = $this->getPrepareException($method, $e);
 
         if ( count($data) ) $log['data'] = $data;
 
-        $this->writeLogCore( $method, $log );
+        $this->recordLog( $method, $log );
     }
 
 
@@ -141,7 +160,7 @@ trait Logger
      *
      * @return array
      */
-    public function prepareException(string $catch, Exception $e): array
+    public function getPrepareException(string $catch, Exception $e): array
     {
         return [
             'catch' => $catch,

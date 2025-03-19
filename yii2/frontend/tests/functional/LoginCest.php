@@ -2,9 +2,8 @@
 
 namespace yii2\frontend\tests\functional;
 
-use yii2\common\components\Action;
+use yii2\common\components\Auth;
 use yii2\common\components\Header;
-use yii2\common\components\Layout;
 use yii2\common\tests\cest\SendForm;
 use yii2\common\fixtures\UserFixture;
 use yii2\common\models\forms\LoginForm;
@@ -62,7 +61,7 @@ class LoginCest extends SendForm
     {
         parent::_before($I);
 
-        $route = AuthController::constructUrl(Action::LOGIN);
+        $route = AuthController::constructUrl(Auth::ACTION_LOGIN);
 
         $I->amOnRoute($route);
     }

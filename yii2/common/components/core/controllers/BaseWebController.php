@@ -1,16 +1,16 @@
 <?php declare(strict_types=1);
 
-namespace yii2\common\components\controllers;
+namespace yii2\common\components\core\controllers;
 
+use yii\web\Controller;
 use yii\web\ErrorAction;
-use yii2\common\components\core\BaseWebController;
 
 /**
  * < Common > `BaseWebController`
  *
  * @package yii2\common\components\core
  */
-abstract class BaseWebWebController extends BaseWebController
+abstract class BaseWebController extends Controller
 {
     public const ENDPOINT = '/';
 

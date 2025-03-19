@@ -1,7 +1,7 @@
 <?php
 
 use yii\web\View;
-use yii2\common\components\Action;
+use yii2\common\components\Auth;
 use yii\bootstrap5\{ Html, ActiveForm };
 use yii2\backend\controllers\AuthController;
 use yii2\backend\resources\auth\AuthLoginResources;
@@ -12,7 +12,7 @@ use yii2\backend\resources\auth\AuthLoginResources;
  * @var AuthLoginResources $R
  */
 
-$this->title = AuthController::LABELS[Action::LOGIN];
+$this->title = AuthController::LABELS[Auth::ACTION_LOGIN];
 
 $loginForm = $R->loginForm;
 

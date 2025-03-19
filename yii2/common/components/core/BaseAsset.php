@@ -15,6 +15,9 @@ use yii\web\AssetBundle;
  */
 abstract class BaseAsset extends AssetBundle
 {
+    /** @var string Путь к корневой директории веб-приложения */
     public $basePath = '@webroot';
+
+    /** @var string URL-адрес корневой директории веб-приложения */
     public $baseUrl = '@web';
 }

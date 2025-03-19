@@ -7,6 +7,7 @@ use yii\filters\VerbFilter;
 use yii\filters\AccessControl;
 use yii2\common\components\Action;
 use yii\base\InvalidConfigException;
+use yii2\common\components\Auth;
 use yii2\common\models\sources\Role;
 use yii2\backend\handlers\AuthHandler;
 use andy87\lazy_load\yii2\LazyLoadTrait;
@@ -29,7 +30,7 @@ class AuthController extends BaseBackendController
     public const ENDPOINT = 'auth';
 
     public const LABELS = [
-        Action::LOGIN => 'Авторизация',
+        Auth::ACTION_LOGIN => 'Авторизация',
     ];
 
 
@@ -37,7 +38,7 @@ class AuthController extends BaseBackendController
         'handler' => [
             'class' => AuthHandler::class,
             'resources' => [
-                Action::LOGIN => AuthLoginResources::class,
+                Auth::ACTION_LOGIN => AuthLoginResources::class,
             ]
         ]
     ];
@@ -58,12 +59,12 @@ class AuthController extends BaseBackendController
                 'class' => AccessControl::class,
                 'rules' => [
                     [
-                        'actions' => [ Action::LOGIN ],
+                        'actions' => [ Auth::ACTION_LOGIN ],
                         'allow' => true,
                         'roles' => [ Role::GUEST ],
                     ],
                     [
-                        'actions' => [ Action::LOGOUT ],
+                        'actions' => [ Auth::ACTION_LOGOUT ],
                         'allow' => true,
                         'roles' => [ Role::USER ],
                     ],
@@ -76,7 +77,7 @@ class AuthController extends BaseBackendController
             'verbs' => [
                 'class' => VerbFilter::class,
                 'actions' => [
-                    Action::LOGOUT => ['post'],
+                    Auth::ACTION_LOGOUT => ['post'],
                 ],
             ],
         ];

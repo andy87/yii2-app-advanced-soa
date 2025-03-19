@@ -5,7 +5,6 @@ namespace yii2\frontend\models\forms;
 use andy87\lazy_load\yii2\LazyLoadTrait;
 use yii2\common\components\forms\EmailingWebForm;
 use yii2\common\models\{dto\EmailMessageDto, Identity};
-use yii2\common\components\Result;
 use yii2\common\services\IdentityService;
 use Yii;
 use yii\base\InvalidConfigException;

@@ -6,7 +6,6 @@ use Yii;
 use yii\base\Exception;
 use yii\web\BadRequestHttpException;
 use yii2\common\components\Auth;
-use yii2\common\components\Action;
 use yii\base\InvalidConfigException;
 use yii\base\InvalidArgumentException;
 use andy87\lazy_load\yii2\LazyLoadTrait;
@@ -42,7 +41,7 @@ class AuthHandler extends \yii2\common\handlers\AuthHandler
         try
         {
             /** @var AuthLoginResources $R */
-            $R = $this->getResource(Action::LOGIN );
+            $R = $this->getResource(Auth::ACTION_LOGIN );
 
             if (Yii::$app->request->isPost)
             {
@@ -55,7 +54,7 @@ class AuthHandler extends \yii2\common\handlers\AuthHandler
 
         } catch ( Exception $e ) {
 
-            Yii::error( $this->prepareException(__METHOD__, $e) );
+            Yii::error( $this->getPrepareException(__METHOD__, $e) );
 
             throw new Exception($e->getMessage());
         }
@@ -84,7 +83,7 @@ class AuthHandler extends \yii2\common\handlers\AuthHandler
 
         } catch ( Exception $e ) {
 
-            Yii::error( $this->prepareException(__METHOD__, $e) );
+            Yii::error( $this->getPrepareException(__METHOD__, $e) );
 
             throw new Exception($e->getMessage());
         }
@@ -114,7 +113,7 @@ class AuthHandler extends \yii2\common\handlers\AuthHandler
 
         } catch ( Exception $e ) {
 
-            Yii::error( $this->prepareException(__METHOD__, $e) );
+            Yii::error( $this->getPrepareException(__METHOD__, $e) );
 
             throw new Exception($e->getMessage());
         }
@@ -147,7 +146,7 @@ class AuthHandler extends \yii2\common\handlers\AuthHandler
 
         } catch ( Exception $e) {
 
-            $log = $this->prepareException(__METHOD__, $e);
+            $log = $this->getPrepareException(__METHOD__, $e);
             $log['token'] = $token;
 
             Yii::error( $log );
@@ -173,7 +172,7 @@ class AuthHandler extends \yii2\common\handlers\AuthHandler
 
         } catch (InvalidArgumentException $e) {
 
-            $log = $this->prepareException(__METHOD__, $e);
+            $log = $this->getPrepareException(__METHOD__, $e);
             $log['token'] = $token;
 
             Yii::error( $log );
@@ -205,7 +204,7 @@ class AuthHandler extends \yii2\common\handlers\AuthHandler
 
         } catch (InvalidArgumentException $e) {
 
-            Yii::error( $this->prepareException(__METHOD__, $e) );
+            Yii::error( $this->getPrepareException(__METHOD__, $e) );
 
             throw new Exception($e->getMessage());
         }

@@ -2,7 +2,6 @@
 
 namespace yii2\common\components\traits;
 
-use yii\base\Model;
 use yii\db\ActiveRecordInterface;
 
 /**
@@ -10,10 +9,10 @@ use yii\db\ActiveRecordInterface;
  *
  * @package yii2\common\components\traits
  */
-trait ModelManagerTrait
+trait ActiveRecordManagerTrait
 {
     /** @var ActiveRecordInterface|string  */
-    public ActiveRecordInterface|string $formClass;
+    public ActiveRecordInterface|string $modelClass;
 
 
 
@@ -22,9 +21,9 @@ trait ModelManagerTrait
      *
      * @return ActiveRecordInterface
      */
-    public function getModelForm( array $attributes = [] ): Model
+    public function getModel( array $attributes = [] ): ActiveRecordInterface
     {
-        $className = $this->getFormClass();
+        $className = $this->getModelClass();
 
         return new $className( $attributes );
     }
@@ -32,8 +31,8 @@ trait ModelManagerTrait
     /**
      * @return ActiveRecordInterface|string
      */
-    public function getFormClass(): Model|string
+    public function getModelClass(): ActiveRecordInterface|string
     {
-        return $this->formClass;
+        return $this->modelClass;
     }
 }

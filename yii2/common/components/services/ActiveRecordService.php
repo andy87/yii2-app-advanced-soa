@@ -2,11 +2,13 @@
 
 namespace yii2\common\components\services;
 
+use yii\base\Model;
+use yii\db\ActiveRecord;
+use yii\db\ActiveRecordInterface;
 use andy87\lazy_load\yii2\LazyLoadTrait;
+use yii2\common\components\core\BaseService;
 use yii2\common\components\core\BaseProduces;
 use yii2\common\components\core\BaseRepository;
-use yii2\common\components\core\BaseService;
-use yii\{ base\Model, db\ActiveRecord, db\ActiveRecordInterface };
 
 /**
  * < Common > `ModelService`
