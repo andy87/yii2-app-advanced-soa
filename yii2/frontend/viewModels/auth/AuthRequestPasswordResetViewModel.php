@@ -1,18 +1,18 @@
 <?php declare(strict_types=1);
 
-namespace yii2\frontend\resources\auth;
+namespace yii2\frontend\viewModels\auth;
 
-use yii2\common\components\resources\TemplateResources;
+use yii2\common\components\viewModels\TemplateViewModel;
 use yii2\frontend\models\forms\PasswordResetRequestForm;
 
 /**
- * < Frontend > `AuthRequestPasswordResetResources`
+ * < Frontend > `AuthRequestPasswordResetViewModels`
  *
- * @package yii2\frontend\resources\auth
+ * @package yii2\frontend\viewModels\auth
  *
- * @tag #resources #auth #request #password #reset
+ * @tag #viewModel #auth #request #password #reset
  */
-class AuthRequestPasswordResetResources extends TemplateResources
+class AuthRequestPasswordResetViewModel extends TemplateViewModel
 {
     /** @var string  */
     public const TEMPLATE = '@app/views/auth/request-password-reset-token';
@@ -23,11 +23,11 @@ class AuthRequestPasswordResetResources extends TemplateResources
 
 
     /**
-     * AuthRequestPasswordResetResources constructor.
+     * AuthRequestPasswordResetViewModels constructor.
      *
      * @return void
      *
-     * @tag #resources #constructor
+     * @tag #viewModel #constructor
      */
     public function __construct()
     {

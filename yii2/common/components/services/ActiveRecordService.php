@@ -8,12 +8,12 @@ use yii\db\ActiveRecordInterface;
 use andy87\lazy_load\yii2\LazyLoadTrait;
 use yii2\common\components\core\BaseService;
 use yii2\common\components\core\BaseProduces;
-use yii2\common\components\core\BaseRepository;
+use yii2\common\components\core\BaseQueryStorage;
 
 /**
  * < Common > `ModelService`
  *
- * @property-read BaseRepository $repository
+ * @property-read BaseQueryStorage $repository
  * @property-read BaseProduces $produces
  *
  * @package yii2\common\components\services
@@ -26,8 +26,8 @@ abstract class ActiveRecordService extends BaseService
     /** @var ActiveRecord|string  */
     protected ActiveRecord|string $modelClass;
 
-    /** @var BaseRepository|string|null  */
-    protected BaseRepository|string|null $repositoryClass = null;
+    /** @var BaseQueryStorage|string|null  */
+    protected BaseQueryStorage|string|null $repositoryClass = null;
 
     /** @var BaseProduces|string|null  */
     protected BaseProduces|string|null $producerClass = null;

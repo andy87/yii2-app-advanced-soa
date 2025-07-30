@@ -13,14 +13,14 @@ use yii2\frontend\models\forms\SignupForm;
 use yii2\frontend\models\forms\VerifyEmailForm;
 use yii2\common\components\traits\SessionFlash;
 use yii2\frontend\models\forms\ResetPasswordForm;
-use yii2\frontend\resources\auth\AuthLoginResources;
-use yii2\frontend\resources\auth\AuthSignupResources;
+use yii2\frontend\viewModels\auth\AuthLoginViewModel;
+use yii2\frontend\viewModels\auth\AuthSignupViewModel;
 use yii2\frontend\models\forms\PasswordResetRequestForm;
 use yii2\frontend\models\forms\ResendVerificationEmailForm;
-use yii2\frontend\resources\auth\AuthResetPasswordResources;
+use yii2\frontend\viewModels\auth\AuthResetPasswordViewModel;
 use yii2\frontend\components\controllers\BaseFrontendController;
-use yii2\frontend\resources\auth\AuthRequestPasswordResetResources;
-use yii2\frontend\resources\auth\AuthResendVerificationEmailResources;
+use yii2\frontend\viewModels\auth\AuthRequestPasswordResetViewModel;
+use yii2\frontend\viewModels\auth\AuthResendVerificationEmailViewModel;
 
 /**
  * < Frontend > `AuthController`
@@ -43,11 +43,11 @@ class AuthController extends BaseFrontendController
         'handler' => [
             'class' => AuthHandler::class,
             'resources' => [
-                Auth::ACTION_LOGIN => AuthLoginResources::class,
-                Auth::ACTION_SIGNUP => AuthSignupResources::class,
-                Auth::ACTION_REQUEST_PASSWORD_RESET => AuthRequestPasswordResetResources::class,
-                Auth::ACTION_RESET_PASSWORD => AuthResetPasswordResources::class,
-                Auth::ACTION_RESEND_VERIFICATION_EMAIL => AuthResendVerificationEmailResources::class,
+                Auth::ACTION_LOGIN => AuthLoginViewModel::class,
+                Auth::ACTION_SIGNUP => AuthSignupViewModel::class,
+                Auth::ACTION_REQUEST_PASSWORD_RESET => AuthRequestPasswordResetViewModel::class,
+                Auth::ACTION_RESET_PASSWORD => AuthResetPasswordViewModel::class,
+                Auth::ACTION_RESEND_VERIFICATION_EMAIL => AuthResendVerificationEmailViewModel::class,
             ]
         ]
     ];

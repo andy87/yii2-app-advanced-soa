@@ -1,18 +1,18 @@
 <?php declare(strict_types=1);
 
-namespace yii2\frontend\resources\auth;
+namespace yii2\frontend\viewModels\auth;
 
-use yii2\common\components\resources\TemplateResources;
+use yii2\common\components\viewModels\TemplateViewModel;
 use yii2\frontend\models\forms\SignupForm;
 
 /**
- * < Frontend > `AuthSignupResources`
+ * < Frontend > `AuthSignupViewModels`
  *
- * @package yii2\frontend\resources\auth
+ * @package yii2\frontend\viewModels\auth
  *
- * @tag #resources #auth #signup
+ * @tag #viewModel #auth #signup
  */
-class AuthSignupResources extends TemplateResources
+class AuthSignupViewModel extends TemplateViewModel
 {
     /** @var string Шаблон */
     public const TEMPLATE = '@app/views/auth/signup';
@@ -23,11 +23,11 @@ class AuthSignupResources extends TemplateResources
 
 
     /**
-     * AuthSignupResources constructor.
+     * AuthSignupViewModels constructor.
      *
      * @return void
      *
-     * @tag #resources #constructor
+     * @tag #viewModel #constructor
      */
     public function __construct()
     {

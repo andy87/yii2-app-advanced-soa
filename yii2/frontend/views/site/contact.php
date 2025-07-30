@@ -2,12 +2,12 @@
 
 use yii\captcha\Captcha;
 use yii\bootstrap5\{ Html, ActiveForm };
-use yii2\frontend\resources\site\SiteContactResources;
+use yii2\frontend\viewModels\site\SiteContactViewModel;
 
 /**
  * @var yii\web\View $this
  * @var yii\bootstrap5\ActiveForm $form
- * @var SiteContactResources $R
+ * @var SiteContactViewModel $R
  */
 
 $contactForm = $R->contactForm;

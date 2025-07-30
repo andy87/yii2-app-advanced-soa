@@ -106,7 +106,7 @@ class VerifyEmailFormTest extends Unit
     {
         $verifyEmailForm = new VerifyEmailForm('4ch0qbfhvWwkcuWqjN8SWRq72SOw1KYT_1548675330');
 
-        $this->authService->handlerAuthVerifyEmailResources($verifyEmailForm);
+        $this->authService->handlerAuthVerifyEmailViewModels($verifyEmailForm);
 
         $identity = $verifyEmailForm->getIdentity();
 

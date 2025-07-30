@@ -4,7 +4,7 @@ namespace yii2\common\components\handlers;
 
 use yii2\common\components\core\BaseHandler;
 use yii2\common\components\interfaces\handlers\TemplateHandlerInterface;
-use yii2\common\components\resources\TemplateResources;
+use yii2\common\components\viewModels\TemplateViewModel;
 
 /**
  *
@@ -19,9 +19,9 @@ class TemplateHandler extends BaseHandler implements TemplateHandlerInterface
     /**
      * @param string $action
      *
-     * @return TemplateResources|string|null
+     * @return TemplateViewModel|string|null
      */
-    public function getResource( string $action ): TemplateResources|null
+    public function getResource( string $action ): TemplateViewModel|null
     {
         $className = $this->resources[$action];
 

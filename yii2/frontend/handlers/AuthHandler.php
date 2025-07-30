@@ -13,11 +13,11 @@ use yii2\common\components\traits\Logger;
 use yii2\frontend\models\forms\VerifyEmailForm;
 use yii2\frontend\models\forms\ResetPasswordForm;
 use yii2\frontend\services\controllers\AuthService;
-use yii2\frontend\resources\auth\AuthLoginResources;
-use yii2\frontend\resources\auth\AuthSignupResources;
-use yii2\frontend\resources\auth\AuthResetPasswordResources;
-use yii2\frontend\resources\auth\AuthRequestPasswordResetResources;
-use yii2\frontend\resources\auth\AuthResendVerificationEmailResources;
+use yii2\frontend\viewModels\auth\AuthLoginViewModel;
+use yii2\frontend\viewModels\auth\AuthSignupViewModel;
+use yii2\frontend\viewModels\auth\AuthResetPasswordViewModel;
+use yii2\frontend\viewModels\auth\AuthRequestPasswordResetViewModel;
+use yii2\frontend\viewModels\auth\AuthResendVerificationEmailViewModel;
 
 /**
  * @property-read AuthService $service;
@@ -32,15 +32,15 @@ class AuthHandler extends \yii2\common\handlers\AuthHandler
 
 
     /**
-     * @return AuthLoginResources
+     * @return AuthLoginViewModel
      *
      * @throws Exception
      */
-    public function processLogin(): AuthLoginResources
+    public function processLogin(): AuthLoginViewModel
     {
         try
         {
-            /** @var AuthLoginResources $R */
+            /** @var AuthLoginViewModel $R */
             $R = $this->getResource(Auth::ACTION_LOGIN );
 
             if (Yii::$app->request->isPost)
@@ -61,15 +61,15 @@ class AuthHandler extends \yii2\common\handlers\AuthHandler
     }
 
     /**
-     * @return AuthSignupResources
+     * @return AuthSignupViewModel
      *
      * @throws Exception
      */
-    public function processSignup(): AuthSignupResources
+    public function processSignup(): AuthSignupViewModel
     {
         try
         {
-            /** @var AuthSignupResources $R */
+            /** @var AuthSignupViewModel $R */
             $R = $this->getResource(Auth::ACTION_SIGNUP );
 
             if (Yii::$app->request->isPost)
@@ -90,23 +90,23 @@ class AuthHandler extends \yii2\common\handlers\AuthHandler
     }
 
     /**
-     * @return AuthRequestPasswordResetResources
+     * @return AuthRequestPasswordResetViewModel
      *
      * @throws Exception
      * @throws InvalidConfigException
      */
-    public function processRequestPasswordReset(): AuthRequestPasswordResetResources
+    public function processRequestPasswordReset(): AuthRequestPasswordResetViewModel
     {
         try
         {
-            /** @var AuthRequestPasswordResetResources $R */
+            /** @var AuthRequestPasswordResetViewModel $R */
             $R = $this->getResource(Auth::ACTION_REQUEST_PASSWORD_RESET);
 
             if (Yii::$app->request->isPost)
             {
                 $post = Yii::$app->request->post();
 
-                $this->service->handlerRequestPasswordResetResources($R->passwordResetRequestForm, $post);
+                $this->service->handlerRequestPasswordResetViewModels($R->passwordResetRequestForm, $post);
             }
 
             return $R;
@@ -122,15 +122,15 @@ class AuthHandler extends \yii2\common\handlers\AuthHandler
     /**
      * @param string $token
      *
-     * @return AuthResetPasswordResources
+     * @return AuthResetPasswordViewModel
      *
      * @throws Exception
      */
-    public function processResetPassword( string $token ): AuthResetPasswordResources
+    public function processResetPassword( string $token ): AuthResetPasswordViewModel
     {
         try
         {
-            /** @var AuthResetPasswordResources $R */
+            /** @var AuthResetPasswordViewModel $R */
             $R = $this->getResource(Auth::ACTION_RESET_PASSWORD );
 
             $R->resetPasswordForm = new ResetPasswordForm($token);
@@ -168,7 +168,7 @@ class AuthHandler extends \yii2\common\handlers\AuthHandler
 
             $verifyEmailForm = new VerifyEmailForm( $token );
 
-            return $this->service->handlerAuthVerifyEmailResources($verifyEmailForm);
+            return $this->service->handlerAuthVerifyEmailViewModels($verifyEmailForm);
 
         } catch (InvalidArgumentException $e) {
 
@@ -182,15 +182,15 @@ class AuthHandler extends \yii2\common\handlers\AuthHandler
     }
 
     /**
-     * @return AuthResendVerificationEmailResources
+     * @return AuthResendVerificationEmailViewModel
      *
      * @throws Exception
      */
-    public function processResendVerificationEmail(): AuthResendVerificationEmailResources
+    public function processResendVerificationEmail(): AuthResendVerificationEmailViewModel
     {
         try
         {
-            /** @var AuthResendVerificationEmailResources $R */
+            /** @var AuthResendVerificationEmailViewModel $R */
             $R = $this->getResource(Auth::ACTION_RESEND_VERIFICATION_EMAIL );
 
             if (Yii::$app->request->isPost)

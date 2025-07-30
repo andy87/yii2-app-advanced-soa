@@ -3,11 +3,11 @@
 namespace yii2\common\components\interfaces\core;
 
 /**
- * < Common > `RepositoryInterface`
+ * < Common > `QueryStorageInterface`
  *
  * @package yii2\common\components\interfaces\core
  */
-interface RepositoryInterface
+interface QueryStorageInterface
 {
 
 }

@@ -1,18 +1,18 @@
 <?php declare(strict_types=1);
 
-namespace yii2\frontend\resources\auth;
+namespace yii2\frontend\viewModels\auth;
 
-use yii2\common\components\resources\TemplateResources;
+use yii2\common\components\viewModels\TemplateViewModel;
 use yii2\frontend\models\forms\ResendVerificationEmailForm;
 
 /**
- * < Frontend > `AuthResendVerificationEmailResources`
+ * < Frontend > `AuthResendVerificationEmailViewModels`
  *
- * @package yii2\frontend\resources\auth
+ * @package yii2\frontend\viewModels\auth
  *
- * @tag #resources #auth #resend #verification #email
+ * @tag #viewModel #auth #resend #verification #email
  */
-class AuthResendVerificationEmailResources extends TemplateResources
+class AuthResendVerificationEmailViewModel extends TemplateViewModel
 {
     /** @var string  */
     public const TEMPLATE = '@app/views/auth/resend-verification-email';
@@ -26,7 +26,7 @@ class AuthResendVerificationEmailResources extends TemplateResources
     /**
      * @return void
      *
-     * @tag #resources #constructor
+     * @tag #viewModel #constructor
      */
     public function __construct()
     {

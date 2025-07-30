@@ -82,7 +82,7 @@ class PasswordResetRequestFormTest extends Unit
         $passwordResetRequestForm= new PasswordResetRequestForm();
         $passwordResetRequestForm->email = 'not-existing-email@example.com';
 
-        $sendResult = $this->authService->handlerRequestPasswordResetResources($passwordResetRequestForm);
+        $sendResult = $this->authService->handlerRequestPasswordResetViewModels($passwordResetRequestForm);
 
         verify($sendResult)->false();
     }
@@ -108,7 +108,7 @@ class PasswordResetRequestFormTest extends Unit
         $passwordResetRequestForm = new PasswordResetRequestForm();
         $passwordResetRequestForm->email = $user['email'];
 
-        $sendResult = $this->authService->handlerRequestPasswordResetResources($passwordResetRequestForm);
+        $sendResult = $this->authService->handlerRequestPasswordResetViewModels($passwordResetRequestForm);
 
         verify($sendResult)->false();
     }
@@ -138,7 +138,7 @@ class PasswordResetRequestFormTest extends Unit
 
         verify($identity)->instanceOf(Identity::class);
 
-        $sendResult = $this->authService->handlerRequestPasswordResetResources($passwordResetRequestForm);
+        $sendResult = $this->authService->handlerRequestPasswordResetViewModels($passwordResetRequestForm);
 
         verify($sendResult)->notEmpty();
 

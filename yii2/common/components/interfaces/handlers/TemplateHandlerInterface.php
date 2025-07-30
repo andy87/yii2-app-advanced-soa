@@ -2,7 +2,7 @@
 
 namespace yii2\common\components\interfaces\handlers;
 
-use yii2\common\components\resources\TemplateResources;
+use yii2\common\components\viewModels\TemplateViewModel;
 
 /**
  * Interface HandlerInterface
@@ -11,5 +11,5 @@ use yii2\common\components\resources\TemplateResources;
  */
 interface TemplateHandlerInterface
 {
-    public function getResource(string $action): ?TemplateResources;
+    public function getResource(string $action): ?TemplateViewModel;
 }

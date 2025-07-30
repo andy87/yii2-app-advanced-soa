@@ -8,9 +8,9 @@ use yii2\common\components\Action;
 use andy87\lazy_load\yii2\LazyLoadTrait;
 use yii2\common\components\Result;
 use yii2\frontend\components\Site;
-use yii2\frontend\resources\site\SiteAboutResources;
-use yii2\frontend\resources\site\SiteContactResources;
-use yii2\frontend\resources\site\SiteIndexResources;
+use yii2\frontend\viewModels\site\SiteAboutViewModel;
+use yii2\frontend\viewModels\site\SiteContactViewModel;
+use yii2\frontend\viewModels\site\SiteIndexViewModel;
 use yii2\frontend\services\controllers\SiteService;
 use yii2\common\components\handlers\TemplateHandler;
 
@@ -26,24 +26,24 @@ class SiteHandler extends TemplateHandler
     ];
 
     /**
-     * @return SiteIndexResources
+     * @return SiteIndexViewModel
      */
-    public function processIndex(): SiteIndexResources
+    public function processIndex(): SiteIndexViewModel
     {
-        /** @var SiteIndexResources $R */
+        /** @var SiteIndexViewModel $R */
         $R = $this->getResource(Action::INDEX);
 
         return $R;
     }
 
     /**
-     * @return SiteContactResources
+     * @return SiteContactViewModel
      *
      * @throws InvalidConfigException
      */
-    public function processContact(): SiteContactResources
+    public function processContact(): SiteContactViewModel
     {
-        /** @var SiteContactResources $R */
+        /** @var SiteContactViewModel $R */
         $R = $this->getResource(Site::ACTION_CONTACT);
 
         if ( Yii::$app->request->isPost)
@@ -59,11 +59,11 @@ class SiteHandler extends TemplateHandler
     }
 
     /**
-     * @return SiteAboutResources
+     * @return SiteAboutViewModel
      */
-    public function processAbout(): SiteAboutResources
+    public function processAbout(): SiteAboutViewModel
     {
-        /** @var SiteAboutResources $R */
+        /** @var SiteAboutViewModel $R */
         $R = $this->getResource(Site::ACTION_ABOUT);
 
         return $R;

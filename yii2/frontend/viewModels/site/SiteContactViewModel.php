@@ -1,18 +1,18 @@
 <?php declare(strict_types=1);
 
-namespace yii2\frontend\resources\site;
+namespace yii2\frontend\viewModels\site;
 
-use yii2\common\components\resources\TemplateResources;
+use yii2\common\components\viewModels\TemplateViewModel;
 use yii2\frontend\models\forms\ContactForm;
 
 /**
- * < Frontend > `SiteContactResources`
+ * < Frontend > `SiteContactViewModels`
  *
- * @package yii2\frontend\resources\site
+ * @package yii2\frontend\viewModels\site
  *
- * @tag #resources #site #contact
+ * @tag #viewModel #site #contact
  */
-class SiteContactResources extends TemplateResources
+class SiteContactViewModel extends TemplateViewModel
 {
     /** @var string Шаблон */
     public const TEMPLATE = '@app/views/site/contact';
@@ -23,11 +23,11 @@ class SiteContactResources extends TemplateResources
 
 
     /**
-     * SiteContactResources constructor.
+     * SiteContactViewModels constructor.
      *
      * @return void
      *
-     * @tag #resources #constructor
+     * @tag #viewModel #constructor
      */
     public function __construct()
     {

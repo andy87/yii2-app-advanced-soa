@@ -4,12 +4,12 @@ use yii\web\View;
 use yii2\common\components\Auth;
 use yii\bootstrap5\{ Html, ActiveForm };
 use yii2\backend\controllers\AuthController;
-use yii2\backend\resources\auth\AuthLoginResources;
+use yii2\backend\viewModels\auth\AuthLoginViewModel;
 
 /**
  * @var View $this
  * @var ActiveForm $form
- * @var AuthLoginResources $R
+ * @var AuthLoginViewModel $R
  */
 
 $this->title = AuthController::LABELS[Auth::ACTION_LOGIN];

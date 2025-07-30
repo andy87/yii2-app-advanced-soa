@@ -6,14 +6,14 @@ use yii\base\BaseObject;
 use yii\db\ActiveQueryInterface;
 use yii\db\ActiveRecordInterface;
 use yii2\common\components\traits\ActiveRecordManagerTrait;
-use yii2\common\components\interfaces\core\RepositoryInterface;
+use yii2\common\components\interfaces\core\QueryStorageInterface;
 
 /**
- * < Common > `BaseRepository`
+ * < Common > `BaseQueryStorage`
  *
  * @package yii2\common\components\core
  */
-abstract class BaseRepository extends BaseObject implements RepositoryInterface
+abstract class BaseQueryStorage extends BaseObject implements QueryStorageInterface
 {
     use ActiveRecordManagerTrait;
 

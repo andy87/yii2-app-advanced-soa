@@ -9,8 +9,8 @@ use yii2\common\models\sources\User;
 use yii2\frontend\models\forms\SignupForm;
 use yii2\common\components\core\BaseProduces;
 use yii2\frontend\producers\IdentityProducer;
-use yii2\common\components\core\BaseRepository;
-use yii2\common\repositories\IdentityRepository;
+use yii2\common\components\core\BaseQueryStorage;
+use yii2\common\queryStorages\IdentityQueryStorage;
 use yii2\common\components\services\ActiveRecordService;
 
 /**
@@ -18,7 +18,7 @@ use yii2\common\components\services\ActiveRecordService;
  *
  * @package yii2\common\services
  *
- * @property-read IdentityRepository $repository;
+ * @property-read IdentityQueryStorage $repository;
  *
  * @method Identity getClassModel()
  * @method Identity createModel(array $attributes = [])
@@ -29,7 +29,7 @@ use yii2\common\components\services\ActiveRecordService;
 class IdentityService extends ActiveRecordService
 {
     public ActiveRecord|string $modelClass = Identity::class;
-    protected BaseRepository|string|null $repositoryClass = IdentityRepository::class;
+    protected BaseQueryStorage|string|null $repositoryClass = IdentityQueryStorage::class;
     protected BaseProduces|string|null $producerClass = IdentityProducer::class;
 
 

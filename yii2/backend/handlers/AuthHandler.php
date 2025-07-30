@@ -6,7 +6,7 @@ use Yii;
 use yii\base\InvalidConfigException;
 use andy87\lazy_load\yii2\LazyLoadTrait;
 use yii2\backend\services\controllers\AuthService;
-use yii2\backend\resources\auth\AuthLoginResources;
+use yii2\backend\viewModels\auth\AuthLoginViewModel;
 
 /**
  * @property-read AuthService $service
@@ -22,13 +22,13 @@ class AuthHandler extends \yii2\common\handlers\AuthHandler
 
 
     /**
-     * @return AuthLoginResources
+     * @return AuthLoginViewModel
      *
      * @throws InvalidConfigException
      */
-    public function processLogin(): AuthLoginResources
+    public function processLogin(): AuthLoginViewModel
     {
-        $R = new AuthLoginResources;
+        $R = new AuthLoginViewModel;
 
         if (Yii::$app->request->isPost)
         {

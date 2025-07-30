@@ -143,7 +143,7 @@ class AuthService extends \yii2\common\services\AuthService
      *
      * @tag #service #auth #handler #form #passwordResetRequest
      */
-    public function handlerRequestPasswordResetResources(PasswordResetRequestForm $passwordResetRequestForm, array $data = []): bool
+    public function handlerRequestPasswordResetViewModels(PasswordResetRequestForm $passwordResetRequestForm, array $data = []): bool
     {
         if (count($data)) $passwordResetRequestForm->load($data);
 
@@ -179,7 +179,7 @@ class AuthService extends \yii2\common\services\AuthService
                         }
                     } catch (Exception $e) {
 
-                        $message = 'Catch `handlerRequestPasswordResetResources`';
+                        $message = 'Catch `handlerRequestPasswordResetViewModels`';
                         $data = $this->getPrepareException('Password reset request error', $e);
                     }
                 } else {
@@ -285,9 +285,9 @@ class AuthService extends \yii2\common\services\AuthService
      *
      * @throws InvalidConfigException|\yii\db\Exception
      *
-     * @tag #service #auth #handler #verifyEmailResources
+     * @tag #service #auth #handler #verifyEmailViewModels
      */
-    public function handlerAuthVerifyEmailResources(VerifyEmailForm $verifyEmailForm, array $data = []): bool
+    public function handlerAuthVerifyEmailViewModels(VerifyEmailForm $verifyEmailForm, array $data = []): bool
     {
         if (count($data)) $verifyEmailForm->load($data);
 

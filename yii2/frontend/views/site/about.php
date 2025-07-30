@@ -4,11 +4,11 @@ use yii\web\View;
 use yii\helpers\Html;
 use yii2\frontend\components\Site;
 use yii2\frontend\controllers\SiteController;
-use yii2\frontend\resources\site\SiteAboutResources;
+use yii2\frontend\viewModels\site\SiteAboutViewModel;
 
 /**
  * @var View $this
- * @var SiteAboutResources $R
+ * @var SiteAboutViewModel $R
  */
 
 $this->title = SiteController::LABELS[Site::ACTION_ABOUT];

@@ -1,10 +1,10 @@
 <?php
 
-use yii2\frontend\resources\site\SiteIndexResources;
+use yii2\frontend\viewModels\site\SiteIndexViewModel;
 
 /**
  * @var yii\web\View $this
- * @var  SiteIndexResources $R
+ * @var  SiteIndexViewModel $R
  */
 
 $this->title = 'My Yii Application';

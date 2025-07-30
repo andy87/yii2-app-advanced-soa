@@ -5,7 +5,7 @@ namespace yii2\common\components\core;
 use Exception;
 use yii\base\BaseObject;
 use yii2\common\components\interfaces\core\HandlerInterface;
-use yii2\common\components\resources\TemplateResources;
+use yii2\common\components\viewModels\TemplateViewModel;
 use yii2\common\components\traits\Logger;
 
 /**
@@ -26,11 +26,11 @@ class BaseHandler extends BaseObject implements HandlerInterface
     /**
      * @param string $name
      *
-     * @return ?TemplateResources
+     * @return ?TemplateViewModel
      *
      * @throws Exception
      */
-    public function getResources( string $name ): ?TemplateResources
+    public function getViewModels( string $name ): ?TemplateViewModel
     {
         $resources = $this->resources[$name] ?? null;
 

@@ -1,20 +1,20 @@
 <?php declare(strict_types=1);
 
-namespace yii2\common\repositories;
+namespace yii2\common\queryStorages;
 
 use yii\db\ActiveRecordInterface;
 use yii2\common\models\Identity;
 use yii2\common\models\sources\User;
-use yii2\common\components\core\BaseRepository;
+use yii2\common\components\core\BaseQueryStorage;
 
 /**
- * < Common > `IdentityRepository`
+ * < Common > `IdentityQueryStorage`
  *
  * @package yii2\common\repositories
  *
- * @tag #repositories #identity
+ * @tag #queryStorage #identity
  */
-class IdentityRepository extends BaseRepository
+class IdentityQueryStorage extends BaseQueryStorage
 {
     /** @var ActiveRecordInterface|string */
     public ActiveRecordInterface|string $modelClass = User::class;

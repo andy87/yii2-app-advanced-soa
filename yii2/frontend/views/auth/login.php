@@ -3,14 +3,14 @@
 use yii\web\View;
 use yii2\common\models\forms\LoginForm;
 use yii\bootstrap5\{ Html, ActiveForm };
-use yii2\frontend\resources\auth\AuthLoginResources;
+use yii2\frontend\viewModels\auth\AuthLoginViewModel;
 
 /**
  * @url {host}/auth/login
  *
  * @var View $this
  * @var ActiveForm $form
- * @var AuthLoginResources $R
+ * @var AuthLoginViewModel $R
  *
  * @tag #frontend #auth #login
  */

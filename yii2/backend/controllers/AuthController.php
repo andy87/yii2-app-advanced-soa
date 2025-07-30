@@ -11,7 +11,7 @@ use yii2\common\components\Auth;
 use yii2\common\models\sources\Role;
 use yii2\backend\handlers\AuthHandler;
 use andy87\lazy_load\yii2\LazyLoadTrait;
-use yii2\backend\resources\auth\AuthLoginResources;
+use yii2\backend\viewModels\auth\AuthLoginViewModel;
 use yii2\backend\components\controllers\BaseBackendController;
 
 /**
@@ -38,7 +38,7 @@ class AuthController extends BaseBackendController
         'handler' => [
             'class' => AuthHandler::class,
             'resources' => [
-                Auth::ACTION_LOGIN => AuthLoginResources::class,
+                Auth::ACTION_LOGIN => AuthLoginViewModel::class,
             ]
         ]
     ];

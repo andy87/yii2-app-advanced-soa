@@ -78,7 +78,7 @@ class AuthService extends BaseService
      */
     protected function getRememberMeDuration( LoginForm $loginForm ): int
     {
-        return ($loginForm->rememberMe)
+        return ( $loginForm->rememberMe )
             ? ( 3600 * 24 * Yii::$app->params[ LoginForm::PARAM_REMEMBER_ME ] )
             : 0;
     }

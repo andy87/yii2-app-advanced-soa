@@ -12,9 +12,9 @@ use andy87\lazy_load\yii2\LazyLoadTrait;
 use yii2\frontend\models\forms\ContactForm;
 use yii2\common\components\traits\SessionFlash;
 use yii2\frontend\components\actions\CaptchaAction;
-use yii2\frontend\resources\site\SiteAboutResources;
-use yii2\frontend\resources\site\SiteIndexResources;
-use yii2\frontend\resources\site\SiteContactResources;
+use yii2\frontend\viewModels\site\SiteAboutViewModel;
+use yii2\frontend\viewModels\site\SiteIndexViewModel;
+use yii2\frontend\viewModels\site\SiteContactViewModel;
 use yii2\frontend\components\controllers\BaseFrontendController;
 
 /**
@@ -39,9 +39,9 @@ class SiteController extends BaseFrontendController
         'handler' => [
             'class' => SiteHandler::class,
             'resources' => [
-                Action::INDEX => SiteIndexResources::class,
-                Site::ACTION_CONTACT => SiteContactResources::class,
-                Site::ACTION_ABOUT => SiteAboutResources::class,
+                Action::INDEX => SiteIndexViewModel::class,
+                Site::ACTION_CONTACT => SiteContactViewModel::class,
+                Site::ACTION_ABOUT => SiteAboutViewModel::class,
             ]
         ]
     ];
