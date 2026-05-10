@@ -1,0 +1,129 @@
+services:
+  frontend:
+    entrypoint: ["site-auditor-prod-entrypoint"]
+    restart: unless-stopped
+    ports: !reset []
+    expose:
+      - "80"
+    env_file:
+      - ${SITE_AUDITOR_ENV_FILE:-./yii2/.env.prod}
+    environment:
+      APP_ROLE: frontend
+    volumes:
+      - composer-cache:/root/.composer/cache
+      - ./:/app:ro
+      - vendor:/app/vendor
+      - uploads:/app/uploads
+      - reports:/app/uploads/reports
+      - frontend-runtime:/app/yii2/frontend/runtime
+      - frontend-assets:/app/yii2/frontend/web/assets
+      - ${SITE_AUDITOR_ENV_FILE:-./yii2/.env.prod}:/app/yii2/.env:ro
+      - ./yii2/environments/prod/common/config/main-local.php:/app/yii2/common/config/main-local.php:ro
+      - ./yii2/environments/prod/common/config/params-local.php:/app/yii2/common/config/params-local.php:ro
+      - ./yii2/environments/prod/frontend/config/main-local.php:/app/yii2/frontend/config/main-local.php:ro
+      - ./yii2/environments/prod/frontend/config/params-local.php:/app/yii2/frontend/config/params-local.php:ro
+      - ./docker/php/prod/frontend-index.php:/app/yii2/frontend/web/index.php:ro
+    networks:
+      - public
+      - internal
+    labels:
+      - traefik.enable=${TRAEFIK_ENABLE:-false}
+      - traefik.http.routers.site-auditor-frontend.rule=Host(`${FRONTEND_HOSTNAME:-auditor.example.com}`)
+      - traefik.http.routers.site-auditor-frontend.entrypoints=${TRAEFIK_ENTRYPOINT:-websecure}
+      - traefik.http.routers.site-auditor-frontend.tls=true
+      - traefik.http.routers.site-auditor-frontend.tls.certresolver=${TRAEFIK_CERT_RESOLVER:-letsencrypt}
+      - traefik.http.services.site-auditor-frontend.loadbalancer.server.port=80
+      - traefik.docker.network=${SITE_AUDITOR_PUBLIC_NETWORK:-site-auditor_public}
+
+  backend:
+    entrypoint: ["site-auditor-prod-entrypoint"]
+    restart: unless-stopped
+    ports: !reset []
+    expose:
+      - "80"
+    env_file:
+      - ${SITE_AUDITOR_ENV_FILE:-./yii2/.env.prod}
+    environment:
+      APP_ROLE: backend
+    volumes:
+      - composer-cache:/root/.composer/cache
+      - ./:/app:ro
+      - vendor:/app/vendor
+      - uploads:/app/uploads
+      - reports:/app/uploads/reports
+      - backend-runtime:/app/yii2/backend/runtime
+      - backend-assets:/app/yii2/backend/web/assets
+      - ${SITE_AUDITOR_ENV_FILE:-./yii2/.env.prod}:/app/yii2/.env:ro
+      - ./yii2/environments/prod/common/config/main-local.php:/app/yii2/common/config/main-local.php:ro
+      - ./yii2/environments/prod/common/config/params-local.php:/app/yii2/common/config/params-local.php:ro
+      - ./yii2/environments/prod/backend/config/main-local.php:/app/yii2/backend/config/main-local.php:ro
+      - ./yii2/environments/prod/backend/config/params-local.php:/app/yii2/backend/config/params-local.php:ro
+      - ./docker/php/prod/backend-index.php:/app/yii2/backend/web/index.php:ro
+    networks:
+      - public
+      - internal
+    labels:
+      - traefik.enable=${TRAEFIK_ENABLE:-false}
+      - traefik.http.routers.site-auditor-backend.rule=Host(`${BACKEND_HOSTNAME:-admin.auditor.example.com}`)
+      - traefik.http.routers.site-auditor-backend.entrypoints=${TRAEFIK_ENTRYPOINT:-websecure}
+      - traefik.http.routers.site-auditor-backend.tls=true
+      - traefik.http.routers.site-auditor-backend.tls.certresolver=${TRAEFIK_CERT_RESOLVER:-letsencrypt}
+      - traefik.http.services.site-auditor-backend.loadbalancer.server.port=80
+      - traefik.docker.network=${SITE_AUDITOR_PUBLIC_NETWORK:-site-auditor_public}
+
+  worker:
+    entrypoint: ["site-auditor-prod-entrypoint"]
+    restart: unless-stopped
+    env_file:
+      - ${SITE_AUDITOR_ENV_FILE:-./yii2/.env.prod}
+    environment:
+      APP_ROLE: worker
+    volumes:
+      - composer-cache:/root/.composer/cache
+      - ./:/app:ro
+      - vendor:/app/vendor
+      - uploads:/app/uploads
+      - reports:/app/uploads/reports
+      - console-runtime:/app/yii2/console/runtime
+      - ${SITE_AUDITOR_ENV_FILE:-./yii2/.env.prod}:/app/yii2/.env:ro
+      - ./yii2/environments/prod/common/config/main-local.php:/app/yii2/common/config/main-local.php:ro
+      - ./yii2/environments/prod/common/config/params-local.php:/app/yii2/common/config/params-local.php:ro
+      - ./yii2/environments/prod/console/config/main-local.php:/app/yii2/console/config/main-local.php:ro
+      - ./yii2/environments/prod/console/config/params-local.php:/app/yii2/console/config/params-local.php:ro
+      - ./docker/php/prod/yii:/app/yii2/yii:ro
+    networks:
+      - public
+      - internal
+
+  postgres:
+    restart: unless-stopped
+    ports: !reset []
+    environment:
+      POSTGRES_DB: ${DB_NAME:?Set DB_NAME in yii2/.env.prod}
+      POSTGRES_USER: ${DB_USERNAME:?Set DB_USERNAME in yii2/.env.prod}
+      POSTGRES_PASSWORD: ${DB_PASSWORD:?Set DB_PASSWORD in yii2/.env.prod}
+    networks:
+      - internal
+
+  redis:
+    restart: unless-stopped
+    ports: !reset []
+    networks:
+      - internal
+
+volumes:
+  composer-cache:
+  uploads:
+  reports:
+  frontend-runtime:
+  backend-runtime:
+  console-runtime:
+  frontend-assets:
+  backend-assets:
+
+networks:
+  public:
+    name: ${SITE_AUDITOR_PUBLIC_NETWORK:-site-auditor_public}
+    external: ${SITE_AUDITOR_PUBLIC_NETWORK_EXTERNAL:-false}
+  internal:
+    internal: true

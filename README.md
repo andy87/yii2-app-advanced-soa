@@ -28,6 +28,87 @@ docker compose exec worker php /app/yii2/yii audit/run-now <orderId>
 docker compose exec worker php /app/yii2/yii audit/queue <orderId>
 ```
 
+## Production Docker override
+
+Production override не выполняет `yii2/init --env=Development --overwrite=All`. Вместо этого он:
+
+- использует `site-auditor-prod-entrypoint`;
+- монтирует приложение read-only;
+- монтирует `yii2/.env.prod` как `/app/yii2/.env`;
+- подменяет web/console bootstrap на prod-варианты с `YII_ENV=prod` и `YII_DEBUG=false`;
+- монтирует tracked prod `main-local.php` и `params-local.php`, поэтому production не требует `yii2/init`;
+- закрывает host ports PostgreSQL и Redis;
+- оставляет frontend/backend доступными только внутри Docker network для reverse proxy;
+- выносит `uploads`, `uploads/reports`, runtime и assets в отдельные volumes.
+- использует tracked `composer.lock` для воспроизводимого `composer install --no-dev`.
+
+Подготовка env:
+
+```bash
+cp yii2/.env.prod.example yii2/.env.prod
+```
+
+Перед запуском обязательно заменить все `change-me` значения в `yii2/.env.prod`, минимум:
+
+- `DB_PASSWORD`
+- `APP_FRONTEND_COOKIE_VALIDATION_KEY`
+- `APP_BACKEND_COOKIE_VALIDATION_KEY`
+- `MAILER_*`, если почта должна отправляться реально
+- `LLM_*`, если нужен реальный provider вместо mock
+- `FRONTEND_HOSTNAME`, `BACKEND_HOSTNAME`, `APP_FRONTEND_HOST`, `APP_BACKEND_HOST`
+
+Проверка итогового compose config:
+
+```bash
+docker compose \
+  --env-file yii2/.env.prod \
+  -f docker-compose.yml \
+  -f docker-compose.prod.yml \
+  config
+```
+
+Запуск:
+
+```bash
+docker compose \
+  --env-file yii2/.env.prod \
+  -f docker-compose.yml \
+  -f docker-compose.prod.yml \
+  up --build -d
+```
+
+Миграции:
+
+```bash
+docker compose \
+  --env-file yii2/.env.prod \
+  -f docker-compose.yml \
+  -f docker-compose.prod.yml \
+  exec worker php /app/yii2/yii migrate --interactive=0
+```
+
+Для Traefik-compatible reverse proxy включите labels:
+
+```dotenv
+TRAEFIK_ENABLE=true
+TRAEFIK_ENTRYPOINT=websecure
+TRAEFIK_CERT_RESOLVER=letsencrypt
+FRONTEND_HOSTNAME=auditor.example.com
+BACKEND_HOSTNAME=admin.auditor.example.com
+```
+
+Если Traefik запущен отдельным compose stack, используйте внешнюю Docker network:
+
+```bash
+docker network create traefik-public
+```
+
+```dotenv
+SITE_AUDITOR_PUBLIC_NETWORK=traefik-public
+SITE_AUDITOR_PUBLIC_NETWORK_EXTERNAL=true
+TRAEFIK_ENABLE=true
+```
+
 ## LLM provider
 
 По умолчанию используется mock provider:
@@ -305,4 +386,3 @@ yii2/                  +   содержит только части прилож
 - **remove/delete** — удаление записи из базы
 - **filter...** — фильтрация данных
 - **sort...** — сортировка данных
-
