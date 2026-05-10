@@ -100,8 +100,12 @@ final class LlmReportResponseValidator
             $this->assertString($task, 'suggestedAction', "task #{$index}");
             $evidence = $this->assertEvidence($task, $index);
 
-            if (($findingMap[$findingId]['evidence'] ?? []) === []) {
+            $sourceEvidence = $findingMap[$findingId]['evidence'] ?? [];
+            if ($sourceEvidence === []) {
                 throw new LlmResponseValidationException("LLM task #{$index} references finding without source evidence.");
+            }
+            if (!$this->evidenceIsSubset($evidence, $sourceEvidence)) {
+                throw new LlmResponseValidationException("LLM task #{$index} contains evidence not present in source finding.");
             }
 
             $tasks[] = [
@@ -213,5 +217,82 @@ final class LlmReportResponseValidator
         }
 
         return $task['evidence'];
+    }
+
+    /**
+     * Проверяет, что evidence задачи является подмножеством исходного evidence finding.
+     *
+     * @param array $candidate Evidence из LLM-задачи.
+     * @param array $source Evidence deterministic finding.
+     * @return bool Evidence не содержит выдуманных ключей или значений.
+     */
+    private function evidenceIsSubset(array $candidate, array $source): bool
+    {
+        foreach ($candidate as $key => $value) {
+            if (!array_key_exists($key, $source)) {
+                return false;
+            }
+
+            $sourceValue = $source[$key];
+            if (is_array($value)) {
+                if (!is_array($sourceValue) || !$this->arrayEvidenceIsSubset($value, $sourceValue)) {
+                    return false;
+                }
+                continue;
+            }
+
+            if ($sourceValue !== $value) {
+                return false;
+            }
+        }
+
+        return true;
+    }
+
+    /**
+     * Проверяет вложенные массивы evidence с поддержкой list и object-структур.
+     *
+     * @param array $candidate Проверяемый вложенный evidence.
+     * @param array $source Исходный вложенный evidence.
+     * @return bool Проверяемый массив является подмножеством исходного.
+     */
+    private function arrayEvidenceIsSubset(array $candidate, array $source): bool
+    {
+        if (array_is_list($candidate)) {
+            foreach ($candidate as $candidateValue) {
+                if (!$this->listContainsEvidenceValue($source, $candidateValue)) {
+                    return false;
+                }
+            }
+
+            return true;
+        }
+
+        return $this->evidenceIsSubset($candidate, $source);
+    }
+
+    /**
+     * Проверяет наличие значения evidence в исходном list-массиве.
+     *
+     * @param array $source Исходный list evidence.
+     * @param mixed $candidateValue Проверяемое значение.
+     * @return bool Значение найдено.
+     */
+    private function listContainsEvidenceValue(array $source, mixed $candidateValue): bool
+    {
+        foreach ($source as $sourceValue) {
+            if (is_array($candidateValue) && is_array($sourceValue)) {
+                if ($this->arrayEvidenceIsSubset($candidateValue, $sourceValue)) {
+                    return true;
+                }
+                continue;
+            }
+
+            if ($sourceValue === $candidateValue) {
+                return true;
+            }
+        }
+
+        return false;
     }
 }

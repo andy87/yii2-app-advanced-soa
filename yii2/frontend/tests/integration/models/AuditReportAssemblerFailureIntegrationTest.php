@@ -1,6 +1,6 @@
 <?php declare(strict_types=1);
 
-namespace yii2\frontend\tests\unit\models;
+namespace yii2\frontend\tests\integration\models;
 
 use Codeception\Test\Unit;
 use Yii;
@@ -24,7 +24,7 @@ use yii2\common\services\audit\report\ReportAssembler;
 /**
  * Integration-тест failed LLM path: ReportAssembler пишет failed log, runner переводит AuditRun в failed.
  *
- * @package yii2\frontend\tests\unit\models
+ * @package yii2\frontend\tests\integration\models
  */
 final class AuditReportAssemblerFailureIntegrationTest extends Unit
 {
@@ -80,7 +80,8 @@ final class AuditReportAssemblerFailureIntegrationTest extends Unit
             ->one();
 
         $this->assertSame(AuditRun::STATUS_FAILED, $run->status);
-        $this->assertSame('LLM provider HTTP 429: RAW_RESPONSE_SECRET', $run->error_message);
+        $this->assertSame('LLM provider HTTP 429.', $run->error_message);
+        $this->assertStringNotContainsString('RAW_RESPONSE_SECRET', (string)$run->error_message);
         $this->assertInstanceOf(LlmCallLog::class, $log);
         $this->assertSame('fake-provider', $log->provider);
         $this->assertSame('fake-model', $log->model);
@@ -323,7 +324,7 @@ final class AuditReportAssemblerFailureIntegrationTest extends Unit
 /**
  * Fake LLM provider, который имитирует HTTP 429 с сырой строкой response в exception.
  *
- * @package yii2\frontend\tests\unit\models
+ * @package yii2\frontend\tests\integration\models
  */
 final class FailingLlmClientForReportAssemblerIntegrationTest implements LlmClientInterface, LlmClientMetadataInterface
 {

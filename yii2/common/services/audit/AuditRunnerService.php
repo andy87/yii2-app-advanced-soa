@@ -10,6 +10,7 @@ use yii2\common\services\audit\checks\DuplicateCheckService;
 use yii2\common\services\audit\checks\MetaCheckService;
 use yii2\common\services\audit\checks\SiteCheckService;
 use yii2\common\services\audit\crawler\CrawlerService;
+use yii2\common\services\audit\llm\LlmClientException;
 use yii2\common\services\audit\report\HtmlReportRenderer;
 use yii2\common\services\audit\report\PdfReportRenderer;
 use yii2\common\services\audit\report\ReportAssembler;
@@ -28,7 +29,7 @@ final class AuditRunnerService
      * @param MetaCheckService $metaCheck Проверки страниц.
      * @param DuplicateCheckService $duplicateCheck Проверки дублей.
      * @param SiteCheckService $siteCheck Проверки уровня сайта.
-     * @param ReportAssembler $reportAssembler Сборщик отчёта.
+     * @param ReportAssembler|null $reportAssembler Сборщик отчёта.
      * @param HtmlReportRenderer $htmlRenderer HTML renderer.
      * @param PdfReportRenderer $pdfRenderer PDF renderer.
      * @return void
@@ -38,7 +39,7 @@ final class AuditRunnerService
         private readonly MetaCheckService $metaCheck = new MetaCheckService(),
         private readonly DuplicateCheckService $duplicateCheck = new DuplicateCheckService(),
         private readonly SiteCheckService $siteCheck = new SiteCheckService(),
-        private readonly ReportAssembler $reportAssembler = new ReportAssembler(),
+        private readonly ?ReportAssembler $reportAssembler = null,
         private readonly HtmlReportRenderer $htmlRenderer = new HtmlReportRenderer(),
         private readonly PdfReportRenderer $pdfRenderer = new PdfReportRenderer(),
     ) {
@@ -153,7 +154,7 @@ final class AuditRunnerService
     {
         try {
             $this->markRun($run, AuditRun::STATUS_REPORTING);
-            $report = $this->reportAssembler->assemble($run);
+            $report = ($this->reportAssembler ?? new ReportAssembler())->assemble($run);
             $this->htmlRenderer->render($report);
         } catch (\Throwable $e) {
             $this->fail($run, $e);
@@ -207,7 +208,7 @@ final class AuditRunnerService
     {
         $this->markRun($run, AuditRun::STATUS_FAILED, [
             'finished_at' => date('Y-m-d H:i:s'),
-            'error_message' => $exception->getMessage(),
+            'error_message' => $this->safeErrorMessage($exception),
         ]);
 
         $order = $run->order;
@@ -234,5 +235,25 @@ final class AuditRunnerService
         }
         $run->touchUpdatedAt();
         $run->save(false);
+    }
+
+    /**
+     * Возвращает безопасное сообщение для хранения в audit_runs.error_message.
+     *
+     * @param \Throwable $exception Исключение pipeline.
+     * @return string Сообщение без сырого LLM response.
+     */
+    private function safeErrorMessage(\Throwable $exception): string
+    {
+        if ($exception instanceof LlmClientException) {
+            $code = (int)$exception->getCode();
+            if ($code >= 100 && $code <= 599) {
+                return "LLM provider HTTP {$code}.";
+            }
+
+            return 'LLM provider request failed.';
+        }
+
+        return $exception->getMessage();
     }
 }

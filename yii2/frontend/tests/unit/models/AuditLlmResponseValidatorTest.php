@@ -96,6 +96,46 @@ final class AuditLlmResponseValidatorTest extends Unit
     }
 
     /**
+     * Проверяет запрет evidence, которого нет в исходном finding.
+     *
+     * @return void
+     */
+    public function testRejectsInventedEvidenceForKnownFinding(): void
+    {
+        $data = $this->validResponse();
+        $data['tasks'][0]['evidence'] = ['url' => 'https://evil.test/'];
+
+        $this->expectException(LlmResponseValidationException::class);
+
+        (new LlmReportResponseValidator())->validate($data, $this->request(), 'test-model', 'test-v1');
+    }
+
+    /**
+     * Проверяет, что подмножество исходного evidence разрешено.
+     *
+     * @return void
+     * @throws LlmResponseValidationException Если валидный evidence ошибочно отклонён.
+     */
+    public function testAcceptsEvidenceSubsetFromSourceFinding(): void
+    {
+        $request = new LlmReportRequestDto('example.ru', 1, [[
+            'id' => 101,
+            'type' => 'title_missing',
+            'severity' => 'critical',
+            'title' => 'Отсутствует title',
+            'description' => 'Описание',
+            'recommendation' => 'Добавить title',
+            'evidence' => ['url' => 'https://example.ru/', 'title' => '', 'length' => 0],
+        ]], []);
+        $data = $this->validResponse();
+        $data['tasks'][0]['evidence'] = ['url' => 'https://example.ru/'];
+
+        $response = (new LlmReportResponseValidator())->validate($data, $request, 'test-model', 'test-v1');
+
+        verify($response->tasks[0]['evidence'])->equals(['url' => 'https://example.ru/']);
+    }
+
+    /**
      * Возвращает исходный LLM request для тестов.
      *
      * @return LlmReportRequestDto Тестовый request.

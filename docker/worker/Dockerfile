@@ -5,6 +5,7 @@ RUN apt-get update \
         git \
         unzip \
         python3 \
+        libcurl4-openssl-dev \
         libicu-dev \
         libpq-dev \
         libsqlite3-dev \
@@ -13,7 +14,7 @@ RUN apt-get update \
         libjpeg-dev \
         libfreetype6-dev \
     && docker-php-ext-configure gd --with-freetype --with-jpeg \
-    && docker-php-ext-install -j"$(nproc)" intl pdo pdo_pgsql pdo_sqlite zip gd opcache \
+    && docker-php-ext-install -j"$(nproc)" curl intl pdo pdo_pgsql pdo_sqlite zip gd opcache \
     && rm -rf /var/lib/apt/lists/*
 
 COPY --from=composer:2 /usr/bin/composer /usr/bin/composer

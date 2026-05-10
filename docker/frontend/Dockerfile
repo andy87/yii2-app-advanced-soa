@@ -7,6 +7,7 @@ RUN apt-get update \
         git \
         unzip \
         python3 \
+        libcurl4-openssl-dev \
         libicu-dev \
         libpq-dev \
         libsqlite3-dev \
@@ -15,7 +16,7 @@ RUN apt-get update \
         libjpeg-dev \
         libfreetype6-dev \
     && docker-php-ext-configure gd --with-freetype --with-jpeg \
-    && docker-php-ext-install -j"$(nproc)" intl pdo pdo_pgsql pdo_sqlite zip gd opcache \
+    && docker-php-ext-install -j"$(nproc)" curl intl pdo pdo_pgsql pdo_sqlite zip gd opcache \
     && a2enmod rewrite \
     && sed -ri "s!/var/www/html!${APACHE_DOCUMENT_ROOT}!g" /etc/apache2/sites-available/000-default.conf /etc/apache2/apache2.conf \
     && rm -rf /var/lib/apt/lists/*

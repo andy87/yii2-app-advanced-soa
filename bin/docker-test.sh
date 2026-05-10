@@ -95,15 +95,25 @@ reset_test_database() {
     exit 1
 }
 
-run_unit_suite() {
+run_suite() {
     local config_path="$1"
+    local suite="$2"
 
     compose run --rm frontend \
         php -d "error_reporting=${PHP_ERROR_REPORTING}" \
         ./vendor/bin/codecept run \
         -c "$config_path" \
-        unit \
+        "$suite" \
         --no-colors
+}
+
+run_suite_if_exists() {
+    local config_path="$1"
+    local suite="$2"
+
+    if [ -f "$config_path/tests/$suite.suite.yml" ]; then
+        run_suite "$config_path" "$suite"
+    fi
 }
 
 trap cleanup EXIT
@@ -116,6 +126,9 @@ reset_test_database
 compose run --rm frontend php /app/yii2/yii_test migrate --interactive=0
 compose run --rm frontend php -d "error_reporting=${PHP_ERROR_REPORTING}" ./vendor/bin/codecept build
 
-run_unit_suite yii2/common
-run_unit_suite yii2/frontend
-run_unit_suite yii2/backend
+run_suite_if_exists yii2/common unit
+run_suite_if_exists yii2/common integration
+run_suite_if_exists yii2/frontend unit
+run_suite_if_exists yii2/frontend integration
+run_suite_if_exists yii2/backend unit
+run_suite_if_exists yii2/backend integration

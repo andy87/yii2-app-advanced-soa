@@ -92,7 +92,7 @@ final class CrawlerService
      */
     private function fetchPage(string $url): CrawlPageDto
     {
-        $this->safetyValidator->assertSafeUrl($url);
+        $curlSafetyOptions = $this->safetyValidator->curlOptionsForUrl($url);
 
         $timeout = (int)($_ENV['AUDIT_REQUEST_TIMEOUT'] ?? 8);
         $maxBytes = (int)($_ENV['AUDIT_MAX_RESPONSE_BYTES'] ?? 1048576);
@@ -104,7 +104,7 @@ final class CrawlerService
             throw new RuntimeException('Не удалось инициализировать HTTP-запрос.');
         }
 
-        curl_setopt_array($ch, [
+        curl_setopt_array($ch, $curlSafetyOptions + [
             CURLOPT_RETURNTRANSFER => false,
             CURLOPT_FOLLOWLOCATION => false,
             CURLOPT_TIMEOUT => $timeout,

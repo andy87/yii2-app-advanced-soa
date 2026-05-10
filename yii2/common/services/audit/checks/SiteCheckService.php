@@ -3,6 +3,7 @@
 namespace yii2\common\services\audit\checks;
 
 use yii2\common\models\audit\Finding;
+use yii2\common\services\audit\crawler\DomainSafetyValidator;
 
 /**
  * Выполняет проверки уровня сайта: robots.txt и sitemap.xml.
@@ -15,10 +16,13 @@ final class SiteCheckService
      * Создаёт сервис проверки сайта.
      *
      * @param FindingFactory $factory Фабрика findings.
+     * @param DomainSafetyValidator $safetyValidator SSRF-защита и DNS pinning.
      * @return void
      */
-    public function __construct(private readonly FindingFactory $factory = new FindingFactory())
-    {
+    public function __construct(
+        private readonly FindingFactory $factory = new FindingFactory(),
+        private readonly DomainSafetyValidator $safetyValidator = new DomainSafetyValidator(),
+    ) {
     }
 
     /**
@@ -47,15 +51,17 @@ final class SiteCheckService
      *
      * @param string $url Проверяемый URL.
      * @return bool URL доступен со статусом меньше 400.
+     * @throws \InvalidArgumentException Если URL резолвится в небезопасный IP.
      */
     private function urlExists(string $url): bool
     {
+        $curlSafetyOptions = $this->safetyValidator->curlOptionsForUrl($url);
         $ch = curl_init($url);
         if ($ch === false) {
             return false;
         }
 
-        curl_setopt_array($ch, [
+        curl_setopt_array($ch, $curlSafetyOptions + [
             CURLOPT_NOBODY => true,
             CURLOPT_RETURNTRANSFER => true,
             CURLOPT_TIMEOUT => (int)($_ENV['AUDIT_REQUEST_TIMEOUT'] ?? 8),
