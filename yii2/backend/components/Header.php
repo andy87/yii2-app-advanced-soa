@@ -3,6 +3,7 @@
 namespace yii2\backend\components;
 
 use yii2\common\components\Action;
+use yii2\backend\controllers\AuditController;
 use yii2\frontend\components\Site;
 
 /**
@@ -19,6 +20,10 @@ class Header extends \yii2\common\components\Header
             [
                 'label' => Site::LABELS[Action::INDEX],
                 'url' => '/'
+            ],
+            [
+                'label' => 'Аудиты',
+                'url' => [AuditController::constructUrl()]
             ],
         ];
     }

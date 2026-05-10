@@ -8,8 +8,8 @@
 
 return [
     'class' => yii\redis\Connection::class,
-    'hostname' => $_ENV['REDIS_CONTAINER_NAME'],
-    'port' => $_ENV['REDIS_CONTAINER_PORT'],
-    'database' => $_ENV['REDIS_CONTAINER_DATABASE'],
-    'password' => $_ENV['REDIS_CONTAINER_PASSWORD'],
+    'hostname' => $_ENV['REDIS_HOST'] ?? 'redis',
+    'port' => (int)($_ENV['REDIS_PORT'] ?? 6379),
+    'database' => (int)($_ENV['REDIS_DATABASE'] ?? 0),
+    'password' => $_ENV['REDIS_PASSWORD'] ?? null,
 ];

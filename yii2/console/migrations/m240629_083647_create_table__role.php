@@ -8,6 +8,8 @@ use yii2\common\models\sources\Role;
  */
 class m240629_083647_create_table__role extends CreateTable
 {
+    protected const DATETIME = self::DATETIME_TIMESTAMP;
+
     /** @var int Сценарий */
     public int $scenario = self::SCENARIO_CREATE;
 

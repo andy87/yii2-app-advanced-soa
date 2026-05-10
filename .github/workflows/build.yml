@@ -1,102 +1,58 @@
-on:
-  - pull_request
-  - push
-
 name: build
 
+on:
+  pull_request:
+  push:
+
+permissions:
+  contents: read
+
 jobs:
-  tests:
-    name: PHP ${{ matrix.php }}-mysql-${{ matrix.mysql }}
-
-    env:
-      extensions: dom, json, gd, imagick, pdo, pdo_mysql
-      key: cache-v1
-
-    runs-on: ${{ matrix.os }}
-
-    strategy:
-      matrix:
-        os:
-          - ubuntu-latest
-
-        php:
-          - "8.0"
-          - "8.1"
-          - "8.2"
-          - "8.3"
-          - "8.4"
-
-        mysql:
-          - "5.7"
-
-    services:
-      mysql:
-        image: mysql:${{ matrix.mysql }}
-        env:
-          MYSQL_ROOT_PASSWORD: root
-          MYSQL_DATABASE: yii2advanced_test
-        ports:
-          - 3306:3306
-        options: --health-cmd="mysqladmin ping" --health-interval=10s --health-timeout=5s --health-retries=3
+  docker-tests:
+    name: Docker unit and integration tests
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
 
     steps:
       - name: Checkout
-        uses: actions/checkout@v2
+        uses: actions/checkout@v4
 
-      - name: Setup cache environment
-        id: cache-env
-        uses: shivammathur/cache-extensions@v1
-        with:
-          php-version: ${{ matrix.php }}
-          extensions: ${{ env.extensions }}
-          key: ${{ env.key }}
+      - name: Prepare log directory
+        run: mkdir -p var/ci-logs
 
-      - name: Cache extensions
-        uses: actions/cache@v4
-        with:
-          path: ${{ steps.cache-env.outputs.dir }}
-          key: ${{ steps.cache-env.outputs.key }}
-          restore-keys: ${{ steps.cache-env.outputs.key }}
-
-      - name: Install PHP with extensions
-        uses: shivammathur/setup-php@v2
-        with:
-          php-version: ${{ matrix.php }}
-          extensions: ${{ env.extensions }}
-          ini-values: date.timezone='UTC'
-          coverage: pcov
-
-      - name: Determine composer cache directory on Linux
-        if: matrix.os == 'ubuntu-latest'
-        run: echo "COMPOSER_CACHE_DIR=$(composer config cache-dir)" >> $GITHUB_ENV
-
-      - name: Cache dependencies installed with composer
-        uses: actions/cache@v4
-        with:
-          path: ${{ env.COMPOSER_CACHE_DIR }}
-          key: php${{ matrix.php }}-composer-${{ matrix.dependencies }}-${{ hashFiles('**/composer.json') }}
-          restore-keys: |
-            php${{ matrix.php }}-composer-${{ matrix.dependencies }}-
-
-      - name: Install dependencies with composer
-        run: composer update --prefer-dist --no-interaction --no-progress --optimize-autoloader --ansi
-
-      - name: Set chmod
-        run: sudo chmod 777 ./yii2/init
-
-      - name: Setup app advanced
+      - name: Show Docker versions
         run: |
-          ./yii2/init --env=Development --interactive=0
-          sed -i "s/'dsn' => 'mysql:host=localhost;dbname=yii2advanced_test'/'dsn' => 'mysql:host=127.0.0.1;dbname=yii2advanced_test'/" ./yii2/common/config/test-local.php
-          sed -i "/'db'/a 'username' => 'root'," ./yii2/common/config/test-local.php
-          sed -i "/'db'/a 'password' => 'root'," ./yii2/common/config/test-local.php
-          sed -i "s/'cookieValidationKey' => ''/'cookieValidationKey' => 'testkey'/" ./yii2/frontend/config/main.php
-          sed -i "s/'cookieValidationKey' => ''/'cookieValidationKey' => 'testkey'/" ./yii2/backend/config/main.php
+          docker version
+          docker compose version
 
-      - name: Apply migration
-        run: php ./yii2/yii_test migrate --interactive=0
-
-      - name: Run tests with codeception 
+      - name: Build Docker images
         run: |
-          ./vendor/bin/codecept build
-          ./vendor/bin/codecept run
+          set -o pipefail
+          docker compose -f docker-compose.yml -f docker-compose.test.yml build frontend backend worker \
+            2>&1 | tee var/ci-logs/docker-build.log
+
+      - name: Run Docker tests
+        run: |
+          set -o pipefail
+          make test-docker 2>&1 | tee var/ci-logs/make-test-docker.log
+
+      - name: Collect Docker logs
+        if: failure()
+        run: |
+          docker compose -f docker-compose.yml -f docker-compose.test.yml ps \
+            > var/ci-logs/docker-compose-ps.log || true
+          docker compose -f docker-compose.yml -f docker-compose.test.yml logs --no-color \
+            > var/ci-logs/docker-compose.log || true
+
+      - name: Upload failure logs
+        if: failure()
+        uses: actions/upload-artifact@v4
+        with:
+          name: docker-test-logs
+          path: var/ci-logs
+          if-no-files-found: ignore
+          retention-days: 14
+
+      - name: Cleanup Docker services
+        if: always()
+        run: docker compose -f docker-compose.yml -f docker-compose.test.yml down --remove-orphans

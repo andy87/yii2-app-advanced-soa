@@ -1,4 +1,30 @@
-FROM yiisoftware/yii2-php:8.1-apache
+FROM php:8.4-apache
 
-# Change document root for Apache
-RUN sed -i -e 's|/yii2/web|/yii2/frontend/web|g' /etc/apache2/sites-available/000-default.conf
+ENV APACHE_DOCUMENT_ROOT=/app/yii2/frontend/web
+
+RUN apt-get update \
+    && apt-get install -y --no-install-recommends \
+        git \
+        unzip \
+        python3 \
+        libicu-dev \
+        libpq-dev \
+        libsqlite3-dev \
+        libzip-dev \
+        libpng-dev \
+        libjpeg-dev \
+        libfreetype6-dev \
+    && docker-php-ext-configure gd --with-freetype --with-jpeg \
+    && docker-php-ext-install -j"$(nproc)" intl pdo pdo_pgsql pdo_sqlite zip gd opcache \
+    && a2enmod rewrite \
+    && sed -ri "s!/var/www/html!${APACHE_DOCUMENT_ROOT}!g" /etc/apache2/sites-available/000-default.conf /etc/apache2/apache2.conf \
+    && rm -rf /var/lib/apt/lists/*
+
+COPY --from=composer:2 /usr/bin/composer /usr/bin/composer
+COPY docker/php/entrypoint.sh /usr/local/bin/site-auditor-entrypoint
+RUN chmod +x /usr/local/bin/site-auditor-entrypoint
+
+WORKDIR /app
+
+ENTRYPOINT ["site-auditor-entrypoint"]
+CMD ["apache2-foreground"]

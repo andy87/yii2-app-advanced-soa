@@ -88,3 +88,45 @@ a.desc:after {
 .nav > li > form > button.logout:focus {
     outline: none;
 }
+
+.block__audit {
+    padding: 24px 0 48px;
+}
+
+.b_audit--head {
+    align-items: center;
+    display: flex;
+    gap: 16px;
+    justify-content: space-between;
+    margin-bottom: 24px;
+}
+
+.b_audit--title {
+    font-size: 30px;
+    margin: 0;
+}
+
+.b_audit--header {
+    font-size: 22px;
+    margin: 28px 0 16px;
+}
+
+.b_audit--card {
+    border: 1px solid #d7dde5;
+    border-radius: 8px;
+    margin-bottom: 14px;
+    padding: 16px;
+}
+
+.b_audit--subtitle {
+    font-size: 18px;
+    margin: 0 0 10px;
+}
+
+.b_audit--text {
+    margin: 0 0 10px;
+}
+
+.b_audit--text.__danger {
+    color: #b91c1c;
+}

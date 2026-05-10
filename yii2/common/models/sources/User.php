@@ -19,6 +19,9 @@ class User extends UserSource
     public const ATTR_PASSWORD_RESET = 'password_reset_token';
     public const ATTR_VERIFICATION = 'verification_token';
     public const ATTR_STATUS = 'status';
+    public const ATTR_ROLE = 'role';
+    public const ATTR_NAME = 'name';
+    public const ATTR_COMPANY_NAME = 'company_name';
     public const ATTR_CREATED_AT = 'created_at';
     public const ATTR_UPDATED_AT = 'updated_at';
 
