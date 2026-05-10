@@ -18,6 +18,9 @@ class Identity extends User implements IdentityInterface
     const STATUS_INACTIVE = 9;
     const STATUS_ACTIVE = 10;
 
+    public const ROLE_CLIENT = 'client';
+    public const ROLE_ADMIN = 'admin';
+
 
     /**
      * {@inheritdoc}
@@ -41,7 +44,20 @@ class Identity extends User implements IdentityInterface
         return array_merge(parent::rules(), [
             [self::ATTR_STATUS, 'default', 'value' => self::STATUS_INACTIVE],
             [self::ATTR_STATUS, 'in', 'range' => [self::STATUS_ACTIVE, self::STATUS_INACTIVE, self::STATUS_DELETED]],
+            [self::ATTR_ROLE, 'default', 'value' => self::ROLE_CLIENT],
+            [self::ATTR_ROLE, 'in', 'range' => [self::ROLE_CLIENT, self::ROLE_ADMIN]],
+            [[self::ATTR_NAME, self::ATTR_COMPANY_NAME], 'string', 'max' => 255],
         ]);
+    }
+
+    /**
+     * Проверяет, является ли текущий пользователь администратором.
+     *
+     * @return bool Администраторский доступ.
+     */
+    public function isAdmin(): bool
+    {
+        return $this->role === self::ROLE_ADMIN;
     }
 
     /**

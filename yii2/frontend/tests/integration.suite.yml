@@ -1,0 +1,10 @@
+
+# @cli ./vendor/bin/codecept run yii2/frontend/tests/integration
+
+suite_namespace: yii2\frontend\tests\integration
+actor: IntegrationTester
+modules:
+    enabled:
+        - Yii2:
+            part: [orm, email, fixtures]
+        - Asserts

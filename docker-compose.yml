@@ -1,38 +1,67 @@
-version: '3.2'
-
 services:
-
   frontend:
-    build: frontend
+    build:
+      context: .
+      dockerfile: docker/frontend/Dockerfile
     ports:
       - 20080:80
+    depends_on:
+      - postgres
+      - redis
+    environment:
+      APP_ROLE: frontend
     volumes:
-      # Re-use local composer cache via host-volume
       - ~/.composer-docker/cache:/root/.composer/cache:delegated
-      # Mount source-code for development
       - ./:/app
+      - vendor:/app/vendor
 
   backend:
-    build: backend
+    build:
+      context: .
+      dockerfile: docker/backend/Dockerfile
     ports:
       - 21080:80
-    volumes:
-      # Re-use local composer cache via host-volume
-      - ~/.composer-docker/cache:/root/.composer/cache:delegated
-      # Mount source-code for development
-      - ./:/app
-
-  mysql:
-    image: mysql:5.7
+    depends_on:
+      - postgres
+      - redis
     environment:
-      - MYSQL_ROOT_PASSWORD=verysecret
-      - MYSQL_DATABASE=yii2advanced
-      - MYSQL_USER=yii2advanced
-      - MYSQL_PASSWORD=secret
+      APP_ROLE: backend
+    volumes:
+      - ~/.composer-docker/cache:/root/.composer/cache:delegated
+      - ./:/app
+      - vendor:/app/vendor
 
-  #pgsql:
-  #  image: postgres:9.5
-  #  environment:
-  #    - POSTGRES_DB=yii2advanced
-  #    - POSTGRES_USER=yii2advanced
-  #    - POSTGRES_PASSWORD=secret
+  worker:
+    build:
+      context: .
+      dockerfile: docker/worker/Dockerfile
+    depends_on:
+      - postgres
+      - redis
+    environment:
+      APP_ROLE: worker
+    command: ["php", "/app/yii2/yii", "queue/listen", "--verbose=1"]
+    volumes:
+      - ~/.composer-docker/cache:/root/.composer/cache:delegated
+      - ./:/app
+      - vendor:/app/vendor
+
+  postgres:
+    image: postgres:16-alpine
+    environment:
+      POSTGRES_DB: site_auditor
+      POSTGRES_USER: site_auditor
+      POSTGRES_PASSWORD: site_auditor
+    ports:
+      - 25432:5432
+    volumes:
+      - postgres-data:/var/lib/postgresql/data
+
+  redis:
+    image: redis:7-alpine
+    ports:
+      - 26379:6379
+
+volumes:
+  postgres-data:
+  vendor:

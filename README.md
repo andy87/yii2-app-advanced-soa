@@ -1,3 +1,81 @@
+# Site Auditor MVP
+
+AI-аудитор сайтов малого бизнеса на Yii2. MVP создаёт заказ на аудит, сканирует публичные страницы сайта, сохраняет deterministic findings, формирует HTML/PDF-отчёт и список задач для клиента.
+
+## Docker-запуск
+
+```bash
+docker compose up --build -d
+docker compose exec frontend php /app/yii2/yii migrate --interactive=0
+```
+
+Адреса:
+
+- frontend: http://localhost:20080
+- backend: http://localhost:21080
+- PostgreSQL: localhost:25432
+- Redis: localhost:26379
+
+Worker очереди запускается сервисом `worker`. Для локальной отладки без очереди можно выполнить полный pipeline синхронно:
+
+```bash
+docker compose exec worker php /app/yii2/yii audit/run-now <orderId>
+```
+
+Постановка заказа в Redis Queue:
+
+```bash
+docker compose exec worker php /app/yii2/yii audit/queue <orderId>
+```
+
+## LLM provider
+
+По умолчанию используется mock provider:
+
+```dotenv
+LLM_PROVIDER=mock
+```
+
+Для реального OpenAI-compatible endpoint:
+
+```dotenv
+LLM_PROVIDER=openai-compatible
+LLM_BASE_URL=https://api.openai.com
+LLM_API_KEY=...
+LLM_MODEL=gpt-4.1-mini
+LLM_PROMPT_VERSION=audit-v1
+LLM_TIMEOUT=30
+LLM_RETRIES=2
+LLM_RETRY_DELAY_MS=500
+```
+
+Ответ provider валидируется локально: каждая задача обязана иметь существующий `findingId` и непустой `evidence`, иначе генерация отчёта падает и audit run получает статус `failed`.
+Failed LLM-вызовы логируются в `llm_call_logs`: `http_status`, `provider`, `model`, `prompt_version`, `request_hash`, `error_message`. Сырой prompt и сырой API response не сохраняются.
+
+## Что реализовано в MVP
+
+- Docker Compose: PHP 8.4 Apache frontend/backend, CLI worker, PostgreSQL 16, Redis 7.
+- Миграция таблиц `domains`, `audit_orders`, `audit_runs`, `audit_pages`, `findings`, `reports`, `report_tasks`, `prompt_versions`, `llm_call_logs`.
+- Расширение существующей таблицы `user` колонками `role`, `name`, `company_name`.
+- Клиентский кабинет `/audit`: создание заказа, список заказов, карточка заказа, просмотр отчёта и скачивание PDF.
+- Админка `/audit`: список заказов, ручной статус `paid`, запуск аудита, утверждение отчёта.
+- Crawler с лимитами страниц, timeout, max response size и SSRF-защитой от private/local адресов.
+- Проверки title, description, H1, canonical, HTTP status, schema, forms, CTA, robots.txt, sitemap.xml, дубли.
+- Mock LLM provider без внешнего API.
+- OpenAI-compatible LLM provider через `LlmClientInterface`, env-настройки, retry/backoff и валидацию JSON-ответа.
+- HTML/PDF renderer через Dompdf.
+- Redis Queue jobs: `StartAuditRunJob`, `CrawlDomainJob`, `RunChecksJob`, `GenerateLlmReportJob`, `RenderHtmlReportJob`, `GeneratePdfReportJob`, `FinalizeAuditRunJob`.
+- Unit-тесты нормализации URL и HTML-парсинга.
+
+## Ограничения текущей версии
+
+- Vue 3 SPA не добавлен: в текущем репозитории уже есть Yii2 frontend/backend, поэтому интерфейс MVP сделан server-rendered Yii views.
+- LLM-провайдер mock; реальный провайдер должен подключаться через `LlmClientInterface`.
+- Для реального provider укажите `LLM_PROVIDER=openai-compatible`, `LLM_BASE_URL`, `LLM_API_KEY`, `LLM_MODEL`.
+- Crawler не выполняет JavaScript и не отправляет формы.
+- Redirect chain проверяется ограниченно: активное следование redirects в crawler выключено.
+- Администратор задаётся через колонку `user.role = admin`; отдельного UI управления ролями пока нет.
+
 <span style="text-align: center">
     <a href="https://github.com/yiisoft" target="_blank">
         <img src="https://avatars0.githubusercontent.com/u/993323" height="100px" alt="logo" />
@@ -60,7 +138,7 @@ console move to `root/app` directory application and run the following commands:
 # Информация
 
 ___
-Я люблю Yii2 за его простоту и функциональность, поэтому захотелось создать свою сборку шаблона приложения.  
+Я люблю Yii2 за его простоту и функциональность, поэтому захотелось создать свою сборку шаблона приложения.
 **Особенности этого шаблона**:
  - все файлы declare(strict_types=1)
  - nullable warning style
@@ -70,21 +148,21 @@ ___
 
 
 ### Были добавлены следующие пакеты
-- [vlucas/phpdotenv](https://github.com/vlucas/phpdotenv) - для работы с переменными окружения  
-- [mihaildev/yii2-ckeditor](https://github.com/MihailDev/yii2-ckeditor?tab=readme-ov-file) - для работы с редактором текста  
-- [kartik-v/yii2-widget-select2](https://demos.krajee.com/widget-details/select2) - для работы с выпадающим списком    
-- [kartik-v/yii2-icons](https://demos.krajee.com/icons) - для работы с иконками  
+- [vlucas/phpdotenv](https://github.com/vlucas/phpdotenv) - для работы с переменными окружения
+- [mihaildev/yii2-ckeditor](https://github.com/MihailDev/yii2-ckeditor?tab=readme-ov-file) - для работы с редактором текста
+- [kartik-v/yii2-widget-select2](https://demos.krajee.com/widget-details/select2) - для работы с выпадающим списком
+- [kartik-v/yii2-icons](https://demos.krajee.com/icons) - для работы с иконками
 - [andy87/knockknock](https://github.com/andy87/knockknock) - для запросов
 - [andy87/yii2-migrate-architect](https://github.com/andy87/yii2-migrate-architect) - для работы с миграциями
 - [andy87/yii2-file-crafter](https://github.com/andy87/yii2-file-crafter) - для массовой генерации файлов
 - [andy87/lazy-load-trait](https://github.com/andy87/lazy-load-trait) - для отложено загрузки свойств(lazyLoad)
-  
+
 ### Файлы
- - Вырезаны `bat` файлы.  
+ - Вырезаны `bat` файлы.
  - В `dev` окружение добавлен файл `yii2/reset` для удаления локальных файлов сгенерированных через команду `init`
  - Все тесты адаптированы под работу с `Service` и `Repository`
  - Всем основных классам добавлены родительские `abstract class`
- 
+
 ### Директории:
 - `yii2` - в корне проекта, содержит только части приложения Yii2.
 - `uploads` - в корне проекта, содержит загруженные файлы пользователей.
@@ -133,7 +211,7 @@ ___
 ## Gii Generator
 
 ### EXAMPLE `frontend`
-* Model Class `yii2\common\models\sources\{Item}` 
+* Model Class `yii2\common\models\sources\{Item}`
 * Search Model Class `yii2\common\models\search\{Item}Search`
 * Controller Class `yii2\(backend|frontend)\controllers\sources\{Item}Controller`
 * View Path `@(backend|frontend)/views/sources/{item}`
@@ -186,7 +264,7 @@ yii2/                  +   содержит только части прилож
         resources/   +        содержит классы ресурсов backend
         runtime/              содержит runtime сгенерированные файлы
         services/    +        содержит классы сервисов backend
-        tests/                содержит тесты для backend приложения    
+        tests/                содержит тесты для backend приложения
         views/                содержит файлы представлений для веб-приложения
         web/                  содержит скрипт входа и веб-ресурсы
 
@@ -206,7 +284,7 @@ yii2/                  +   содержит только части прилож
         views/                содержит файлы представлений для веб-приложения
         web/                  содержит скрипт входа и веб-ресурсы
         widgets/              содержит виджеты для frontend
-    
+
 ```
 
 ### Терминология именования методов.
@@ -218,8 +296,8 @@ yii2/                  +   содержит только части прилож
 - **set** — задать какое-то значение исходя из какой-то логики
 - **find...** — найти данные в базе
 - **construct/generate** — Получить экземпляр класса
-- **create/generate** — создать объект модели в runtime  
-- **add** — добавление новой записи в базу 
+- **create/generate** — создать объект модели в runtime
+- **add** — добавление новой записи в базу
 - **handler...** — обработчик события/формы/модели
 - **prepare...** — подготовить данные для дальнейшего использования
 - **send...** — отправка данных
@@ -227,4 +305,4 @@ yii2/                  +   содержит только части прилож
 - **remove/delete** — удаление записи из базы
 - **filter...** — фильтрация данных
 - **sort...** — сортировка данных
-  
+

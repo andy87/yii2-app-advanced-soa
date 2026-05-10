@@ -1,0 +1,12 @@
+services:
+  frontend:
+    ports: !reset []
+
+  backend:
+    ports: !reset []
+
+  postgres:
+    ports: !reset []
+
+  redis:
+    ports: !reset []

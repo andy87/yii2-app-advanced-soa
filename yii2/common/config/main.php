@@ -27,7 +27,13 @@ $config = [
 
         'mailer' => require __DIR__ . '/components/mailer.php',
 
-        //'redis' => require __DIR__ . '/components/redis.php',
+        'redis' => require __DIR__ . '/components/redis.php',
+
+        'queue' => [
+            'class' => yii\queue\redis\Queue::class,
+            'redis' => 'redis',
+            'channel' => 'site-auditor-queue',
+        ],
 
         //'rabbitMq' => require __DIR__ . '/components/rabbitMq.php',
 
