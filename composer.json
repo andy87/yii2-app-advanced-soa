@@ -32,7 +32,8 @@
         "kartik-v/yii2-icons": "^1.4@dev",
         "andy87/knockknock": "^1.3 || dev-master",
         "andy87/yii2-migrate-architect": "^0.0.1 || dev-master",
-        "andy87/lazy-load-trait": "dev-main"
+        "andy87/lazy-load-trait": "dev-main",
+        "andy87/yii2-dnk-base": "^0.1"
     },
 
     "require-dev": {

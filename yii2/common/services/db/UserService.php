@@ -4,7 +4,7 @@ namespace yii2\common\services\db;
 
 use yii2\common\{components\core\BaseQueryStorage, models\sources\User, components\services\ActiveRecordService};
 use yii\db\ActiveRecord;
-use yii2\frontend\repositories\items\UserQueryStorage;
+use yii2\common\queryStorages\items\UserQueryStorage;
 
 /**
  * < Items > `UserService`

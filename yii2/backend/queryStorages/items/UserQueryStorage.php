@@ -1,6 +1,6 @@
 <?php
 
-namespace yii2\backend\repositories\items;
+namespace yii2\backend\queryStorages\items;
 
 use yii2\backend\models\items\User;
 

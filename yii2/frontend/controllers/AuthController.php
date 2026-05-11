@@ -5,10 +5,14 @@ namespace yii2\frontend\controllers;
 use Yii;
 use Exception;
 use yii\web\Response;
+use RuntimeException;
+use andy87\yii2dnk\domain\BaseDomain;
 use yii2\common\components\Auth;
 use yii2\common\components\Result;
 use yii2\frontend\handlers\AuthHandler;
 use andy87\lazy_load\yii2\LazyLoadTrait;
+use yii2\frontend\domains\auth\AuthDomain;
+use yii2\frontend\domains\auth\AuthHandler as DnkAuthHandler;
 use yii2\frontend\models\forms\SignupForm;
 use yii2\frontend\models\forms\VerifyEmailForm;
 use yii2\common\components\traits\SessionFlash;
@@ -19,6 +23,10 @@ use yii2\frontend\models\forms\PasswordResetRequestForm;
 use yii2\frontend\models\forms\ResendVerificationEmailForm;
 use yii2\frontend\viewModels\auth\AuthResetPasswordViewModel;
 use yii2\frontend\components\controllers\BaseFrontendController;
+use yii2\frontend\domains\auth\viewModels\AuthLoginViewModel as DnkAuthLoginViewModel;
+use yii2\frontend\domains\auth\viewModels\AuthRequestPasswordResetViewModel as DnkAuthRequestPasswordResetViewModel;
+use yii2\frontend\domains\auth\viewModels\AuthResendVerificationEmailViewModel as DnkAuthResendVerificationEmailViewModel;
+use yii2\frontend\domains\auth\viewModels\AuthResetPasswordViewModel as DnkAuthResetPasswordViewModel;
 use yii2\frontend\viewModels\auth\AuthRequestPasswordResetViewModel;
 use yii2\frontend\viewModels\auth\AuthResendVerificationEmailViewModel;
 
@@ -86,7 +94,16 @@ class AuthController extends BaseFrontendController
      */
     public function actionLogin(): Response|string
     {
-        $R = $this->handler->processLogin();
+        $payload = AuthDomain::createPayload(Auth::ACTION_LOGIN, [
+            'isPost' => Yii::$app->request->isPost,
+            'formData' => Yii::$app->request->post(),
+        ]);
+
+        $R = $this->createDnkAuthHandler()->run($payload);
+
+        if (!$R instanceof DnkAuthLoginViewModel) {
+            throw new RuntimeException('DNK Auth login returned invalid view model.');
+        }
 
         if ( Yii::$app->user->isGuest )
         {
@@ -146,7 +163,20 @@ class AuthController extends BaseFrontendController
      */
     public function actionRequestPasswordReset(): Response|string
     {
-        $R = $this->handler->processRequestPasswordReset();
+        $payload = AuthDomain::createPayload(Auth::ACTION_REQUEST_PASSWORD_RESET, [
+            'isPost' => Yii::$app->request->isPost,
+            'formData' => Yii::$app->request->post(),
+        ]);
+
+        $dnkHandler = $this->createDnkAuthHandler();
+
+        $R = Yii::$app->request->isPost
+            ? $dnkHandler->runTransactional($payload)
+            : $dnkHandler->run($payload);
+
+        if (!$R instanceof DnkAuthRequestPasswordResetViewModel) {
+            throw new RuntimeException('DNK Auth request-password-reset returned invalid view model.');
+        }
 
         if ($R->passwordResetRequestForm->result)
         {
@@ -176,7 +206,21 @@ class AuthController extends BaseFrontendController
      */
     public function actionResetPassword( string $token ): Response|string
     {
-        $R = $this->handler->processResetPassword($token);
+        $payload = AuthDomain::createPayload(Auth::ACTION_RESET_PASSWORD, [
+            'token' => $token,
+            'isPost' => Yii::$app->request->isPost,
+            'formData' => Yii::$app->request->post(),
+        ]);
+
+        $dnkHandler = $this->createDnkAuthHandler();
+
+        $R = Yii::$app->request->isPost
+            ? $dnkHandler->runTransactional($payload)
+            : $dnkHandler->run($payload);
+
+        if (!$R instanceof DnkAuthResetPasswordViewModel) {
+            throw new RuntimeException('DNK Auth reset-password returned invalid view model.');
+        }
 
         if (Yii::$app->request->isPost)
         {
@@ -194,6 +238,26 @@ class AuthController extends BaseFrontendController
     }
 
     /**
+     * Создаёт DNK handler домена Auth через пакетный Domain registry.
+     *
+     * @return DnkAuthHandler Handler login/reset-password сценариев.
+     */
+    private function createDnkAuthHandler(): DnkAuthHandler
+    {
+        $handler = AuthDomain::create(BaseDomain::HANDLER);
+
+        if (!$handler instanceof DnkAuthHandler) {
+            throw new RuntimeException(sprintf(
+                'DNK Auth handler must be instance of "%s", "%s" given.',
+                DnkAuthHandler::class,
+                $handler::class
+            ));
+        }
+
+        return $handler;
+    }
+
+    /**
      * @endpoint auth/verify-email
      *
      * @param string $token
@@ -206,7 +270,15 @@ class AuthController extends BaseFrontendController
      */
     public function actionVerifyEmail( string $token ): Response
     {
-        $result = $this->handler->processVerifyEmail( $token );
+        $payload = AuthDomain::createPayload(Auth::ACTION_VERIFY_EMAIL, [
+            'token' => $token,
+        ]);
+
+        $result = $this->createDnkAuthHandler()->runTransactional($payload);
+
+        if (!is_bool($result)) {
+            throw new RuntimeException('DNK Auth verify-email returned invalid result.');
+        }
 
         $this->setSessionFlashMessage( $result,
             VerifyEmailForm::MESSAGE_SUCCESS,
@@ -227,7 +299,20 @@ class AuthController extends BaseFrontendController
      */
     public function actionResendVerificationEmail(): Response|string
     {
-        $R = $this->handler->processResendVerificationEmail();
+        $payload = AuthDomain::createPayload(Auth::ACTION_RESEND_VERIFICATION_EMAIL, [
+            'isPost' => Yii::$app->request->isPost,
+            'formData' => Yii::$app->request->post(),
+        ]);
+
+        $dnkHandler = $this->createDnkAuthHandler();
+
+        $R = Yii::$app->request->isPost
+            ? $dnkHandler->runTransactional($payload)
+            : $dnkHandler->run($payload);
+
+        if (!$R instanceof DnkAuthResendVerificationEmailViewModel) {
+            throw new RuntimeException('DNK Auth resend-verification-email returned invalid view model.');
+        }
 
         if ($R->resendVerificationEmailForm->result)
         {

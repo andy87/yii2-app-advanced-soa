@@ -155,35 +155,33 @@ class AuthService extends \yii2\common\services\AuthService
 
             if ($identity)
             {
-                if (Identity::isPasswordResetTokenValid($identity->password_reset_token))
+                try
                 {
-                    try
+                    if (!Identity::isPasswordResetTokenValid((string)$identity->password_reset_token))
                     {
                         $identity->generatePasswordResetToken();
-
-                        if ($identity->save())
-                        {
-                            if ($this->sendEmailRequestPasswordReset($passwordResetRequestForm)) {
-
-                                $transaction?->commit();
-
-                                $passwordResetRequestForm->result = Result::OK;
-
-                                return true;
-
-                            } else {
-                                $message = 'send EmailRequestPasswordReset error';
-                            }
-                        } else{
-                            $message = 'Identity `save error`';
-                        }
-                    } catch (Exception $e) {
-
-                        $message = 'Catch `handlerRequestPasswordResetViewModels`';
-                        $data = $this->getPrepareException('Password reset request error', $e);
                     }
-                } else {
-                    $message = 'Password reset token `is not valid`';
+
+                    if ($identity->save())
+                    {
+                        if ($this->sendEmailRequestPasswordReset($passwordResetRequestForm)) {
+
+                            $transaction?->commit();
+
+                            $passwordResetRequestForm->result = Result::OK;
+
+                            return true;
+
+                        } else{
+                            $message = 'send EmailRequestPasswordReset error';
+                        }
+                    } else{
+                        $message = 'Identity `save error`';
+                    }
+                } catch (Exception $e) {
+
+                    $message = 'Catch `handlerRequestPasswordResetViewModels`';
+                    $data = $this->getPrepareException('Password reset request error', $e);
                 }
             } else {
                 $message = 'Identity not found';
@@ -259,17 +257,25 @@ class AuthService extends \yii2\common\services\AuthService
     }
 
     /**
-     * @return bool if password was reset.
+     * Сохраняет новый пароль пользователя из legacy reset-password формы.
      *
-     * @throws \yii\base\Exception
+     * @param ResetPasswordForm $resetPasswordForm Валидируемая форма нового пароля.
+     * @return bool True, если пароль сохранён.
+     * @throws \yii\base\Exception Если Yii security не смог сгенерировать hash/auth key.
      *
      * @tag #service #auth #resetPassword
      */
     public function resetPassword(ResetPasswordForm $resetPasswordForm): bool
     {
+        if (!$resetPasswordForm->validate()) {
+            $resetPasswordForm->result = Result::ERROR;
+
+            return false;
+        }
+
         $identity = $resetPasswordForm->getIdentity();
 
-        $identity->setPassword($resetPasswordForm->password);
+        $identity->setPassword((string)$resetPasswordForm->password);
 
         $identity->removePasswordResetToken();
 

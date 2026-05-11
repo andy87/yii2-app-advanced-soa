@@ -40,7 +40,11 @@ class ResetPasswordForm extends BaseWebForm
     /** @var ?string  */
     public ?string $password = null;
 
-    public ?bool $result = null;
+    /** @var ?string */
+    public ?string $token = null;
+
+    /** @var string|bool|null */
+    public string|bool|null $result = null;
 
     /**
      * @var ?Identity
@@ -49,31 +53,33 @@ class ResetPasswordForm extends BaseWebForm
 
 
     /**
-     * Creates a form model given a token.
+     * Создаёт форму нового пароля по token.
      *
-     * @param string $password
-     * @param array $config name-value pairs that will be used to initialize the object properties
+     * @param string $token Токен сброса пароля.
+     * @param array $config Параметры конфигурации Yii model.
+     * @param bool $validateToken Нужно ли сразу искать identity через legacy IdentityService.
+     * @return void
      *
-     * @throws InvalidArgumentException|InvalidConfigException if token is empty or not valid
+     * @throws InvalidArgumentException Если token пустой или не найден legacy-сервисом.
+     * @throws InvalidConfigException Если legacy IdentityService настроен неверно.
      *
      * @tag #constructor
      */
-    public function __construct( string $password, array $config = [])
+    public function __construct(string $token, array $config = [], bool $validateToken = true)
     {
-        $this->password = $password;
+        $this->token = $token;
 
-        if ( strlen($this->password) )
+        if (strlen($this->token))
         {
-            $this->_identity = $this->identityService->findByPasswordResetToken($this->password);
+            if ($validateToken) {
+                $this->_identity = $this->identityService->findByPasswordResetToken($this->token);
 
-            if ($this->_identity)
-            {
-                parent::__construct($config);
-
-            } else {
-
-                throw new InvalidArgumentException(self::EXCEPTION_TOKEN_INVALID);
+                if (!$this->_identity) {
+                    throw new InvalidArgumentException(self::EXCEPTION_TOKEN_INVALID);
+                }
             }
+
+            parent::__construct($config);
         } else {
 
             throw new InvalidArgumentException(self::EXCEPTION_TOKEN_EMPTY_PASSWORD);
@@ -96,7 +102,9 @@ class ResetPasswordForm extends BaseWebForm
     }
 
     /**
-     * @return Identity
+     * Возвращает identity, найденную legacy token lookup.
+     *
+     * @return Identity Identity пользователя.
      *
      * @tag #getter #identity
      */
