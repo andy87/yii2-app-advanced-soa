@@ -23,7 +23,8 @@ RUN apt-get update \
 
 COPY --from=composer:2 /usr/bin/composer /usr/bin/composer
 COPY docker/php/entrypoint.sh /usr/local/bin/site-auditor-entrypoint
-RUN chmod +x /usr/local/bin/site-auditor-entrypoint
+COPY docker/php/entrypoint-prod.sh /usr/local/bin/site-auditor-prod-entrypoint
+RUN chmod +x /usr/local/bin/site-auditor-entrypoint /usr/local/bin/site-auditor-prod-entrypoint
 
 WORKDIR /app
 

@@ -5,8 +5,8 @@ vendor/
 .idea/
 
 yii2/.env
-
-composer.lock
+yii2/.env.prod
+yii2/.env.prod.local
 
 # yii console commands
 yii2/yii
