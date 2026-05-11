@@ -10,16 +10,19 @@ $config = [
 ];
 
 if (YII_ENV_DEV) {
+    $allowedIps = ['127.0.0.1', '::1', '172.*.*.*'];
+
     // configuration adjustments for 'dev' environment
     $config['bootstrap'][] = 'debug';
     $config['modules']['debug'] = [
         'class' => yii\debug\Module::class,
+        'allowedIPs' => $allowedIps,
     ];
 
     $config['bootstrap'][] = 'gii';
     $config['modules']['gii'] = [
         'class' => yii\gii\Module::class,
-        'allowedIPs' => ['127.0.0.1', '::1'],
+        'allowedIPs' => $allowedIps,
         'generators' => [
             'fileCrafter' => [
                 'class' => andy87\yii2\file_crafter\Crafter::class,

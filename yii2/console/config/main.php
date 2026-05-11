@@ -21,7 +21,7 @@ return [
         'log' => require __DIR__ . '/components/log.php',
     ],
 
-    'bootstrap' => ['log'],
+    'bootstrap' => ['log', 'queue'],
 
     'params' => $params,
 
