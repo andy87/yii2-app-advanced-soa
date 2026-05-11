@@ -33,7 +33,7 @@ docker compose exec worker php /app/yii2/yii audit/queue <orderId>
 Production override не выполняет `yii2/init --env=Development --overwrite=All`. Вместо этого он:
 
 - использует `site-auditor-prod-entrypoint`;
-- монтирует приложение read-only;
+- содержит код приложения внутри immutable image и не монтирует `/app` целиком;
 - монтирует `yii2/.env.prod` как `/app/yii2/.env`;
 - подменяет web/console bootstrap на prod-варианты с `YII_ENV=prod` и `YII_DEBUG=false`;
 - монтирует tracked prod `main-local.php` и `params-local.php`, поэтому production не требует `yii2/init`;
@@ -87,6 +87,8 @@ docker compose \
   -f docker-compose.prod.yml \
   exec worker php /app/yii2/yii migrate --interactive=0
 ```
+
+Runbook для first deploy, update, rollback и backup/restore PostgreSQL volume: [docs/production-runbook.md](docs/production-runbook.md).
 
 Для Traefik-compatible reverse proxy включите labels:
 
