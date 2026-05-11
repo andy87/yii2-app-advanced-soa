@@ -25,6 +25,8 @@ class m240629_083647_create_table__role extends CreateTable
             Role::ATTR_NAME => $this->string(64)->notNull()->unique()->comment('Название'),
             Role::ATTR_HINT => $this->string(255)->null()->comment('Описание'),
             Role::ATTR_PRIORITY => $this->integer(5)->notNull()->defaultValue(1)->comment('Приоритет'),
+            Role::ATTR_CREATED_AT => $this->dateTime()->notNull()->defaultExpression('NOW()')->comment('Дата создания'),
+            Role::ATTR_UPDATED_AT => $this->dateTime()->null()->comment('Дата обновления'),
         ];
     }
 }
