@@ -1,7 +1,6 @@
 <?php declare(strict_types=1);
 
 use andy87\yii2\architect\UpdateTable;
-use andy87\yii2\architect\components\interfaces\ArchitectInterface;
 use yii2\common\models\sources\User;
 
 /**
@@ -13,8 +12,10 @@ use yii2\common\models\sources\User;
  */
 class m130524_201445_update_table__user extends UpdateTable
 {
+    private const SCENARIO_UPDATE_TABLE = 2;
+
     /** @var int Сценарий */
-    public int $scenario = ArchitectInterface::SCENARIO_UPDATE;
+    public int $scenario = self::SCENARIO_UPDATE_TABLE;
 
     /** @var string  */
     public string $tableName = '{{%user}}';
