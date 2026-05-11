@@ -37,10 +37,11 @@ Production override не выполняет `yii2/init --env=Development --overw
 - монтирует `yii2/.env.prod` как `/app/yii2/.env`;
 - подменяет web/console bootstrap на prod-варианты с `YII_ENV=prod` и `YII_DEBUG=false`;
 - монтирует tracked prod `main-local.php` и `params-local.php`, поэтому production не требует `yii2/init`;
+- содержит приложение и `vendor` внутри image, без runtime `composer install`;
 - закрывает host ports PostgreSQL и Redis;
 - оставляет frontend/backend доступными только внутри Docker network для reverse proxy;
 - выносит `uploads`, `uploads/reports`, runtime и assets в отдельные volumes.
-- использует tracked `composer.lock` для воспроизводимого `composer install --no-dev`.
+- использует tracked `composer.lock` для воспроизводимого build-time `composer install --no-dev`.
 
 Подготовка env:
 

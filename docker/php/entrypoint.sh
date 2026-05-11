@@ -3,7 +3,7 @@ set -e
 
 cd /app
 
-if [ ! -f vendor/autoload.php ]; then
+if [ ! -f vendor/autoload.php ] || [ ! -f vendor/bin/codecept ]; then
     COMPOSER_ALLOW_SUPERUSER=1 composer install --no-interaction --prefer-dist
 fi
 
