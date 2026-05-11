@@ -88,7 +88,13 @@ class ContactCest extends SendForm
      */
     public function checkContactSubmitNoData(FunctionalTester $I): void
     {
-        $I->submitForm($this->formId, []);
+        $I->submitForm($this->formId, [
+            "$this->formName[".ContactForm::ATTR_NAME."]" => '',
+            "$this->formName[".ContactForm::ATTR_EMAIL."]" => '',
+            "$this->formName[".ContactForm::ATTR_SUBJECT."]" => '',
+            "$this->formName[".ContactForm::ATTR_BODY."]" => '',
+            "$this->formName[".ContactForm::ATTR_VERIFY_CODE."]" => '',
+        ]);
         $I->see($this->form::TITLE, 'h1');
         $messages = [
             str_replace('{attribute}', $this->form->getAttributeLabel($this->form::ATTR_NAME), $this->form::RULE_REQUIRED_MESSAGE),
@@ -100,7 +106,7 @@ class ContactCest extends SendForm
             $I->seeValidationError($message);
         }
 
-        $I->seeValidationError($this->form::RULE_VERIFY_CODE_MESSAGE);
+        $I->dontSeeValidationError($this->form::RULE_VERIFY_CODE_MESSAGE);
     }
 
     /**

@@ -3,7 +3,6 @@
 namespace yii2\frontend\tests\acceptance;
 
 use Yii;
-use yii\helpers\Url;
 use yii2\common\components\Action;
 use yii2\frontend\components\Site;
 use yii2\frontend\controllers\SiteController;
@@ -31,9 +30,7 @@ class HomeCest
      */
     public function checkHome(AcceptanceTester $I): void
     {
-        $url = Url::toRoute('/' . SiteController::ENDPOINT . '/' . Action::INDEX );
-
-        $I->amOnRoute($url);
+        $I->amOnPage('/' . SiteController::ENDPOINT . '/' . Action::INDEX);
         $I->see(Yii::$app->name);
 
         $link = Site::LABELS[Site::ACTION_ABOUT];
@@ -42,6 +39,6 @@ class HomeCest
         $I->click($link);
         $I->wait(2); // wait for page to be opened
 
-        $I->see('This is the About page.');
+        $I->see('Это страница О нас.');
     }
 }

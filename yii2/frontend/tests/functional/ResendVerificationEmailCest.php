@@ -119,7 +119,7 @@ class ResendVerificationEmailCest extends SendForm
     public function checkEmptyField(FunctionalTester $I): void
     {
         $I->submitForm($this->formId, $this->formParams(''));
-        $I->seeValidationError('Email cannot be blank.');
+        $I->seeValidationError('Поле `Email` не может быть пустым');
     }
 
     /**
@@ -138,7 +138,7 @@ class ResendVerificationEmailCest extends SendForm
     public function checkWrongEmailFormat(FunctionalTester $I): void
     {
         $I->submitForm($this->formId, $this->formParams('abcd.com'));
-        $I->seeValidationError('Email is not a valid email address.');
+        $I->seeValidationError('Некорректный адрес электронной почты');
     }
 
     /**

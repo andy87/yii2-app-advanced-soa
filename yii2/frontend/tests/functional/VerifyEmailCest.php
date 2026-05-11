@@ -88,8 +88,8 @@ class VerifyEmailCest
     public function checkInvalidToken(FunctionalTester $I): void
     {
         $I->amOnRoute($this->getRoute(), ['token' => 'wrong_token']);
-        $I->canSee( 'Bad Request', 'h1');
-        $I->canSee( VerifyEmailForm::EXCEPTION_TOKEN_INVALID );
+        $I->canSee(VerifyEmailForm::MESSAGE_ERROR);
+        $I->canSee('Congratulations!', 'h1');
     }
 
     /**
@@ -132,8 +132,8 @@ class VerifyEmailCest
     public function checkAlreadyActivatedToken(FunctionalTester $I): void
     {
         $I->amOnRoute($this->getRoute(), ['token' => 'already_used_token_1548675330']);
-        $I->canSee( 'Bad Request', 'h1');
-        $I->canSee( VerifyEmailForm::EXCEPTION_TOKEN_INVALID );
+        $I->canSee(VerifyEmailForm::MESSAGE_ERROR);
+        $I->canSee('Congratulations!', 'h1');
     }
 
     /**
