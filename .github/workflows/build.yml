@@ -96,9 +96,15 @@ jobs:
           ./vendor/bin/codecept config:validate
 
       - name: Apply test migrations
-        run: php ./yii2/yii_test migrate --interactive=0
+        run: |
+          php ./yii2/yii_test migrate --interactive=0 2>&1 | tee /tmp/yii-test-migrate.log
+          ! grep -E "Exception '|PHP (Fatal error|Parse error)" /tmp/yii-test-migrate.log
 
       - name: Run tests
         run: |
           ./vendor/bin/codecept build
-          ./vendor/bin/codecept run
+          ./vendor/bin/codecept run yii2/common/tests/unit
+          ./vendor/bin/codecept run yii2/frontend/tests/unit
+          ./vendor/bin/codecept run yii2/frontend/tests/functional
+          ./vendor/bin/codecept run yii2/backend/tests/unit
+          ./vendor/bin/codecept run yii2/backend/tests/functional
