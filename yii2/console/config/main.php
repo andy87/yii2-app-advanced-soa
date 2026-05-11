@@ -15,6 +15,8 @@ return [
 
     'basePath' => dirname(__DIR__),
 
+    'runtimePath' => '@runtime/console',
+
     'controllerNamespace' => 'yii2\console\controllers',
 
     'components' => [

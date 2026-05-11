@@ -1,4 +1,6 @@
 # Ignore all test and documentation for archive
+* text=auto eol=lf
+
 /.github            export-ignore
 /.gitattributes     export-ignore
 /.scrutinizer.yml   export-ignore

@@ -11,7 +11,12 @@ $config = [
         '@npm'      => '@vendor/npm-asset',
         '@root'     => $root,
         '@yii2'     => "$root/yii2",
+        '@runtime'  => "$root/runtime",
         '@uploads'  => "$root/uploads",
+        '@runtimeFrontend' => "$root/runtime/frontend",
+        '@runtimeBackend'  => "$root/runtime/backend",
+        '@runtimeConsole'  => "$root/runtime/console",
+        '@runtimeDocker'   => "$root/runtime/Docker",
         '@mode'     => $dirApp,
         '@common'   => "$dirApp/common",
         '@frontend' => "$dirApp/frontend",
@@ -27,9 +32,9 @@ $config = [
 
         'mailer' => require __DIR__ . '/components/mailer.php',
 
-        //'redis' => require __DIR__ . '/components/redis.php',
+        'redis' => require __DIR__ . '/components/redis.php',
 
-        //'rabbitMq' => require __DIR__ . '/components/rabbitMq.php',
+        'rabbitmq' => require __DIR__ . '/components/rabbitMq.php',
 
         //'elasticsearch' => require __DIR__ . '/components/elasticsearch.php',
     ],

@@ -18,17 +18,20 @@
 
     "require": {
         "php": ">=8.0",
+        "ext-pdo_pgsql": "*",
         "yiisoft/yii2": "~2.0.45",
         "yiisoft/yii2-bootstrap5": "~2.0.2",
         "yiisoft/yii2-symfonymailer": "~2.0.3",
         "behat/gherkin": "4.9.0",
         "twbs/bootstrap-icons": "~1.7",
         "vlucas/phpdotenv": "^5.5",
+        "yiisoft/yii2-redis": "~2.0.0",
+        "mikemadisonweb/yii2-rabbitmq": "^2.5",
         "mihaildev/yii2-ckeditor": "dev-master",
         "kartik-v/yii2-widget-select2": "^2.2@dev",
         "kartik-v/yii2-icons": "^1.4@dev",
-        "andy87/knockknock": "*",
-        "andy87/yii2-migrate-architect": "*",
+        "andy87/knockknock": "^1.3 || dev-master",
+        "andy87/yii2-migrate-architect": "^0.0.1 || dev-master",
         "andy87/lazy-load-trait": "dev-main"
     },
 

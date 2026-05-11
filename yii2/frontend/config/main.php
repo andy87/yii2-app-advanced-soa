@@ -15,6 +15,8 @@ return [
 
     'basePath' => dirname(__DIR__),
 
+    'runtimePath' => '@runtime/frontend',
+
     'controllerNamespace' => 'yii2\frontend\controllers',
 
     'components' => [

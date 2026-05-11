@@ -1,11 +1,15 @@
-version: '3.2'
-
 services:
 
   frontend:
-    build: frontend
+    build:
+      context: .
+      dockerfile: docker/frontend/Dockerfile
     ports:
       - 20080:80
+    depends_on:
+      - postgresql
+      - redis
+      - rabbitmq
     volumes:
       # Re-use local composer cache via host-volume
       - ~/.composer-docker/cache:/root/.composer/cache:delegated
@@ -13,26 +17,43 @@ services:
       - ./:/app
 
   backend:
-    build: backend
+    build:
+      context: .
+      dockerfile: docker/backend/Dockerfile
     ports:
       - 21080:80
+    depends_on:
+      - postgresql
+      - redis
+      - rabbitmq
     volumes:
       # Re-use local composer cache via host-volume
       - ~/.composer-docker/cache:/root/.composer/cache:delegated
       # Mount source-code for development
       - ./:/app
 
-  mysql:
-    image: mysql:5.7
+  postgresql:
+    image: postgres:16-alpine
     environment:
-      - MYSQL_ROOT_PASSWORD=verysecret
-      - MYSQL_DATABASE=yii2advanced
-      - MYSQL_USER=yii2advanced
-      - MYSQL_PASSWORD=secret
+      POSTGRES_DB: yii2advanced
+      POSTGRES_USER: yii2advanced
+      POSTGRES_PASSWORD: secret
+    ports:
+      - 25432:5432
+    volumes:
+      - ./runtime/Docker/postgresql:/var/lib/postgresql/data
 
-  #pgsql:
-  #  image: postgres:9.5
-  #  environment:
-  #    - POSTGRES_DB=yii2advanced
-  #    - POSTGRES_USER=yii2advanced
-  #    - POSTGRES_PASSWORD=secret
+  redis:
+    image: redis:7-alpine
+    ports:
+      - 26379:6379
+    volumes:
+      - ./runtime/Docker/redis:/data
+
+  rabbitmq:
+    image: rabbitmq:3-management-alpine
+    ports:
+      - 25672:5672
+      - 25673:15672
+    volumes:
+      - ./runtime/Docker/rabbitMq:/var/lib/rabbitmq

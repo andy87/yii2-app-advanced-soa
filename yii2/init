@@ -353,6 +353,11 @@ function setWritable( string $root, array $paths ): void
 {
     foreach ($paths as $writable)
     {
+        if (!is_dir("$root/$writable"))
+        {
+            @mkdir("$root/$writable", 0777, true);
+        }
+
         if (is_dir("$root/$writable"))
         {
             if (@chmod("$root/$writable", 0777)) {
@@ -426,10 +431,10 @@ function createSymlink( string  $root, array  $links ): void
         if (is_link($root . "/" . $link)) {
             @unlink($root . "/" . $link);
         }
-        if (@symlink($root . "/" . $target, $root . "/" . $link)) {
-            echo "      symlink $root/$target $root/$link\n";
+        if (@symlink($target, $root . "/" . $link)) {
+            echo "      symlink $target $root/$link\n";
         } else {
-            printError("Cannot create symlink $root/$target $root/$link.");
+            printError("Cannot create symlink $target $root/$link.");
         }
     }
 }

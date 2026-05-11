@@ -32,12 +32,19 @@ return [
     'Development' => [
         'path' => 'dev',
         'setWritable' => [
-            'backend/runtime',
-            'backend/web/assets',
-            'console/runtime',
-            'frontend/runtime',
-            'frontend/web/assets',
+            '../runtime/backend',
+            '../runtime/backend/assets',
+            '../runtime/console',
+            '../runtime/Docker/postgresql',
+            '../runtime/Docker/rabbitMq',
+            '../runtime/Docker/redis',
+            '../runtime/frontend',
+            '../runtime/frontend/assets',
             '../uploads',
+        ],
+        'createSymlink' => [
+            'backend/web/assets' => '../../../runtime/backend/assets',
+            'frontend/web/assets' => '../../../runtime/frontend/assets',
         ],
         'setExecutable' => [
             'reset',
@@ -53,12 +60,19 @@ return [
     'Production' => [
         'path' => 'prod',
         'setWritable' => [
-            'backend/runtime',
-            'backend/web/assets',
-            'console/runtime',
-            'frontend/runtime',
-            'frontend/web/assets',
+            '../runtime/backend',
+            '../runtime/backend/assets',
+            '../runtime/console',
+            '../runtime/Docker/postgresql',
+            '../runtime/Docker/rabbitMq',
+            '../runtime/Docker/redis',
+            '../runtime/frontend',
+            '../runtime/frontend/assets',
             '../uploads',
+        ],
+        'createSymlink' => [
+            'backend/web/assets' => '../../../runtime/backend/assets',
+            'frontend/web/assets' => '../../../runtime/frontend/assets',
         ],
         'setExecutable' => [
             'yii',

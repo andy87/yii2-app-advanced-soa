@@ -18,11 +18,11 @@ $config = [
     'connections' => [
         [
             'host' => $_ENV['RABBITMQ_HOST'],
-            'port' => $_ENV['RABBITMQ_PORT'],
+            'port' => (int)$_ENV['RABBITMQ_PORT'],
             'user' => $_ENV['RABBITMQ_USER'],
             'password' => $_ENV['RABBITMQ_PASSWORD'],
             'vhost' => $_ENV['RABBITMQ_VHOST'],
-            'heartbeat' => $_ENV['RABBITMQ_HEARTBEAT'],
+            'heartbeat' => (int)$_ENV['RABBITMQ_HEARTBEAT'],
         ],
     ],
     'exchanges' => [],
@@ -57,10 +57,10 @@ $consumerList = [
     //  Простейшая настройка консамера - добавление в массив $consumerList записи вида:
     //     [ 'consumer-unique-name' => yii2\components\rabbitmq\UniqueNameConsumer::class]
 
-    ['notify' => [
-        'class' => \yii2\components\rabbitmq\consumers\NameConsumer::class,
-        'bindingsRoutingKeys' => ['12345678'],
-    ]],
+    // ['notify' => [
+    //     'class' => \yii2\components\rabbitmq\consumers\NameConsumer::class,
+    //     'bindingsRoutingKeys' => ['12345678'],
+    // ]],
 ];
 
 // Динамическая генерация конфигурации для консамеров
