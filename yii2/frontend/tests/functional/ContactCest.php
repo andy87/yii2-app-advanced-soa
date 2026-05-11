@@ -131,7 +131,7 @@ class ContactCest extends SendForm
             "$this->formName[".ContactForm::ATTR_BODY."]" => 'test content',
             "$this->formName[".ContactForm::ATTR_VERIFY_CODE."]" => CaptchaAction::TEST_VALUE,
         ]);
-        $I->seeValidationError('Email is not a valid email address.');
+        $I->seeValidationError($this->form::RULE_MESSAGE_WRONG_EMAIL);
         $I->dontSeeValidationError('Name cannot be blank');
         $I->dontSeeValidationError('Subject cannot be blank');
         $I->dontSeeValidationError('Body cannot be blank');

@@ -32,6 +32,7 @@ class ContactForm extends BaseWebForm
     public const MESSAGE_ERROR = 'При отправке вашего сообщения произошла ошибка.';
 
     public const RULE_REQUIRED_MESSAGE = 'Поле `{attribute}` не может быть пустым';
+    public const RULE_MESSAGE_WRONG_EMAIL = 'Некорректный адрес электронной почты';
     public const RULE_VERIFY_CODE_MESSAGE = 'Неверный код проверки';
 
     public const BUTTON_SEND_TEXT = 'Отправить';
@@ -54,7 +55,7 @@ class ContactForm extends BaseWebForm
     {
         return [
             [[self::ATTR_NAME, self::ATTR_EMAIL, self::ATTR_SUBJECT, self::ATTR_BODY], 'required', 'message' => self::RULE_REQUIRED_MESSAGE],
-            [self::ATTR_EMAIL, 'email'],
+            [self::ATTR_EMAIL, 'email', 'message' => self::RULE_MESSAGE_WRONG_EMAIL],
             [self::ATTR_VERIFY_CODE, 'captcha', 'message' => self::RULE_VERIFY_CODE_MESSAGE],
         ];
     }
