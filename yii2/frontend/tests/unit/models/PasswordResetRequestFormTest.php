@@ -84,7 +84,7 @@ class PasswordResetRequestFormTest extends Unit
 
         $sendResult = $this->authService->handlerRequestPasswordResetViewModels($passwordResetRequestForm);
 
-        verify($sendResult)->false();
+        $this->assertFalse($sendResult);
     }
 
     /**
@@ -103,14 +103,14 @@ class PasswordResetRequestFormTest extends Unit
      */
     public function testNotSendEmailsToInactiveUser()
     {
-        $user = $this->tester->grabFixture('user', 1);
+        $user = $this->tester->grabFixture('user', '1');
 
         $passwordResetRequestForm = new PasswordResetRequestForm();
         $passwordResetRequestForm->email = $user['email'];
 
         $sendResult = $this->authService->handlerRequestPasswordResetViewModels($passwordResetRequestForm);
 
-        verify($sendResult)->false();
+        $this->assertFalse($sendResult);
     }
 
     /**
@@ -129,27 +129,27 @@ class PasswordResetRequestFormTest extends Unit
      */
     public function testSendEmailSuccessfully(): void
     {
-        $userFixture = $this->tester->grabFixture('user', 0);
+        $userFixture = $this->tester->grabFixture('user', '0');
 
         $passwordResetRequestForm = new PasswordResetRequestForm();
         $passwordResetRequestForm->email = $userFixture['email'];
 
         $identity = $this->identityService->findIdentityByPasswordResetToken($userFixture['password_reset_token']);
 
-        verify($identity)->instanceOf(Identity::class);
+        $this->assertInstanceOf(Identity::class, $identity);
 
         $sendResult = $this->authService->handlerRequestPasswordResetViewModels($passwordResetRequestForm);
 
-        verify($sendResult)->notEmpty();
+        $this->assertNotEmpty($sendResult);
 
         $identity = $passwordResetRequestForm->getIdentity();
 
-        verify($identity->password_reset_token)->notEmpty();
+        $this->assertNotEmpty($identity->password_reset_token);
 
         $emailMessage = $this->tester->grabLastSentEmail();
 
-        verify($emailMessage)->instanceOf(MessageInterface::class);
-        verify($emailMessage->getTo())->arrayHasKey($passwordResetRequestForm->email);
-        verify($emailMessage->getFrom())->arrayHasKey(Yii::$app->params['supportEmail']);
+        $this->assertInstanceOf(MessageInterface::class, $emailMessage);
+        $this->assertArrayHasKey($passwordResetRequestForm->email, $emailMessage->getTo());
+        $this->assertArrayHasKey(Yii::$app->params['supportEmail'], $emailMessage->getFrom());
     }
 }

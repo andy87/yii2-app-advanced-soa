@@ -58,17 +58,17 @@ class ContactFormTest extends Unit
 
         $sendResult = $this->siteService->sendEmailContactForm($contactForm);
 
-        verify( $sendResult )->notEmpty();
+        $this->assertNotEmpty($sendResult);
 
         $this->tester->seeEmailIsSent();
 
         $emailMessage = $this->tester->grabLastSentEmail();
 
-        verify($emailMessage)->instanceOf(MessageInterface::class);
-        verify($emailMessage->getTo())->arrayHasKey('admin@example.com');
-        verify($emailMessage->getFrom())->arrayHasKey('noreply@example.com');
-        verify($emailMessage->getReplyTo())->arrayHasKey('tester@example.com');
-        verify($emailMessage->getSubject())->equals('very important letter subject');
-        verify($emailMessage->toString())->stringContainsString('body of current message');
+        $this->assertInstanceOf(MessageInterface::class, $emailMessage);
+        $this->assertArrayHasKey('admin@example.com', $emailMessage->getTo());
+        $this->assertArrayHasKey('noreply@example.com', $emailMessage->getFrom());
+        $this->assertArrayHasKey('tester@example.com', $emailMessage->getReplyTo());
+        $this->assertSame('very important letter subject', $emailMessage->getSubject());
+        $this->assertStringContainsString('body of current message', $emailMessage->toString());
     }
 }

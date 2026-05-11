@@ -6,6 +6,7 @@ actor: FunctionalTester
 modules:
     enabled:
         - Yii2:
+            recreateComponents: [view]
             parts: [orm, fixtures]
         - Asserts
         - Filesystem

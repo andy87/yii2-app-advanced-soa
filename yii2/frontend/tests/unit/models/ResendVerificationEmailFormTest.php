@@ -83,9 +83,9 @@ class ResendVerificationEmailFormTest extends Unit
             ResendVerificationEmailForm::ATTR_EMAIL => 'aaa@bbb.cc'
         ]);
 
-        verify($resendVerificationEmailForm->validate())->false();
-        verify($resendVerificationEmailForm->hasErrors())->true();
-        verify($resendVerificationEmailForm->getFirstError('email'))->equals($resendVerificationEmailForm::RULE_EXIST_MESSAGE);
+        $this->assertFalse($resendVerificationEmailForm->validate());
+        $this->assertTrue($resendVerificationEmailForm->hasErrors());
+        $this->assertSame($resendVerificationEmailForm::RULE_EXIST_MESSAGE, $resendVerificationEmailForm->getFirstError('email'));
     }
 
     /**
@@ -105,9 +105,9 @@ class ResendVerificationEmailFormTest extends Unit
             ResendVerificationEmailForm::ATTR_EMAIL => ''
         ]);
 
-        verify($resendVerificationEmailForm->validate())->false();
-        verify($resendVerificationEmailForm->hasErrors())->true();
-        verify($resendVerificationEmailForm->getFirstError('email'))->equals('Email cannot be blank.');
+        $this->assertFalse($resendVerificationEmailForm->validate());
+        $this->assertTrue($resendVerificationEmailForm->hasErrors());
+        $this->assertSame('Email cannot be blank.', $resendVerificationEmailForm->getFirstError('email'));
     }
 
     /**
@@ -127,9 +127,9 @@ class ResendVerificationEmailFormTest extends Unit
             ResendVerificationEmailForm::ATTR_EMAIL => 'test2@mail.com'
         ]);
 
-        verify($resendVerificationEmailForm->validate())->false();
-        verify($resendVerificationEmailForm->hasErrors())->true();
-        verify($resendVerificationEmailForm->getFirstError('email'))->equals($resendVerificationEmailForm::RULE_EXIST_MESSAGE);
+        $this->assertFalse($resendVerificationEmailForm->validate());
+        $this->assertTrue($resendVerificationEmailForm->hasErrors());
+        $this->assertSame($resendVerificationEmailForm::RULE_EXIST_MESSAGE, $resendVerificationEmailForm->getFirstError('email'));
     }
 
     /**
@@ -151,21 +151,21 @@ class ResendVerificationEmailFormTest extends Unit
             ResendVerificationEmailForm::ATTR_EMAIL => 'test@mail.com'
         ]);
 
-        verify($resendVerificationEmailForm->validate())->true();
-        verify($resendVerificationEmailForm->hasErrors())->false();
+        $this->assertTrue($resendVerificationEmailForm->validate());
+        $this->assertFalse($resendVerificationEmailForm->hasErrors());
 
         $sendResult = $this->authService->handlerResendVerificationEmail($resendVerificationEmailForm);
 
-        verify($sendResult)->true();
+        $this->assertTrue($sendResult);
 
         $this->tester->seeEmailIsSent();
 
         $mail = $this->tester->grabLastSentEmail();
 
-        verify($mail)->instanceOf(MessageInterface::class);
-        verify($mail->getTo())->arrayHasKey('test@mail.com');
-        verify($mail->getFrom())->arrayHasKey(Yii::$app->params['supportEmail']);
-        verify($mail->getSubject())->equals($resendVerificationEmailForm->generateMailSubject());
-        verify($mail->toString())->stringContainsString('4ch0qbfhvWwkcuWqjN8SWRq72SOw1KYT_1548675330');
+        $this->assertInstanceOf(MessageInterface::class, $mail);
+        $this->assertArrayHasKey('test@mail.com', $mail->getTo());
+        $this->assertArrayHasKey(Yii::$app->params['supportEmail'], $mail->getFrom());
+        $this->assertSame($resendVerificationEmailForm->generateMailSubject(), $mail->getSubject());
+        $this->assertStringContainsString('4ch0qbfhvWwkcuWqjN8SWRq72SOw1KYT_1548675330', $mail->toString());
     }
 }

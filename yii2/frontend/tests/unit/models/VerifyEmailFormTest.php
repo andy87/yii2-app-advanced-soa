@@ -110,11 +110,11 @@ class VerifyEmailFormTest extends Unit
 
         $identity = $verifyEmailForm->getIdentity();
 
-        verify($identity)->instanceOf(Identity::class);
+        $this->assertInstanceOf(Identity::class, $identity);
 
-        verify($identity->username)->equals('test.test');
-        verify($identity->email)->equals('test@mail.com');
-        verify($identity->status)->equals(Identity::STATUS_ACTIVE);
-        verify($identity->validatePassword('Test1234'))->true();
+        $this->assertSame('test.test', $identity->username);
+        $this->assertSame('test@mail.com', $identity->email);
+        $this->assertSame(Identity::STATUS_ACTIVE, $identity->status);
+        $this->assertTrue($identity->validatePassword('Test1234'));
     }
 }

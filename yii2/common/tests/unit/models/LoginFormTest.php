@@ -84,8 +84,8 @@ class LoginFormTest extends Unit
         $this->loginForm->username = 'not_existing_username';
         $this->loginForm->password = 'not_existing_password';
 
-        verify($this->authService->authLoginForm($this->loginForm))->false();
-        verify(Yii::$app->user->isGuest)->true();
+        $this->assertFalse($this->authService->authLoginForm($this->loginForm));
+        $this->assertTrue(Yii::$app->user->isGuest);
     }
 
     /**
@@ -108,9 +108,9 @@ class LoginFormTest extends Unit
 
         $login = ( $this->loginForm->result === Result::OK );
 
-        verify($login)->false();
-        verify( $this->loginForm->errors)->arrayHasKey('password');
-        verify(Yii::$app->user->isGuest)->true();
+        $this->assertFalse($login);
+        $this->assertArrayHasKey('password', $this->loginForm->errors);
+        $this->assertTrue(Yii::$app->user->isGuest);
     }
 
     /**
@@ -129,8 +129,8 @@ class LoginFormTest extends Unit
         $this->loginForm->username = 'bayer.hudson';
         $this->loginForm->password = 'password_0';
 
-        verify($this->authService->authLoginForm($this->loginForm))->true();
-        verify($this->loginForm->errors)->arrayHasNotKey('password');
-        verify(Yii::$app->user->isGuest)->false();
+        $this->assertTrue($this->authService->authLoginForm($this->loginForm));
+        $this->assertArrayNotHasKey('password', $this->loginForm->errors);
+        $this->assertFalse(Yii::$app->user->isGuest);
     }
 }

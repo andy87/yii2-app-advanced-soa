@@ -5,4 +5,5 @@ suite_namespace: yii2\backend\tests\functional
 actor: FunctionalTester
 modules:
     enabled:
-        - Yii2
+        - Yii2:
+            recreateComponents: [view]

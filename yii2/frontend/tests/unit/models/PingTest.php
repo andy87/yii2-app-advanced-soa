@@ -30,6 +30,6 @@ class PingTest extends Unit
      */
     public function testPong(): void
     {
-        verify((new Ping)->run())->equals(Ping::ANSWER);
+        $this->assertSame(Ping::ANSWER, (new Ping)->run());
     }
 }

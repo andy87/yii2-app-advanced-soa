@@ -11,9 +11,9 @@ paths:
 bootstrap: _bootstrap.php
 settings:
     colors: true
+    error_level: E_ALL
     memory_limit: 1024M
 modules:
     config:
         Yii2:
             configFile: 'config/codeception-local.php'
-

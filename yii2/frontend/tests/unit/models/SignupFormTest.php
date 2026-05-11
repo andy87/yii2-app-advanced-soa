@@ -66,16 +66,16 @@ class SignupFormTest extends Unit
     {
         $user = new User;
 
-        verify($attributes)->arrayHasKey($user::ATTR_USERNAME);
-        verify($attributes)->arrayHasKey($user::ATTR_EMAIL);
-        verify($attributes)->arrayHasKey($user::ATTR_PASSWORD);
+        $this->assertArrayHasKey($user::ATTR_USERNAME, $attributes);
+        $this->assertArrayHasKey($user::ATTR_EMAIL, $attributes);
+        $this->assertArrayHasKey($user::ATTR_PASSWORD, $attributes);
 
         $user->setAttributes($attributes);
         $user->password = $attributes[$user::ATTR_PASSWORD];
 
-        verify($user->attributes)->arrayHasKey($user::ATTR_USERNAME);
-        verify($user->attributes)->arrayHasKey($user::ATTR_EMAIL);
-        verify((array) $user)->arrayHasKey($user::ATTR_PASSWORD);
+        $this->assertArrayHasKey($user::ATTR_USERNAME, $user->attributes);
+        $this->assertArrayHasKey($user::ATTR_EMAIL, $user->attributes);
+        $this->assertArrayHasKey($user::ATTR_PASSWORD, (array) $user);
 
         return $user;
     }
@@ -105,7 +105,7 @@ class SignupFormTest extends Unit
 
         $this->authService->handlerSignupForm($signupForm);
 
-        verify($signupForm->identity)->notEmpty();
+        $this->assertNotEmpty($signupForm->identity);
 
         /** @var Identity $identity */
         $identity = $this->tester->grabRecord(Identity::class, [
@@ -118,11 +118,11 @@ class SignupFormTest extends Unit
 
         $mail = $this->tester->grabLastSentEmail();
 
-        verify($mail)->instanceOf(MessageInterface::class);
-        verify($mail->getTo())->arrayHasKey('some_email@example.com');
-        verify($mail->getFrom())->arrayHasKey(\Yii::$app->params['supportEmail']);
-        verify($mail->getSubject())->equals($signupForm->generateMailSubject());
-        verify($mail->toString())->stringContainsString($identity->verification_token);
+        $this->assertInstanceOf(MessageInterface::class, $mail);
+        $this->assertArrayHasKey('some_email@example.com', $mail->getTo());
+        $this->assertArrayHasKey(\Yii::$app->params['supportEmail'], $mail->getFrom());
+        $this->assertSame($signupForm->generateMailSubject(), $mail->getSubject());
+        $this->assertStringContainsString($identity->verification_token, $mail->toString());
     }
 
     /**
@@ -151,12 +151,12 @@ class SignupFormTest extends Unit
 
         $identity = $this->identityService->signUp($signupForm);
 
-        verify($identity)->empty();
-        verify($signupForm->getErrors('username'))->notEmpty();
-        verify($signupForm->getErrors('email'))->notEmpty();
+        $this->assertEmpty($identity);
+        $this->assertNotEmpty($signupForm->getErrors('username'));
+        $this->assertNotEmpty($signupForm->getErrors('email'));
 
-        verify($signupForm->getFirstError('username'))->equals(SignupForm::RULE_EXCEPTION_USERNAME_UNIQUE);
-        verify($signupForm->getFirstError('email'))->equals(SignupForm::RULE_EXCEPTION_EMAIL_UNIQUE);
+        $this->assertSame(SignupForm::RULE_EXCEPTION_USERNAME_UNIQUE, $signupForm->getFirstError('username'));
+        $this->assertSame(SignupForm::RULE_EXCEPTION_EMAIL_UNIQUE, $signupForm->getFirstError('email'));
     }
 
     /**
