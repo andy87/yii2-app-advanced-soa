@@ -1,6 +1,7 @@
 <?php declare(strict_types=1);
 
 use andy87\yii2\architect\CreateTable;
+use andy87\yii2\architect\components\interfaces\ArchitectInterface;
 use yii2\common\models\sources\User;
 
 /**
@@ -15,7 +16,7 @@ class m130524_201442_create_table__user extends CreateTable
     protected const DATETIME = self::DATETIME_TIMESTAMP;
 
     /** @var int Сценарий */
-    public int $scenario = self::SCENARIO_CREATE;
+    public int $scenario = ArchitectInterface::SCENARIO_CREATE;
 
     /** @var string  */
     public string $tableName = '{{%user}}';
