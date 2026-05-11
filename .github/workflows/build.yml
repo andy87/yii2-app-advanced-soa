@@ -31,6 +31,11 @@ jobs:
           docker compose -f docker-compose.yml -f docker-compose.test.yml build frontend backend worker \
             2>&1 | tee var/ci-logs/docker-build.log
 
+      - name: Check production Docker config
+        run: |
+          set -o pipefail
+          bash bin/docker-prod-smoke.sh 2>&1 | tee var/ci-logs/docker-prod-smoke.log
+
       - name: Run Docker tests
         run: |
           set -o pipefail

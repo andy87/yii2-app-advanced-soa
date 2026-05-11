@@ -9,30 +9,8 @@ if [ ! -f /app/yii2/.env ]; then
 fi
 
 if [ ! -f vendor/autoload.php ]; then
-    lock_dir="/app/vendor/.composer-install.lock"
-
-    while ! mkdir "$lock_dir" 2>/dev/null; do
-        if [ -f vendor/autoload.php ]; then
-            break
-        fi
-
-        sleep 2
-    done
-
-    if [ -d "$lock_dir" ]; then
-        trap 'rmdir "$lock_dir" 2>/dev/null || true' EXIT
-
-        if [ ! -f vendor/autoload.php ]; then
-            COMPOSER_ALLOW_SUPERUSER=1 composer install \
-                --no-dev \
-                --no-interaction \
-                --prefer-dist \
-                --optimize-autoloader
-        fi
-
-        rmdir "$lock_dir" 2>/dev/null || true
-        trap - EXIT
-    fi
+    printf 'Immutable production image is missing /app/vendor/autoload.php. Rebuild the image with composer.lock present.\n' >&2
+    exit 1
 fi
 
 for path in \

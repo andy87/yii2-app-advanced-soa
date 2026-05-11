@@ -9,10 +9,7 @@ services:
       - ${SITE_AUDITOR_ENV_FILE:-./yii2/.env.prod}
     environment:
       APP_ROLE: frontend
-    volumes:
-      - composer-cache:/root/.composer/cache
-      - ./:/app:ro
-      - vendor:/app/vendor
+    volumes: !override
       - uploads:/app/uploads
       - reports:/app/uploads/reports
       - frontend-runtime:/app/yii2/frontend/runtime
@@ -23,6 +20,7 @@ services:
       - ./yii2/environments/prod/frontend/config/main-local.php:/app/yii2/frontend/config/main-local.php:ro
       - ./yii2/environments/prod/frontend/config/params-local.php:/app/yii2/frontend/config/params-local.php:ro
       - ./docker/php/prod/frontend-index.php:/app/yii2/frontend/web/index.php:ro
+      - ./yii2/environments/prod/frontend/web/robots.txt:/app/yii2/frontend/web/robots.txt:ro
     networks:
       - public
       - internal
@@ -45,10 +43,7 @@ services:
       - ${SITE_AUDITOR_ENV_FILE:-./yii2/.env.prod}
     environment:
       APP_ROLE: backend
-    volumes:
-      - composer-cache:/root/.composer/cache
-      - ./:/app:ro
-      - vendor:/app/vendor
+    volumes: !override
       - uploads:/app/uploads
       - reports:/app/uploads/reports
       - backend-runtime:/app/yii2/backend/runtime
@@ -59,6 +54,7 @@ services:
       - ./yii2/environments/prod/backend/config/main-local.php:/app/yii2/backend/config/main-local.php:ro
       - ./yii2/environments/prod/backend/config/params-local.php:/app/yii2/backend/config/params-local.php:ro
       - ./docker/php/prod/backend-index.php:/app/yii2/backend/web/index.php:ro
+      - ./yii2/environments/prod/backend/web/robots.txt:/app/yii2/backend/web/robots.txt:ro
     networks:
       - public
       - internal
@@ -78,10 +74,7 @@ services:
       - ${SITE_AUDITOR_ENV_FILE:-./yii2/.env.prod}
     environment:
       APP_ROLE: worker
-    volumes:
-      - composer-cache:/root/.composer/cache
-      - ./:/app:ro
-      - vendor:/app/vendor
+    volumes: !override
       - uploads:/app/uploads
       - reports:/app/uploads/reports
       - console-runtime:/app/yii2/console/runtime
@@ -111,8 +104,8 @@ services:
     networks:
       - internal
 
-volumes:
-  composer-cache:
+volumes: !override
+  postgres-data:
   uploads:
   reports:
   frontend-runtime:

@@ -18,11 +18,18 @@ RUN apt-get update \
     && rm -rf /var/lib/apt/lists/*
 
 COPY --from=composer:2 /usr/bin/composer /usr/bin/composer
+WORKDIR /app
+COPY composer.json composer.lock ./
+RUN COMPOSER_ALLOW_SUPERUSER=1 composer install \
+        --no-dev \
+        --no-interaction \
+        --prefer-dist \
+        --optimize-autoloader \
+        --no-progress
+COPY . /app
 COPY docker/php/entrypoint.sh /usr/local/bin/site-auditor-entrypoint
 COPY docker/php/entrypoint-prod.sh /usr/local/bin/site-auditor-prod-entrypoint
 RUN chmod +x /usr/local/bin/site-auditor-entrypoint /usr/local/bin/site-auditor-prod-entrypoint
-
-WORKDIR /app
 
 ENTRYPOINT ["site-auditor-entrypoint"]
 CMD ["php", "/app/yii2/yii", "queue/listen", "--verbose=1"]
