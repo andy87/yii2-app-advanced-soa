@@ -1,6 +1,7 @@
 <?php
 
 use andy87\yii2\architect\CreateTable;
+use andy87\yii2\architect\components\interfaces\ArchitectInterface;
 use yii2\common\models\sources\Role;
 
 /**
@@ -9,7 +10,7 @@ use yii2\common\models\sources\Role;
 class m240629_083647_create_table__role extends CreateTable
 {
     /** @var int Сценарий */
-    public int $scenario = self::SCENARIO_CREATE;
+    public int $scenario = ArchitectInterface::SCENARIO_CREATE;
 
     /** @var string Название таблицы */
     public string $tableName = '{{%role}}';
