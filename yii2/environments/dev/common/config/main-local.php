@@ -4,26 +4,23 @@ $config = [];
 
 if (YII_ENV_DEV)
 {
-    $moduleList = [
-        'debug' => yii\debug\Module::class,
-        'gii' => yii\gii\Module::class,
-    ];
-
-    foreach ($moduleList as $module => $class)
-    {
-        $config['bootstrap'][] = $module;
-        $config['modules'][$module] = ['class' => $class];
-    }
+    $allowedIps = ['127.0.0.1', '::1', '172.*.*.*'];
 
     $moduleList = [
-        'debug' => yii\debug\Module::class,
-        'gii' => yii\gii\Module::class,
+        'debug' => [
+            'class' => yii\debug\Module::class,
+            'allowedIPs' => $allowedIps,
+        ],
+        'gii' => [
+            'class' => yii\gii\Module::class,
+            'allowedIPs' => $allowedIps,
+        ],
     ];
 
-    foreach ($moduleList as $module => $class)
+    foreach ($moduleList as $module => $definition)
     {
         $config['bootstrap'][] = $module;
-        $config['modules'][$module] = ['class' => $class];
+        $config['modules'][$module] = $definition;
     }
 }
 
