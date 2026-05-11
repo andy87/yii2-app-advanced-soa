@@ -7,4 +7,5 @@ return [
         'name' => $_ENV['APP_BACKEND_IDENTITY_COOKIE'],
         'httpOnly' => true
     ],
+    'loginUrl' => ['auth/login'],
 ];

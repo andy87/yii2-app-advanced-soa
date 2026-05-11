@@ -3,6 +3,9 @@
 namespace yii2\backend\controllers;
 
 use Yii;
+use yii\base\InvalidConfigException;
+use yii\base\ExitException;
+use yii\filters\AccessControl;
 use yii\web\ForbiddenHttpException;
 use yii\web\NotFoundHttpException;
 use yii\web\Response;
@@ -21,6 +24,41 @@ use yii2\common\services\audit\AuditOrderService;
 final class AuditController extends BaseBackendController
 {
     public const ENDPOINT = 'audit';
+
+    /**
+     * Настраивает доступ к административным действиям аудита.
+     *
+     * Гостей отправляет на форму входа, авторизованных не-администраторов
+     * оставляет с явным отказом доступа.
+     *
+     * @return array Конфигурация фильтров контроллера.
+     * @throws InvalidConfigException Если компонент user настроен некорректно.
+     */
+    public function behaviors(): array
+    {
+        return [
+            'access' => [
+                'class' => AccessControl::class,
+                'rules' => [
+                    [
+                        'allow' => true,
+                        'matchCallback' => static function (): bool {
+                            $identity = Yii::$app->user->identity;
+
+                            return $identity instanceof Identity && $identity->isAdmin();
+                        },
+                    ],
+                ],
+                'denyCallback' => static function (): Response {
+                    if (Yii::$app->user->isGuest) {
+                        return Yii::$app->user->loginRequired();
+                    }
+
+                    throw new ForbiddenHttpException('Доступ только для администратора.');
+                },
+            ],
+        ];
+    }
 
     /**
      * Показывает список всех заказов аудита.
@@ -116,9 +154,16 @@ final class AuditController extends BaseBackendController
      *
      * @return void
      * @throws ForbiddenHttpException Если пользователь не администратор.
+     * @throws InvalidConfigException Если компонент user настроен некорректно.
+     * @throws ExitException Если гостевой запрос отправлен на страницу входа.
      */
     private function assertAdmin(): void
     {
+        if (Yii::$app->user->isGuest) {
+            Yii::$app->user->loginRequired();
+            Yii::$app->end();
+        }
+
         $identity = Yii::$app->user->identity;
         if (!$identity instanceof Identity || !$identity->isAdmin()) {
             throw new ForbiddenHttpException('Доступ только для администратора.');
